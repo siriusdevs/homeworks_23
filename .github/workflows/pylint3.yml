@@ -1,8 +1,8 @@
-name: Проверка hw2
+name: Проверка hw3
 on: [push]
 jobs:
   linter:
-    name: Линтер hw2 
+    name: Линтер
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -17,7 +17,7 @@ jobs:
     - name: Flake8
       run: flake8 .
   tests:
-    name: Тесты hw2
+    name: Тесты hw3
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -31,5 +31,5 @@ jobs:
         pip install pytest==6.2.5
         pip install numpy
     - name: Pytest
-      run: cd hw2 && pytest .
+      run: pytest hw3
 
