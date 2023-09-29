@@ -7,7 +7,7 @@ import pytest
 
 from hw1 import salary_stats
 
-the_company = (
+THE_COMPANY_DATA = (
     (([5000.1, 1029.5, 120.12], 99.98),
      {
         'Deka': {
@@ -61,7 +61,7 @@ the_company = (
 )
 
 
-@pytest.mark.parametrize('expected, company, ceiling', the_company)
+@pytest.mark.parametrize('expected, company, ceiling', THE_COMPANY_DATA)
 def test_salary_stats(
     expected: tuple[list, float] | str,
     company: Dict[str, Dict[str, float]],
