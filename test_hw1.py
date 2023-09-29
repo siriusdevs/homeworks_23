@@ -1,11 +1,11 @@
 """Test module main."""
 
 
-from typing import Dict, List, Tuple
+from typing import Dict
 
 import pytest
 
-from hw_one import salary_stats
+from hw1 import salary_stats
 
 the_company = (
     (([5000.1, 1029.5, 120.12], 99.98),
@@ -40,12 +40,30 @@ the_company = (
     },
         1050,
     ),
+    ("That's a strange company. It does not pay it's workers or they have none of them.",
+     {},
+     None,
+     ),
+    ("That's a strange company. It does not pay it's workers or they have none of them.",
+     {
+         'Shady department 1': {
+             'Anon 1': 0,
+             'Anon 2': 0,
+             'Anon 3': 0,
+         },
+         'Shady department 3': {
+             'Blank': 0,
+             'None': 0,
+         },
+     },
+     None,
+     ),
 )
 
 
 @pytest.mark.parametrize('expected, company, ceiling', the_company)
 def test_salary_stats(
-    expected: Tuple[List, float],
+    expected: tuple[list, float] | str,
     company: Dict[str, Dict[str, float]],
     ceiling: float,
 ) -> None:
@@ -53,7 +71,7 @@ def test_salary_stats(
     Test salary stats function.
 
     Args:
-        expected: Tuple[List, float] - the expected parameter
+        expected: tuple[list, float] - the expected parameter
         company: Dict - the dict parameter
         ceiling: float - the ceiling parameter
 
