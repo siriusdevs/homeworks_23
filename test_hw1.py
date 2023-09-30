@@ -64,4 +64,4 @@ def test_salary_stats(limit: int | None, departments: dict, expected: tuple[str]
             are the names of the employees and values are their salaries.
         expected (tuple): expected value from function.
     """
-    assert tuple(salary_stats(limit, **departments)) == expected
+    assert salary_stats(limit, **departments) == expected
