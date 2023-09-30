@@ -4,7 +4,7 @@ import pytest
 
 from hw1 import salary_stats
 
-test_salaries = (
+TEST_SALARIES = (
     (
         None,
         {
@@ -52,7 +52,7 @@ test_salaries = (
 )
 
 
-@pytest.mark.parametrize('limit, departments, expected', test_salaries)
+@pytest.mark.parametrize('limit, departments, expected', TEST_SALARIES)
 def test_salary_stats(limit: int | None, departments: dict, expected: tuple[str]) -> None:
     """Created function that tests salary_stats function.
 
