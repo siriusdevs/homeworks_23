@@ -28,7 +28,7 @@ def salary_stats(
     for _, employees_data in departments.items():
         salaries = employees_data.values()
         all_salaries.extend(salaries)
-    all_salaries = list(filter(lambda salary: salary <= limit))
+    all_salaries = list(filter(lambda salary: salary <= limit, all_salaries))
 
     three_lowest_salaries = sorted(all_salaries)[:3]
     yield three_lowest_salaries
