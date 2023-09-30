@@ -1,3 +1,4 @@
+'''Test module for function top_salary from hw1.py'''
 import pytest
 from hw1 import top_salary
 
