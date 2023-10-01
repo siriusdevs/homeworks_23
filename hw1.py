@@ -29,6 +29,6 @@ def salary_info(
                 '1: {0:.2f}, '.format(sum(list_of_values[:1]))
                 + '2: {0:.2f}, '.format(sum(list_of_values[1:2]))
                 + '3: {0:.2f}; '.format(sum(list_of_values[2:3]))
-                + '{0:.2f}%'.format(sum_of_our_salary / sum_of_all_salary * 100),
+                + '{0:.2f}%'.format(sum_of_our_salary / (sum_of_all_salary * 100 or 1)),
             )
     return answer
