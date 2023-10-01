@@ -24,6 +24,7 @@ def get_statistic(department_data: dict[dict[float]], limit: Optional[int] = Non
 
     if not salary_people:
         return (0, 0, 0)
+    salary_people = sorted(salary_people)
     mal_salary = []
     len_salary_people = len(salary_people)
 
