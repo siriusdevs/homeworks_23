@@ -86,8 +86,8 @@ def test_top_three_salaries(
     Test salary stats function.
 
     Args:
-        departments: Dict[str, Dict[str, float] | Tuple[str, ...]] - given data
-        expected: Tuple[Tuple[str, ...], Tuple[str, ...]] - the dict parameter
+        departments: dict[str, dict[str, float] | Tuple[str, ...]] - given data
+        expected: tuple[tuple[str, ...], tuple[str, ...]] - the dict parameter
 
     Asserts:
         True if the answer is correct

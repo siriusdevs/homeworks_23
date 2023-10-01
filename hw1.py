@@ -9,11 +9,11 @@ def top_three_salaries(
     Extract top and bottom three salaries.
 
     Args:
-        names: Tuple[str, ...] | None - Optional tuple of names for return.
-        departments: Dict[str, int] - dict of department names and their values.
+        names: tuple[str, ...] | None - Optional tuple of names for return.
+        departments: dict[str, int] - dict of department names and their values.
 
     Returns:
-        Tuple[Tuple[float, ...], Tuple[float, ...]] - inner tuples are with lowest and
+        tuple[tuple[float, ...], tuple[float, ...]] - inner tuples are with lowest and
         highest salaries
     """
     avg_salaries = []
