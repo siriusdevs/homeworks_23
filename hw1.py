@@ -5,6 +5,7 @@ def get_salaries(*agrs: Tuple[str, dict], dep_except: Tuple[str] = None) -> Tupl
     """Function for count top 3 salaries and those part in all salaries
 
     Args:
+        *args (Tuple[str, dict]): salaries in departments
         dep_except (Tuple[str], optional): Excluded departments. Defaults to None.
 
     Returns:
@@ -19,7 +20,6 @@ def get_salaries(*agrs: Tuple[str, dict], dep_except: Tuple[str] = None) -> Tupl
             top_salary += list(dep[1].values())
             all_salaries += sum(dep[1].values())
 
-    print(top_salary)
     top_3 = sorted(top_salary, reverse=True)[:3]
     in_percentage = (sum(top_3) / all_salaries) * 100
 

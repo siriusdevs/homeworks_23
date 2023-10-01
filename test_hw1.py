@@ -40,4 +40,11 @@ data = (
 
 @pytest.mark.parametrize('source, dep_except, expected', data)
 def test_get_salaries(source: Tuple[tuple], dep_except: Tuple[str], expected: Tuple[list, float]):
-    assert get_salaries(*source, dep_except=dep_except) == expected
+  """Testing...
+
+  Args:
+      source (Tuple[tuple]): data for testing
+      dep_except (Tuple[str]): exception for department data
+      expected (Tuple[list, float]): expected values
+  """
+  assert get_salaries(*source, dep_except=dep_except) == expected
