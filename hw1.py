@@ -1,7 +1,7 @@
 '''Salary stats and percent's'''
 
 
-def top_salary(*args: tuple[str, list[float]],
+def top_salary(*company: tuple[str, list[float]],
                name_departments: [list[str]] = None) -> tuple[list[float], float]:
     """
     Find top 3 salaries in the company, the ratio of the amount of this top to the total amount of
@@ -15,20 +15,15 @@ def top_salary(*args: tuple[str, list[float]],
         tuple[list[float], float] - top 3 salaries and the ratio  of the amount
         of this top to the total amount of payments.
     """
-    department_salaries = {}
-    for department_name, salaries in args:
+    all_salaries = []
+    for department_name, salaries in company:
         if name_departments is None or department_name in name_departments:
-            department_salaries[department_name] = salaries
-
-    all_salaries = [salary for salaries in department_salaries.values()
-                    for salary in salaries]
+            all_salaries.extend(salaries)
 
     if not all_salaries:
         return [], 0.0
 
     top_salaries = sorted(all_salaries, reverse=True)[:3]
-    total_top_salaries = sum(top_salaries)
-    total_salaries = sum(all_salaries)
-    percentage = round(total_top_salaries / total_salaries * 100, 2)
+    percentage = round(sum(top_salaries) / sum(all_salaries) * 100, 2)
 
     return top_salaries, percentage

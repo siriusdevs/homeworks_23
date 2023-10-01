@@ -14,8 +14,8 @@ data = (
                                     7500.5, 7200.3, 7000.25], 38.14)), )
 
 
-@pytest.mark.parametrize('args, expected', data)
-def test_top_salary(args, expected):
-    result = top_salary(*args[0])
+@pytest.mark.parametrize('company, expected', data)
+def test_top_salary(company, expected):
+    result = top_salary(*company[0])
     assert result[0] == expected[0]
     assert result[1] == expected[1]
