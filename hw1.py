@@ -18,7 +18,7 @@ def get_statistic(departamen_data: dict, limit: Optional[int] = None) -> tuple:
     """
     salary_people = []
     for names_departamens in departamen_data.keys():
-        for salary in (departamen_data[names_departamens]).values():
+        for salary in departamen_data[names_departamens].values():
             salary_people.append(salary)
 
     salary_people = sorted(
@@ -38,5 +38,5 @@ def get_statistic(departamen_data: dict, limit: Optional[int] = None) -> tuple:
              ) // 2, 2,
         ))
     mal_salary.append(round(max(salary_people), 2))
-    mal_salary.append(round(sum(salary_people) / len(salary_people), 2))
+    mal_salary.append(round(sum(salary_people) / len_salary_people, 2))
     return tuple(mal_salary)
