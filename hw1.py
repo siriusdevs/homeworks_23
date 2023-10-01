@@ -1,32 +1,29 @@
 """Calculates top and bottom three salaries."""
 
 
-from typing import Dict, Tuple
-
-
 def top_three_salaries(
-    names: Tuple[str, ...] | None = None,
-    **kwargs: Dict[str, float],
-) -> Tuple[Tuple[str, ...], Tuple[str, ...]]:
+    names: tuple[str, ...] | None = None,
+    **departments: dict[str, float],
+) -> tuple[tuple[str, ...], tuple[str, ...]]:
     """
     Extract top and bottom three salaries.
 
     Args:
         names: Tuple[str, ...] | None - Optional tuple of names for return.
-        kwargs: Dict[str, int] - dict of department names and their values.
+        departments: Dict[str, int] - dict of department names and their values.
 
     Returns:
         Tuple[Tuple[float, ...], Tuple[float, ...]] - inner tuples are with lowest and
         highest salaries
     """
-    avgs = []
-    for elem in kwargs.keys():
-        if names is None or elem in names:
-            cur_elem = kwargs[elem].values()
-            cur_avg = sum(cur_elem) / max(len(cur_elem), 1)
-            avgs.append([elem, cur_avg])
+    avg_salaries = []
+    for department in departments.keys():
+        if names is None or department in names:
+            dep_salaries = departments[department].values()
+            avg_salary = sum(dep_salaries) / max(len(dep_salaries), 1)
+            avg_salaries.append([department, avg_salary])
 
-    avgs.sort(key=lambda department: department[1])
-    lowest = [low[0] for low in avgs[:3]]
-    highest = [high[0] for high in avgs[-3:]]
+    avg_salaries.sort(key=lambda dep: dep[1])
+    lowest = [low[0] for low in avg_salaries[:3]]
+    highest = [high[0] for high in avg_salaries[-3:]]
     return tuple(lowest), tuple(highest)

@@ -1,8 +1,6 @@
 """Test module hw1."""
 
 
-from typing import Dict, Tuple
-
 import pytest
 
 from hw1 import top_three_salaries
@@ -79,19 +77,19 @@ test_cases = (
 )
 
 
-@pytest.mark.parametrize('kwargs, expected', test_cases)
+@pytest.mark.parametrize('departments, expected', test_cases)
 def test_top_three_salaries(
-    kwargs: Dict[str, Dict[str, float] | Tuple[str, ...]],
-    expected: Tuple[Tuple[str, ...], Tuple[str, ...]],
+    departments: dict[str, dict[str, float] | tuple[str, ...]],
+    expected: tuple[tuple[str, ...], tuple[str, ...]],
 ) -> None:
     """
     Test salary stats function.
 
     Args:
-        kwargs: Dict[str, Dict[str, float] | Tuple[str, ...]] - given data
+        departments: Dict[str, Dict[str, float] | Tuple[str, ...]] - given data
         expected: Tuple[Tuple[str, ...], Tuple[str, ...]] - the dict parameter
 
     Asserts:
         True if the answer is correct
     """
-    assert top_three_salaries(**kwargs) == expected
+    assert top_three_salaries(**departments) == expected
