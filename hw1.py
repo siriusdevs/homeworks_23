@@ -14,8 +14,6 @@ def salary_stats(
 
     Returns:
         tuple[list[float], float] - top 3 salaries and the ratio.
-        or
-        str - if your company is shady.
     """
     all_salaries = []
     salaries_sum = 0
@@ -31,4 +29,4 @@ def salary_stats(
     if salaries_sum > 0:
         ratio = round(sum(top) / salaries_sum * 100, 2)
         return top, ratio
-    return top
+    return top, 100
