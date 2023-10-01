@@ -43,7 +43,7 @@ company_departments_test = (
     ),
     ),
     ({
-        'HR Department': {
+        'Purchasing': {
             'John Smith': 50000,
             'Mary Johnson': 55000,
             'David Brown': 48000,
@@ -58,12 +58,12 @@ company_departments_test = (
             'Daniel Martinez': 54000,
             'Linda Hall': 56000,
         },
-        'Engineering Department': {
+        'Human Resources': {
             'Robert Taylor': 70000,
             'Susan Miller': 72000,
             'William White': 68000,
         },
-        'Sales Department': {
+        'Creativity': {
             'Karen Harris': 30000,
             'Richard Jackson': 58000,
             'Patricia Anderson': 61000,
@@ -96,19 +96,19 @@ company_departments_test = (
             'Susan Miller': 72000,
             'William White': 68000,
         },
-        'Sales Department': {
+        'Division': {
             'Karen Harris': 30000,
             'Richard Jackson': 58000,
             'Patricia Anderson': 61000,
         },
     },
         (
-        'HR Departmen',
-        'Sales Department',
+        'HR Department',
+        'Division',
     ),
         (
-        [0, 1000, 40000],
-        7.16,
+        [0, 1000, 54000],
+        12.79,
     ),
     ),
 )

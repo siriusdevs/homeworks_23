@@ -1,7 +1,7 @@
 """Module for calculation company salaries statistics."""
 
 
-def work_statistics(company_part: dict, ex_company_part: tuple = ()) -> tuple:
+def work_statistics(company_part: dict, ex_company_part: tuple = None) -> tuple:
     """Calculate the statistics of employees salaries in a company.
 
     Args:
