@@ -22,14 +22,13 @@ def get_median(items: Sequence[float | int]) -> float:
     return (items[centre_index] + items[centre_index + 1]) / 2
 
 
-MinSalary: TypeAlias = Optional[int | float]
 Employees: TypeAlias = dict[str, float]  # name, salary
 
 CompanyInfo: TypeAlias = tuple[float, float, float]  # average, maximum and median salary
 CompaniesInfo: TypeAlias = dict[str, CompanyInfo]  # company name, company statistic
 
 
-def calculate_companies_info(min_salary: MinSalary = None, **companies: Employees) \
+def calculate_companies_info(min_salary: Optional[int | float] = None, **companies: Employees) \
         -> CompaniesInfo:
     """Calculate average, maximum and medium salary for each company.
 
