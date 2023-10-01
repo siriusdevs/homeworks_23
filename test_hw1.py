@@ -6,11 +6,11 @@ from hw1 import get_statistic
 
 test_get_datas = (
     (
-        None,
+        10000,
         {
             'Sales Departaments': {'Staffer1': 50000.0},
         },
-        (50000.0, 50000.0, 50000.0),
+        (0, 0, 0),
     ),
     (
         150000,
@@ -34,6 +34,13 @@ test_get_datas = (
             'Dep2': {'Staffer4': 80000.0, 'Staff5': 90000.0},
         },
         (65000.0, 80000.0, 65000.0),
+    ),
+    (
+        None,
+        {
+            'Sales Departaments': {'Staffer1': 50000.0},
+        },
+        (50000.0, 50000.0, 50000.0),
     ),
 )
 
