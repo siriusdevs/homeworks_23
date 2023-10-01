@@ -1,13 +1,13 @@
 """Module that includes the implemented function from Vasilenko's first task."""
 
 
-from typing import Any, Dict, Generator, Iterable, Optional
+from typing import Optional
 
 
 def salary_stats(
     limit: Optional[int] = None,
-    **departments: Dict[str, Dict[str, float]],
-) -> Generator[Iterable | str, Any, Any]:
+    **departments: dict[str, dict[str, float]],
+) -> tuple[list[int], str]:
     """Create a function that returns a generator containing statistics about employee salaries.
 
     Args:
