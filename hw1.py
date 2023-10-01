@@ -23,18 +23,17 @@ def get_statistic(departamen_data: dict, limit: Optional[int] = None) -> tuple:
 
     salary_people = sorted(
         filter(lambda se: limit is None or se <= limit, salary_people),
-        )
+    )
     mal_salary = []
     len_salary_people = len(salary_people)
 
     if len(salary_people) % 2 == 1:
-        mal_salary.append(round(salary_people[len_salary_people//2], 2))
+        mal_salary.append(round(salary_people[len_salary_people // 2], 2))
     else:
         mal_salary.append(round(
-            (salary_people[len_salary_people//2] +
-             salary_people[len_salary_people // 2 - 1]
+            (salary_people[len_salary_people // 2] + salary_people[len_salary_people // 2 - 1]
              ) // 2, 2,
         ))
     mal_salary.append(round(max(salary_people), 2))
-    mal_salary.append(round(sum(salary_people)/len(salary_people), 2))
+    mal_salary.append(round(sum(salary_people) / len(salary_people), 2))
     return tuple(mal_salary)
