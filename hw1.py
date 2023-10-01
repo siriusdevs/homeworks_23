@@ -4,11 +4,11 @@
 from typing import Optional
 
 
-def get_statistic(departamen_data: dict, limit: Optional[int] = None) -> tuple:
+def get_statistic(department_data: dict[dict[float]], limit: Optional[int] = None) -> tuple[float]:
     """Take a dictionary with salary as input and return statistics.
 
     Args:
-        departamen_data: dictionary with the names departments as keys,\
+        department_data: dictionary with the names departments as keys,\
             the dictionary with employee names as keys\
             and salaries as values
         limit: A numerical limit above which salaries need not be taken
@@ -17,13 +17,10 @@ def get_statistic(departamen_data: dict, limit: Optional[int] = None) -> tuple:
         A tuple with average, maximum and median salary.
     """
     salary_people = []
-    for names_departamens in departamen_data.keys():
-        for salary in departamen_data[names_departamens].values():
-            salary_people.append(salary)
-
-    salary_people = sorted(
-        filter(lambda se: limit is None or se <= limit, salary_people),
-    )
+    for names_departments in department_data.values():
+        for salary in names_departments.values():
+            if limit is None or salary <= limit:
+                salary_people.append(salary)
 
     if not salary_people:
         return (0, 0, 0)

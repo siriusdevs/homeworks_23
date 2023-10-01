@@ -4,7 +4,7 @@ import pytest
 
 from hw1 import get_statistic
 
-test_get_datas = (
+TEST_GET_DATAS = (
     (
         10000,
         {
@@ -45,8 +45,8 @@ test_get_datas = (
 )
 
 
-@pytest.mark.parametrize('limit,departamens_data,expected', test_get_datas)
-def test_get_stat(limit: int, departamens_data: dict, expected: tuple) -> None:
+@pytest.mark.parametrize('limit,departments_data,expected', TEST_GET_DATAS)
+def test_get_stat(limit: int, departments_data: dict, expected: tuple) -> None:
     """A function that tests get_statistic function.
 
     Args:
@@ -56,4 +56,4 @@ def test_get_stat(limit: int, departamens_data: dict, expected: tuple) -> None:
             and salaries as values.
         expected: expected function output.
     """
-    assert get_statistic(departamens_data, limit) == expected
+    assert get_statistic(departments_data, limit) == expected
