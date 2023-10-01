@@ -63,7 +63,7 @@ THE_COMPANY_DATA = (
         },
     },
         None,
-    )
+    ),
 )
 
 
