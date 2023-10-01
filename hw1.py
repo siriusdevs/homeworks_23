@@ -17,16 +17,18 @@ def salary_stats(
         or
         str - if your company is shady.
     """
-    sal = []
-    all_sal = 0
+    all_salaries = []
+    salaries_sum = 0
     for department in company.values():
         for salary in department.values():
             if ceiling is None or salary <= ceiling:
-                sal.append(round(salary, 2))
-                all_sal += salary
-    sal.sort(reverse=True)
-    top = sal[:3]
-    if all_sal > 0:
-        ratio = round(sum(top) / all_sal * 100, 2)
+                all_salaries.append(round(salary, 2))
+                salaries_sum += salary
+    all_salaries.sort(reverse=True)
+    while len(all_salaries) < 3:
+        all_salaries.append(0)
+    top = all_salaries[:3]
+    if salaries_sum > 0:
+        ratio = round(sum(top) / salaries_sum * 100, 2)
         return top, ratio
     return top
