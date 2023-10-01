@@ -51,7 +51,7 @@ def test_get_stat(limit: int, departments_data: dict, expected: tuple) -> None:
 
     Args:
         limit: A numerical limit above which salaries need not be taken
-        departamens_data: dictionary with the names departments as keys,\
+        departments_data: dictionary with the names departments as keys,\
             the dictionary with employee names as keys\
             and salaries as values.
         expected: expected function output.
