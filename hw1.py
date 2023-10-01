@@ -8,7 +8,7 @@ def top_salary(*company: tuple[str, list[float]],
     payments in the company in percentages.
 
     Args:
-        *args: Tuple[str, List[float]] - company departments and their salaries.
+        *company: Tuple[str, List[float]] - company departments and their salaries.
         name_departments: List[str] - the name departaments. Usually Optional[List[str]] = None.
 
     Returns:
