@@ -4,7 +4,7 @@
 def salary_stats(
     company: dict[str, dict[str, float]],
     ceiling: float = None,
-) -> tuple[list[float], float] | str:
+) -> tuple[list[float], float]:
     """
     Find top 3 salaries and a top salaries sum to all salaries ratio.
 

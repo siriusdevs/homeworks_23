@@ -69,7 +69,7 @@ THE_COMPANY_DATA = (
 
 @pytest.mark.parametrize('expected, company, ceiling', THE_COMPANY_DATA)
 def test_salary_stats(
-    expected: tuple[list, float] | str,
+    expected: tuple[list, float],
     company: dict[str, dict[str, float]],
     ceiling: float,
 ) -> None:
