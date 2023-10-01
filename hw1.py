@@ -55,9 +55,10 @@ def salary_stats(
     for employees_data in departments.values():
         salaries = employees_data.values()
 
-        for salary in tuple(sal for sal in salaries if sal <= limit):
-            total_payed += salary
-            process_lowest_sals(lowest_sals, salary)
+        for salary in salaries:
+            if salary <= limit:
+                total_payed += salary
+                process_lowest_sals(lowest_sals, salary)
 
     # prevent division by zero error
     if total_payed == 0:
