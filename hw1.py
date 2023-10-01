@@ -1,9 +1,8 @@
 '''Salary stats and percent's'''
-from typing import List, Tuple, Optional
 
 
-def top_salary(*args: Tuple[str, List[float]],
-               name_departments: Optional[List[str]] = None) -> Tuple[List[float], float]:
+def top_salary(*args: tuple[str, list[float]],
+               name_departments: [list[str]] = None) -> tuple[list[float], float]:
     """
     Find top 3 salaries in the company, the ratio of the amount of this top to the total amount of
     payments in the company in percentages.
