@@ -18,7 +18,7 @@ def get_statistic(departamen_data: dict, limit: Optional[int] = None) -> tuple:
     """
     salary_people = []
     for names_departamens in departamen_data.keys():
-        for _, salary in (departamen_data[names_departamens]).items():
+        for salary in (departamen_data[names_departamens]).values():
             salary_people.append(salary)
 
     salary_people = sorted(
