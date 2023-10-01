@@ -1,7 +1,15 @@
-from typing import TypeAlias, Sequence
+from typing import TypeAlias, Sequence, Optional
 
 
 def get_median(items: Sequence[float | int]) -> float:
+    """Calculate median in transmitted sequence.
+
+    Args:
+        items: Sequence of any int or float item.
+
+    Returns:
+        median value of items.
+    """
     length = len(items)
     centre_index = (length - 1) // 2
 
@@ -14,18 +22,29 @@ def get_median(items: Sequence[float | int]) -> float:
     return (items[centre_index] + items[centre_index + 1]) / 2
 
 
-MinSalary: TypeAlias = None | int | float
+MinSalary: TypeAlias = Optional[int | float]
 Employees: TypeAlias = dict[str, float]  # name, salary
-Companies: TypeAlias = dict[str, Employees]  # company name, employees dictionary
 
-CompanyStatistic: TypeAlias = tuple[float, float, float]  # average, maximum and median salary
-CompaniesStatistic: TypeAlias = dict[str, CompanyStatistic]  # company name, company statistic
+CompanyInfo: TypeAlias = tuple[float, float, float]  # average, maximum and median salary
+CompaniesInfo: TypeAlias = dict[str, CompanyInfo]  # company name, company statistic
 
 
-def calculate_companies_statistic(min_salary: MinSalary = None, **companies: Companies) \
-        -> CompaniesStatistic:
+def calculate_companies_info(min_salary: MinSalary = None, **companies: Employees) \
+        -> CompaniesInfo:
+    """Calculate average, maximum and medium salary for each company.
 
-    result: CompaniesStatistic = dict()
+    Args:
+        min_salary: The lower limit of salaries that we consider, default - None.
+        companies: \
+            Companies that we consider salaries in, \
+            They have to be given through keyword params.
+
+    Returns:
+        Calculated average, maximum and medium salary in each company,
+        result is a tuple with three float value.
+    """
+
+    result: CompaniesInfo = dict()
 
     for company_name, employees in companies.items():
         salary_sum = 0
@@ -33,7 +52,7 @@ def calculate_companies_statistic(min_salary: MinSalary = None, **companies: Com
         filtered_salaries: list[float] = list()
 
         for salary in employees.values():
-            if min_salary is not None and salary < min_salary:
+            if (min_salary is not None) and (salary < min_salary):
                 continue
 
             salary_sum += salary
@@ -44,17 +63,8 @@ def calculate_companies_statistic(min_salary: MinSalary = None, **companies: Com
         average = salary_sum / salaries_length if salaries_length > 0 else 0
         median = get_median(filtered_salaries)
 
+        # it has a redundancy for mypy (static type checker)
         total = tuple(round(salary, 2) for salary in [average, max_salary, median])
-        result[company_name] = total
+        result[company_name] = (total[0], total[1], total[2])
 
     return result
-
-
-print(calculate_companies_statistic(apple={
-    'a': 100,
-    'b': 300,
-    'c': 500,
-    'df': 348,
-}, samsung={
-    'dkfj': 577,
-}, hi={}))
