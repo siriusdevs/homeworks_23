@@ -14,12 +14,11 @@ def salary_info(
     Returns:
         tuple[list, float] - top 3 salaries and the ratio for company.
     """
-    list_of_values = []
+    salaries = []
+    incident = excluded if excluded else []
     for departament in departaments:
-        incident = excluded if excluded else []
         if departament[0] not in incident:
-            list_of_values += departament[1].values()
-    sum_of_all_salary = sum(list_of_values)
-    our_salary = sorted(list_of_values)[:3]
-    salary_percent = sum(our_salary) / (sum_of_all_salary or 1) * 100
+            salaries += departament[1].values()
+    our_salary = sorted(salaries)[:3]
+    salary_percent = sum(our_salary) / (sum(salaries) or 1) * 100
     return [round(salary, 2) for salary in our_salary], round(salary_percent, 2)
