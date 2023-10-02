@@ -19,6 +19,9 @@ def work_statistics(company_part: dict, ex_company_part: tuple = None) -> tuple:
                 all_salaries.append(salary)
 
     lowest_top = sorted(all_salaries)[:3]
-    percent_of_lowest = round(sum(lowest_top) / sum(all_salaries) * 100, 2)
+
+    percent_of_lowest = 0
+    if sum(all_salaries) != 0:
+        percent_of_lowest = round(sum(lowest_top) / sum(all_salaries) * 100, 2)
 
     return lowest_top, percent_of_lowest
