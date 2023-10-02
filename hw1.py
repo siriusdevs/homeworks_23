@@ -12,7 +12,7 @@ def get_best_salaries(ignored_depts: Tuple = None, **dept_employees) -> Tuple:
 
     Returns:
         Tuple: the first element is a tuple of 3 employees,
-        and the second element is a floating point number.
+        and the second element is a float number.
     """
     employees = {}
     for dept, dept_employees in dept_employees.items():
@@ -33,7 +33,7 @@ def get_employee_salary(employee: Tuple):
     """Get employee salary.
 
     Args:
-        employee (Tuple): employee tuple.
+        employee (Tuple): employee with his salary.
 
     Returns:
         int: employee salary.
