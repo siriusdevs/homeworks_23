@@ -1,9 +1,7 @@
 """Module for calculating the salary stats"""
 
-from typing import Dict
 
-
-def calculate_salary_stats(salary_limit: float = None, **kwargs: dict) -> Dict[str, tuple]:
+def calculate_salary_stats(salary_limit: float = None, **kwargs: dict) -> dict[str, tuple]:
     """Сreates salary statistics in the company.
 
     Args:
