@@ -1,4 +1,4 @@
-"""Calculate salary."""
+"""Module for salary analysis and calculations."""
 
 from typing import Tuple
 
