@@ -1,26 +1,20 @@
-from typing import Tuple
-
-
-def get_salaries(*agrs: Tuple[str, dict], dep_except: Tuple[str] = None) -> Tuple[list, float]:
+def get_salaries(*company: tuple[str, dict], dept_except: tuple[str] = None) -> tuple[list, float]:
     """Function for count top 3 salaries and those part in all salaries
 
     Args:
-        *args (Tuple[str, dict]): salaries in departments
-        dep_except (Tuple[str], optional): Excluded departments. Defaults to None.
+        *departments (Tuple[str, dict]): salaries in departments
+        dept_except (Tuple[str], optional): Excluded departments. Defaults to None.
 
     Returns:
         Tuple[list, float]: top 3 salaries and part of those in '%'
     """
-    top_salary = []
-    all_salaries = 0
-    dep_except = '' if dep_except is None else dep_except
+    salaries = []
 
-    for dep in agrs:
-        if not(dep[0] in dep_except):
-            top_salary += list(dep[1].values())
-            all_salaries += sum(dep[1].values())
+    for department in company:
+        if dept_except is None or not(department[0] in dept_except):
+            salaries += list(department[1].values())
 
-    top_3 = sorted(top_salary, reverse=True)[:3]
-    in_percentage = (sum(top_3) / all_salaries) * 100
+    top_3 = sorted(salaries, reverse=True)[:3]
+    in_percentage = (sum(top_3) / sum(salaries)) * 100
 
-    return [round(i, 2) for i in top_3], round(in_percentage, 2)
+    return [round(salary, 2) for salary in top_3], round(in_percentage, 2)
