@@ -30,7 +30,7 @@ test_data = (
 )
 
 
-@pytest.mark.parametrize('ignored_depts, expected, kwargs', test_data)
+@pytest.mark.parametrize('ignored_depts, expected, dept_employees', test_data)
 def test_colculating_best_salaries(ignored_depts: Tuple, expected: Tuple, dept_employees) -> None:
     """Test get_best_salaries function.
 
