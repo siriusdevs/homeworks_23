@@ -29,8 +29,8 @@ def process_lowest_sals(lowest_sals: list[float | int], salary: float) -> None:
 
 def salary_stats(
     limit: Optional[int] = None,
-    **departments: dict[str, dict[str, float]],
-) -> tuple[list[int], str]:
+    **departments: dict[str, float],
+) -> tuple[list[float], str]:
     """Create a function that returns a generator containing statistics about employee salaries.
 
     Args:
