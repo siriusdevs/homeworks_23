@@ -16,7 +16,7 @@ def calculate_salary_stats(salary_limit: float = None, **kwargs: dict) -> dict[s
     for departament_name, employees in kwargs.items():
         employees_salaries = employees.values()
         if salary_limit is not None:
-            employees_salaries = [i for i in employees_salaries if i > salary_limit]
+            employees_salaries = [salary for salary in employees_salaries if salary > salary_limit]
         all_salary = sum(employees_salaries)
         top_salaries = sorted(employees_salaries)[-3:][::-1]
         all_top_salary = sum(top_salaries)

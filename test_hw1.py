@@ -44,7 +44,7 @@ def test_calculate_salary_stats_with_one_company(kwargs, expected):
 
 
 @pytest.mark.parametrize("kwargs, expected", data_two_companies)
-def test_calculate_salary_stats_with_two_companies(kwargs, expected):
+def test_calculate_salary_two_companies(kwargs, expected):
     assert calculate_salary_stats(**kwargs) == expected
 
 
