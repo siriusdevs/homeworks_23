@@ -15,11 +15,11 @@ def get_best_salaries(ignored_depts: Tuple = None, **dept_employees) -> Tuple:
         and the second element is a float number.
     """
     employees = {}
-    for dept, dept_employees in dept_employees.items():
+    for dept, employees_salaries in dept_employees.items():
         if ignored_depts is None or dept not in ignored_depts:
-            for key in dept_employees.keys():
-                dept_employees[key] = round(dept_employees[key], 2)
-            employees.update(dept_employees)
+            for key in employees_salaries.keys():
+                employees_salaries[key] = round(employees_salaries[key], 2)
+            employees.update(employees_salaries)
     best_salaried_employees = sorted(employees.items(), key=get_employee_salary, reverse=True)[:3]
     best_salaries_sum = sum(employee[1] for employee in best_salaried_employees)
     salaries_sum = sum(salary for salary in employees.values())
