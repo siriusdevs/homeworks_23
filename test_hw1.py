@@ -9,8 +9,7 @@ THE_COMPANY_DATA = (
     (
         (
             (
-                'test1',
-                {
+                'test1', {
                     'test1.1': 231.231,
                     'test1.2': 312.312,
                     'test1.3': 123.123,
@@ -18,26 +17,24 @@ THE_COMPANY_DATA = (
             ),
         ),
         ('a', 'b'),
-        ['1: 123.12, 2: 231.23, 3: 312.31; 100.00%'],
+        ([123.12, 231.23, 312.31], 100.0),
     ),
     (
         (
             (
-                'test2',
-                {
+                'test2', {
                     'test2.1': 228.228,
                     'test2.2': 1337.337,
                 },
             ),
         ),
         None,
-        ['1: 228.23, 2: 1337.34, 3: 0.00; 100.00%'],
+        ([228.23, 1337.34], 100.0),
     ),
     (
         (
             (
-                'test3',
-                {
+                'test3', {
                     'test3.1': 228.228,
                     'test3.2': 1337.337,
                     'test3.3': 123.222,
@@ -47,7 +44,7 @@ THE_COMPANY_DATA = (
             ),
         ),
         None,
-        ['1: 1.11, 2: 123.22, 3: 228.23; 5.87%'],
+        ([1.11, 123.22, 228.23], 5.87),
     ),
     (
         (
@@ -69,7 +66,7 @@ THE_COMPANY_DATA = (
             ),
         ),
         None,
-        ['1: 12.69, 2: 13.79, 3: 14.89; 73.22%', '1: 50.44, 2: 100.00, 3: 198.40; 58.23%'],
+        ([12.69, 13.79, 14.89], 6.31),
     ),
     (
         (
@@ -91,7 +88,7 @@ THE_COMPANY_DATA = (
             ),
         ),
         ('test55',),
-        ['1: 12.69, 2: 13.79, 3: 14.89; 73.22%'],
+        ([12.69, 13.79, 14.89], 73.22),
     ),
     (
         (
@@ -113,25 +110,25 @@ THE_COMPANY_DATA = (
             ),
         ),
         ('test6', 'test66'),
-        [],
+        ([], 0),
     ),
 )
 
 
-@pytest.mark.parametrize('sal_info, excluded, expected', THE_COMPANY_DATA)
+@pytest.mark.parametrize('info_salary, test_excluded, expected', THE_COMPANY_DATA)
 def test_salary_stats(
-    sal_info: tuple[str, dict[str, float]],
-    excluded: tuple[str] | None,
-    expected: list[str],
+    info_salary: tuple[str, dict[str, float]],
+    test_excluded: tuple[str] | None,
+    expected: tuple[list, float],
 ) -> None:
     """Test salary info function.
 
     Args:
-        sal_info: tuple[str, dict[str, float]] - given parameter.
-        excluded: tuple[str] - exluded parameter.
-        expected: list[str] - expedcted parameter.
+        info_salary: tuple[str, dict[str, float]] - given parameter.
+        test_excluded: tuple[str] - exluded parameter.
+        expected: tuple[list, float] - expedcted parameter.
 
     Asserts:
         True if the answer is correct.
     """
-    assert expected == salary_info(*sal_info, arg=excluded)
+    assert expected == salary_info(*info_salary, excluded=test_excluded)

@@ -1,34 +1,25 @@
-"""Home work about company's salary."""
+"""Homework about company's salary."""
 
 
 def salary_info(
-    *args: tuple[str, dict[str, float]],
-    arg: tuple[str] | None = None,
-) -> list[str]:
+    *departaments: tuple[str, dict[str, float]],
+    excluded: tuple[str] | None = None,
+) -> tuple[list, float]:
     """Find top 3 salaries and a top salaries sum to all salaries ratio.
 
     Args:
-        args: tuple[str, dict[str, float]] - company departments, employees and their salaries.
-        arg: tuple[str] - exculded company.
+        departaments: tuple[str, dict[str, float]] - departments, employees and their salaries.
+        excluded: tuple[str] - excluded company.
 
     Returns:
-        list[str] - top 3 salaries and the ratio for each company.
+        tuple[list, float] - top 3 salaries and the ratio for company.
     """
-    answer = []
-    for index, _ in enumerate(args):
-        list_of_values = []
-        incident = arg if arg else []
-        if args[index][0] not in incident:
-            for values_of_salary in args[index][1].values():
-                list_of_values.append(values_of_salary)
-            list_of_values = sorted(list_of_values)
-            all_our_arr = list_of_values[:1] + list_of_values[1:2]
-            sum_of_our_salary = sum(all_our_arr + list_of_values[2:3])
-            sum_of_all_salary = sum(list_of_values)
-            answer.append(
-                '1: {0:.2f}, '.format(sum(list_of_values[:1]))
-                + '2: {0:.2f}, '.format(sum(list_of_values[1:2]))
-                + '3: {0:.2f}; '.format(sum(list_of_values[2:3]))
-                + '{0:.2f}%'.format(sum_of_our_salary / (sum_of_all_salary or 1) * 100),
-            )
-    return answer
+    list_of_values = []
+    for departament in departaments:
+        incident = excluded if excluded else []
+        if departament[0] not in incident:
+            list_of_values += departament[1].values()
+    sum_of_all_salary = sum(list_of_values)
+    our_salary = sorted(list_of_values)[:3]
+    salary_percent = sum(our_salary) / (sum_of_all_salary or 1) * 100
+    return [round(salary, 2) for salary in our_salary], round(salary_percent, 2)
