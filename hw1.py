@@ -1,4 +1,4 @@
-"""Module for calculating the salary stats"""
+"""Module for calculating the salary stats."""
 
 
 def calculate_salary_stats(salary_limit: float = None, **kwargs: dict) -> dict[str, tuple]:
@@ -12,7 +12,7 @@ def calculate_salary_stats(salary_limit: float = None, **kwargs: dict) -> dict[s
         dict: Dictionary in which the key is the name of the company, and the value is statistics
 
     """
-    statistics = dict()
+    statistics = {}
     for departament_name, employees in kwargs.items():
         employees_salaries = employees.values()
         if salary_limit is not None:
