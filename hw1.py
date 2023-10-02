@@ -3,19 +3,19 @@
 from typing import Tuple
 
 
-def get_best_salaries(ignored_depts: Tuple = None, **kwargs) -> Tuple:
+def get_best_salaries(ignored_depts: Tuple = None, **dept_employees) -> Tuple:
     """Calculate employee salary statistics.
 
     Args:
         ignored_depts (Tuple): depts ignored when calculating statistics.
-        kwargs: the key is the name of the department, the value is a dictionary.
+        dept_employees: the key is the name of the department, the value is a dictionary.
 
     Returns:
         Tuple: the first element is a tuple of 3 employees,
         and the second element is a floating point number.
     """
     employees = {}
-    for dept, dept_employees in kwargs.items():
+    for dept, dept_employees in dept_employees.items():
         if ignored_depts is None or dept not in ignored_depts:
             for key in dept_employees.keys():
                 dept_employees[key] = round(dept_employees[key], 2)

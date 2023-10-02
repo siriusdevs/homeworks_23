@@ -31,12 +31,12 @@ test_data = (
 
 
 @pytest.mark.parametrize('ignored_depts, expected, kwargs', test_data)
-def test_colculating_best_salaries(ignored_depts: Tuple, expected: Tuple, kwargs) -> None:
+def test_colculating_best_salaries(ignored_depts: Tuple, expected: Tuple, dept_employees) -> None:
     """Test get_best_salaries function.
 
     Args:
         ignored_depts (Tuple): depts ignored when calculating statistics.
-        kwargs: the key is the name of the department, the value is a dictionary.
+        dept_employees: the key is the name of the department, the value is a dictionary.
         expected (Tuple): test value.
     """
-    assert get_best_salaries(ignored_depts, **kwargs) == expected
+    assert get_best_salaries(ignored_depts, **dept_employees) == expected
