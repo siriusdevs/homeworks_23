@@ -13,24 +13,18 @@ dept3 = {'g': 7, 'h': 8, 'i': 9}
 test_dict = {'dept1': dept1, 'dept2': dept2, 'dept3': dept3}
 test_data = (
     (
-        None,
-        (
-            (
-                (
-                    'i',
-                    9,
-                ),
-                (
-                    'h',
-                    8,
-                ),
-                (
-                    'g',
-                    7,
-                ),
-            ),
-            53.33,
-        ),
+        ('dept3',),
+        ((('f', 6), ('e', 5), ('d', 4)), 71.43),
+        test_dict,
+    ),
+    (
+        ('dept3', 'dept2'),
+        ((('c', 3), ('b', 2), ('a', 1)), 100.0),
+        test_dict,
+    ),
+    (
+        (None, ),
+        ((('i', 9), ('h', 8), ('g', 7)), 53.33),
         test_dict,
     ),
 )
@@ -46,15 +40,3 @@ def test_colculating_best_salaries(ignored_depts: Tuple, expected: Tuple, kwargs
         expected (Tuple): test value.
     """
     assert get_best_salaries(ignored_depts, **kwargs) == expected
-
-
-#     (
-#         ('dept3', 'dept2'),
-#         ((('c', 3), ('b', 2), ('a', 1)), 100.0),
-#         test_dict,
-#     ),
-#     (
-#         ('dept3'),
-#         ((('f', 6), ('e', 5), ('d', 4)), 71.43),
-#         test_dict,
-#     ),
