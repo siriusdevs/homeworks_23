@@ -2,13 +2,13 @@
 
 
 def salary_info(
-    *departaments: tuple[str, dict[str, float]],
+    *departments: tuple[str, dict[str, float]],
     excluded: tuple[str] | None = None,
 ) -> tuple[list, float]:
     """Find top 3 salaries and a top salaries sum to all salaries ratio.
 
     Args:
-        departaments: tuple[str, dict[str, float]] - departments, employees and their salaries.
+        departments: tuple[str, dict[str, float]] - departments, employees and their salaries.
         excluded: tuple[str] - excluded company.
 
     Returns:
@@ -16,9 +16,9 @@ def salary_info(
     """
     salaries = []
     incident = excluded if excluded else []
-    for departament in departaments:
-        if departament[0] not in incident:
-            salaries += departament[1].values()
+    for department in departments:
+        if department[0] not in incident:
+            salaries += department[1].values()
     our_salary = sorted(salaries)[:3]
     salary_percent = sum(our_salary) / (sum(salaries) or 1) * 100
     return [round(salary, 2) for salary in our_salary], round(salary_percent, 2)
