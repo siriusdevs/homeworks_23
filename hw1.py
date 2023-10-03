@@ -18,10 +18,18 @@ def get_top_salaries(*args: Tuple[str, list], departments: Tuple[str] = None) ->
     """
     top_salaries = []
     if departments:
-        args = list(filter(lambda arg: arg[0] in departments, args))
+        args = tuple(filter(lambda arg: arg[0] in departments, args))
     required_salaries = [salaries[1] for salaries in args]
     for salaries in required_salaries:
         top_salaries.extend(salaries)
     top_salaries.sort(reverse=True)
-    percent = sum(top_salaries[:3]) / sum(top_salaries) * 100
+    try:
+        percent = sum(top_salaries[:3]) / sum(top_salaries) * 100
+    except ZeroDivisionError:
+        if top_salaries:
+            percent = float(100)
+        else:
+            percent = float(0)
     return top_salaries[:3], round(percent, 2)
+
+print(get_top_salaries(('', [20])))
