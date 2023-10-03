@@ -1,5 +1,6 @@
 """Those are tests for hw1."""
 import pytest
+
 from hw1 import get_salary_stats
 
 
@@ -8,13 +9,13 @@ test_data = {
         'Bob': 1450.5,
         'Jeremy': 999.9,
         'Elijah': 1000,
-        'Charlie': 150.45
+        'Charlie': 150.45,
     },
     'marketing': {
         'Rimus': 1500,
         'Thomas': 1250.5,
         'Richard': 79893.12312,
-        'Charlie': 150.45
+        'Charlie': 150.45,
     },
     'managment': {
         'Elon': 99999999999.99999999,
@@ -29,8 +30,9 @@ test_data_values = (
     ('managment', ((100000000000.0, 100), 100.0)),
 )
 
+
 @pytest.mark.parametrize('department, expected', test_data_values)
-def test_salary_stat(department: str, expected: tuple): 
+def test_salary_stat(department: str, expected: tuple):
     """Test function.
 
     Args:
@@ -39,4 +41,3 @@ def test_salary_stat(department: str, expected: tuple):
     
     """
     assert get_salary_stats(test_data, department) == expected
-
