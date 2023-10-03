@@ -19,7 +19,7 @@ def get_top_salaries(*args: Tuple[str, list], departments: Tuple[str] = None) ->
     top_salaries = []
     if departments:
         args = tuple(filter(lambda arg: arg[0] in departments, args))
-    required_salaries = [salaries[1] for salaries in args]
+    required_salaries = [salaries[1] for salaries in args if len(salaries) > 1]
     for salaries in required_salaries:
         top_salaries.extend(salaries)
     top_salaries.sort(reverse=True)
