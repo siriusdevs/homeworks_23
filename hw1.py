@@ -3,7 +3,7 @@ from typing import Tuple
 
 
 def get_salary_stats(data_salaries: dict, department: str, limit: int = None) -> Tuple:
-    """This exact function is designed to work with salaries data and searches for top 3 salaries in chosen department.
+    """This exact function is designed to search for top 3 salaries in chosen department and etc.
 
     Args:
         data_salaries: dictionary of dictionaries that includes departments and salaries data.
