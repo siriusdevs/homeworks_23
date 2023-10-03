@@ -2,22 +2,23 @@
 import pytest
 from hw1 import get_salary_stats
 
+
 test_data = {
-    'it':{
-        'Bob':1450.5,
-        'Jeremy':999.9,
-        'Elijah':1000,
-        'Charlie':150.45
+    'it': {
+        'Bob': 1450.5,
+        'Jeremy': 999.9,
+        'Elijah': 1000,
+        'Charlie': 150.45
     },
-    'marketing':{
-        'Rimus':1500,
-        'Thomas':1250.5,
-        'Richard':79893.12312,
-        'Charlie':150.45
+    'marketing': {
+        'Rimus': 1500,
+        'Thomas': 1250.5,
+        'Richard': 79893.12312,
+        'Charlie': 150.45
     },
-    'managment':{
-        'Elon':99999999999.99999999,
-        'Tim':100,
+    'managment': {
+        'Elon': 99999999999.99999999,
+        'Tim': 100,
     },
 }
 
@@ -29,10 +30,13 @@ test_data_values = (
 )
 
 @pytest.mark.parametrize('department, expected', test_data_values)
-def test_salary_stat(department: str, expected: tuple):
+def test_salary_stat(department: str, expected: tuple): 
     """Test function.
+
     Args:
         department: str, name of the dept.
         expected: tuple that is expected.
+    
     """
     assert get_salary_stats(test_data, department) == expected
+
