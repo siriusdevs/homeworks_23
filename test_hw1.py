@@ -3,7 +3,6 @@ import pytest
 
 from hw1 import get_salary_stats
 
-
 test_data = {
     'it': {
         'Bob': 1450.5,
@@ -38,6 +37,6 @@ def test_salary_stat(department: str, expected: tuple):
     Args:
         department: str, name of the dept.
         expected: tuple that is expected.
-    
+
     """
     assert get_salary_stats(test_data, department) == expected
