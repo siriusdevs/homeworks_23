@@ -18,7 +18,9 @@ def get_top_salaries(*args: Tuple[str, list], departments: Tuple[str] = None) ->
     """
     top_salaries = []
     if departments:
-        args = tuple(filter(lambda arg: arg[0] in departments, args))
+        args = filter(lambda arg: arg, args)
+        args = filter(lambda arg: arg[0] in departments, args)
+        args = tuple(args)
     required_salaries = [salaries[1] for salaries in args if len(salaries) > 1]
     for salaries in required_salaries:
         top_salaries.extend(salaries)
@@ -31,5 +33,3 @@ def get_top_salaries(*args: Tuple[str, list], departments: Tuple[str] = None) ->
         else:
             percent = float(0)
     return top_salaries[:3], round(percent, 2)
-
-print(get_top_salaries(('', [20])))
