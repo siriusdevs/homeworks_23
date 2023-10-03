@@ -24,6 +24,8 @@ def get_top_salaries(*args: Tuple[str, list], departments: Tuple[str] = None) ->
     required_salaries = [salaries[1] for salaries in args if len(salaries) > 1]
     for salaries in required_salaries:
         top_salaries.extend(salaries)
+    if any(salary < 0 for salary in top_salaries):
+        return 'Sorry, salary cannot be less than zero.'
     top_salaries.sort(reverse=True)
     try:
         percent = sum(top_salaries[:3]) / sum(top_salaries) * 100
