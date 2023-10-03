@@ -3,7 +3,7 @@ from typing import Tuple
 
 
 def get_salary_stats(data_salaries: dict, department: str, limit: int = None) -> Tuple:
-    """Function that works with salaries data and searches for top 3 salaries in chosen department.
+    """This exact function is designed to work with salaries data and searches for top 3 salaries in chosen department.
 
     Args:
         data_salaries: dictionary of dictionaries that includes departments and salaries data.
@@ -27,8 +27,6 @@ def get_salary_stats(data_salaries: dict, department: str, limit: int = None) ->
         salary = round(salary, 2)
         salaries.append(salary)
     salaries = sorted(salaries, reverse=True)
-    top_3_salaries_sum = sum(salaries[:3])
-    ratio = round(top_3_salaries_sum / sum_salaries * 100, 2)
-    out = ()
-    out += (tuple(salaries[:3]))
-    return out, ratio
+    top3salariessum = sum(salaries[:3])
+    ratio = round(top3salariessum / sum_salaries * 100, 2)
+    return (tuple(salaries[:3])), ratio
