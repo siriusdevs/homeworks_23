@@ -11,7 +11,7 @@ def lowest_salaries(*args, salary_limit: float = None) -> tuple:
 
     Returns:
         tuple: contains list of all employee salaries and \
-            the percentage of three lowest salaries from all payments
+            the percentage of three lowest salaries from all payments.
 
     """
     if salary_limit == 0:
