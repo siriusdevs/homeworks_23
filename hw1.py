@@ -29,7 +29,7 @@ def dept_stat(*args: Tuple[str, List[float]], cur_dept: Tuple[str] = None) -> Tu
             ) for elem in depts
         )
     except ZeroDivisionError:
-        raise ZeroDivisionError('Division by zero.')
+        raise ZeroDivisionError('Oooops, division by zero.')
     else:
         sorted_dept = sorted(dept_mean_salary, key=lambda elem: elem[1])
     return (sorted_dept[:3], sorted_dept[-3:])
