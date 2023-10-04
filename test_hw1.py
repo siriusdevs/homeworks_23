@@ -1,3 +1,6 @@
+"""Test hw1."""
+
+
 from hw1 import get_salaries
 import pytest
 
@@ -12,47 +15,47 @@ data = (
         None,
         (
             [600.0, 400.0, 300.0],
-            68.42
-        )
+            68.42,
+        ),
     ),
 
     (
         (
             ('1st', {'Smith': 5.0, 'Robbinson': 10.0}),
             ('2nd', {'White': 8.0, 'Jefferson': 6.0}),
-            ('3rd', {'Bale': 4.0, 'Gosling': 6.0})
+            ('3rd', {'Bale': 4.0, 'Gosling': 6.0}),
         ),
         None,
         (
             [10.0, 8.0, 6.0],
-            61.54)
+            61.54,),
     ),
 
     (
         (
             ('South', {'a': 2.0, 'b': 3.0}),
             ('West', {'c': 4.0, 'd': 1.0}),
-            ('East', {'e': 9.0, 'f': 3.0})
+            ('East', {'e': 9.0, 'f': 3.0}),
         ),
         None,
         (
             [9.0, 4.0, 3.0],
-            72.73)
+            72.73,),
     ),
 
     (
         (
             ('South', {'a': 2.0, 'b': 3.0}),
             ('West', {'c': 4.0, 'd': 1.0}),
-            ('East', {'e': 9.0, 'f': 3.0})
+            ('East', {'e': 9.0, 'f': 3.0}),
         ),
         (
             'South',
         ),
         (
             [9.0, 4.0, 3.0],
-            94.12
-        )
+            94.12,
+        ),
     ),
 
     (
@@ -61,14 +64,14 @@ data = (
             ('2nd', {'White': 8.0, 'Jefferson': 6.0}),
             ('3rd', {'Bale': 7.0, 'Gosling': 15.0}),
             ('4th', {'Kant': 4.0, 'Dude': 11.0}),
-            ('5th', {'Black': 1.0, 'Malek': 3.0})
+            ('5th', {'Black': 1.0, 'Malek': 3.0}),
         ),
         (
-            '3rd', '4th'
+            '3rd', '4th',
         ),
         (
             [10.0, 8.0, 6.0],
-            72.73)
+            72.73,),
     ),
 )
 
@@ -81,5 +84,6 @@ def test_get_salaries(source: tuple[tuple], dept_except: tuple[str], expected: t
         source (Tuple[tuple]): data for testing
         dept_except (Tuple[str]): exception for department data
         expected (Tuple[list, float]): expected values
+
     """
     assert get_salaries(*source, dept_except=dept_except) == expected
