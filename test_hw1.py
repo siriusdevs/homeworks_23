@@ -3,6 +3,8 @@ import pytest
 
 from hw1 import get_salary_stats
 
+nan = None
+
 test_data = {
     'it': {
         'Bob': 1450.5,
@@ -30,7 +32,11 @@ test_data_values = (
 )
 
 
-test_data_limit = (('it', 1000, ((1000, 999.9, 150.45), 59.72)))
+data_limit_test = (
+    ('it', 1000, ((1000, 999.9, 150.45), 59.72)),
+    ('marketing', nan, ((79893.12, 1500, 1250.5), 99.82)),
+    ('managment', 0, ((), 0)),
+)
 
 
 @pytest.mark.parametrize('department, expected', test_data_values)
@@ -45,8 +51,8 @@ def test_salary_stat(department: str, expected: tuple):
     assert get_salary_stats(test_data, department) == expected
 
 
-@pytest.mark.parametrize('department, limit, expected', test_data_limit)
-def test_salary_stat_limit(department: str, limit, expected: tuple):
+@pytest.mark.parametrize('department, limit, expected', data_limit_test)
+def test_salary_stat_limit(department: str, limit: int, expected: tuple):
     """Test function.
 
     Args:
