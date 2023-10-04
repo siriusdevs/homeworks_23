@@ -6,20 +6,20 @@ from hw1 import lowest_salaries
 test_data = [
     (
         ('it', {
-            'nikiforov': 10.0,
-            'litvinov': 20.0,
-            'argun': 30.0,
-            'demyanenko': 40.0,
-            'startsev': 50.0,
+            'Nikiforov': 10.0,
+            'Litvinov': 20.0,
+            'Argun': 30.0,
+            'Demyanenko': 40.0,
+            'Startsev': 50.0,
         },
         ),
         (10.0, 20.0, 30.0, 0.4),
     ),
     (
         ('hr', {
-            'tyapkova': 10.0,
-            'kolkareva': 10.0,
-            'kuznentsova': 10.0,
+            'Tyapkova': 10.0,
+            'Kolkareva': 10.0,
+            'Kuznentsova': 10.0,
         },
         ),
         (10.0, 10.0, 10.0, 1.0),
@@ -29,18 +29,18 @@ test_data = [
 test_data_args = [
     (
         (
-            ('it', {
-                'nikiforov': 10.0,
-                'litvinov': 20.0,
-                'argun': 30.0,
-                'demyanenko': 40.0,
-                'startsev': 50.0,
+            ('design', {
+                'Fernandez': 10.0,
+                'Thompson': 20.0,
+                'Davidson': 30.0,
+                'Ramirez': 40.0,
+                'Stevenson': 50.0,
             },
             ),
-            ('hr', {
-                'tyapkova': 60.0,
-                'kolkareva': 70.0,
-                'kuznentsova': 80.0,
+            ('tech_support', {
+                'Daniel': 60.0,
+                'Patel': 70.0,
+                'Bolton': 80.0,
             },
             ),
         ),
@@ -50,36 +50,36 @@ test_data_args = [
 
 test_data_kwargs = [
     (
-        ('it', {                    # name of department
-            'nikiforov': 10.0,      # surnames below
-            'litvinov': 20.0,
-            'argun': 30.0,
-            'demyanenko': 40.0,
-            'startsev': 50.0,
+        ('data_analitics', {
+            'Vargas': 10.0,
+            'Morgan': 20.0,
+            'Hicks': 30.0,
+            'Steele': 40.0,
+            'Estrada': 50.0,
         },
         ),
-        100.0,                      # salary limit
-        (10.0, 20.0, 30.0, 0.4),    # expected values
+        100.0,
+        (10.0, 20.0, 30.0, 0.4),
     ),
     (
-        ('design', {
-            'mukaseev': 10.0,
-            'kolkareva': 20.0,
-            'tyrin': 30.0,
-            'roganov': 40.0,
-            'startsev': 50.0,
+        ('administrators', {
+            'Walters': 10.0,
+            'Wolf': 20.0,
+            'Reese': 30.0,
+            'Daniels': 40.0,
+            'Torres': 50.0,
         },
         ),
         30.0,
         (10.0, 20.0, 0.2),
     ),
     (
-        ('design', {
-            'mukaseev': 10.0,
-            'kolkareva': 20.0,
-            'tyrin': 30.0,
-            'roganov': 40.0,
-            'startsev': 50.0,
+        ('security', {
+            'Salazar': 10.0,
+            'Osborne': 20.0,
+            'Santiago': 30.0,
+            'Luna': 40.0,
+            'Wilson': 50.0,
         },
         ),
         0,
@@ -90,18 +90,18 @@ test_data_kwargs = [
 test_data_args_kwargs = [
     (
         (
-            ('it', {
-                'nikiforov': 10.0,
-                'litvinov': 20.0,
-                'argun': 30.0,
-                'demyanenko': 40.0,
-                'startsev': 50.0,
+            ('management', {
+                'Rowe': 10.0,
+                'Ford': 20.0,
+                'Paul': 30.0,
+                'Turner': 40.0,
+                'Peters': 50.0,
             },
             ),
-            ('hr', {
-                'tyapkova': 60.0,
-                'kolkareva': 70.0,
-                'kuznentsova': 80.0,
+            ('programmers', {
+                'Wang': 60.0,
+                'Lamb': 70.0,
+                'Davis': 80.0,
             },
             ),
         ),
@@ -110,18 +110,18 @@ test_data_args_kwargs = [
     ),
     (
         (
-            ('it', {
-                'nikiforov': 100.0,
-                'litvinov': 200.0,
-                'argun': 300.0,
-                'demyanenko': 400.0,
-                'startsev': 500.0,
+            ('engeneers', {
+                'Fitzgerald': 100.0,
+                'Craig': 200.0,
+                'Acosta': 300.0,
+                'Mac': 400.0,
+                'Henderson': 500.0,
             },
             ),
-            ('hr', {
-                'tyapkova': 600.0,
-                'kolkareva': 70.0,
-                'kuznentsova': 80.0,
+            ('network_administrators', {
+                'Griffin': 600.0,
+                'Coleman': 70.0,
+                'Fox': 80.0,
             },
             ),
         ),
