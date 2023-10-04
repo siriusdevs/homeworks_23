@@ -24,15 +24,29 @@ test_data = {
 
 
 test_data_values = (
-    ('it', None, ((1450.5, 1000, 999.9), 95.82)),
-    ('marketing', None, ((79893.12, 1500, 1250.5), 99.82)),
-    ('managment', None, ((100000000000.0, 100), 100.0)),
-    ('it', 1000, ((1000, 999.9, 150.45), 59.72)),
+    ('it', ((1450.5, 1000, 999.9), 95.82)),
+    ('marketing', ((79893.12, 1500, 1250.5), 99.82)),
+    ('managment', ((100000000000.0, 100), 100.0)),
 )
 
 
-@pytest.mark.parametrize('department, limit, expected', test_data_values)
-def test_salary_stat(department: str, limit, expected: tuple):
+test_data_limit = (('it', 1000, ((1000, 999.9, 150.45), 59.72)))
+
+
+@pytest.mark.parametrize('department, expected', test_data_values)
+def test_salary_stat(department: str, expected: tuple):
+    """Test function.
+
+    Args:
+        department: str, name of the dept.
+        expected: tuple that is expected.
+
+    """
+    assert get_salary_stats(test_data, department) == expected
+
+
+@pytest.mark.parametrize('department, limit, expected', test_data_limit)
+def test_salary_stat_limit(department: str, limit, expected: tuple):
     """Test function.
 
     Args:
