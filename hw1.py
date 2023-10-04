@@ -20,10 +20,11 @@ def top_salary(*company: tuple[str, list[float]],
         if name_departments is None or department_name in name_departments:
             all_salaries.extend(salaries)
 
-    if not all_salaries:
+    if not all_salaries or sum(all_salaries) == 0:
         return [], 0.0
 
     top_salaries = sorted(all_salaries, reverse=True)[:3]
+
     percentage = round(sum(top_salaries) / sum(all_salaries) * 100, 2)
 
     return top_salaries, percentage
