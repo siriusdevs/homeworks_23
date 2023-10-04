@@ -1,10 +1,11 @@
+"""Module that tests main.py."""
+
 import pytest
 
-from hw1 import get_median, calculate_companies_info
-
+import hw1
 
 data_test_get_median = (
-    ([], 0.0),
+    ([], 0),
     ([1], 1.0),
     ([1, 2], 1.5),
     ([1, 2, 3], 2),
@@ -12,16 +13,15 @@ data_test_get_median = (
 )
 
 
-@pytest.mark.parametrize('items, expected', data_test_get_median)
-def test_get_median(items, expected) -> None:
+@pytest.mark.parametrize('sequence, expected', data_test_get_median)
+def test_get_median(sequence, expected) -> None:
     """Test 'get_median' function for correct values.
 
     Args:
-        items (Sequences[int | float]): Sequence of random int or float value.
+        sequence (Sequences[int | float]): Sequence of random int or float value.
         expected (float): Median value that has to be a float.
     """
-    result = get_median(items)
-    assert result == expected and isinstance(result, float)
+    assert hw1.get_median(sequence) == expected
 
 
 data_test_calculate_companies_info = (
@@ -38,17 +38,17 @@ data_test_calculate_companies_info = (
                 'a': 2843.349834,
                 'b': 324234.324234,
                 'c': 12.0,
-            }
+            },
         },
         {
             'samsung': (250.0, 400.0, 250.0),
             'apple': (109029.89, 324234.32, 324234.32),
-        }
+        },
     ),
     (
         250.0,
         {
-            'samsung': {
+            'microsoft': {
                 'a': 100.0,
                 'b': 200.0,
                 'c': 300.0,
@@ -56,8 +56,8 @@ data_test_calculate_companies_info = (
             },
         },
         {
-            'samsung': (350.0, 400.0, 350.0),
-        }
+            'microsoft': (350.0, 400.0, 350.0),
+        },
     ),
     (
         0,
@@ -80,4 +80,4 @@ def test_calculate_companies_info(min_salary, companies, expected) -> None:
         companies (dict[str, dict[str, float]]): Companies that we consider salaries in.
         expected (dict[str, tuple[float, float, float]]): result calculation of companies.
     """
-    assert calculate_companies_info(min_salary, **companies) == expected
+    assert hw1.calculate_companies_info(min_salary, **companies) == expected

@@ -1,25 +1,26 @@
-from typing import TypeAlias, Sequence, Optional
+"""Module for calculating average, max, median salary for employees."""
+from typing import Optional, Sequence, TypeAlias
 
 
-def get_median(items: Sequence[float | int]) -> float:
+def get_median(sequence: Sequence[float | int]) -> float | int:
     """Calculate median in transmitted sequence.
 
     Args:
-        items: Sequence of any int or float item.
+        sequence: Sequence of any int or float item.
 
     Returns:
         median value of items.
     """
-    length = len(items)
+    length = len(sequence)
     centre_index = (length - 1) // 2
 
     if length == 0:
-        return 0.0
+        return 0
 
     if length % 2 == 1:
-        return float(items[centre_index])
+        return float(sequence[centre_index])
 
-    return (items[centre_index] + items[centre_index + 1]) / 2
+    return (sequence[centre_index] + sequence[centre_index + 1]) / 2
 
 
 Employees: TypeAlias = dict[str, float]  # name, salary
@@ -42,13 +43,12 @@ def calculate_companies_info(min_salary: Optional[int | float] = None, **compani
         Calculated average, maximum and medium salary in each company,
         result is a tuple with three float value.
     """
-
-    result: CompaniesInfo = dict()
+    salaries_in_companies: CompaniesInfo = {}
 
     for company_name, employees in companies.items():
-        salary_sum = 0
-        max_salary = 0
-        filtered_salaries: list[float] = list()
+        salary_sum: float = 0
+        max_salary: float = 0
+        filtered_salaries: list[float] = []
 
         for salary in employees.values():
             if (min_salary is not None) and (salary < min_salary):
@@ -59,11 +59,18 @@ def calculate_companies_info(min_salary: Optional[int | float] = None, **compani
             filtered_salaries.append(salary)
 
         salaries_length = len(filtered_salaries)
-        average = salary_sum / salaries_length if salaries_length > 0 else 0
-        median = get_median(filtered_salaries)
+        average_salary = (salary_sum / salaries_length) if (salaries_length > 0) else 0
 
-        # it has a redundancy for mypy (static type checker)
-        total = tuple(round(salary, 2) for salary in [average, max_salary, median])
-        result[company_name] = (total[0], total[1], total[2])
+        total = tuple(round(info_salary, 2) for info_salary in (
+            average_salary,
+            max_salary,
+            get_median(filtered_salaries),
+        ))
 
-    return result
+        # for mypy
+        if len(total) != 3:
+            continue
+
+        salaries_in_companies[company_name] = total
+
+    return salaries_in_companies
