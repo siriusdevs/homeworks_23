@@ -1,9 +1,7 @@
 """Module for salary analysis and calculations."""
 
-from typing import Tuple
 
-
-def get_top_salaries(*args: Tuple[str, list], departments: Tuple[str] = None) -> tuple:
+def get_top_salaries(*args: tuple[str, list], departments: tuple[str] = None) -> tuple:
     """Get the 3 highest salaries and the ratio of their sum to the sum of all salaries.
 
     Args:
