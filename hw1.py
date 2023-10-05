@@ -1,12 +1,12 @@
 """Module for salary analysis and calculations."""
 
 
-def get_top_salaries(*args: tuple[str, list], departments: tuple[str] = None) -> tuple:
+def get_top_salaries(*departments: tuple[str, list], required_deps: tuple[str] = None) -> tuple:
     """Get the 3 highest salaries and the ratio of their sum to the sum of all salaries.
 
     Args:
-        args: Tuple[str, list] - departments name and lists of salaries.
-        departments: Tuple[str] - names of departments in which salaries need to be calculated.
+        departments: Tuple[str, list] - departments name and lists of salaries.
+        required_deps: Tuple[str] - names of departments in which salaries need to be calculated.
 
     Returns:
         tuple: A tuple containing two elements:
@@ -15,11 +15,11 @@ def get_top_salaries(*args: tuple[str, list], departments: tuple[str] = None) ->
         salaries within the specified departments, rounded to two decimal places.
     """
     top_salaries = []
-    if departments:
-        args = filter(lambda arg: arg, args)
-        args = filter(lambda arg: arg[0] in departments, args)
-        args = tuple(args)
-    required_salaries = [salaries[1] for salaries in args if len(salaries) > 1]
+    if required_deps:
+        departments = filter(lambda arg: arg, departments)
+        departments = filter(lambda arg: arg[0] in required_deps, departments)
+        departments = tuple(departments)
+    required_salaries = [salaries[1] for salaries in departments if len(salaries) > 1]
     for salaries in required_salaries:
         top_salaries.extend(salaries)
     if any(salary < 0 for salary in top_salaries):
