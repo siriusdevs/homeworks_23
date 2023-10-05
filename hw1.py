@@ -19,9 +19,9 @@ def get_top_salaries(*departments: tuple[str, list], required_deps: tuple[str] =
         departments = filter(lambda arg: arg, departments)
         departments = filter(lambda arg: arg[0] in required_deps, departments)
         departments = tuple(departments)
-    for salaries in departments:
-        if len(salaries) > 1:
-            sorted_salaries.extend(salaries[1])
+    for department in departments:
+        if len(department) > 1:
+            sorted_salaries.extend(department[1])
     if any(salary < 0 for salary in sorted_salaries):
         return 'Sorry, salary cannot be less than zero.'
     sorted_salaries.sort()
