@@ -24,7 +24,7 @@ def get_top_salaries(*departments: tuple[str, list], required_deps: tuple[str] =
             sorted_salaries.extend(salaries[1])
     if any(salary < 0 for salary in sorted_salaries):
         return 'Sorry, salary cannot be less than zero.'
-    sorted_salaries.sort(reverse=True)
+    sorted_salaries.sort()
     try:
         percent = sum(sorted_salaries[:3]) / sum(sorted_salaries) * 100
     except ZeroDivisionError:
