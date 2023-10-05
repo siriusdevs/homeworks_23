@@ -33,6 +33,3 @@ def get_top_salaries(*departments: tuple[str, list], required_deps: tuple[str] =
         else:
             percent = float(0)
     return sorted_salaries[:3], round(percent, 2)
-
-
-print(get_top_salaries(('Develop', [20, 20, 20, 80, 20]), ('Marketing', [20, 20, 20, 80, 20]), ('Sales', [20, 20, 20, 80, 20])))
