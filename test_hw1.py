@@ -106,4 +106,4 @@ def test_get_top_salaries_with_departments(args: tuple, deps: Tuple[str], expect
         deps: tuple - a tuple with a tuple of departments names whose salaries need to be counted.
         expected: tuple - expected function result.
     """
-    assert get_top_salaries(*args, departments=deps) == expected
+    assert get_top_salaries(*args, required_deps=deps) == expected
