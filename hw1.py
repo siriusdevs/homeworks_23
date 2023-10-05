@@ -9,7 +9,7 @@ def get_top_salaries(*departments: tuple[str, list], required_deps: tuple[str] =
         required_deps: Tuple[str] - names of departments in which salaries need to be calculated.
 
     Returns:
-        tuple: A tuple containing two elements:
+        tuple: two elements:
         - A list of the top three salaries (sorted in descending order).
         - The percentage that the top three salaries contribute to the total
         salaries within the specified departments, rounded to two decimal places.
