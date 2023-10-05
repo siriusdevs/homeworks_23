@@ -2,82 +2,115 @@
 
 import pytest
 
+import helpers.get_median
 import hw1
 
 data_test_get_median = (
-    ([], 0),
-    ([1], 1.0),
-    ([1, 2], 1.5),
-    ([1, 2, 3], 2),
-    ((1, 2, 3, 4), 2.5),
+    (
+        [],
+        True,
+        0,
+    ),
+    (
+        [1],
+        True,
+        1.0,
+    ),
+    (
+        [1, 2],
+        True,
+        1.5,
+    ),
+    (
+        [1, 3, 2],
+        False,
+        2,
+    ),
+    (
+        (1, 2, 3, 4),
+        True,
+        2.5,
+    ),
+    (
+        [4, 2, 3, 1],
+        True,
+        2.5,
+    ),
 )
 
 
-@pytest.mark.parametrize('sequence, expected', data_test_get_median)
-def test_get_median(sequence, expected) -> None:
-    """Test 'get_median' function for correct values.
+@pytest.mark.parametrize('sequence, is_sorted, expected', data_test_get_median)
+def test_get_median(sequence, is_sorted, expected) -> None:
+    """Test function 'get_median' for correct values.
 
     Args:
         sequence (Sequences[int | float]): Sequence of random int or float value.
-        expected (float): Median value that has to be a float.
+        is_sorted (bool): Is given sequence sorted or no? default - False.
+        expected (float): Median value.
     """
-    assert hw1.get_median(sequence) == expected
+    assert helpers.get_median.get_median(sequence) == expected
 
 
-data_test_calculate_companies_info = (
+data_test_get_stats = (
     (
         None,
         {
-            'samsung': {
-                'a': 100.0,
-                'b': 200.0,
-                'c': 300.0,
-                'd': 400.0,
-            },
-            'apple': {
-                'a': 2843.349834,
-                'b': 324234.324234,
-                'c': 12.0,
+            'main': {
+                'Alex': 100.0,
+                'Ivan': 100.0,
+                'Danil': 200.0,
+                'Kirill': 300.0,
+                'Sasha': 300.0,
             },
         },
+        (200.0, 300.0, 200.0),
+    ),
+    (
+        None,
         {
-            'samsung': (250.0, 400.0, 250.0),
-            'apple': (109029.89, 324234.32, 324234.32),
+            'extra': {
+                'Shurik': 100.0,
+                'Katya': 200.0,
+                'Vasya': 300.0,
+                'Igor': 400.0,
+            },
+            'mega-extra': {
+                'Who': 234.0,
+                'Slava': 10000.0,
+                'Rodic': 1200.0,
+            },
         },
+        (1776.29, 10000.0, 300.0),
     ),
     (
         250.0,
         {
-            'microsoft': {
-                'a': 100.0,
-                'b': 200.0,
-                'c': 300.0,
-                'd': 400.0,
+            'new-department': {
+                'Gora': 100.0,
+                'Gosha': 200.0,
+                'Grigoriy': 300.0,
+                'Goyda': 400.0,
             },
         },
-        {
-            'microsoft': (350.0, 400.0, 350.0),
-        },
+        (350.0, 400.0, 350.0),
     ),
     (
         0,
         {
             'Sirius': {},
         },
-        {
-            'Sirius': (0, 0, 0),
-        },
+        (0, 0, 0),
     ),
 )
 
 
-@pytest.mark.parametrize('min_salary, companies, expected', data_test_calculate_companies_info)
-def test_calculate_companies_info(min_salary, companies, expected) -> None:
-    """Test 'calculate_companies_info' function for correct values.
+@pytest.mark.parametrize('min_salary, departments, expected', data_test_get_stats)
+def test_get_stats(min_salary, departments, expected) -> None:
+    """Test function 'get_stats' for correct values.
 
     Args:
         min_salary (None | int | float): The lower limit of salaries that we consider.
-        companies (dict[str, dict[str, float]]): Companies that we consider salaries in.
-        expected (dict[str, tuple[float, float, float]]): result calculation of companies.
+        departments (dict[str, dict[str, float]]): departments that we consider salaries in.
+        expected (tuple[float, float, float]): result calculation of the company.
     """
-    assert hw1.calculate_companies_info(min_salary, **companies) == expected
+    assert hw1.get_stats(min_salary, **departments) == expected
