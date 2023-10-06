@@ -1,16 +1,15 @@
 """Test hw1."""
 
-
-from hw1 import get_salaries
 import pytest
 
+from hw1 import get_salaries
 
-data = (
+test_data = (
     (
         (
             ('1', {'1': 200.0, '2': 300.0}),
             ('2', {'3': 300.0, '4': 400.0}),
-            ('3', {'5': 100.0, '6': 600.0})
+            ('3', {'5': 100.0, '6': 600.0}),
         ),
         None,
         (
@@ -28,7 +27,8 @@ data = (
         None,
         (
             [10.0, 8.0, 6.0],
-            61.54,),
+            61.54,
+        ),
     ),
 
     (
@@ -40,7 +40,8 @@ data = (
         None,
         (
             [9.0, 4.0, 3.0],
-            72.73,),
+            72.73,
+        ),
     ),
 
     (
@@ -71,12 +72,13 @@ data = (
         ),
         (
             [10.0, 8.0, 6.0],
-            72.73,),
+            72.73,
+        ),
     ),
 )
 
 
-@pytest.mark.parametrize('source, dept_except, expected', data)
+@pytest.mark.parametrize('source, dept_except, expected', test_data)
 def test_get_salaries(source: tuple[tuple], dept_except: tuple[str], expected: tuple[list, float]):
     """Testing...
 
