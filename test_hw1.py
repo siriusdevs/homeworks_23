@@ -5,7 +5,7 @@ import pytest
 import helpers.get_median
 import hw1
 
-data_test_get_median = (
+DATA_TESTS_GET_MEDIAN = (
     (
         [],
         True,
@@ -39,7 +39,7 @@ data_test_get_median = (
 )
 
 
-@pytest.mark.parametrize('sequence, is_sorted, expected', data_test_get_median)
+@pytest.mark.parametrize('sequence, is_sorted, expected', DATA_TESTS_GET_MEDIAN)
 def test_get_median(sequence, is_sorted, expected) -> None:
     """Test function 'get_median' for correct values.
 
@@ -51,7 +51,7 @@ def test_get_median(sequence, is_sorted, expected) -> None:
     assert helpers.get_median.get_median(sequence) == expected
 
 
-data_test_get_stats = (
+DATA_TESTS_GET_STATS = (
     (
         None,
         {
@@ -104,7 +104,7 @@ data_test_get_stats = (
 )
 
 
-@pytest.mark.parametrize('min_salary, departments, expected', data_test_get_stats)
+@pytest.mark.parametrize('min_salary, departments, expected', DATA_TESTS_GET_STATS)
 def test_get_stats(min_salary, departments, expected) -> None:
     """Test function 'get_stats' for correct values.
 
