@@ -18,6 +18,10 @@ def get_salaries(*company: tuple, dept_except: tuple[str] = None) -> tuple[list,
             salaries += list(department[1].values())
 
     top_three = sorted(salaries, reverse=True)[:3]
-    in_percentage = (sum(top_three) / sum(salaries)) * 100
+
+    if sum(salaries) == 0:
+        in_percentage = 0
+    else:
+        in_percentage = (sum(top_three) / sum(salaries)) * 100
 
     return [round(salary, 2) for salary in top_three], round(in_percentage, 2)
