@@ -4,9 +4,10 @@ import pytest
 from hw1 import get_salary_stats
 
 nan = None
+it = 'it'
 
 test_data = {
-    'it': {
+    it: {
         'Bob': 1450.5,
         'Jeremy': 999.9,
         'Elijah': 1000,
@@ -26,14 +27,14 @@ test_data = {
 
 
 test_data_values = (
-    ('it', ((1450.5, 1000, 999.9), 95.82)),
+    (it, ((1450.5, 1000, 999.9), 95.82)),
     ('marketing', ((79893.12, 1500, 1250.5), 99.82)),
     ('managment', ((100000000000.0, 100), 100.0)),
 )
 
 
 data_limit_test = (
-    ('it', 1000, ((1000, 999.9, 150.45), 59.72)),
+    (it, 1000, ((1000, 999.9, 150.45), 59.72)),
     ('marketing', nan, ((79893.12, 1500, 1250.5), 99.82)),
     ('managment', 0, ((), 0)),
 )
@@ -62,3 +63,9 @@ def test_salary_stat_limit(department: str, limit: int, expected: tuple):
 
     """
     assert get_salary_stats(test_data, department, limit) == expected
+
+
+@pytest.mark.xfail(raises=Exception)
+def test_exception_test():
+    """This is block that rasies exception for purpose."""
+    assert get_salary_stats({it: {'Rimus': 0, 'John': 0, 'Casey': 0}}, it)
