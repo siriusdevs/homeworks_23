@@ -1,35 +1,48 @@
 """Homework №1. Module of departments stats."""
-from typing import List, Tuple
+from typing import List
 
 
-def dept_stat(*args: Tuple[str, List[float]], cur_dept: Tuple[str] = None) -> Tuple[List, List]:
+def department_statistics(
+    *departments: tuple[str, List[float]],
+    specific_departments: tuple[str] = None,
+) -> tuple[List, List]:
     """
-    Department salaries stats.
+    Department statistics by salaries.
 
     Args:
-        args: Tuple[str, List[float]] - names of departments and their salaries of employees.
-        cur_dept: Tuple[str] - departments that need to be included in the statistics.\
+        departments: tuple[str, List[float]] - names of departments and\
+            their salaries of employees.
+        specific_departments: tuple[str] - departments that need to be included in the statistics.\
             (default None).
 
-    Raises:
-        ZeroDivisionError: - division by zero.
+    Exception:
+        ZeroDivisionError: - division by zero occurs if an empty list of salaries was passed.
 
     Returns:
         Top 3 highest and lowest-paid departments.
     """
-    depts = (
-        tuple(filter(lambda elem: elem[0] in cur_dept, args))
-        if cur_dept else args
+    filtered_departments_by_optional_arg = (
+        tuple(
+            filter(
+                lambda department: department[0] in specific_departments, departments,
+            ),
+        )
+        if specific_departments
+        else departments
     )
     try:
-        dept_mean_salary = (
+        avg_salary_by_departments = (
             (
-                elem[0],
-                round(sum(elem[1]) / len(elem[1]), 2),
-            ) for elem in depts
+                department[0],
+                round(sum(department[1]) / len(department[1]), 2),
+            )
+            for department in filtered_departments_by_optional_arg
         )
     except ZeroDivisionError:
-        raise ZeroDivisionError('Oooops, division by zero.')
+        return 'You have entered empty list of department salaries.'
     else:
-        sorted_dept = sorted(dept_mean_salary, key=lambda elem: elem[1])
-    return (sorted_dept[:3], sorted_dept[-3:])
+        sorted_departments_by_avg_salary = sorted(
+            avg_salary_by_departments,
+            key=lambda department: department[1],
+        )
+    return (sorted_departments_by_avg_salary[:3], sorted_departments_by_avg_salary[-3:])

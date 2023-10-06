@@ -1,18 +1,26 @@
 """Test module for HW1."""
 import pytest
 
-from hw1 import dept_stat
+from hw1 import department_statistics
 
-depts = ['Programmers', 'Managers', 'ML', 'HR', 'Designers', 'DL', 'Engineers']
+departments_names = [
+    'Programmers',
+    'Managers',
+    'ML',
+    'HR',
+    'Designers',
+    'DL',
+    'Engineers',
+]
 
 test_data1 = (
-    (depts[0], [56.7, 89.3, 99.5]),  # 81.83
-    (depts[1], [32.9, 54, 100.5, 23.1]),  # 52.62
-    (depts[2], [123.4, 250.6, 100.3, 300.5]),  # 193.7
-    (depts[3], [56.7, 89.3, 99.5, 123.3]),  # 92.2
-    (depts[4], [32.9, 54, 100.5, 23.1]),  # 52.62
-    (depts[5], [123.4, 250.6, 100.3, 300.5, 45.2, 145.3]),  # 160.88
-    (depts[6], [56.7, 89.3, 99.5, 87.3, 12.4, 45.9]),  # 65.18
+    (departments_names[0], [56.7, 89.3, 99.5]),  # 81.83
+    (departments_names[1], [32.9, 54, 100.5, 23.1]),  # 52.62
+    (departments_names[2], [123.4, 250.6, 100.3, 300.5]),  # 193.7
+    (departments_names[3], [56.7, 89.3, 99.5, 123.3]),  # 92.2
+    (departments_names[4], [32.9, 54, 100.5, 23.1]),  # 52.62
+    (departments_names[5], [123.4, 250.6, 100.3, 300.5, 45.2, 145.3]),  # 160.88
+    (departments_names[6], [56.7, 89.3, 99.5, 87.3, 12.4, 45.9]),  # 65.18
 )
 
 expected_data1 = (
@@ -21,48 +29,69 @@ expected_data1 = (
 )
 
 
-@pytest.mark.parametrize('args, expected', [(test_data1, expected_data1)])
-def test_positive_data_without_opt_arg(args, expected):
+@pytest.mark.parametrize('departments, expected', [(test_data1, expected_data1)])
+def test_positive_data_without_optional_argument(departments, expected):
     """Positive test without optional argument.
 
     Args:
-        args: - valid test data without optional argument
+        departments: - valid test data without optional argument
         expected: - expected result of the program
     """
-    assert dept_stat(*args) == expected
+    assert department_statistics(*departments) == expected
 
 
-dept1 = (depts[3], depts[4], depts[5], depts[2])
+specific_departments = (
+    departments_names[3],
+    departments_names[4],
+    departments_names[5],
+    departments_names[2],
+)
 
 expected_data1 = (
-    [(depts[4], 52.62), (depts[3], 92.2), (depts[5], 160.88)],
-    [(depts[3], 92.2), (depts[5], 160.88), (depts[2], 193.7)],
+    [
+        (departments_names[4], 52.62),
+        (departments_names[3], 92.2),
+        (departments_names[5], 160.88),
+    ],
+    [
+        (departments_names[3], 92.2),
+        (departments_names[5], 160.88),
+        (departments_names[2], 193.7),
+    ],
 )
 
 
-@pytest.mark.parametrize('args, dept, expected', [(test_data1, dept1, expected_data1)])
-def test_positive_data_with_opt_arg(args, dept, expected):
+@pytest.mark.parametrize(
+    'departments, required_departments, expected',
+    [(test_data1, specific_departments, expected_data1)],
+)
+def test_positive_data_with_optional_argument(
+    departments, required_departments, expected,
+):
     """Positive test with optional argument.
 
     Args:
-        args: - valid test data without optional argument
-        dept: - optional argument
+        departments: - valid test data without optional argument
+        required_departments: - optional argument
         expected: - expected result of the program
     """
-    assert dept_stat(*args, cur_dept=dept) == expected
+    assert department_statistics(
+        *departments,
+        specific_departments=required_departments,
+    ) == expected
 
 
 test_data2 = [
-    (depts[0], []),
-    (depts[1], []),
+    (departments_names[0], []),
+    (departments_names[1], []),
 ]
 
 
 @pytest.mark.xfail(test_data2, reason=ZeroDivisionError)
-def test_negative_data_division_by_zero(args):
+def test_negative_data_division_by_zero(departments):
     """Negative test with ZeroDivisionError.
 
     Args:
-        args: - invalid test data
+        departments: - invalid test data
     """
-    assert dept_stat(*args)
+    assert department_statistics(*departments)
