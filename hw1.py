@@ -10,6 +10,9 @@ def get_salary_stats(data_salaries: dict, department: str, limit: int = None) ->
         department: string that tells us which department we are looking for.
         limit: default is None, sets up limit for salary, everything above is ignored.
 
+    Raises:
+        ZeroDivisionError: if there are no salaries paid in company
+
     Returns:
         Tuple: tuple with top 3 salaries and ratio of this 3 salaries to all of them in department.
 
@@ -17,6 +20,8 @@ def get_salary_stats(data_salaries: dict, department: str, limit: int = None) ->
     data_raw = data_salaries[department]
     salaries_list = data_raw.values()
     sum_salaries = sum(salaries_list)
+    if sum_salaries == 0:
+        raise ZeroDivisionError('It seems like there is no salary at all, check the data')
     if limit is not None:
         salaries_list = [elem for elem in salaries_list if elem <= limit]
     salaries = []
