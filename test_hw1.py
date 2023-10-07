@@ -33,8 +33,8 @@ def test_colculating_best_salaries(ignored_depts: tuple, expected: tuple, dept_e
     """Test get_best_salaries function.
 
     Args:
-        ignored_depts (Tuple): depts ignored when calculating statistics.
+        ignored_depts (tuple): depts ignored when calculating statistics.
         dept_employees: the key is the name of the department, the value is a dictionary.
-        expected (Tuple): test value.
+        expected (tuple): test value.
     """
     assert get_best_salaries(ignored_depts, **dept_employees) == expected

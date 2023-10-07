@@ -5,11 +5,11 @@ def get_best_salaries(ignored_depts: tuple = None, **dept_employees) -> tuple:
     """Calculate employee salary statistics.
 
     Args:
-        ignored_depts (Tuple): depts ignored when calculating statistics.
+        ignored_depts (tuple): depts ignored when calculating statistics.
         dept_employees: the key is the name of the department, the value is a dictionary.
 
     Returns:
-        Tuple: the first element is a tuple of 3 employees,
+        tuple: the first element is a tuple of 3 employees,
         and the second element is a float number.
     """
     employees = {}
@@ -31,7 +31,7 @@ def get_employee_salary(employee: tuple):
     """Get employee salary.
 
     Args:
-        employee (Tuple): employee with his salary.
+        employee (tuple): employee with his salary.
 
     Returns:
         int: employee salary.
