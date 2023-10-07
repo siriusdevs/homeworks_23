@@ -3,7 +3,7 @@ import pytest
 
 from hw1 import get_salary_stats
 
-nan = None
+NAN = None
 it = 'it'
 
 test_data = {
@@ -26,43 +26,39 @@ test_data = {
 }
 
 
-test_data_values = (
-    (it, ((1450.5, 1000, 999.9), 95.82)),
-    ('marketing', ((79893.12, 1500, 1250.5), 99.82)),
-    ('managment', ((100000000000.0, 100), 100.0)),
+test_data_value = (
+    (((100000000000.0, 79893.12, 1500), 100.0)),
 )
 
 
 data_limit_test = (
-    (it, 1000, ((1000, 999.9, 150.45), 59.72)),
-    ('marketing', nan, ((79893.12, 1500, 1250.5), 99.82)),
-    ('managment', 0, ((), 0)),
+    (1000, ((1000, 999.9, 150.45), 89.57)),
+    (NAN, ((100000000000.0, 79893.12, 1500), 100.0)),
+    (5000, ((1500, 1450.5, 1250.5), 63.63)),
 )
 
 
-@pytest.mark.parametrize('department, expected', test_data_values)
-def test_salary_stat(department: str, expected: tuple):
+@pytest.mark.parametrize('expected', test_data_value)
+def test_salary_stat(expected: tuple):
     """Test function.
 
     Args:
-        department: str, name of the dept.
         expected: tuple that is expected.
 
     """
-    assert get_salary_stats(test_data, department) == expected
+    assert get_salary_stats(test_data) == expected
 
 
-@pytest.mark.parametrize('department, limit, expected', data_limit_test)
-def test_salary_stat_limit(department: str, limit: int, expected: tuple):
+@pytest.mark.parametrize('limit, expected', data_limit_test)
+def test_salary_stat_limit(limit: int, expected: tuple):
     """Test function.
 
     Args:
-        department: str, name of the dept.
         limit: int, limit of salary that we are not exceeding
         expected: tuple that is expected.
 
     """
-    assert get_salary_stats(test_data, department, limit) == expected
+    assert get_salary_stats(test_data, limit) == expected
 
 
 @pytest.mark.xfail(raises=Exception)
