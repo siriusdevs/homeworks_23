@@ -26,7 +26,7 @@ def calculate_salary_stats(salary_limit: float = None, **kwargs: dict) -> tuple:
 
     sum_salaries = sum(all_salaries)
 
-    if(sum_salaries == 0):
+    if sum_salaries == 0:
         ratio = 0
     else:
         ratio = round(sum(top_salaries) / (sum(all_salaries)) * 100, 2)
