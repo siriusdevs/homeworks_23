@@ -22,8 +22,8 @@ def get_salary_stats(data_salaries: dict, limit: int = None) -> tuple:
         if limit:
             salaries_list = [salary for salary in salaries_list if salary <= limit]
 
-        for salary in salaries_list:
-            salaries.append(salary)
+        for salar in salaries_list:
+            salaries.append(salar)
         salaries = [round(salary, 2) for salary in salaries]
         salaries = sorted(salaries, reverse=True)
         if sum(salaries) == 0:
