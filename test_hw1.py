@@ -48,7 +48,7 @@ def test_get_median(sequence, is_sorted, expected) -> None:
         is_sorted (bool): Is given sequence sorted or no? default - False.
         expected (float): Median value.
     """
-    assert helpers.get_median.get_median(sequence) == expected
+    assert helpers.get_median.get_median(sequence, is_sorted) == expected
 
 
 DATA_TESTS_GET_STATS = (
