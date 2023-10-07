@@ -17,11 +17,11 @@ def get_median(sequence: Sequence[float | int], is_sorted: Optional[bool] = Fals
     centre_index = (length - 1) // 2
     new_sequence = list(sequence)
 
-    if not is_sorted:
-        new_sequence.sort()
-
     if length == 0:
         return 0
+
+    if not is_sorted:
+        new_sequence.sort()
 
     if length % 2 == 1:
         return new_sequence[centre_index]

@@ -31,7 +31,7 @@ def get_stats(min_salary: Optional[int | float] = None, **departments: Employees
                 continue
 
             salary_sum += salary
-            max_salary = salary if max_salary < salary else max_salary
+            max_salary = max(salary, max_salary)
             filtered_salaries.append(salary)
 
     salaries_length = len(filtered_salaries)
