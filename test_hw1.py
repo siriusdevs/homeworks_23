@@ -101,6 +101,15 @@ DATA_TESTS_GET_STATS = (
         },
         (0, 0, 0),
     ),
+    (
+        1000,
+        {
+            'old-departments': {
+                'Polina': 700,
+            },
+        },
+        (0, 0, 0),
+    ),
 )
 
 
