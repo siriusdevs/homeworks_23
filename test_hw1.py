@@ -11,8 +11,8 @@ dept3 = {'g': 7, 'h': 8, 'i': 9}
 test_dict = {'dept1': dept1, 'dept2': dept2, 'dept3': dept3}
 test_data = (
     (
-        ('dept3',),
-        ([6, 5, 4], 71.43),
+        ('dept1',),
+        ([9, 8, 7], 61.54),
         test_dict,
     ),
     (
