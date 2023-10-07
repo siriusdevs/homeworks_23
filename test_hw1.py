@@ -5,7 +5,7 @@ import pytest
 
 from hw1 import company_departament
 
-test_cases = (
+TEST_CASES = (
     (
         {
             'first_departament': {
@@ -68,14 +68,14 @@ test_cases = (
         },
         5.02,
         (
-            ['second department', 'first department', 'third_department'],
+            ['sixth department', 'second department', 'first department'],
             ['third_department', 'fifth department', 'fourth department'],
         ),
     ),
 )
 
 
-@pytest.mark.parametrize('departments, min_salary, expected', test_cases)
+@pytest.mark.parametrize('departments, min_salary, expected', TEST_CASES)
 def test_salaries(
     departments: dict[str, dict[str, float]],
     min_salary: float,
@@ -85,7 +85,7 @@ def test_salaries(
 
     Args:
         min_salary: float | None = None.
-        departments: dict[str, int] - dict of department names and values.
+        departments: dict[str, dict] - dict of department names and values.
         expected: tuple - answer about salary.
 
     Asserts:
