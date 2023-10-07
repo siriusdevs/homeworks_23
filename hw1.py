@@ -18,7 +18,7 @@ def get_best_salaries(ignored_depts: tuple = None, **dept_employees) -> tuple:
             for salary in employees_salaries.values():
                 employees.append(round(salary, 2))
 
-    if len(employees) == 0:
+    if not employees:
         return [], 0
 
     best_salaried_employees = sorted(employees, reverse=True)[:3]
