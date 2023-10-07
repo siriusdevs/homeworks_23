@@ -26,7 +26,7 @@ def get_best_salaries(ignored_depts: Tuple = None, **dept_employees) -> Tuple:
 
     percent = round((best_salaries_sum / salaries_sum) * 100, 2)
 
-    return tuple(best_salaried_employees), percent
+    return best_salaried_employees, percent
 
 
 def get_employee_salary(employee: Tuple):
