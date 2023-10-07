@@ -7,7 +7,7 @@ def get_salaries(*company: tuple, dept_except: Optional[str] = None) -> tuple[li
     """Count top 3 salaries and those part in all salaries.
 
     Args:
-        company (tuple): salaries in departments for each employee.
+        company (tuple[str, dict[str, float]]): salaries in departments for each employee.
         dept_except (tuple[str], optional): Excluded departments. Defaults to None.
 
     Returns:

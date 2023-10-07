@@ -7,9 +7,9 @@ from hw1 import get_salaries
 test_data = (
     (
         (
-            ('1', {'Smith': 200.0, 'Guy': 300.0}),
-            ('2', {'Ahmed': 300.0, 'Zyrick': 400.0}),
-            ('3', {'Ravshan': 100.0, 'Maga': 600.0}),
+            ('vk', {'Smith': 200.0, 'Guy': 300.0}),
+            ('tinkoff', {'Ahmed': 300.0, 'Zyrick': 400.0}),
+            ('sber', {'Ravshan': 100.0, 'Maga': 600.0}),
         ),
         None,
         (
@@ -20,9 +20,9 @@ test_data = (
 
     (
         (
-            ('1st', {'Smith': 5.0, 'Robbinson': 10.0}),
-            ('2nd', {'White': 8.0, 'Jefferson': 6.0}),
-            ('3rd', {'Bale': 4.0, 'Gosling': 6.0}),
+            ('vk', {'Smith': 5.0, 'Robbinson': 10.0}),
+            ('tinkoff', {'White': 8.0, 'Jefferson': 6.0}),
+            ('sber', {'Bale': 4.0, 'Gosling': 6.0}),
         ),
         None,
         (
@@ -61,14 +61,14 @@ test_data = (
 
     (
         (
-            ('1st', {'Smith': 5.0, 'Robbinson': 10.0}),
-            ('2nd', {'White': 8.0, 'Jefferson': 6.0}),
-            ('3rd', {'Bale': 7.0, 'Gosling': 15.0}),
-            ('4th', {'Kant': 4.0, 'Dude': 11.0}),
-            ('5th', {'Black': 1.0, 'Malek': 3.0}),
+            ('Reserve', {'Smith': 5.0, 'Robbinson': 10.0}),
+            ('West', {'White': 8.0, 'Jefferson': 6.0}),
+            ('North', {'Bale': 7.0, 'Gosling': 15.0}),
+            ('Main', {'Kant': 4.0, 'Dude': 11.0}),
+            ('Center', {'Black': 1.0, 'Malek': 3.0}),
         ),
         (
-            '3rd', '4th',
+            'North', 'Main',
         ),
         (
             [10.0, 8.0, 6.0],
