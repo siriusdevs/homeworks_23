@@ -13,17 +13,20 @@ def get_best_salaries(ignored_depts: tuple = None, **dept_employees) -> tuple:
         and the second element is a float number.
     """
     employees = []
+    salaries_sum = 0
+
     for dept, employees_salaries in dept_employees.items():
         if ignored_depts is None or dept not in ignored_depts:
             for salary in employees_salaries.values():
-                employees.append(round(salary, 2))
+                round_salary = round(salary, 2)
+                employees.append(round_salary)
+                salaries_sum += round_salary
 
     if not employees:
         return [], 0
 
     best_salaried_employees = sorted(employees, reverse=True)[:3]
     best_salaries_sum = sum(best_salaried_employees)
-    salaries_sum = sum(employees)
 
     percent = round((best_salaries_sum / salaries_sum) * 100, 2)
 
