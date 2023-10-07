@@ -1,7 +1,5 @@
 """Unit tests for modul hw1."""
 
-from typing import Tuple
-
 import pytest
 
 from hw1 import get_best_salaries

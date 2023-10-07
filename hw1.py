@@ -1,7 +1,5 @@
 """Salary analysis."""
 
-from typing import Tuple
-
 
 def get_best_salaries(ignored_depts: Tuple = None, **dept_employees) -> Tuple:
     """Calculate employee salary statistics.
