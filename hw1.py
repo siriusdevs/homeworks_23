@@ -14,7 +14,8 @@ def company_departament(employees: dict, min_salary: float | None = None) -> tup
     """
     salaries = []
     for employee in employees.keys():
-        average_salary = sum(employees[employee].values()) / len(employee)
+        all_salary = sum(employees[employee].values())
+        average_salary = all_salary / max(len(employee), 1)
         if min_salary is None or min_salary <= average_salary:
             salaries.append([average_salary, employee])
     salaries.sort(key=lambda salary: salary[0])

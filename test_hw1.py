@@ -3,7 +3,7 @@
 
 import pytest
 
-from main import company_departament
+from hw1 import company_departament
 
 test_cases = (
     (
