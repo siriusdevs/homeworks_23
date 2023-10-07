@@ -1,7 +1,7 @@
 """Salary analysis."""
 
 
-def get_best_salaries(ignored_depts: Tuple = None, **dept_employees) -> Tuple:
+def get_best_salaries(ignored_depts: tuple = None, **dept_employees) -> tuple:
     """Calculate employee salary statistics.
 
     Args:
@@ -27,7 +27,7 @@ def get_best_salaries(ignored_depts: Tuple = None, **dept_employees) -> Tuple:
     return best_salaried_employees, percent
 
 
-def get_employee_salary(employee: Tuple):
+def get_employee_salary(employee: tuple):
     """Get employee salary.
 
     Args:
