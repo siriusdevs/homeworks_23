@@ -1,7 +1,7 @@
 """Module, that has one function "best_wage", homework1."""
 
 
-def best_wage(departments: list, exclude_deps: tuple = None) -> list[float | int]:
+def best_wage(departments: list, exclude_deps: tuple = None) -> list[float | int, str]:
     """Find 3 best salaries and their percentage to total amount of payments.
 
     Args:
