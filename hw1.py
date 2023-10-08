@@ -6,7 +6,7 @@ def get_best_salaries(ignored_depts: tuple = None, **dept_employees) -> tuple:
 
     Args:
         ignored_depts (tuple): contain dept names ignored when calculating statistics.
-        dept_employees: the key is the name of the department, the value is a dictionary.
+        dept_employees: key is name of dept, value is dict (key employee name , value is salary).
 
     Returns:
         tuple: the first element is a list of 3 salaries,
