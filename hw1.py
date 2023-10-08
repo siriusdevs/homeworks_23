@@ -22,7 +22,7 @@ def top_salary(
             all_salaries.extend([round(salary, 2) for salary in salaries])
 
 
-    if sum(all_salaries) == 0 or sum(all_salaries) == 0:
+    if sum(all_salaries) == 0:
         return [], 0
 
     top_salaries = sorted(all_salaries, reverse=True)[:3]
