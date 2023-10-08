@@ -1,11 +1,15 @@
 """This is the main code for first homework."""
 
 
-def get_salary_stats(data_salaries: dict, limit: int = None) -> tuple:
+def get_salary_stats(
+    company_salaries_data: dict[str, dict],
+    limit: int = None,
+) -> tuple:
     """Block of code that is designed to search for top 3 salaries in chosen department and etc.
 
     Args:
-        data_salaries: dictionary of dictionaries that includes departments and salaries data.
+        company_salaries_data: dictionary of dictionaries \
+            that includes departments and salaries data.
         limit: default is None, sets up limit for salary, everything above is ignored.
 
     Raises:
@@ -16,16 +20,12 @@ def get_salary_stats(data_salaries: dict, limit: int = None) -> tuple:
 
     """
     salaries = []
-    for department, _ in data_salaries.items():
-        data_raw = data_salaries[department]
-        salaries_list = data_raw.values()
+    for department in company_salaries_data.keys():
+        salaries_list = company_salaries_data[department].values()
         if limit:
             salaries_list = [salary for salary in salaries_list if salary <= limit]
-
-        for salar in salaries_list:
-            salaries.append(salar)
-        salaries = [round(salary, 2) for salary in salaries]
-        salaries = sorted(salaries, reverse=True)
+        salaries += salaries_list
+        salaries = sorted([round(salary, 2) for salary in salaries], reverse=True)
         if sum(salaries) == 0:
             raise ZeroDivisionError('It seems like there is no salary at all, check the data')
         top3salariessum = round(sum(salaries[:3]), 2)
