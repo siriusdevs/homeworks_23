@@ -21,7 +21,6 @@ def top_salary(
         if name_departments is None or department_name in name_departments:
             all_salaries.extend([round(salary, 2) for salary in salaries])
 
-
     if sum(all_salaries) == 0:
         return [], 0
 
