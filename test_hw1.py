@@ -4,10 +4,10 @@ import pytest
 from hw1 import get_salary_stats
 
 NAN = None
-it = 'it'
+
 
 test_data = {
-    it: {
+    'it': {
         'Bob': 1450.5,
         'Jeremy': 999.9,
         'Elijah': 1000,
@@ -37,6 +37,10 @@ data_limit_test = (
     (5000, ((1500, 1450.5, 1250.5), 63.63)),
 )
 
+test_data_zero = (
+    ((0, 0, 0), 100.0),
+)
+
 
 @pytest.mark.parametrize('expected', test_data_value)
 def test_salary_stat(expected: tuple):
@@ -61,7 +65,12 @@ def test_salary_stat_limit(limit: int, expected: tuple):
     assert get_salary_stats(test_data, limit) == expected
 
 
-@pytest.mark.xfail(raises=Exception)
-def test_exception_test():
-    """This is block that rasies exception for purpose."""
-    assert get_salary_stats({it: {'Rimus': 0, 'John': 0, 'Casey': 0}}, it)
+@pytest.mark.parametrize('expected', test_data_zero)
+def test_for_zeros(expected: tuple):
+    """This is block that awaits zero in return for no salary in company.
+
+    Args:
+        expected: tuple with zeros that is supposed to be recieved due to 0 summ of salaries.
+
+    """
+    assert get_salary_stats({'it': {'Rimus': 0, 'John': 0, 'Casey': 0}}) == expected
