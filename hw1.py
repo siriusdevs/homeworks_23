@@ -14,9 +14,10 @@ def get_best_salaries(ignored_depts: tuple = None, **dept_employees) -> tuple:
     """
     employees = []
     salaries_sum = 0
-
+    ignored_depts = set(ignored_depts)
+    
     for dept, employees_salaries in dept_employees.items():
-        if ignored_depts is None or dept not in set(ignored_depts):
+        if ignored_depts is None or dept not in ignored_depts:
             for salary in employees_salaries.values():
                 employees.append(round(salary, 2))
                 salaries_sum += employees[-1]
