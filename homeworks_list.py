@@ -3,6 +3,8 @@ import typing
 from mdutils.mdutils import MdUtils
 
 HW_COUNT = 10 # TODO: provide as an argument  
+MD_FILENAME = 'README.md' 
+MD_TITLE = 'Репозиторий для домашних заданий, осень 2023, Колледж Сириус' 
 
 HomeworksInfo = typing.Dict[int, bool]
 
@@ -33,8 +35,7 @@ def get_finished_homeworks() -> typing.Dict[str, HomeworksInfo]:
     return result
 
 def write_homework_stats_to_md(stats: typing.Dict[str, HomeworksInfo]): 
-    # TODO: provide filename as an argument
-    md = MdUtils(file_name='hw_stats', title='Homework stats') 
+    md = MdUtils(file_name=MD_FILENAME, title=MD_TITLE) 
     table = ["Branch"] + get_hw_names() 
     for branch, hws in sorted(stats.items(), key=lambda item: item[0]): 
         table += [branch] + ['+' if hws[hw] else '-' for hw in get_hw_names()]
