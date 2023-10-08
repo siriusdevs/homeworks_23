@@ -5,7 +5,7 @@ def get_best_salaries(ignored_depts: tuple = None, **dept_employees) -> tuple:
     """Calculate employee salary statistics.
 
     Args:
-        ignored_depts (tuple): depts ignored when calculating statistics.
+        ignored_depts (tuple): contain dept names ignored when calculating statistics.
         dept_employees: the key is the name of the department, the value is a dictionary.
 
     Returns:
@@ -16,7 +16,7 @@ def get_best_salaries(ignored_depts: tuple = None, **dept_employees) -> tuple:
     salaries_sum = 0
 
     for dept, employees_salaries in dept_employees.items():
-        if ignored_depts is None or dept not in ignored_depts:
+        if ignored_depts is None or dept not in set(ignored_depts):
             for salary in employees_salaries.values():
                 employees.append(round(salary, 2))
                 salaries_sum += employees[-1]
