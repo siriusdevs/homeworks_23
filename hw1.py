@@ -30,13 +30,12 @@ def calculate_lowest_salaries(
     total_payments = 0
     salaries = []
     for department in company:
-        staff = department[1]
-        for _, salary in staff.items():
+        for salary in department[1].values():
             total_payments += salary
             if salary_limit is None:
-                salaries.append(salary)
+                salaries.append(round(salary, 2))
             elif salary < salary_limit:
-                salaries.append(salary)
+                salaries.append(round(salary, 2))
 
     if total_payments == 0:
         return [], '100%'
