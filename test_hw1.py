@@ -49,25 +49,25 @@ TEST_DATA_ARGS = (
 )
 
 
-@pytest.mark.parametrize('args, limit, expected', TEST_DATA)
-def test_lowest_salaries(args: tuple, limit: None | int, expected: tuple[str]):
+@pytest.mark.parametrize('company, limit, expected', TEST_DATA)
+def test_lowest_salaries(company: tuple[str, dict], limit: None | int, expected: tuple[str]):
     """Checks the correctness of the lowest_salaries function.
 
     Args:
-        args: contains info about one dept.
+        company: contains info about one dept.
         limit: numerical limit above which salaries should not be taken.
         expected: expected values of three smallest salaries, and their ratio to all.
     """
-    assert calculate_lowest_salaries(args, salary_limit=limit) == expected
+    assert calculate_lowest_salaries(company, salary_limit=limit) == expected
 
 
-@pytest.mark.parametrize('args, limit, expected', TEST_DATA_ARGS)
-def test_lowest_salaries_args(args, limit: None | int, expected: tuple[str]):
+@pytest.mark.parametrize('company, limit, expected', TEST_DATA_ARGS)
+def test_lowest_salaries_args(company: tuple[str, dict], limit: None | int, expected: tuple[str]):
     """Checks the correctness of the lowest_salaries function with several depts in args.
 
     Args:
-        args: contains info about several depts.
+        company: contains info about several depts.
         limit: numerical limit above which salaries should not be taken.
         expected: expected values of three smallest salaries, and their ratio to all.
     """
-    assert calculate_lowest_salaries(*args, salary_limit=limit) == expected
+    assert calculate_lowest_salaries(*company, salary_limit=limit) == expected
