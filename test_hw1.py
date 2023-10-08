@@ -3,7 +3,7 @@ import pytest
 
 from hw1 import calculate_lowest_salaries
 
-test_data = (
+TEST_DATA = (
     (
         ('it', {'Nikiforov': 10.0, 'Litvinov': 20.0, 'Demyanenko': 30.0}),
         None,
@@ -21,7 +21,7 @@ test_data = (
     ),
 )
 
-test_data_args = (
+TEST_DATA_ARGS = (
     (
         (
             ('design', {'Ramirez': 40.0, 'Stevenson': 50.0}),
@@ -49,7 +49,7 @@ test_data_args = (
 )
 
 
-@pytest.mark.parametrize('args, limit, expected', test_data)
+@pytest.mark.parametrize('args, limit, expected', TEST_DATA)
 def test_lowest_salaries(args: tuple, limit: None | int, expected: tuple[str]):
     """Checks the correctness of the lowest_salaries function.
 
@@ -61,7 +61,7 @@ def test_lowest_salaries(args: tuple, limit: None | int, expected: tuple[str]):
     assert calculate_lowest_salaries(args, salary_limit=limit) == expected
 
 
-@pytest.mark.parametrize('args, limit, expected', test_data_args)
+@pytest.mark.parametrize('args, limit, expected', TEST_DATA_ARGS)
 def test_lowest_salaries_args(args, limit: None | int, expected: tuple[str]):
     """Checks the correctness of the lowest_salaries function with several depts in args.
 
