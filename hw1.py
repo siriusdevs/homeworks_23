@@ -13,6 +13,9 @@ def get_top_salaries(*departments: tuple[str, list], required_deps: tuple[str] =
         - A list of the top three salaries (sorted in descending order).
         - The percentage that the top three salaries contribute to the total
         salaries within the specified departments, rounded to two decimal places.
+
+    Raises:
+        Exception: occurs if there are salaries less than zero.
     """
     sorted_salaries = []
     if required_deps:
@@ -23,7 +26,7 @@ def get_top_salaries(*departments: tuple[str, list], required_deps: tuple[str] =
         if len(department) > 1:
             sorted_salaries.extend(department[1])
     if any(salary < 0 for salary in sorted_salaries):
-        return 'Sorry, salary cannot be less than zero.'
+        raise Exception('Sorry, salary cannot be less than zero.')
     sorted_salaries.sort()
     try:
         percent = sum(sorted_salaries[:3]) / sum(sorted_salaries) * 100
