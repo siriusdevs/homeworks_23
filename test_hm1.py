@@ -52,7 +52,7 @@ test_data = (
             },
             'east': {
                 'Kostya': 65000,
-                'Vanya': 47000,
+                'Vanya': 47100,
                 'Kira': 71000
             }
         },
