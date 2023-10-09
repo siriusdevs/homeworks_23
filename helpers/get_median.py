@@ -1,9 +1,9 @@
 """Module for getting median value in given sequence."""
 
-from typing import Optional, Sequence
+from typing import Optional
 
 
-def get_median(sequence: Sequence[float | int], is_sorted: Optional[bool] = False) -> float | int:
+def get_median(sequence: list[int | float], is_sorted: Optional[bool] = False) -> float | int:
     """Calculate median in transmitted sequence.
 
     Args:
@@ -15,13 +15,11 @@ def get_median(sequence: Sequence[float | int], is_sorted: Optional[bool] = Fals
     """
     length = len(sequence)
     centre_index = (length - 1) // 2
-    new_sequence = list(sequence)
 
     if length == 0:
         return 0
 
-    if not is_sorted:
-        new_sequence.sort()
+    new_sequence = sequence.copy() if is_sorted else sorted(sequence)
 
     if length % 2 == 1:
         return new_sequence[centre_index]

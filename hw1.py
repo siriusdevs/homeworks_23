@@ -35,7 +35,7 @@ def get_stats(min_salary: Optional[int | float] = None, **departments: Employees
             filtered_salaries.append(salary)
 
     salaries_length = len(filtered_salaries)
-    average_salary = (salary_sum / salaries_length) if (salaries_length > 0) else 0
+    average_salary = salary_sum / max(salaries_length, 1)
 
     return tuple(round(info_salary, 2) for info_salary in (
         average_salary,
