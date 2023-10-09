@@ -29,7 +29,7 @@ test_data = (
                 'Kira': 71000,
             },
         },
-        (['north', 'east', 'south'], ['west', 'north', 'east'])
+        (['north', 'east', 'south'], ['west', 'north', 'east']),
     ),
     (
         {

@@ -1,6 +1,7 @@
 """ Модуль для расчёта статистики: топ-3 самых
 высокооплачиваемых отдела в компании и топ-3 самых
-низкооплачиваемых (по средней зарплате в отделе)"""
+низкооплачиваемых (по средней зарплате в отделе).
+"""
 
 
 def salary_statistics(exclude_department: tuple = None, **department: dict[str, float]) -> list:
@@ -18,12 +19,13 @@ def salary_statistics(exclude_department: tuple = None, **department: dict[str, 
     average_salaries = []
 
     for dep in department.keys():
+        len_dep = len(department[dep])
         if exclude_department is None or dep not in exclude_department:
-            if len(department[dep]) > 0:
-                average_salary = round(sum(department[dep].values()) / len(department[dep]), 2)
+            if len_dep > 0:
+                average_salary = round(sum(department[dep].values()) / len_dep, 2)
                 average_salaries.append([dep, average_salary])
 
-    average_salaries = sorted(average_salaries, key=lambda dep: dep[1])
+    average_salaries = sorted(average_salaries, key=lambda depart: depart[1])
     top_dep = [dep[0] for dep in average_salaries[-3:]]
     worst_dep = [dep[0] for dep in average_salaries[:3]]
 
