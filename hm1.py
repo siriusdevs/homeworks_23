@@ -23,8 +23,8 @@ def salary_statistics(exclude_department: tuple = None, **department: dict[str, 
                 average_salary = round(sum(department[dep].values()) / len(department[dep]), 2)
                 average_salaries.append([dep, average_salary])
 
-    average_salaries = sorted(average_salaries, key=lambda x: x[1])
-    top_dep = [i[0] for i in average_salaries[-3:]]
-    worst_dep = [i[0] for i in average_salaries[:3]]
+    average_salaries = sorted(average_salaries, key=lambda dep: dep[1])
+    top_dep = [dep[0] for dep in average_salaries[-3:]]
+    worst_dep = [dep[0] for dep in average_salaries[:3]]
 
     return top_dep, worst_dep
