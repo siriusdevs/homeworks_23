@@ -14,7 +14,7 @@
 |demyanenko|-|-|-|-|
 |drobyazko|-|-|-|-|
 |druzhinin|-|-|-|-|
-|dyatlova|-|-|-|-|
+|dyatlova|+|-|-|-|
 |eremin|+|-|-|-|
 |evstifeev|-|-|-|-|
 |galaktionova|-|-|-|-|
