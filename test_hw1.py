@@ -1,7 +1,5 @@
 """get_top_salaries function test module."""
 
-from typing import Tuple
-
 import pytest
 
 from hw1 import get_top_salaries
@@ -99,7 +97,7 @@ def test_get_top_salaries_without_departments(args: tuple, expected: tuple):
 
 
 @pytest.mark.parametrize('args, deps, expected', test_data_with_departments)
-def test_get_top_salaries_with_departments(args: tuple, deps: Tuple[str], expected: tuple):
+def test_get_top_salaries_with_departments(args: tuple, deps: tuple[str], expected: tuple):
     """Test get_top_salaries function with departments argument.
 
     Args:
