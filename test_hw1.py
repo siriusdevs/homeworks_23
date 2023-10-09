@@ -85,34 +85,34 @@ test_data_with_negative_value = (
 )
 
 
-@pytest.mark.parametrize('args, expected', test_data_without_departments)
-def test_get_top_salaries_without_departments(args: tuple, expected: tuple):
+@pytest.mark.parametrize('departments, expected', test_data_without_departments)
+def test_get_top_salaries_without_departments(deps: tuple, expected: tuple):
     """Test get_top_salaries function with departments argument.
 
     Args:
-        args: tuple - tuples with name of departments and list of salaries.
+        deps: tuple - tuples with name of departments and list of salaries.
         expected: tuple - expected function result.
     """
-    assert get_top_salaries(*args) == expected
+    assert get_top_salaries(*deps) == expected
 
 
-@pytest.mark.parametrize('args, deps, expected', test_data_with_departments)
-def test_get_top_salaries_with_departments(args: tuple, deps: tuple[str], expected: tuple):
+@pytest.mark.parametrize('departments, deps, expected', test_data_with_departments)
+def test_get_top_salaries_with_departments(deps: tuple, req_deps: tuple[str], expected: tuple):
     """Test get_top_salaries function with departments argument.
 
     Args:
-        args: tuple - tuples with name of departments and list of salaries.
-        deps: tuple - inside is a tuple of departments names whose salaries need to be counted.
+        deps: tuple - tuples with name of departments and list of salaries.
+        req_deps: tuple - inside is a tuple of departments names whose salaries need to be counted.
         expected: tuple - expected function result.
     """
-    assert get_top_salaries(*args, required_deps=deps) == expected
+    assert get_top_salaries(*deps, required_deps=req_deps) == expected
 
 
 @pytest.mark.xfail(test_data_with_negative_value, reason=Exception)
-def test_calcuate_with_negative_params(args):
+def test_calcuate_with_negative_params(deps):
     """Test calculate with negative parametrs.
 
     Args:
-        args: tuple[float] - negative parameters.
+        deps: tuple[float] - negative parameters.
     """
-    assert get_top_salaries(*args)
+    assert get_top_salaries(*deps)
