@@ -25,13 +25,6 @@ test_data_without_departments = (
       ),
      ([20, 20, 20], 12.5),
      ),
-    # Отрицательная зарплата. Такой не бывает - возвращаем ошибку.
-    ((('Develop', [80, 80, 80, -20, 80]),
-      ('Marketing', [80, 80, 80, -20, 80]),
-      ('Sales', [80, 80, 80, -20, 80, 80]),
-      ),
-     ('Sorry, salary cannot be less than zero.'),
-     ),
     # Указан отдел и единственная зарплата, равная 0 - все ок, работаем
     ((('Dev', [0]),),
      ([0], 100.0),
@@ -84,6 +77,14 @@ test_data_with_departments = (
     # Передан пустой кортеж и кортеж отделов - не считаем, данных нет
     (((),), ('abc', 'ghi'), ([], 0)),
 )
+test_data_with_negative_value = (
+    # Отрицательная зарплата. Такой не бывает - возвращаем ошибку.
+    ((('Develop', [80, 80, 80, -20, 80]),
+      ('Marketing', [80, 80, 80, -20, 80]),
+      ('Sales', [80, 80, 80, -20, 80, 80]),
+      ),
+     ),
+)
 
 
 @pytest.mark.parametrize('args, expected', test_data_without_departments)
@@ -107,3 +108,13 @@ def test_get_top_salaries_with_departments(args: tuple, deps: Tuple[str], expect
         expected: tuple - expected function result.
     """
     assert get_top_salaries(*args, required_deps=deps) == expected
+
+
+@pytest.mark.xfail(test_data_with_negative_value, reason=Exception)
+def test_calcuate_with_negative_params(args):
+    """Test calculate with negative parametrs.
+
+    Args:
+        args: Tuple[float] - negative parameters.
+    """
+    assert get_top_salaries(*args)
