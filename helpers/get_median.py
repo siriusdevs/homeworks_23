@@ -19,7 +19,7 @@ def get_median(sequence: list[int | float], is_sorted: Optional[bool] = False) -
     if length == 0:
         return 0
 
-    new_sequence = sequence.copy() if is_sorted else sorted(sequence)
+    new_sequence = sequence if is_sorted else sorted(sequence)
 
     if length % 2 == 1:
         return new_sequence[centre_index]
