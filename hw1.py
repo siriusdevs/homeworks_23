@@ -20,28 +20,23 @@ def department_statistics(
     Returns:
         Top 3 highest and lowest-paid departments.
     """
-    filtered_depts_by_optional_arg = (
-        tuple(
-            filter(
-                lambda department: department[0] in specific_departments, departments,
-            ),
-        )
-        if specific_departments
-        else departments
-    )
     try:
-        avg_salary_by_departments = (
+        avg_salary_by_depts = (
             (
                 department[0],
                 round(sum(department[1]) / len(department[1]), 2),
             )
-            for department in filtered_depts_by_optional_arg
+            for department in departments
+            if department[0] in (specific_departments or department[0])
         )
     except ZeroDivisionError:
         return 'You have entered empty list of department salaries.'
     else:
-        sorted_depts_by_avg_salary = sorted(
-            avg_salary_by_departments,
-            key=lambda department: department[1],
-        )
+        sorted_depts_by_avg_salary = [
+            department[0]
+            for department in sorted(
+                avg_salary_by_depts,
+                key=lambda department: department[1],
+            )
+        ]
     return (sorted_depts_by_avg_salary[:3], sorted_depts_by_avg_salary[-3:])
