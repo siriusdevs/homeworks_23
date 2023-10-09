@@ -33,66 +33,67 @@ test_data = (
     ),
     (
         {
-            'exclude_department': ('north', 'south', 'west', 'east'),
-            'north': {
-                'Nikita': 58000,
-                'Sasha': 71000,
-                'Masha': 66000,
+            'exclude_department': ('accounting', 'financial', 'quality', 'development'),
+            'accounting': {
+                'Roman': 58000,
+                'Kris': 71000,
+                'Mariana': 66000,
             },
-            'south': {
-                'Andrey': 112000,
-                'Georgiy': 21000,
-                'Anna': 54000,
+            'financial': {
+                'Anna': 112000,
+                'Josef': 21000,
+                'Jostar': 54000,
             },
-            'west': {
-                'Misha': 44000,
-                'Natasha': 88000,
-                'Grisha': 38000,
+            'quality': {
+                'Djek': 44000,
+                'Vein': 88000,
+                'Genry': 38000,
             },
-            'east': {
-                'Kostya': 65000,
-                'Vanya': 47100,
-                'Kira': 71000,
+            'development': {
+                'Milana': 65000,
+                'Richard': 47100,
+                'Katy': 71000,
             },
         },
         ([], []),
     ),
     (
         {
-            'exclude_department': ('north', 'south'),
-            'north': {
-                'Nikita': 1111,
-                'Sasha': 72323,
-                'Masha': 3232.23,
+            'exclude_department': ('Konoha', 'Iva'),
+            'Konoha': {
+                'Naruto': 1111,
+                'Saske': 72323,
+                'Orochimary': 3232.23,
             },
-            'south': {
-                'Andrey': 1123230,
-                'Georgiy': 21000,
+            'Iva': {
+                'Deidara': 1123230,
+                'Suchicage': 21000,
                 'Anna': 0,
             },
-            'west': {
-                'Misha': 44000,
+            'Kiri': {
+                'Mei': 44000,
+                'Dzabydza': 0,
             },
-            'east': {
-                'Kostya': 632300,
-                'Vanya': 130000,
+            'Syna': {
+                'Gaara': 632300,
+                'Sasori': 130000,
             },
         },
-        (['west', 'east'], ['west', 'east']),
+        (['Kiri', 'Syna'], ['Kiri', 'Syna']),
     ),
     (
         {
-            'south': {
+            'sales': {
             },
-            'west': {
-                'Misha': 44000,
+            'supplies': {
+                'Peter': 44000,
             },
-            'east': {
-                'Kostya': 632300,
-                'Vanya': 130000,
+            'marketing': {
+                'Hunry': 632300,
+                'Jon': 130000,
             },
         },
-        (['west', 'east'], ['west', 'east']),
+        (['supplies', 'marketing'], ['supplies', 'marketing']),
     ),
 )
 
