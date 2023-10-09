@@ -17,8 +17,8 @@ def get_salary_stats(
 
     """
     salaries = []
-    for departments in company_salaries_data.values():
-        salaries_list = departments.values()
+    for employees in company_salaries_data.values():
+        salaries_list = employees.values()
         if limit:
             salaries_list = [salary for salary in salaries_list if salary <= limit]
         salaries += salaries_list
