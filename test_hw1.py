@@ -90,7 +90,7 @@ def test_get_top_salaries_without_departments(args: tuple, expected: tuple):
     """Test get_top_salaries function with departments argument.
 
     Args:
-        args: tuple - a tuple of tuples with name of departments and list of salaries.
+        args: tuple - tuples with name of departments and list of salaries.
         expected: tuple - expected function result.
     """
     assert get_top_salaries(*args) == expected
@@ -101,8 +101,8 @@ def test_get_top_salaries_with_departments(args: tuple, deps: tuple[str], expect
     """Test get_top_salaries function with departments argument.
 
     Args:
-        args: tuple - a tuple of tuples with name of departments and list of salaries.
-        deps: tuple - a tuple with a tuple of departments names whose salaries need to be counted.
+        args: tuple - tuples with name of departments and list of salaries.
+        deps: tuple - inside is a tuple of departments names whose salaries need to be counted.
         expected: tuple - expected function result.
     """
     assert get_top_salaries(*args, required_deps=deps) == expected
@@ -113,6 +113,6 @@ def test_calcuate_with_negative_params(args):
     """Test calculate with negative parametrs.
 
     Args:
-        args: Tuple[float] - negative parameters.
+        args: tuple[float] - negative parameters.
     """
     assert get_top_salaries(*args)
