@@ -17,21 +17,21 @@ def get_top_salaries(*departments: tuple[str, list], required_deps: tuple[str] =
     Raises:
         Exception: occurs if there are salaries less than zero.
     """
-    sorted_salaries = []
+    required_salaries = []
     if required_deps:
         departments = filter(lambda arg: arg, departments)
         departments = tuple(filter(lambda arg: arg[0] in required_deps, departments))
     for department in departments:
         if len(department) > 1:
-            sorted_salaries.extend(department[1])
-    if any(salary < 0 for salary in sorted_salaries):
+            required_salaries.extend(department[1])
+    if any(salary < 0 for salary in required_salaries):
         raise Exception('Sorry, salary cannot be less than zero.')
-    sorted_salaries.sort()
+    required_salaries.sort()
     try:
-        percent = sum(sorted_salaries[:3]) / sum(sorted_salaries) * 100
+        percent = sum(required_salaries[:3]) / sum(required_salaries) * 100
     except ZeroDivisionError:
-        if sorted_salaries:
+        if required_salaries:
             percent = float(100)
         else:
             percent = float(0)
-    return sorted_salaries[:3], round(percent, 2)
+    return required_salaries[:3], round(percent, 2)
