@@ -85,7 +85,7 @@ test_data_with_negative_value = (
 )
 
 
-@pytest.mark.parametrize('departments, expected', test_data_without_departments)
+@pytest.mark.parametrize('deps, expected', test_data_without_departments)
 def test_get_top_salaries_without_departments(deps: tuple, expected: tuple):
     """Test get_top_salaries function with departments argument.
 
@@ -96,7 +96,7 @@ def test_get_top_salaries_without_departments(deps: tuple, expected: tuple):
     assert get_top_salaries(*deps) == expected
 
 
-@pytest.mark.parametrize('departments, deps, expected', test_data_with_departments)
+@pytest.mark.parametrize('deps, req_deps, expected', test_data_with_departments)
 def test_get_top_salaries_with_departments(deps: tuple, req_deps: tuple[str], expected: tuple):
     """Test get_top_salaries function with departments argument.
 
