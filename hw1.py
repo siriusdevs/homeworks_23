@@ -30,8 +30,5 @@ def get_top_salaries(*departments: tuple[str, list], required_deps: tuple[str] =
     try:
         percent = sum(required_salaries[:3]) / sum(required_salaries) * 100
     except ZeroDivisionError:
-        if required_salaries:
-            percent = float(100)
-        else:
-            percent = float(0)
+        percent = float(100) if required_salaries else float(0)
     return required_salaries[:3], round(percent, 2)
