@@ -4,12 +4,19 @@ import pytest
 
 from hw1 import salary_count
 
-test_company_data = (
+TEST_COMPANY_DATA = (
     (
         (
             ('HR', {'Alice': 60000.0, 'Bob': 55000.0, 'Carol': 58000.0}),
         ),
         None,
+        ([60000.0, 58000.0, 55000.0], 100.0),
+    ),
+    (
+        (
+            ('Programmers', {'Alice': 60000.0, 'Bob': 55000.0, 'Carol': 58000.0}),
+        ),
+        [],
         ([60000.0, 58000.0, 55000.0], 100.0),
     ),
     (
@@ -32,22 +39,22 @@ test_company_data = (
 )
 
 
-@pytest.mark.parametrize('args, excluded_departments, expected', test_company_data)
+@pytest.mark.parametrize('company, excluded_departments, expected', TEST_COMPANY_DATA)
 def test_salary_count(
-    args: tuple[str, dict[str, float]],
-    excluded_departments: list[str] | None,
+    company: tuple[str, dict[str, float]],
+    excluded_departments: list[str],
     expected: tuple[list[float], float],
 ) -> None:
     """
     Test salary_count function.
 
     Parameters:
-        args: tuple[str,dict[str, float]] - the args parameters.
+        company: tuple[str,dict[str, float]] - the company parameters.
         excluded_departments: list[str] | None - departments to be excluded.
         expected: tuple[list[float], float] - the expected result.
 
     Asserts:
         True if the answer is correct.
     """
-    total = salary_count(*args, excluded_departments=excluded_departments)
+    total = salary_count(*company, excluded_departments=excluded_departments)
     assert total == expected
