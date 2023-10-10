@@ -8,7 +8,7 @@ def top3_salaries_stats(
     """Find 3 most-paid and 3 least-paid departments in a given dictionary by average value.
 
     Args:
-        departments: a dictionary with departments names (keys: str) and names of employees with their salaries (values: dict)
+        departments: a dictionary with departments names their values
         excluding: tuple with names of departments to be excluded from stats, defaults to None
 
     Returns:
