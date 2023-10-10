@@ -47,7 +47,7 @@ def generete_report(*departments: tuple, exceptions: tuple = None) -> tuple:
 
     def sort_data(department: tuple, reverse: bool) -> list:
         updated_data = sorted(department, key=lambda dpt: statistics.mean(dpt[1]), reverse=reverse)
-        return [dpt[0] for dpt in updated_data if dpt[0] not in exceptions]
+        return [department[0] for department in updated_data if department[0] not in exceptions]
 
     check_arguments(departments)
 

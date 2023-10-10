@@ -3,7 +3,7 @@ import pytest
 
 from hw1 import generete_report
 
-test_cases = (
+positive_test_cases = (
     (
         (
             ('Отдел продаж', [1000.0, 1000.0, 1000.0]),
@@ -42,12 +42,14 @@ test_cases = (
 )
 
 
-@pytest.mark.parametrize('departments, exceptions, expected', test_cases)
+@pytest.mark.parametrize('departments, exceptions, expected', positive_test_cases)
 def test_get_report(departments, exceptions, expected):
     """Функция запускающая тестирование.
-    
-    Arg:
-      departments: tupple - кортеж кортежей с данными об отделах и зарплатах в отделе
-      exceptions: tupple - кортеж с отделами, которые нужно исключить из статистики
-      expected: ожидаемые данные"""
+
+    Args:
+        departments: tupple - кортеж кортежей с данными об отделах и зарплатах в отделе
+        exceptions: tupple - кортеж с отделами, которые нужно исключить из статистики
+        expected: ожидаемые данные
+
+    """
     assert generete_report(*departments, exceptions=exceptions) == expected
