@@ -31,12 +31,12 @@ def department_statistics(
         )
     except ZeroDivisionError:
         raise Exception('You have entered empty list of department salaries.')
-    else:
-        sorted_depts_by_avg_salary = [
-            department[0]
-            for department in sorted(
-                avg_salary_by_depts,
-                key=lambda department: department[1],
-            )
-        ]
-    return (sorted_depts_by_avg_salary[:3], sorted_depts_by_avg_salary[-3:])
+
+    sorted_depts_by_avg_salary = [
+        department[0]
+        for department in sorted(
+            avg_salary_by_depts,
+            key=lambda department: department[1],
+        )
+    ]
+    return sorted_depts_by_avg_salary[:3], sorted_depts_by_avg_salary[-3:]
