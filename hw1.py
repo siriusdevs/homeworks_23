@@ -3,7 +3,7 @@
 
 def top3_salaries_stats(
     departments: dict[str, float | int],
-    excluding: tuple = None,
+    excluding: tuple[str, ...] = None,
 ) -> tuple[tuple[str, float | int], tuple[str, float | int]]:
     """Find 3 most-paid and 3 least-paid departments in a given dictionary by average value.
 
@@ -14,12 +14,10 @@ def top3_salaries_stats(
     Returns:
         stats: tuple of top 3 most and least paid departments with their average salaries.
     """
-    if excluding is None:
-        excluding = ()
 
     avg_salaries = {}
     for department, employees in departments.items():
-        if department not in excluding:
+        if excluding is None or department not in excluding:
             salaries = [salary for salary in employees.values()]
             if sum(salaries) == 0:
                 avg_salary = 0
