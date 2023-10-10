@@ -14,8 +14,8 @@ def department_statistics(
         specific_departments: tuple[str] - departments that need to be included in the statistics.\
             (default None).
 
-    Exception:
-        ZeroDivisionError: - division by zero occurs if an empty list of salaries was passed.
+    Raises:
+        Exception: - division by zero occurs if an empty list of salaries was passed.
 
     Returns:
         Top 3 highest and lowest-paid departments.
@@ -30,7 +30,7 @@ def department_statistics(
             if department[0] in (specific_departments or department[0])
         )
     except ZeroDivisionError:
-        return 'You have entered empty list of department salaries.'
+        raise Exception('You have entered empty list of department salaries.')
     else:
         sorted_depts_by_avg_salary = [
             department[0]
