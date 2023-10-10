@@ -21,9 +21,10 @@ def salary_count(
             all_salaries.extend(list(salary.values()))
     # Sort salaries in descending order
     sorted_salaries = sorted(all_salaries, reverse=True)[:3]
+    sum_total = sum(all_salaries)
     # We calculate the ratio of the sum of the last three salaries to the total amount
-    if sum(all_salaries) > 0:
-        ratio = round((sum(sorted_salaries) / sum(all_salaries)) * 100, 2)
+    if  sum_total > 0:
+        ratio = round(sum(sorted_salaries) / sum_total * 100, 2)
     else:
         ratio = 0.0
     return list(sorted_salaries), ratio
