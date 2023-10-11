@@ -4,7 +4,7 @@ import pytest
 
 from hw1 import get_salaries
 
-test_data_with_none = (
+TEST_DATA_WITH_NONE = (
     (
         (
             ('vk', {'Smith': 200.0, 'Guy': 300.0}),
@@ -42,7 +42,7 @@ test_data_with_none = (
     ),
 )
 
-test_data_without_none = (
+TEST_DATA_WITHOUT_NONE = (
     (
         (
             ('South', {'Alex': 2.0, 'Johan': 3.0}),
@@ -77,7 +77,7 @@ test_data_without_none = (
 )
 
 
-@pytest.mark.parametrize('source, expected', test_data_with_none)
+@pytest.mark.parametrize('source, expected', TEST_DATA_WITH_NONE)
 def test_with_none(source: tuple[tuple], expected: tuple[list, float]):
     """Test data contains None in dept_except.
 
@@ -89,7 +89,7 @@ def test_with_none(source: tuple[tuple], expected: tuple[list, float]):
     assert get_salaries(*source) == expected
 
 
-@pytest.mark.parametrize('source, dept_except, expected', test_data_without_none)
+@pytest.mark.parametrize('source, dept_except, expected', TEST_DATA_WITHOUT_NONE)
 def test_without_none(source: tuple[tuple], dept_except: tuple[str], expected: tuple[list, float]):
     """Test data have some values in dept_except.
 
