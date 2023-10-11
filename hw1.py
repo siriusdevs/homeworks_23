@@ -19,7 +19,7 @@ def sort_dep(*args: Tuple[str, int], limit: Optional[int] = None) -> Tuple[str]:
         filtered_args = [
             (dept, [salary for salary in salaries if salary >= limit])
             for dept, salaries in args
-            ]
+        ]
     else:
         filtered_args = args
 
@@ -27,7 +27,7 @@ def sort_dep(*args: Tuple[str, int], limit: Optional[int] = None) -> Tuple[str]:
         (dept, salaries)
         for dept, salaries in filtered_args
         if sum(salaries) > 0
-        ]
+    ]
 
     if not filtered_args:
         return (), ()
@@ -36,7 +36,7 @@ def sort_dep(*args: Tuple[str, int], limit: Optional[int] = None) -> Tuple[str]:
         filtered_args,
         key=lambda dept: sum(dept[1]) / len(dept[1]),
         reverse=True,
-        )
+    )
 
     top3_high = [dept for dept, _ in sorted_args[:3]]
     top3_low = [dept for dept, _ in sorted_args[-3:]]
