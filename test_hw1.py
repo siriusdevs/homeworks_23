@@ -5,27 +5,27 @@ import pytest
 
 from hw1 import calculate_salary_stats
 
-vk = 'vk'
-tinkoff = 'tinkoff'
+VK = 'vk'
+TINKOFF = 'tinkoff'
 
-vk_departament = {
+VK_DEPARTAMENT = {
     'Misha': 200000,
     'Andrey': 100000,
     'Denis': 50000,
 }
 
-tinkoff_departament = {
+TINKOFF_DEPARTAMENT = {
     'Igor': 80000,
     'Sasha': 50000,
     'Egor': 70000,
 }
 
-top_salaries = [200000, 100000, 80000]
+TOP_SALARIES = [200000, 100000, 80000]
 
-vk_and_tinkoff_departament = {vk: vk_departament, tinkoff: tinkoff_departament}
+VK_AND_TINKOFF_DEPARTAMENT = {VK: VK_DEPARTAMENT, TINKOFF: TINKOFF_DEPARTAMENT}
 
-data_sales = [(vk_and_tinkoff_departament, (top_salaries, 69.09))]
-data_sales_with_limit = [(50000, vk_and_tinkoff_departament, (top_salaries, 84.44))]
+data_sales = [(VK_AND_TINKOFF_DEPARTAMENT, (TOP_SALARIES, 69.09))]
+data_sales_with_limit = [(50000, VK_AND_TINKOFF_DEPARTAMENT, (TOP_SALARIES, 84.44))]
 
 
 @pytest.mark.parametrize('kwargs, expected', data_sales)

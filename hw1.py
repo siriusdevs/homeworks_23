@@ -1,7 +1,7 @@
 """Module for calculating the salary stats."""
 
 
-def calculate_salary_stats(salary_limit: float = None, **kwargs: dict) -> tuple:
+def calculate_salary_stats(salary_limit: float = None, **departaments: dict) -> tuple:
     """Сreates salary statistics in the company.
 
     Args:
@@ -14,12 +14,11 @@ def calculate_salary_stats(salary_limit: float = None, **kwargs: dict) -> tuple:
     """
     all_salaries = []
 
-    for salaries in kwargs.values():
-        for salary in salaries.values():
-            if salary_limit is not None:
-                if salary > salary_limit:
-                    all_salaries.append(salary)
-            else:
+    for employees in departaments.values():
+        for salary in employees.values():
+            if salary_limit is not None and salary > salary_limit:
+                all_salaries.append(salary)
+            elif salary_limit is None:
                 all_salaries.append(salary)
 
     top_salaries = sorted(all_salaries, reverse=True)[:3]
@@ -31,4 +30,4 @@ def calculate_salary_stats(salary_limit: float = None, **kwargs: dict) -> tuple:
     else:
         ratio = round(sum(top_salaries) / (sum(all_salaries)) * 100, 2)
 
-    return (top_salaries, ratio)
+    return top_salaries, ratio
