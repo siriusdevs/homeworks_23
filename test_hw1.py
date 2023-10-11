@@ -3,7 +3,7 @@ import pytest
 
 from hw1 import best_wage
 
-test_data = (
+TEST_DATA = (
     (
         (
             ('Clothes', {'Telegin': 2000, 'Sachkov': 3000}),
@@ -13,7 +13,7 @@ test_data = (
             ('Headsets', {'Terrabledov': 50000, 'Monkeykingov': 52250}),
         ),
         ('Laptops', 'Clothes'),
-        ([52250, 50000, 37000, '53.1%']),
+        ([52250, 50000, 37000], 53.1),
     ),
     (
         (
@@ -24,7 +24,7 @@ test_data = (
             ('Markers', {'Enigmov': 50000, 'Shadowfiendov': 52250}),
         ),
         ('Pens'),
-        ([52250, 50000, 30000, '50.43%']),
+        ([52250, 50000, 30000], 50.43),
     ),
     (
         (
@@ -35,7 +35,7 @@ test_data = (
             ('Tables', {'Pudgov': 55368, 'Tinkerov': 53439}),
         ),
         ('Tables', 'Bottles'),
-        ([38467, 35365.35, 23678, '32.05%']),
+        ([38467, 35365.35, 23678], 32.05),
     ),
     (
         (
@@ -43,17 +43,17 @@ test_data = (
             ('Windows', {'Oknovin': 1360, 'Steklovina': 2450}),
         ),
         ('Pans'),
-        ([3567, 2576, 2450, '86.34%']),
+        ([3567, 2576, 2450], 86.34),
     ),
     (
         (),
         (),
-        (['Недостаточно данных для использования функции']),
+        ('Недостаточно не исключенных отделов для использования функции'),
     ),
     (
         (),
         ('Library', 'Beer'),
-        (['Недостаточно данных для использования функции']),
+        ('Недостаточно не исключенных отделов для использования функции'),
     ),
     (
         (
@@ -61,7 +61,7 @@ test_data = (
             ('Cakes', {'Tortova': 42000, 'Pirozhenkov': 20000}),
         ),
         ('Books', 'Cakes'),
-        (['Недостаточно не исключенных отделов для использования функции']),
+        ('Недостаточно не исключенных отделов для использования функции'),
     ),
     (
         (
@@ -69,12 +69,12 @@ test_data = (
             ('Chips', {'Laysova': 24680, 'Kartoshkova': 25340}),
         ),
         ('Milk'),
-        (['Недостаточно не исключенных отделов для использования функции']),
+        ([25340, 24680], 56.22),
     ),
 )
 
 
-@pytest.mark.parametrize('departments, exclude_data, expected', test_data)
+@pytest.mark.parametrize('departments, exclude_data, expected', TEST_DATA)
 def test_top_salaries(departments, exclude_data, expected):
     """Compare result of function 'best_wages' and correct answer for every datas.
 
@@ -83,4 +83,4 @@ def test_top_salaries(departments, exclude_data, expected):
         exclude_data: Tuple[str] - excluded departments.
         expected: list[str | int] - correct answer of best_wages's result.
     """
-    assert best_wage(departments, exclude_data) == expected
+    assert best_wage(*departments, exclude_deps=exclude_data) == expected
