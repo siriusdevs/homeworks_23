@@ -11,7 +11,7 @@
 |blagodarova|-|-|-|-|
 |butenko|-|-|-|-|
 |danilov|-|-|-|-|
-|demyanenko|-|-|-|-|
+|demyanenko|+|-|-|-|
 |drobyazko|-|-|-|-|
 |druzhinin|-|-|-|-|
 |dyatlova|+|-|-|-|
