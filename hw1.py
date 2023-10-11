@@ -1,7 +1,9 @@
 """Salary analysis."""
 
 
-def get_best_salaries(ignored_depts: tuple = None, **dept_employees) -> tuple:
+def get_best_salaries(
+    ignored_depts: tuple = None, **dept_employees: dict[str, dict[str, int]],
+) -> tuple:
     """Calculate employee salary statistics.
 
     Args:
