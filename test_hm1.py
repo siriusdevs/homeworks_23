@@ -81,6 +81,9 @@ test_data = (
         },
         (['Kiri', 'Syna'], ['Kiri', 'Syna']),
     ),
+)
+
+test_data_invalid = (
     (
         {
             'sales': {
@@ -99,7 +102,7 @@ test_data = (
 
 
 @pytest.mark.parametrize('args, expected', test_data)
-def test_worst_best_department(args: dict[str, float], expected: list) -> None:
+def test_salary_statistics(args: dict[str, float], expected: list) -> None:
     """Тест функции salary_statistics.
 
     Args:
@@ -107,3 +110,9 @@ def test_worst_best_department(args: dict[str, float], expected: list) -> None:
         expected (list): результат
     """
     assert salary_statistics(**args) == expected
+
+
+@pytest.mark.xfail(raises=Exception)
+def test_invalid_salary_statistics():
+    """Тест функции salary_statistics на ошибки"""
+    salary_statistics(test_data_invalid)
