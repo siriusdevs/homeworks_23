@@ -64,13 +64,16 @@ TEST_CASES = (
             },
             'sixth department': {
                 'Clown': 2.99,
+                'Vlad': 340.02,
             },
         },
         5.02,
         (
-            ['sixth department', 'second department', 'first department'],
+            ['second department', 'first department', 'sixth department'],
             ['third_department', 'fifth department', 'fourth department'],
         ),
+    ), (
+        {}, 25.11, ([], []),
     ),
 )
 
