@@ -51,7 +51,7 @@
 |ozornin|+|-|-|-|
 |pazych|-|-|-|-|
 |roganov|-|-|-|-|
-|romodanov|-|-|-|-|
+|romodanov|+|-|-|-|
 |safikanov|-|-|-|-|
 |safronova|-|-|-|-|
 |sannikov|-|-|-|-|
@@ -61,7 +61,7 @@
 |siriusdevs-patch-3|-|-|-|-|
 |startsev|-|-|-|-|
 |tarasov|-|-|-|-|
-|tatarnikov|-|-|-|-|
+|tatarnikov|+|-|-|-|
 |telegin|-|-|-|-|
 |tereshin|-|-|-|-|
 |trofimov|-|-|-|-|
