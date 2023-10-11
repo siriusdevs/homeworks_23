@@ -3,7 +3,10 @@
 from typing import Optional
 
 
-def get_salaries(*company: tuple, dept_except: Optional[str] = None) -> tuple[list, float]:
+def get_salaries(
+    *company: tuple[str, dict[str, float]],
+    dept_except: Optional[str] = None,
+) -> tuple[list, float]:
     """Count top 3 salaries and those part in all salaries.
 
     Args:

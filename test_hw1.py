@@ -4,14 +4,13 @@ import pytest
 
 from hw1 import get_salaries
 
-test_data = (
+test_data_with_none = (
     (
         (
             ('vk', {'Smith': 200.0, 'Guy': 300.0}),
             ('tinkoff', {'Ahmed': 300.0, 'Zyrick': 400.0}),
             ('sber', {'Ravshan': 100.0, 'Maga': 600.0}),
         ),
-        None,
         (
             [600.0, 400.0, 300.0],
             68.42,
@@ -24,7 +23,6 @@ test_data = (
             ('tinkoff', {'White': 8.0, 'Jefferson': 6.0}),
             ('sber', {'Bale': 4.0, 'Gosling': 6.0}),
         ),
-        None,
         (
             [10.0, 8.0, 6.0],
             61.54,
@@ -37,13 +35,14 @@ test_data = (
             ('West', {'Mate': 4.0, 'Employee': 1.0}),
             ('East', {'Friend': 9.0, 'Guy': 3.0}),
         ),
-        None,
         (
             [9.0, 4.0, 3.0],
             72.73,
         ),
     ),
+)
 
+test_data_without_none = (
     (
         (
             ('South', {'Alex': 2.0, 'Johan': 3.0}),
@@ -78,9 +77,21 @@ test_data = (
 )
 
 
-@pytest.mark.parametrize('source, dept_except, expected', test_data)
-def test_get_salaries(source: tuple[tuple], dept_except: tuple[str], expected: tuple[list, float]):
-    """Testing...
+@pytest.mark.parametrize('source, expected', test_data_with_none)
+def test_with_none(source: tuple[tuple], expected: tuple[list, float]):
+    """Test data contains None in dept_except.
+
+    Args:
+        source (Tuple[tuple]): data for testing
+        expected (Tuple[list, float]): expected values
+
+    """
+    assert get_salaries(*source) == expected
+
+
+@pytest.mark.parametrize('source, dept_except, expected', test_data_without_none)
+def test_without_none(source: tuple[tuple], dept_except: tuple[str], expected: tuple[list, float]):
+    """Test data have some values in dept_except.
 
     Args:
         source (Tuple[tuple]): data for testing
