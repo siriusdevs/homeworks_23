@@ -1,37 +1,32 @@
 """Module, that has one function "best_wage", homework1."""
+from typing import List, Tuple
 
 
-def best_wage(departments: list, exclude_deps: tuple = None) -> list[float | int, str]:
+def best_wage(*departments: Tuple[str, dict], exclude_deps: Tuple[str] = None) -> Tuple[List[int | float], str] | str:
     """Find 3 best salaries and their percentage to total amount of payments.
 
     Args:
-        exclude_deps: Tuple[str] - tuple of excluded department's names.
-        departments: List[tuple] - tuple of departments and dictionary of names and salaries.
+        exclude_deps: excluded department's names.
+        departments: departments and dictionary of names and salaries.
 
     Returns:
-        list[float | str]: 3 best salaries and their percentage to total amount of payments.
+        Tuple: 3 best salaries and their percentage to total amount of payments.
+        str: error handling
     """
-    quantity_deps = len(departments)
-    if quantity_deps == 0:
-        return ['Недостаточно данных для использования функции']
-    total_payments = []
+    total_salary = 0
     permitted_wages = []
+    for department in departments:
+        for salary in department[1].values():
+            total_salary += salary
+            if exclude_deps is None or department[0] not in exclude_deps:
+                permitted_wages.append(salary)
+    try:
+        if not permitted_wages:
+            raise ZeroDivisionError
+    except ZeroDivisionError:
+        return 'Недостаточно не исключенных отделов для использования функции'
 
-    for dep in departments:
-        for _, salary in dep[1].items():
-            total_payments += [salary]
-            if exclude_deps is None or dep[0] not in exclude_deps:
-                permitted_wages += [salary]
-
-    permitted_wages = sorted(permitted_wages, reverse=True)
-    possible_len = len(permitted_wages)
-
-    if possible_len >= 3:
-        permitted_wages = [round(permitted_wages[top], 2) for top in range(3)]
-    else:
-        return ['Недостаточно не исключенных отделов для использования функции']
-
-    percent_best_salary = round(sum(permitted_wages) / sum(total_payments) * 100, 2)
-    permitted_wages += [f'{percent_best_salary}%']
-
-    return permitted_wages
+    permitted_wages = sorted(permitted_wages, reverse=True)[:3]
+    permitted_wages = [round(permitted_wages[top], 2) for top in range(len(permitted_wages))]
+    percent_best_salary = round(sum(permitted_wages) / total_salary * 100, 2)
+    return permitted_wages, percent_best_salary
