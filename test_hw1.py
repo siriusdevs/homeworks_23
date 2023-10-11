@@ -24,8 +24,8 @@ TEST_DATA1 = (
 )
 
 EXPECTED_DATA1 = (
-    ['Managers', 'Designers', 'Engineers'],
-    ['HR', 'DL', 'ML'],
+    [DEPARTMENTS_NAMES[1], DEPARTMENTS_NAMES[4], DEPARTMENTS_NAMES[6]],
+    [DEPARTMENTS_NAMES[3], DEPARTMENTS_NAMES[5], DEPARTMENTS_NAMES[2]],
 )
 
 
@@ -47,7 +47,7 @@ SPECIFIC_DEPARTMENTS = (
     DEPARTMENTS_NAMES[2],
 )
 
-EXPECTED_DATA1 = (
+EXPECTED_DATA2 = (
     [
         DEPARTMENTS_NAMES[4],
         DEPARTMENTS_NAMES[3],
@@ -63,7 +63,7 @@ EXPECTED_DATA1 = (
 
 @pytest.mark.parametrize(
     'departments, required_departments, expected',
-    [(TEST_DATA1, SPECIFIC_DEPARTMENTS, EXPECTED_DATA1)],
+    [(TEST_DATA1, SPECIFIC_DEPARTMENTS, EXPECTED_DATA2)],
 )
 def test_positive_data_with_optional_argument(
     departments, required_departments, expected,
