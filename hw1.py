@@ -2,8 +2,8 @@
 
 
 def calculate_salary(
-        salary_limit: float = None,
-        **departaments: dict[str, dict],
+    salary_limit: float = None,
+    **departaments: dict[str, dict],
 ) -> tuple[list, float]:
     """Сreates salary statistics in the company.
 
@@ -19,7 +19,7 @@ def calculate_salary(
 
     for employees in departaments.values():
         for salary in employees.values():
-            if salary > (-1 if salary_limit is None else salary_limit):
+            if salary_limit is None or salary > salary_limit:
                 all_salaries.append(salary)
 
     top_salaries = sorted(all_salaries, reverse=True)[:3]
