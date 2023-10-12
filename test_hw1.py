@@ -77,7 +77,7 @@ test_deps = (
                 'Hector': 6,
                 'Garry': 0,
             },
-            'excluding': (
+            excluding = (
                 'Bright Purple',
                 'Classics',
             ),
@@ -101,7 +101,7 @@ test_deps = (
                 'Peter': 2400.0,
                 'Michael': 500.0
             },
-            'excluding': ('Salesmen'),
+            excluding = ('Salesmen'),
         },
         ((('Bodyguards', 1000.0), ('Drivers', 400.0)),
          (('Drivers', 400.0), ('Bodyguards', 1000.0))),
