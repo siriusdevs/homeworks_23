@@ -5,7 +5,7 @@
 
 
 def salary_statistics(
-        exclude_department: tuple[str] = None,
+    exclude_department: tuple[str] = None,
         **department: dict[str: dict[str, float]]) -> tuple[list]:
     """Вывод топ-3 высокооплачиваемых отделов и топ-3 низкооплачиваемых отделов в компании.
 
@@ -19,6 +19,9 @@ def salary_statistics(
     Returns:
         Tuple[list]: статистика топ-3 самых высокооплачиваемых отдела в компании
         и топ-3 самых низкооплачиваемых.
+
+    Raises:
+        Возвращает ошибку.
     """
     average_salaries = []
 

@@ -114,5 +114,5 @@ def test_salary_statistics(args: dict[str, float], expected: list) -> None:
 
 @pytest.mark.xfail(raises=Exception)
 def test_invalid_salary_statistics():
-    """Тест функции salary_statistics на ошибки"""
+    """Тест функции salary_statistics на ошибки."""
     salary_statistics(test_data_invalid)
