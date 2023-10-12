@@ -23,6 +23,7 @@ test_deps = (
                 'Van': 50.0,
             },
         },
+        excluding = (),
         ((('Tyndex', 500.0), ('Goggle', 400.0), ('Spectacle', 375.0)),
          (('Spectacle', 375.0), ('Goggle', 400.0), ('Tyndex', 500.0))),
     ), (
@@ -46,6 +47,7 @@ test_deps = (
                 'Grey': 10000.0,
             },
         },
+        excluding = (),
         ((('GRY', 10000.0), ('BLU', 1266.67), ('RED', 666.67)),
          (('GRN', 0), ('YLW', 175.0), ('RED', 666.67))),
     ), (
@@ -77,11 +79,11 @@ test_deps = (
                 'Hector': 6,
                 'Garry': 0,
             },
-            excluding = (
-                'Bright Purple',
-                'Classics',
+        }
+        excluding = (
+            'Bright Purple',
+            'Classics',
             ),
-        },
         ((('Front Tier', 5.0), ('Crusher', 2.5), ('Mercs', 2.0)),
          (('Funi Sound', 1.5), ('Mercs', 2.0), ('Crusher', 2.5))),
     ), (
@@ -101,17 +103,18 @@ test_deps = (
                 'Peter': 2400.0,
                 'Michael': 500.0
             },
-            excluding = ('Salesmen'),
         },
+        excluding = ('Salesmen'),
         ((('Bodyguards', 1000.0), ('Drivers', 400.0)),
          (('Drivers', 400.0), ('Bodyguards', 1000.0))),
     )
 )
 
 
-@pytest.mark.parametrize('departments, expected', test_deps)
+@pytest.mark.parametrize('departments, excluding, expected', test_deps)
 def test_deps_salaries(
-    departments: dict[str, dict[float | int] | tuple[str, ...]],
+    departments: dict[str, dict[float | int]],
+    excluding: tuple[str, ...],
     expected: tuple[tuple[str, float | int], tuple[str, float | int]],
 ) -> None:
     """Test top 3 salaries function.
@@ -123,4 +126,4 @@ def test_deps_salaries(
     Asserts:
         state of answer - correct or not
     """
-    assert top3_salaries_stats(departments) == expected
+    assert top3_salaries_stats(departments, excluding) == expected
