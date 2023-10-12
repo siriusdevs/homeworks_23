@@ -6,7 +6,8 @@
 
 def salary_statistics(
     exclude_department: tuple[str] = None,
-        **department: dict[str: dict[str, float]]) -> tuple[list]:
+        **department: dict[str: dict[str, float]],
+) -> tuple[list]:
     """Вывод топ-3 высокооплачиваемых отделов и топ-3 низкооплачиваемых отделов в компании.
 
     Args:
@@ -29,7 +30,7 @@ def salary_statistics(
         len_dep = len(department[dep])
         if exclude_department is None or dep not in exclude_department:
             if len_dep == 0:
-                raise Exception(f'В отделе {dep} нету сотрудников!')
+                raise (f'В отделе {dep} нету сотрудников!')
             average_salary = round(sum(department[dep].values()) / len_dep, 2)
             average_salaries.append([dep, average_salary])
 

@@ -112,7 +112,7 @@ def test_salary_statistics(args: dict[str, float], expected: list) -> None:
     assert salary_statistics(**args) == expected
 
 
-@pytest.mark.xfail(raises=Exception)
+@pytest.mark.xfail(raises=ZeroDivisionError)
 def test_invalid_salary_statistics():
     """Тест функции salary_statistics на ошибки."""
     salary_statistics(test_data_invalid)
