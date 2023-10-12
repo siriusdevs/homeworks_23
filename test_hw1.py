@@ -23,7 +23,7 @@ test_deps = (
                 'Van': 50.0,
             },
         },
-        excluding = (),
+        (),
         ((('Tyndex', 500.0), ('Goggle', 400.0), ('Spectacle', 375.0)),
          (('Spectacle', 375.0), ('Goggle', 400.0), ('Tyndex', 500.0))),
     ), (
@@ -47,7 +47,7 @@ test_deps = (
                 'Grey': 10000.0,
             },
         },
-        excluding = (),
+        (),
         ((('GRY', 10000.0), ('BLU', 1266.67), ('RED', 666.67)),
          (('GRN', 0), ('YLW', 175.0), ('RED', 666.67))),
     ), (
@@ -79,11 +79,11 @@ test_deps = (
                 'Hector': 6,
                 'Garry': 0,
             },
-        }
-        excluding = (
+        },
+        (
             'Bright Purple',
             'Classics',
-            ),
+        ),
         ((('Front Tier', 5.0), ('Crusher', 2.5), ('Mercs', 2.0)),
          (('Funi Sound', 1.5), ('Mercs', 2.0), ('Crusher', 2.5))),
     ), (
@@ -104,7 +104,7 @@ test_deps = (
                 'Michael': 500.0
             },
         },
-        excluding = ('Salesmen'),
+        ('Salesmen'),
         ((('Bodyguards', 1000.0), ('Drivers', 400.0)),
          (('Drivers', 400.0), ('Bodyguards', 1000.0))),
     )
