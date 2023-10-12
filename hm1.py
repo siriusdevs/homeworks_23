@@ -22,7 +22,7 @@ def salary_statistics(
         и топ-3 самых низкооплачиваемых.
 
     Raises:
-        Возвращает ошибку.
+        ZeroDivisionError: выдает ошибку.
     """
     average_salaries = []
 
@@ -30,7 +30,7 @@ def salary_statistics(
         len_dep = len(department[dep])
         if exclude_department is None or dep not in exclude_department:
             if len_dep == 0:
-                raise (f'В отделе {dep} нету сотрудников!')
+                raise ZeroDivisionError(f'В отделе {dep} нету сотрудников!')
             average_salary = round(sum(department[dep].values()) / len_dep, 2)
             average_salaries.append([dep, average_salary])
 
