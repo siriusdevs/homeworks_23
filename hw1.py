@@ -21,9 +21,11 @@ def get_top_salaries(*departments: tuple[str, list], required_deps: tuple[str] =
     if required_deps:
         departments = filter(lambda arg: arg, departments)
         departments = tuple(filter(lambda arg: arg[0] in required_deps, departments))
-    for department in departments:
-        if len(department) > 1:
-            required_salaries.extend(department[1])
+    for departmentIndex in range(len(departments)):
+        try:
+            required_salaries.extend(departments[departmentIndex][1])
+        except IndexError:
+            raise Exception(f'Salary list not found for department in index {departmentIndex}')
     if any(salary < 0 for salary in required_salaries):
         raise Exception('Sorry, salary cannot be less than zero.')
     required_salaries.sort()
