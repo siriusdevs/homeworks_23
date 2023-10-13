@@ -27,23 +27,6 @@ test_data_without_departments = (
     ((('Dev', [0]),),
      ([0], 100.0),
      ),
-    # Указан список зарплат, но не указан отдел - игнорируем
-    ((([123],),),
-     ([], 0),
-     ),
-    # В одном кортеже не указано имя отдела. Игнорируем именно его
-    ((([10, 20, 20, 80, 20],),
-      ('Market', [20, 20, 20, 80, 20]),
-      ('Sale', [20, 20, 20, 80, 20]),
-      ),
-     ([20, 20, 20], 18.75),
-     ),
-    # Указан отдел, но не указаны зарплаты
-    ((('Dev',),),
-     ([], 0),
-     ),
-    # Передан пустой кортеж - игнорируем
-    ((()), ([], 0)),
     # Не переданы аргументы - игнорируем
     ((), ([], 0)),
 )
@@ -72,16 +55,23 @@ test_data_with_departments = (
      (),
      ([100, 200, 300], 13.95),
      ),
-    # Передан пустой кортеж и кортеж отделов - не считаем, данных нет
-    (((),), ('abc', 'ghi'), ([], 0)),
 )
-test_data_with_negative_value = (
+test_data_with_wrong_values = (
     # Отрицательная зарплата. Такой не бывает - возвращаем ошибку.
     ((('Develop', [80, 80, 80, -20, 80]),
       ('Marketing', [80, 80, 80, -20, 80]),
       ('Sales', [80, 80, 80, -20, 80, 80]),
       ),
      ),
+     ((()), ([], 0)),
+     ((('Dev',),)),
+     ((([10, 20, 20, 80, 20],),
+      ('Market', [20, 20, 20, 80, 20]),
+      ('Sale', [20, 20, 20, 80, 20]),
+      ),
+     ([20, 20, 20], 18.75),
+     ),
+     ((),), ('abc', 'ghi'),
 )
 
 
@@ -108,7 +98,7 @@ def test_get_top_salaries_with_departments(deps: tuple, req_deps: tuple[str], ex
     assert get_top_salaries(*deps, required_deps=req_deps) == expected
 
 
-@pytest.mark.xfail(test_data_with_negative_value, reason=Exception)
+@pytest.mark.xfail(test_data_with_wrong_values, reason=Exception)
 def test_calcuate_with_negative_params(deps):
     """Test calculate with negative parametrs.
 
