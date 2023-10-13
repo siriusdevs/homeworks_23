@@ -35,7 +35,7 @@
 |krivenko|-|-|-|-|
 |kuznetsova|-|-|-|-|
 |lebedev|-|-|-|-|
-|litvinov|-|-|-|-|
+|litvinov|+|-|-|-|
 |main|-|-|-|-|
 |malanin|-|-|-|-|
 |malygin|-|-|-|-|
