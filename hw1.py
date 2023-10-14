@@ -4,7 +4,7 @@
 def get_salary_statistics(
     minimal_salary: int | float = None,
     **departments: dict[str, dict[str, float]],
-) -> tuple[float]:
+) -> tuple[float, float, float]:
     """Calculate statistics on employee salaries.
 
     Args:
