@@ -41,4 +41,4 @@ def calculate_lowest_salaries(
     lowest_salaries = sorted(salaries)[:3]
     ratio_lowest_salaries = round(sum(lowest_salaries) * 100 / total_payments)
 
-    return *lowest_salaries, f'{ratio_lowest_salaries}%'
+    return lowest_salaries, f'{ratio_lowest_salaries}%'
