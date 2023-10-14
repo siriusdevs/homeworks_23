@@ -101,18 +101,18 @@ test_data_invalid = (
 )
 
 
-@pytest.mark.parametrize('args, expected', test_data)
-def test_salary_statistics(args: dict[str, float], expected: list) -> None:
+@pytest.mark.parametrize('kwargs, expected', test_data)
+def test_salary_statistics(kwargs: dict[str, float], expected: list) -> None:
     """Тест функции salary_statistics.
 
     Args:
-        args (dict[str, float]): тестовые данные
+        kwargs (dict[str, float]): тестовые данные
         expected (list): результат
     """
-    assert salary_statistics(**args) == expected
+    assert salary_statistics(**kwargs) == expected
 
 
-@pytest.mark.xfail(raises=ZeroDivisionError)
+@pytest.mark.xfail(raises=Exception)
 def test_invalid_salary_statistics():
     """Тест функции salary_statistics на ошибки."""
     salary_statistics(test_data_invalid)

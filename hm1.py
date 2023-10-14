@@ -22,15 +22,15 @@ def salary_statistics(
         и топ-3 самых низкооплачиваемых.
 
     Raises:
-        ZeroDivisionError: выдает ошибку.
+        Exception: выдает ошибку.
     """
     average_salaries = []
 
     for dep in department.keys():
         len_dep = len(department[dep])
+        if len_dep == 0:
+            raise Exception(f'В отделе {dep} нету сотрудников!')
         if exclude_department is None or dep not in exclude_department:
-            if len_dep == 0:
-                raise ZeroDivisionError(f'В отделе {dep} нету сотрудников!')
             average_salary = round(sum(department[dep].values()) / len_dep, 2)
             average_salaries.append([dep, average_salary])
 
@@ -38,4 +38,4 @@ def salary_statistics(
     top_dep = [depart[0] for depart in average_salaries[-3:]]
     worst_dep = [depart[0] for depart in average_salaries[:3]]
 
-    return (top_dep, worst_dep)
+    return top_dep, worst_dep
