@@ -10,15 +10,15 @@ def company_departament(departments: [str, dict], min_salary: float | None = Non
         departments: dict[str, dict] - dict of department names and values.
 
     Returns:
-        list[str] - array for highest and lowest salaries.
+        tuple[list] - array for highest and lowest salaries.
     """
     salaries = []
 
     for department, dept_salaries in departments.items():
+        if not dept_salaries:
+            continue
         if min_salary:
             dept_salaries = [salary for salary in dept_salaries.values() if salary >= min_salary]
-            if not dept_salaries:
-                continue
         else:
             dept_salaries = list(dept_salaries.values())
         all_salary = sum(dept_salaries)
