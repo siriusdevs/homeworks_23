@@ -12,8 +12,7 @@ def best_wage(
         departments: departments and dictionary of names and salaries.
 
     Returns:
-        Tuple: 3 best salaries and their percentage to total amount of payments.
-        str: error handling
+        tuple: 3 best salaries and their percentage to total amount of payments.
     """
     total_salary = 0
     permitted_wages = []
