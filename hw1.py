@@ -4,7 +4,7 @@
 def best_wage(
     *departments: tuple[str, dict],
     exclude_deps: tuple[str] = None,
-) -> tuple[list[int | float], str] | str:
+) -> tuple[list[int | float], int]:
     """Find 3 best salaries and their percentage to total amount of payments.
 
     Args:
@@ -26,7 +26,7 @@ def best_wage(
         if not permitted_wages:
             raise ZeroDivisionError
     except ZeroDivisionError:
-        return [], 0
+        return ([], 0)
 
     permitted_wages = sorted(permitted_wages, reverse=True)[:3]
     permitted_wages = [
