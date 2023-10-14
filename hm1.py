@@ -22,14 +22,14 @@ def salary_statistics(
         и топ-3 самых низкооплачиваемых.
 
     Raises:
-        Exception: выдает ошибку.
+        Exception: выдает ошибку, когда в отделе нет сотрудников.
     """
     average_salaries = []
 
     for dep in department.keys():
         len_dep = len(department[dep])
         if len_dep == 0:
-            raise Exception(f'В отделе {dep} нету сотрудников!')
+            raise Exception(f'В отделе {dep} нет сотрудников!')
         if exclude_department is None or dep not in exclude_department:
             average_salary = round(sum(department[dep].values()) / len_dep, 2)
             average_salaries.append([dep, average_salary])
