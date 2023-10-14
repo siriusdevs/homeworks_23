@@ -5,7 +5,7 @@ import pytest
 
 from hm1 import salary_statistics
 
-test_data = (
+TEST_DATA = (
     (
         {
             'north': {
@@ -83,7 +83,7 @@ test_data = (
     ),
 )
 
-test_data_invalid = (
+TEST_DATA_INVALID = (
     (
         {
             'sales': {
@@ -101,7 +101,7 @@ test_data_invalid = (
 )
 
 
-@pytest.mark.parametrize('kwargs, expected', test_data)
+@pytest.mark.parametrize('kwargs, expected', TEST_DATA)
 def test_salary_statistics(kwargs: dict[str, float], expected: list) -> None:
     """Тест функции salary_statistics.
 
@@ -115,4 +115,4 @@ def test_salary_statistics(kwargs: dict[str, float], expected: list) -> None:
 @pytest.mark.xfail(raises=Exception)
 def test_invalid_salary_statistics():
     """Тест функции salary_statistics на ошибки."""
-    salary_statistics(test_data_invalid)
+    salary_statistics(TEST_DATA_INVALID)
