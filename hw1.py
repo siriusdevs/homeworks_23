@@ -42,4 +42,3 @@ def sort_dep(
         for department, _ in filtered_dep[:-4:-1]
     ]
     return top3_high, top3_low
- 
