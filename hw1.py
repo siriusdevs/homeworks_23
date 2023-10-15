@@ -22,7 +22,7 @@ def sort_dep(
     for dept, salaries in departments:
         filtered_salaries = [
             salary for salary in salaries if salary >= limit
-            ] if limit is not None else salaries
+        ] if limit is not None else salaries
 
         if filtered_salaries:
             filtered_dep.append((dept, filtered_salaries))
@@ -34,11 +34,12 @@ def sort_dep(
         filtered_dep,
         key=lambda department: sum(department[1]) / len(department[1]),
         reverse=True,
-        )
+    )
 
     top3_high = [department for department, _ in filtered_dep[:3]]
     top3_low = [
         department
         for department, _ in filtered_dep[:-4:-1]
-        ]
+    ]
     return top3_high, top3_low
+ 
