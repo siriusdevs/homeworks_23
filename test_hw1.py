@@ -23,8 +23,8 @@ TEST_DICT_ONE_DEPTS = MappingProxyType({DEPT1: DEPT1_DIR})
 
 TEST_DATA = (
     (
-        (DEPT1,),
-        ([9, 8, 7], 61.54),
+        (DEPT3,),
+        ([6, 5, 4], 71.43),
         TEST_DICT_THREE_DEPTS,
     ),
     (
@@ -54,7 +54,9 @@ TEST_DATA_DEFAULT = (
 
 @pytest.mark.parametrize('ignored_depts, expected, dept_employees', TEST_DATA)
 def test_colculating_best_salaries(
-    ignored_depts: tuple, expected: tuple, dept_employees: dict[str, dict[str, int]],
+    ignored_depts: tuple[str, ...],
+    expected: tuple[list[float], float],
+    dept_employees: dict[str, dict[str, int]],
 ) -> None:
     """Test get_best_salaries function.
 
@@ -68,7 +70,8 @@ def test_colculating_best_salaries(
 
 @pytest.mark.parametrize('expected, dept_employees', TEST_DATA_DEFAULT)
 def test_calculating_best_salaries_default(
-    expected: tuple, dept_employees: dict[str, dict[str, int]],
+    expected: tuple[list[float], float],
+    dept_employees: dict[str, dict[str, int]],
 ) -> None:
     """Test get_best_salaries function without ignore_depts argument.
 
