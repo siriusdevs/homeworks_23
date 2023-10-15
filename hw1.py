@@ -15,7 +15,7 @@ def get_top_salaries(*departments: tuple[str, list], required_deps: tuple[str] =
         salaries within the specified departments, rounded to two decimal places.
 
     Raises:
-        Exception: occurs if there are salaries less than zero.
+        Exception: calls if there are salaries less than zero or department name is not specified.
     """
     required_salaries = []
     if required_deps:
