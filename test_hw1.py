@@ -4,7 +4,7 @@ import pytest
 
 from hw1 import get_top_salaries
 
-test_data_without_departments = (
+TEST_DATA_WITHOUT_DEPARTMENTS = (
     # Обычные ожидаемые входные данные
     ((('Develop', [1000, 200, 500]),
       ('Marketing', [400, 600, 300]),
@@ -30,7 +30,7 @@ test_data_without_departments = (
     # Не переданы аргументы - игнорируем
     ((), ([], 0)),
 )
-test_data_with_departments = (
+TEST_DATA_WITH_DEPARTMENTS = (
     # Считаем зарплаты только с отделов Develop и Sales
     ((('Programmers', [1000, 200, 500]),
      ('DB', [400, 600, 300]),
@@ -56,7 +56,7 @@ test_data_with_departments = (
      ([100, 200, 300], 13.95),
      ),
 )
-test_data_with_wrong_values = (
+TEST_DATA_WITH_WRONG_VALUES = (
     ((('Develop', [80, 80, 80, -20, 80]),
       ('Marketing', [80, 80, 80, -20, 80]),
       ('Sales', [80, 80, 80, -20, 80, 80]),
@@ -73,7 +73,7 @@ test_data_with_wrong_values = (
 )
 
 
-@pytest.mark.parametrize('deps, expected', test_data_without_departments)
+@pytest.mark.parametrize('deps, expected', TEST_DATA_WITHOUT_DEPARTMENTS)
 def test_get_top_salaries_without_departments(deps: tuple, expected: tuple):
     """Test get_top_salaries function with departments argument.
 
@@ -84,7 +84,7 @@ def test_get_top_salaries_without_departments(deps: tuple, expected: tuple):
     assert get_top_salaries(*deps) == expected
 
 
-@pytest.mark.parametrize('deps, req_deps, expected', test_data_with_departments)
+@pytest.mark.parametrize('deps, req_deps, expected', TEST_DATA_WITH_DEPARTMENTS)
 def test_get_top_salaries_with_departments(deps: tuple, req_deps: tuple[str], expected: tuple):
     """Test get_top_salaries function with departments argument.
 
@@ -96,7 +96,7 @@ def test_get_top_salaries_with_departments(deps: tuple, req_deps: tuple[str], ex
     assert get_top_salaries(*deps, required_deps=req_deps) == expected
 
 
-@pytest.mark.xfail(test_data_with_wrong_values, reason=Exception)
+@pytest.mark.xfail(TEST_DATA_WITH_WRONG_VALUES, reason=Exception)
 def test_calcuate_with_negative_params(deps):
     """Test calculate with negative parametrs.
 
