@@ -8,7 +8,7 @@ def get_best_salaries(
     """Calculate employee salary statistics.
 
     Args:
-        ignored_depts (tuple): contain dept names ignored when calculating statistics.
+        ignored_depts : contain dept names ignored when calculating statistics (default None).
         dept_employees: key is name of dept, value is dict (key employee name , value is salary).
 
     Returns:
