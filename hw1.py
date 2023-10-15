@@ -31,8 +31,8 @@ def calculate_lowest_salaries(
     salaries = []
     for department in company:
         for salary in department[1].values():
-            total_payments += salary
             if salary_limit is None or salary < salary_limit:
+                total_payments += salary
                 salaries.append(round(salary, 2))
 
     if total_payments == 0:
