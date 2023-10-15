@@ -5,7 +5,7 @@ import pytest
 
 from hw1 import sort_dep
 
-test = (
+TEST = (
     (
         (
             (
@@ -21,7 +21,7 @@ test = (
                 None
             ),
             (
-                (['dep5', 'dep7', 'dep4'], ['dep3', 'dep6', 'dep1'])
+                ['dep5', 'dep7', 'dep4'], ['dep1', 'dep6', 'dep3']
             ),
         )
     ),
@@ -40,7 +40,7 @@ test = (
                 20
             ),
             (
-                (['depart5', 'depart7', 'depart2'], ['depart2', 'depart4', 'depart3'])
+                (['depart5', 'depart7', 'depart2'], ['depart3', 'depart4', 'depart2'])
             ),
         )
     ),
@@ -90,25 +90,25 @@ test = (
         (
             (
                 ('dep4', [0]),
-                ('dep2', [0, 0, 0, 0]),
-                ('dep3', [0, 0, 0]),
-                ('dep1', [0, 0, 0]),
-                ('dep5', [0, 0, 0]),
-                ('dep6', [0]),
-                ('dep7', [0, 0, 0, 0, 0, 0]),
+                ('dep2', [12,1,3]),
+                ('dep3', [1,32,2,0]),
+                ('dep1', [100,1,2,3,4,5]),
+                ('dep5', [0, 0]),
+                ('dep6', [2,4,5,2,34]),
+                ('dep7', [234,23,2,34,5,]),
             ),
             (
                 None
             ),
             (
-                ((), ())
+                (['dep7', 'dep1', 'dep6'], ['dep5', 'dep4', 'dep2'])
             ),
         )
     ),
 )
 
 
-@pytest.mark.parametrize('input_data, limit, expected', test)
+@pytest.mark.parametrize('input_data, limit, expected', TEST)
 def test_calc_dep(input_data, limit, expected):
     """Created function that tests sort_dep function.
 
