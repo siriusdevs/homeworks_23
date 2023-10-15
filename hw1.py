@@ -25,7 +25,7 @@ def get_top_salaries(*departments: tuple[str, list], required_deps: tuple[str] =
         try:
             required_salaries.extend(department[1])
         except IndexError:
-            raise Exception(f'Salary list not found for department in index {department[0]}')
+            raise Exception(f'Salary list not found for department {department[0]}')
     if any(salary < 0 for salary in required_salaries):
         raise Exception('Sorry, salary cannot be less than zero.')
     required_salaries.sort()
