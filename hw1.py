@@ -2,8 +2,9 @@
 
 
 def get_best_salaries(
-    ignored_depts: tuple = None, **dept_employees: dict[str, dict[str, int]],
-) -> tuple:
+    ignored_depts: tuple[str, ...] = None,
+    **dept_employees: dict[str, dict[str, int]],
+) -> tuple[list[float], float]:
     """Calculate employee salary statistics.
 
     Args:
@@ -17,7 +18,6 @@ def get_best_salaries(
     employees = []
     salaries_sum = 0
     ignored_depts = set() if ignored_depts is None else set(ignored_depts)
-
     for dept, employees_salaries in dept_employees.items():
         if dept not in ignored_depts:
             for salary in employees_salaries.values():
@@ -25,10 +25,8 @@ def get_best_salaries(
                 salaries_sum += employees[-1]
 
     best_salaried_employees = sorted(employees, reverse=True)[:3]
-
     if salaries_sum == 0:
         percent = 0
     else:
         percent = round((sum(best_salaried_employees) / salaries_sum) * 100, 2)
-
     return best_salaried_employees, percent
