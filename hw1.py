@@ -4,7 +4,10 @@
 from typing import Optional
 
 
-def sort_dep(*departments: tuple[str, list[int|float]] , limit: Optional[float] = None) -> tuple[str, str]:
+def sort_dep(
+    *departments: tuple[str, list[int | float]],
+    limit: Optional[float] = None,
+) -> tuple[str, str]:
     """
     Create a function that sorts a tuple of company.
 
@@ -15,27 +18,27 @@ def sort_dep(*departments: tuple[str, list[int|float]] , limit: Optional[float] 
     Returns:
         Return tuple[str, str] - Top 3 high-paying and low-paying departments.
     """
-    if limit is not None:
-        filtered_dep = [
-            (dept, [salary for salary in salaries if salary >= limit])
-            for dept, salaries in departments
-            if any(salary >= limit for salary in salaries)
-        ]
+    filtered_dep = []
+    for dept, salaries in departments:
+        filtered_salaries = [
+            salary for salary in salaries if salary >= limit
+            ] if limit is not None else salaries
 
-    else:
-        filtered_dep = departments
+        if filtered_salaries:
+            filtered_dep.append((dept, filtered_salaries))
+
     if not filtered_dep:
-        return (), ()
+        return [], []
 
     filtered_dep = sorted(
         filtered_dep,
-        key=lambda dept: sum(dept[1]) / len(dept[1]),
+        key=lambda department: sum(department[1]) / len(department[1]),
         reverse=True,
         )
 
-    top3_high = [dept for dept, _ in filtered_dep[:3]]
+    top3_high = [department for department, _ in filtered_dep[:3]]
     top3_low = [
-        dept
-        for dept, _ in filtered_dep[-1:-4:-1]
+        department
+        for department, _ in filtered_dep[:-4:-1]
         ]
     return top3_high, top3_low
