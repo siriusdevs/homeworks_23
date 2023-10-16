@@ -4,7 +4,7 @@
 from typing import Optional
 
 
-def sort_dep(
+def search_top_departmets(
     *departments: tuple[str, list[int | float]],
     limit: Optional[float] = None,
 ) -> tuple[list[str], list[str]]:
@@ -16,7 +16,7 @@ def sort_dep(
         limit: Optional[float] - Payroll accounting limit in sorting.
 
     Returns:
-        Return tuple[list[str], list[str]] - Top 3 high-paying and low-paying departments.
+        Return tuple[str, str] - Top 3 high-paying and low-paying departments.
     """
     filtered_dep = []
     for dept, salaries in departments:

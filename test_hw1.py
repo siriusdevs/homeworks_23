@@ -3,7 +3,7 @@
 
 import pytest
 
-from hw1 import sort_dep
+from hw1 import search_top_departmets
 
 TEST = (
     (
@@ -136,4 +136,4 @@ def test_calc_dep(input_data, limit, expected):
         limit: int -  Salary limit below which does not need to be taken into account.
         expected: tuple - expected value from function.
     """
-    assert sort_dep(*input_data, limit=limit) == expected
+    assert search_top_departmets(*input_data, limit=limit) == expected
