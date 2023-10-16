@@ -4,7 +4,7 @@
 def best_wage(
     *departments: tuple[str, dict],
     exclude_deps: tuple[str] = None,
-) -> tuple[list[int | float], int]:
+) -> tuple[list[int | float], ]:
     """Find 3 best salaries and their percentage to total amount of payments.
 
     Args:
@@ -15,6 +15,8 @@ def best_wage(
         tuple: 3 best salaries and their percentage to total amount of payments.
     """
     permitted_wages = []
+    if exclude_deps is None:
+        exclude_deps = ()
     exclude_deps = set(exclude_deps)
     for department, employee in departments:
         if department not in exclude_deps:
