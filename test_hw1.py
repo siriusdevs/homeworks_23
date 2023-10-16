@@ -13,7 +13,7 @@ TEST_DATA = (
             ('Headsets', {'Terrabledov': 50000, 'Monkeykingov': 52250}),
         ),
         ('Laptops', 'Clothes'),
-        ([52250, 50000, 37000], 53.1),
+        ([52250, 50000, 37000], 62.1),
     ),
     (
         (
@@ -23,8 +23,8 @@ TEST_DATA = (
             ('Pens', {'Ruchkina': 35000, 'Nozhov': 37000}),
             ('Markers', {'Enigmov': 50000, 'Shadowfiendov': 52250}),
         ),
-        ('Pens'),
-        ([52250, 50000, 30000], 50.43),
+        ('Pens',),
+        ([52250, 50000, 30000], 69.51),
     ),
     (
         (
@@ -35,14 +35,14 @@ TEST_DATA = (
             ('Tables', {'Pudgov': 55368, 'Tinkerov': 53439}),
         ),
         ('Tables', 'Bottles'),
-        ([38467, 35365.35, 23678], 32.05),
+        ([38467, 35365.35, 23678], 80.07),
     ),
     (
         (
             ("Test's devices", {'Testovich': 2576, 'Testivina': 3567}),
             ('Windows', {'Oknovin': 1360, 'Steklovina': 2450}),
         ),
-        ('Pans'),
+        ('Pans',),
         ([3567, 2576, 2450], 86.34),
     ),
     (
@@ -68,8 +68,8 @@ TEST_DATA = (
             ('Milk', {'Yogurtova': 15500, 'Bylgakov': 23450}),
             ('Chips', {'Laysova': 24680, 'Kartoshkova': 25340}),
         ),
-        ('Milk'),
-        ([25340, 24680], 56.22),
+        ('Milk',),
+        ([25340, 24680], 100.0),
     ),
 )
 

@@ -14,22 +14,17 @@ def best_wage(
     Returns:
         tuple: 3 best salaries and their percentage to total amount of payments.
     """
-    total_salary = 0
     permitted_wages = []
-    for department in departments:
-        for salary in department[1].values():
-            total_salary += salary
-            if exclude_deps is None or department[0] not in exclude_deps:
-                permitted_wages.append(salary)
-    try:
-        if not permitted_wages:
-            raise ZeroDivisionError
-    except ZeroDivisionError:
-        return ([], 0)
+    exclude_deps = set(exclude_deps)
+    for department, employee in departments:
+        if department not in exclude_deps:
+            permitted_wages += employee.values()
 
-    permitted_wages = sorted(permitted_wages, reverse=True)[:3]
-    permitted_wages = [
-        round(permitted_wages[top], 2) for top in range(len(permitted_wages))
-    ]
-    percent_best_salary = round(sum(permitted_wages) / total_salary * 100, 2)
+    if not permitted_wages:
+        return [], 0
+
+    total_payments = sum(permitted_wages)
+    permitted_wages = sorted(permitted_wages)[:-4:-1]
+    permitted_wages = [round(top, 2) for top in permitted_wages]
+    percent_best_salary = round(sum(permitted_wages) / total_payments * 100, 2)
     return permitted_wages, percent_best_salary
