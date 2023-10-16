@@ -15,16 +15,14 @@ def get_salary_statistics(
         tuple: the average, maximum and median salary
         among all of the departments.
     """
-    average = 0
-    maximum = 0
-    median = 0
+    average, maximum, median = 0
     salary_list = []
 
     for department in departments.values():
         for salary in department.values():
             if minimal_salary is None or salary >= minimal_salary:
                 salary_list.append(salary)
-    salary_list = sorted(salary_list)
+    salary_list.sort()
 
     length = len(salary_list)
     half_length = length // 2
