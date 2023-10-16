@@ -4,9 +4,10 @@
 def top3_salaries_stats(
     departments: dict[str, float | int],
     excluding: tuple[str, ...] = None,
-) -> tuple[tuple[str, float | int], tuple[str, float | int]]:
-    """Find 3 most-paid and 3 least-paid departments in a given dictionary by average value.
-
+) -> tuple[tuple[str, float | int],
+           tuple[str, float | int]]:
+    """Find 3 most- and least-paid departments in a given dictionary by average value.
+    
     Args:
         departments: a dictionary with departments names their values
         excluding: tuple with names of departments to be excluded from stats, defaults to None
@@ -25,6 +26,27 @@ def top3_salaries_stats(
                 avg_salary = round(sum(salaries) / len(salaries), 2)
             avg_salaries[department] = avg_salary
 
-    top3_most_paid = sorted(avg_salaries.items(), key=lambda x: x[1], reverse=True)[:3]
-    top3_least_paid = sorted(avg_salaries.items(), key=lambda x: x[1])[:3]
+    top3_most_paid = sorted(
+        avg_salaries.items(), key=lambda srt: srt[1], reverse=True)[:3]
+    top3_least_paid = sorted(
+        avg_salaries.items(), key=lambda srt: srt[1])[:3]
     return tuple(top3_most_paid), tuple(top3_least_paid)
+
+test_deps = {
+    'Goggle': {
+        'Larson': 200.0,
+        'Simon': 400.0,
+        'Vincent': 600.0,
+    },
+    'Tyndex': {
+        'Nikolay': 800.0,
+        'Alexey': 200.0,
+        'Helen': 500.0
+    },
+    'Spectacle': {
+        'Thomas': 700.0,
+        'Van': 50.0,
+    }
+}
+
+print(top3_salaries_stats(test_deps))

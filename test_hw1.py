@@ -16,7 +16,7 @@ test_deps = (
             'Tyndex': {
                 'Nikolay': 800.0,
                 'Alexey': 200.0,
-                'Helen': 500.0
+                'Helen': 500.0,
             },
             'Spectacle': {
                 'Thomas': 700.0,
@@ -26,7 +26,8 @@ test_deps = (
         (),
         ((('Tyndex', 500.0), ('Goggle', 400.0), ('Spectacle', 375.0)),
          (('Spectacle', 375.0), ('Goggle', 400.0), ('Tyndex', 500.0))),
-    ), (
+    ),
+    (
         {
             'RED': {
                 'Medic': 900.0,
@@ -50,7 +51,8 @@ test_deps = (
         (),
         ((('GRY', 10000.0), ('BLU', 1266.67), ('RED', 666.67)),
          (('GRN', 0), ('YLW', 175.0), ('RED', 666.67))),
-    ), (
+    ),
+    (
         {
             'Funi Sound': {
                 'Keith': 1,
@@ -86,7 +88,8 @@ test_deps = (
         ),
         ((('Front Tier', 5.0), ('Crusher', 2.5), ('Mercs', 2.0)),
          (('Funi Sound', 1.5), ('Mercs', 2.0), ('Crusher', 2.5))),
-    ), (
+    ),
+    (
         {
             'Drivers': {
                 'Dennis': 1000.0,
@@ -101,13 +104,13 @@ test_deps = (
             'Salesmen': {
                 'Nikita': 6000.0,
                 'Peter': 2400.0,
-                'Michael': 500.0
+                'Michael': 500.0,
             },
         },
         ('Salesmen'),
         ((('Bodyguards', 1000.0), ('Drivers', 400.0)),
          (('Drivers', 400.0), ('Bodyguards', 1000.0))),
-    )
+    ),
 )
 
 
@@ -121,7 +124,8 @@ def test_deps_salaries(
 
     Args:
         departments: dict - data for tests
-        expected: dict - expected stats
+        excluding: tuple - departments to be excluded
+        expected: tuple - expected stats
 
     Asserts:
         state of answer - correct or not
