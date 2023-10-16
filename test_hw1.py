@@ -74,8 +74,6 @@ TEST_CASES = (
         ),
     ), (
         {}, 25.11, ([], []),
-    ), (
-        {}, None, ([], []),
     ),
 )
 
@@ -89,7 +87,7 @@ def test_salaries(
     """Test funcion for salaries.
 
     Args:
-        min_salary: float | None = None.
+        min_salary: float | None = None - minimum salary, which is compared with each department.
         departments: dict[str, dict] - dict of department names and values.
         expected: tuple - answer about salary.
 
@@ -97,3 +95,64 @@ def test_salaries(
         True if the answer is correct.
     """
     assert company_departament(departments, min_salary) == expected
+
+
+TEST_CASES2 = (
+    (
+        {
+            'department1': {
+                'Claus': 29.01,
+                'Iren': 3402.35,
+                'Arab': 48.94,
+            },
+            'department2': {
+                'Vlad': 90.203,
+                'Fedor': 5245.03,
+                'Goblin': 484.24,
+            },
+            'department3': {
+                'Alina': 940.21,
+                'Sasha': 54.02,
+                'Frogg': 5840.23,
+            },
+            'department4': {
+                'Artem': 490.02,
+                'Popit': 74.32,
+                'SimpleDimple': 483.02,
+            },
+            'department5': {
+                'Mops': 49304.35,
+                'What': 473.45,
+                'Where': 905.06,
+            },
+            'department6': {
+                'Frog': 9430.03,
+                'Who': 484.09,
+                'Gannibal': 3893.04,
+            },
+        },
+        (
+            ['department4', 'department1', 'department2'],
+            ['department3', 'department6', 'department5'],
+        ),
+    ), (
+        {}, ([], []),
+    ),
+)
+
+
+@pytest.mark.parametrize('departments, expected', TEST_CASES2)
+def test_salaries2(
+    departments: dict[str, dict[str, float]],
+    expected: tuple[list, list],
+) -> None:
+    """Test funcion for salaries.
+
+    Args:
+        departments: dict[str, dict] - dict of department names and values.
+        expected: tuple - answer about salary.
+
+    Asserts:
+        True if the answer is correct.
+    """
+    assert company_departament(departments) == expected

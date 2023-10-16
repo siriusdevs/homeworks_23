@@ -6,11 +6,11 @@ def company_departament(departments: [str, dict], min_salary: float | None = Non
     Extract minimum and maxsimun three salaries.
 
     Args:
-        min_salary: float | None = None.
+        min_salary: float | None = None - minimum salary, which is compared with each department.
         departments: dict[str, dict] - dict of department names and values.
 
     Returns:
-        tuple[list] - array for highest and lowest salaries.
+        tuple[list] - tuple for highest and lowest salaries.
     """
     salaries = []
 
