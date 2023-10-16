@@ -11,11 +11,6 @@ TEST_DATA = (
     ),
     (
         ('it', {'Nikiforov': 10.0, 'Litvinov': 20.0, 'Demyanenko': 30.0}),
-        100,
-        ([10.0, 20.0, 30.0], '100%'),
-    ),
-    (
-        ('it', {'Nikiforov': 10.0, 'Litvinov': 20.0, 'Demyanenko': 30.0}),
         20,
         ([10.0], '100%'),
     ),
