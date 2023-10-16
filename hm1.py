@@ -22,7 +22,7 @@ def salary_statistics(
         и топ-3 самых низкооплачиваемых.
 
     Raises:
-        Exception: выдает ошибку, когда в отделе нет сотрудников.
+        Exception: когда в отделе нет сотрудников.
     """
     average_salaries = []
 
