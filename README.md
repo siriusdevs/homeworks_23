@@ -30,7 +30,7 @@
 |kordon|-|-|-|-|
 |korenyakin_a|-|-|-|-|
 |korenyakin_g|-|-|-|-|
-|krdyan|-|-|-|-|
+|krdyan|+|-|-|-|
 |kristev|-|-|-|-|
 |krivenko|-|-|-|-|
 |kuznetsova|-|-|-|-|
@@ -60,7 +60,7 @@
 |siriusdevs-patch-2|-|-|-|-|
 |siriusdevs-patch-3|-|-|-|-|
 |startsev|-|-|-|-|
-|tarasov|-|-|-|-|
+|tarasov|+|-|-|-|
 |tatarnikov|+|-|-|-|
 |telegin|-|-|-|-|
 |tereshin|-|-|-|-|
