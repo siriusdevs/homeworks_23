@@ -3,7 +3,7 @@ import pytest
 
 from hw1 import generete_report
 
-test_cases_with_key_arg = (
+TEST_CASES_WITH_KEY_ARG = (
     (
         (
             ('Отдел продаж', [1000.0, 1000.0, 1000.0]),
@@ -12,7 +12,7 @@ test_cases_with_key_arg = (
             ('Отдел маркетинга', [0, 0]),
             ('Отдел тестирования', [7000.9, 0, 9.7]),
         ),
-        ('Отдел тестирования', 'Отдел маркетинга', 'Отдел аналитики'),
+        {'Отдел тестирования', 'Отдел маркетинга', 'Отдел аналитики'},
         (
             ['Отдел продаж', 'Отдел разработки'],
             ['Отдел разработки', 'Отдел продаж'],
@@ -24,7 +24,7 @@ test_cases_with_key_arg = (
             ('Отдел тестирования', [5000, 1000, 100]),
             ('Отдел техподдержки', [50, 10, 5]),
         ),
-        ('Отдел тестирования'),
+        {'Отдел тестирования'},
         (
             ['Отдел техподдержки', 'Отдел разработки'],
             ['Отдел разработки', 'Отдел техподдержки'],
@@ -35,7 +35,7 @@ test_cases_with_key_arg = (
             ('Отдел управления', [8, 5, 16]),
             ('Отдел отделения', [999, 999, 999]),
         ),
-        ('Отдел управления', 'Отдел отделения'),
+        {'Отдел управления', 'Отдел отделения'},
         (
             [],
             [],
@@ -43,7 +43,7 @@ test_cases_with_key_arg = (
     ),
 )
 
-test_cases_without_key_arg = (
+TEST_CASES_WITHOUT_KEY_ARG = (
     (
         (
             ('Отдел продаж', [1000.0, 1000.0, 1000.0]),
@@ -66,28 +66,33 @@ test_cases_without_key_arg = (
 )
 
 
-@pytest.mark.parametrize('departments, expected', test_cases_without_key_arg)
+@pytest.mark.parametrize('departments, expected', TEST_CASES_WITHOUT_KEY_ARG)
 def test_get_report_without_key_args(departments, expected):
     """Функция, запускающая тестирование на наборе данных без именованного аргумента.
 
     Args:
-        departments: tupple - кортеж, содержащий информацию об отделах компании
-    и о зарплатах сотрудников этих отделов
-        expected: tupple[list[str]]: ожидаемые результаты работы функции
+        departments:
+            tuple[str, list[float]] - кортеж, содержащий информацию об отделах компании
+            и о зарплатах сотрудников этих отделов
+        expected:
+            tuple[list[str]]: ожидаемые результаты работы функции
 
     """
     assert generete_report(*departments) == expected
 
 
-@pytest.mark.parametrize('departments, exceptions, expected', test_cases_with_key_arg)
+@pytest.mark.parametrize('departments, exceptions, expected', TEST_CASES_WITH_KEY_ARG)
 def test_get_report_with_key_args(departments, exceptions, expected):
     """Функция, запускающая тестирование на наборе данных с именованным аргументом.
 
     Args:
-        departments: tupple - кортеж, содержащий информацию об отделах компании
-    и о зарплатах сотрудников этих отделов
-        exceptions: tupple[str] - кортеж с названиями отделов,
-    которые должны быть исключены из топа
-        expected: tupple[list[str]] - ожидаемые результаты работы функции
+        departments:
+            tupple[str, list[float]] - кортеж, содержащий информацию об отделах компании
+            и о зарплатах сотрудников этих отделов
+        exceptions:
+            set[str] - кортеж с названиями отделов,
+            которые должны быть исключены из топа
+        expected:
+            tuple[list[str]] - ожидаемые результаты работы функции
     """
     assert generete_report(*departments, exceptions=exceptions) == expected

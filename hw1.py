@@ -6,9 +6,9 @@ def check_arguments(departments: tuple) -> None:
     """Функция для проверки на пригодность переданных аргументов.
 
     Args:
-        departments: tuple - кортеж, который содержит название отдела
-        и список с зарплатами сотрудников отдела.
-        Например ('Отдел аналитики', [50000, 15000, 30000])
+        departments:
+            tuple[str, list[float]] - кортеж, который содержит название отдела
+            и список с зарплатами сотрудников отдела.
 
     Raises:
         AttributeError: Ошибка, связанная с некорректно переданными в функцию аргументы
@@ -36,30 +36,29 @@ def check_arguments(departments: tuple) -> None:
                 )
 
 
-def generete_report(*departments: tuple, exceptions: tuple = None) -> tuple:
+def generete_report(*departments: tuple, exceptions: set = None) -> tuple:
     """Анализирует аргументы и возвращает топ 3 высокооплачиваемых и самых низкооплачиваемых отдела.
 
     Args:
-        departments: tuple - Кортеж, содержащий название отдела и список с
-    зарплатами сотрудников этого отдела
-        exceptions: tuple - Кортеж, содержащий названия отделов,
-    которые будут исключены из результата работы функции.
-    То есть не войдут в топ 3 высокооплачиваемых или низкооплачиваемых отдела.
+        departments:
+            tuple[str, [int|float]] - Кортеж, содержащий название отдела и список с
+            зарплатами сотрудников этого отдела
+        exceptions:
+            tuple[str] - Кортеж, содержащий названия отделов,
+            которые будут исключены из результата работы функции.
+            То есть не войдут в топ 3 высокооплачиваемых или низкооплачиваемых отдела.
 
     Returns:
-        tuple - кортеж из 2 списков: Топ 3 высокооплачиваемых отдела и топ 3 низкооплачиваемых
+        tuple[list[str], list] - кортеж из 2 списков:
+        Топ 3 низкооплачиваемых отдела и топ 3 высокооплачиваемых соответственно
     """
+    if not exceptions:
+        exceptions = set()
 
-    def sort_data(department: tuple, reverse: bool = False) -> list:
-        updated_data = sorted(department, key=lambda dpt: statistics.mean(dpt[1]), reverse=reverse)
-        return [department[0] for department in updated_data if department[0] not in exceptions]
+    new_data = sorted(departments, key=lambda dpt: statistics.mean(dpt[1]))
+    # Меняю название переменной, чтобы линтер на длину строки
+    sorted_deptmnt = [department[0] for department in new_data if department[0] not in exceptions]
 
     check_arguments(departments)
 
-    if not exceptions:
-        exceptions = ()
-
-    higest = sort_data(departments, reverse=True)
-    lowest = sort_data(departments)
-
-    return lowest[:3], higest[:3]
+    return sorted_deptmnt[:3], list(reversed(sorted_deptmnt))[:3]
