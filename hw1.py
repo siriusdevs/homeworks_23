@@ -7,7 +7,7 @@ from typing import Optional
 def sort_dep(
     *departments: tuple[str, list[int | float]],
     limit: Optional[float] = None,
-) -> tuple[str, str]:
+) -> tuple[list[str], list[str]]:
     """
     Create a function that sorts a tuple of company.
 
@@ -39,6 +39,6 @@ def sort_dep(
     top3_high = [department for department, _ in filtered_dep[:3]]
     top3_low = [
         department
-        for department, _ in filtered_dep[:-4:-1]
+        for department, _ in filtered_dep[-1:-4:-1]
     ]
     return top3_high, top3_low
