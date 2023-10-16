@@ -16,7 +16,7 @@ def sort_dep(
         limit: Optional[float] - Payroll accounting limit in sorting.
 
     Returns:
-        Return tuple[str, str] - Top 3 high-paying and low-paying departments.
+        Return tuple[list[str], list[str]] - Top 3 high-paying and low-paying departments.
     """
     filtered_dep = []
     for dept, salaries in departments:
