@@ -15,7 +15,7 @@ def get_salary_statistics(
         tuple: the average, maximum and median salary
         among all of the departments.
     """
-    average, maximum, median = 0
+    average, maximum, median = 0, 0, 0
     salary_list = []
 
     for department in departments.values():
