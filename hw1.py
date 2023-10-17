@@ -1,7 +1,10 @@
 """Calculates the three smallest and the largest salaries."""
 
 
-def company_departament(departments: [str, dict], min_salary: float | None = None) -> tuple[list]:
+def company_departament(
+    departments: [str, dict],
+    min_salary: float | None = None,
+) -> tuple[list, list]:
     """
     Extract minimum and maxsimun three salaries.
 
@@ -20,7 +23,7 @@ def company_departament(departments: [str, dict], min_salary: float | None = Non
         if min_salary:
             dept_salaries = [salary for salary in dept_salaries.values() if salary >= min_salary]
         else:
-            dept_salaries = list(dept_salaries.values())
+            dept_salaries = dept_salaries.values()
         all_salary = sum(dept_salaries)
         average_salary = all_salary / max(len(dept_salaries), 1)
         salaries.append([average_salary, department])
