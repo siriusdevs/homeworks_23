@@ -50,7 +50,7 @@
 |otroshenko|-|-|-|-|
 |ozornin|+|-|-|-|
 |pazych|-|-|-|-|
-|roganov|-|-|-|-|
+|roganov|+|-|-|-|
 |romodanov|+|-|-|-|
 |safikanov|-|-|-|-|
 |safronova|-|-|-|-|
@@ -68,7 +68,7 @@
 |tsverkunov|-|-|-|-|
 |turapov|-|-|-|-|
 |tyapkova|-|-|-|-|
-|tyurin|-|-|-|-|
+|tyurin|+|-|-|-|
 |urbanovich|-|-|-|-|
 |vasilenko|+|-|-|-|
 |vavilov|-|-|-|-|
