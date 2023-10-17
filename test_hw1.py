@@ -37,7 +37,7 @@ TEST_CASES = (
         20.05,
         (
             ['fifth_departament', 'third_departament', 'fourth_departament'],
-            ['second_departament', 'sixth_department', 'first_departament'],
+            ['first_departament', 'sixth_department', 'second_departament'],
         ),
     ), (
         {
@@ -50,7 +50,7 @@ TEST_CASES = (
                 'Alena': 90.58,
                 'Adolf': 6.05,
             },
-            'third_department': {
+            'third department': {
                 'Sasha': 550.09,
             },
             'fourth department': {
@@ -70,7 +70,7 @@ TEST_CASES = (
         5.02,
         (
             ['second department', 'first department', 'sixth department'],
-            ['third_department', 'fifth department', 'fourth department'],
+            ['fourth department', 'fifth department', 'third department'],
         ),
     ), (
         {}, 25.11, ([], []),
@@ -133,7 +133,7 @@ TEST_CASES2 = (
         },
         (
             ['department4', 'department1', 'department2'],
-            ['department3', 'department6', 'department5'],
+            ['department5', 'department6', 'department3'],
         ),
     ), (
         {}, ([], []),
