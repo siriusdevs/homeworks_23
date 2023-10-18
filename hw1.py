@@ -36,7 +36,7 @@ def check_arguments(departments: tuple) -> None:
                 )
 
 
-def generete_report(*departments: tuple, exceptions: set = None) -> tuple:
+def generete_report(*departments: tuple, exceptions: tuple = None) -> tuple:
     """Анализирует аргументы и возвращает топ 3 высокооплачиваемых и самых низкооплачиваемых отдела.
 
     Args:
@@ -52,13 +52,16 @@ def generete_report(*departments: tuple, exceptions: set = None) -> tuple:
         tuple[list[str], list] - кортеж из 2 списков:
         Топ 3 низкооплачиваемых отдела и топ 3 высокооплачиваемых соответственно
     """
-    if not exceptions:
-        exceptions = set()
+    check_arguments(departments)
+
+    if isinstance(exceptions, str):
+        department, exceptions = exceptions, set()
+        exceptions.add(department)
+    else:
+        exceptions = set() if exceptions is None else set(exceptions)
 
     new_data = sorted(departments, key=lambda dpt: statistics.mean(dpt[1]))
-    # Меняю название переменной, чтобы линтер на длину строки
+    # Меняю название переменной, чтобы линтер на длину строки не ругался
     sorted_deptmnt = [department[0] for department in new_data if department[0] not in exceptions]
-
-    check_arguments(departments)
 
     return sorted_deptmnt[:3], list(reversed(sorted_deptmnt))[:3]
