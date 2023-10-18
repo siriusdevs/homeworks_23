@@ -2,7 +2,7 @@
 
 
 def company_departament(
-    departments: [str, dict],
+    departments: dict[str, dict],
     min_salary: float | None = None,
 ) -> tuple[list, list]:
     """
@@ -21,11 +21,11 @@ def company_departament(
         if not employees:
             continue
         if min_salary:
-            employees = [salary for salary in employees.values() if salary >= min_salary]
+            dept_salaries = [salary for salary in employees.values() if salary >= min_salary]
         else:
-            employees = list(employees.values())
-        all_salary = sum(employees)
-        average_salary = all_salary / max(len(employees), 1)
+            dept_salaries = list(employees.values())
+        all_salary = sum(dept_salaries)
+        average_salary = all_salary / max(len(dept_salaries), 1)
         salaries.append([average_salary, department])
     salaries.sort(key=lambda salary: salary[0])
     min_max_department = [salary[1] for salary in salaries]
