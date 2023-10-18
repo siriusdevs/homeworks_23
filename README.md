@@ -79,3 +79,4 @@
 |zinko|-|-|-|-|
 |zorina_a|-|-|-|-|
 |zorina_e|-|-|-|-|
+|overall|15|0|0|0|
