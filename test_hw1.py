@@ -21,6 +21,13 @@ TEST_COMPANY_DATA = (
     ),
     (
         (
+            ('Programmers', {'Aleks': 0, 'Mashka': 0, 'Areg': 0}),
+        ),
+        [],
+        ([0, 0, 0], 0),
+    ),
+    (
+        (
             ('Finance', {'David': 62000.0, 'Eve': 59000.0, 'Frank': 63000.0}),
             ('IT', {'Mary': 50001.0, 'Mike': 75000.0, 'Sarah': 55000.0}),
         ),

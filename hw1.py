@@ -27,5 +27,5 @@ def salary_count(
     if sum_total > 0:
         ratio = round(sum(sorted_salaries) / sum_total * 100, 2)
     else:
-        ratio = 0.0
+        ratio = 0
     return list(sorted_salaries), ratio
