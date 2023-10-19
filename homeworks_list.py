@@ -63,8 +63,12 @@ def write_homework_stats_to_md(stats: HomeworkStats):
     for branch, hws in sorted_stats:
         table.append(branch)
         table += ['+' if hws[hw] else '-' for hw in _get_hw_names()]
+    
+    if sorted_stats:
+        table = [sum([hws[hw] for _, hws in sorted_stats]) for hw in _get_hw_names()] + table
+        table.insert(0, 'overall')
 
-    cols, rows = HW_COUNT + 1, len(stats) + 1
+    cols, rows = HW_COUNT + 1, len(stats) + 2
     md.new_table(columns=cols, rows=rows, text=table)
     md.create_md_file()
 
