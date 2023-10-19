@@ -11,7 +11,7 @@ def check_arguments(departments: tuple) -> None:
             и список с зарплатами сотрудников отдела.
 
     Raises:
-        AttributeError: Ошибка, связанная с некорректно переданными в функцию аргументы
+        AttributeError: Ошибка, связанная с некорректно переданными в функцию аргументами
     """
     if not departments:
         raise AttributeError(
@@ -53,12 +53,7 @@ def generete_report(*departments: tuple, exceptions: tuple = None) -> tuple:
         Топ 3 низкооплачиваемых отдела и топ 3 высокооплачиваемых соответственно
     """
     check_arguments(departments)
-
-    if isinstance(exceptions, str):
-        department, exceptions = exceptions, set()
-        exceptions.add(department)
-    else:
-        exceptions = set() if exceptions is None else set(exceptions)
+    exceptions = set() if exceptions is None else set(exceptions)
 
     new_data = sorted(departments, key=lambda dpt: statistics.mean(dpt[1]))
     # Меняю название переменной, чтобы линтер на длину строки не ругался
