@@ -17,7 +17,7 @@ def make_path(file_name):
     Returns:
         Returns full path to filename
     """
-    return pathlib.Path(file_name)
+    return str(pathlib.Path(file_name))
 
 
 TEST_PROCESS_DATA = (
