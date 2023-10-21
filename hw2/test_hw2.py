@@ -7,23 +7,28 @@ import pytest
 from hw2 import process_data
 
 TEST_PROCESS_DATA = (
-    ('homeworks_23/hw2/data_hw2.json', 'homeworks_23/hw2/datas_output.json',
+    ('/home/runner/work/homeworks_23/hw2/data_hw2.json',
+     '/home/runner/work/homeworks_23/hw2/datas_output.json',
      {'2012-12-24': 50.0, '2022-10-30': 50.0, 'gmail.com': 50.0, 'yandex.ru': 50.0},
      ),
-    ('homeworks_23/hw2/data_hw1_2.json',
-     'homeworks_23/hw2/datas_test_output2.json',
+    ('/home/runner/work/homeworks_23/hw2/data_hw1_2.json',
+     '/home/runner/work/homeworks_23/hw2/datas_test_output2.json',
      {'2012-12-24': 33.33, '2019-10-30': 33.33, '2022-10-30': 33.33,
       'gmail.com': 33.33, 'mail.ru': 33.33, 'yandex.ru': 33.33,
       },
      ),
-    ('homeworks_23/hw2/data_hw2_3.json',
-     'homeworks_23/hw2/datas_output3.json', {},
+    ('/home/runner/work/homeworks_23/hw2/data_hw2_3.json',
+     '/home/runner/work/homeworks_23/hw2/datas_output3.json', {},
      ),
 )
 
 TEST_ERROR_PROCESS_DATA = (
-    ('homeworks_23/hw2/data.json', 'homeworks_23/hw2/datas_output.json', 'Is not a file path'),
-    ('homeworks_23/hw2/data_hw2.json', 'homeworks_23/hw2/data.json', 'Is not a file path'),
+    ('/home/runner/work/homeworks_23/hw2/data.json',
+     '/home/runner/work/homeworks_23/hw2/datas_output.json', 'Is not a file path',
+     ),
+    ('/home/runner/work/homeworks_23/hw2/data_hw2.json',
+     '/home/runner/work/homeworks_23/hw2/data.json', 'Is not a file path',
+     ),
 )
 
 
