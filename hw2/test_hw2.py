@@ -10,14 +10,14 @@ TEST_PROCESS_DATA = (
     ('data_hw2.json', 'datas_output.json',
      {'2012-12-24': 50.0, '2022-10-30': 50.0, 'gmail.com': 50.0, 'yandex.ru': 50.0},
      ),
-    ('/home/artem/Documents/BP/homeworks_23/hw2/data_hw1_2.json',
-     '/home/artem/Documents/BP/homeworks_23/hw2/datas_test_output2.json',
+    ('data_hw1_2.json',
+     'datas_test_output2.json',
      {'2012-12-24': 33.33, '2019-10-30': 33.33, '2022-10-30': 33.33,
       'gmail.com': 33.33, 'mail.ru': 33.33, 'yandex.ru': 33.33,
       },
      ),
-    ('/home/artem/Documents/BP/homeworks_23/hw2/data_hw2_3.json',
-     '/home/artem/Documents/BP/homeworks_23/hw2/datas_output3.json', {},
+    ('data_hw2_3.json',
+     'datas_output3.json', {},
      ),
 )
 
