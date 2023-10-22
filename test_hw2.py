@@ -21,7 +21,7 @@ def make_tests():
         with open(f'hw2/expected/{num}.json') as file_excepted:
             excepted = json.load(file_excepted)
         res.append((input_file, output_file, excepted))
-        return tuple(res)
+    return tuple(res)
 
 
 TEST_PROCESS_DATA = make_tests()
