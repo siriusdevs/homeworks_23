@@ -10,10 +10,10 @@ from hw2 import process_data
 def make_tests():
     res=[]
     for i in range(1,4):
-        input_file=f'/hw2/input/{i}.json'
-        output_file=f'/hw2/output/{i}.json'
+        input_file=f'hw2/input/{i}.json'
+        output_file=f'hw2/output/{i}.json'
 
-        with open(f'/hw2/expected/{i}.json') as file_excepted:
+        with open(f'hw2/expected/{i}.json') as file_excepted:
             excepted=json.load(file_excepted)
         res.append(input_file)
         res.append(output_file)
