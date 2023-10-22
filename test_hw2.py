@@ -11,7 +11,7 @@ def make_tests():
     """Create test data.
 
     Returns:
-        A tuple with test data.
+        A tuple with data test.
     """
     res = []
     for num in range(1, 4):
