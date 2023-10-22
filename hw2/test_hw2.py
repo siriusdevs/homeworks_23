@@ -4,14 +4,18 @@ import pytest
 
 from hw2 import process_data
 
+INPUT_FILES_DIR_PATH = 'hw2/test_files/input'
+OUTPUT_FILES_DIR_PATH = 'hw2/test_files/output'
+EXPECTED_FILES_DIR_PATH = 'hw2/test_files/expected_output'
+
 
 def initialise_test_data():
     result = []
     for i in range(1, 11):
-        input_file_path = f'hw2_test_files/input/{i}.json'
-        output_file_path = f'hw2_test_files/output/{i}.json'
+        input_file_path = f'{INPUT_FILES_DIR_PATH}/{i}.json'
+        output_file_path = f'{OUTPUT_FILES_DIR_PATH}/{i}.json'
 
-        with open(f'hw2_test_files/expected_output/{i}.json') as expected_output_file:
+        with open(f'{EXPECTED_FILES_DIR_PATH}/{i}.json') as expected_output_file:
             expected_output_data = json.load(expected_output_file)
 
         result.append((input_file_path, output_file_path, expected_output_data))

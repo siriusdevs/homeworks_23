@@ -5,7 +5,7 @@ from datetime import date, datetime
 
 from faker import Faker
 
-TEST_FILES_DIR_PATH = 'hw2_test_files/input'
+TEST_FILES_DIR_PATH = 'hw2/test_files/input'
 NOW = datetime.now()
 REGIONS = ('Moscow', 'Sochi', 'Saint-Petersburg', 'New-York', 'Paris', 'London')
 
