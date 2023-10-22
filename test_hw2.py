@@ -18,6 +18,7 @@ def make_tests():
         res.append(input_file)
         res.append(output_file)
         res.append(excepted)
+    return tuple(res)
 
 
 
