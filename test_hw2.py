@@ -15,10 +15,8 @@ def make_tests():
 
         with open(f'hw2/expected/{i}.json') as file_excepted:
             excepted=json.load(file_excepted)
-        res.append(input_file)
-        res.append(output_file)
-        res.append(excepted)
-    return tuple(res)
+        res.append((input_file,output_file,excepted))
+        return tuple(res)
 
 
 
