@@ -8,16 +8,20 @@ from hw2 import process_data
 
 
 def make_tests():
-    res=[]
-    for i in range(1,4):
-        input_file=f'hw2/input/{i}.json'
-        output_file=f'hw2/output/{i}.json'
+    """Create test data.
 
-        with open(f'hw2/expected/{i}.json') as file_excepted:
-            excepted=json.load(file_excepted)
-        res.append((input_file,output_file,excepted))
+    Returns:
+        A tuple with test data.
+    """
+    res = []
+    for num in range(1, 4):
+        input_file = f'hw2/input/{num}.json'
+        output_file = f'hw2/output/{num}.json'
+
+        with open(f'hw2/expected/{num}.json') as file_excepted:
+            excepted = json.load(file_excepted)
+        res.append((input_file, output_file, excepted))
         return tuple(res)
-
 
 
 TEST_PROCESS_DATA = make_tests()
