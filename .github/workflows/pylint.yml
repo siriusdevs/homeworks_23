@@ -31,5 +31,5 @@ jobs:
         pip install pytest==6.2.5
         pip install numpy
     - name: Pytest
-      run: pytest test_hw1.py
+      run: pytest
 
