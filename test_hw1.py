@@ -46,6 +46,20 @@ TEST_DATA_BASIC = (
         ([3567, 2576, 2450], 86.34),
     ),
 )
+
+
+@pytest.mark.parametrize('departments, exclude_data, expected', TEST_DATA_BASIC)
+def test_top_salaries_basic(departments, exclude_data, expected):
+    """Compare result of 'best_wages' and correct answer for basic databases.
+
+    Args:
+        departments: Tuple[Tuple[str, dict]] - information about departments.
+        exclude_data: Tuple[str] - excluded departments.
+        expected: list[str | int] - correct answer of best_wages's result.
+    """
+    assert best_wage(*departments, exclude_deps=exclude_data) == expected
+
+
 TEST_DATA_NO_ARGUMENTS = (
     (
         (),
@@ -71,6 +85,20 @@ TEST_DATA_NO_ARGUMENTS = (
         ([], 0),
     ),
 )
+
+
+@pytest.mark.parametrize('departments, exclude_data, expected', TEST_DATA_NO_ARGUMENTS)
+def test_top_salaries_no_arguments(departments, exclude_data, expected):
+    """Compare result of 'best_wages' and correct answer for database with no arguments.
+
+    Args:
+        departments: Tuple[Tuple[str, dict]] - information about departments.
+        exclude_data: Tuple[str] - excluded departments.
+        expected: list[str | int] - correct answer of best_wages's result.
+    """
+    assert best_wage(*departments, exclude_deps=exclude_data) == expected
+
+
 TEST_DATA_FEW_ARGUMENTS = (
     (
         (('Courses', {'Uchilov': 25000, 'Pythonov': 80000}),),
@@ -94,30 +122,6 @@ TEST_DATA_FEW_ARGUMENTS = (
         ([99999], 100.0),
     ),
 )
-
-
-@pytest.mark.parametrize('departments, exclude_data, expected', TEST_DATA_BASIC)
-def test_top_salaries_basic(departments, exclude_data, expected):
-    """Compare result of 'best_wages' and correct answer for basic databases.
-
-    Args:
-        departments: Tuple[Tuple[str, dict]] - information about departments.
-        exclude_data: Tuple[str] - excluded departments.
-        expected: list[str | int] - correct answer of best_wages's result.
-    """
-    assert best_wage(*departments, exclude_deps=exclude_data) == expected
-
-
-@pytest.mark.parametrize('departments, exclude_data, expected', TEST_DATA_NO_ARGUMENTS)
-def test_top_salaries_no_arguments(departments, exclude_data, expected):
-    """Compare result of 'best_wages' and correct answer for database with no arguments.
-
-    Args:
-        departments: Tuple[Tuple[str, dict]] - information about departments.
-        exclude_data: Tuple[str] - excluded departments.
-        expected: list[str | int] - correct answer of best_wages's result.
-    """
-    assert best_wage(*departments, exclude_deps=exclude_data) == expected
 
 
 @pytest.mark.parametrize('departments, exclude_data, expected', TEST_DATA_FEW_ARGUMENTS)

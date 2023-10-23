@@ -8,8 +8,8 @@ def best_wage(
     """Find 3 best salaries and their percentage to total amount of payments.
 
     Args:
-        exclude_deps: excluded department's names.
-        departments: departments and dictionary of names and salaries.
+        departments: departments' names and dictionaries of emloyees and their salaries.
+        exclude_deps: excluded department's names from departments.
 
     Returns:
         tuple: 3 best salaries and their percentage to total amount of payments.
