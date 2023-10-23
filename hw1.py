@@ -15,7 +15,7 @@ def statistic_salary(*args, limit: Optional[int] = None) -> tuple:
         A tuple with average, max and median salary.
     """
     salary = []
-    if  not args[0]:
+    if not args[0]:
         return (0, 0, 0)
     for data_salary in args:
         for salaries in data_salary[1].values():
@@ -36,4 +36,3 @@ def statistic_salary(*args, limit: Optional[int] = None) -> tuple:
              ))
 
     return tuple(stat_salary)
-print(statistic_salary(('TVD', {'Ivanov': 450.0, 'Petrov': 600.0, 'Pupkin': 450.0}),limit = 1200))
