@@ -50,7 +50,7 @@ TEST_DATA_BASIC = (
 
 @pytest.mark.parametrize('departments, exclude_data, expected', TEST_DATA_BASIC)
 def test_top_salaries_basic(departments, exclude_data, expected):
-    """Compare result of 'best_wages' and correct answer for basic databases.
+    """Testing best_wage in hw1.py with data, that have usual arguments.
 
     Args:
         departments: Tuple[Tuple[str, dict]] - information about departments.
@@ -89,7 +89,7 @@ TEST_DATA_NO_ARGUMENTS = (
 
 @pytest.mark.parametrize('departments, exclude_data, expected', TEST_DATA_NO_ARGUMENTS)
 def test_top_salaries_no_arguments(departments, exclude_data, expected):
-    """Compare result of 'best_wages' and correct answer for database with no arguments.
+    """Testing best_wages in hw1.py with data, that have no arguments.
 
     Args:
         departments: Tuple[Tuple[str, dict]] - information about departments.
@@ -126,7 +126,7 @@ TEST_DATA_FEW_ARGUMENTS = (
 
 @pytest.mark.parametrize('departments, exclude_data, expected', TEST_DATA_FEW_ARGUMENTS)
 def test_top_salaries_few_arguments(departments, exclude_data, expected):
-    """Compare result of 'best_wages' and correct answer for database with not enough arguments.
+    """Testing best_wages in hw1.py with data, that have not enough arguments.
 
     Args:
         departments: Tuple[Tuple[str, dict]] - information about departments.
