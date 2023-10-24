@@ -28,6 +28,8 @@ Salaries = dict[str, float]
 # an optional list of unit names that correspond to unit names in Salaries
 Units = Optional[tuple[str, ...]]
 
+ROUND_UPTO = 2
+
 
 def get_salary_stats(units: Units = None, **salaries: Salaries) -> SalaryStats:
     """Compute salary statistics for a given company, optionally including only the specified units.
@@ -46,9 +48,9 @@ def get_salary_stats(units: Units = None, **salaries: Salaries) -> SalaryStats:
     ]
     salary_amounts = sum(unit_salaries, start=[])
     return SalaryStats(
-        maximum=max(salary_amounts),
-        average=round(_average(salary_amounts), 2),
-        median=round(_median(salary_amounts), 2),
+        maximum=round(max(salary_amounts), ROUND_UPTO),
+        average=round(_average(salary_amounts), ROUND_UPTO),
+        median=round(_median(salary_amounts), ROUND_UPTO),
     ) if salary_amounts else SalaryStats()
 
 
