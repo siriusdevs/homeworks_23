@@ -1,6 +1,5 @@
 """This is a solution of hw2."""
 import json
-from json import JSONDecodeError
 
 LOWEST_ADULT_AGE = 18
 MIDDLE_ADULT_AGE = 25
@@ -19,28 +18,26 @@ def stats_by_age(ages: list) -> dict:
 
     """
     output = {'Below 18': 0, '18 to 25': 0, '25 to 45': 0, '45 to 60': 0, 'Above 60': 0}
-    younglings = 0
-    padawans = 0
-    adults = 0
-    adults_plus = 0
-    aged_people = 0
+    age_gaps = [0, 0, 0, 0, 0]
     for age in ages:
         match age:
             case age if age < LOWEST_ADULT_AGE:
-                younglings += 1
+                age_gaps[0] += 1
             case age if age in range(LOWEST_ADULT_AGE, MIDDLE_ADULT_AGE):
-                padawans += 1
+                age_gaps[1] += 1
             case age if age in range(MIDDLE_ADULT_AGE, LOWEST_ADULT_PLUS_AGE):
-                adults += 1
+                age_gaps[2] += 1
             case age if age in range(LOWEST_ADULT_PLUS_AGE, HIGHEST_ADULT_PLUS_AGE):
-                adults_plus += 1
+                age_gaps[3] += 1
             case age if age > HIGHEST_ADULT_PLUS_AGE:
-                aged_people += 1
-    total = younglings + padawans + adults + adults_plus + aged_people
+                age_gaps[4] += 1
+    total = sum(age_gaps)
     temp = [
-        round(younglings / total * 100, 2), round(padawans / total * 100, 2),
-        round(adults / total * 100, 2), round(adults_plus / total * 100, 2),
-        round(aged_people / total * 100, 2),
+        round(age_gaps[0] / total * 100, 2),
+        round(age_gaps[1] / total * 100, 2),
+        round(age_gaps[2] / total * 100, 2),
+        round(age_gaps[3] / total * 100, 2),
+        round(age_gaps[4] / total * 100, 2),
         ]
     for index, age_gap in enumerate(output.keys()):
         output[age_gap] = temp[index]
@@ -82,7 +79,7 @@ def process_data(in_path: str, out_path: str) -> None:
     try:
         with open(in_path) as inputdata:
             user_stats = json.load(inputdata)
-    except JSONDecodeError:
+    except json.JSONDecodeError:
         raise ValueError('File that you provided is empty')
     with open(in_path) as input_data:
         user_stats = json.load(input_data)
