@@ -50,7 +50,7 @@ jobs:
         pip install pytest==6.2.5
         pip install numpy
     - name: Pytest
-      run: pytest test_hw1.py
+        run: pytest test_hw1.py
   tests_for_hw2:
       name: Tests for hw2
       runs-on: ubuntu-latest
