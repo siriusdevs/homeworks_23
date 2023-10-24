@@ -51,7 +51,7 @@ jobs:
         pip install numpy
     - name: Pytest
       run: |
-      pytest test_hw1.py
+        pytest test_hw1.py
   tests_for_hw2:
       name: Tests for hw2
       runs-on: ubuntu-latest
