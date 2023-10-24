@@ -1,6 +1,7 @@
 """Tests for hw1.py."""
 
 from dataclasses import dataclass
+from types import MappingProxyType
 
 import pytest
 
@@ -17,11 +18,12 @@ class SalaryStatsTestCase:
     expected_stats: SalaryStats
 
 
-TEST_COMPANY = {
-    'IT': {'John': 100, 'Bob': 200, 'Alice': 50},
-    'Banking': {'name1': 10, 'name2': 20, 'name3': 30, 'name4': 40}, 
+# MappingProxyType is used for ensuring inmutability of the underlying dictionary
+TEST_COMPANY = MappingProxyType({
+    'IT': {'John': 100.0, 'Bob': 200.0, 'Alice': 50.0},
+    'Banking': {'name1': 10.0, 'name2': 20.0, 'name3': 30.0, 'name4': 40.0},
     'Marketing': {'name5': 1.5, 'name6': 1.6, 'name7': 1.7, 'name8': 1.8},
-}
+})
 
 TESTS_TABLE = (
     SalaryStatsTestCase(
@@ -33,13 +35,13 @@ TESTS_TABLE = (
     SalaryStatsTestCase(
         name='with all units',
         units=None,
-        salaries=TEST_COMPANY,
+        salaries=dict(TEST_COMPANY),
         expected_stats=SalaryStats(maximum=200, average=41.51, median=20),
     ),
     SalaryStatsTestCase(
         name='with specific units',
         units=('Banking', 'Marketing'),
-        salaries=TEST_COMPANY,
+        salaries=dict(TEST_COMPANY),
         expected_stats=SalaryStats(maximum=40, average=13.32, median=5.9),
     ),
 )
