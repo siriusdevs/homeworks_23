@@ -37,6 +37,26 @@ def get_salary_stats(units: Units = None, **salaries: Salaries) -> SalaryStats:
 
     Returns:
         Statistics for provided company's salaries.
-        If units list (first argument) is specified, the result only includes these units.
+        If units list (first argument) is provided, the result only includes these specified units.
     """
-    return SalaryStats()
+    unit_salaries = [list(unit.values()) for unit in salaries.values()]
+    salary_amounts = sum(unit_salaries, start=[])
+    return SalaryStats(
+        maximum=max(salary_amounts),
+        average=round(_average(salary_amounts), 2),
+        median=round(_median(salary_amounts), 2),
+    ) if salary_amounts else SalaryStats()
+
+
+def _average(nums: list[float]) -> float:
+    return sum(nums) / len(nums)
+
+
+def _median(nums: list[float]) -> float:
+    nums = sorted(nums)
+    center = len(nums) // 2
+    return (
+        nums[center]
+        if len(nums) % 2
+        else _average(nums[center - 1:center + 1])
+    )
