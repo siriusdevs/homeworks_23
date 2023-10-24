@@ -47,21 +47,65 @@ TEST_COMPANY_DATA = (
 
 
 @pytest.mark.parametrize('company, excluded_departments, expected', TEST_COMPANY_DATA)
-def test_salary_count(
+def test_salary_count_with_exclusion(
     company: tuple[str, dict[str, float]],
     excluded_departments: list[str],
     expected: tuple[list[float], float],
 ) -> None:
     """
-    Test salary_count function.
+    Test salary_count function with excluded_departments.
 
     Parameters:
         company: tuple[str,dict[str, float]] - the company parameters.
-        excluded_departments: list[str] | None - departments to be excluded.
+        excluded_departments: list[str] - departments to be excluded.
         expected: tuple[list[float], float] - the expected result.
 
     Asserts:
         True if the answer is correct.
     """
     total = salary_count(*company, excluded_departments=excluded_departments)
+    assert total == expected
+
+
+TEST_COMPANY_DATA_WITHOUT_EXCLUSION = (
+    (
+        (
+            ('Sirius', {'Artyr': 60000.0, 'Igor': 55000.0, 'Franklin': 58000.0}),
+        ),
+        ([60000.0, 58000.0, 55000.0], 100.0),
+    ),
+    (
+        (
+            ('Math', {'Michael': 40000.0, 'Misha': 59000.0, 'Franklin': 63000.0}),
+            ('Phys', {'Mary': 50001.0, 'Mike': 75000.0, 'Sarah': 55000.0}),
+        ),
+        ([75000.0, 63000.0, 59000.0], 57.6),
+    ),
+    (
+        (
+            ('Math', {'David': 62000.0, 'Eve': 59000.0, 'Frank': 63000.0}),
+            ('Phys', {'Anton': 50001.0, 'Mikely': 75000.0, 'Sarahs': 55000.0}),
+            ('Sirius', {'Oleg': 60000.0, 'Dima': 55000.0, 'Carolina': 58000.0}),
+        ),
+        ([75000.0, 63000.0, 62000.0], 37.24),
+    ),
+)
+
+
+@pytest.mark.parametrize('company, expected', TEST_COMPANY_DATA_WITHOUT_EXCLUSION)
+def test_salary_count_without_exclusion(
+    company: tuple[str, dict[str, float]],
+    expected: tuple[list[float], float],
+) -> None:
+    """
+    Test salary_count function without excluded_departments.
+
+    Parameters:
+        company: tuple[str,dict[str, float]] - the company parameters.
+        expected: tuple[list[float], float] - the expected result.
+
+    Asserts:
+        True if the answer is correct.
+    """
+    total = salary_count(*company, excluded_departments=None)
     assert total == expected
