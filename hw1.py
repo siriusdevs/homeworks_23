@@ -7,8 +7,8 @@
 максимальная и медианная зарплата в компании.
 Функция также должна принимать опциональный аргумент,
 который по умолчанию равен None. Этот аргумент - кортеж названий отделов,
-которые нужно включить в статистику (их и только их). В
-се числа в выводе функции округлять до второго знака после запятой.
+которые нужно включить в статистику (их и только их). 
+Все числа в выводе функции округлять до второго знака после запятой.
 """
 from dataclasses import dataclass
 from typing import Optional
@@ -16,7 +16,7 @@ from typing import Optional
 # dictionary of employee names to their salaries
 Salaries = dict[str, float]
 # an optional list of unit names that correspond to unit names in Salaries
-Units = Optional[tuple[str]]
+Units = Optional[tuple[str, ...]]
 
 
 @dataclass
@@ -39,7 +39,10 @@ def get_salary_stats(units: Units = None, **salaries: Salaries) -> SalaryStats:
         Statistics for provided company's salaries.
         If units list (first argument) is provided, the result only includes these specified units.
     """
-    unit_salaries = [list(unit.values()) for unit in salaries.values()]
+    unit_salaries = [
+        list(unit.values()) for name, unit in salaries.items()
+        if units is None or name in units
+    ]
     salary_amounts = sum(unit_salaries, start=[])
     return SalaryStats(
         maximum=max(salary_amounts),

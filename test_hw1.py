@@ -25,16 +25,22 @@ TEST_COMPANY = {
 
 TESTS_TABLE = (
     SalaryStatsTestCase(
-        name='empty arguments',
+        name='with empty arguments',
         units=None,
         salaries={},
         expected_stats=SalaryStats(maximum=0, average=0, median=0),
     ),
     SalaryStatsTestCase(
-        name='without excluded units',
+        name='with all units',
         units=None,
         salaries=TEST_COMPANY,
         expected_stats=SalaryStats(maximum=200, average=41.51, median=20),
+    ),
+    SalaryStatsTestCase(
+        name='with specific units',
+        units=('Banking', 'Marketing'),
+        salaries=TEST_COMPANY,
+        expected_stats=SalaryStats(maximum=40, average=13.32, median=5.9),
     ),
 )
 
@@ -46,4 +52,4 @@ def test_get_salary_stats(tc: SalaryStatsTestCase):
     Args:
         tc: a test case with input and expected output
     """
-    assert get_salary_stats(None, **tc.salaries) == tc.expected_stats
+    assert get_salary_stats(tc.units, **tc.salaries) == tc.expected_stats
