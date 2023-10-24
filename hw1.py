@@ -13,11 +13,6 @@
 from dataclasses import dataclass
 from typing import Optional
 
-# dictionary of employee names to their salaries
-Salaries = dict[str, float]
-# an optional list of unit names that correspond to unit names in Salaries
-Units = Optional[tuple[str, ...]]
-
 
 @dataclass
 class SalaryStats:
@@ -26,6 +21,12 @@ class SalaryStats:
     average: float = 0
     median: float = 0
     maximum: float = 0
+
+
+# dictionary of employee names to their salaries
+Salaries = dict[str, float]
+# an optional list of unit names that correspond to unit names in Salaries
+Units = Optional[tuple[str, ...]]
 
 
 def get_salary_stats(units: Units = None, **salaries: Salaries) -> SalaryStats:
