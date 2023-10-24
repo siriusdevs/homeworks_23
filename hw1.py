@@ -13,6 +13,11 @@
 from dataclasses import dataclass
 from typing import Optional
 
+# dictionary of employee names to their salaries
+Salaries = dict[str, float]
+# an optional list of unit names that correspond to unit names in Salaries
+Units = Optional[tuple[str]]
+
 
 @dataclass
 class SalaryStats:
@@ -23,12 +28,12 @@ class SalaryStats:
     maximum: float = 0
 
 
-def get_salary_stats(units: Optional[tuple[str]] = None, **kwargs) -> SalaryStats:
+def get_salary_stats(units: Units = None, **salaries: Salaries) -> SalaryStats:
     """Compute salary statistics for a given company, optionally including only the specified units.
 
     Args:
         units: the only units to include in stats. If omitted, defaults to all units
-        kwargs: dictionary of unit names to dictionaries of employee names to their salaries
+        salaries: dictionary of unit names to Salaries
 
     Returns:
         Statistics for provided company's salaries.
