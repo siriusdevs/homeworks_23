@@ -59,4 +59,4 @@ def generete_report(*departments: tuple, exceptions: tuple = None) -> tuple:
     # Меняю название переменной, чтобы линтер на длину строки не ругался
     sorted_deptmnt = [department[0] for department in new_data if department[0] not in exceptions]
 
-    return sorted_deptmnt[:3], list(reversed(sorted_deptmnt))[:3]
+    return sorted_deptmnt[:3], list(reversed(sorted_deptmnt[-3:]))
