@@ -2,7 +2,7 @@
 
 import pytest
 
-from hw1 import calculate_salary
+from hw1 import top_salary
 
 test_salaries_none = (
     (
@@ -109,31 +109,31 @@ test_salaries = (
 
 
 @pytest.mark.parametrize('salaries, lim, expected', test_salaries)
-def test_top_salary1(salaries: list[tuple[str, list]], lim: float, expected: tuple[list, float]):
+def test_salary_first(salaries: list[tuple[str, list]], lim: float, expected: tuple[list, float]):
     """Test detective function with test_salaries.
 
     Args:
-        salaries: List[Tuple[str, List]] - department salary list.
-        lim: float - numerical limit which default is None.
-        expected: Tuple[List, float] - an actual expected result.
+        salaries: list[tuple[str, list]] - department salary list.
+        lim: float - salaries less than this value are considered, default is None.
+        expected: tuple[list, float] - an actual expected result.
 
     Asserts:
         True if the function returns expected results.
 
     """
-    assert calculate_salary(*salaries, lim=lim) == expected
+    assert top_salary(*salaries, lim=lim) == expected
 
 
 @pytest.mark.parametrize('salaries, expected', test_salaries_none)
-def test_top_salary2(salaries: list[tuple[str, list]], expected: tuple[list, float]):
+def test_salary_second(salaries: list[tuple[str, list]], expected: tuple[list, float]):
     """Test detective function with test_salaries.
 
     Args:
-        salaries: List[Tuple[str, List]] - department salary list.
-        expected: Tuple[List, float] - an actual expected result.
+        salaries: list[tuple[str, list]] - department salary list.
+        expected: tuple[list, float] - an actual expected result.
 
     Asserts:
         True if the function returns expected results.
 
     """
-    assert calculate_salary(*salaries) == expected
+    assert top_salary(*salaries) == expected
