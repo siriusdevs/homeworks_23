@@ -1,27 +1,34 @@
 """Test to check the functionality of the function."""
 
-from typing import List, Tuple
-
 import pytest
 
-from top_three_salaries import calculate_salary
+from hw1 import calculate_salary
 
-test_salaries = (
+test_salaries_none = (
     (
         [
             ('Sales', [62522, 95943, 18109, 88948, 93378]),
-        ],
-        None, ([95943, 93378, 88948], 77.53),
+        ], ([95943, 93378, 88948], 77.53),
     ),
 
     (
         [
             ('HR', [49416.47, 76537.66, 25614.78, 47902.73, 94947.7, 11403.35, 37022.33]),
             ('Sales', [62522, 95943, 18109, 88948, 93378]),
-        ],
-        None, ([95943, 94947.7, 93378], 40.51),
+        ], ([95943, 94947.7, 93378], 40.51),
     ),
 
+    (
+        [
+            ('PR Department', [94573.15, 78903.3, 91034.47, 15986.02, 63041.3, 44337.85]),
+            ('Human Resources Department', [37766.83, 65465.74, 20545.0, 73187.46, 62949.99]),
+            ('Call Center', [83844.2, 30526.49, 74225.93, 13118.32, 80232.09, 48549.1]),
+            ('Business Analist', [51057.59, 89586.69, 73203.17, 75241.16, 19800.95, 52196.2]),
+        ], ([94573.15, 91034.47, 89586.69], 20.55),
+    ),
+)
+
+test_salaries = (
     (
         [
             ('Dev', [33784.13, 75083.35, 25461.69, 72662.32, 91994.4, 77572.92]),
@@ -50,16 +57,6 @@ test_salaries = (
             ('Develops', [58310.48, 41128.93, 80082.52, 66253.9, 41056.9, 50907.06, 91585.14]),
         ],
         30000, ([19102.4, 17830.8, 14720.49], 64.75),
-    ),
-
-    (
-        [
-            ('PR Department', [94573.15, 78903.3, 91034.47, 15986.02, 63041.3, 44337.85]),
-            ('Human Resources Department', [37766.83, 65465.74, 20545.0, 73187.46, 62949.99]),
-            ('Call Center', [83844.2, 30526.49, 74225.93, 13118.32, 80232.09, 48549.1]),
-            ('Business Analist', [51057.59, 89586.69, 73203.17, 75241.16, 19800.95, 52196.2]),
-        ],
-        None, ([94573.15, 91034.47, 89586.69], 20.55),
     ),
 
     (
@@ -112,7 +109,7 @@ test_salaries = (
 
 
 @pytest.mark.parametrize('salaries, lim, expected', test_salaries)
-def test_top_salary(salaries: List[Tuple[str, List]], lim: float, expected: Tuple[List, float]):
+def test_top_salary1(salaries: list[tuple[str, list]], lim: float, expected: tuple[list, float]):
     """Test detective function with test_salaries.
 
     Args:
@@ -125,3 +122,18 @@ def test_top_salary(salaries: List[Tuple[str, List]], lim: float, expected: Tupl
 
     """
     assert calculate_salary(*salaries, lim=lim) == expected
+
+
+@pytest.mark.parametrize('salaries, expected', test_salaries_none)
+def test_top_salary2(salaries: list[tuple[str, list]], expected: tuple[list, float]):
+    """Test detective function with test_salaries.
+
+    Args:
+        salaries: List[Tuple[str, List]] - department salary list.
+        expected: Tuple[List, float] - an actual expected result.
+
+    Asserts:
+        True if the function returns expected results.
+
+    """
+    assert calculate_salary(*salaries) == expected

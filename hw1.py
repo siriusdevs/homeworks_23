@@ -1,39 +1,29 @@
 """Function for calculating the top 3 salaries and its percentage of all salaries."""
 
-from typing import List, Tuple
 
-
-def calculate_salary(*departments: Tuple[str, List[float]], lim: float = None):
+def calculate_salary(*deps: tuple[str, list[float]], lim: float = None):
     """Calculate the top 3 salaries and its percentage of all salaries.
 
     Args:
-        departments: Tuple[str, List[float]] department name and list of salaries.
-        lim: float numerical limit which default is None.
+        deps: Tuple[str, List[float]] department name and list of salaries.
+        lim: float numerical limit of salaries which default is None.
 
     Returns:
-        tuple: top 3 salaries.
-        float: percentage of top 3 salaries to all salaries.
+        tuple[tuple, float]: top 3 salaries and percentage of it to all salaries.
 
     """
     salaries = []
 
-    for department in departments:
-        _, department_salaries = department
-
-        for salary in department_salaries:
-            if lim is not None:
-                if salary <= lim:
-                    salaries.append(round(salary, 2))
-            else:
+    for _, dep_salaries in deps:
+        for salary in dep_salaries:
+            if (lim is not None and salary <= lim) or not lim:
                 salaries.append(round(salary, 2))
 
     salaries.sort(reverse=True)
-    total_top_salary = sum(salaries[:3])
-    total_salary_payments = sum(salaries)
 
-    if total_salary_payments == 0:
+    if sum(salaries) == 0:
         return [], 0
 
-    total_salaries_percentage = (total_top_salary / total_salary_payments) * 100
+    percent = (sum(salaries[:3]) / sum(salaries)) * 100
 
-    return (salaries[:3], round(total_salaries_percentage, 2))
+    return (salaries[:3], round(percent, 2))
