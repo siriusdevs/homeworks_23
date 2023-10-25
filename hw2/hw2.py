@@ -25,6 +25,8 @@ def process_data(input_path, output_path):
             last_login = info['last_login']
             if not last_login:
                 raise Exception(f'last_login field is empty for client {client}')
+            date = datetime.strptime(last_login, '%Y-%m-%d')
+            last_login_ago = datetime.now() - date
         except KeyError:
             raise Exception(f'No last_login field for client {client}.')
     hosts_percentage = {host: (count / TOTAL_CLIENTS) * 100 for host, count in hosts_count.items()}
