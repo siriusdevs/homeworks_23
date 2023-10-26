@@ -4,35 +4,36 @@
 from typing import Optional
 
 
-def statistic_salary(*args, limit: Optional[int] = None) -> tuple:
+def statistic_salary(*departments, limit: Optional[int] = None) -> tuple[float, float, float]:
     """Fucntion take position argument and optional argument.
 
     Args:
-        args: position argument, whose take tuple of format (str, dict)
+        departments: position argument, whose take tuple of format (str, dict)
         limit: a numercal limit above which salaries need not be taken
 
     Returns:
         A tuple with average, max and median salary.
     """
-    salary = []
-    if not args[0]:
+    salaries = []
+    if not departments[0]:
         return (0, 0, 0)
-    for data_salary in args:
-        for salaries in data_salary[1].values():
-            if limit is None or limit >= salaries:
+    for employees in departments:
+        for salary in employees.values():
+            if limit is None or limit <= salaries:
                 salary.append(salaries)
-    salary = sorted(salary)
+    salaries = sorted(salaries)
     stat_salary = []
-    len_salary = len(salary)
-    stat_salary.append(round(sum(salary) / len_salary, 2))
-    stat_salary.append(round(max(salary), 2))
-    if len_salary % 2 == 1:
-        stat_salary.append(round(salary[len_salary // 2], 2))
+    len_salaries = len(salaries)
+    if len_salaries == 0:
+        return (0, 0, 0)
+    stat_salary.append(round(sum(salaries) / len_salaries, 2))
+    stat_salary.append(round(max(salaries), 2))
+    if len_salaries % 2 == 1:
+        stat_salary.append(round(salaries[len_salaries // 2], 2))
     else:
-        stat_salary.append(round(
-            (round(salary[(len_salary // 2)-1], 2)
-             + round(salary[len_salary // 2], 2)
-             ) // 2, 2,
-             ))
+        middle_index = round(salaries[(len_salaries // 2) - 1], 2)
+        scnd_middle_index = round(salaries[len_salaries // 2], 2)
+        median_salary = round((middle_index + scnd_middle_index) // 2, 2)
+        stat_salary.append(median_salary)
 
     return tuple(stat_salary)

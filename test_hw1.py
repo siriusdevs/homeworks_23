@@ -1,12 +1,11 @@
 """This module include test for function."""
 
-from typing import Tuple
 
 import pytest
 
 from hw1 import statistic_salary
 
-compans = (
+COMPANS = (
     (
         1000,
         (
@@ -32,8 +31,8 @@ compans = (
 )
 
 
-@pytest.mark.parametrize('limit, args, expected', compans)
-def test_statistic_salary_vp(limit: int, args: Tuple, expected: Tuple) -> None:
+@pytest.mark.parametrize('limit, args, expected', COMPANS)
+def test_statistic_salary_vp(limit: int, args: tuple, expected: tuple) -> None:
     """Test function for salary.
 
     Args:
