@@ -1,7 +1,5 @@
 """A module for testing hw1 get_stats function."""
 
-from typing import Tuple
-
 import pytest
 
 from hw1 import get_stats
@@ -37,7 +35,7 @@ test_data = [
 
 
 @pytest.mark.parametrize('departments, limit, expected', test_data)
-def test_get_stats(departments: Tuple, limit, expected):
+def test_get_stats(departments: tuple, limit, expected):
     """Test get_stats function with test_data.
 
     Args:

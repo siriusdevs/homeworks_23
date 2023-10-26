@@ -19,19 +19,20 @@ def get_stats(
         A tuple containing the maximum salary, average salary, and median salary.
     """
     all_sls = []
-    for department in departments:
-        for _, salary in department[1].items():
+    for _, employees in departments:
+        for salary in employees.values():
             if limit is None or salary >= limit:
                 all_sls.append(salary)
     if not all_sls:
         return (0, 0, 0)
+    sorted_salaries = sorted(all_sls)
     count_salaries = len(all_sls)
     average_salary = round(sum(all_sls) / count_salaries, 2)
     max_salary = round(max(all_sls), 2)
     if count_salaries % 2 == 1:
-        median_salary = round(sorted(all_sls)[count_salaries // 2], 2)
+        median_salary = round(sorted_salaries[count_salaries // 2], 2)
     else:
-        median_elements = sorted(all_sls)[count_salaries // 2 - 1]
-        median_elements += sorted(all_sls)[count_salaries // 2]
+        median_elements = sorted_salaries[count_salaries // 2 - 1]
+        median_elements += sorted_salaries[count_salaries // 2]
         median_salary = round(median_elements / 2, 2)
     return max_salary, average_salary, median_salary
