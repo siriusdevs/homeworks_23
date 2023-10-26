@@ -6,11 +6,11 @@ import pytest
 from hw2 import process_data
 
 test1 = (
-    ('data_hw2.json', 'out.json', 'example2.json'),
+    ('files/data_hw2.json', 'out.json', 'files/example2.json'),
 )
 
 test2 = (
-    ('test_data_hw2.json', 'out.json', 'example.json'),
+    ('files/test_data_hw2.json', 'out.json', 'files/example.json'),
 )
 
 

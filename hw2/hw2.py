@@ -1,4 +1,18 @@
-"""This is a solution of hw2."""
+"""This is a solution of hw2.
+
+Напишите модуль,
+в котором функция process_data принимает путь к json-файлу с данными о клиентах сайта
+(пример файла в data_hw2.json)
+и путь к json-файлу вывода.
+Функция process_data записывает в этот общий json статистику:
+процент аудитории каждой возрастной категории 0-18-25-45-60+,
+а также процент регистраций пользователей по годам.
+Вынести домашнее и его тесты в отдельную папку hw2.
+Тесты используют различные json-файлы.
+В workflows выделить отдельные работы для проверок линтера разных домашних,
+отдельные работы для тестов разных домашних
+(цель состоит в том, чтобы в actions они отображались отдельными галочками).
+"""
 import json
 
 LOWEST_ADULT_AGE = 18
@@ -7,14 +21,16 @@ LOWEST_ADULT_PLUS_AGE = 45
 HIGHEST_ADULT_PLUS_AGE = 60
 
 
-def stats_by_age(ages: list) -> dict:
+def stats_by_age(ages: list[int]) -> dict[str, float]:
     """Block that finds percentage of each age gap.
 
     Args:
-        ages: list of ages that were given.
+        ages: list[int] with int values of ages that were given.
 
     Returns:
-        dict: of age groups in percents.
+        output - dict:
+            key: str with age-gap naming.
+            value: float with percentage count of this age group.
 
     """
     output = {'Below 18': 0, '18 to 25': 0, '25 to 45': 0, '45 to 60': 0, 'Above 60': 0}
@@ -32,6 +48,8 @@ def stats_by_age(ages: list) -> dict:
             case age if age > HIGHEST_ADULT_PLUS_AGE:
                 age_gaps[4] += 1
     total = sum(age_gaps)
+    if age_gaps == 0:
+        return output
     temp = [
         round(age_gaps[0] / total * 100, 2),
         round(age_gaps[1] / total * 100, 2),
@@ -44,14 +62,16 @@ def stats_by_age(ages: list) -> dict:
     return output
 
 
-def count_unique(sample: list) -> dict:
+def count_unique(sample: list[str]) -> dict[str, float]:
     """Counter of unique elements in list.
 
     Args:
-        sample: list of elemetns.
+        sample: list of str elemetns.
 
     Returns:
-        dict: where key is element and value it's percentage in list.
+        dict:
+            key: str with name of unique element.
+            value: float with count percentage of it on file.
 
     """
     output = {}
@@ -61,6 +81,8 @@ def count_unique(sample: list) -> dict:
         else:
             output[element] += 1
     total = sum(output.values())
+    if total == 0:
+        return output.update({'No values were found': 0})
     for key in output.keys():
         output[key] = round(output[key] / total * 100, 2)
     return output
@@ -80,7 +102,7 @@ def process_data(in_path: str, out_path: str) -> None:
         with open(in_path) as inputdata:
             user_stats = json.load(inputdata)
     except json.JSONDecodeError:
-        raise ValueError('File that you provided is empty')
+        raise ValueError('File that you provided is empty, not valid or not exists')
     with open(in_path) as input_data:
         user_stats = json.load(input_data)
     ages = []
