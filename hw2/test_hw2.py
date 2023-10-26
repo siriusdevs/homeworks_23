@@ -22,7 +22,6 @@ def test_comparison_frst(input_file: str, output_file: str, expected: str) -> No
         input_file: str with path to test data file.
         output_file: str with path to test output file.
         expected: str with path to precalculated correct data.
-
     """
     process_data(input_file, output_file)
     with open(output_file) as res:
@@ -40,7 +39,6 @@ def test_comparison_snd(input_file, output_file, expected):
         input_file: str with path to test data file.
         output_file: str with path to test output file.
         expected: str with path to precalculated correct data.
-
     """
     process_data(input_file, output_file)
     with open(output_file) as res:
