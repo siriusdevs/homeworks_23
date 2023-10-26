@@ -42,12 +42,12 @@ TESTS_TABLE = (
         name='simple with specific units',
         units=('C', 'D'),
         salaries={
-            'C': {'name1': 500.42, 'name2': 30.12, 'name3': 50_000},
+            'C': {'name1': 500.42, 'name2': 30.12, 'name3': 50000},
             'D': {'name4': 4, 'name5': 5},
-            'Should be excluded': {'name6': 100_000, 'name7': 0.01},
-            'Should also be excluded': {'name8': 200_000, 'name9': 0.001},
+            'Should be excluded': {'name6': 100000, 'name7': 0.01},
+            'Should also be excluded': {'name8': 200000, 'name9': 0.001},
         },
-        expected_stats=SalaryStats(maximum=50_000, average=10107.91, median=30.12),
+        expected_stats=SalaryStats(maximum=50000, average=10107.91, median=30.12),
     ),
     SalaryStatsTestCase(
         name='complex with all units',
