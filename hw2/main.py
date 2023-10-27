@@ -1,23 +1,8 @@
 """Module for calculating users' stats from users' data and outputting it to a new json."""
 import json
-from typing import Required, TypedDict
 
 import create_stats
 import increment_field
-
-
-class User(TypedDict):
-    """Class for description user's type.
-
-    Args:
-        TypedDict: class for creating user's type.
-    """
-
-    region: Required[str]
-    registered: Required[str]
-    last_login: Required[str]
-    email: Required[str]
-    age: Required[int]
 
 
 def process_data(users_path: str, result_path: str) -> None:
@@ -28,14 +13,14 @@ def process_data(users_path: str, result_path: str) -> None:
         result_path (str): the path that will been written in users' stats in json format.
     """
     with open(users_path) as users_file:
-        users: dict[str, User] = json.load(users_file)
+        users: dict[str, dict[str, str | int]] = json.load(users_file)
 
     users_domains: dict[str, int] = {}
     users_by_year: dict[str, int] = {}
     users_count: int = 0
 
     for user in users.values():
-        email_domain = user['email'].split('@')[-1]
+        email_domain = str(user['email']).split('@')[-1]  # str because email can be int
 
         increment_field.increment_field(users_domains, email_domain)
         increment_field.increment_field(users_by_year, str(user['age']))
