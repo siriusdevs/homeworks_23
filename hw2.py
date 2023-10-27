@@ -22,7 +22,7 @@ def is_file(in_path: str, out_path: str) -> None:
         raise FileNotFoundError('Is not a file path')
 
 
-def dict_path(count_dct: dict) -> dict:
+def dict_path(count_dct: dict[str, dict]) -> dict[str, dict]:
     """Take a set and two lists and returns a dictionary with statistics.
 
     Args:
