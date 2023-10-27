@@ -48,7 +48,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8==3.9.0 wemake-python-styleguide==0.15.3 bandit==1.7.2
       - name: Flake8
-        run: flake8 hw2/hw2.py hw2/test_hw2.py
+        run: flake8 hw2/
 
   tests_for_hw2:
     name: Тесты для второго дз
