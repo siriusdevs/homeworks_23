@@ -5,6 +5,7 @@ import pytest
 from msgspec import ValidationError
 
 from hw2.hw2 import process_data
+from hw2.typesdev import Error, Users
 
 INPUT_FILES_DIR_PATH = 'hw2/test_files/input'
 OUTPUT_FILES_DIR_PATH = 'hw2/test_files/output'
@@ -40,7 +41,11 @@ TEST_DATA = initialise_test_data()
 
 
 @pytest.mark.parametrize('input_file_path, output_file_path, expected_output_data', TEST_DATA)
-def test_process_data(input_file_path, output_file_path, expected_output_data):
+def test_process_data(
+    input_file_path: str,
+    output_file_path: str,
+    expected_output_data: Users | Error,
+) -> None:
     """Create function (extended by pytest decorator) that tests process_data function.
 
     Args:

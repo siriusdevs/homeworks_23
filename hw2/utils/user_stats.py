@@ -1,6 +1,7 @@
 """The module which contains class-helper for process data function."""
 import json
 from datetime import datetime, timedelta
+from typing import Self
 
 import msgspec
 
@@ -44,7 +45,7 @@ class UserStatsUtils:
         self.all_ages = []
 
     @property
-    def users_data(self) -> Users:
+    def users_data(self: Self) -> Users:
         """The property of the which returns users_data from the input JSON file or raises an error.
 
         Raises:
@@ -92,7 +93,7 @@ class UserStatsUtils:
                 return users_data
 
     @property
-    def user_stats(self) -> dict[str, int]:
+    def user_stats(self: Self) -> dict[str, int]:
         """Create a function that returns necessary user statistics.
 
         Returns:
@@ -131,7 +132,7 @@ class UserStatsUtils:
                 self.get_mt_half_of_year_offline_users_avg_age(),
         }
 
-    def validate_user_models(self, users_data: Users) -> None:
+    def validate_user_models(self: Self, users_data: Users) -> None:
         """Create a function that validates all the user data dicts using msgspec model.
 
         Args:
@@ -150,7 +151,7 @@ class UserStatsUtils:
             if set(user_data.keys()) != type(self).necessary_user_keys:
                 raise msgspec.ValidationError
 
-    def get_lt_period_offline_users_avg_age(self, target_period) -> int:
+    def get_lt_period_offline_users_avg_age(self: Self, target_period: Period) -> int:
         """Create a function that returns whether the user is offline for lt target period or not.
 
         Args:
@@ -168,7 +169,7 @@ class UserStatsUtils:
             return 0
         return sum(user['age'] for user in filtered_by_offline_period) // number_of_users
 
-    def get_mt_half_of_year_offline_users_avg_age(self) -> int:
+    def get_mt_half_of_year_offline_users_avg_age(self: Self) -> int:
         """Create a function that returns whether the user is offline for more then half of year or not.
 
         Returns:
