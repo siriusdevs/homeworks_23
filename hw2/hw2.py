@@ -1,7 +1,7 @@
 """Module that includes the implemented function from Vasilenko's second task."""
 import json
 
-from hw2.utils import CommonUtils, UserStatsUtils
+from hw2.utils import UserStatsUtils, find_insertion_index
 
 
 def process_data(data_file_path: str, output_file_path: str) -> None:
@@ -17,7 +17,7 @@ def process_data(data_file_path: str, output_file_path: str) -> None:
     all_ages: list[int] = []
     for user_data in user_stats_utils.users_data.values():
         user_age: int = user_data['age']
-        all_ages.insert(CommonUtils.find_insertion_index(all_ages, user_age), user_age)
+        all_ages.insert(find_insertion_index(all_ages, user_age), user_age)
 
     user_stats_utils.all_ages = all_ages
     with open(output_file_path, 'w') as output_file:
