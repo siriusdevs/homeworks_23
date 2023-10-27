@@ -31,6 +31,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest==6.2.5
         pip install numpy
+        pip install msgspec
     - name: Pytest
       run: pytest test_hw1.py
 
