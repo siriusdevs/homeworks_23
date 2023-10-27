@@ -4,18 +4,20 @@ import pytest
 
 from hw1 import top_salary
 
-test_salaries_none = (
+TEST_SALARIES_NONE = (
     (
         [
             ('Sales', [62522, 95943, 18109, 88948, 93378]),
-        ], ([95943, 93378, 88948], 77.53),
+        ],
+        ([95943, 93378, 88948], 77.53),
     ),
 
     (
         [
             ('HR', [49416.47, 76537.66, 25614.78, 47902.73, 94947.7, 11403.35, 37022.33]),
             ('Sales', [62522, 95943, 18109, 88948, 93378]),
-        ], ([95943, 94947.7, 93378], 40.51),
+        ],
+        ([95943, 94947.7, 93378], 40.51),
     ),
 
     (
@@ -24,11 +26,29 @@ test_salaries_none = (
             ('Human Resources Department', [37766.83, 65465.74, 20545.0, 73187.46, 62949.99]),
             ('Call Center', [83844.2, 30526.49, 74225.93, 13118.32, 80232.09, 48549.1]),
             ('Business Analist', [51057.59, 89586.69, 73203.17, 75241.16, 19800.95, 52196.2]),
-        ], ([94573.15, 91034.47, 89586.69], 20.55),
+        ],
+        ([94573.15, 91034.47, 89586.69], 20.55),
+    ),
+
+    (
+        [
+            ('Information Sequrity', [69866.71, 94117.24, 78293.63, 43446.76, 12081.02]),
+            ('Web Designers', [64206.21, 55992.19, 92598.0, 95503.8, 93918.09, 85352.38]),
+            ('Network Architector', [14954.93, 61641.47, 32108.5, 17670.75, 39770.86]),
+            ('System Analist', [97091.02, 71905.66, 39683.33, 85845.74, 35815.7, 84381.96]),
+            ('Control Center', [13769.06, 74131.29, 46456.65, 84693.47, 99501.3, 49732.09]),
+            ('Human Resources Department', [49381.69, 95960.95, 34727.97, 19302.26]),
+            ('Head Office', [55803.99, 98081.95, 45437.12, 36965.09, 20109.42, 46612.53]),
+            ('IT', [52001.32, 69466.14, 63332.81, 19766.88, 67461.6, 29112.73, 91029.75]),
+            ('DD', [57001.35, 21029.32, 42315.53, 80998.23, 34195.56, 83035.25, 69948.67]),
+            ('Develops', [33431.54, 16902.89, 66902.78, 15980.28, 62269.43, 98798.74]),
+            ('PR', [33520.5, 53793.38, 96354.22, 73712.68, 56100.72, 55220.45]),
+        ],
+        ([99501.3, 98798.74, 98081.95], 8.05),
     ),
 )
 
-test_salaries = (
+TEST_SALARIES = (
     (
         [
             ('Dev', [33784.13, 75083.35, 25461.69, 72662.32, 91994.4, 77572.92]),
@@ -108,7 +128,7 @@ test_salaries = (
 )
 
 
-@pytest.mark.parametrize('salaries, lim, expected', test_salaries)
+@pytest.mark.parametrize('salaries, lim, expected', TEST_SALARIES)
 def test_salary_first(salaries: list[tuple[str, list]], lim: float, expected: tuple[list, float]):
     """Test detective function with test_salaries.
 
@@ -124,7 +144,7 @@ def test_salary_first(salaries: list[tuple[str, list]], lim: float, expected: tu
     assert top_salary(*salaries, lim=lim) == expected
 
 
-@pytest.mark.parametrize('salaries, expected', test_salaries_none)
+@pytest.mark.parametrize('salaries, expected', TEST_SALARIES_NONE)
 def test_salary_second(salaries: list[tuple[str, list]], expected: tuple[list, float]):
     """Test detective function with test_salaries.
 
