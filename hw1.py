@@ -17,10 +17,10 @@ def statistic_salary(*departments, limit: Optional[int] = None) -> tuple[float, 
     salaries = []
     if not departments[0]:
         return (0, 0, 0)
-    for employees in departments:
+    for _, employees in departments:
         for salary in employees.values():
-            if limit is None or limit <= salaries:
-                salary.append(salaries)
+            if limit is None or limit >= salary:
+                salaries.append(salary)
     salaries = sorted(salaries)
     stat_salary = []
     len_salaries = len(salaries)
