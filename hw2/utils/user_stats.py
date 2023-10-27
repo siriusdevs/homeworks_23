@@ -11,26 +11,8 @@ from hw2.typesdev import Users
 from .common import get_valid_dict_to_str
 
 
-def user_is_offline_lt_target_period(user_item: dict, target_period: Period) -> bool:
-    """Create a function that returns whether the user is offline for less then target period or not.
-
-    Args:
-        user_item (dict): the dict that includes all the user params such as age, last_login
-        target_period (Period): the value that represents the target period in days
-
-    Returns:
-        Bool value whether the user is offline for less then target period or not
-    """
-    last_login_date = datetime.fromisoformat(user_item['last_login'])
-    target_date = timedelta(days=target_period.value)
-
-    return datetime.now() - last_login_date < target_date
-
-
 class UserStatsUtils:
     """Create the class which helps to simplify and reduce code in process_data function."""
-
-    necessary_user_keys = {'region', 'registered', 'last_login', 'email', 'age'}
 
     def __init__(self, data_file_path: str, output_file_path: str) -> None:
         """Create initial method of the UserStatsUtils class which sets necessary attributes on instance.
@@ -131,24 +113,33 @@ class UserStatsUtils:
                 self.get_mt_half_of_year_offline_users_avg_age(),
         }
 
+    def user_is_offline_lt_target_period(self, user_item: dict, target_period: Period) -> bool:
+        """Create a function that returns whether the user is offline for less then target period or not.
+
+        Args:
+            user_item (dict): the dict that includes all the user params such as age, last_login
+            target_period (Period): the value that represents the target period in days
+
+        Returns:
+            Bool value whether the user is offline for less then target period or not
+        """
+        last_login_date = datetime.fromisoformat(user_item['last_login'])
+        target_date = timedelta(days=target_period.value)
+
+        return datetime.now() - last_login_date < target_date
+
     def validate_user_models(self, users_data: Users) -> None:
         """Create a function that validates all the user data dicts using msgspec model.
 
         Args:
             users_data (Users): the dict where the keys are the user's name and \
             the value is a dict of the User model attributes
-
-        Raises:
-            ValidationError: if any of the users values doesn't have necessary keys \
-            then this error raises
         """
         for user_data in users_data.values():
             msgspec.json.decode(
                 get_valid_dict_to_str(user_data).encode(),
                 type=UserDataSchema,
             )
-            if set(user_data.keys()) != type(self).necessary_user_keys:
-                raise msgspec.ValidationError
 
     def get_lt_period_offline_users_avg_age(self, target_period: Period) -> int:
         """Create a function that returns whether the user is offline for lt target period or not.
@@ -160,7 +151,7 @@ class UserStatsUtils:
             The avg age of the filtered by 'num of offline days lt target period' condition users
         """
         filtered_by_offline_period = list(filter(
-            lambda user_item: user_is_offline_lt_target_period(user_item, target_period),
+            lambda user_item: self.user_is_offline_lt_target_period(user_item, target_period),
             self.users_data.values(),
         ))
         number_of_users = len(filtered_by_offline_period)
