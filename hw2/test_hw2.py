@@ -2,8 +2,9 @@
 import json
 
 import pytest
+from msgspec import ValidationError
 
-from hw2 import process_data
+from hw2.hw2 import process_data
 
 INPUT_FILES_DIR_PATH = 'hw2/test_files/input'
 OUTPUT_FILES_DIR_PATH = 'hw2/test_files/output'
@@ -47,7 +48,15 @@ def test_process_data(input_file_path, output_file_path, expected_output_data):
         output_file_path: path file where we save necessary stats
         expected_output_data: dict with correct statistics
     """
-    process_data(input_file_path, output_file_path)
+    try:
+        process_data(input_file_path, output_file_path)
+    except ValidationError:
+        # Invalid data in file 2.json ('age': 'lol')
+        assert input_file_path == f'{INPUT_FILES_DIR_PATH}/2.json'
+    except json.JSONDecodeError:
+        # Invalid json syntax in 8.json (421: 57)
+        assert input_file_path == f'{INPUT_FILES_DIR_PATH}/8.json'
+
     with open(output_file_path) as output_file:
         output_data = json.load(output_file)
 

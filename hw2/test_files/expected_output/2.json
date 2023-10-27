@@ -1,11 +1,1 @@
-{
-    "max_age": 65,
-    "min_age": 15,
-    "avg_age": 40,
-    "median_age": 35,
-    "lt_two_days_offline_users_average_age": 0,
-    "lt_week_offline_users_average_age": 63,
-    "lt_month_offline_users_average_age": 63,
-    "lt_half_of_year_offline_users_average_age": 42,
-    "mt_half_of_year_offline_users_average_age": 29
-}
+{"status": "Error", "details": {"msg": "Validation error for user items"}}
