@@ -4,7 +4,10 @@
 from typing import Optional
 
 
-def statistic_salary(*departments, limit: Optional[int] = None) -> tuple[float, float, float]:
+def statistic_salary(
+    *departments: tuple[str, dict[str, float]],
+    limit: Optional[int] = None,
+) -> tuple[float, float, float]:
     """Fucntion take position argument and optional argument.
 
     Args:
