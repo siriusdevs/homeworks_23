@@ -1,0 +1,11 @@
+{
+    "max_age": 75,
+    "min_age": 13,
+    "avg_age": 44,
+    "median_age": 44,
+    "lt_two_days_offline_users_average_age": 46,
+    "lt_week_offline_users_average_age": 51,
+    "lt_month_offline_users_average_age": 51,
+    "lt_half_of_year_offline_users_average_age": 44,
+    "mt_half_of_year_offline_users_average_age": 0
+}
