@@ -48,7 +48,7 @@ def stats_by_age(ages: list[int]) -> dict[str, float]:
             case age if age > HIGHEST_ADULT_PLUS_AGE:
                 age_gaps[4] += 1
     total = sum(age_gaps)
-    if age_gaps == 0:
+    if total == 0:
         return output
     temp = [
         round(age_gaps[0] / total * 100, 2),
