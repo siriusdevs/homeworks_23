@@ -37,7 +37,7 @@ def stats_by_age(ages: list[int]) -> dict[str, float]:
     age_gaps = [0, 0, 0, 0, 0]
     for age in ages:
         match age:
-            case age if age < LOWEST_ADULT_AGE:
+            case age if age in range(0, LOWEST_ADULT_AGE):
                 age_gaps[0] += 1
             case age if age in range(LOWEST_ADULT_AGE, MIDDLE_ADULT_AGE):
                 age_gaps[1] += 1
