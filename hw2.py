@@ -4,8 +4,8 @@
 import json
 import os
 
-mail = 'email'
-registr = 'registered'
+MAIL = 'email'
+REGISTR = 'registered'
 
 
 def is_file(in_path: str, out_path: str) -> None:
@@ -31,16 +31,16 @@ def dict_path(count_dct: dict[str, dict]) -> dict[str, dict]:
     Returns:
         A dictionary with statistics.
     """
-    res_dict = {mail: {}, registr: {}}
-    regist_len = len(count_dct[registr])
-    email_len = len(count_dct['email'])
+    res_dict = {MAIL: {}, REGISTR: {}}
+    regist_len = len(count_dct[REGISTR]) if count_dct[REGISTR] else 1
+    email_len = len(count_dct['email']) if count_dct['email'] else 1
 
-    for register, email in zip(count_dct[registr], count_dct[mail]):
-        res_dict[registr][register] = round((
-            count_dct[registr][register]/regist_len
+    for register, email in zip(count_dct[REGISTR], count_dct[MAIL]):
+        res_dict[REGISTR][register] = round((
+            count_dct[REGISTR][register]/regist_len
         )*100, 2,
         )
-        res_dict[mail][email] = round((count_dct[mail][email]/email_len)*100, 2)
+        res_dict[MAIL][email] = round((count_dct[MAIL][email]/email_len)*100, 2)
     return res_dict
 
 
@@ -54,15 +54,15 @@ def process_data(input_filepath: str, output_filepath: str) -> None:
     """
     is_file(input_filepath, output_filepath)
     with open(input_filepath, 'r') as input_file:
-        res_dict = {mail: {}, registr: {}}
+        res_dict = {MAIL: {}, REGISTR: {}}
 
         for user in json.load(input_file).values():
             for key in user.keys():
-                if key == registr:
-                    res_dict[registr][user[key]] = res_dict.get(user[key], 0)+1
-                elif key == mail:
+                if key == REGISTR:
+                    res_dict[REGISTR][user[key]] = res_dict.get(user[key], 0)+1
+                elif key == MAIL:
                     mail_host = user[key][user[key].find('@')+1:]
-                    res_dict[mail][mail_host] = res_dict.get(mail_host, 0)+1
+                    res_dict[MAIL][mail_host] = res_dict.get(mail_host, 0)+1
         res_dict = dict_path(res_dict)
     with open(output_filepath, 'w') as output_file:
         json.dump(res_dict, output_file)
