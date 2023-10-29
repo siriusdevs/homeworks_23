@@ -11,15 +11,16 @@ class SalaryStatsTestCase:
     """Test case for hw1 (get_salary_stats function) tests.
 
     Args:
-        name: test name
+        name: name of test case
         deps: test deps
-        used_deps: test used deps
+        used_deps: test used_deps
         expected: expected value for current test data
     """
 
     name: str
     deps: tuple[Deps, ...]
     used_deps: UsedDeps
+    # expected value or error message
     expected: SalaryStats | str
 
 
