@@ -8,7 +8,7 @@ PossibleAge = Annotated[float, Meta(ge=10)]
 
 
 class UserDataSchema(Struct):
-    """The msgspec struct that represents correct User model."""
+    """The msgspec struct representing a valid User model."""
 
     region: str
     registered: str

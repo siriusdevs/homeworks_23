@@ -12,7 +12,7 @@ from .common import get_valid_dict_to_str
 
 
 class UserStatsUtils:
-    """Create the class which helps to simplify and reduce code in process_data function."""
+    """Create the class which helps to simplify and reduce the code in process_data function."""
 
     def __init__(self, data_file_path: str, output_file_path: str) -> None:
         """Create initial method of the UserStatsUtils class which sets necessary attributes on instance.
@@ -27,18 +27,17 @@ class UserStatsUtils:
 
     @property
     def users_data(self) -> Users:
-        """The property of the which returns users_data from the input JSON file or raises an error.
+        """Create a function-property which validates provided JSON file, it's data and returns it \
+        or raises an error in case of the failed validation.
 
         Raises:
-            json.JSONDecodeError: if the input JSON file is invalid
-            msgspec.ValidationError: if the users data in input JSON file invalid
+            json.JSONDecodeError: if the input JSON file has invalid syntax
+            msgspec.ValidationError: if the users data from the input JSON file is invalid
 
         Returns:
             the dict of the user's names and its data
         """
-        with (
-            open(self.data_file_path, 'r') as data_file,
-        ):
+        with open(self.data_file_path, 'r') as data_file:
             with open(self.output_file_path, 'w') as output_file:
                 # If the provided JSON file has invalid syntax then an error occurs. \
                 # We catch it and write an error message to the output file
@@ -56,8 +55,7 @@ class UserStatsUtils:
                     )
                     raise
 
-                # If the provided JSON file doesn't satisfy our Users model then an error occurs. \
-                # We catch it and write an error message to the output file
+                # Processing possible error with data from JSON file validation
                 try:
                     self.validate_user_models(users_data)
                 except msgspec.ValidationError:
@@ -75,7 +73,7 @@ class UserStatsUtils:
 
     @property
     def user_stats(self) -> dict[str, int]:
-        """Create a function that returns necessary user statistics.
+        """Create a function-property that returns necessary user stats.
 
         Returns:
             The user_stats property
@@ -129,7 +127,7 @@ class UserStatsUtils:
         return datetime.now() - last_login_date < target_date
 
     def validate_user_models(self, users_data: Users) -> None:
-        """Create a function that validates all the user data dicts using msgspec model.
+        """Create a function that validates all the user data dicts using msgspec.
 
         Args:
             users_data (Users): the dict where the keys are the user's name and \
@@ -142,7 +140,8 @@ class UserStatsUtils:
             )
 
     def get_lt_period_offline_users_avg_age(self, target_period: Period) -> int:
-        """Create a function that returns whether the user is offline for lt target period or not.
+        """Create a function that returns avg age of the filtered by \
+        'num of offline days lt target period' condition users.
 
         Args:
             target_period (Period): the value that represents the target period in days

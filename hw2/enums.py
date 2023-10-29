@@ -4,7 +4,7 @@ from enum import Enum
 
 
 class Period(Enum):
-    """Class-enum representing all the necessary periods."""
+    """Class-enum representing all the necessary periods in days."""
 
     two_days = 2
     week = 7

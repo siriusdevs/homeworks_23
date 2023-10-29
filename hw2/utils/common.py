@@ -3,7 +3,7 @@ from typing import Any, Hashable
 
 
 def get_valid_dict_to_str(dct: dict[Hashable, Any]) -> str:
-    """Create function that finds the index for insertion using binary search algorithm and returns it.
+    """Create function that returns string representation of the dict in valid format for msgspec.
 
     Args:
         dct (dict): any dict
@@ -15,7 +15,7 @@ def get_valid_dict_to_str(dct: dict[Hashable, Any]) -> str:
 
 
 def find_insertion_index(nums: list[int], target: int) -> int:
-    """Create function that finds the index for insertion using binary search algorithm and returns it.
+    """Create function that finds the index for insertion using binary search and returns it.
 
     Args:
         nums (list[int]): the list where we want to insert the target number
