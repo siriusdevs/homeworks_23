@@ -69,6 +69,15 @@ TEST_DATA = (
             top_salaries_percent=96.29,
         ),
     ),
+    SalaryStatsTestCase(
+        name='wrong specific departments',
+        deps=TEST_DEPS_DATA,
+        used_deps=('development', 'integrating', 'designing'),
+        expected=SalaryStats(
+            top_salaries=[111.11, 25.21, 10.0],
+            top_salaries_percent=100,
+        ),
+    ),
 )
 
 TEST_ERROR_DATA = (
