@@ -59,11 +59,11 @@ def process_data(input_filepath: str, output_filepath: str) -> None:
     with open(input_filepath, 'r') as input_file:
         res_dict = {MAIL: {}, REGISTR: {}}
         try:
-            json.load(input_file)
+            data_files = json.load(input_file)
         except json.decoder.JSONDecodeError:
             return 'Input file is empty'
 
-        for user in json.load(input_file).values():
+        for user in data_files.values():
             for key in user.keys():
                 if key == REGISTR:
                     res_dict[REGISTR][user[key]] = res_dict.get(user[key], 0)+1
