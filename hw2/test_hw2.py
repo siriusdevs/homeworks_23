@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 from main import process_data
 
-DIRECTORY = 'test_data_hw2/'
+DIRECTORY = 'hw2/test_data_hw2/'
 test_data = [(f'data_hw2_{cnt}.json', f'output_hw2_{cnt}.json') for cnt in range(5)]
 
 
