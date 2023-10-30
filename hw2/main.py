@@ -64,9 +64,9 @@ def email_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict]]:
     email_disp = {}
 
     for users in clients.items():
+        if not validate_email(clients[users[0]]['email']):
+            continue
         email_host = clients[users[0]]['email'].split('@')[1]
-        # if not validate_email(email_host):
-        #     continue
         if email_host in email_disp.keys():
             email_disp[email_host] += 1
         else:
