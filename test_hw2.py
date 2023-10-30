@@ -32,8 +32,8 @@ TEST_ERROR_PROCESS_DATA = (
     ('/home/runner/work/homeworks_23/hw2/data_hw2.json',
      '/home/runner/work/homeworks_23/hw2/data.json', 'Is not a file path',
      ),
-    ('/home/artem/Documents/BP/homeworks_23/hw2/input/4.json',
-     '/home/artem/Documents/BP/homeworks_23/hw2/output/4.json', 'Input file is empty',
+    ('hw2/input/4.json',
+     'hw2/output/4.json', 'Input file is empty',
      ),
 )
 
