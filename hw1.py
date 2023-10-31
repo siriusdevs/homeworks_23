@@ -32,7 +32,7 @@ class SalaryStats:
     """
 
     # mutable default [] is not allowed, use field with default_factory
-    top_salaries: list[float, ...] = field(default_factory=list)
+    top_salaries: list[float] = field(default_factory=list)
     top_salaries_percent: float = 0
 
 
@@ -45,7 +45,7 @@ TOP_X = 3
 Deps = tuple[str, dict[str, float]]
 # departments, that only used in statictics calculations
 UsedDeps = Optional[tuple[str, ...]]
-Salaries = list[float, ...]
+Salaries = list[float]
 
 
 def get_salary_stats(*deps: Deps, used_deps: UsedDeps = None) -> SalaryStats:
