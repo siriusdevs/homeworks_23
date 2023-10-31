@@ -1,20 +1,25 @@
 """hw2 module for msgspec models and based types."""
 
+from datetime import date
 from typing import Annotated
 
 from msgspec import Meta, Struct
 
-PossibleAge = Annotated[float, Meta(ge=10)]
+MIN_ALLOWED_AGE = 12
+MAX_ALLOWED_AGE = 120
 
 
-class UserDataSchema(Struct):
+AllowedAge = Annotated[float, Meta(ge=MIN_ALLOWED_AGE, le=MAX_ALLOWED_AGE)]
+
+
+class User(Struct):
     """The msgspec struct representing a valid User model."""
 
     region: str
-    registered: str
+    registered: date
     email: str
-    age: PossibleAge
-    last_login: str
+    age: AllowedAge
+    last_login: date
 
 
-UsersSchema = dict[str, UserDataSchema]
+Users = list[User]
