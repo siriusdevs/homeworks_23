@@ -1,20 +1,20 @@
 """The module which contains class-helper for process data function."""
 import json
 from datetime import datetime, timedelta
+from typing import NoReturn
 
 import msgspec
 
+import hw2.schemas as schemas
+import hw2.typesdev as typesdev
 from hw2.enums import Period
-from hw2.schemas import UserDataSchema
-from hw2.typesdev import Users
-
-from .common import get_valid_dict_to_str
+from hw2.utils.common import get_valid_dict_to_str
 
 
 class UserStatsUtils:
     """Create the class which helps to simplify and reduce the code in process_data function."""
 
-    def __init__(self, data_file_path: str, output_file_path: str) -> None:
+    def __init__(self, data_file_path: str, output_file_path: str) -> NoReturn:
         """Create initial method of the UserStatsUtils class which sets necessary attributes on instance.
 
         Args:
@@ -26,7 +26,7 @@ class UserStatsUtils:
         self.all_ages = []
 
     @property
-    def users_data(self) -> Users:
+    def users(self) -> schemas.Users:
         """Create a function-property which validates provided JSON file, it's data and returns it \
         or raises an error in case of the failed validation.
 
@@ -42,7 +42,7 @@ class UserStatsUtils:
                 # If the provided JSON file has invalid syntax then an error occurs. \
                 # We catch it and write an error message to the output file
                 try:
-                    users_data: Users = json.load(data_file)
+                    users_data: typesdev.Users = json.load(data_file)
                 except json.JSONDecodeError:
                     json.dump(
                         obj={
@@ -57,7 +57,7 @@ class UserStatsUtils:
 
                 # Processing possible error with data from JSON file validation
                 try:
-                    self.validate_user_models(users_data)
+                    users: schemas.Users = self.validate_user_models(users_data)
                 except msgspec.ValidationError:
                     json.dump(
                         obj={
@@ -69,10 +69,10 @@ class UserStatsUtils:
                         fp=output_file,
                     )
                     raise
-                return users_data
+                return users
 
     @property
-    def user_stats(self) -> dict[str, int]:
+    def user_stats(self) -> typesdev.UserStats:
         """Create a function-property that returns necessary user stats.
 
         Returns:
@@ -111,7 +111,11 @@ class UserStatsUtils:
                 self.get_mt_half_of_year_offline_users_avg_age(),
         }
 
-    def user_is_offline_lt_target_period(self, user_item: dict, target_period: Period) -> bool:
+    def user_is_offline_lt_target_period(
+        self,
+        user_item: schemas.User,
+        target_period: Period,
+    ) -> bool:
         """Create a function that returns whether the user is offline for less then target period or not.
 
         Args:
@@ -121,23 +125,30 @@ class UserStatsUtils:
         Returns:
             Bool value whether the user is offline for less then target period or not
         """
-        last_login_date = datetime.fromisoformat(user_item['last_login'])
+        last_login_date = datetime.fromisoformat(user_item.last_login)
         target_date = timedelta(days=target_period.value)
 
         return datetime.now() - last_login_date < target_date
 
-    def validate_user_models(self, users_data: Users) -> None:
-        """Create a function that validates all the user data dicts using msgspec.
+    def validate_user_models(self, users_data: typesdev.Users) -> schemas.Users:
+        """Create a function that validates all the user data dicts using msgspec \
+        and returns users as list of the class-models.
 
         Args:
             users_data (Users): the dict where the keys are the user's name and \
             the value is a dict of the User model attributes
+
+        Returns:
+            List of user models.
         """
+        users: schemas.Users = []
         for user_data in users_data.values():
             msgspec.json.decode(
                 get_valid_dict_to_str(user_data).encode(),
-                type=UserDataSchema,
+                type=schemas.User,
             )
+            users.append(schemas.User(**user_data))
+        return users
 
     def get_lt_period_offline_users_avg_age(self, target_period: Period) -> int:
         """Create a function that returns avg age of the filtered by \
@@ -151,12 +162,12 @@ class UserStatsUtils:
         """
         filtered_by_offline_period = list(filter(
             lambda user_item: self.user_is_offline_lt_target_period(user_item, target_period),
-            self.users_data.values(),
+            self.users,
         ))
         number_of_users = len(filtered_by_offline_period)
         if not number_of_users:
             return 0
-        return sum(user['age'] for user in filtered_by_offline_period) // number_of_users
+        return sum(user.age for user in filtered_by_offline_period) // number_of_users
 
     def get_mt_half_of_year_offline_users_avg_age(self) -> int:
         """Create a function that returns whether the user is offline for more then half of year or not.
@@ -166,12 +177,12 @@ class UserStatsUtils:
             condition users
         """
         mt_half_year_offline_users = []
-        for user_data in self.users_data.values():
-            last_login_date = datetime.fromisoformat(user_data['last_login'])
+        for user in self.users:
+            last_login_date = datetime.fromisoformat(user.last_login)
             target_date = timedelta(days=Period.half_of_year.value)
 
             if datetime.now() - last_login_date > target_date:
-                mt_half_year_offline_users.append(user_data['age'])
+                mt_half_year_offline_users.append(user.age)
 
         number_of_users = len(mt_half_year_offline_users)
         if not number_of_users:
