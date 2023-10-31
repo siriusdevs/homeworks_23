@@ -8,7 +8,7 @@ MAIL = 'email'
 REGISTR = 'registered'
 
 
-def is_file(in_path: str, out_path: str) -> None:
+def file_found(in_path: str, out_path: str) -> None:
     """Check if the arguments are files.
 
     Args:
@@ -55,7 +55,7 @@ def process_data(input_filepath: str, output_filepath: str) -> None:
         None or error message.
 
     """
-    is_file(input_filepath, output_filepath)
+    file_found(input_filepath, output_filepath)
     with open(input_filepath, 'r') as input_file:
         res_dict = {MAIL: {}, REGISTR: {}}
         try:
