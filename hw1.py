@@ -61,9 +61,11 @@ def get_salary_stats(*deps: Deps, used_deps: UsedDeps = None) -> SalaryStats:
     """
     # get list of all salaries
     all_salaries = []
+    # convert tuple to set for speed boost
+    used_deps_set = set(used_deps) if used_deps is not None else None
     for dep_name, dep_salaries in deps:
         # if current department name is used in calculations
-        if used_deps is None or dep_name in used_deps:
+        if used_deps_set is None or dep_name in used_deps_set:
             # dep_salaries is dict in format {employee last name: salary, ...}
             all_salaries += dep_salaries.values()
 
