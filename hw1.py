@@ -88,4 +88,6 @@ def _get_top(all_salaries: Salaries, top_x: int) -> Salaries:
 def _get_percents(top_salaries: Salaries, all_salaries: Salaries) -> float:
     if not all_salaries:
         raise AbsenceError('No one salary was found.')
+    if sum(all_salaries) == 0:
+        raise ValueError('All salaries are 0.')
     return sum(top_salaries) / sum(all_salaries) * 100
