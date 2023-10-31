@@ -59,7 +59,7 @@ def email_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict]]:
         clients (dict[str, dict]): users and information about them
 
     Returns:
-        tuple[dict[str, dict]]: percentages of usage each email
+        tuple[dict[str, dict]]: stat of usage each email and sum of all usages
     """
     email_disp = {}
 
