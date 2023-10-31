@@ -3,7 +3,7 @@
 
 def salary_count(
     *company: tuple[str, dict[str, float]],
-    excluded_departments: tuple[str] | None,
+    excluded_departments: tuple[str, ...] = None,
 ) -> tuple[list, float]:
     """Calculate the top 3 salaries and the ratio in percents.
 
