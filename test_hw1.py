@@ -1,5 +1,6 @@
 """Tests for hw1.py."""
 from dataclasses import dataclass
+from typing import Type
 
 import pytest
 
@@ -22,6 +23,21 @@ class SalaryStatsTestCase:
     used_deps: UsedDeps
     # expected value or error message
     expected: SalaryStats | str
+
+
+@dataclass
+class SalaryStatsErrorTestCase(SalaryStatsTestCase):
+    """Test case for hw1 (get_salary_stats function) tests ending with error.
+
+    Args:
+        name: name of test case
+        deps: test deps
+        used_deps: test used_deps
+        expected: expected value for current test data
+        error_type: type of error that current test should end with
+    """
+
+    error_type: Type[Exception]
 
 
 TEST_DEPS_DATA = (
@@ -81,13 +97,26 @@ TEST_DATA = (
 )
 
 TEST_ERROR_DATA = (
-    SalaryStatsTestCase(
+    SalaryStatsErrorTestCase(
         name='empty arguments',
         deps=(
             ('', {}),
         ),
         used_deps=None,
         expected='No one salary was found.',
+        error_type=AbsenceError,
+    ),
+    SalaryStatsErrorTestCase(
+        name='all salaries are 0',
+        deps=(
+            (
+                'developing',
+                {'name1': 0, 'name2': 0, 'name3': 0},
+            ),
+        ),
+        used_deps=None,
+        expected='All salaries are 0.',
+        error_type=ValueError,
     ),
 )
 
@@ -106,7 +135,7 @@ def test_get_salary_stats(test_case: SalaryStatsTestCase):
 
 
 @pytest.mark.parametrize('test_case', TEST_ERROR_DATA, ids=lambda tc: tc.name)
-def test_get_salary_stats_errors(test_case: SalaryStatsTestCase):
+def test_get_salary_stats_errors(test_case: SalaryStatsErrorTestCase):
     """Test salary stats function (get_salary_stats) with test data and expected error.
 
     Args:
@@ -116,7 +145,7 @@ def test_get_salary_stats_errors(test_case: SalaryStatsTestCase):
         True if function with current test data returns right error type and error message.
     """
     # check error type
-    with pytest.raises(AbsenceError) as exc:
+    with pytest.raises(test_case.error_type) as exc:
         get_salary_stats(*test_case.deps, used_deps=test_case.used_deps)
 
         # check error message
