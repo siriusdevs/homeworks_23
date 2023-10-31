@@ -35,12 +35,12 @@ def dict_path(count_dct: dict[str, dict]) -> dict[str, dict]:
     regist_len = len(count_dct[REGISTR]) if count_dct[REGISTR] else 1
     email_len = len(count_dct['email']) if count_dct['email'] else 1
 
-    for register, email in zip(count_dct[REGISTR], count_dct[MAIL]):
+    for register, mail_email in zip(count_dct[REGISTR], count_dct[MAIL]):
         res_dict[REGISTR][register] = round((
             count_dct[REGISTR][register]/regist_len
         )*100, 2,
         )
-        res_dict[MAIL][email] = round((count_dct[MAIL][email]/email_len)*100, 2)
+        res_dict[MAIL][mail_email] = round((count_dct[MAIL][mail_email]/email_len)*100, 2)
     return res_dict
 
 
