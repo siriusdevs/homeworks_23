@@ -1,29 +1,27 @@
 """The module which contains class-helper for process data function."""
 import json
+from dataclasses import dataclass, field
 from datetime import datetime, timedelta
-from typing import NoReturn
 
 import msgspec
 
 import hw2.schemas as schemas
 import hw2.typesdev as typesdev
 from hw2.enums import Period
-from hw2.utils.common import get_valid_dict_to_str
+from hw2.utils.common import get_valid_dict_to_str, validate_file_path
 
 
+@dataclass
 class UserStatsUtils:
     """Create the class which helps to simplify and reduce the code in process_data function."""
 
-    def __init__(self, data_file_path: str, output_file_path: str) -> NoReturn:
-        """Create initial method of the UserStatsUtils class which sets necessary attributes on instance.
+    data_file_path: str
+    output_file_path: str
+    all_ages: list[int] = field(default_factory=list)
 
-        Args:
-            data_file_path (str): the input JSON file with data about users
-            output_file_path (str): the output file where we save necessary statistics
-        """
-        self.data_file_path = data_file_path
-        self.output_file_path = output_file_path
-        self.all_ages = []
+    def __post_init__(self):
+        """Create a function that represents post init logic."""
+        validate_file_path(self.data_file_path, self.output_file_path)
 
     @property
     def users(self) -> schemas.Users:

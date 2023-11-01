@@ -1,5 +1,7 @@
 """Module that consists functions that can't be a part of the certain entity."""
-from typing import Any, Hashable
+import json
+import os
+from typing import Any, Hashable, NoReturn, Optional
 
 
 def get_valid_dict_to_str(dct: dict[Hashable, Any]) -> str:
@@ -32,3 +34,30 @@ def find_insertion_index(nums: list[int], target: int) -> int:
         else:
             left = mid + 1
     return left
+
+
+def validate_file_path(file_path: str, output_file_path: Optional[str] = None) -> NoReturn:
+    """Create a function that checks whether the file exists or not.
+
+    Args:
+        file_path (str): path to file we need to check.
+        output_file_path (Optional[str]): path to file that we write an error message in.
+
+    Raises:
+        FileNotFoundError: if the specified path to file is incorrect.
+    """
+    if not os.path.exists(file_path):
+        if output_file_path:
+            with open(output_file_path, 'w') as output_file:
+                json.dump(
+                    obj={
+                        'status': 'Error',
+                        'details': {
+                            'msg': f'Invalid path to data file ({file_path})',
+                        },
+                    },
+                    fp=output_file,
+                )
+        raise FileNotFoundError(
+            f'The specified path to file ({file_path}) is incorrect. File does not exist',
+        )

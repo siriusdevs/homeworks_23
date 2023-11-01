@@ -5,12 +5,13 @@ from datetime import datetime, timedelta
 from typing import Generator, NoReturn
 
 from hw2.typesdev import TestDataItem, Users
+from hw2.utils.common import validate_file_path
 
 
 class TestDataGenerator():
     """Class-generator representing all test data."""
 
-    _number_of_files = 10
+    _number_of_files = 11
     _input_files_dir_path = 'hw2/test_files/input/'
     _output_files_dir_path = 'hw2/test_files/output/'
     _expected_files_dir_path = 'hw2/test_files/expected_output/'
@@ -73,6 +74,12 @@ class TestDataGenerator():
 
         for filename in self._generate_filenames():
             input_file_path = f'{self._input_files_dir_path}{filename}'
+
+            try:
+                validate_file_path(input_file_path)
+            except FileNotFoundError:
+                continue
+
             with open(input_file_path, 'r') as input_file:
                 # skip files with invalid JSON syntax
                 try:
