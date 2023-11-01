@@ -48,6 +48,8 @@ def validate_file_path(file_path: str, output_file_path: Optional[str] = None) -
     """
     if not os.path.exists(file_path):
         if output_file_path:
+            process_output_file(output_file_path)
+
             with open(output_file_path, 'w') as output_file:
                 json.dump(
                     obj={
@@ -61,3 +63,15 @@ def validate_file_path(file_path: str, output_file_path: Optional[str] = None) -
         raise FileNotFoundError(
             f'The specified path to file ({file_path}) is incorrect. File does not exist',
         )
+
+
+def process_output_file(output_file_path: str) -> NoReturn:
+    """Create a function that creates all the sub dirs for output_file if the path contains it.
+
+    Args:
+        output_file_path (str): path to file we need to check.
+    """
+    output_file_path = output_file_path.replace('\\', '/')
+    if not os.path.exists(output_file_path):
+        dir_tree = '/'.join(output_file_path.rsplit('/')[:-1])
+        os.makedirs(dir_tree)
