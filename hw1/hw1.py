@@ -42,7 +42,7 @@ def get_departments_rating(
             if lenth != 0:
                 average_salaries[department] = round(sum(salaries) / lenth, 2)
 
-    average_salaries = sorted(average_salaries.items(), key=lambda el: el[1])
-    average_salaries = [sorted_salary for sorted_salary, _ in average_salaries]
+    sorted_departments = sorted(average_salaries.items(), key=lambda el: el[1])
+    sorted_departments = [sorted_department for sorted_department, _ in sorted_departments]
 
-    return average_salaries[:-4:-1], average_salaries[:3]
+    return sorted_departments[:-4:-1], sorted_departments[:3]
