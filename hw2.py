@@ -3,16 +3,17 @@
 
 import json
 import os
+from datetime import datetime
 
 MAIL = 'email'
 REGISTER = 'registered'
 
 
-def make_path(path: list):
+def make_path(path: list) -> None:
     """Make path to output file.
 
     Args:
-        path: list with name of directory and output filename
+        path: list with name of directory and output filename as last element
 
     Returns:
         None or self without the first element.
@@ -44,7 +45,7 @@ def file_found(in_path: str, out_path: str) -> None:
         make_path(out_path.split('/'))
 
 
-def dict_path(count_dct: dict[str, dict]) -> dict[str, dict]:
+def dict_path(count_dct: dict[datetime, dict]) -> dict[str, dict]:
     """Take a set and two lists and returns a dictionary with statistics.
 
     Args:
@@ -57,8 +58,9 @@ def dict_path(count_dct: dict[str, dict]) -> dict[str, dict]:
     regist_len = len(count_dct[REGISTER]) if count_dct[REGISTER] else 1
     email_len = len(count_dct[MAIL]) if count_dct[MAIL] else 1
 
-    for register, mail_host in zip(count_dct[REGISTER], count_dct[MAIL]):
-        res_dict[REGISTER][register] = round((
+    for register, mail_host in zip(sorted(count_dct[REGISTER]), count_dct[MAIL]):
+        new_register = register.strftime('%Y-%m-%d')
+        res_dict[REGISTER][new_register] = round((
             count_dct[REGISTER][register]/regist_len
         )*100, 2,
         )
@@ -88,7 +90,8 @@ def process_data(input_filepath: str, output_filepath: str) -> None:
         for user in data_files.values():
             for key in user.keys():
                 if key == REGISTER:
-                    res_dict[REGISTER][user[key]] = res_dict.get(user[key], 0)+1
+                    date = datetime.fromisoformat(user[key])
+                    res_dict[REGISTER][date] = res_dict.get(date, 0)+1
                 elif key == MAIL:
                     mail_host = user[key][user[key].find('@')+1:]
                     res_dict[MAIL][mail_host] = res_dict.get(mail_host, 0)+1
