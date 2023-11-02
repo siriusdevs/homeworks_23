@@ -5,8 +5,8 @@ from datetime import datetime, timedelta
 
 import msgspec
 
+import hw2.src.bbtypes as bbtypes
 import hw2.src.schemas as schemas
-import hw2.src.typesdev as typesdev
 from hw2.src.enums import Period
 
 from .common import get_valid_dict_to_str, validate_file_path
@@ -41,7 +41,7 @@ class UserStatsUtils:
                 # If the provided JSON file has invalid syntax then an error occurs. \
                 # We catch it and write an error message to the output file
                 try:
-                    users_data: typesdev.Users = json.load(data_file)
+                    users_data: bbtypes.Users = json.load(data_file)
                 except json.JSONDecodeError:
                     json.dump(
                         obj={
@@ -71,7 +71,7 @@ class UserStatsUtils:
                 return users
 
     @property
-    def user_stats(self) -> typesdev.UserStats:
+    def user_stats(self) -> bbtypes.UserStats:
         """Create a function-property that returns necessary user stats.
 
         Returns:
@@ -129,7 +129,7 @@ class UserStatsUtils:
 
         return datetime.now() - last_login_date < target_date
 
-    def validate_user_models(self, users_data: typesdev.Users) -> schemas.Users:
+    def validate_user_models(self, users_data: bbtypes.Users) -> schemas.Users:
         """Create a function that validates all the user data dicts using msgspec \
         and returns users as list of the class-models.
 

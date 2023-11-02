@@ -1,4 +1,4 @@
-"""hw2 module for all custom types."""
+"""hw2 module for all custom built-in based (bb) types."""
 
 UserData = dict[str, str | int]
 Users = dict[str, UserData]
