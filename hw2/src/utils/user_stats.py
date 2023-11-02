@@ -5,10 +5,11 @@ from datetime import datetime, timedelta
 
 import msgspec
 
-import hw2.schemas as schemas
-import hw2.typesdev as typesdev
-from hw2.enums import Period
-from hw2.utils.common import get_valid_dict_to_str, validate_file_path
+import hw2.src.schemas as schemas
+import hw2.src.typesdev as typesdev
+from hw2.src.enums import Period
+
+from .common import get_valid_dict_to_str, validate_file_path
 
 
 @dataclass
