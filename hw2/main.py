@@ -1,6 +1,7 @@
 """Module for calculate stats."""
 
 import json
+import re
 from math import ceil
 
 import dateparser
@@ -18,10 +19,11 @@ def validate_email(email: str) -> bool:
     Returns:
         bool: valid or invalid email
     """
-    return email.count('@') == 1 and not email.startswith('@')
+    pattern = r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)'
+    return re.match(pattern, email) is not None
 
 
-def duration_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict]]:
+def duration_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict], ...]:
     """Calculate duration on site for each user.
 
     Args:
@@ -52,7 +54,7 @@ def duration_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict]]:
     return duration_disp, sum(duration_disp.values())
 
 
-def email_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict]]:
+def email_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict], ...]:
     """Calculate email dispersion among users.
 
     Args:
@@ -82,11 +84,21 @@ def process_data(path_in: str, path_out: str) -> None:
         path_in (str): path to input file
         path_out (str): path to output file
 
+    Raises:
+        FileNotFoundError: file or directory not found
+        JSONDecodeError: fail to decode file in json
+
     Result:
         Json file with calculated stats
     """
-    with open(path_in, 'r') as data_file:
-        clients = json.loads(data_file.read())
+    try:
+        with open(path_in, 'r') as data_file:
+            clients = json.loads(data_file.read())
+    except FileNotFoundError:
+        raise FileNotFoundError(f'file {path_in} not found')
+    except json.decoder.JSONDecodeError:
+        raise json.decoder.JSONDecodeError(f'file {path_in} is not valid')
+
     email_disp, duration_disp = email_dispersion(clients), duration_dispersion(clients)
 
     stats = {'email_scatter': {}, 'duration_scatter': {}}
@@ -96,5 +108,8 @@ def process_data(path_in: str, path_out: str) -> None:
     for duration in duration_disp[0].keys():
         stats['duration_scatter'][duration] = (duration_disp[0][duration] / duration_disp[1]) * 100
 
-    with open(path_out, 'w') as output_file:
-        json.dump(stats, fp=output_file, indent=4)
+    try:
+        with open(path_out, 'w') as output_file:
+            json.dump(stats, fp=output_file, indent=4)
+    except FileNotFoundError:
+        raise FileNotFoundError(f'file {path_in} not found')
