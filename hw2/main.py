@@ -38,9 +38,14 @@ def duration_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict], ...]
         'under_half_year': 0,
         'over_half_year': 0,
     }
+    count_durations = 0
     for users in clients.items():
-        registered = dateparser.parse(clients[users[0]]['registered'])
-        last_login = dateparser.parse(clients[users[0]]['last_login'])
+        try:
+            registered = dateparser.parse(clients[users[0]]['registered'])
+            last_login = dateparser.parse(clients[users[0]]['last_login'])
+        except KeyError:
+            continue
+        count_durations +=1
         how_long = ceil((last_login.timestamp() - registered.timestamp()) / DAYS_CONST)
 
         if how_long < 2:
@@ -51,7 +56,10 @@ def duration_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict], ...]
             duration_disp['under_half_year'] += 1
         else:
             duration_disp['over_half_year'] += 1
-    return duration_disp, sum(duration_disp.values())
+    if count_durations:
+        return duration_disp, sum(duration_disp.values())
+    else:
+        return duration_disp, 1
 
 
 def email_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict], ...]:
@@ -64,17 +72,23 @@ def email_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict], ...]:
         tuple[dict[str, dict]]: stat of usage each email and sum of all usages
     """
     email_disp = {}
+    count_emails = 0
 
     for users in clients.items():
-        if not validate_email(clients[users[0]]['email']):
+        try:
+            if not validate_email(clients[users[0]]['email']):
+                continue
+            email_host = clients[users[0]]['email'].split('@')[1]
+        except KeyError:
             continue
-        email_host = clients[users[0]]['email'].split('@')[1]
+        count_emails +=1
         if email_host in email_disp.keys():
             email_disp[email_host] += 1
         else:
             email_disp[email_host] = 1
-
-    return email_disp, sum(email_disp.values())
+    if not count_emails:
+        raise KeyError('data doesn`t have email fields!')
+    return email_disp, sum(email_disp.values()) 
 
 
 def process_data(path_in: str, path_out: str) -> None:
@@ -95,9 +109,12 @@ def process_data(path_in: str, path_out: str) -> None:
         with open(path_in, 'r') as data_file:
             clients = json.loads(data_file.read())
     except FileNotFoundError:
-        raise FileNotFoundError(f'file {path_in} not found')
+        raise FileNotFoundError(f'file <{path_in}> not found')
     except json.decoder.JSONDecodeError:
-        raise json.decoder.JSONDecodeError(f'file {path_in} is not valid')
+        raise ValueError(f'file <{path_in}> is not valid')
+
+    if not clients:
+        raise ValueError('data file is empty!')
 
     email_disp, duration_disp = email_dispersion(clients), duration_dispersion(clients)
 
@@ -112,4 +129,5 @@ def process_data(path_in: str, path_out: str) -> None:
         with open(path_out, 'w') as output_file:
             json.dump(stats, fp=output_file, indent=4)
     except FileNotFoundError:
-        raise FileNotFoundError(f'file {path_in} not found')
+        raise FileNotFoundError(f'file <{path_in}> not found')
+process_data('hw2/test_data_hw2/data_emty.json', 'hw2/test_data_hw2/output.json')
