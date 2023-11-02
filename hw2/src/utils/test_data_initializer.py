@@ -15,7 +15,7 @@ class TestDataGenerator():
     _input_files_dir_path = 'hw2/test_files/input/'
     _output_files_dir_path = 'hw2/test_files/output/'
     _expected_files_dir_path = 'hw2/test_files/expected_output/'
-    _last_modification_date_file_path = 'hw2/last_modification_date'
+    _last_modification_date_file_path = 'hw2/test_files/last_modification_date'
 
     def initialize_test_data(self) -> tuple[TestDataItem, ...]:
         """Create a function that initialises test_data and returns it.
