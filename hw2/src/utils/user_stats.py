@@ -77,8 +77,9 @@ class UserStatsUtils:
         median_age: int = self.all_ages[half_num_of_users]
         if number_of_users % 2 == 0:
             median_age = (
-                self.all_ages[half_num_of_users] + self.all_ages[half_num_of_users - 1]
-            ) // 2
+                (self.all_ages[half_num_of_users] + self.all_ages[half_num_of_users - 1])
+                // 2
+            )
         return {
             'max_age': self.all_ages[-1],
             'min_age': self.all_ages[0],
@@ -100,26 +101,27 @@ class UserStatsUtils:
                 self.get_gt_half_of_year_offline_users_avg_age(),
         }
 
+    @staticmethod
     def user_is_offline_lt_target_period(
-        self,
         user_item: schemas.User,
         target_period: Period,
     ) -> bool:
         """Create a function that returns whether the user is offline for less then target period or not.
 
         Args:
-            user_item (dict): the dict that includes all the user params such as age, last_login
+            user_item (User): the dict that includes all the user params such as age, last_login
             target_period (Period): the value that represents the target period in days
 
         Returns:
             Bool value whether the user is offline for less then target period or not
         """
-        last_login_date = datetime.fromisoformat(user_item.last_login)
+        last_login_date = datetime.fromisoformat(str(user_item.last_login))
         target_date = timedelta(days=target_period.value)
 
         return datetime.now() - last_login_date < target_date
 
-    def validate_user_models(self, users_data: bbtypes.Users) -> schemas.Users:
+    @staticmethod
+    def validate_user_models(users_data: bbtypes.Users) -> schemas.Users:
         """Create a function that validates all the user data dicts using msgspec \
         and returns users as list of the class-models.
 
@@ -167,7 +169,7 @@ class UserStatsUtils:
         """
         gt_half_year_offline_users = []
         for user in self.users:
-            last_login_date = datetime.fromisoformat(user.last_login)
+            last_login_date = datetime.fromisoformat(str(user.last_login))
             target_date = timedelta(days=Period.half_of_year.value)
 
             if datetime.now() - last_login_date > target_date:

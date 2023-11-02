@@ -1,6 +1,7 @@
 """Module with an implemented TestDataInitialiser class."""
 import json
 import os
+from contextlib import suppress
 from datetime import datetime, timedelta
 from typing import Generator, NoReturn
 
@@ -8,7 +9,7 @@ from hw2.src.bbtypes import TestDataItem, Users
 from hw2.src.utils.common import validate_file_path
 
 
-class TestDataGenerator():
+class TestDataGenerator:
     """Class-generator representing all test data."""
 
     _number_of_files = 11
@@ -73,22 +74,17 @@ class TestDataGenerator():
         date_diff: timedelta = datetime.now() - last_modification_date
 
         for filename in self._generate_filenames():
-            input_file_path = f'{self._input_files_dir_path}{filename}'
-
-            try:
+            # skip files with invalid path and invalid JSON syntax
+            with suppress(json.JSONDecodeError, FileNotFoundError):
+                input_file_path = f'{self._input_files_dir_path}{filename}'
                 validate_file_path(input_file_path)
-            except FileNotFoundError:
-                continue
 
-            with open(input_file_path, 'r') as input_file:
-                # skip files with invalid JSON syntax
-                try:
+                with open(input_file_path, 'r') as input_file:
+                    # skip files with invalid JSON syntax
                     input_data = json.load(input_file)
-                except json.JSONDecodeError:
-                    continue
 
-            updated_data: Users = self._update_input_data(input_data, date_diff)
-            self._save_updated_data(input_file_path, updated_data)
+                updated_data: Users = self._update_input_data(input_data, date_diff)
+                self._save_updated_data(input_file_path, updated_data)
 
         # update last_modification_date
         self._update_last_modification_date()
@@ -99,7 +95,8 @@ class TestDataGenerator():
         with open(self._last_modification_date_file_path, 'w') as last_modification_date_file:
             last_modification_date_file.write(datetime.now().strftime('%Y-%m-%d'))
 
-    def _update_input_data(self, input_user_data: Users, date_diff: timedelta) -> Users:
+    @staticmethod
+    def _update_input_data(input_user_data: Users, date_diff: timedelta) -> Users:
         """Create a function that updates last_login field in received input_user_data \
         and returns it.
 
@@ -119,7 +116,8 @@ class TestDataGenerator():
             user['last_login'] = (old_last_login_date + date_diff).strftime('%Y-%m-%d')
         return input_user_data
 
-    def _save_updated_data(self, input_file_path: str, updated_data: Users) -> NoReturn:
+    @staticmethod
+    def _save_updated_data(input_file_path: str, updated_data: Users) -> NoReturn:
         """Create a function that writes an updated data to input_file.
 
         Args:
