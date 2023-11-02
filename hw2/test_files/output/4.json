@@ -7,5 +7,5 @@
     "lt_week_offline_users_average_age": 51,
     "lt_month_offline_users_average_age": 51,
     "lt_half_of_year_offline_users_average_age": 44,
-    "mt_half_of_year_offline_users_average_age": 0
+    "gt_half_of_year_offline_users_average_age": 0
 }
