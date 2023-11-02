@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from hw2 import process_data, NotCorrectFormatDate
+from hw2 import NotCorrectFormatDate, process_data
 
 
 def make_tests():

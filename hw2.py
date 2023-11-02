@@ -77,7 +77,6 @@ def file_found(in_path: str, out_path: str) -> None:
         os.chdir(pwd)
 
 
-
 def dict_path(count_dct: dict[datetime, dict]) -> dict[str, dict]:
     """Take a set and two lists and returns a dictionary with statistics.
 
