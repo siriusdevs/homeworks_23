@@ -9,7 +9,11 @@ import hw2.src.bbtypes as bbtypes
 import hw2.src.schemas as schemas
 from hw2.src.enums import Period
 
-from .common import create_error_object, get_valid_dict_to_str, validate_file_path
+from .common import (
+    create_error_object,
+    get_valid_dict_to_str,
+    validate_file_path,
+)
 
 
 @dataclass
