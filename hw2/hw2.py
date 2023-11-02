@@ -2,7 +2,7 @@
 import json
 from typing import NoReturn
 
-from hw2.utils import UserStatsUtils, find_insertion_index
+from hw2.src.utils import UserStatsUtils, find_insertion_index
 
 
 def process_data(data_file_path: str, output_file_path: str) -> NoReturn:

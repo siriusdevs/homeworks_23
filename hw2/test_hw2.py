@@ -6,8 +6,8 @@ import pytest
 from msgspec import ValidationError
 
 from hw2.hw2 import process_data
-from hw2.typesdev import Error, Users
-from hw2.utils.test_data_initialiser import TestDataGenerator
+from hw2.src.typesdev import Error, Users
+from hw2.src.utils import TestDataGenerator
 
 TEST_DATA = TestDataGenerator()
 
