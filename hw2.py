@@ -21,7 +21,7 @@ class NotCorrectFormatDate(Exception):
         super().__init__(f'{date} not in format YYYY-MM-DD')
 
 
-def check_correct_format(date: str) -> datetime | None:
+def to_datetime(date: str) -> datetime | None:
     """Check if the date is in the format.
 
     Args:
@@ -68,11 +68,14 @@ def file_found(in_path: str, out_path: str) -> None:
     Raises:
         FileNotFoundError: If in_path is not file
     """
+    pwd = os.getcwd()
     if not os.path.isfile(in_path):
         raise FileNotFoundError('Is not a file path')
     if not os.path.isfile(out_path):
         out_path = out_path.replace(os.getcwd(), '')
         make_path(out_path.split('/'))
+        os.chdir(pwd)
+
 
 
 def dict_path(count_dct: dict[datetime, dict]) -> dict[str, dict]:
@@ -120,7 +123,7 @@ def process_data(input_filepath: str, output_filepath: str) -> None:
         for user in data_files.values():
             for key in user.keys():
                 if key == REGISTER:
-                    date = check_correct_format((user[key]))
+                    date = to_datetime((user[key]))
                     res_dict[REGISTER][date] = res_dict.get(date, 0)+1
                 elif key == MAIL:
                     mail_host = user[key][user[key].find('@')+1:]
