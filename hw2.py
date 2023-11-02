@@ -9,6 +9,36 @@ MAIL = 'email'
 REGISTER = 'registered'
 
 
+class NotCorrectFormatDate(Exception):
+    """Error for date in not format YYYY-MM-DD."""
+
+    def __init__(self, date: str) -> None:
+        """Create error message.
+
+        Args:
+            date: date in uncorrect format
+        """
+        super().__init__(f'{date} not in format YYYY-MM-DD')
+
+
+def check_correct_format(date: str) -> datetime | None:
+    """Check if the date is in the format.
+
+    Args:
+        date: date in uncorrect format
+
+    Raises:
+        NotCorrectFormatDate: if date in not format YYYY-MM-DD
+
+    Returns:
+        Object datetime type.
+    """
+    try:
+        return datetime.fromisoformat(date)
+    except ValueError:
+        raise NotCorrectFormatDate(date)
+
+
 def make_path(path: list) -> None:
     """Make path to output file.
 
@@ -90,7 +120,7 @@ def process_data(input_filepath: str, output_filepath: str) -> None:
         for user in data_files.values():
             for key in user.keys():
                 if key == REGISTER:
-                    date = datetime.fromisoformat(user[key])
+                    date = check_correct_format((user[key]))
                     res_dict[REGISTER][date] = res_dict.get(date, 0)+1
                 elif key == MAIL:
                     mail_host = user[key][user[key].find('@')+1:]

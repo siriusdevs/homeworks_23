@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from hw2 import process_data
+from hw2 import process_data, NotCorrectFormatDate
 
 
 def make_tests():
@@ -35,6 +35,9 @@ TEST_ERROR_PROCESS_DATA = (
     ('hw2/input/5.json',
      'hw2/output/5.json', 'Input file is empty',
      ),
+    ('hw2/input/6.json',
+     'hw2/output/6.json', '201212-24 not in format YYYY-MM-DD',
+     ),
 )
 
 
@@ -64,5 +67,5 @@ def test_errors_process_data(input_filepath: str, output_filepath: str, expected
     """
     try:
         process_data(input_filepath, output_filepath)
-    except FileNotFoundError as err:
+    except (FileNotFoundError, NotCorrectFormatDate) as err:
         assert expected == str(err)
