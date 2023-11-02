@@ -9,7 +9,7 @@ import hw2.src.bbtypes as bbtypes
 import hw2.src.schemas as schemas
 from hw2.src.enums import Period
 
-from .common import get_valid_dict_to_str, validate_file_path
+from .common import create_error_object, get_valid_dict_to_str, validate_file_path
 
 
 @dataclass
@@ -44,12 +44,7 @@ class UserStatsUtils:
                     users_data: bbtypes.Users = json.load(data_file)
                 except json.JSONDecodeError:
                     json.dump(
-                        obj={
-                            'status': 'Error',
-                            'details': {
-                                'msg': 'Invalid JSON file provided',
-                            },
-                        },
+                        obj=create_error_object(msg='Invalid JSON file provided'),
                         fp=output_file,
                     )
                     raise
@@ -59,12 +54,7 @@ class UserStatsUtils:
                     users: schemas.Users = self.validate_user_models(users_data)
                 except msgspec.ValidationError:
                     json.dump(
-                        obj={
-                            'status': 'Error',
-                            'details': {
-                                'msg': 'Validation error for user items',
-                            },
-                        },
+                        obj=create_error_object('Validation error for user items'),
                         fp=output_file,
                     )
                     raise

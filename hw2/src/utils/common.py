@@ -3,6 +3,8 @@ import json
 import os
 from typing import Any, Hashable, NoReturn, Optional
 
+from hw2.src import bbtypes
+
 
 def get_valid_dict_to_str(dct: dict[Hashable, Any]) -> str:
     """Create function that returns string representation of the dict in valid format for msgspec.
@@ -52,12 +54,7 @@ def validate_file_path(file_path: str, output_file_path: Optional[str] = None) -
 
             with open(output_file_path, 'w') as output_file:
                 json.dump(
-                    obj={
-                        'status': 'Error',
-                        'details': {
-                            'msg': f'Invalid path to data file ({file_path})',
-                        },
-                    },
+                    obj=create_error_object(msg=f'Invalid path to data file ({file_path})'),
                     fp=output_file,
                 )
         raise FileNotFoundError(
@@ -75,3 +72,20 @@ def process_output_file(output_file_path: str) -> NoReturn:
     if not os.path.exists(output_file_path):
         dir_tree = '/'.join(output_file_path.rsplit('/')[:-1])
         os.makedirs(dir_tree)
+
+
+def create_error_object(msg: str) -> bbtypes.Error:
+    """Create a function that returns the bbtypes.Error object with the custom message.
+
+    Args:
+        msg (str): custom message.
+
+    Returns:
+        The bbtypes.Error object
+    """
+    return {
+        'status': 'Error',
+        'details': {
+            'msg': msg,
+        },
+    }
