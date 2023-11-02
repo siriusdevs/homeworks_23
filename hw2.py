@@ -41,7 +41,7 @@ def file_found(in_path: str, out_path: str) -> None:
         raise FileNotFoundError('Is not a file path')
     if not os.path.isfile(out_path):
         out_path = out_path.replace(os.getcwd(), '')
-        make_path(out_path.split('/')[1:])
+        make_path(out_path.split('/'))
 
 
 def dict_path(count_dct: dict[str, dict]) -> dict[str, dict]:
