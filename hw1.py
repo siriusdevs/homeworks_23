@@ -1,7 +1,8 @@
+"""Module, that has one function "check_arguments" and "top_salary", homework 1."""
 from itertools import chain
 
 
-def check_arguments(departments: dict[str, dict], limit_salary: int | float):
+def check_arguments(departments: dict[str, ...], limit_salary: int | float):
     """Check the validity of the arguments.
 
     Args:
@@ -58,7 +59,7 @@ def top_salary(
                                                    departments.values())), reverse=True)
 
     if limit_salary:
-        top = list(filter(lambda x: x < limit_salary, all_salaries))[:3]
+        top = list(filter(lambda salary: salary < limit_salary, all_salaries))[:3]
     else:
         top = all_salaries[:3]
 
