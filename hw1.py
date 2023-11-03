@@ -2,6 +2,20 @@ from itertools import chain
 
 
 def check_arguments(departments: dict[str, dict], limit_salary: int | float):
+    """Check the validity of the arguments.
+
+    Args:
+        departments: A dictionary representing departments and their workers
+            where the keys are department names (str) and the values are dictionaries of workers
+            where the keys are worker names (str) and the values are their salaries (float).
+        limit_salary: An optional argument representing the salary limit.
+
+    Raises:
+        ValueError: If no arguments are provided in the departments dictionary.
+        TypeError: If the department or workers is not of the correct type.
+        TypeError: If the worker or salary is not of the correct type.
+        TypeError: If the optional argument limit_salary is not an int or float.
+    """
     if not departments:
         raise ValueError('No one argument in departments')
 
@@ -20,8 +34,24 @@ def check_arguments(departments: dict[str, dict], limit_salary: int | float):
 
 def top_salary(
     limit_salary: int | float = None,
-    **departments: dict[str, dict]
+    **departments: dict[str, dict],
 ) -> (list[float], float):
+    """Calculates the top salaries and the percentage they represent.
+
+    Args:
+        limit_salary: The salary limit. Default is None.
+        **departments: Variable keyword arguments representing departments
+            and their workers. The keys are department names (str) and the values are
+            dictionaries of workers where the keys are worker names (str) and the
+            values are their salaries (float).
+
+    Returns:
+        tuple: A tuple containing a list of the top salaries (rounded to 2 decimal places) and
+            the percentage these salaries represent (rounded to 2 decimal places).
+
+    Raises:
+        ValueError: If there are no arguments in the departments.
+    """
     check_arguments(departments, limit_salary)
 
     all_salaries = sorted(list(chain.from_iterable(workers.values() for workers in
