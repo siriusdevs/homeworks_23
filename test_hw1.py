@@ -5,7 +5,7 @@ from hw1 import top_salary
 TEST_BASIC = (
     (
         {
-            'IT': {'John': 5000.0, 'Alice': 6000.0},
+            'DB': {'John': 5000.0, 'Alice': 6000.0},
             'HR': {'Bob': 4000.0, 'Carol': 4500.0, 'David': 4200.0},
             'Sales': {'Emily': 5500.0, 'Frank': 5200.0}
         },
