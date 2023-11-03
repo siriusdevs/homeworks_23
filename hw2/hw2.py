@@ -14,6 +14,8 @@
 (цель состоит в том, чтобы в actions они отображались отдельными галочками).
 """
 import json
+import os
+import os.path as op
 
 LOWEST_ADULT_AGE = 18
 MIDDLE_ADULT_AGE = 25
@@ -32,31 +34,35 @@ def stats_by_age(ages: list[int]) -> dict[str, float]:
             key: str with age-gap naming.
             value: float with percentage count of this age group.
 
+    Raises:
+        ValueError: if age that given is not number
+
     """
     output = {'Below 18': 0, '18 to 25': 0, '25 to 45': 0, '45 to 60': 0, 'Above 60': 0}
-    age_gaps = [0, 0, 0, 0, 0]
     for age in ages:
+        if not isinstance(age, (int, float)):
+            raise ValueError(f'{age} was given instead of proper numeric age')
         match age:
             case age if age in range(0, LOWEST_ADULT_AGE):
-                age_gaps[0] += 1
+                output['Below 18'] += 1
             case age if age in range(LOWEST_ADULT_AGE, MIDDLE_ADULT_AGE):
-                age_gaps[1] += 1
+                output['18 to 25'] += 1
             case age if age in range(MIDDLE_ADULT_AGE, LOWEST_ADULT_PLUS_AGE):
-                age_gaps[2] += 1
+                output['25 to 45'] += 1
             case age if age in range(LOWEST_ADULT_PLUS_AGE, HIGHEST_ADULT_PLUS_AGE):
-                age_gaps[3] += 1
-            case age if age > HIGHEST_ADULT_PLUS_AGE:
-                age_gaps[4] += 1
-    total = sum(age_gaps)
+                output['45 to 60'] += 1
+            case age if age >= HIGHEST_ADULT_PLUS_AGE:
+                output['Above 60'] += 1
+    total = sum(output.values())
     if total == 0:
         return output
     temp = [
-        round(age_gaps[0] / total * 100, 2),
-        round(age_gaps[1] / total * 100, 2),
-        round(age_gaps[2] / total * 100, 2),
-        round(age_gaps[3] / total * 100, 2),
-        round(age_gaps[4] / total * 100, 2),
-        ]
+        round(output['Below 18'] / total * 100, 2),
+        round(output['18 to 25'] / total * 100, 2),
+        round(output['25 to 45'] / total * 100, 2),
+        round(output['45 to 60'] / total * 100, 2),
+        round(output['Above 60'] / total * 100, 2),
+    ]
     for index, age_gap in enumerate(output.keys()):
         output[age_gap] = temp[index]
     return output
@@ -77,7 +83,7 @@ def count_unique(sample: list[str]) -> dict[str, float]:
     output = {}
     for element in sample:
         if element not in output.keys():
-            output.update({element: 1})
+            output[element] = 1
         else:
             output[element] += 1
     total = sum(output.values())
@@ -86,6 +92,25 @@ def count_unique(sample: list[str]) -> dict[str, float]:
     for key in output.keys():
         output[key] = round(output[key] / total * 100, 2)
     return output
+
+
+def write_to_file(file_path: str, reg_years: list[str], ages: list[int]) -> None:
+    """Output writer muodule.
+
+    Args:
+        file_path: path to file that we need to write output to.
+        reg_years: list of different registration years from given json.
+        ages: list of ages that we generate from given json.
+
+    """
+    if op.dirname(file_path) and not op.exists(file_path):
+        os.mkdir(op.dirname(file_path))
+    with open(file_path, 'w') as json_file:
+        json.dump(
+            {'Registration stats': count_unique(reg_years)}
+            | {'Age-gaps stats': stats_by_age(ages)},
+            fp=json_file,
+        )
 
 
 def process_data(in_path: str, out_path: str) -> None:
@@ -102,17 +127,16 @@ def process_data(in_path: str, out_path: str) -> None:
         with open(in_path) as inputdata:
             user_stats = json.load(inputdata)
     except json.JSONDecodeError:
-        raise ValueError('File that you provided is empty, not valid or not exists')
+        raise ValueError('File that you provided is empty or not valid')
+    except FileNotFoundError:
+        raise ValueError('File that you provided does not exist or not valid')
     with open(in_path) as input_data:
         user_stats = json.load(input_data)
     ages = []
     reg_years = []
     for user_data in user_stats.values():
+        if 'age' not in user_data.keys() or 'registered' not in user_data.keys():
+            raise ValueError('Not valid file provided, missing age or registered data')
         ages.append(user_data['age'])
         reg_years.append(user_data['registered'][:4])
-    with open(out_path, 'w') as json_file:
-        json.dump(
-            {'Registration stats': count_unique(reg_years)} |
-            {'Age-gaps stats': stats_by_age(ages)},
-            fp=json_file,
-                )
+    write_to_file(out_path, reg_years, ages)
