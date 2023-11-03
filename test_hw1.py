@@ -2,7 +2,7 @@ import pytest
 
 from hw1 import top_salary
 
-tests_basic = (
+TEST_BASIC = (
     (
         {
             'IT': {'John': 5000.0, 'Alice': 6000.0},
@@ -38,12 +38,19 @@ tests_basic = (
 )
 
 
-@pytest.mark.parametrize('departments, limit_salary, expected', tests_basic)
+@pytest.mark.parametrize('departments, limit_salary, expected', TEST_BASIC)
 def test_top_salaries_basic(departments, limit_salary, expected):
+    """Test function for `top_salary` to validate basic functionality.
+
+    Args:
+        departments: A dictionary representing departments and their workers.
+        limit_salary: The salary limit.
+        expected: The expected output.
+    """
     assert top_salary(limit_salary, **departments) == expected
 
 
-tests_errors = (
+TEST_ERRORS = (
     (
         {
             'IT': 'test',
@@ -91,7 +98,14 @@ tests_errors = (
 )
 
 
-@pytest.mark.parametrize('departments, limit_salary, expected', tests_errors)
+@pytest.mark.parametrize('departments, limit_salary, expected', TEST_ERRORS)
 def test_top_salaries_errors(departments, limit_salary, expected):
+    """Test function for `top_salary` to validate basic functionality.
+
+    Args:
+        departments: A dictionary representing departments and their workers.
+        limit_salary: The salary limit.
+        expected: The expected output.
+    """
     with pytest.raises(expected):
         top_salary(limit_salary, **departments)
