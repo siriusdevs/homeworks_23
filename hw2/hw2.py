@@ -9,8 +9,7 @@ Provides types and functions for solving task_2.
 """
 
 import json
-from datetime import datetime
-from typing import Callable
+from datetime import datetime, timedelta
 
 import const
 from age_stats import AgeStats, get_age_stats
@@ -29,34 +28,30 @@ def aggregate_users_stats(input_file: str, output_file: str, _now: datetime = No
     """
     with open(input_file, 'r') as inp:
         users = json.load(inp).values()
-    stats = _aggregate_stats_usecase(users, _now)
+    stats = _aggregate_stats(users, _now)
     json_stats = {name: age_stats.to_json() for name, age_stats in stats.items()}
     with open(output_file, 'w') as out:
         json.dump(json_stats, out)
 
 
-def _aggregate_stats_usecase(users: list[dict], _now: datetime = None) -> dict[str, AgeStats]:
-    now = datetime.now() if _now is None else _now
-    stats = {}
-    for less_name, less_delta in const.TIMEDELTAS_LESS:
-        bound = now - less_delta
-        stats[less_name] = get_age_stats(
-            filter(_with_login_newer_than(bound), users),
-        )
-    for greater_name, greater_delta in const.TIMEDELTAS_GREATER:
-        bound = now - greater_delta
-        stats[greater_name] = get_age_stats(
-            filter(_with_login_older_than(bound), users),
-        )
-    return stats
+def _aggregate_stats(users: list[dict], _now: datetime = None) -> dict[str, AgeStats]:
+    now = datetime.now() if _now is None else _now  # for tests
+    return {
+        name: get_age_stats(filter(
+            _active_filter(now, filter_type, delta),
+            users,
+        ))
+        for filter_type, name, delta in const.TIMEDELTAS
+    }
 
 
-def _with_login_newer_than(dt: datetime) -> Callable[[dict], bool]:
-    return lambda user: _get_login_time(user) > dt
-
-
-def _with_login_older_than(dt: datetime) -> Callable[[dict], bool]:
-    return lambda user: _get_login_time(user) < dt
+def _active_filter(now: datetime, filter_type: const.TimeFilterType, delta: timedelta) -> callable:
+    timebound = now - delta
+    return (
+        (lambda user: _get_login_time(user) > timebound)
+        if filter_type == const.LESS
+        else (lambda user: _get_login_time(user) < timebound)
+    )
 
 
 def _get_login_time(user: dict) -> datetime:
