@@ -8,30 +8,12 @@ Provides types and functions for solving task_2.
 клиентов, которые были онлайн менее двух дней, недели, месяца, полугода, и более полугода назад.
 """
 
-import dataclasses
 import json
 from datetime import datetime
-from typing import Callable, Iterable
+from typing import Callable
 
 import const
-
-
-@dataclasses.dataclass
-class AgeStats:
-    """Basic stats for a list of ages."""
-
-    min: float = 0
-    max: float = 0
-    average: float = 0
-    median: float = 0
-
-    def to_json(self) -> dict:
-        """Convert AgeStats to a dict for json encoding.
-
-        Returns:
-            A dictionary with all fields
-        """
-        return dataclasses.asdict(self)
+from age_stats import AgeStats, get_age_stats
 
 
 def aggregate_users_stats(input_file: str, output_file: str, _now: datetime = None) -> None:
@@ -58,12 +40,12 @@ def _aggregate_stats_usecase(users: list[dict], _now: datetime = None) -> dict[s
     stats = {}
     for less_name, less_delta in const.TIMEDELTAS_LESS:
         bound = now - less_delta
-        stats[less_name] = _get_age_stats(
+        stats[less_name] = get_age_stats(
             filter(_with_login_newer_than(bound), users),
         )
     for greater_name, greater_delta in const.TIMEDELTAS_GREATER:
         bound = now - greater_delta
-        stats[greater_name] = _get_age_stats(
+        stats[greater_name] = get_age_stats(
             filter(_with_login_older_than(bound), users),
         )
     return stats
@@ -79,30 +61,3 @@ def _with_login_older_than(dt: datetime) -> Callable[[dict], bool]:
 
 def _get_login_time(user: dict) -> datetime:
     return datetime.strptime(user['last_login'], '%Y-%m-%d')
-
-
-ROUND_UPTO = 2
-
-
-def _get_age_stats(users: Iterable[dict]) -> AgeStats:
-    ages = [user['age'] for user in users]
-    return AgeStats(
-        min=min(ages),
-        max=max(ages),
-        average=round(_average(ages), 2),
-        median=round(_median(ages), 2),
-    ) if ages else AgeStats()
-
-
-def _average(nums: Iterable[float]) -> float:
-    return sum(nums) / len(nums)
-
-
-def _median(nums: Iterable[float]) -> float:
-    nums = sorted(nums)
-    center = len(nums) // 2
-    return (
-        nums[center]
-        if len(nums) % 2
-        else _average(nums[center - 1:center + 1])
-    )
