@@ -9,16 +9,16 @@ MAIL = 'email'
 REGISTER = 'registered'
 
 
-class NotCorrectFormatDate(Exception):
+class InvalidDate(Exception):
     """Error for date in not format YYYY-MM-DD."""
 
     def __init__(self, date: str) -> None:
         """Create error message.
 
         Args:
-            date: date in uncorrect format
+            date: date in uncorrect format or time
         """
-        super().__init__(f'{date} not in format YYYY-MM-DD')
+        super().__init__(f'{date} in uncorrect format YYYY-MM-DD or time')
 
 
 def to_datetime(date: str) -> datetime | None:
@@ -34,9 +34,11 @@ def to_datetime(date: str) -> datetime | None:
         Object datetime type.
     """
     try:
-        return datetime.fromisoformat(date)
+        if datetime.fromisoformat(date) <= datetime.now():
+            return datetime.fromisoformat(date)
+        raise InvalidDate(date)
     except ValueError:
-        raise NotCorrectFormatDate(date)
+        raise InvalidDate(date)
 
 
 def make_path(path: list) -> None:
