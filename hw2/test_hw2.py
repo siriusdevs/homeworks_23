@@ -26,6 +26,13 @@ TESTS_TABLE = (
         const.LESS_HALFYEAR: AgeStats(max=36, min=36, average=36, median=36).to_json(),
         const.GREATER_HALFYEAR: AgeStats(max=18, min=18, average=18, median=18).to_json(),
     }),
+    ('test_data/complex.json', {
+        const.LESS_TWO_DAYS: AgeStats(max=11, min=11, average=11, median=11).to_json(),
+        const.LESS_WEEK: AgeStats(min=10, max=12, average=11, median=11).to_json(),
+        const.LESS_MONTH: AgeStats(min=10, max=22, average=14.67, median=13.5).to_json(),
+        const.LESS_HALFYEAR: AgeStats(min=10, max=60, average=23, median=16).to_json(),
+        const.GREATER_HALFYEAR: AgeStats(min=10, max=42, average=29.4, median=32).to_json(),
+    }),
 )
 
 # Since aggregate_users_stats() works with time.now,
