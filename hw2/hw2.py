@@ -10,6 +10,7 @@ Provides types and functions for solving task_2.
 
 import dataclasses
 import json
+from datetime import datetime
 
 import const
 
@@ -32,7 +33,7 @@ class AgeStats:
         return dataclasses.asdict(self)
 
 
-def aggregate_users_stats(input_file: str, output_file: str) -> None:
+def aggregate_users_stats(input_file: str, output_file: str, _now: datetime = None) -> None:
     """Read user stats from input_file, aggregate them and write to output_file.
 
     Schema of the output file is a json object with fields corresponding to keys of

@@ -2,12 +2,19 @@
 import json
 import os
 import tempfile
+from datetime import datetime
 from typing import Any
 
 import const
 import pytest
 
 from hw2 import AgeStats, aggregate_users_stats
+
+# Since aggregate_users_stats() works with time.now,
+# we need to mock it, so that tests don't become invalid after time passes.
+# MOCK_NOW is passed in the hidden _now parameter to aggregate_users_stats().
+# TODO: use a proper mocking library
+MOCK_NOW = datetime(year=2023, month=10, day=4, hour=16)
 
 EMPTY_INPUT_FILE = 'test_data/empty.json'
 TESTS_TABLE = (
@@ -30,7 +37,7 @@ def test_aggregate_users_stats(input_file: str, expected: dict[str, Any]):
         expected: the json value that should be written by aggregate_users_stats()
     """
     with tempfile.NamedTemporaryFile() as output:
-        aggregate_users_stats(input_file, output.name)
+        aggregate_users_stats(input_file, output.name, _now=MOCK_NOW)
         got = json.load(output)
         assert sorted(got.items()) == sorted(expected.items())
 
