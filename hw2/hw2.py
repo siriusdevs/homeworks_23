@@ -23,6 +23,14 @@ class AgeStats:
     mean: float = 0
     median: float = 0
 
+    def to_json(self) -> dict:
+        """Convert AgeStats to a dict for json encoding.
+
+        Returns:
+            A dictionary with all fields
+        """
+        return dataclasses.asdict(self)
+
 
 def aggregate_users_stats(input_file: str, output_file: str) -> None:
     """Read user stats from input_file, aggregate them and write to output_file.

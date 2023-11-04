@@ -1,5 +1,4 @@
 """pytest tests for hw2 module."""
-import dataclasses
 import json
 import os
 import tempfile
@@ -11,14 +10,13 @@ import pytest
 from hw2 import AgeStats, aggregate_users_stats
 
 EMPTY_INPUT_FILE = 'test_data/empty.json'
-
 TESTS_TABLE = (
     (EMPTY_INPUT_FILE, {
-        const.LESS_TWO_DAYS: dataclasses.asdict(AgeStats()),
-        const.LESS_WEEK: dataclasses.asdict(AgeStats()),
-        const.LESS_MONTH: dataclasses.asdict(AgeStats()),
-        const.LESS_HALFYEAR: dataclasses.asdict(AgeStats()),
-        const.GREATER_HALFYEAR: dataclasses.asdict(AgeStats()),
+        const.LESS_TWO_DAYS: AgeStats().to_json(),
+        const.LESS_WEEK: AgeStats().to_json(),
+        const.LESS_MONTH: AgeStats().to_json(),
+        const.LESS_HALFYEAR: AgeStats().to_json(),
+        const.GREATER_HALFYEAR: AgeStats().to_json(),
     }),
 )
 
