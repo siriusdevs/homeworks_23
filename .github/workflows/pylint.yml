@@ -60,5 +60,5 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest==6.2.5
     - name: Pytest
-      run: pytest hw2
+      run: cd hw2 && pytest hw2
 

@@ -1,20 +1,20 @@
 """pytest tests for hw2 module."""
-from datetime import datetime
 import json
 import os
 import tempfile
+from datetime import datetime
 from typing import Any
 
-import const
 import pytest
 
+import const
 from hw2 import AgeStats, aggregate_users_stats
 
 # Since aggregate_users_stats() works with time.now,
 # we need to mock it, so that tests don't become invalid after time passes.
 # MOCK_NOW is passed in the hidden _now parameter to aggregate_users_stats().
 # TODO: use a proper mocking library
-MOCK_NOW = datetime(year=2023, month=10, day=4, hour=16)
+MOCK_NOW = datetime(year=2023, month=11, day=4, hour=16)
 
 EMPTY_INPUT_FILE = 'test_data/empty.json'
 TESTS_TABLE = (
@@ -27,10 +27,10 @@ TESTS_TABLE = (
     }),
     ('test_data/example.json', {
         const.LESS_TWO_DAYS: AgeStats().to_json(),
-        const.LESS_WEEK: AgeStats(max=36, min=36, mean=36, median=36).to_json(),
-        const.LESS_MONTH: AgeStats(max=36, min=36, mean=36, median=36).to_json(),
-        const.LESS_HALFYEAR: AgeStats(max=36, min=36, mean=36, median=36).to_json(),
-        const.GREATER_HALFYEAR: AgeStats(max=18, min=18, mean=18, median=18).to_json(),
+        const.LESS_WEEK: AgeStats(max=36, min=36, average=36, median=36).to_json(),
+        const.LESS_MONTH: AgeStats(max=36, min=36, average=36, median=36).to_json(),
+        const.LESS_HALFYEAR: AgeStats(max=36, min=36, average=36, median=36).to_json(),
+        const.GREATER_HALFYEAR: AgeStats(max=18, min=18, average=18, median=18).to_json(),
     }),
 )
 
