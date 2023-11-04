@@ -40,7 +40,7 @@ TEST_ERROR_PROCESS_DATA = (
      ),
     ('hw2/input/7.json',
      'hw2/output/7.json', '2077-12-24 in uncorrect format YYYY-MM-DD or time',
-     ),     
+     ),
 )
 
 

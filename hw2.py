@@ -28,7 +28,7 @@ def to_datetime(date: str) -> datetime | None:
         date: date in uncorrect format
 
     Raises:
-        NotCorrectFormatDate: if date in not format YYYY-MM-DD
+        InvalidDate: if date in not format YYYY-MM-DD
 
     Returns:
         Object datetime type.
@@ -36,9 +36,9 @@ def to_datetime(date: str) -> datetime | None:
     try:
         if datetime.fromisoformat(date) <= datetime.now():
             return datetime.fromisoformat(date)
-        raise InvalidDate(date)
     except ValueError:
         raise InvalidDate(date)
+    raise InvalidDate(date)
 
 
 def make_path(path: list) -> None:
