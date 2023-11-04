@@ -4,17 +4,18 @@ import json
 import tempfile
 from typing import Any
 
+import const
 import pytest
 
 from hw2 import AgeStats, aggregate_users_stats
 
 TESTS_TABLE = (
     ('test_data/empty.json', {
-        'less_2_days': dataclasses.asdict(AgeStats()),
-        'less_week': dataclasses.asdict(AgeStats()),
-        'less_month': dataclasses.asdict(AgeStats()),
-        'less_halfyear': dataclasses.asdict(AgeStats()),
-        'greater_halfyear': dataclasses.asdict(AgeStats()),
+        const.LESS_TWO_DAYS: dataclasses.asdict(AgeStats()),
+        const.LESS_WEEK: dataclasses.asdict(AgeStats()),
+        const.LESS_MONTH: dataclasses.asdict(AgeStats()),
+        const.LESS_HALFYEAR: dataclasses.asdict(AgeStats()),
+        const.GREATER_HALFYEAR: dataclasses.asdict(AgeStats()),
     }),
 )
 

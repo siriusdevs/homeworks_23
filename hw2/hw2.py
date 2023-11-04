@@ -9,8 +9,9 @@ Provides types and functions for solving task_2.
 """
 
 import dataclasses
-import datetime
 import json
+
+import const
 
 
 @dataclasses.dataclass
@@ -21,20 +22,6 @@ class AgeStats:
     max: float = 0
     mean: float = 0
     median: float = 0
-
-
-YEAR_DAYS = 365
-TIMEDELTAS_LESS = (
-    ('less_2_days', datetime.timedelta(days=2)),
-    ('less_week', datetime.timedelta(weeks=1)),
-    ('less_month', datetime.timedelta(weeks=4)),
-    ('less_halfyear', datetime.timedelta(days=YEAR_DAYS/2)),
-)
-
-
-TIMEDELTAS_GREATER = (
-    ('greater_halfyear', datetime.timedelta(days=YEAR_DAYS/2)),
-)
 
 
 def aggregate_users_stats(input_file: str, output_file: str) -> None:
@@ -49,9 +36,9 @@ def aggregate_users_stats(input_file: str, output_file: str) -> None:
         output_file: path to an output file. json aggregate stats will be written there.
     """
     stats = {}
-    for less_name, _ in TIMEDELTAS_LESS:
+    for less_name, _ in const.TIMEDELTAS_LESS:
         stats[less_name] = dataclasses.asdict(AgeStats())
-    for greater_name, _ in TIMEDELTAS_GREATER:
+    for greater_name, _ in const.TIMEDELTAS_GREATER:
         stats[greater_name] = dataclasses.asdict(AgeStats())
     with open(output_file, 'w') as out:
         json.dump(stats, out)
