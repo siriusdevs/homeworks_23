@@ -1,8 +1,8 @@
 """pytest tests for hw2 module."""
+from datetime import datetime
 import json
 import os
 import tempfile
-from datetime import datetime
 from typing import Any
 
 import const
@@ -24,6 +24,13 @@ TESTS_TABLE = (
         const.LESS_MONTH: AgeStats().to_json(),
         const.LESS_HALFYEAR: AgeStats().to_json(),
         const.GREATER_HALFYEAR: AgeStats().to_json(),
+    }),
+    ('test_data/example.json', {
+        const.LESS_TWO_DAYS: AgeStats().to_json(),
+        const.LESS_WEEK: AgeStats(max=36, min=36, mean=36, median=36).to_json(),
+        const.LESS_MONTH: AgeStats(max=36, min=36, mean=36, median=36).to_json(),
+        const.LESS_HALFYEAR: AgeStats(max=36, min=36, mean=36, median=36).to_json(),
+        const.GREATER_HALFYEAR: AgeStats(max=18, min=18, mean=18, median=18).to_json(),
     }),
 )
 
