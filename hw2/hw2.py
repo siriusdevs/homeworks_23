@@ -10,6 +10,7 @@ Provides types and functions for solving task_2.
 
 import dataclasses
 import datetime
+import json
 
 
 @dataclasses.dataclass
@@ -47,4 +48,10 @@ def aggregate_users_stats(input_file: str, output_file: str) -> None:
         input_file: path to a json file containing user stats
         output_file: path to an output file. json aggregate stats will be written there.
     """
-    pass
+    stats = {}
+    for less_name, _ in TIMEDELTAS_LESS:
+        stats[less_name] = dataclasses.asdict(AgeStats())
+    for greater_name, _ in TIMEDELTAS_GREATER:
+        stats[greater_name] = dataclasses.asdict(AgeStats())
+    with open(output_file, 'w') as out:
+        json.dump(stats, out)
