@@ -9,7 +9,7 @@ Provides types and functions for solving task_2.
 """
 
 import json
-from datetime import datetime, timedelta
+from datetime import datetime
 
 import const
 from age_stats import AgeStats, get_age_stats
@@ -19,7 +19,7 @@ def aggregate_users_stats(input_file: str, output_file: str, _now: datetime = No
     """Read user stats from input_file, aggregate them and write to output_file.
 
     Schema of the output file is a json object with fields corresponding to keys of
-    TIMEDELTAS_LESS and TIMEDELTAS_GREATER and values corresponding to AgeStats of users
+    const.TIMEDELTAS and values corresponding to AgeStats of users
     who have been online according to these timedeltas.
 
     Args:
@@ -38,19 +38,17 @@ def _aggregate_stats(users: list[dict], _now: datetime = None) -> dict[str, AgeS
     now = datetime.now() if _now is None else _now  # for tests
     return {
         name: get_age_stats(filter(
-            _active_filter(now, filter_type, delta),
+            _last_login_filter(filter_type, timebound=now - delta),
             users,
         ))
         for filter_type, name, delta in const.TIMEDELTAS
     }
 
 
-def _active_filter(now: datetime, filter_type: const.TimeFilterType, delta: timedelta) -> callable:
-    timebound = now - delta
-    return (
-        (lambda user: _get_login_time(user) > timebound)
-        if filter_type == const.LESS
-        else (lambda user: _get_login_time(user) < timebound)
+def _last_login_filter(filter_type: const.TimeFilterType, timebound: datetime) -> callable:
+    return lambda user: (
+        _get_login_time(user) > timebound if filter_type == const.LESS else
+        _get_login_time(user) < timebound
     )
 
 
