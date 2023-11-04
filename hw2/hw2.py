@@ -41,7 +41,7 @@ def _aggregate_stats(users: const.JsonDict, _now: datetime = None) -> const.Json
     now = datetime.now() if _now is None else _now  # for tests
     return {
         name: _average(_ages(filter(
-            _last_login_filter(filter_type, timebound=now - delta),
+            _filter_by_activity(filter_type, timebound=now - delta),
             users,
         )))
         for filter_type, name, delta in const.TIMEDELTAS
@@ -57,7 +57,7 @@ def _total_stats(ages: list[int]) -> const.JsonDict:
     }
 
 
-def _last_login_filter(filter_type: const.TimeFilterType, timebound: datetime) -> callable:
+def _filter_by_activity(filter_type: const.TimeFilterType, timebound: datetime) -> callable:
     return lambda user: (
         _get_login_time(user) > timebound if filter_type == const.LESS else
         _get_login_time(user) < timebound
