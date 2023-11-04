@@ -10,17 +10,21 @@ Provides types and functions for solving task_2.
 
 import json
 from datetime import datetime
+from typing import Iterable
 
 import const
-from age_stats import AgeStats, get_age_stats
+
+ROUND_UPTO = 2
 
 
 def aggregate_users_stats(input_file: str, output_file: str, _now: datetime = None) -> None:
     """Read user stats from input_file, aggregate them and write to output_file.
 
     Schema of the output file is a json object with fields corresponding to keys of
-    const.TIMEDELTAS and values corresponding to AgeStats of users
+    const.TIMEDELTAS and values corresponding to average age of users
     who have been online according to these timedeltas.
+    The output file also contains total age stats with these keys:
+    const.AGE_MAX, const.AGE_MIN, const.AGE_AVERAGE, const.AGE_MEDIAN.
 
     Args:
         input_file: path to a json file containing user stats
@@ -29,19 +33,27 @@ def aggregate_users_stats(input_file: str, output_file: str, _now: datetime = No
     with open(input_file, 'r') as inp:
         users = json.load(inp).values()
     stats = _aggregate_stats(users, _now)
-    json_stats = {name: age_stats.to_json() for name, age_stats in stats.items()}
     with open(output_file, 'w') as out:
-        json.dump(json_stats, out)
+        json.dump(stats, out)
 
 
-def _aggregate_stats(users: list[dict], _now: datetime = None) -> dict[str, AgeStats]:
+def _aggregate_stats(users: const.JsonDict, _now: datetime = None) -> const.JsonDict:
     now = datetime.now() if _now is None else _now  # for tests
     return {
-        name: get_age_stats(filter(
+        name: _average(_ages(filter(
             _last_login_filter(filter_type, timebound=now - delta),
             users,
-        ))
+        )))
         for filter_type, name, delta in const.TIMEDELTAS
+    } | _total_stats(_ages(users))
+
+
+def _total_stats(ages: list[int]) -> const.JsonDict:
+    return {
+       const.AGE_MAX: max(ages, default=0),
+       const.AGE_MIN: min(ages, default=0),
+       const.AGE_AVERAGE: _average(ages),
+       const.AGE_MEDIAN: _median(ages),
     }
 
 
@@ -54,3 +66,23 @@ def _last_login_filter(filter_type: const.TimeFilterType, timebound: datetime) -
 
 def _get_login_time(user: dict) -> datetime:
     return datetime.strptime(user['last_login'], '%Y-%m-%d')
+
+
+def _ages(users: Iterable[const.JsonDict]) -> list[int]:
+    return [user['age'] for user in users]
+
+
+def _average(nums: list[float]) -> float:
+    return round(sum(nums) / max(len(nums), 1), ROUND_UPTO)
+
+
+def _median(nums: list[float]) -> float:
+    if not nums:
+        return 0
+    nums = sorted(nums)
+    center = len(nums) // 2
+    return (
+        nums[center]
+        if len(nums) % 2
+        else _average(nums[center - 1:center + 1])
+    )

@@ -1,6 +1,15 @@
 """A module that provides constants for hw2."""
 
+import typing
 from datetime import timedelta
+
+JsonDict = dict[str, typing.Any]
+
+AGE_MAX = 'age_max'
+AGE_MIN = 'age_min'
+AGE_AVERAGE = 'age_average'
+AGE_MEDIAN = 'age_median'
+
 
 LESS_TWO_DAYS = 'less_two_days'
 LESS_WEEK = 'less_week'

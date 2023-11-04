@@ -8,30 +8,42 @@ from typing import Any
 import const
 import pytest
 
-from hw2 import AgeStats, aggregate_users_stats
+from hw2 import aggregate_users_stats
 
 EMPTY_INPUT_FILE = 'test_data/empty.json'
 TESTS_TABLE = (
     (EMPTY_INPUT_FILE, {
-        const.LESS_TWO_DAYS: AgeStats().to_json(),
-        const.LESS_WEEK: AgeStats().to_json(),
-        const.LESS_MONTH: AgeStats().to_json(),
-        const.LESS_HALFYEAR: AgeStats().to_json(),
-        const.GREATER_HALFYEAR: AgeStats().to_json(),
+        const.LESS_TWO_DAYS: 0,
+        const.LESS_WEEK: 0,
+        const.LESS_MONTH: 0,
+        const.LESS_HALFYEAR: 0,
+        const.GREATER_HALFYEAR: 0,
+        const.AGE_MAX: 0,
+        const.AGE_MIN: 0,
+        const.AGE_AVERAGE: 0,
+        const.AGE_MEDIAN: 0,
     }),
     ('test_data/example.json', {
-        const.LESS_TWO_DAYS: AgeStats().to_json(),
-        const.LESS_WEEK: AgeStats(max=36, min=36, average=36, median=36).to_json(),
-        const.LESS_MONTH: AgeStats(max=36, min=36, average=36, median=36).to_json(),
-        const.LESS_HALFYEAR: AgeStats(max=36, min=36, average=36, median=36).to_json(),
-        const.GREATER_HALFYEAR: AgeStats(max=18, min=18, average=18, median=18).to_json(),
+        const.LESS_TWO_DAYS: 0,
+        const.LESS_WEEK: 36,
+        const.LESS_MONTH: 36,
+        const.LESS_HALFYEAR: 36,
+        const.GREATER_HALFYEAR: 18,
+        const.AGE_MAX: 36,
+        const.AGE_MIN: 18,
+        const.AGE_AVERAGE: 27,
+        const.AGE_MEDIAN: 27,
     }),
     ('test_data/complex.json', {
-        const.LESS_TWO_DAYS: AgeStats(max=11, min=11, average=11, median=11).to_json(),
-        const.LESS_WEEK: AgeStats(min=10, max=12, average=11, median=11).to_json(),
-        const.LESS_MONTH: AgeStats(min=10, max=22, average=14.67, median=13.5).to_json(),
-        const.LESS_HALFYEAR: AgeStats(min=10, max=60, average=23, median=16).to_json(),
-        const.GREATER_HALFYEAR: AgeStats(min=10, max=42, average=29.4, median=32).to_json(),
+        const.LESS_TWO_DAYS: 11,
+        const.LESS_WEEK: 11,
+        const.LESS_MONTH: 14.67,
+        const.LESS_HALFYEAR: 23,
+        const.GREATER_HALFYEAR: 29.4,
+        const.AGE_MAX: 60,
+        const.AGE_MIN: 10,
+        const.AGE_AVERAGE: 25,
+        const.AGE_MEDIAN: 20,
     }),
 )
 
