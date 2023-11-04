@@ -77,8 +77,6 @@ def _average(nums: list[float]) -> float:
 
 
 def _median(nums: list[float]) -> float:
-    if not nums:
-        return 0
     nums = sorted(nums)
     center = len(nums) // 2
     return (
