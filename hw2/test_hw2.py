@@ -54,16 +54,16 @@ TESTS_TABLE = (
 MOCK_NOW = datetime(year=2023, month=11, day=4, hour=16)
 
 
-@pytest.mark.parametrize('input_file, expected', TESTS_TABLE)
-def test_aggregate_users_stats(input_file: str, expected: dict[str, Any]):
-    """Asserts that calling aggregate_users_stats(input_file, output_file) writes $expected.
+@pytest.mark.parametrize('input_path, expected', TESTS_TABLE)
+def test_aggregate_users_stats(input_path: str, expected: dict[str, Any]):
+    """Asserts that calling aggregate_users_stats(input_path, output_file) writes $expected.
 
     Args:
-        input_file: path to a file from which to get users stats
+        input_path: path to a file from which to get users stats
         expected: the json value that should be written by aggregate_users_stats()
     """
     with tempfile.NamedTemporaryFile() as output:
-        aggregate_users_stats(input_file, output.name, _now=MOCK_NOW)
+        aggregate_users_stats(input_path, output.name, _now=MOCK_NOW)
         got = json.load(output)
         assert sorted(got.items()) == sorted(expected.items())
 

@@ -15,8 +15,8 @@ from typing import Iterable
 import const
 
 
-def aggregate_users_stats(input_file: str, output_file: str, _now: datetime = None) -> None:
-    """Read user stats from input_file, aggregate them and write to output_file.
+def aggregate_users_stats(input_path: str, output_path: str, _now: datetime = None) -> None:
+    """Read user stats from input_path, aggregate them and write to output_path.
 
     Schema of the output file is a json object with fields corresponding to keys of
     const.TIMEDELTAS and values corresponding to average age of users
@@ -25,13 +25,13 @@ def aggregate_users_stats(input_file: str, output_file: str, _now: datetime = No
     const.AGE_MAX, const.AGE_MIN, const.AGE_AVERAGE, const.AGE_MEDIAN.
 
     Args:
-        input_file: path to a json file containing user stats
-        output_file: path to an output file. json aggregate stats will be written there.
+        input_path: path to a json file containing user stats
+        output_path: path to an output file. json aggregate stats will be written there.
     """
-    with open(input_file, 'r') as inp:
+    with open(input_path, 'r') as inp:
         users = json.load(inp).values()
     stats = _aggregate_stats(users, _now)
-    with open(output_file, 'w') as out:
+    with open(output_path, 'w') as out:
         json.dump(stats, out)
 
 
