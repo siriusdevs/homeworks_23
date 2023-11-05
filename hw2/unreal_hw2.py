@@ -17,14 +17,14 @@ def aggregate_users_stats(input_path: str, output_path: str, _now: datetime = No
     """
     now = datetime.now() if _now is None else _now  # for tests
     df = pd.read_json(input_path, orient='index', convert_dates=['last_login'])
-    diff = now - df.get('last_login', pd.Series())
+    time_since_login = now - df.get('last_login', pd.Series())
     ages = df.get('age', pd.Series())
     pd.Series({
-        const.LESS_TWO_DAYS: ages[diff < pd.Timedelta('2 days')].mean(),
-        const.LESS_WEEK: ages[diff < pd.Timedelta('7 days')].mean(),
-        const.LESS_MONTH: ages[diff < pd.Timedelta('30 days')].mean(),
-        const.LESS_HALFYEAR: ages[diff < pd.Timedelta('180 days')].mean(),
-        const.GREATER_HALFYEAR: ages[diff > pd.Timedelta('180 days')].mean(),
+        const.LESS_TWO_DAYS: ages[time_since_login < pd.Timedelta('2 days')].mean(),
+        const.LESS_WEEK: ages[time_since_login < pd.Timedelta('7 days')].mean(),
+        const.LESS_MONTH: ages[time_since_login < pd.Timedelta('30 days')].mean(),
+        const.LESS_HALFYEAR: ages[time_since_login < pd.Timedelta('180 days')].mean(),
+        const.GREATER_HALFYEAR: ages[time_since_login > pd.Timedelta('180 days')].mean(),
 
         const.AGE_MAX: ages.max(),
         const.AGE_MIN: ages.min(),
