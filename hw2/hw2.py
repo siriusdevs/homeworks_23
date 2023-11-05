@@ -57,7 +57,7 @@ def _total_stats(ages: list[int]) -> const.JsonDict:
 
 def _filter_by_activity(filter_type: const.TimeFilterType, timebound: datetime) -> callable:
     return lambda user: (
-        _get_login_time(user) > timebound if filter_type == const.LESS else
+        _get_login_time(user) > timebound if filter_type == const.LESS_FILTER else
         _get_login_time(user) < timebound
     )
 

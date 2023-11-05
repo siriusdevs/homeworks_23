@@ -22,15 +22,15 @@ LESS_HALFYEAR = 'active_in_last_halfyear_average_age'
 GREATER_HALFYEAR = 'not_active_in_last_halfyear_average_age'
 
 TimeFilterType = str
-LESS: TimeFilterType = 'LESS'
-GREATER: TimeFilterType = 'GREATER'
+LESS_FILTER: TimeFilterType = 'LESS'
+GREATER_FILTER: TimeFilterType = 'GREATER'
 
-YEAR_DAYS = 365
-MONTH_DAYS = 30
+_HALFYEAR_DAYS = 180
+_MONTH_DAYS = 30
 TIMEDELTAS: tuple[TimeFilterType, str, timedelta] = (
-    (LESS, LESS_TWO_DAYS, timedelta(days=2)),
-    (LESS, LESS_WEEK, timedelta(weeks=1)),
-    (LESS, LESS_MONTH, timedelta(days=MONTH_DAYS)),
-    (LESS, LESS_HALFYEAR, timedelta(days=YEAR_DAYS/2)),
-    (GREATER, GREATER_HALFYEAR, timedelta(days=YEAR_DAYS/2)),
+    (LESS_FILTER, LESS_TWO_DAYS, timedelta(days=2)),
+    (LESS_FILTER, LESS_WEEK, timedelta(weeks=1)),
+    (LESS_FILTER, LESS_MONTH, timedelta(days=_MONTH_DAYS)),
+    (LESS_FILTER, LESS_HALFYEAR, timedelta(days=_HALFYEAR_DAYS)),
+    (GREATER_FILTER, GREATER_HALFYEAR, timedelta(days=_HALFYEAR_DAYS)),
 )
