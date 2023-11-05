@@ -14,8 +14,6 @@ from typing import Iterable
 
 import const
 
-ROUND_UPTO = 2
-
 
 def aggregate_users_stats(input_file: str, output_file: str, _now: datetime = None) -> None:
     """Read user stats from input_file, aggregate them and write to output_file.
@@ -73,7 +71,7 @@ def _ages(users: Iterable[const.JsonDict]) -> list[int]:
 
 
 def _average(nums: list[float]) -> float:
-    return round(sum(nums) / max(len(nums), 1), ROUND_UPTO)
+    return round(sum(nums) / max(len(nums), 1), const.ROUND_UPTO)
 
 
 def _median(nums: list[float]) -> float:

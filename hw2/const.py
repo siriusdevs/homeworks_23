@@ -5,6 +5,9 @@ from datetime import timedelta
 
 JsonDict = dict[str, typing.Any]
 
+ROUND_UPTO = 2
+
+
 AGE_MAX = 'age_max'
 AGE_MIN = 'age_min'
 AGE_AVERAGE = 'age_average'

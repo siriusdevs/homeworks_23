@@ -5,9 +5,9 @@ import tempfile
 from datetime import datetime
 from typing import Any
 
-import const
 import pytest
 
+import const
 from hw2 import aggregate_users_stats
 
 EMPTY_INPUT_FILE = 'test_data/empty.json'
