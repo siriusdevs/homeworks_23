@@ -170,15 +170,15 @@ class UserStatsUtils:
             The avg age of the filtered by 'num of offline days more then half of year' \
             condition users
         """
-        gt_half_year_offline_users = []
+        gt_half_of_year_offline_users = []
         for user in self.users:
             last_login_date = datetime.fromisoformat(str(user.last_login))
             target_date = timedelta(days=Period.half_of_year.value)
 
             if datetime.now() - last_login_date > target_date:
-                gt_half_year_offline_users.append(user.age)
+                gt_half_of_year_offline_users.append(user.age)
 
-        number_of_users = len(gt_half_year_offline_users)
+        number_of_users = len(gt_half_of_year_offline_users)
         if not number_of_users:
             return 0
-        return sum(gt_half_year_offline_users) // number_of_users
+        return sum(gt_half_of_year_offline_users) // number_of_users
