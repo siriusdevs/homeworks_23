@@ -31,5 +31,7 @@ jobs:
         pip install pytest==6.2.5
         pip install numpy
     - name: Pytest
-      run:  python3 test_hw1.py
+      run: 
+       cd /home/runner/work/homeworks_23/test_hw1.py
+       python3 test_hw1.py
 
