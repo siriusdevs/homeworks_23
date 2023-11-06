@@ -20,9 +20,11 @@ def top_salary(*deps: tuple[str, list[float]], lim: float = None) -> tuple[tuple
                 all_salaries.append(round(salary, 2))
 
     all_salaries.sort(reverse=True)
-    if sum(all_salaries) == 0:
+    all_sum = sum(all_salaries)
+
+    if all_sum == 0:
         return [], 0
 
-    percent = sum(all_salaries[:3]) / sum(all_salaries) * 100
+    percent = sum(all_salaries[:3]) / all_sum * 100
 
     return (all_salaries[:3], round(percent, 2))
