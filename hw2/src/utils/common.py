@@ -1,4 +1,4 @@
-"""Module that consists functions that can't be a part of the certain entity."""
+"""Consist functions that can't be a part of any specific entity."""
 import json
 import os
 from typing import Any, Hashable, NoReturn, Optional

@@ -1,4 +1,4 @@
-"""Module that includes the implemented function from Vasilenko's second task."""
+"""Contain the implemented function from Vasilenko's second task."""
 import json
 from typing import NoReturn
 

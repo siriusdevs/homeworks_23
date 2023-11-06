@@ -1,4 +1,4 @@
-"""Test module for function process_data from hw2.py."""
+"""Contain tests for function process_data from hw2.py."""
 import json
 from contextlib import suppress
 

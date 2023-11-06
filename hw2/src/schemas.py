@@ -1,4 +1,4 @@
-"""hw2 module for msgspec models and based types."""
+"""Contain msgspec based types and models for hw2."""
 
 from datetime import date
 from typing import Annotated

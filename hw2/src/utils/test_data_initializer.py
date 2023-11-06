@@ -1,6 +1,7 @@
 """Module with an implemented TestDataInitialiser class."""
 import json
 import os
+from collections.abc import Iterable
 from contextlib import suppress
 from datetime import datetime, timedelta
 from typing import Generator, NoReturn
@@ -9,8 +10,8 @@ from hw2.src.bbtypes import TestDataItem, Users
 from hw2.src.utils.common import validate_file_path
 
 
-class TestDataGenerator:
-    """Class-generator representing all test data."""
+class TestDataGenerator(Iterable):
+    """Represent iterable containing all the test data."""
 
     _number_of_files = 11
     _input_files_dir_path = 'hw2/test_files/input/'

@@ -1,4 +1,4 @@
-"""The module which contains class-helper for process data function."""
+"""Contain class-helper for process data function."""
 import json
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta

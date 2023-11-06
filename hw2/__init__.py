@@ -1,1 +1,1 @@
-"""The package with the files for second homework."""
+"""Contain the files for Vasilenko's second homework."""

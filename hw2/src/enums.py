@@ -1,10 +1,10 @@
-"""hw2 module for all classes-enums."""
+"""Contain all the enum classes for hw2."""
 
 from enum import Enum
 
 
 class Period(Enum):
-    """Class-enum representing all the necessary periods in days."""
+    """Represent all the necessary periods in days."""
 
     two_days = 2
     week = 7
