@@ -1,2 +1,5 @@
 *pycache*
 *pytest_cache*
+*.swp 
+.vscode 
+.idea
