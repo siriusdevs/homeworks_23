@@ -95,7 +95,7 @@ def count_unique(sample: list[str]) -> dict[str, float]:
 
 
 def write_to_file(file_path: str, reg_years: list[str], ages: list[int]) -> None:
-    """Output writer muodule.
+    """Output writer module.
 
     Args:
         file_path: path to file that we need to write output to.
@@ -130,8 +130,7 @@ def process_data(in_path: str, out_path: str) -> None:
         raise ValueError('File that you provided is empty or not valid')
     except FileNotFoundError:
         raise ValueError('File that you provided does not exist or not valid')
-    with open(in_path) as input_data:
-        user_stats = json.load(input_data)
+
     ages = []
     reg_years = []
     for user_data in user_stats.values():
