@@ -7,7 +7,7 @@ from hw2.src import bbtypes
 
 
 def get_valid_dict_to_str(dct: dict[Hashable, Any]) -> str:
-    """Create function that returns string representation of the dict in valid format for msgspec.
+    """Return string representation of the dict in valid format for msgspec.
 
     Args:
         dct (dict): any dict
@@ -19,7 +19,7 @@ def get_valid_dict_to_str(dct: dict[Hashable, Any]) -> str:
 
 
 def find_insertion_index(nums: list[int], target: int) -> int:
-    """Create function that finds the index for insertion using binary search and returns it.
+    """Find the index for insertion using binary search and return it.
 
     Args:
         nums (list[int]): the list where we want to insert the target number
@@ -39,7 +39,7 @@ def find_insertion_index(nums: list[int], target: int) -> int:
 
 
 def validate_file_path(file_path: str, output_file_path: Optional[str] = None) -> NoReturn:
-    """Create a function that checks whether the file exists or not.
+    """Check whether the file exists or not.
 
     Args:
         file_path (str): path to file we need to check.
@@ -63,7 +63,7 @@ def validate_file_path(file_path: str, output_file_path: Optional[str] = None) -
 
 
 def process_output_file(output_file_path: str) -> NoReturn:
-    """Create a function that creates all the sub dirs for output_file if the path contains it.
+    """Create all the sub dirs for output_file if the path contains it.
 
     Args:
         output_file_path (str): path to file we need to check.
@@ -75,7 +75,7 @@ def process_output_file(output_file_path: str) -> NoReturn:
 
 
 def create_error_object(msg: str) -> bbtypes.Error:
-    """Create a function that returns the bbtypes.Error object with the custom message.
+    """Return the bbtypes.Error object with the custom message.
 
     Args:
         msg (str): custom message.

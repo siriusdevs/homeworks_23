@@ -18,7 +18,7 @@ def test_process_data(
     output_file_path: str,
     expected_output_data: Users | Error,
 ) -> None:
-    """Create function (extended by pytest decorator) that tests process_data function.
+    """Test process_data function.
 
     Args:
         input_file_path: path to file with users data

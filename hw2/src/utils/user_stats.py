@@ -18,20 +18,19 @@ from .common import (
 
 @dataclass
 class UserStatsUtils:
-    """Create the class which helps to simplify and reduce the code in process_data function."""
+    """Help to simplify and reduce the code in process_data function."""
 
     data_file_path: str
     output_file_path: str
     all_ages: list[int] = field(default_factory=list)
 
     def __post_init__(self):
-        """Create a function that represents post init logic."""
+        """Post initialization logic."""
         validate_file_path(self.data_file_path, self.output_file_path)
 
     @property
     def users(self) -> schemas.Users:
-        """Create a function-property which validates provided JSON file, it's data and returns it \
-        or raises an error in case of the failed validation.
+        """The users data.
 
         Raises:
             json.JSONDecodeError: if the input JSON file has invalid syntax
@@ -66,7 +65,7 @@ class UserStatsUtils:
 
     @property
     def user_stats(self) -> bbtypes.UserStats:
-        """Create a function-property that returns necessary user stats.
+        """The necessary user stats.
 
         Returns:
             The user_stats property
@@ -110,7 +109,7 @@ class UserStatsUtils:
         user_item: schemas.User,
         target_period: Period,
     ) -> bool:
-        """Create a function that returns whether the user is offline for less then target period or not.
+        """Check whether the user is offline for less then target period or not.
 
         Args:
             user_item (User): the dict that includes all the user params such as age, last_login
@@ -126,7 +125,7 @@ class UserStatsUtils:
 
     @staticmethod
     def validate_user_models(users_data: bbtypes.Users) -> schemas.Users:
-        """Create a function that validates all the user data dicts using msgspec \
+        """Validate  all the user data dicts using msgspec \
         and returns users as list of the class-models.
 
         Args:
@@ -146,7 +145,7 @@ class UserStatsUtils:
         return users
 
     def get_lt_period_offline_users_avg_age(self, target_period: Period) -> int:
-        """Create a function that returns avg age of the filtered by \
+        """Get the avg age of the filtered by \
         'num of offline days lt target period' condition users.
 
         Args:
@@ -165,7 +164,7 @@ class UserStatsUtils:
         return sum(user.age for user in filtered_by_offline_period) // number_of_users
 
     def get_gt_half_of_year_offline_users_avg_age(self) -> int:
-        """Create a function that returns whether the user is offline for more then half of year or not.
+        """Check if the user has been offline for more than half of the year or not.
 
         Returns:
             The avg age of the filtered by 'num of offline days more then half of year' \

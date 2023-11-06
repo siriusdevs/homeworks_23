@@ -6,8 +6,8 @@ from hw2.src.utils import UserStatsUtils, find_insertion_index
 
 
 def process_data(data_file_path: str, output_file_path: str) -> NoReturn:
-    """Create the main function that reads users data from data_file \
-        and writes the necessary statistics by task into output_file.
+    """Read users data from data_file \
+        and write the necessary statistics by task into output_file.
 
     Args:
         data_file_path (str): the path to file with users data

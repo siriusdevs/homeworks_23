@@ -19,7 +19,7 @@ class TestDataGenerator:
     _last_modification_date_file_path = 'hw2/test_files/last_modification_date'
 
     def initialize_test_data(self) -> tuple[TestDataItem, ...]:
-        """Create a function that initialises test_data and returns it.
+        """Initialise test_data and return it.
 
         Returns:
             The field containing the tuples of the following format: \
@@ -44,7 +44,7 @@ class TestDataGenerator:
         return tuple(test_data)
 
     def __iter__(self) -> Generator[tuple[TestDataItem, ...], None, None]:
-        """Create a magic method that returns generator containing all the test items.
+        """Yield all the test items.
 
         Yields:
             All the test items.
@@ -52,7 +52,7 @@ class TestDataGenerator:
         yield from self.initialize_test_data()
 
     def _generate_filenames(self) -> Generator[str, None, None]:
-        """Create a function that returns a generator containing file names.
+        """Return a generator containing file names.
 
         Yields:
             The name for the file from 1.json to 10.json
@@ -60,7 +60,7 @@ class TestDataGenerator:
         yield from (f'{file_num}.json' for file_num in range(1, self._number_of_files + 1))
 
     def _modify_test_data(self) -> NoReturn:
-        """Create a function that modifies the last_login of all users according to \
+        """Modify last_login of all users according to \
         the current date so that the tests work with the already existing expected_data."""
         if not os.path.exists(self._last_modification_date_file_path):
             self._update_last_modification_date()
@@ -90,15 +90,15 @@ class TestDataGenerator:
         self._update_last_modification_date()
 
     def _update_last_modification_date(self) -> NoReturn:
-        """Create a function that updates the date in the last_modification_date \
+        """Update the date in the last_modification_date \
         file to the current date."""
         with open(self._last_modification_date_file_path, 'w') as last_modification_date_file:
             last_modification_date_file.write(datetime.now().strftime('%Y-%m-%d'))
 
     @staticmethod
     def _update_input_data(input_user_data: Users, date_diff: timedelta) -> Users:
-        """Create a function that updates last_login field in received input_user_data \
-        and returns it.
+        """Update last_login field in received input_user_data \
+        and return it.
 
         Args:
             input_user_data (Users): user data we need to update.
@@ -118,7 +118,7 @@ class TestDataGenerator:
 
     @staticmethod
     def _save_updated_data(input_file_path: str, updated_data: Users) -> NoReturn:
-        """Create a function that writes an updated data to input_file.
+        """Write an updated data to input_file.
 
         Args:
             input_file_path (str): path to the input file that we need to update.
