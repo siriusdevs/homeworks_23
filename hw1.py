@@ -28,7 +28,7 @@ def statistic_salary(
     stat_salary = []
     len_salaries = len(salaries)
     if len_salaries == 0:
-        return (0, 0, 0)
+        return 0, 0, 0
     stat_salary.append(round(sum(salaries) / len_salaries, 2))
     stat_salary.append(round(max(salaries), 2))
     if len_salaries % 2 == 1:
