@@ -1,2 +1,12 @@
+# cache files
 *pycache*
 *pytest_cache*
+
+# python virtual environment
+venv/
+
+# IDE configuration
+.idea/
+
+# Mac folder parameters file
+.DS_Store
