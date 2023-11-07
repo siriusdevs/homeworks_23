@@ -12,8 +12,11 @@ def salary(*departments: tuple, maxs: Optional[int] = None) -> tuple:
         departments: tuple -  a tuple containing tuples of department names and salary information.
         maxs: (int or None) - maximum salary limit.
 
-    Returns:
-        tuple
+    returns:
+        typle - top 3 maximum salary and attitude
+
+    Raises:
+        ValueError: if the salary is zero.
     """
     main_list = []
 
@@ -21,6 +24,8 @@ def salary(*departments: tuple, maxs: Optional[int] = None) -> tuple:
         if isinstance(department[1], dict):
             for salary_depa in department[1].values():
                 main_list.append(salary_depa)
+        if sum(main_list) == 0:
+            raise ValueError('all salaries are zero')
 
     # создадим отдельный список, с учетом максимального числа зарплаты
     if maxs is None:
