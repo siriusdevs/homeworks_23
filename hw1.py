@@ -24,7 +24,7 @@ def get_stats(
             if limit is None or salary >= limit:
                 all_sls.append(salary)
     if not all_sls:
-        return (0, 0, 0)
+        return 0, 0, 0
     count_salaries = len(all_sls)
     average_salary = round(sum(all_sls) / count_salaries, 2)
     max_salary = round(max(all_sls), 2)
