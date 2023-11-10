@@ -18,9 +18,9 @@ def top3_salaries_stats(
         stats: tuple of top 3 most and least paid departments with their average salaries.
     """
     avg_salaries = {}
-    for department in departments.keys():
+    for department, workers in departments.items():
         if excluding is None or department not in excluding:
-            salaries = departments[department].values()
+            salaries = workers.values()
             if sum(salaries) == 0:
                 avg_salary = 0
             else:
