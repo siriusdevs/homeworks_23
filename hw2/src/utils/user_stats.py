@@ -33,16 +33,8 @@ class UserStatsUtils:
         self.data_file_is_valid = data_file_is_valid
         self.error_msg = error_msg
 
-    @property
-    def users(self) -> schemas.Users:
-        """The users data.
-
-        Returns:
-            List of user models.
-        """
-        with open(self.data_file_path, 'r') as data_file:
-            users_data: bbtypes.Users = json.load(data_file)
-        return self.get_users_as_models(users_data)
+        if data_file_is_valid:
+            self.users = self._get_users_as_models()
 
     @property
     def user_stats(self) -> bbtypes.UserStats:
@@ -75,24 +67,24 @@ class UserStatsUtils:
             'min_age': all_ages[0],
             'avg_age': sum(all_ages) // number_of_users,
             'median_age': median_age,
-            'lt_two_days_offline_users_average_age': self.get_lt_period_offline_users_avg_age(
+            'lt_two_days_offline_users_average_age': self._get_lt_period_offline_users_avg_age(
                 target_period=Period.two_days,
             ),
-            'lt_week_offline_users_average_age': self.get_lt_period_offline_users_avg_age(
+            'lt_week_offline_users_average_age': self._get_lt_period_offline_users_avg_age(
                 target_period=Period.week,
             ),
-            'lt_month_offline_users_average_age': self.get_lt_period_offline_users_avg_age(
+            'lt_month_offline_users_average_age': self._get_lt_period_offline_users_avg_age(
                 target_period=Period.month,
             ),
-            'lt_half_of_year_offline_users_average_age': self.get_lt_period_offline_users_avg_age(
+            'lt_half_of_year_offline_users_average_age': self._get_lt_period_offline_users_avg_age(
                 target_period=Period.half_of_year,
             ),
             'gt_half_of_year_offline_users_average_age':
-                self.get_gt_half_of_year_offline_users_avg_age(),
+                self._get_gt_half_of_year_offline_users_avg_age(),
         }
 
     @staticmethod
-    def user_is_offline_lt_target_period(
+    def _user_is_offline_lt_target_period(
         user_item: schemas.User,
         target_period: Period,
     ) -> bool:
@@ -110,22 +102,7 @@ class UserStatsUtils:
 
         return datetime.now() - last_login_date < target_date
 
-    def get_users_as_models(self, users_data):
-        """Return users as list of the msgspec class-models.
-
-        Args:
-            users_data (Users): the dict where the keys are the user's name and \
-            the value is a dict of the User model attributes
-
-        Returns:
-            List of user models.
-        """
-        users: schemas.Users = []
-        for user_data in users_data.values():
-            users.append(schemas.User(**user_data))
-        return users
-
-    def get_lt_period_offline_users_avg_age(self, target_period: Period) -> int:
+    def _get_lt_period_offline_users_avg_age(self, target_period: Period) -> int:
         """Get the avg age of the filtered by \
         'num of offline days lt target period' condition users.
 
@@ -136,7 +113,7 @@ class UserStatsUtils:
             The avg age of the filtered by 'num of offline days lt target period' condition users
         """
         filtered_by_offline_period = list(filter(
-            lambda user_item: self.user_is_offline_lt_target_period(user_item, target_period),
+            lambda user_item: self._user_is_offline_lt_target_period(user_item, target_period),
             self.users,
         ))
         number_of_users = len(filtered_by_offline_period)
@@ -144,7 +121,7 @@ class UserStatsUtils:
             return 0
         return sum(user.age for user in filtered_by_offline_period) // number_of_users
 
-    def get_gt_half_of_year_offline_users_avg_age(self) -> int:
+    def _get_gt_half_of_year_offline_users_avg_age(self) -> int:
         """Check if the user has been offline for more than half of the year or not.
 
         Returns:
@@ -163,3 +140,17 @@ class UserStatsUtils:
         if not number_of_users:
             return 0
         return sum(gt_half_of_year_offline_users) // number_of_users
+
+    def _get_users_as_models(self):
+        """Return users as list of the msgspec class-models.
+
+        Returns:
+            List of user models.
+        """
+        with open(self.data_file_path, 'r') as data_file:
+            users_data: bbtypes.Users = json.load(data_file)
+
+        users: schemas.Users = []
+        for user_data in users_data.values():
+            users.append(schemas.User(**user_data))
+        return users
