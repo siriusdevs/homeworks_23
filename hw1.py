@@ -28,10 +28,11 @@ def get_stats(
     count_salaries = len(all_sls)
     average_salary = round(sum(all_sls) / count_salaries, 2)
     max_salary = round(max(all_sls), 2)
+    all_sls.sort()
     if count_salaries % 2 == 1:
-        median_salary = round(sorted(all_sls)[count_salaries // 2], 2)
+        median_salary = round(all_sls[count_salaries // 2], 2)
     else:
-        median_elements = sorted(all_sls)[count_salaries // 2 - 1]
-        median_elements += sorted(all_sls)[count_salaries // 2]
+        median_elements = all_sls[count_salaries // 2 - 1]
+        median_elements += all_sls[count_salaries // 2]
         median_salary = round(median_elements / 2, 2)
     return max_salary, average_salary, median_salary
