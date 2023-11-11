@@ -13,7 +13,7 @@ class TestDataGenerator(Iterable):
     """Represent iterable containing all the test data."""
 
     _number_of_files = 11
-    _invalid_files = ('8.json', '11.json')
+    _invalid_files = ('2.json', '8.json', '11.json')
     _input_files_dir_path = 'hw2/test_files/input/'
     _output_files_dir_path = 'hw2/test_files/output/'
     _expected_files_dir_path = 'hw2/test_files/expected_output/'
@@ -109,10 +109,7 @@ class TestDataGenerator(Iterable):
         """
         for user in input_user_data.values():
             # skip files with invalid user model
-            try:
-                old_last_login_date = datetime.fromisoformat(user['last_login'])
-            except KeyError:
-                continue
+            old_last_login_date = datetime.fromisoformat(user['last_login'])
             user['last_login'] = (old_last_login_date + date_diff).strftime('%Y-%m-%d')
         return input_user_data
 
