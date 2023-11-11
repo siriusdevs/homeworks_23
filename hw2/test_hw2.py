@@ -1,9 +1,6 @@
 """Contain tests for function process_data from hw2.py."""
 import json
-from contextlib import suppress
-
 import pytest
-from msgspec import ValidationError
 
 from hw2.hw2 import process_data
 from hw2.src.bbtypes import Error, Users
@@ -26,8 +23,7 @@ def test_process_data(
         expected_output_data: dict with correct statistics
     """
     # Ignore errors since they will be checked anyway.
-    with suppress(ValidationError, json.JSONDecodeError, FileNotFoundError):
-        process_data(input_file_path, output_file_path)
+    process_data(input_file_path, output_file_path)
 
     with open(output_file_path) as output_file:
         output_data = json.load(output_file)
