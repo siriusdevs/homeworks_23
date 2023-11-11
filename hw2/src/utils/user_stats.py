@@ -1,19 +1,16 @@
 """Contain class-helper for process data function."""
 import json
-from dataclasses import dataclass, field
+import logging
+import os
+from dataclasses import dataclass
 from datetime import datetime, timedelta
-
-import msgspec
 
 import hw2.src.bbtypes as bbtypes
 import hw2.src.schemas as schemas
 from hw2.src.enums import Period
 
-from .common import (
-    create_error_object,
-    get_valid_dict_to_str,
-    validate_file_path,
-)
+from .common import create_file, find_insertion_index
+from .validate_data_file import validate_data_file
 
 
 @dataclass
@@ -22,11 +19,19 @@ class UserStatsUtils:
 
     data_file_path: str
     output_file_path: str
-    all_ages: list[int] = field(default_factory=list)
+    logger: logging.Logger
 
     def __post_init__(self):
         """Post initialization logic."""
-        validate_file_path(self.data_file_path, self.output_file_path)
+        if not os.path.exists(self.output_file_path):
+            self.logger.info('Output file does not exist. Creating..')
+            create_file(self.output_file_path)
+
+        data_file_is_valid, error_msg = validate_data_file(
+            self.data_file_path,
+        )
+        self.data_file_is_valid = data_file_is_valid
+        self.error_msg = error_msg
 
     @property
     def users(self) -> schemas.Users:
@@ -40,28 +45,9 @@ class UserStatsUtils:
             the dict of the user's names and its data
         """
         with open(self.data_file_path, 'r') as data_file:
-            with open(self.output_file_path, 'w') as output_file:
-                # If the provided JSON file has invalid syntax then an error occurs. \
-                # We catch it and write an error message to the output file
-                try:
-                    users_data: bbtypes.Users = json.load(data_file)
-                except json.JSONDecodeError:
-                    json.dump(
-                        obj=create_error_object(msg='Invalid JSON file provided'),
-                        fp=output_file,
-                    )
-                    raise
-
-                # Processing possible error with data from JSON file validation
-                try:
-                    users: schemas.Users = self.validate_user_models(users_data)
-                except msgspec.ValidationError:
-                    json.dump(
-                        obj=create_error_object('Validation error for user items'),
-                        fp=output_file,
-                    )
-                    raise
-                return users
+            users_data: bbtypes.Users = json.load(data_file)
+            users: schemas.Users = self.get_users_as_models(users_data)
+            return users
 
     @property
     def user_stats(self) -> bbtypes.UserStats:
@@ -70,23 +56,29 @@ class UserStatsUtils:
         Returns:
             The user_stats property
         """
-        number_of_users: int = len(self.all_ages)
+        number_of_users: int = 0
+        all_ages: list[int] = []
+
+        for user in self.users:
+            user_age: int = user.age
+            all_ages.insert(find_insertion_index(all_ages, user_age), user_age)
+            number_of_users += 1
 
         if not number_of_users:
             return {}
 
         half_num_of_users = number_of_users // 2
 
-        median_age: int = self.all_ages[half_num_of_users]
+        median_age: int = all_ages[half_num_of_users]
         if number_of_users % 2 == 0:
             median_age = (
-                (self.all_ages[half_num_of_users] + self.all_ages[half_num_of_users - 1])
-                // 2
+                    (all_ages[half_num_of_users] + all_ages[half_num_of_users - 1])
+                    // 2
             )
         return {
-            'max_age': self.all_ages[-1],
-            'min_age': self.all_ages[0],
-            'avg_age': sum(self.all_ages) // number_of_users,
+            'max_age': all_ages[-1],
+            'min_age': all_ages[0],
+            'avg_age': sum(all_ages) // number_of_users,
             'median_age': median_age,
             'lt_two_days_offline_users_average_age': self.get_lt_period_offline_users_avg_age(
                 target_period=Period.two_days,
@@ -123,10 +115,8 @@ class UserStatsUtils:
 
         return datetime.now() - last_login_date < target_date
 
-    @staticmethod
-    def validate_user_models(users_data: bbtypes.Users) -> schemas.Users:
-        """Validate  all the user data dicts using msgspec \
-        and returns users as list of the class-models.
+    def get_users_as_models(self, users_data):
+        """Return users as list of the msgspec class-models.
 
         Args:
             users_data (Users): the dict where the keys are the user's name and \
@@ -137,10 +127,6 @@ class UserStatsUtils:
         """
         users: schemas.Users = []
         for user_data in users_data.values():
-            msgspec.json.decode(
-                get_valid_dict_to_str(user_data).encode(),
-                type=schemas.User,
-            )
             users.append(schemas.User(**user_data))
         return users
 

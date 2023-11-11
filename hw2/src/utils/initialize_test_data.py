@@ -7,13 +7,13 @@ from datetime import datetime, timedelta
 from typing import Generator, NoReturn
 
 from hw2.src.bbtypes import TestDataItem, Users
-from hw2.src.utils.common import validate_file_path
 
 
 class TestDataGenerator(Iterable):
     """Represent iterable containing all the test data."""
 
     _number_of_files = 11
+    _invalid_files = ('8.json', '11.json')
     _input_files_dir_path = 'hw2/test_files/input/'
     _output_files_dir_path = 'hw2/test_files/output/'
     _expected_files_dir_path = 'hw2/test_files/expected_output/'
@@ -74,18 +74,17 @@ class TestDataGenerator(Iterable):
             )
         date_diff: timedelta = datetime.now() - last_modification_date
 
-        for filename in self._generate_filenames():
-            # skip files with invalid path and invalid JSON syntax
-            with suppress(json.JSONDecodeError, FileNotFoundError):
-                input_file_path = f'{self._input_files_dir_path}{filename}'
-                validate_file_path(input_file_path)
+        for filename in filter(
+            lambda file: file not in self._invalid_files,
+            self._generate_filenames()
+        ):
+            input_file_path = f'{self._input_files_dir_path}{filename}'
 
-                with open(input_file_path, 'r') as input_file:
-                    # skip files with invalid JSON syntax
-                    input_data = json.load(input_file)
+            with open(input_file_path, 'r') as input_file:
+                input_data = json.load(input_file)
 
-                updated_data: Users = self._update_input_data(input_data, date_diff)
-                self._save_updated_data(input_file_path, updated_data)
+            updated_data: Users = self._update_input_data(input_data, date_diff)
+            self._save_updated_data(input_file_path, updated_data)
 
         # update last_modification_date
         self._update_last_modification_date()

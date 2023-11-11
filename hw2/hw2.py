@@ -1,8 +1,15 @@
 """Contain the implemented function from Vasilenko's second task."""
 import json
+import logging
 from typing import NoReturn
 
-from hw2.src.utils import UserStatsUtils, find_insertion_index
+from hw2.src.utils import UserStatsUtils
+from hw2.src.utils.common import log_error_and_write_to_output_file
+
+
+logging.basicConfig(
+    level=logging.INFO
+)
 
 
 def process_data(data_file_path: str, output_file_path: str) -> NoReturn:
@@ -13,14 +20,17 @@ def process_data(data_file_path: str, output_file_path: str) -> NoReturn:
         data_file_path (str): the path to file with users data
         output_file_path (str): the path to file in which we save the necessary statistics
     """
-    user_stats_utils: UserStatsUtils = UserStatsUtils(data_file_path, output_file_path)
+    logger = logging.getLogger(__name__)
+    user_stats_utils: UserStatsUtils = UserStatsUtils(data_file_path, output_file_path, logger)
 
-    all_ages: list[int] = []
-    for user in user_stats_utils.users:
-        user_age: int = user.age
-        all_ages.insert(find_insertion_index(all_ages, user_age), user_age)
+    if not user_stats_utils.data_file_is_valid:
+        log_error_and_write_to_output_file(
+            error_msg=user_stats_utils.error_msg,
+            output_file_path=output_file_path,
+            logger=logger,
+        )
+        return
 
-    user_stats_utils.all_ages = all_ages
     with open(output_file_path, 'w') as output_file:
         json.dump(
             obj=user_stats_utils.user_stats,
