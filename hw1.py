@@ -18,7 +18,7 @@ def statistic_salary(
         A tuple with average, max and median salary.
     """
     salaries = []
-    if not departments[0]:
+    if not departments:
         return (0, 0, 0)
     for _, employees in departments:
         for salary in employees.values():
@@ -27,10 +27,10 @@ def statistic_salary(
     salaries = sorted(salaries)
     stat_salary = []
     len_salaries = len(salaries)
-    if len_salaries == 0:
-        return 0, 0, 0
     stat_salary.append(round(sum(salaries) / len_salaries, 2))
     stat_salary.append(round(max(salaries), 2))
+    if len_salaries == 0:
+        return 0, 0, 0
     if len_salaries % 2 == 1:
         stat_salary.append(round(salaries[len_salaries // 2], 2))
     else:
