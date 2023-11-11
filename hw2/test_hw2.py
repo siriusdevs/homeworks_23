@@ -1,5 +1,6 @@
 """Contain tests for function process_data from hw2.py."""
 import json
+
 import pytest
 
 from hw2.hw2 import process_data

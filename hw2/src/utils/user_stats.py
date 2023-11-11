@@ -37,17 +37,12 @@ class UserStatsUtils:
     def users(self) -> schemas.Users:
         """The users data.
 
-        Raises:
-            json.JSONDecodeError: if the input JSON file has invalid syntax
-            msgspec.ValidationError: if the users data from the input JSON file is invalid
-
         Returns:
-            the dict of the user's names and its data
+            List of user models.
         """
         with open(self.data_file_path, 'r') as data_file:
             users_data: bbtypes.Users = json.load(data_file)
-            users: schemas.Users = self.get_users_as_models(users_data)
-            return users
+        return self.get_users_as_models(users_data)
 
     @property
     def user_stats(self) -> bbtypes.UserStats:
@@ -72,8 +67,8 @@ class UserStatsUtils:
         median_age: int = all_ages[half_num_of_users]
         if number_of_users % 2 == 0:
             median_age = (
-                    (all_ages[half_num_of_users] + all_ages[half_num_of_users - 1])
-                    // 2
+                (all_ages[half_num_of_users] + all_ages[half_num_of_users - 1])
+                // 2
             )
         return {
             'max_age': all_ages[-1],

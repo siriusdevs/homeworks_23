@@ -1,9 +1,11 @@
+"""Contain functions for validating file with users data."""
 import json
 from typing import NoReturn
 
 import msgspec
 
 from hw2.src import bbtypes, schemas
+
 from .common import get_valid_dict_to_str
 
 

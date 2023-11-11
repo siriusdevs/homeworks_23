@@ -51,7 +51,18 @@ def create_file(file_path: str) -> NoReturn:
         os.makedirs(dir_tree)
 
 
-def log_error_and_write_to_output_file(error_msg: str, output_file_path: str, logger: Logger):
+def log_error_and_write_to_output_file(
+    error_msg: str,
+    output_file_path: str,
+    logger: Logger,
+) -> NoReturn:
+    """Write an error message to the console and to the file.
+
+    Args:
+        error_msg (str): an error message
+        output_file_path (str): the file in which we write an error message
+        logger (Logger): object that is needed to write an error message to console
+    """
     # Write error logs to the console and to an output file.
     logger.error(error_msg)
     with open(output_file_path, 'w') as output_file:

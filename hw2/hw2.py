@@ -3,12 +3,10 @@ import json
 import logging
 from typing import NoReturn
 
-from hw2.src.utils import UserStatsUtils
-from hw2.src.utils import log_error_and_write_to_output_file
-
+from hw2.src.utils import UserStatsUtils, log_error_and_write_to_output_file
 
 logging.basicConfig(
-    level=logging.INFO
+    level=logging.INFO,
 )
 
 

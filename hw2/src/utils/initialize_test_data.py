@@ -2,7 +2,6 @@
 import json
 import os
 from collections.abc import Iterable
-from contextlib import suppress
 from datetime import datetime, timedelta
 from typing import Generator, NoReturn
 
@@ -74,17 +73,16 @@ class TestDataGenerator(Iterable):
             )
         date_diff: timedelta = datetime.now() - last_modification_date
 
-        for filename in filter(
-            lambda file: file not in self._invalid_files,
-            self._generate_filenames()
-        ):
-            input_file_path = f'{self._input_files_dir_path}{filename}'
+        valid_files = filter(
+            lambda file_name: file_name not in self._invalid_files,
+            self._generate_filenames(),
+        )
+        for filename in valid_files:
+            data_file_path = f'{self._input_files_dir_path}{filename}'
 
-            with open(input_file_path, 'r') as input_file:
-                input_data = json.load(input_file)
-
-            updated_data: Users = self._update_input_data(input_data, date_diff)
-            self._save_updated_data(input_file_path, updated_data)
+            with open(data_file_path, 'r') as input_file:
+                updated_data: Users = self._update_input_data(json.load(input_file), date_diff)
+            self._save_updated_data(data_file_path, updated_data)
 
         # update last_modification_date
         self._update_last_modification_date()
