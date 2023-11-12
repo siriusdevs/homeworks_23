@@ -1,3 +1,6 @@
+"""A module that includes the functions for working with json files."""
+
+
 import json
 from datetime import datetime, timedelta
 
@@ -6,7 +9,15 @@ def update_online_stats(
     online_stats: dict,
     time_online: timedelta,
     month: int, six_months: int,
-):
+) -> None:
+    """Update online statistics.
+
+    Args:
+        online_stats (dict): Dictionary with statistics of being online for different periods.
+        time_online (timedelta): The period when the user is online.
+        month (int): Month with 31 days.
+        six_months (int): Six months with 186 days.
+    """
     if time_online < timedelta(days=2):
         online_stats['less than 2 days'] += 1
     elif time_online < timedelta(days=7):
@@ -20,6 +31,14 @@ def update_online_stats(
 
 
 def online(usr_data: dict) -> dict:
+    """Make online statistics.
+
+    Args:
+        usr_data (dict): User information.
+
+    Returns:
+        dict: Dictionary with statistics of being online for different periods.
+    """
     month = 31
     six_months = 186
     online_stats = {
@@ -38,6 +57,14 @@ def online(usr_data: dict) -> dict:
 
 
 def geo(usr_data: dict) -> dict:
+    """Make geographical statistics.
+
+    Args:
+        usr_data (dict): User information.
+
+    Returns:
+        dict: Dictionary with statistics on the distribution of users by city.
+    """
     city_stats = {}
     for user_info in usr_data.values():
         region = user_info.get('region')
@@ -47,7 +74,13 @@ def geo(usr_data: dict) -> dict:
     return city_stats
 
 
-def process_data(data_file, output_file):
+def process_data(data_file: str, output_file: str) -> None:
+    """Make other statistics as a percentage.
+
+    Args:
+        data_file (str): Path to input json file with user data.
+        output_file (str): Path to output json file.
+    """
     with open(data_file, 'rt') as inp_f:
         usr_data = json.load(inp_f)
         geo_distribution = {city: num / len(usr_data) for city, num in geo(usr_data).items()}
