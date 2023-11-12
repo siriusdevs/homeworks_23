@@ -1,0 +1,37 @@
+{
+    "pirozhok": {
+        "region": "Smesharovo",
+        "registered": "2003-01-17",
+        "last_login": "2023-12-31",
+        "email": "pirozhochek@yandex.ru",
+        "age": 8
+    },
+    "barsik": {
+        "region": "Kirov",
+        "registered": "2010-11-27",
+        "last_login": "2010-11-28",
+        "email": "barsichek@gmail.com",
+        "age": 13
+    },
+    "semyon": {
+        "region": "Novorossiysk",
+        "registered": "2021-11-25",
+        "last_login": "2022-04-24",
+        "email": "sam@mail.ru",
+        "age": 1
+    },
+    "stephashka": {
+        "region": "Falyonki",
+        "registered": "2017-02-18",
+        "last_login": "2017-02-23",
+        "email": "stepash@icloud.com",
+        "age": 5
+    },
+    "murzik": {
+        "region": "Kotelnich",
+        "registered": "2018-09-10",
+        "last_login": "2018-09-25",
+        "email": "stepash@icloud.com",
+        "age": 5
+    }
+}

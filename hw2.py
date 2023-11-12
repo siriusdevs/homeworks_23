@@ -85,13 +85,10 @@ def process_data(data_file: str, output_file: str) -> None:
         usr_data = json.load(inp_f)
         geo_distribution = {city: num / len(usr_data) for city, num in geo(usr_data).items()}
         online_stats = {period: num / len(usr_data) for period, num in online(usr_data).items()}
-        with open(output_file, 'w') as out_f:
-            json.dump(
-                {
-                    'geo_distribution': geo_distribution, 'online_stats': online_stats,
-                },
-                out_f, indent=4,
-            )
-
-
-process_data('data_hw2.json', 'output.json')
+    with open(output_file, 'w') as out_f:
+        json.dump(
+            {
+                'geo_distribution': geo_distribution, 'online_stats': online_stats,
+            },
+            out_f, indent=4,
+        )
