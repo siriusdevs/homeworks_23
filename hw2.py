@@ -51,9 +51,7 @@ def make_path(path: list) -> None:
         None or self without the first element.
     """
     if len(path) == 1:
-        with open(f'{path[0]}', 'w') as new_file:
-            new_file.close()
-        return None
+        return 
     if not os.path.isdir(path[0]):
         os.mkdir(path[0])
     os.chdir(path[0])
