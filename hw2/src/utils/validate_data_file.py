@@ -8,6 +8,12 @@ from hw2.src import bbtypes, schemas
 
 from .common import get_valid_dict_to_str
 
+# Built-in interpreter errors and text messages for them
+builtin_error_messages: dict[BaseException, str] = {
+    FileNotFoundError: 'Invalid path to data file',
+    PermissionError: 'You don`t have permission to read the data file',
+}
+
 
 def validate_data_file(data_file_path: str) -> tuple[bool, str | None]:
     """Validate data file.
@@ -25,16 +31,22 @@ def validate_data_file(data_file_path: str) -> tuple[bool, str | None]:
             _validate_users_from_data_file(
                 users_data=users_data,
             )
-    except FileNotFoundError:
-        error_msg = f'Invalid path to data file ({data_file_path})'
+
+    # handling built-in interpreter errors
+    except (FileNotFoundError, PermissionError) as builtin_error:
+        builtin_error_msg = builtin_error_messages[builtin_error.__class__]
+        error_msg = f'{builtin_error_msg} ({data_file_path})'
+
+    # handling errors from built-in libs
     except json.JSONDecodeError:
         error_msg = f'Invalid JSON file provided ({data_file_path})'
+
+    # handling errors from external libs
     except msgspec.ValidationError as ve:
         error_msg = f'Validation error for user items in data file ({data_file_path}): {ve}'
 
-    if error_msg:
-        return False, error_msg
-    return True, None
+    # If there is no error message the file passed validation
+    return error_msg is None, error_msg
 
 
 def _validate_users_from_data_file(users_data: bbtypes.Users) -> NoReturn:
