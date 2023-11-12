@@ -1,7 +1,9 @@
 # --encoding: utf-8
-from typing import Tuple, List
+"""
+Search for three maximum salaries for employees.
+"""
 
-"""Search for three maximum salaries for employees."""
+from typing import Tuple, List
 
 
 def check_sum_solary(*args: Tuple[str, List[float]], salary_cap: None or float = None) ->\
@@ -42,7 +44,3 @@ def check_sum_solary(*args: Tuple[str, List[float]], salary_cap: None or float =
     return (list_three_max_salaries,
             round((sum(list_three_max_salaries) / sum(list_all_salaries))*100, 2))\
         if sum(list_all_salaries) > 0 else 0
-
-
-if __name__ == "__main__":
-    print(check_sum_solary(('a', [-1, -2, -3]), ('b', [0, -7, -1.1])))
