@@ -1,7 +1,7 @@
 # --encoding: utf-8
 """Search for three maximum salaries for employees."""
 
-from typing import Tuple, List
+from typing import List, Tuple
 
 
 def check_sum_salary(*args: Tuple[str, List[float]], salary_cap: None or float = None) ->\
@@ -24,7 +24,7 @@ def check_sum_salary(*args: Tuple[str, List[float]], salary_cap: None or float =
     for i in range(len(args)):
 
         if not isinstance(args[i][0], str):
-            raise TypeError("Неверный тип")
+            raise TypeError('Неверный тип')
 
         list_all_salaries.extend(args[i][1])
 

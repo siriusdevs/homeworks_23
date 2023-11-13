@@ -1,8 +1,11 @@
 # --encoding: utf-8
 """Test main file."""
-import pytest
-from typing import Tuple, List
+
+from typing import List, Tuple
+
 from hw1 import check_sum_salary
+
+import pytest
 
 test_argument = [
     ((('v', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]),), 9, ([8, 7, 6], 58.33)),
