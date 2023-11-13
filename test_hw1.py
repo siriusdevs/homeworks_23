@@ -1,11 +1,8 @@
 # --encoding: utf-8
+"""Test main file."""
 import pytest
 from typing import Tuple, List
 from hw1 import check_sum_salary
-
-"""
-Function for test main file.
-"""
 
 test_argument = [
     ((('v', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]),), 9, ([8, 7, 6], 58.33)),
@@ -21,8 +18,8 @@ def test_func(
         args: Tuple[str, List[float]],
         salary_cap: None or float,
         answer: Tuple[List[float], float]):
-    """
-    Checks answers.
+    """Checks answers.
+
     Parameters:
         args: Tuple[str, List[float]] - accepts department name and their salaries
         answer: Tuple[List[float], float] - top three salaries in company and percentage of salary

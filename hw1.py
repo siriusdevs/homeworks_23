@@ -1,16 +1,12 @@
 # --encoding: utf-8
+"""Search for three maximum salaries for employees."""
+
 from typing import Tuple, List
 
-"""
-Search for three maximum salaries for employees.
-"""
 
 def check_sum_salary(*args: Tuple[str, List[float]], salary_cap: None or float = None) ->\
         Tuple[List[float], float] or int:
-
-    """
-    Function searches three max salaries and return their.
-     if salary_cap is less than 0, then it will be equal to 0.
+    """Search three max salaries and return their.
 
     Parameters:
         args: Tuple[str, List[float]] - takes two arguments: name company and all salaries
@@ -19,7 +15,6 @@ def check_sum_salary(*args: Tuple[str, List[float]], salary_cap: None or float =
     Returns:
         Tuple[List[float], float] - top three salaries in company and percentage of salary
     """
-
     if salary_cap is not None and salary_cap < 0:
         salary_cap = 0
 
