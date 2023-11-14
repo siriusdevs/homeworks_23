@@ -72,7 +72,7 @@ def file_found(in_path: str, out_path: str) -> None:
     if not os.path.isfile(in_path):
         raise FileNotFoundError('Is not a file path')
     if not os.path.isfile(out_path):
-        out_path = out_path.replace(os.getcwd(), '')
+        out_path = out_path.replace(pwd, '')
         make_path(out_path.split('/'))
         os.chdir(pwd)
 
@@ -120,13 +120,11 @@ def process_data(input_filepath: str, output_filepath: str) -> None:
             return 'Input file is empty'
 
         for user in data_files.values():
-            for key in user.keys():
-                if key == REGISTER:
-                    date = to_datetime((user[key]))
-                    res_dict[REGISTER][date] = res_dict.get(date, 0)+1
-                elif key == MAIL:
-                    mail_host = user[key][user[key].find('@')+1:]
-                    res_dict[MAIL][mail_host] = res_dict.get(mail_host, 0)+1
+            date = to_datetime(user.get(REGISTER))
+            res_dict[REGISTER][date] = res_dict.get(date, 0)+1
+            user_mail = user.get(MAIL)
+            mail_host = user_mail[user_mail.find('@')+1:]
+            res_dict[MAIL][mail_host] = res_dict.get(mail_host, 0)+1
         res_dict = dict_path(res_dict)
     with open(output_filepath, 'w') as output_file:
         json.dump(res_dict, output_file)
