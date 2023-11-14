@@ -38,7 +38,14 @@ def stats_by_age(ages: list[int]) -> dict[str, float]:
         ValueError: if age that given is not number
 
     """
-    output = {'Below 18': 0, '18 to 25': 0, '25 to 45': 0, '45 to 60': 0, 'Above 60': 0}
+    output = {
+        'Below 18': 0,
+        '18 to 25': 0,
+        '25 to 45': 0,
+        '45 to 60': 0,
+        'Above 60': 0,
+        'Undefined': 0,
+        }
     for age in ages:
         if not isinstance(age, (int, float)):
             raise ValueError(f'{age} was given instead of proper numeric age')
@@ -53,6 +60,9 @@ def stats_by_age(ages: list[int]) -> dict[str, float]:
                 output['45 to 60'] += 1
             case age if age >= HIGHEST_ADULT_PLUS_AGE:
                 output['Above 60'] += 1
+            case age if not age:
+                output['Undefined'] += 1
+
     total = sum(output.values())
     if total == 0:
         return output
@@ -62,6 +72,7 @@ def stats_by_age(ages: list[int]) -> dict[str, float]:
         round(output['25 to 45'] / total * 100, 2),
         round(output['45 to 60'] / total * 100, 2),
         round(output['Above 60'] / total * 100, 2),
+        round(output['Undefined'] / total * 100, 2),
     ]
     for index, age_gap in enumerate(output.keys()):
         output[age_gap] = temp[index]
@@ -143,15 +154,17 @@ def process_data(in_path: str, out_path: str) -> None:
     except FileNotFoundError:
         write_to_file(out_path, [], [], error_flag=True)
         return
+    except PermissionError:
+        write_to_file(out_path, [], [], error_flag=True)
+        return
     ages = []
     reg_years = []
-    error_flag = False
     for user_data in user_stats.values():
-        if 'age' not in user_data.keys() or 'registered' not in user_data.keys():
-            ages = [None for _ in range(len(user_data))]
-            reg_years = [None for _ in range(len(user_data))]
-            error_flag = True
+        if 'age' not in user_data.keys():
+            user_data.update({'age': None})
+        if 'registered' not in user_data.keys():
+            user_data.update({'registered': 'NaN'})
             break
         ages.append(user_data['age'])
         reg_years.append(user_data['registered'][:4])
-    write_to_file(out_path, reg_years, ages, error_flag)
+    write_to_file(out_path, reg_years, ages)
