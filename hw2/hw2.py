@@ -94,15 +94,28 @@ def count_unique(sample: list[str]) -> dict[str, float]:
     return output
 
 
-def write_to_file(file_path: str, reg_years: list[str], ages: list[int]) -> None:
+def write_to_file(
+    file_path: str,
+    reg_years: list[str],
+    ages: list[int],
+    error_flag: bool = False,
+        ) -> None:
     """Output writer module.
 
     Args:
+        error_flag: bool value that tells us to add or not add error in output file.
         file_path: path to file that we need to write output to.
         reg_years: list of different registration years from given json.
         ages: list of ages that we generate from given json.
 
     """
+    if error_flag:
+        with open(file_path, 'w') as j_err_file:
+            json.dump(
+                {'File Error, there are some troubles with given file': None},
+                fp=j_err_file,
+            )
+        return
     if op.dirname(file_path) and not op.exists(file_path):
         os.mkdir(op.dirname(file_path))
     with open(file_path, 'w') as json_file:
@@ -120,22 +133,25 @@ def process_data(in_path: str, out_path: str) -> None:
         in_path: str, that contains path to input .json file.
         out_path: str, that contains path to output .json file.
 
-    Raises:
-        ValueError: if given path to file leads to nothing or empty file.
     """
     try:
         with open(in_path) as inputdata:
             user_stats = json.load(inputdata)
     except json.JSONDecodeError:
-        raise ValueError('File that you provided is empty or not valid')
+        write_to_file(out_path, [], [], error_flag=True)
+        return
     except FileNotFoundError:
-        raise ValueError('File that you provided does not exist or not valid')
-
+        write_to_file(out_path, [], [], error_flag=True)
+        return
     ages = []
     reg_years = []
+    error_flag = False
     for user_data in user_stats.values():
         if 'age' not in user_data.keys() or 'registered' not in user_data.keys():
-            raise ValueError('Not valid file provided, missing age or registered data')
+            ages = [None for _ in range(len(user_data))]
+            reg_years = [None for _ in range(len(user_data))]
+            error_flag = True
+            break
         ages.append(user_data['age'])
         reg_years.append(user_data['registered'][:4])
-    write_to_file(out_path, reg_years, ages)
+    write_to_file(out_path, reg_years, ages, error_flag)
