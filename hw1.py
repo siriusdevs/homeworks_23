@@ -4,11 +4,37 @@
 from typing import List, Tuple
 
 
+def three_max_selaries(
+    list_salary: List[float],
+    cap_salary: float,
+        ) -> Tuple[List[float], List[float]]:
+    """Search three max salaries and all salaries are less than cap_salary.
+
+    Parameters:
+        list_salary: List[float] - all salaries
+        cap_salary: None | float - maximum salary
+
+    Returns:
+        Tuple[List[float], List[float]] - top three salaries and all salaries less than cap_salary
+    """
+    list_max_salaries: List[float] = []
+
+    for salary in list_salary:
+        if salary < cap_salary:
+            list_max_salaries.append(salary)
+
+        if len(list_max_salaries) == 3:
+            list_salary = list_salary[-list_salary.index(salary)-1:]
+            break
+
+    return list_max_salaries, list_salary
+
+
 def check_sum_salary(
     *args: Tuple[str, List[float]],
     salary_cap: None | float = None,
         ) -> Tuple[List[float], float] | int:
-    """Search three max salaries and return their.
+    """Return three max salaries.
 
     Parameters:
         args: Tuple[str, List[float]] - takes two arguments: name company and all salaries
@@ -16,16 +42,18 @@ def check_sum_salary(
 
     Returns:
         Tuple[List[float], float] - top three salaries in company and percentage of salary
+
+    Raises:
+        TypeError: if not isinstance(args[ind][0], str).
     """
     if salary_cap is not None and salary_cap < 0:
         salary_cap = 0
 
     list_all_salaries: List[float] = []
-    list_three_max_salaries: List[float] = []
 
-    for ind, argument in enumerate(args):
+    for ind, _ in enumerate(args):
         if not isinstance(args[ind][0], str):
-            raise TypeError('Неверный тип')
+            raise TypeError('Не верное название компании, попробуй задать ')
 
         list_all_salaries.extend(args[ind][1])
 
@@ -33,19 +61,18 @@ def check_sum_salary(
     list_all_salaries = [salary for salary in list_all_salaries if salary >= 0]
 
     if salary_cap is not None:
-        for salary in list_all_salaries:
 
-            if salary < salary_cap:
-                list_three_max_salaries.append(salary)
-
-            if len(list_three_max_salaries) == 3:
-                list_all_salaries = list_all_salaries[-list_all_salaries.index(salary)-1:]
-                break
+        list_three_max_salaries, list_all_salaries = three_max_selaries(
+            list_all_salaries,
+            salary_cap,
+                )
 
     else:
-        list_three_max_salaries.extend(list_all_salaries[:3])
+        list_three_max_salaries = list_all_salaries[:3]
 
-    result_sum = (sum(list_three_max_salaries) / sum(list_all_salaries))
-    result_sum = round(result_sum * 100, 2)
+    sum_all_sal = sum(list_all_salaries)
 
-    return (list_three_max_salaries, result_sum) if sum(list_all_salaries) > 0 else 0
+    return (
+        list_three_max_salaries,
+        round((sum(list_three_max_salaries) / sum_all_sal)*100, 2),
+        ) if sum_all_sal > 0 else 0
