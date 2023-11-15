@@ -4,8 +4,10 @@
 from typing import List, Tuple
 
 
-def check_sum_salary(*args: Tuple[str, List[float]], salary_cap: None or float = None) ->\
-        Tuple[List[float], float] or int:
+def check_sum_salary(
+    *args: Tuple[str, List[float]],
+    salary_cap: None | float = None,
+        ) -> Tuple[List[float], float] | int:
     """Search three max salaries and return their.
 
     Parameters:
@@ -18,15 +20,14 @@ def check_sum_salary(*args: Tuple[str, List[float]], salary_cap: None or float =
     if salary_cap is not None and salary_cap < 0:
         salary_cap = 0
 
-    list_all_salaries: List[float] = list()
-    list_three_max_salaries: List[float] = list()
+    list_all_salaries: List[float] = []
+    list_three_max_salaries: List[float] = []
 
-    for i in range(len(args)):
-
-        if not isinstance(args[i][0], str):
+    for ind, argument in enumerate(args):
+        if not isinstance(args[ind][0], str):
             raise TypeError('Неверный тип')
 
-        list_all_salaries.extend(args[i][1])
+        list_all_salaries.extend(args[ind][1])
 
     list_all_salaries.sort(reverse=True)
     list_all_salaries = [salary for salary in list_all_salaries if salary >= 0]
@@ -44,6 +45,7 @@ def check_sum_salary(*args: Tuple[str, List[float]], salary_cap: None or float =
     else:
         list_three_max_salaries.extend(list_all_salaries[:3])
 
-    return (list_three_max_salaries,
-            round((sum(list_three_max_salaries) / sum(list_all_salaries))*100, 2))\
-        if sum(list_all_salaries) > 0 else 0
+    result_sum = (sum(list_three_max_salaries) / sum(list_all_salaries))
+    result_sum = round(result_sum * 100, 2)
+
+    return (list_three_max_salaries, result_sum) if sum(list_all_salaries) > 0 else 0
