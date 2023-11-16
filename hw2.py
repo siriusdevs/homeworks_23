@@ -18,16 +18,21 @@ def update_online_stats(
         month (int): Month with 31 days.
         six_months (int): Six months with 186 days.
     """
+    lt_two_days = 'less than 2 days'
+    lt_week = 'less than 2 days'
+    lt_month = 'less than month'
+    lt_six_months = 'less than 6 months'
+    gt_six_months = 'great than 6 months'
     if time_online < timedelta(days=2):
-        online_stats['less than 2 days'] += 1
+        online_stats[lt_two_days] += 1
     elif time_online < timedelta(days=7):
-        online_stats['less than week'] += 1
+        online_stats[lt_week] += 1
     elif time_online < timedelta(days=month):
-        online_stats['less than month'] += 1
+        online_stats[lt_month] += 1
     elif time_online < timedelta(days=six_months):
-        online_stats['less than 6 months'] += 1
+        online_stats[lt_six_months] += 1
     else:
-        online_stats['great than 6 months'] += 1
+        online_stats[gt_six_months] += 1
 
 
 def online(usr_data: dict) -> dict:
