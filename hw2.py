@@ -1,9 +1,9 @@
-"""This module include function process_data,which writes statistics to a file."""
+"""This module include function process_data, which writes statistics to a file."""
 
 
 import json
 import os
-from datetime import datetime
+from datetime import date, datetime
 
 MAIL = 'email'
 REGISTER = 'registered'
@@ -12,20 +12,21 @@ REGISTER = 'registered'
 class InvalidDate(Exception):
     """Error for date in not format YYYY-MM-DD."""
 
-    def __init__(self, date: str) -> None:
+    def __init__(self, invalid_date: str) -> None:
         """Create error message.
 
         Args:
-            date: date in uncorrect format or time
+            invalid_date: date in uncorrect format or time
         """
-        super().__init__(f'{date} in uncorrect format YYYY-MM-DD or time')
+        super().__init__(f'{invalid_date} in uncorrect format YYYY-MM-DD or time')
 
 
-def to_datetime(date: str) -> datetime | None:
-    """Check if the date is in the format.
+def to_datetime(regisrated: str, last_login: str) -> datetime | None:
+    """Check if the date is in the format and lower then today date and last login date.
 
     Args:
-        date: date in uncorrect format
+        regisrated: string with user regisrated date
+        last_login: string with user last login
 
     Raises:
         InvalidDate: if date in not format YYYY-MM-DD
@@ -34,11 +35,12 @@ def to_datetime(date: str) -> datetime | None:
         Object datetime type.
     """
     try:
-        if datetime.fromisoformat(date) <= datetime.now():
-            return datetime.fromisoformat(date)
+        regisrated, last_login = date.fromisoformat(regisrated), date.fromisoformat(last_login)
     except ValueError:
-        raise InvalidDate(date)
-    raise InvalidDate(date)
+        raise InvalidDate(regisrated)
+    if regisrated <= datetime.now().date() and regisrated <= last_login:
+        return regisrated
+    raise InvalidDate(regisrated)
 
 
 def make_path(path: list) -> None:
@@ -120,11 +122,15 @@ def process_data(input_filepath: str, output_filepath: str) -> None:
             return 'Input file is empty'
 
         for user in data_files.values():
-            date = to_datetime(user.get(REGISTER))
-            res_dict[REGISTER][date] = res_dict.get(date, 0)+1
-            user_mail = user.get(MAIL)
-            mail_host = user_mail[user_mail.find('@')+1:]
-            res_dict[MAIL][mail_host] = res_dict.get(mail_host, 0)+1
+            if user.get(REGISTER):
+                reg_date = to_datetime(user.get(REGISTER), user.get(
+                    'last_login', datetime.now().strftime('%Y-%m-%d'),
+                    ))
+                res_dict[REGISTER][reg_date] = res_dict.get(reg_date, 0)+1
+            if user.get(MAIL):
+                user_mail = user.get(MAIL)
+                mail_host = user_mail[user_mail.find('@')+1:]
+                res_dict[MAIL][mail_host] = res_dict.get(mail_host, 0)+1
         res_dict = dict_path(res_dict)
     with open(output_filepath, 'w') as output_file:
-        json.dump(res_dict, output_file)
+        json.dump(res_dict, output_file, indent=3)

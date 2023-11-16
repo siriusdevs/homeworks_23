@@ -1,9 +1,9 @@
 {
     "user": {
         "region": "Saint-Petersburg",
-        "registered": "2077-12-24",
-        "last_login": "2010-10-01",
-        "email": "useryandex.ru",
+        "registered": "201212-24",
+        "last_login": "2023-10-01",
+        "email": "user@yandex.ru",
         "age": 36
     },
     "user2": {
@@ -11,6 +11,13 @@
         "registered": "2022-10-30",
         "last_login": "2022-11-21",
         "email": "user2@gmail.com",
+        "age": 18
+    },
+    "user3": {
+        "region": "Moscow",
+        "registered": "2019-10-30",
+        "last_login": "2022-11-21",
+        "email": "@mail.ru",
         "age": 18
     }
 }

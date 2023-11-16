@@ -14,7 +14,7 @@ def make_tests():
         A tuple with data test.
     """
     res = []
-    for num in range(1, 5):
+    for num in range(1, 6):
         input_file = f'hw2/input/{num}.json'
         output_file = f'hw2/output/{num}.json'
 
@@ -32,14 +32,14 @@ TEST_ERROR_PROCESS_DATA = (
     ('/home/runner/work/homeworks_23/hw2/data_hw2.json',
      '/home/runner/work/homeworks_23/hw2/data.json', 'Is not a file path',
      ),
-    ('hw2/input/5.json',
-     'hw2/output/5.json', 'Input file is empty',
-     ),
     ('hw2/input/6.json',
-     'hw2/output/6.json', '201212-24 in uncorrect format YYYY-MM-DD or time',
+     'hw2/output/6.json', 'Input file is empty',
      ),
     ('hw2/input/7.json',
-     'hw2/output/7.json', '2077-12-24 in uncorrect format YYYY-MM-DD or time',
+     'hw2/output/7.json', '201212-24 in uncorrect format YYYY-MM-DD or time',
+     ),
+    ('hw2/input/8.json',
+     'hw2/output/8.json', '2077-12-24 in uncorrect format YYYY-MM-DD or time',
      ),
 )
 
