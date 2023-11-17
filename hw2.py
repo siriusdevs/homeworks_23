@@ -19,7 +19,7 @@ def update_online_stats(
         six_months (int): Six months with 186 days.
     """
     lt_two_days = 'less than 2 days'
-    lt_week = 'less than 2 days'
+    lt_week = 'less than week'
     lt_month = 'less than month'
     lt_six_months = 'less than 6 months'
     gt_six_months = 'great than 6 months'
@@ -54,10 +54,13 @@ def online(usr_data: dict) -> dict:
         'great than 6 months': 0,
         }
     for user_info in usr_data.values():
-        registr = datetime.strptime(user_info.get('registered'), '%Y-%m-%d')
-        last_log = datetime.strptime(user_info.get('last_login'), '%Y-%m-%d')
-        time_online = (last_log - registr)
-        update_online_stats(online_stats, time_online, month, six_months)
+        user_info = {details.lower(): personal_data for details, personal_data in user_info.items()}
+        print(user_info)
+        if user_info.get('registered') and user_info.get('last_login'):
+            registr = datetime.strptime(user_info.get('registered'), '%Y-%m-%d')
+            last_log = datetime.strptime(user_info.get('last_login'), '%Y-%m-%d')
+            time_online = (last_log - registr)
+            update_online_stats(online_stats, time_online, month, six_months)
     return online_stats
 
 
@@ -73,9 +76,10 @@ def geo(usr_data: dict) -> dict:
     city_stats = {}
     for user_info in usr_data.values():
         region = user_info.get('region')
-        if region not in city_stats:
-            city_stats[region] = 0
-        city_stats[region] += 1
+        if region:
+            if region not in city_stats:
+                city_stats[region] = 0
+            city_stats[region] += 1
     return city_stats
 
 
@@ -88,8 +92,8 @@ def process_data(data_file: str, output_file: str) -> None:
     """
     with open(data_file, 'rt') as inp_f:
         usr_data = json.load(inp_f)
-        geo_distribution = {city: num / len(usr_data) for city, num in geo(usr_data).items()}
-        online_stats = {period: num / len(usr_data) for period, num in online(usr_data).items()}
+        geo_distribution = {city: round(num / len(usr_data), 2) for city, num in geo(usr_data).items()}
+        online_stats = {period: round(num / len(usr_data), 2) for period, num in online(usr_data).items()}
     with open(output_file, 'w') as out_f:
         json.dump(
             {

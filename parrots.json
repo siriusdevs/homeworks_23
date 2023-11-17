@@ -1,14 +1,15 @@
 {
     "geo_distribution": {
-        "World": 0.5,
-        "Moscow": 0.25,
-        "London": 0.25
+        "World": 0.33,
+        "Moscow": 0.17,
+        "London": 0.17,
+        "Sun": 0.17
     },
     "online_stats": {
-        "less than 2 days": 0.0,
-        "less than week": 0.25,
+        "less than 2 days": 0.17,
+        "less than week": 0.17,
         "less than month": 0.0,
-        "less than 6 months": 0.25,
-        "great than 6 months": 0.5
+        "less than 6 months": 0.17,
+        "great than 6 months": 0.33
     }
 }

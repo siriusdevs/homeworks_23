@@ -26,5 +26,16 @@
         "last_login": "2006-04-30",
         "email": "byklya@mail.ru",
         "age": 4
+    },
+    "ra": {
+        "region": "Sun",
+        "email": "ra@mail.ru",
+        "age": 6
+    },
+    "lemon": {
+        "registered": "2007-01-29",
+        "last_login": "2007-01-30",
+        "email": "lemon@mail.ru",
+        "age": 2
     }
 }
