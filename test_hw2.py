@@ -27,23 +27,6 @@ def make_tests():
 
 
 TEST_PROCESS_DATA = make_tests()
-TEST_ERROR_PROCESS_DATA = (
-    ('/home/runner/work/homeworks_23/hw2/data.json',
-     '/home/runner/work/homeworks_23/hw2/datas_output.json', 'Is not a file path',
-     ),
-    ('/home/runner/work/homeworks_23/hw2/data_hw2.json',
-     '/home/runner/work/homeworks_23/hw2/data.json', 'Is not a file path',
-     ),
-    ('hw2/input/6.json',
-     'hw2/output/6.json', 'Input file is empty',
-     ),
-    ('hw2/input/7.json',
-     'hw2/output/7.json', '201212-24 in uncorrect format YYYY-MM-DD or time',
-     ),
-    ('hw2/input/8.json',
-     'hw2/output/8.json', '2077-12-24 in uncorrect format YYYY-MM-DD or time',
-     ),
-)
 
 
 @pytest.mark.parametrize('input_filepath,output_filepath,expected', TEST_PROCESS_DATA)
