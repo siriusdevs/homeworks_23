@@ -89,12 +89,16 @@ def process_data(data_file: str, output_file: str) -> None:
         data_file (str): Path to input json file with user data.
         output_file (str): Path to output json file.
     """
-    with open(data_file, 'rt') as inp_f:
-        usr_data = json.load(inp_f)
-        geo_distrb = {city: num / len(usr_data) for city, num in geo(usr_data).items()}
-        onl_sts = {period: num / len(usr_data) for period, num in onl(usr_data).items()}
-        geo_distrb = {city: round(num, 2) for city, num in geo_distrb.items()}
-        onl_sts = {period: round(num, 2) for period, num in onl_sts.items()}
+    if data_file:
+        with open(data_file, 'rt') as inp_f:
+            usr_data = json.load(inp_f)
+            geo_distrb = {city: num / len(usr_data) for city, num in geo(usr_data).items()}
+            onl_sts = {period: num / len(usr_data) for period, num in onl(usr_data).items()}
+            geo_distrb = {city: round(num, 2) for city, num in geo_distrb.items()}
+            onl_sts = {period: round(num, 2) for period, num in onl_sts.items()}
+    else:
+        geo_distrb = 0
+        onl_sts = 0
     with open(output_file, 'w') as out_f:
         json.dump(
             {

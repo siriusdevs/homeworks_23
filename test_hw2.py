@@ -10,6 +10,8 @@ test_data = [
     ('data_hw2.json', 'output_hw2.json', 'data_hw2_out.json'),
     ('inp_cats.json', 'out_cats.json', 'cats.json'),
     ('inp_parrots.json', 'out_parrots.json', 'parrots.json'),
+    ('inp_dogs.json', None, 'dogs.json'),
+    (None, None, 'empty.json'),
 ]
 
 
@@ -25,6 +27,8 @@ def test_process_data(input_file: str, output_file: str, expected):
     Asserts:
         True if process_data makes expected json file.
     """
+    if output_file is None:
+        output_file = 'output.json'
     process_data(input_file, output_file)
     with open(output_file, 'rt') as o_f:
         output_f = json.load(o_f)
