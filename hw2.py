@@ -35,7 +35,7 @@ def update_online_stats(
         online_stats[gt_six_months] += 1
 
 
-def online(usr_data: dict) -> dict:
+def onl(usr_data: dict) -> dict:
     """Make online statistics.
 
     Args:
@@ -54,8 +54,7 @@ def online(usr_data: dict) -> dict:
         'great than 6 months': 0,
         }
     for user_info in usr_data.values():
-        user_info = {details.lower(): personal_data for details, personal_data in user_info.items()}
-        print(user_info)
+        user_info = {details.lower(): _ for details, _ in user_info.items()}
         if user_info.get('registered') and user_info.get('last_login'):
             registr = datetime.strptime(user_info.get('registered'), '%Y-%m-%d')
             last_log = datetime.strptime(user_info.get('last_login'), '%Y-%m-%d')
@@ -92,12 +91,14 @@ def process_data(data_file: str, output_file: str) -> None:
     """
     with open(data_file, 'rt') as inp_f:
         usr_data = json.load(inp_f)
-        geo_distribution = {city: round(num / len(usr_data), 2) for city, num in geo(usr_data).items()}
-        online_stats = {period: round(num / len(usr_data), 2) for period, num in online(usr_data).items()}
+        geo_distrb = {city: num / len(usr_data) for city, num in geo(usr_data).items()}
+        onl_sts = {period: num / len(usr_data) for period, num in onl(usr_data).items()}
+        geo_distrb = {city: round(num, 2) for city, num in geo_distrb.items()}
+        onl_sts = {period: round(num, 2) for period, num in onl_sts.items()}
     with open(output_file, 'w') as out_f:
         json.dump(
             {
-                'geo_distribution': geo_distribution, 'online_stats': online_stats,
+                'geo_distribution': geo_distrb, 'online_stats': onl_sts,
             },
             out_f, indent=4,
         )
