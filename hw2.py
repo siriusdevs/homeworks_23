@@ -1,82 +1,99 @@
 """This module include function process_data, which writes statistics to a file."""
 
-
 import json
+import logging
 import os
 from datetime import date, datetime
+from typing import Any, NoReturn
 
 MAIL = 'email'
 REGISTER = 'registered'
+logging.basicConfig(level=logging.INFO)
 
 
-class InvalidDate(Exception):
-    """Error for date in not format YYYY-MM-DD."""
+def load_input_file(input_filepath, output_filepath) -> Any:
+    """Read content file.
 
-    def __init__(self, invalid_date: str) -> None:
-        """Create error message.
+    Args:
+        input_filepath: path to json file with data on site clients
+        output_filepath: path to json output file
 
-        Args:
-            invalid_date: date in uncorrect format or time
-        """
-        super().__init__(f'{invalid_date} in uncorrect format YYYY-MM-DD or time')
+    Returns:
+        Content file or None.
+    """
+    with open(input_filepath, 'r') as input_file:
+        try:
+            return json.load(input_file)
+        except json.decoder.JSONDecodeError as err:
+            logging.info('Input file is empty')
+            dump_to_invalid_file(output_filepath, type(err).__name__, 'Input file is empty')
+            return None
 
 
-def to_datetime(regisrated: str, last_login: str) -> datetime | None:
+def dump_to_invalid_file(output_filepath: str, err: str, msg: str) -> NoReturn:
+    """Write in file type and message about error.
+
+    Args:
+        output_filepath: path to json output file
+        err: type of error
+        msg: message about error
+    """
+    with open(output_filepath, 'w') as output_file:
+        json.dump(obj={
+            'status': err, 'message': msg,
+        },
+            fp=output_file,
+        )
+
+
+def to_datetime(output_filepath, regisrated: str, last_login: str) -> datetime | None:
     """Check if the date is in the format and lower then today date and last login date.
 
     Args:
+        output_filepath: path to json output file
         regisrated: string with user regisrated date
         last_login: string with user last login
-
-    Raises:
-        InvalidDate: if date in not format YYYY-MM-DD
 
     Returns:
         Object datetime type.
     """
     try:
         regisrated, last_login = date.fromisoformat(regisrated), date.fromisoformat(last_login)
-    except ValueError:
-        raise InvalidDate(regisrated)
+    except ValueError as err:
+        msg = f'{regisrated} in uncorrect format YYYY-MM-DD or time'
+        logging.info(msg)
+        dump_to_invalid_file(output_filepath, type(err).__name__, msg)
+        return None
+
     if regisrated <= datetime.now().date() and regisrated <= last_login:
         return regisrated
-    raise InvalidDate(regisrated)
+
+    msg = f'{regisrated} in uncorrect time'
+    logging.info(msg)
+    dump_to_invalid_file(output_filepath, 'TimeDateError', msg)
 
 
-def make_path(path: list) -> None:
-    """Make path to output file.
-
-    Args:
-        path: list with name of directory and output filename as last element
-
-    Returns:
-        None or self without the first element.
-    """
-    if len(path) == 1:
-        return None
-    if not os.path.isdir(path[0]):
-        os.mkdir(path[0])
-    os.chdir(path[0])
-    return make_path(path[1:])
-
-
-def file_found(in_path: str, out_path: str) -> None:
+def file_found(in_path: str, out_path: str) -> bool:
     """Check if the arguments are files.
 
     Args:
         in_path: path to json file with data on site clients
         out_path: path to json output file
 
-    Raises:
-        FileNotFoundError: If in_path is not file
+    Returns:
+        False if File not found or None.
     """
-    pwd = os.getcwd()
-    if not os.path.isfile(in_path):
-        raise FileNotFoundError('Is not a file path')
     if not os.path.isfile(out_path):
-        out_path = out_path.replace(pwd, '')
-        make_path(out_path.split('/'))
-        os.chdir(pwd)
+        out_dir = os.path.dirname(out_path)
+        if not os.path.exists(out_dir):
+            os.makedirs(out_dir, exist_ok=True)
+
+    if not os.path.isfile(in_path):
+        msg = 'Is not a file path'
+        logging.info(msg)
+        dump_to_invalid_file(out_path, 'FileNotFoundError', msg)
+        return False
+    return True
 
 
 def dict_path(count_dct: dict[datetime, dict]) -> dict[str, dict]:
@@ -102,35 +119,42 @@ def dict_path(count_dct: dict[datetime, dict]) -> dict[str, dict]:
     return res_dict
 
 
-def process_data(input_filepath: str, output_filepath: str) -> None:
+def process_data(input_filepath: str, output_filepath: str) -> NoReturn:
     """Take json file and returns emailing and registration statiatic.
 
     Args:
         input_filepath: path to json file with data on site clients
         output_filepath: path to json output file
-
-    Returns:
-        None or error message.
-
     """
-    file_found(input_filepath, output_filepath)
-    with open(input_filepath, 'r') as input_file:
-        res_dict = {MAIL: {}, REGISTER: {}}
-        try:
-            data_files = json.load(input_file)
-        except json.decoder.JSONDecodeError:
-            return 'Input file is empty'
+    if not file_found(input_filepath, output_filepath):
+        return
 
-        for user in data_files.values():
-            if user.get(REGISTER):
-                reg_date = to_datetime(user.get(REGISTER), user.get(
-                    'last_login', datetime.now().strftime('%Y-%m-%d'),
-                    ))
-                res_dict[REGISTER][reg_date] = res_dict.get(reg_date, 0)+1
-            if user.get(MAIL):
-                user_mail = user.get(MAIL)
-                mail_host = user_mail[user_mail.find('@')+1:]
-                res_dict[MAIL][mail_host] = res_dict.get(mail_host, 0)+1
-        res_dict = dict_path(res_dict)
+    res_dict = {MAIL: {}, REGISTER: {}}
+    data_files = load_input_file(input_filepath, output_filepath)
+
+    if data_files is None:
+        return
+
+    if not isinstance(data_files, dict):
+        msg = 'Content in file must be dict'
+        logging.info(msg)
+        dump_to_invalid_file(output_filepath, 'InvalidContentFile', msg)
+        return
+
+    for user in data_files.values():
+        if user.get(REGISTER):
+            reg_date = to_datetime(output_filepath, user.get(REGISTER), user.get(
+                'last_login', datetime.now().strftime('%Y-%m-%d'),
+            ))
+            if not reg_date:
+                return
+            res_dict[REGISTER][reg_date] = res_dict.get(reg_date, 0)+1
+        if user.get(MAIL):
+            user_mail = user.get(MAIL)
+            mail_host = user_mail[user_mail.find('@')+1:]
+            res_dict[MAIL][mail_host] = res_dict.get(mail_host, 0)+1
+
+    res_dict = dict_path(res_dict)
+
     with open(output_filepath, 'w') as output_file:
         json.dump(res_dict, output_file, indent=3)

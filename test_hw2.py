@@ -4,7 +4,9 @@ import json
 
 import pytest
 
-from hw2 import InvalidDate, process_data
+from hw2 import process_data
+
+COUNTTESTFILE = 11
 
 
 def make_tests():
@@ -14,7 +16,7 @@ def make_tests():
         A tuple with data test.
     """
     res = []
-    for num in range(1, 6):
+    for num in range(1, COUNTTESTFILE):
         input_file = f'hw2/input/{num}.json'
         output_file = f'hw2/output/{num}.json'
 
@@ -57,18 +59,3 @@ def test_process_data(input_filepath: str, output_filepath: str, expected: dict)
     with open(output_filepath, 'r') as file1:
         input_file = json.load(file1)
     assert input_file == expected
-
-
-@pytest.mark.parametrize('input_filepath,output_filepath,expected', TEST_ERROR_PROCESS_DATA)
-def test_errors_process_data(input_filepath: str, output_filepath: str, expected: str) -> None:
-    """A function that tests process_data function.
-
-    Args:
-        input_filepath: path to json file with data on site clients
-        output_filepath: path to json output file
-        expected:  expected function output.
-    """
-    try:
-        process_data(input_filepath, output_filepath)
-    except (FileNotFoundError, InvalidDate) as err:
-        assert expected == str(err)
