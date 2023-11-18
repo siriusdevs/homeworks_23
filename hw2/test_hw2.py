@@ -1,35 +1,10 @@
-"""Module for testing functions process_data, create_stats, increment_field."""
+"""Module for testing main's functions."""
 
 import json
 from typing import TypeAlias
 
-
-import increment_field
 import main
 import pytest
-
-
-DATA_TEST_INCREMENT_FIELD: tuple[tuple[dict, str, dict], ...] = (
-    (
-        {
-            'a': 1,
-        },
-        'a',
-        {
-            'a': 2,
-        },
-    ),
-    (
-        {
-            'b': 1,
-        },
-        'c',
-        {
-            'b': 1,
-            'c': 1,
-        },
-    ),
-)
 
 DIRECTORY = 'dataset_hw2'
 FILE_PATH_FOR_OUTPUTTING = f'{DIRECTORY}/__file_for_testing__.json'
@@ -69,27 +44,7 @@ DATA_TEST_DATA_PROCESS: tuple[tuple[str, str, UsersOutput], ...] = (
             },
         },
     ),
-    (
-        f'{DIRECTORY}/third.json',
-        FILE_PATH_FOR_OUTPUTTING,
-        {
-            'domains': {},
-            'years': {},
-        },
-    ),
 )
-
-@pytest.mark.parametrize('dictionary, field, expected', DATA_TEST_INCREMENT_FIELD)
-def test_increment_field(dictionary: dict[str, int], field: str, expected: dict[str, int]) -> None:
-    """Test function increment field.
-
-    Args:
-        dictionary (dict[str, int]): given dictionary with element's count in field.
-        field (str): dictionary's field key.
-        expected (dict[str, int]): dictionary with incremented field.
-    """
-    increment_field.increment_field(dictionary, field)
-    assert dictionary == expected
 
 
 @pytest.mark.parametrize('from_path, to_path, expected', DATA_TEST_DATA_PROCESS)

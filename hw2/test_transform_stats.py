@@ -1,5 +1,7 @@
-import transform_stats
+"""Module for testing (transform_stats)'s functions."""
+
 import pytest
+import transform_stats
 
 DATA_TEST_TRANSFORM_STATS: tuple[tuple[dict, int, dict], ...] = (
     (
@@ -13,6 +15,11 @@ DATA_TEST_TRANSFORM_STATS: tuple[tuple[dict, int, dict], ...] = (
             'mail.ru': 60.0,
         },
     ),
+    (
+        {},
+        0,
+        {},
+    ),
 )
 
 DATA_TEST_TRANSFORM_STATS_INCORRECT: tuple[dict[str, int], ...] = (
@@ -23,21 +30,21 @@ DATA_TEST_TRANSFORM_STATS_INCORRECT: tuple[dict[str, int], ...] = (
     {},
 )
 
+
 @pytest.mark.parametrize('stats, sum_count, expected', DATA_TEST_TRANSFORM_STATS)
-def test_transform_stats(stats: dict[str, int], sum_count: int, expected: dict[str, float]) \
-    -> None:
+def test_transform_stats(stats: dict[str, int], sum_count: int, expected: dict) -> None:
     """Test transform stats.
 
     Args:
         stats (dict[str, int]): dictionary that has int values in its field.
         sum_count (int): the count of all registered entity.
-        expected (dict[str, float]): dictionary that has percents value in its field.
+        expected (dict): dictionary that has percents value in its field.
     """
     assert transform_stats.transform_stats(stats, sum_count) == expected
 
 
 @pytest.mark.parametrize('stats', DATA_TEST_TRANSFORM_STATS_INCORRECT)
-@pytest.mark.xfail(raises=transform_stats.SumCountEqualsZero)
+@pytest.mark.xfail(raises=transform_stats.SumCountEqualsZeroForNoneEmpty)
 def test_transform_stats_incorrect(stats: dict[str, int]) -> None:
     """Test transform stats incorrect values.
 
