@@ -38,7 +38,7 @@
 |lebedev|-|-|-|-|
 |litvinov|+|-|-|-|
 |main|-|-|-|-|
-|malanin|+|+|-|-|
+|malanin|+|-|-|-|
 |malygin|-|-|-|-|
 |mashtaler|-|-|-|-|
 |mens|-|-|-|-|
