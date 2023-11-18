@@ -3,7 +3,11 @@ import subprocess  # noqa: S404
 
 from mdutils.mdutils import MdUtils
 
+<<<<<<< HEAD
 HW_COUNT = 10
+=======
+HW_COUNT = 4
+>>>>>>> 1321c45bc7031482d3d33518b5afb9d9b1fd25de
 MD_FILENAME = 'README.md'
 MD_TITLE = 'Репозиторий для домашних заданий, осень 2023, Колледж Сириус'
 
@@ -63,8 +67,17 @@ def write_homework_stats_to_md(stats: HomeworkStats):
     for branch, hws in sorted_stats:
         table.append(branch)
         table += ['+' if hws[hw] else '-' for hw in _get_hw_names()]
+<<<<<<< HEAD
 
     cols, rows = HW_COUNT + 1, len(stats) + 1
+=======
+    
+    if sorted_stats:
+        table = [sum([hws[hw] for _, hws in sorted_stats]) for hw in _get_hw_names()] + table
+        table.insert(0, 'overall')
+
+    cols, rows = HW_COUNT + 1, len(stats) + 2
+>>>>>>> 1321c45bc7031482d3d33518b5afb9d9b1fd25de
     md.new_table(columns=cols, rows=rows, text=table)
     md.create_md_file()
 
