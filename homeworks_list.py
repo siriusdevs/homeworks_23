@@ -18,20 +18,17 @@ def _get_branches():
     return [line for line in lines if line.startswith(REMOTE_PREFIX) and 'HEAD' not in line]
 
 
-def _branch_has_file(branch, filename) -> bool:
-    cmd = ['git', 'cat-file', '-e', f'{branch}:{filename}']
+def _branch_has_path(branch: str, path: str) -> bool: 
+    cmd = ['git', 'cat-file', '-e', f'{branch}:{path}']
     process = subprocess.run(cmd, capture_output=True)  # noqa: S603
     return process.returncode == 0
 
 
-def _get_hw_names() -> list[str]:
-    homeworks = []
-    for hw_index in range(1, HW_COUNT + 1):
-        homeworks.append(f'hw{hw_index}.py')
-    return homeworks
+def _branch_has_hw(branch: str, index: int) -> bool:
+    return _branch_has_path(branch, f'hw{index}') or _branch_has_path(branch, f'hw{index}.py')
 
 
-HomeworkStats = dict[str, dict[str, bool]]
+HomeworkStats = dict[str, dict[int, bool]]
 
 
 def get_finished_homeworks() -> HomeworkStats:
@@ -45,8 +42,8 @@ def get_finished_homeworks() -> HomeworkStats:
     for branch in branches:
         surname = branch.removeprefix(REMOTE_PREFIX)
         stats[surname] = {}
-        for hw_name in _get_hw_names():
-            stats[surname][hw_name] = _branch_has_file(branch, hw_name)
+        for hw in range(1, HW_COUNT+1):
+            stats[surname][hw] = _branch_has_hw(branch, hw)
     return stats
 
 
@@ -57,15 +54,16 @@ def write_homework_stats_to_md(stats: HomeworkStats):
         stats: HomeworkStats for filling the table
     """
     md = MdUtils(file_name=MD_FILENAME, title=MD_TITLE)
-    table = ['Branch'] + _get_hw_names()
+    table = ['Branch'] + [f'hw{hw}' for hw in range(1, HW_COUNT+1)]
     # sort stats by branch name to get consistent results
     sorted_stats = sorted(stats.items(), key=lambda elem: elem[0])
+
     for branch, hws in sorted_stats:
         table.append(branch)
-        table += ['+' if hws[hw] else '-' for hw in _get_hw_names()]
-    
+        table += ['+' if hws[hw] else '-' for hw in range(1, HW_COUNT+1)]
+  
     if sorted_stats:
-        table = [sum([hws[hw] for _, hws in sorted_stats]) for hw in _get_hw_names()] + table
+        table = [sum([hws[hw] for _, hws in sorted_stats]) for hw in range(1, HW_COUNT+1)] + table
         table.insert(0, 'overall')
 
     cols, rows = HW_COUNT + 1, len(stats) + 2
