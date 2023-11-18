@@ -46,7 +46,7 @@ def dump_to_invalid_file(output_filepath: str, err: str, msg: str) -> None:
         json.dump(obj={
             'status': err, 'message': msg,
         },
-            fp=output_file,
+            fp=output_file, indent=3,
         )
 
 
@@ -135,18 +135,18 @@ def process_data(input_filepath: str, output_filepath: str) -> None:
         return
 
     res_dict = {MAIL: {}, REGISTER: {}}
-    data_files = load_input_file(input_filepath, output_filepath)
+    usrfile = load_input_file(input_filepath, output_filepath)
 
-    if data_files is None:
+    if usrfile is None:
         return
 
-    if not isinstance(data_files, dict):
+    if not (isinstance(usrfile, dict) and all(isinstance(usr, dict) for usr in usrfile.values())):
         msg = 'Content in file must be dict'
         logging.error(msg)
         dump_to_invalid_file(output_filepath, 'InvalidContentFile', msg)
         return
 
-    for user in data_files.values():
+    for user in usrfile.values():
         if user.get(REGISTER):
             reg_date = to_datetime(output_filepath, user.get(REGISTER), user.get(
                 'last_login', datetime.now().strftime('%Y-%m-%d'),

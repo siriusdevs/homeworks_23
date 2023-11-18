@@ -1,1 +1,4 @@
-{"status": "ValueError", "message": "201212-24 in uncorrect format YYYY-MM-DD or time"}
+{
+   "status": "ValueError",
+   "message": "201212-24 in uncorrect format YYYY-MM-DD or time"
+}

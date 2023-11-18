@@ -6,7 +6,7 @@ import pytest
 
 from hw2 import process_data
 
-COUNTTESTFILE = 11
+COUNTTESTFILE = 12
 
 
 def make_tests():
