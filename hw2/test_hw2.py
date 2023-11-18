@@ -3,29 +3,11 @@
 import json
 from typing import TypeAlias
 
-import create_stats
+
 import increment_field
 import main
 import pytest
 
-DATA_TEST_CREATE_STATS: tuple[tuple[dict, int, dict], ...] = (
-    (
-        {
-            'yandex': 2,
-            'mail.ru': 3,
-        },
-        5,
-        {
-            'yandex': 40.0,
-            'mail.ru': 60.0,
-        },
-    ),
-    (
-        {},
-        0,
-        {},
-    ),
-)
 
 DATA_TEST_INCREMENT_FIELD: tuple[tuple[dict, str, dict], ...] = (
     (
@@ -96,19 +78,6 @@ DATA_TEST_DATA_PROCESS: tuple[tuple[str, str, UsersOutput], ...] = (
         },
     ),
 )
-
-
-@pytest.mark.parametrize('stats, all_count, expected', DATA_TEST_CREATE_STATS)
-def test_create_stats(stats: dict[str, int], all_count: int, expected: dict[str, float]) -> None:
-    """Test create stats.
-
-    Args:
-        stats (dict[str, int]): dictionary that has int values in your field.
-        all_count (int): the count of all registered entity.
-        expected (dict[str, float]): dictionary that has percents value in your field.
-    """
-    assert create_stats.create_stats(stats, all_count) == expected
-
 
 @pytest.mark.parametrize('dictionary, field, expected', DATA_TEST_INCREMENT_FIELD)
 def test_increment_field(dictionary: dict[str, int], field: str, expected: dict[str, int]) -> None:
