@@ -3,11 +3,11 @@ from datetime import datetime
 
 
 online_status_count = {
-    "less_than_2_days": 0,
-    "less_than_a_week": 0,
-    "less_than_a_month": 0,
-    "less_than_six_months": 0,
-    "more_than_six_months": 0
+    'less_than_2_days': 0,
+    'less_than_a_week': 0,
+    'less_than_a_month': 0,
+    'less_than_six_months': 0,
+    'more_than_six_months': 0
 }
 
 
@@ -39,13 +39,17 @@ def process_data(input_path, output_path):
 
 
 def fill_online_status_count(last_login_ago: int) -> None:
-    if last_login_ago < 2:
+    two_days = 2
+    week = 7
+    month = 30
+    six_months = month * 6
+    if last_login_ago < two_days:
         online_status_count['less_than_2_days'] += 1
-    elif last_login_ago < 7:
+    elif last_login_ago < week:
         online_status_count['less_than_a_week'] += 1
-    elif last_login_ago < 30:
+    elif last_login_ago < month:
         online_status_count['less_than_a_month'] += 1
-    elif last_login_ago < (30 * 6):
+    elif last_login_ago < (six_months):
         online_status_count['less_than_six_months'] += 1
     else:
         online_status_count['more_than_six_months'] += 1
