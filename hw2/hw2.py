@@ -1,4 +1,4 @@
-"""Docstring."""
+"""Module for calculating the last login of users and the percentage of email hosts."""
 
 import json
 from datetime import datetime
