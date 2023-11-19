@@ -13,6 +13,7 @@ online_status_count = {
 
 def process_data(input_path, output_path):
     hosts_count = dict()
+    hosts_percentage = dict()
     with open(input_path, 'r') as input_file:
         data = json.load(input_file)
     TOTAL_CLIENTS = len(data)
@@ -33,8 +34,8 @@ def process_data(input_path, output_path):
             fill_online_status_count(last_login_ago)
         except KeyError:
             raise Exception(f'No last_login field for client {client}.')
-    hosts_percentage = {host: (count / TOTAL_CLIENTS) * 100 for host, count in hosts_count.items()}
-    print(online_status_count)
+    for host, count in hosts_count.items():
+        hosts_percentage[host] = round((count / TOTAL_CLIENTS) * 100, 2)
 
 
 def fill_online_status_count(last_login_ago: int) -> None:
