@@ -1,41 +1,42 @@
+"""Docstring."""
+
 import json
 from datetime import datetime
-
 
 online_status_count = {
     'less_than_2_days': 0,
     'less_than_a_week': 0,
     'less_than_a_month': 0,
     'less_than_six_months': 0,
-    'more_than_six_months': 0
+    'more_than_six_months': 0,
 }
 
 
-def process_data(input_path, output_path):
+def process_data(input_path, output_path) -> None:
     hosts_count = dict()
     hosts_percentage = dict()
     with open(input_path, 'r') as input_file:
-        data = json.load(input_file)
-    TOTAL_CLIENTS = len(data)
-    for client, info in data.items():
+        json_data = json.load(input_file)
+    total_clients = len(json_data)
+    for client, client_info in json_data.items():
         try:
-            host = info['email'].split('@')[1]
-            if not host:
-                raise Exception(f'email field is empty for client {client}')
-            hosts_count[host] = hosts_count.get(host, 0) + 1
+            host = client_info['email'].split('@')[1]
         except KeyError:
             raise Exception(f'No email field for client {client}.')
+        if not host:
+            raise Exception(f'email field is empty for client {client}')
+        hosts_count[host] = hosts_count.get(host, 0) + 1
         try:
-            last_login = info['last_login']
-            if not last_login:
-                raise Exception(f'last_login field is empty for client {client}')
-            date = datetime.strptime(last_login, '%Y-%m-%d')
-            last_login_ago = (datetime.now() - date).days
-            fill_online_status_count(last_login_ago)
+            last_login = client_info['last_login']
         except KeyError:
             raise Exception(f'No last_login field for client {client}.')
-    for host, count in hosts_count.items():
-        hosts_percentage[host] = round((count / TOTAL_CLIENTS) * 100, 2)
+        if not last_login:
+            raise Exception(f'last_login field is empty for client {client}')
+        date = datetime.strptime(last_login, '%Y-%m-%d')
+        last_login_ago = (datetime.now() - date).days
+        fill_online_status_count(last_login_ago)
+    for host_name, count in hosts_count.items():
+        hosts_percentage[host_name] = round((count / total_clients) * 100, 2)
 
 
 def fill_online_status_count(last_login_ago: int) -> None:
