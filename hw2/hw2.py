@@ -22,6 +22,13 @@ MIDDLE_ADULT_AGE = 25
 LOWEST_ADULT_PLUS_AGE = 45
 HIGHEST_ADULT_PLUS_AGE = 60
 
+BELOW_LA_AGE_STRING = 'Below 18'
+LA_TO_MA_AGE_STRING = '18 to 25'
+MA_TO_LAP_AGE_STRING = '25 to 45'
+LAP_TO_HAP_AGE_STRING = '45 to 60'
+HIGHEST_AND_ABOVE_AP_AGE_STRING = 'Above 60'
+UNDEFINED_AGE_STRING = 'Undefined'
+
 
 def stats_by_age(ages: list[int]) -> dict[str, float]:
     """Block that finds percentage of each age gap.
@@ -39,40 +46,40 @@ def stats_by_age(ages: list[int]) -> dict[str, float]:
 
     """
     output = {
-        'Below 18': 0,
-        '18 to 25': 0,
-        '25 to 45': 0,
-        '45 to 60': 0,
-        'Above 60': 0,
-        'Undefined': 0,
+        BELOW_LA_AGE_STRING: 0,
+        LA_TO_MA_AGE_STRING: 0,
+        MA_TO_LAP_AGE_STRING: 0,
+        LAP_TO_HAP_AGE_STRING: 0,
+        HIGHEST_AND_ABOVE_AP_AGE_STRING: 0,
+        UNDEFINED_AGE_STRING: 0,
         }
     for age in ages:
         if not isinstance(age, (int, float)):
             raise ValueError(f'{age} was given instead of proper numeric age')
         match age:
             case age if age in range(0, LOWEST_ADULT_AGE):
-                output['Below 18'] += 1
+                output[BELOW_LA_AGE_STRING] += 1
             case age if age in range(LOWEST_ADULT_AGE, MIDDLE_ADULT_AGE):
-                output['18 to 25'] += 1
+                output[LA_TO_MA_AGE_STRING] += 1
             case age if age in range(MIDDLE_ADULT_AGE, LOWEST_ADULT_PLUS_AGE):
-                output['25 to 45'] += 1
+                output[MA_TO_LAP_AGE_STRING] += 1
             case age if age in range(LOWEST_ADULT_PLUS_AGE, HIGHEST_ADULT_PLUS_AGE):
-                output['45 to 60'] += 1
+                output[LAP_TO_HAP_AGE_STRING] += 1
             case age if age >= HIGHEST_ADULT_PLUS_AGE:
-                output['Above 60'] += 1
+                output[HIGHEST_AND_ABOVE_AP_AGE_STRING] += 1
             case age if not age:
-                output['Undefined'] += 1
+                output[UNDEFINED_AGE_STRING] += 1
 
     total = sum(output.values())
     if total == 0:
         return output
     temp = [
-        round(output['Below 18'] / total * 100, 2),
-        round(output['18 to 25'] / total * 100, 2),
-        round(output['25 to 45'] / total * 100, 2),
-        round(output['45 to 60'] / total * 100, 2),
-        round(output['Above 60'] / total * 100, 2),
-        round(output['Undefined'] / total * 100, 2),
+        round(output[BELOW_LA_AGE_STRING] / total * 100, 2),
+        round(output[LA_TO_MA_AGE_STRING] / total * 100, 2),
+        round(output[MA_TO_LAP_AGE_STRING] / total * 100, 2),
+        round(output[LAP_TO_HAP_AGE_STRING] / total * 100, 2),
+        round(output[HIGHEST_AND_ABOVE_AP_AGE_STRING] / total * 100, 2),
+        round(output[UNDEFINED_AGE_STRING] / total * 100, 2),
     ]
     for index, age_gap in enumerate(output.keys()):
         output[age_gap] = temp[index]
@@ -162,9 +169,8 @@ def process_data(in_path: str, out_path: str) -> None:
     for user_data in user_stats.values():
         if 'age' not in user_data.keys():
             user_data.update({'age': None})
-        if 'registered' not in user_data.keys():
+        elif 'registered' not in user_data.keys():
             user_data.update({'registered': 'NaN'})
-            break
         ages.append(user_data['age'])
         reg_years.append(user_data['registered'][:4])
     write_to_file(out_path, reg_years, ages)
