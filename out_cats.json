@@ -1,0 +1,16 @@
+{
+    "geo_distribution": {
+        "Smesharovo": 0.2,
+        "Kirov": 0.2,
+        "Novorossiysk": 0.2,
+        "Falyonki": 0.2,
+        "Vezde": 0.2
+    },
+    "online_stats": {
+        "less than 2 days": 0.2,
+        "less than week": 0.2,
+        "less than month": 0.2,
+        "less than 6 months": 0.2,
+        "great than 6 months": 0.2
+    }
+}

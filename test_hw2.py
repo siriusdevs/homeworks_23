@@ -1,6 +1,8 @@
 """A module for testing hw2 process_data function."""
 
 import json
+import os
+from datetime import datetime
 
 import pytest
 
@@ -10,27 +12,28 @@ test_data = [
     ('data_hw2.json', 'output_hw2.json', 'data_hw2_out.json'),
     ('inp_cats.json', 'out_cats.json', 'cats.json'),
     ('inp_parrots.json', 'out_parrots.json', 'parrots.json'),
-    ('inp_dogs.json', None, 'dogs.json'),
-    (None, None, 'empty.json'),
+    ('inp_dogs.json', 'jfhdrutf.json', 'dogs.json'),
+    ('pusto.json', 'some1/some2/choto/1/file.json', 'empty.json'),
 ]
 
 
-@pytest.mark.parametrize('input_file, output_file, expected', test_data)
-def test_process_data(input_file: str, output_file: str, expected):
+@pytest.mark.parametrize('input_file, result_file, expected', test_data)
+def test_process_data(input_file: str, result_file: str, expected):
     """Test process_data function with test_data.
 
     Args:
         input_file (str): Json file with input test data.
-        output_file (str): Json file with output test data.
+        result_file (str): Json file with output test data.
         expected (_type_): Json file with expected output data.
 
     Asserts:
         True if process_data makes expected json file.
     """
-    if output_file is None:
-        output_file = 'output.json'
-    process_data(input_file, output_file)
-    with open(output_file, 'rt') as o_f:
+    if not os.path.exists(os.path.dirname(result_file)):
+        time_now = datetime.now().strftime('%Y_%m_%d_%H_%M_%S')
+        result_file = f'result_{time_now}.json'
+    process_data(input_file, result_file)
+    with open(result_file, 'rt') as o_f:
         output_f = json.load(o_f)
     with open(expected, 'rt') as e_f:
         expected_f = json.load(e_f)

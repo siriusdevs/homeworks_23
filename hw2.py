@@ -1,7 +1,7 @@
 """A module that includes the functions for working with json files."""
 
-
 import json
+import os
 from datetime import datetime, timedelta
 
 
@@ -52,7 +52,7 @@ def onl(usr_data: dict) -> dict:
         'less than month': 0,
         'less than 6 months': 0,
         'great than 6 months': 0,
-        }
+    }
     for user_info in usr_data.values():
         user_info = {details.lower(): _ for details, _ in user_info.items()}
         if user_info.get('registered') and user_info.get('last_login'):
@@ -89,7 +89,7 @@ def process_data(data_file: str, output_file: str) -> None:
         data_file (str): Path to input json file with user data.
         output_file (str): Path to output json file.
     """
-    if data_file:
+    if os.path.exists(data_file):
         with open(data_file, 'rt') as inp_f:
             usr_data = json.load(inp_f)
             geo_distrb = {city: num / len(usr_data) for city, num in geo(usr_data).items()}
