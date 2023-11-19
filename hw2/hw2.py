@@ -4,6 +4,17 @@ import json
 from datetime import datetime
 from typing import Any
 
+
+class NonExistentField(Exception):
+    def __init__(self, client: str, field: str) -> None:
+        super().__init__(f'{field} field does not exists for client {client}.')
+
+
+class EmptyField(Exception):
+    def __init__(self, client: str, field: str) -> None:
+        super().__init__(f'{field} field is empty for client {client}.')
+
+
 online_status_count = {
     'less_than_2_days': 0,
     'less_than_a_week': 0,
@@ -29,9 +40,9 @@ def get_last_login(client: str, client_info: dict) -> str:
     try:
         last_login = client_info['last_login']
     except KeyError:
-        raise Exception(f'No last_login field for client {client}.')
+        raise NonExistentField(client, 'last_login')
     if not last_login:
-        raise Exception(f'last_login field is empty for client {client}')
+        raise EmptyField(client, 'last_login')
     return last_login
 
 
@@ -39,9 +50,9 @@ def get_host(client: str, client_info: dict) -> str:
     try:
         host = client_info['email'].split('@')[1]
     except KeyError:
-        raise Exception(f'No email field for client {client}.')
+        raise NonExistentField(client, 'email')
     if not host:
-        raise Exception(f'email field is empty for client {client}')
+        raise EmptyField(client, 'email')
     return host
 
 
