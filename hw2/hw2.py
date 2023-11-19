@@ -13,8 +13,8 @@ online_status_count = {
 
 
 def process_data(input_path, output_path) -> None:
-    hosts_count = dict()
-    hosts_percentage = dict()
+    hosts_count = {}
+    hosts_percentage = {}
     with open(input_path, 'r') as input_file:
         json_data = json.load(input_file)
     total_clients = len(json_data)
@@ -26,17 +26,22 @@ def process_data(input_path, output_path) -> None:
         if not host:
             raise Exception(f'email field is empty for client {client}')
         hosts_count[host] = hosts_count.get(host, 0) + 1
-        try:
-            last_login = client_info['last_login']
-        except KeyError:
-            raise Exception(f'No last_login field for client {client}.')
-        if not last_login:
-            raise Exception(f'last_login field is empty for client {client}')
+        last_login = get_last_login()
         date = datetime.strptime(last_login, '%Y-%m-%d')
         last_login_ago = (datetime.now() - date).days
         fill_online_status_count(last_login_ago)
     for host_name, count in hosts_count.items():
         hosts_percentage[host_name] = round((count / total_clients) * 100, 2)
+
+
+def get_last_login(client_info: dict) -> None:
+    try:
+        last_login = client_info['last_login']
+    except KeyError:
+        raise Exception(f'No last_login field for client {client}.')
+    if not last_login:
+        raise Exception(f'last_login field is empty for client {client}')
+    return last_login
 
 
 def fill_online_status_count(last_login_ago: int) -> None:
