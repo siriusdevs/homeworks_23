@@ -17,16 +17,13 @@ def process_data(input_path, output_path) -> None:
     hosts_percentage = {}
     with open(input_path, 'r') as input_file:
         json_data = json.load(input_file)
-    total_clients = len(json_data)
     for client, client_info in json_data.items():
         host = get_host(client, client_info)
         hosts_count[host] = hosts_count.get(host, 0) + 1
-        last_login = get_last_login(client, client_info)
-        date = datetime.strptime(last_login, '%Y-%m-%d')
-        last_login_ago = (datetime.now() - date).days
-        fill_online_status_count(last_login_ago)
+        date = datetime.strptime(get_last_login(client, client_info), '%Y-%m-%d')
+        fill_online_status_count((datetime.now() - date).days)
     for host_name, count in hosts_count.items():
-        hosts_percentage[host_name] = round((count / total_clients) * 100, 2)
+        hosts_percentage[host_name] = round((count / len(json_data)) * 100, 2)
 
 
 def get_last_login(client: str, client_info: dict) -> str:
