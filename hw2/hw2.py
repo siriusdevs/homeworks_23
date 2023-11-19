@@ -2,6 +2,7 @@
 
 import json
 from datetime import datetime
+from typing import Any
 
 online_status_count = {
     'less_than_2_days': 0,
@@ -13,17 +14,15 @@ online_status_count = {
 
 
 def process_data(input_path, output_path) -> None:
-    hosts_count = {}
     hosts_percentage = {}
     with open(input_path, 'r') as input_file:
         json_data = json.load(input_file)
     for client, client_info in json_data.items():
-        host = get_host(client, client_info)
-        hosts_count[host] = hosts_count.get(host, 0) + 1
-        date = datetime.strptime(get_last_login(client, client_info), '%Y-%m-%d')
-        fill_online_status_count((datetime.now() - date).days)
-    for host_name, count in hosts_count.items():
+        fill_online_status_count(client, client_info)
+    for host_name, count in get_hosts_count(json_data).items():
         hosts_percentage[host_name] = round((count / len(json_data)) * 100, 2)
+    with open(output_path, 'w') as output_file:
+        json.dump((online_status_count, hosts_percentage), output_file)
 
 
 def get_last_login(client: str, client_info: dict) -> str:
@@ -46,7 +45,17 @@ def get_host(client: str, client_info: dict) -> str:
     return host
 
 
-def fill_online_status_count(last_login_ago: int) -> None:
+def get_hosts_count(json_data: Any) -> dict:
+    hosts_count = {}
+    for client, client_info in json_data.items():
+        host = get_host(client, client_info)
+        hosts_count[host] = hosts_count.get(host, 0) + 1
+    return hosts_count
+
+
+def fill_online_status_count(client: str, client_info: dict) -> None:
+    date = datetime.strptime(get_last_login(client, client_info), '%Y-%m-%d')
+    last_login_ago = (datetime.now() - date).days
     two_days = 2
     week = 7
     month = 30
@@ -63,4 +72,4 @@ def fill_online_status_count(last_login_ago: int) -> None:
         online_status_count['more_than_six_months'] += 1
 
 
-process_data('/home/tire/Documents/Sirius_dev/homeworks_23/data_hw2.json', 'ululu')
+process_data('/home/tire/Documents/Sirius_dev/homeworks_23/data_hw2.json', 'ululu.json')
