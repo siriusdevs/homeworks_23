@@ -26,7 +26,7 @@ def process_data(input_path, output_path) -> None:
         if not host:
             raise Exception(f'email field is empty for client {client}')
         hosts_count[host] = hosts_count.get(host, 0) + 1
-        last_login = get_last_login()
+        last_login = get_last_login(client, client_info)
         date = datetime.strptime(last_login, '%Y-%m-%d')
         last_login_ago = (datetime.now() - date).days
         fill_online_status_count(last_login_ago)
@@ -34,7 +34,7 @@ def process_data(input_path, output_path) -> None:
         hosts_percentage[host_name] = round((count / total_clients) * 100, 2)
 
 
-def get_last_login(client_info: dict) -> None:
+def get_last_login(client: str, client_info: dict) -> None:
     try:
         last_login = client_info['last_login']
     except KeyError:
