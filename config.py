@@ -1,11 +1,3 @@
-ONLINE_STATS = {
-    'less than 2 days': 0,
-    'less than week': 0,
-    'less than month': 0,
-    'less than 6 months': 0,
-    'great than 6 months': 0,
-}
-
 MONTH = 31
 SIX_MONTHS = 186
 

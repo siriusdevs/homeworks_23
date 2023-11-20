@@ -12,7 +12,7 @@ test_data = [
     ('data_hw2.json', 'output_hw2.json', 'data_hw2_out.json'),
     ('inp_cats.json', 'out_cats.json', 'cats.json'),
     ('inp_parrots.json', 'out_parrots.json', 'parrots.json'),
-    ('inp_dogs.json', 'jfhdrutf.json', 'dogs.json'),
+    ('inp_dogs.json', 'out_dogs.json', 'dogs.json'),
     ('pusto.json', 'some1/some2/choto/1/file.json', 'empty.json'),
 ]
 
@@ -29,8 +29,8 @@ def test_process_data(input_file: str, result_file: str, expected):
     Asserts:
         True if process_data makes expected json file.
     """
-    if not os.path.exists(os.path.dirname(result_file)):
-        time_now = datetime.now().strftime('%Y_%m_%d_%H_%M_%S')
+    if not os.path.isfile(result_file):
+        time_now = datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
         result_file = f'result_{time_now}.json'
     process_data(input_file, result_file)
     with open(result_file, 'rt') as o_f:

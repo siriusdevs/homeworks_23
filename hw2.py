@@ -4,28 +4,29 @@ import json
 import os
 from datetime import datetime, timedelta
 
-from config import (GT_SIX_MONTHS, LT_MONTH, LT_SIX_MONTHS, LT_TWO_DAYS,
-                    LT_WEEK, MONTH, ONLINE_STATS, SIX_MONTHS)
+import config
 
 
 def update_online_stats(
+    online_stats: dict,
     time_online: timedelta,
 ) -> None:
     """Update online statistics.
 
     Args:
+        online_stats (dict): Dictionary with statistics of being online for different periods.
         time_online (timedelta): The period when the user is online.
     """
     if time_online < timedelta(days=2):
-        ONLINE_STATS[LT_TWO_DAYS] += 1
+        online_stats[config.LT_TWO_DAYS] += 1
     elif time_online < timedelta(days=7):
-        ONLINE_STATS[LT_WEEK] += 1
-    elif time_online < timedelta(days=MONTH):
-        ONLINE_STATS[LT_MONTH] += 1
-    elif time_online < timedelta(days=SIX_MONTHS):
-        ONLINE_STATS[LT_SIX_MONTHS] += 1
+        online_stats[config.LT_WEEK] += 1
+    elif time_online < timedelta(days=config.MONTH):
+        online_stats[config.LT_MONTH] += 1
+    elif time_online < timedelta(days=config.SIX_MONTHS):
+        online_stats[config.LT_SIX_MONTHS] += 1
     else:
-        ONLINE_STATS[GT_SIX_MONTHS] += 1
+        online_stats[config.GT_SIX_MONTHS] += 1
 
 
 def onl(usr_data: dict) -> dict:
@@ -37,14 +38,21 @@ def onl(usr_data: dict) -> dict:
     Returns:
         dict: Dictionary with statistics of being online for different periods.
     """
+    online_stats = {
+        config.LT_TWO_DAYS: 0,
+        config.LT_WEEK: 0,
+        config.LT_MONTH: 0,
+        config.LT_SIX_MONTHS: 0,
+        config.GT_SIX_MONTHS: 0,
+    }
     for user_info in usr_data.values():
         user_info = {details.lower(): _ for details, _ in user_info.items()}
         if user_info.get('registered') and user_info.get('last_login'):
             registr = datetime.strptime(user_info.get('registered'), '%Y-%m-%d')
             last_log = datetime.strptime(user_info.get('last_login'), '%Y-%m-%d')
             time_online = (last_log - registr)
-            update_online_stats(time_online)
-    return ONLINE_STATS
+            update_online_stats(online_stats, time_online)
+    return online_stats
 
 
 def geo(usr_data: dict) -> dict:
