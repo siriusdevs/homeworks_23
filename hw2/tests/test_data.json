@@ -1,0 +1,108 @@
+{
+  "tests": [
+    {
+      "test": {
+        "user": {
+          "region": "Saint-Petersburg",
+          "registered": "2012-12-24",
+          "last_login": "2023-10-01",
+          "email": "user@yandex.ru",
+          "age": 36
+        },
+        "user2": {
+          "region": "Sochi",
+          "registered": "2022-10-30",
+          "last_login": "2022-11-21",
+          "email": "user2@gmail.com",
+          "age": 18
+        }
+      },
+      "answer": {
+        "max_age": 36,
+        "min_age": 18,
+        "average_age": 27.0,
+        "median_age": 27.0,
+        "years_statistics": {
+          "2012": 50.0,
+          "2022": 50.0
+        }
+      }
+    },
+    {
+      "test": {
+        "joe": {
+          "region": "America",
+          "registered": "2008-04-24",
+          "last_login": "2022-01-01",
+          "email": "americonets@pendosia.us",
+          "age": 27
+        },
+        "jane": {
+          "region": "Brazil",
+          "registered": "2019-01-01",
+          "last_login": "2022-09-09",
+          "email": "jane@jane.jane",
+          "age": 22
+        },
+        "pyotr": {
+          "region": "Sochi",
+          "registered": "2022-10-30",
+          "last_login": "2022-11-21",
+          "email": "pyotr@pyotr.pyotr",
+          "age": 18
+        }
+      },
+      "answer": {
+        "max_age": 27,
+        "min_age": 18,
+        "average_age": 22.333333333333332,
+        "median_age": 22,
+        "years_statistics": {
+          "2008": 33.33333333333333,
+          "2019": 33.33333333333333,
+          "2022": 33.33333333333333
+        }
+      }
+    },
+    {
+      "test": {
+        "bobby": {
+          "region": "Argentina",
+          "registered": "2020-04-12",
+          "last_login": "2023-11-11",
+          "email": "bobbyfiscer@gmail.com",
+          "age": 5
+        }
+      },
+      "answer": {
+        "max_age": 5,
+        "min_age": 5,
+        "average_age": 5.0,
+        "median_age": 5,
+        "years_statistics": {
+          "2020": 100.0
+        }
+      }
+    },
+    {
+      "test": {
+        "master": {
+          "region": "Moscow",
+          "registered": "2022-10-30",
+          "last_login": "2022-11-21",
+          "email": "master@mail.ru",
+          "age": 81
+        }
+      },
+      "answer": {
+        "max_age": 81,
+        "min_age": 81,
+        "average_age": 81.0,
+        "median_age": 81,
+        "years_statistics": {
+          "2022": 100.0
+        }
+      }
+    }
+  ]
+}
