@@ -1,3 +1,5 @@
+"""Module with variables for the hw2.py."""
+
 MONTH = 31
 SIX_MONTHS = 186
 
