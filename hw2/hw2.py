@@ -7,11 +7,23 @@ from typing import Any
 
 class NonExistentField(Exception):
     def __init__(self, client: str, field: str) -> None:
+        """Initialize error for non existent field.
+
+        Args:
+            client: str - client name
+            field: str name of non existent field
+        """
         super().__init__(f'{field} field does not exists for client {client}.')
 
 
 class EmptyField(Exception):
     def __init__(self, client: str, field: str) -> None:
+        """Initialize error for empty field.
+
+        Args:
+            client: str - client name.
+            field: str name of non existent field.
+        """
         super().__init__(f'{field} field is empty for client {client}.')
 
 
@@ -24,12 +36,18 @@ online_status_count = {
 }
 
 
-def process_data(input_path, output_path) -> None:
+def process_data(input_path: str, output_path: str) -> None:
+    """Process the input_path and write statistics to output_path.
+
+    Args:
+        input_path: str - file with data for process.
+        output_path: str - file to write statistics.
+    """
     hosts_percentage = {}
     with open(input_path, 'r') as input_file:
         json_data = json.load(input_file)
     for client, client_info in json_data.items():
-        fill_online_status_count(client, client_info)
+        change_online_status_counter(client, client_info)
     for host_name, count in get_hosts_count(json_data).items():
         hosts_percentage[host_name] = round((count / len(json_data)) * 100, 2)
     with open(output_path, 'w') as output_file:
@@ -37,6 +55,19 @@ def process_data(input_path, output_path) -> None:
 
 
 def get_last_login(client: str, client_info: dict) -> str:
+    """Find client email host.
+
+    Args:
+        client: str - client name.
+        client_info: dict - info about client: region, registered, last_login, email, age.
+
+    Returns:
+        str: last login date.
+
+    Raises:
+        NonExistentField: calls if client have not last_login field.
+        EmptyField: calls if last_login field is empty.
+    """
     try:
         last_login = client_info['last_login']
     except KeyError:
@@ -47,6 +78,19 @@ def get_last_login(client: str, client_info: dict) -> str:
 
 
 def get_host(client: str, client_info: dict) -> str:
+    """Find client email host.
+
+    Args:
+        client: str - client name.
+        client_info: dict - info about client: region, registered, last_login, email, age.
+
+    Returns:
+        str: name of email host.
+
+    Raises:
+        NonExistentField: calls if client have not correct email.
+        EmptyField: calls if at client email does not exists host name.
+    """
     try:
         host = client_info['email'].split('@')[1]
     except KeyError:
@@ -57,6 +101,14 @@ def get_host(client: str, client_info: dict) -> str:
 
 
 def get_hosts_count(json_data: Any) -> dict:
+    """Count the number of different hosts.
+
+    Args:
+        json_data: Any - loaded json file.
+
+    Returns:
+        dict: email host and the number of times it appears among users.
+    """
     hosts_count = {}
     for client, client_info in json_data.items():
         host = get_host(client, client_info)
@@ -64,7 +116,13 @@ def get_hosts_count(json_data: Any) -> dict:
     return hosts_count
 
 
-def fill_online_status_count(client: str, client_info: dict) -> None:
+def change_online_status_counter(client: str, client_info: dict) -> None:
+    """Change online status counter using last login ago.
+
+    Args:
+        client: str - client name.
+        client_info: dict - info about client: region, registered, last_login, email, age.
+    """
     date = datetime.strptime(get_last_login(client, client_info), '%Y-%m-%d')
     last_login_ago = (datetime.now() - date).days
     two_days = 2
