@@ -4,35 +4,28 @@ import json
 import os
 from datetime import datetime, timedelta
 
+from config import (GT_SIX_MONTHS, LT_MONTH, LT_SIX_MONTHS, LT_TWO_DAYS,
+                    LT_WEEK, MONTH, ONLINE_STATS, SIX_MONTHS)
+
 
 def update_online_stats(
-    online_stats: dict,
     time_online: timedelta,
-    month: int, six_months: int,
 ) -> None:
     """Update online statistics.
 
     Args:
-        online_stats (dict): Dictionary with statistics of being online for different periods.
         time_online (timedelta): The period when the user is online.
-        month (int): Month with 31 days.
-        six_months (int): Six months with 186 days.
     """
-    lt_two_days = 'less than 2 days'
-    lt_week = 'less than week'
-    lt_month = 'less than month'
-    lt_six_months = 'less than 6 months'
-    gt_six_months = 'great than 6 months'
     if time_online < timedelta(days=2):
-        online_stats[lt_two_days] += 1
+        ONLINE_STATS[LT_TWO_DAYS] += 1
     elif time_online < timedelta(days=7):
-        online_stats[lt_week] += 1
-    elif time_online < timedelta(days=month):
-        online_stats[lt_month] += 1
-    elif time_online < timedelta(days=six_months):
-        online_stats[lt_six_months] += 1
+        ONLINE_STATS[LT_WEEK] += 1
+    elif time_online < timedelta(days=MONTH):
+        ONLINE_STATS[LT_MONTH] += 1
+    elif time_online < timedelta(days=SIX_MONTHS):
+        ONLINE_STATS[LT_SIX_MONTHS] += 1
     else:
-        online_stats[gt_six_months] += 1
+        ONLINE_STATS[GT_SIX_MONTHS] += 1
 
 
 def onl(usr_data: dict) -> dict:
@@ -44,23 +37,14 @@ def onl(usr_data: dict) -> dict:
     Returns:
         dict: Dictionary with statistics of being online for different periods.
     """
-    month = 31
-    six_months = 186
-    online_stats = {
-        'less than 2 days': 0,
-        'less than week': 0,
-        'less than month': 0,
-        'less than 6 months': 0,
-        'great than 6 months': 0,
-    }
     for user_info in usr_data.values():
         user_info = {details.lower(): _ for details, _ in user_info.items()}
         if user_info.get('registered') and user_info.get('last_login'):
             registr = datetime.strptime(user_info.get('registered'), '%Y-%m-%d')
             last_log = datetime.strptime(user_info.get('last_login'), '%Y-%m-%d')
             time_online = (last_log - registr)
-            update_online_stats(online_stats, time_online, month, six_months)
-    return online_stats
+            update_online_stats(time_online)
+    return ONLINE_STATS
 
 
 def geo(usr_data: dict) -> dict:
