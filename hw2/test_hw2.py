@@ -6,7 +6,7 @@ from datetime import datetime
 
 import pytest
 
-from hw2 import process_data
+from homeworks_23.hw2.hw2 import process_data
 
 test_data = [
     ('data_hw2.json', 'output_hw2.json', 'data_hw2_out.json'),

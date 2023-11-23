@@ -4,7 +4,7 @@ import json
 import os
 from datetime import datetime, timedelta
 
-import config
+import homeworks_23.hw2.config as config
 
 
 def update_online_stats(
