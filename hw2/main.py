@@ -1,6 +1,7 @@
 """Module for calculating users' stats from users' data and outputting it to a new json."""
 import json
 import os
+import sys
 
 import increment_field
 import transform_stats
@@ -16,7 +17,7 @@ def check_existing_files(paths: list[str] | tuple[str, ...]) -> None:
         FileNotFoundError: If file doesn't exist.
     """
     for path in paths:
-        message = f'Check your given file ({path} in {os.getcwd()}) because it was not found here'
+        message = f'Check your given file ({path} in {os.getcwd()}) because it was not found!'
 
         if not os.path.exists(path):
             raise FileNotFoundError(message)
@@ -58,6 +59,8 @@ def calculate_users_stats(users: dict[str, dict]) -> dict[str, dict[str, float]]
         increment_field.increment_field(users_by_year, str(years))
         users_count += 1
 
+    # Should not use try-except for transform stats, because SumCountEqualsZeroForNoneEmpty
+    # will be never because of realization the current function
     return {
         'domains': transform_stats.transform_stats(users_domains, users_count),
         'years': transform_stats.transform_stats(users_by_year, users_count),
@@ -71,12 +74,20 @@ def process_data(users_path: str, result_path: str) -> None:
         users_path (str): the path that has users' data in json format.
         result_path (str): the path that will been written in users' stats in json format.
     """
-    check_existing_files((users_path, result_path))
+    try:
+        check_existing_files((users_path, result_path))
+    except FileNotFoundError as no_founded_files_message:
+        sys.stdout.write(str(no_founded_files_message))
+        return
 
     with open(users_path) as users_file:
         users: dict[str, dict[str, str | int]] = json.load(users_file)
 
-    calculated_stats = calculate_users_stats(users)
+    try:
+        calculated_stats = calculate_users_stats(users)
+    except TypeError as incorrect_users_fields_message:
+        sys.stdout.write(str(incorrect_users_fields_message))
+        return
 
     with open(result_path, 'w') as result_file:
         json.dump(calculated_stats, result_file, indent=2)

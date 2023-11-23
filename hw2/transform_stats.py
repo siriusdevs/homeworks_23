@@ -32,7 +32,7 @@ def transform_stats(stats: dict[str, int], sum_count: Optional[int] = None) -> d
     if sum_count is None:
         sum_count = reduce(lambda start, current: start + current[1], stats.items(), 0)
 
-    if sum_count == 0 and len(stats.keys()):
+    if sum_count == 0 and len(stats.keys()) > 1:
         raise SumCountEqualsZeroForNoneEmpty()
 
     return {
