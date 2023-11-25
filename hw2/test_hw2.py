@@ -8,19 +8,19 @@ from hw2 import process_data
 
 test_data = {
     (
-        '../data_hw2.json',
-        './test_result/test_1.json',
-        './test_answer/answer_test_1.json',
+        './data_hw2.json',
+        './hw2/test_result/test_1.json',
+        './hw2/test_answer/answer_test_1.json',
     ),
     (
-        './data_file/data_file_1.json',
-        './test_result/test_2.json',
-        './test_answer/answer_test_2.json',
+        './hw2/data_file/data_file_1.json',
+        './hw2/test_result/test_2.json',
+        './hw2/test_answer/answer_test_2.json',
     ),
     (
-        './data_file/data_file_2.json',
-        './test_result/test_3.json',
-        './test_answer/answer_test_3.json',
+        './hw2/data_file/data_file_2.json',
+        './hw2/test_result/test_3.json',
+        './hw2/test_answer/answer_test_3.json',
     ),
 }
 
