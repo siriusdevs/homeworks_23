@@ -57,11 +57,3 @@ def top_salary(
     percent = round(sum(top) / sum(all_salaries) * 100, 2)
 
     return [round(salary, 2) for salary in top], percent
-
-
-data = {
-            'HR2': {'BobMArk': 4000.0, 'Mark': 4500.0, 'KAtya': 4200.0},
-            'Sales2': {'Juse': 5500.0, 'Pasito': 5200.0},
-        }
-
-print(top_salary(**data))
