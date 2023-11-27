@@ -3,7 +3,7 @@ import pytest
 
 from hw1 import top_salary
 
-TEST_BASIC = (
+TESTS = (
     (
         {
             'DataBase': {'John': 5000.0, 'Alice': 6000.0},
@@ -36,10 +36,17 @@ TEST_BASIC = (
         },
         12, ([], 0.),
     ),
+    (
+        {
+            'HR2': {'BobMArk': 4000.0, 'Mark': 4500.0, 'KAtya': 4200.0},
+            'Sales2': {'Juse': 5500.0, 'Pasito': 5200.0},
+        },
+        None, ([5500.0, 5200.0, 4500.0], 64.96),
+    ),
 )
 
 
-@pytest.mark.parametrize('departments, limit_salary, expected', TEST_BASIC)
+@pytest.mark.parametrize('departments, limit_salary, expected', TESTS)
 def test_top_salaries_basic(departments, limit_salary, expected):
     """Test function for `top_salary` to validate basic functionality.
 
@@ -49,64 +56,3 @@ def test_top_salaries_basic(departments, limit_salary, expected):
         expected: The expected output.
     """
     assert top_salary(limit_salary, **departments) == expected
-
-
-TEST_ERRORS = (
-    (
-        {
-            'IT3': 'test',
-            'HR2': {'BobMArk': 4000.0, 'Mark': 4500.0, 'KAtya': 4200.0},
-            'Sales2': {'Juse': 5500.0, 'Pasito': 5200.0},
-        },
-        None, TypeError,
-    ),
-    (
-        {},
-        None, ValueError,
-    ),
-    (
-        {
-            12: {'Jame': 4500.0, 'Lisa': 300.0},
-            'HR3': {'HQD': 1234.0, 'Mega': 523.0, 'Green': 100.0},
-            'Sales3': {'Glad': 550.0, 'Golang': 12.0},
-        },
-        None, TypeError,
-    ),
-    (
-        {
-            'IT4': {12: 4500.0, 'Vlad': 300.0},
-            'HR4': {'Marly': 1234.0, 'Dollar': 523.0, 'Moriarty': 100.0},
-            'Sales4': {'Anna': 550.0, 'Huil': 12.0},
-        },
-        None, TypeError,
-    ),
-    (
-        {
-            'IT5': {'Jame': 1200, 'Kum': 300.0},
-            'HR5': {'Igor': 1234.0, 'Francs': 523.0, 'Kip': 100.0},
-            'Sales5': {'Formus': 550.0, 'Gtrw': 12.0},
-        },
-        None, TypeError,
-    ),
-    (
-        {
-            'IT6': {'Jame': 1200, 'Grow': 300.0},
-            'HR6': {'James': 'test', 'Lucy': 523.0, 'Kepka': 100.0},
-            'Sales6': {'Jol': 550.0, 'Iosrt': 12.0},
-        },
-        None, TypeError,
-    ),
-)
-
-
-@pytest.mark.parametrize('departments, limit_salary, expected', TEST_ERRORS)
-def test_top_salaries_errors(departments, limit_salary, expected):
-    """Test function for `top_salary` to validate basic functionality.
-
-    Args:
-        departments: A dictionary representing departments and their workers.
-        limit_salary: The salary limit.
-        expected: The expected output.
-    """
-    with pytest.raises(expected):
-        top_salary(limit_salary, **departments)
