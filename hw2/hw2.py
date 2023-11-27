@@ -3,6 +3,12 @@ import json
 import re
 import statistics
 
+AGE = "age"
+MAX_AGE = "max_age"
+MIN_AGE = "min_age"
+AVERAGE_AGE = "average_age"
+MEDIAN_AGE = "median_age"
+
 
 def process_data(src_file: str, dst_file: str) -> None:
     """
@@ -36,11 +42,11 @@ def age_stats(users: dict) -> dict:
         dict: age stats - max, min and median
     """
     result_ages = {}
-    ages = [users[user]["age"] for user in users]
-    result_ages.update({"max_age": max(ages)})
-    result_ages.update({"min_age": min(ages)})
-    result_ages.update({"average_age": sum(ages) / len(ages)})
-    result_ages.update({"median_age": statistics.median(ages)})
+    ages = [users[user][AGE] for user in users]
+    result_ages.update({MAX_AGE: max(ages)})
+    result_ages.update({MIN_AGE: min(ages)})
+    result_ages.update({AVERAGE_AGE: sum(ages) / max(len(ages), 1)})
+    result_ages.update({MEDIAN_AGE: statistics.median(ages)})
     return result_ages
 
 
@@ -59,6 +65,8 @@ def year_percentage(users: dict) -> dict:
     """
     years = {}
     for user in users.keys():
+        if "registered" not in users[user]:
+            raise ValueError('No "registered" entry')
         year = users[user]["registered"]
         if re.match(r"\d{4}-\d{2}-\d{2}", year):
             year = year.split("-")[0]
@@ -70,5 +78,5 @@ def year_percentage(users: dict) -> dict:
             years.update({year: 1})
     count_of_years = len(years)
     for elem in years:
-        years.update({elem: (years.get(elem, 0) / count_of_years) * 100})
+        years[elem] = (years.get(elem, 0) / count_of_years) * 100
     return years
