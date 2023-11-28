@@ -22,7 +22,6 @@ def three_max_selaries(
     for salary in list_salary:
         if salary < cap_salary:
             list_max_salaries.append(salary)
-
         if len(list_max_salaries) == 3:
             list_salary = list_salary[-list_salary.index(salary)-1:]
             break
@@ -31,42 +30,40 @@ def three_max_selaries(
 
 
 def check_sum_salary(
-    *args: Tuple[str, List[float]],
+    *departments: Tuple[str, List[float]],
     salary_cap: None | float = None,
         ) -> Tuple[List[float], float] | int:
     """Return three max salaries.
 
     Parameters:
-        args: Tuple[str, List[float]] - takes two arguments: name company and all salaries
+        departments: Tuple[str, List[float]] - takes two arguments: name company and all salaries
         salary_cap: None | float - maximum salary
 
     Returns:
         Tuple[List[float], float] - top three salaries in company and percentage of salary
 
     Raises:
-        TypeError: if not isinstance(args[ind][0], str).
+        TypeError: if not isinstance(departments[ind][0], str).
     """
     if salary_cap is not None and salary_cap < 0:
         salary_cap = 0
 
     list_all_salaries: List[float] = []
 
-    for ind, _ in enumerate(args):
-        if not isinstance(args[ind][0], str):
+    for ind, _ in enumerate(departments):
+        if not isinstance(departments[ind][0], str):
             raise TypeError('Не верное название компании, попробуй задать ')
 
-        list_all_salaries.extend(args[ind][1])
+        list_all_salaries.extend(departments[ind][1])
 
     list_all_salaries.sort(reverse=True)
     list_all_salaries = [salary for salary in list_all_salaries if salary >= 0]
 
     if salary_cap is not None:
-
         list_three_max_salaries, list_all_salaries = three_max_selaries(
             list_all_salaries,
             salary_cap,
                 )
-
     else:
         list_three_max_salaries = list_all_salaries[:3]
 
