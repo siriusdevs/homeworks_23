@@ -103,6 +103,33 @@
           "2022": 100.0
         }
       }
+    },
+    {
+      "test": {
+        "user": {
+          "region": "Saint-Petersburg",
+          "registered": "2012.12.14",
+          "last_login": "2023-10-01",
+          "email": "user@yandex.ru",
+          "age": 36
+        }
+      },
+      "answer": {
+        "error": "Incorrect date format - 2012.12.14. Use YYYY-MM-DD"
+      }
+    },
+    {
+      "test": {
+        "user": {
+          "region": "Saint-Petersburg",
+          "last_login": "2023-10-01",
+          "email": "user@yandex.ru",
+          "age": 36
+        }
+      },
+      "answer": {
+        "error": "No \"registered\" entry in user \"user\""
+      }
     }
   ]
 }

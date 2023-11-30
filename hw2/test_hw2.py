@@ -11,26 +11,13 @@ from hw2 import process_data
 TEST_DATA_PATH = "hw2/tests/test_data.json"
 
 
-def get_mock_output(mock_object: MagicMock) -> str:
-    """Get mock output.
-
-    Args:
-        mock_object: mock object
-
-    Returns:
-        str: mock output
-    """
+def _get_mock_output(mock_object: MagicMock) -> str:
     return "".join(
         [token.args[0] for token in mock_object().write.call_args_list],
     )
 
 
-def prepare_test_data():
-    """Prepare data for tests.
-
-    Returns:
-        list: list of mockups and answers
-    """
+def _prepare_test_data():
     with open(TEST_DATA_PATH, "r") as test_data:
         tests = json.load(test_data)["tests"]
         return [
@@ -42,7 +29,7 @@ def prepare_test_data():
         ]
 
 
-@pytest.mark.parametrize("mockup, answer", prepare_test_data())
+@pytest.mark.parametrize("mockup, answer", _prepare_test_data())
 def test_process_data(mockup: MagicMock, answer: str):
     """Test process_data function.
 
@@ -55,4 +42,4 @@ def test_process_data(mockup: MagicMock, answer: str):
     """
     with patch("builtins.open", mockup):
         process_data("", "")
-    assert get_mock_output(mockup) == answer
+    assert _get_mock_output(mockup) == answer

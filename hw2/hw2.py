@@ -10,7 +10,7 @@ AVERAGE_AGE = "average_age"
 MEDIAN_AGE = "median_age"
 
 
-def process_data(src_file: str, dst_file: str) -> None:
+def process_data(src_file: str = "input.json", dst_file: str = "output.json") -> None:
     """
     Process data from the source file and write the result to the destination file.
 
@@ -18,11 +18,18 @@ def process_data(src_file: str, dst_file: str) -> None:
         src_file (str): The path to the source file.
         dst_file (str): The path to the destination file.
     """
+    try:
+        _collect_results(src_file, dst_file)
+    except (ValueError, FileNotFoundError) as error:
+        with open(dst_file, "x") as output_json:
+            json.dump({"error": str(error)}, output_json, indent=4)
+
+
+def _collect_results(src_file: str, dst_file: str) -> None:
     with open(src_file, "r") as input_json:
         users = json.load(input_json)
-
-    years_result = year_percentage(users)
-    age_result = age_stats(users)
+    years_result = _year_percentage(users)
+    age_result = _age_stats(users)
     full_result = {
         **age_result,
     }
@@ -31,16 +38,7 @@ def process_data(src_file: str, dst_file: str) -> None:
         json.dump(full_result, output_json, indent=4)
 
 
-def age_stats(users: dict) -> dict:
-    """
-    Calculate age stats.
-
-    Args:
-        users (dict): dict of users.
-
-    Returns:
-        dict: age stats - max, min and median
-    """
+def _age_stats(users: dict) -> dict:
     result_ages = {}
     ages = [users[user][AGE] for user in users]
     result_ages.update({MAX_AGE: max(ages)})
@@ -50,28 +48,16 @@ def age_stats(users: dict) -> dict:
     return result_ages
 
 
-def year_percentage(users: dict) -> dict:
-    """
-    Calculate year percentage.
-
-    Args:
-        users (dict): dict of users.
-
-    Returns:
-        dict: dict of years and their percentage
-
-    Raises:
-        ValueError: Incorrect date format
-    """
+def _year_percentage(users: dict) -> dict:
     years = {}
     for user in users.keys():
         if "registered" not in users[user]:
-            raise ValueError('No "registered" entry')
+            raise ValueError(f'No "registered" entry in user "{user}"')
         year = users[user]["registered"]
         if re.match(r"\d{4}-\d{2}-\d{2}", year):
             year = year.split("-")[0]
         else:
-            raise ValueError("Incorrect date format")
+            raise ValueError(f"Incorrect date format - {year}. Use YYYY-MM-DD")
         if year in years:
             years.update({year: years.get(year, 0) + 1})
         else:
