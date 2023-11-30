@@ -21,10 +21,7 @@ def top3_salaries_stats(
     for department, workers in departments.items():
         if excluding is None or department not in excluding:
             salaries = workers.values()
-            if sum(salaries) == 0:
-                avg_salary = 0
-            else:
-                avg_salary = round(sum(salaries) / len(salaries), 2)
+            avg_salary = round(sum(salaries) / len(salaries), 2) if salaries else 0
             avg_salaries[department] = avg_salary
 
     salaries_sorted = sorted(avg_salaries.items(), key=lambda srt: srt[1], reverse=True)
