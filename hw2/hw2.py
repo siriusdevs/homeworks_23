@@ -7,26 +7,24 @@ from datetime import datetime, timedelta
 import config
 
 
-def update_online_stats(
-    online_stats: dict,
-    time_online: timedelta,
-) -> None:
+def update_online_stats(online_stats: dict, time_online: timedelta) -> None:
     """Update online statistics.
 
     Args:
         online_stats (dict): Dictionary with statistics of being online for different periods.
         time_online (timedelta): The period when the user is online.
     """
-    if time_online < timedelta(days=2):
-        online_stats[config.LT_TWO_DAYS] += 1
-    elif time_online < timedelta(days=7):
-        online_stats[config.LT_WEEK] += 1
-    elif time_online < timedelta(days=config.MONTH):
-        online_stats[config.LT_MONTH] += 1
-    elif time_online < timedelta(days=config.SIX_MONTHS):
-        online_stats[config.LT_SIX_MONTHS] += 1
-    else:
-        online_stats[config.GT_SIX_MONTHS] += 1
+    thresholds = {
+        config.LT_TWO_DAYS: timedelta(days=2),
+        config.LT_WEEK: timedelta(days=7),
+        config.LT_MONTH: timedelta(days=config.MONTH),
+        config.LT_SIX_MONTHS: timedelta(days=config.SIX_MONTHS),
+        config.GT_SIX_MONTHS: timedelta.max,
+    }
+    for stat_key, threshold in thresholds.items():
+        if time_online < threshold:
+            online_stats[stat_key] += 1
+            break
 
 
 def onl(usr_data: dict) -> dict:
