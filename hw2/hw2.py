@@ -74,6 +74,25 @@ def geo(usr_data: dict) -> dict:
     return city_stats
 
 
+def slash(path: str) -> None:
+    """Create and change directories and return file name in this path.
+
+    Args:
+        path (str): Path to json file.
+    """
+    if not os.path.exists(path[:path.rindex(config.SLASH)]):
+        os.makedirs(path[:path.rindex(config.SLASH)])
+    os.chdir(path[:path.rindex(config.SLASH)])
+    output_file = path[path.rindex(config.SLASH) + 1:]
+    with open(output_file, 'w') as out_f:
+        json.dump(
+            {
+                'geo_distribution': 0, 'online_stats': 0,
+            },
+            out_f, indent=4,
+        )
+
+
 def process_data(data_file: str, output_file: str) -> None:
     """Make other statistics as a percentage.
 
@@ -91,10 +110,13 @@ def process_data(data_file: str, output_file: str) -> None:
     else:
         geo_distrb = 0
         onl_sts = 0
-    with open(output_file, 'w') as out_f:
-        json.dump(
-            {
-                'geo_distribution': geo_distrb, 'online_stats': onl_sts,
-            },
-            out_f, indent=4,
-        )
+    if config.SLASH in output_file:
+        slash(output_file)
+    else:
+        with open(output_file, 'w') as out_f:
+            json.dump(
+                {
+                    'geo_distribution': geo_distrb, 'online_stats': onl_sts,
+                },
+                out_f, indent=4,
+            )

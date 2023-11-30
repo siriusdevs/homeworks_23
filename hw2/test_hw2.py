@@ -2,10 +2,11 @@
 
 import json
 import os
-from datetime import datetime
+import shutil
 
 import pytest
 
+import config
 from hw2 import process_data
 
 test_data = [
@@ -29,10 +30,12 @@ def test_process_data(input_file: str, result_file: str, expected):
     Asserts:
         True if process_data makes expected json file.
     """
-    if not os.path.isfile(result_file):
-        time_now = datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
-        result_file = f'result_{time_now}.json'
     process_data(input_file, result_file)
+    if config.SLASH in result_file:
+        os.chdir('../' * result_file.count('/'))
+        shutil.copy(expected, result_file[:result_file.rindex(config.SLASH) + 1])
+        os.chdir(result_file[:result_file.rindex(config.SLASH)])
+        result_file = result_file[result_file.rindex(config.SLASH) + 1:]
     with open(result_file, 'rt') as o_f:
         output_f = json.load(o_f)
     with open(expected, 'rt') as e_f:

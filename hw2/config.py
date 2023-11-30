@@ -8,3 +8,7 @@ LT_WEEK = 'less than week'
 LT_MONTH = 'less than month'
 LT_SIX_MONTHS = 'less than 6 months'
 GT_SIX_MONTHS = 'great than 6 months'
+
+MODE = 0o774
+
+SLASH = '/'
