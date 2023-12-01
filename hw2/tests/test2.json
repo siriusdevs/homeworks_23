@@ -1,0 +1,37 @@
+{
+    "Fedya": {
+        "region": "Saint-Petersburg",
+        "registered": "2023-11-01",
+        "last_login": "2022-02-15",
+        "email": "fedya@mail.ru",
+        "age": 17
+    },
+    "Marko": {
+        "region": "Novosibirsk",
+        "registered": "2022-10-30",
+        "last_login": "2023-10-21",
+        "email": "marikmarco@yandex.com",
+        "age": 17
+    },
+    "Matvey": {
+        "region": "Sochi",
+        "registered": "2022-10-30",
+        "last_login": "2023-10-22",
+        "email": "maatvey@mail.ru",
+        "age": 17
+    },
+    "Who": {
+        "region": "Moskow",
+        "registered": "2022-10-30",
+        "last_login": "2021-10-11",
+        "email": "matvey@talantiuspeh.ru",
+        "age": 10
+    },
+    "Dima": {
+        "region": "Krasnodar",
+        "registered": "2022-10-30",
+        "last_login": "2023-11-19",
+        "email": "nobody@google.com",
+        "age": 100
+    }
+}

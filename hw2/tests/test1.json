@@ -1,0 +1,37 @@
+{
+    "Oleg": {
+        "region": "Saint-Petersburg",
+        "registered": "2023-11-01",
+        "last_login": "2023-11-17",
+        "email": "oleg@mail.ru",
+        "age": 28
+    },
+    "dog": {
+        "region": "Novosibirsk",
+        "registered": "2022-10-30",
+        "last_login": "2023-11-12",
+        "email": "dog@gmail.com",
+        "age": 5
+    },
+    "cat": {
+        "region": "Sochi",
+        "registered": "2022-10-30",
+        "last_login": "2023-10-22",
+        "email": "cat@yandex.com",
+        "age": 3
+    },
+    "hamster": {
+        "region": "Moskow",
+        "registered": "2022-10-30",
+        "last_login": "2023-06-01",
+        "email": "hamster@talantiuspeh.ru",
+        "age": 10
+    },
+    "goose": {
+        "region": "Krasnodar",
+        "registered": "2022-10-30",
+        "last_login": "2021-11-25",
+        "email": "goose@lovefrogs.ru",
+        "age": 63
+    }
+}
