@@ -9,11 +9,11 @@ def three_max_selaries(
     """Search three max salaries and all salaries are less than cap_salary.
 
     Parameters:
-        list_salary: List[float] - all salaries
+        list_salary: list[float] - all salaries
         cap_salary: None | float - maximum salary
 
     Returns:
-        Tuple[List[float], List[float]] - top three salaries and all salaries less than cap_salary
+        tuple[list[float], list[float]] - top three salaries and all salaries less than cap_salary
     """
     list_max_salaries: list[float] = []
 
@@ -34,11 +34,11 @@ def check_sum_salary(
     """Return three max salaries.
 
     Parameters:
-        departments: Tuple[str, List[float]] - takes two arguments: name company and all salaries
+        departments:tuple[str, list[float]] - takes two arguments: name company and all salaries
         salary_cap: None | float - maximum salary
 
     Returns:
-        Tuple[List[float], float] - top three salaries in company and percentage of salary
+        tuple[list[float], float] - top three salaries in company and percentage of salary
 
     Raises:
         TypeError: if not isinstance(departments[ind][0], str).
