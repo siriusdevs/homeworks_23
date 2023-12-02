@@ -54,6 +54,10 @@ def top_salary(
     """
     all_salaries = get_all_salaries(departments)
     top = filter_top_salaries(all_salaries, limit_salary)
-    percent = round(sum(top) / sum(all_salaries) * 100, 2)
+
+    if sum(all_salaries) == 0:
+        percent = 0
+    else:
+        percent = round(sum(top) / sum(all_salaries) * 100, 2)
 
     return [round(salary, 2) for salary in top], percent
