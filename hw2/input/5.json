@@ -1,0 +1,19 @@
+{
+    "user": {
+        "region": "Saint-Petersburg",
+        "email": "user@yandex.ru",
+        "age": 36
+    },
+    "user2": {
+        "region": "Sochi",
+        "registered": "2022-10-30",
+        "age": 18
+    },
+    "user3": {
+        "region": "Moscow",
+        "registered": "2019-10-30",
+        "last_login": "2022-11-21",
+        "email": "@mail.ru",
+        "age": 18
+    }
+}

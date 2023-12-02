@@ -1,0 +1,4 @@
+{
+   "status": "InvalidContentFile",
+   "message": "Content in file must be dict"
+}
