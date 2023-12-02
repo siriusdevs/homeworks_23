@@ -35,8 +35,8 @@ def test_func(
     """Checks answers.
 
     Parameters:
-        departments: Tuple[str, List[float]] - accepts department name and their salaries
-        answer: Tuple[List[float], float] - top three salaries in company and percentage of salary
+        departments: tuple[str, list[float]] - accepts department name and their salaries
+        answer: tuple[list[float], float] - top three salaries in company and percentage of salary
         salary_cap: None or float - maximum salary
     """
     assert check_sum_salary(*departments, salary_cap=salary_cap) == answer
