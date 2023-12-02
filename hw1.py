@@ -7,7 +7,7 @@ from typing import List, Tuple
 def three_max_selaries(
     list_salary: List[float],
     cap_salary: float,
-        ) -> Tuple[List[float], List[float]]:
+) -> Tuple[List[float], List[float]]:
     """Search three max salaries and all salaries are less than cap_salary.
 
     Parameters:
