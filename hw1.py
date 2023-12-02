@@ -46,7 +46,7 @@ def check_sum_salary(
     if salary_cap is not None and salary_cap < 0:
         salary_cap = 0
 
-    list_all_salaries: List[float] = []
+    list_all_salaries: list[float] = []
 
     for ind, _ in enumerate(departments):
         if not isinstance(departments[ind][0], str):
