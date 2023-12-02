@@ -1,8 +1,6 @@
 # --encoding: utf-8
 """Test main file."""
 
-from typing import List, Tuple
-
 import pytest
 
 from hw1 import check_sum_salary
@@ -28,17 +26,17 @@ test_argument = [
 ]
 
 
-@pytest.mark.parametrize('args, salary_cap, answer', test_argument)
+@pytest.mark.parametrize('departments, salary_cap, answer', test_argument)
 def test_func(
-    args: Tuple[str, List[float]],
+    departments: tuple[str, list[float]],
     salary_cap: None or float,
-    answer: Tuple[List[float], float],
+    answer: tuple[list[float], float],
         ) -> None:
     """Checks answers.
 
     Parameters:
-        args: Tuple[str, List[float]] - accepts department name and their salaries
+        departments: Tuple[str, List[float]] - accepts department name and their salaries
         answer: Tuple[List[float], float] - top three salaries in company and percentage of salary
         salary_cap: None or float - maximum salary
     """
-    assert check_sum_salary(*args, salary_cap=salary_cap) == answer
+    assert check_sum_salary(*departments, salary_cap=salary_cap) == answer

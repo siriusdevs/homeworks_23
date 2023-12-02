@@ -1,13 +1,11 @@
 # --encoding: utf-8
 """Search for three maximum salaries for employees."""
 
-from typing import List, Tuple
-
 
 def three_max_selaries(
-    list_salary: List[float],
+    list_salary: list[float],
     cap_salary: float,
-) -> Tuple[List[float], List[float]]:
+) -> tuple[list[float], list[float]]:
     """Search three max salaries and all salaries are less than cap_salary.
 
     Parameters:
@@ -17,7 +15,7 @@ def three_max_selaries(
     Returns:
         Tuple[List[float], List[float]] - top three salaries and all salaries less than cap_salary
     """
-    list_max_salaries: List[float] = []
+    list_max_salaries: list[float] = []
 
     for salary in list_salary:
         if salary < cap_salary:
@@ -30,9 +28,9 @@ def three_max_selaries(
 
 
 def check_sum_salary(
-    *departments: Tuple[str, List[float]],
+    *departments: tuple[str, list[float]],
     salary_cap: None | float = None,
-        ) -> Tuple[List[float], float] | int:
+) -> tuple[list[float], float] | int:
     """Return three max salaries.
 
     Parameters:
