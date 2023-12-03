@@ -41,5 +41,5 @@ def test_process_data(mockup: MagicMock, answer: str):
         True if the answer is correct
     """
     with patch("builtins.open", mockup):
-        process_data("", "")
+        process_data()
     assert _get_mock_output(mockup) == answer

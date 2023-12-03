@@ -2,6 +2,7 @@
 import json
 import re
 import statistics
+from pathlib import Path
 
 AGE = "age"
 MAX_AGE = "max_age"
@@ -21,7 +22,7 @@ def process_data(src_file: str = "input.json", dst_file: str = "output.json") ->
     try:
         _collect_results(src_file, dst_file)
     except (ValueError, FileNotFoundError) as error:
-        with open(dst_file, "x") as output_json:
+        with open(dst_file, "w") as output_json:
             json.dump({"error": str(error)}, output_json, indent=4)
 
 
@@ -34,6 +35,8 @@ def _collect_results(src_file: str, dst_file: str) -> None:
         **age_result,
     }
     full_result.update({"years_statistics": years_result})
+    output_path = Path(dst_file)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(dst_file, "x") as output_json:
         json.dump(full_result, output_json, indent=4)
 
@@ -41,10 +44,10 @@ def _collect_results(src_file: str, dst_file: str) -> None:
 def _age_stats(users: dict) -> dict:
     result_ages = {}
     ages = [users[user][AGE] for user in users]
-    result_ages.update({MAX_AGE: max(ages)})
-    result_ages.update({MIN_AGE: min(ages)})
-    result_ages.update({AVERAGE_AGE: sum(ages) / max(len(ages), 1)})
-    result_ages.update({MEDIAN_AGE: statistics.median(ages)})
+    result_ages[MAX_AGE] = max(ages)
+    result_ages[MIN_AGE] = min(ages)
+    result_ages[AVERAGE_AGE] = sum(ages) / max(len(ages), 1)
+    result_ages[MEDIAN_AGE] = statistics.median(ages)
     return result_ages
 
 
@@ -58,10 +61,10 @@ def _year_percentage(users: dict) -> dict:
             year = year.split("-")[0]
         else:
             raise ValueError(f"Incorrect date format - {year}. Use YYYY-MM-DD")
-        if year in years:
-            years.update({year: years.get(year, 0) + 1})
+        if years.get(year):
+            years[year] += 1
         else:
-            years.update({year: 1})
+            years[year] = 1
     count_of_years = len(years)
     for elem in years:
         years[elem] = (years.get(elem, 0) / count_of_years) * 100
