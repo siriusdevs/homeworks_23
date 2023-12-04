@@ -87,13 +87,16 @@ def get_host(client: str, client_info: dict) -> str:
         str: name of email host.
 
     Raises:
+        NonExistentField: calls if client have not email field.
         EmailError: calls if client have not correct email.
         EmptyField: calls if at client email does not exists host name.
     """
     try:
         host = client_info['email'].split('@')[1]
-    except KeyError:
+    except IndexError:
         raise EmailError(client)
+    except KeyError:
+        raise NonExistentField(client, 'email')
     if not host:
         raise EmptyField(client, 'email')
     return host
