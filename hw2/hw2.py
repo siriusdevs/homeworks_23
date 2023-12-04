@@ -31,6 +31,18 @@ class EmptyField(Exception):
         super().__init__(f'{field} field is empty for client {client}.')
 
 
+class EmailError(Exception):
+    """Custom error, calls if email is incorrect."""
+
+    def __init__(self, client: str) -> None:
+        """Initialize error for email address without host name.
+
+        Args:
+            client: str - client name.
+        """
+        super().__init__(f'Wrong email address: empty host name for client {client}.')
+
+
 online_status_count = {
     'less_than_2_days': 0,
     'less_than_a_week': 0,
@@ -92,13 +104,13 @@ def get_host(client: str, client_info: dict) -> str:
         str: name of email host.
 
     Raises:
-        NonExistentField: calls if client have not correct email.
+        EmailError: calls if client have not correct email.
         EmptyField: calls if at client email does not exists host name.
     """
     try:
         host = client_info['email'].split('@')[1]
     except KeyError:
-        raise NonExistentField(client, 'email')
+        raise EmailError(client)
     if not host:
         raise EmptyField(client, 'email')
     return host
