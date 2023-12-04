@@ -12,10 +12,13 @@ REMOTE_PREFIX = 'remotes/origin/'
 
 
 def _get_branches():
+    def _filter(branch: str) -> bool:
+        excludes = 'HEAD', 'patch'
+        return not any(excluded in branch for excluded in excludes)
     process = subprocess.run(['git', 'branch', '--all'], capture_output=True)  # noqa: S607, S603
     output = process.stdout.decode()
     lines = [line.strip() for line in output.split('\n')]
-    return [line for line in lines if line.startswith(REMOTE_PREFIX) and 'HEAD' not in line]
+    return [line for line in lines if line.startswith(REMOTE_PREFIX) and _filter(line)]
 
 
 def _branch_has_path(branch: str, path: str) -> bool: 

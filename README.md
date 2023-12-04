@@ -57,9 +57,6 @@
 |safronova|-|-|-|-|
 |sannikov|-|-|-|-|
 |sheina|-|-|-|-|
-|siriusdevs-patch-1|-|-|-|-|
-|siriusdevs-patch-2|-|-|-|-|
-|siriusdevs-patch-3|-|-|-|-|
 |startsev|-|-|-|-|
 |tarasov|+|-|-|-|
 |tatarnikov|+|-|-|-|
