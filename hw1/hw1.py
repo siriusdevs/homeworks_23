@@ -15,7 +15,7 @@ def get_top_salaries(*departments: tuple[str, list], required_deps: tuple[str] =
         salaries within the specified departments, rounded to two decimal places.
 
     Raises:
-        Exception: calls if there are salaries less than zero or department name is not specified.
+        ValueError: calls if there are salaries less than zero or department name is not specified.
     """
     required_salaries = []
     if required_deps:
@@ -25,9 +25,9 @@ def get_top_salaries(*departments: tuple[str, list], required_deps: tuple[str] =
         try:
             required_salaries.extend(department[1])
         except IndexError:
-            raise Exception(f'Salary list not found for department {department[0]}')
+            raise ValueError(f'Salary list not found for department {department[0]}')
     if any(salary < 0 for salary in required_salaries):
-        raise Exception('Sorry, salary cannot be less than zero.')
+        raise ValueError('Sorry, salary cannot be less than zero.')
     required_salaries.sort()
     try:
         percent = sum(required_salaries[:3]) / sum(required_salaries) * 100
