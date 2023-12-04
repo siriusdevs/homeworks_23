@@ -1,6 +1,7 @@
 """Module for calculating the last login of users and the percentage of email hosts."""
 
 import json
+import os
 from datetime import datetime
 from typing import Any
 
