@@ -16,13 +16,26 @@ time_stats = {
 
 
 def check_is_file(file_name: str) -> bool:
-    """Chekcs that file is a file."""
+    """Chekcs that file is a file.
+
+    Args:
+        file_name: name of the input data file.
+
+    Raises:
+        FileNotFoundError: if file is not a file or is not exist.
+
+    """
     if not os.path.isfile(file_name):
         raise FileNotFoundError(f'<{file_name}> is not a file or is not exist.')
 
 
 def check_by_time(user_info: dict) -> None:
-    """Dictributes age over time."""
+    """Dictributes age over time.
+
+    Args:
+        user_info: dict - information of user.
+
+    """
     age = user_info.get('age')
     online = datetime.now() - datetime.strptime(user_info.get('last_login'), '%Y-%m-%d')
 
