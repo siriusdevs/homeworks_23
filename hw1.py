@@ -61,7 +61,7 @@ def check_sum_salary(
         list_three_max_salaries, list_all_salaries = three_max_selaries(
             list_all_salaries,
             salary_cap,
-                )
+        )
     else:
         list_three_max_salaries = list_all_salaries[:3]
 
