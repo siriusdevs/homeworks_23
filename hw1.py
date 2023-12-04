@@ -1,4 +1,4 @@
-    """Функция для генерации отчетов о самых высокооплачиваемых и самых низкооплачиваемых отделах."""
+"""Функция для генерации отчетов о самых высокооплачиваемых и самых низкооплачиваемых отделах."""
 import statistics
 
 
@@ -36,7 +36,7 @@ def check_arguments(departments: tuple[str, list[float]]) -> None:
                 )
 
 
-def generete_report(*departments: tuple[str, [int|float]], exceptions[str]: tuple = None) -> tuple:
+def generete_report(*departments: tuple[str, list[int | float]], exceptions: tuple[str] = None) -> tuple:
     """Анализирует аргументы и возвращает топ 3 высокооплачиваемых и самых низкооплачиваемых отдела.
 
     Args:
