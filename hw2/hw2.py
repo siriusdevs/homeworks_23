@@ -158,6 +158,3 @@ def change_online_status_counter(client: str, client_info: dict) -> None:
         online_status_count['less_than_six_months'] += 1
     else:
         online_status_count['more_than_six_months'] += 1
-
-
-process_data('data_hw2.json', 'ululu.json')
