@@ -67,6 +67,8 @@ def process_data(input_path: str, output_path: str) -> None:
         change_online_status_counter(client, client_info)
     for host_name, count in get_hosts_count(json_data).items():
         hosts_percentage[host_name] = round((count / len(json_data)) * 100, 2)
+    if os.path.dirname(output_path) and not os.path.exists(output_path):
+        os.mkdir(os.path.dirname(output_path))
     with open(output_path, 'w') as output_file:
         json.dump((online_status_count, hosts_percentage), output_file)
 
@@ -158,4 +160,4 @@ def change_online_status_counter(client: str, client_info: dict) -> None:
         online_status_count['more_than_six_months'] += 1
 
 
-process_data('/home/tire/Documents/Sirius_dev/homeworks_23/data_hw2.json', 'ululu.json')
+process_data('data_hw2.json', 'ululu.json')
