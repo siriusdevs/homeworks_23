@@ -26,7 +26,7 @@ test4 = (
 
 
 @pytest.mark.parametrize(TEST_VALUES, test1)
-def test_comparison_frst(input_file: str, output_file: str, expected: str) -> None:
+def test_comparison_valid_small(input_file: str, output_file: str, expected: str) -> None:
     """Designed to test function with first example input data.
 
     Args:
@@ -43,7 +43,7 @@ def test_comparison_frst(input_file: str, output_file: str, expected: str) -> No
 
 
 @pytest.mark.parametrize(TEST_VALUES, test2)
-def test_comparison_snd(input_file, output_file, expected):
+def test_comparison_valid_big(input_file, output_file, expected):
     """Designed to test function with second example input data.
 
     Args:
@@ -60,7 +60,7 @@ def test_comparison_snd(input_file, output_file, expected):
 
 
 @pytest.mark.parametrize(TEST_VALUES, test3)
-def test_comparison_trd(input_file, output_file, expected):
+def test_comparison_unexsit(input_file, output_file, expected):
     """Designed to test function with second example input data.
 
     Args:
@@ -77,7 +77,7 @@ def test_comparison_trd(input_file, output_file, expected):
 
 
 @pytest.mark.parametrize(TEST_VALUES, test4)
-def test_comparison_fourth(input_file, output_file, expected):
+def test_comparison_empty(input_file, output_file, expected):
     """Designed to test function with second example input data.
 
     Args:

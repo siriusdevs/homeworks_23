@@ -135,7 +135,7 @@ def write_to_file(
             )
         return
     if op.dirname(file_path) and not op.exists(file_path):
-        os.mkdir(op.dirname(file_path))
+        os.makedirs(op.dirname(file_path))
     with open(file_path, 'w') as json_file:
         json.dump(
             {'Registration stats': count_unique(reg_years)}
