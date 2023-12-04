@@ -6,42 +6,64 @@ from datetime import datetime
 from typing import Any
 
 
+def write(message: str | tuple[str], output_path: str) -> None:
+    """Write message in json file.
+
+    Args:
+        message: str | tuple[str] - strings to write.
+        output_path: str - file to write message.
+    """
+    if os.path.dirname(output_path) and not os.path.exists(output_path):
+        os.mkdir(os.path.dirname(output_path))
+    with open(output_path, 'w') as output_file:
+        json.dump(message, output_file)
+
+
 class NonExistentField(Exception):
     """Custom error, calls if field isn't exists."""
 
-    def __init__(self, client: str, field: str) -> None:
+    def __init__(self, client: str, field: str, output_path: str) -> None:
         """Initialize error for non existent field.
 
         Args:
             client: str - client name
             field: str name of non existent field
+            output_path: str - file to write error.
         """
-        super().__init__(f'{field} field does not exists for client {client}.')
+        message = f'{field} field does not exists for client {client}.'
+        write(message, output_path)
+        super().__init__(message)
 
 
 class EmptyField(Exception):
     """Custom error, calls if field is empty."""
 
-    def __init__(self, client: str, field: str) -> None:
+    def __init__(self, client: str, field: str, output_path: str) -> None:
         """Initialize error for empty field.
 
         Args:
             client: str - client name.
             field: str name of non existent field.
+            output_path: str - file to write error.
         """
-        super().__init__(f'{field} field is empty for client {client}.')
+        message = f'{field} field is empty for client {client}.'
+        write(message, output_path)
+        super().__init__(message)
 
 
 class EmailError(Exception):
     """Custom error, calls if email is incorrect."""
 
-    def __init__(self, client: str) -> None:
+    def __init__(self, client: str, output_path: str) -> None:
         """Initialize error for email address without host name.
 
         Args:
             client: str - client name.
+            output_path: str - file to write error.
         """
-        super().__init__(f'Wrong email address: empty host name for client {client}.')
+        message = f'Wrong email address: empty host name for client {client}.'
+        write(message, output_path)
+        super().__init__(message)
 
 
 online_status_count = {
@@ -141,19 +163,6 @@ def change_online_status_counter(client: str, client_info: dict) -> None:
         online_status_count['less_than_six_months'] += 1
     else:
         online_status_count['more_than_six_months'] += 1
-
-
-def write(message: str | tuple[str], output_path: str) -> None:
-    """Write message in json file.
-
-    Args:
-        message: str | tuple[str] - strings to write.
-        output_path: str - file to write statistics.
-    """
-    if os.path.dirname(output_path) and not os.path.exists(output_path):
-        os.mkdir(os.path.dirname(output_path))
-    with open(output_path, 'w') as output_file:
-        json.dump(message, output_file)
 
 
 def process_data(input_path: str, output_path: str) -> None:
