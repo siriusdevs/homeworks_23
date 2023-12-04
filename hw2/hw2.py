@@ -22,6 +22,8 @@ def write(message: str | tuple[str], output_path: str) -> None:
 class NonExistentField(Exception):
     """Custom error, calls if field isn't exists."""
 
+    output_path = 
+
     def __init__(self, client: str, field: str, output_path: str) -> None:
         """Initialize error for non existent field.
 
@@ -75,12 +77,13 @@ online_status_count = {
 }
 
 
-def get_last_login(client: str, client_info: dict) -> str:
+def get_last_login(client: str, client_info: dict, output_path: str) -> str:
     """Find client email host.
 
     Args:
         client: str - client name.
         client_info: dict - info about client: region, registered, last_login, email, age.
+        output_path: str - file to write
 
     Returns:
         str: last login date.
@@ -92,18 +95,19 @@ def get_last_login(client: str, client_info: dict) -> str:
     try:
         last_login = client_info['last_login']
     except KeyError:
-        raise NonExistentField(client, 'last_login')
+        raise NonExistentField(client, 'last_login', output_path)
     if not last_login:
-        raise EmptyField(client, 'last_login')
+        raise EmptyField(client, 'last_login', output_path)
     return last_login
 
 
-def get_host(client: str, client_info: dict) -> str:
+def get_host(client: str, client_info: dict, output_path: str) -> str:
     """Find client email host.
 
     Args:
         client: str - client name.
         client_info: dict - info about client: region, registered, last_login, email, age.
+        output_path: str - file to write
 
     Returns:
         str: name of email host.
@@ -116,38 +120,40 @@ def get_host(client: str, client_info: dict) -> str:
     try:
         host = client_info['email'].split('@')[1]
     except IndexError:
-        raise EmailError(client)
+        raise EmailError(client, output_path)
     except KeyError:
-        raise NonExistentField(client, 'email')
+        raise NonExistentField(client, 'email', output_path)
     if not host:
-        raise EmptyField(client, 'email')
+        raise EmptyField(client, 'email', output_path)
     return host
 
 
-def get_hosts_count(json_data: Any) -> dict:
+def get_hosts_count(json_data: Any, output_path: str) -> dict:
     """Count the number of different hosts.
 
     Args:
         json_data: Any - loaded json file.
+        output_path: str - file to write
 
     Returns:
         dict: email host and the number of times it appears among users.
     """
     hosts_count = {}
     for client, client_info in json_data.items():
-        host = get_host(client, client_info)
+        host = get_host(client, client_info, output_path)
         hosts_count[host] = hosts_count.get(host, 0) + 1
     return hosts_count
 
 
-def change_online_status_counter(client: str, client_info: dict) -> None:
+def change_online_status_counter(client: str, client_info: dict, output_path: str) -> None:
     """Change online status counter using last login ago.
 
     Args:
         client: str - client name.
         client_info: dict - info about client: region, registered, last_login, email, age.
+        output_path: str - file to write
     """
-    date = datetime.strptime(get_last_login(client, client_info), '%Y-%m-%d')
+    date = datetime.strptime(get_last_login(client, client_info, output_path), '%Y-%m-%d')
     last_login_ago = (datetime.now() - date).days
     two_days = 2
     week = 7
@@ -176,7 +182,7 @@ def process_data(input_path: str, output_path: str) -> None:
     with open(input_path, 'r') as input_file:
         json_data = json.load(input_file)
     for client, client_info in json_data.items():
-        change_online_status_counter(client, client_info)
-    for host_name, count in get_hosts_count(json_data).items():
+        change_online_status_counter(client, client_info, output_path)
+    for host_name, count in get_hosts_count(json_data, output_path).items():
         hosts_percentage[host_name] = round((count / len(json_data)) * 100, 2)
     write((online_status_count, hosts_percentage), output_path)
