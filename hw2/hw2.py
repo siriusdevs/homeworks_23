@@ -6,6 +6,8 @@ from typing import Any
 
 
 class NonExistentField(Exception):
+    """Custom error, calls if field isn't exists."""
+
     def __init__(self, client: str, field: str) -> None:
         """Initialize error for non existent field.
 
@@ -17,6 +19,8 @@ class NonExistentField(Exception):
 
 
 class EmptyField(Exception):
+    """Custom error, calls if field is empty."""
+
     def __init__(self, client: str, field: str) -> None:
         """Initialize error for empty field.
 
