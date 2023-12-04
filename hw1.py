@@ -1,8 +1,8 @@
-"""Функция для генерации отчетов о самых высокооплачиваемых и самых низкооплачиваемых отделах."""
+    """Функция для генерации отчетов о самых высокооплачиваемых и самых низкооплачиваемых отделах."""
 import statistics
 
 
-def check_arguments(departments: tuple) -> None:
+def check_arguments(departments: tuple[str, list[float]]) -> None:
     """Функция для проверки на пригодность переданных аргументов.
 
     Args:
@@ -36,7 +36,7 @@ def check_arguments(departments: tuple) -> None:
                 )
 
 
-def generete_report(*departments: tuple, exceptions: tuple = None) -> tuple:
+def generete_report(*departments: tuple[str, [int|float]], exceptions[str]: tuple = None) -> tuple:
     """Анализирует аргументы и возвращает топ 3 высокооплачиваемых и самых низкооплачиваемых отдела.
 
     Args:
@@ -60,6 +60,6 @@ def generete_report(*departments: tuple, exceptions: tuple = None) -> tuple:
     sorted_deptmnt = [department[0] for department in new_data if department[0] not in exceptions]
 
     top_well_paid = sorted_deptmnt[:3]
-    top_low_paid = list(reversed(sorted_deptmnt[-3:]))
+    top_low_paid = sorted_deptmnt[-1:-4:-1]
 
     return top_well_paid, top_low_paid
