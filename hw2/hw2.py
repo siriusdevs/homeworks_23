@@ -9,9 +9,11 @@ Provides types and functions for solving task_2.
 """
 
 import json
-from datetime import datetime
 import os
+from datetime import datetime
 from typing import Callable, Iterable
+
+from hw2 import types_hw2
 
 from .const_hw2 import LESS_FILTER, ROUND_UPTO, TIMEDELTAS
 from .fields_hw2 import AGE_AVERAGE, AGE_MAX, AGE_MEDIAN, AGE_MIN
@@ -30,10 +32,16 @@ def aggregate_users_stats(input_path: str, output_path: str, _now=None) -> None:
     Args:
         input_path: path to a json file containing user stats
         output_path: path to an output file. json aggregate stats will be written there.
+
+    Raises:
+        InvalidInputFileException: when input_path is invalid
     """
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(input_path, 'r') as inp:
-        users = json.load(inp).values()
+    try:
+        with open(input_path, 'r') as inp:
+            users = json.load(inp).values()
+    except Exception:
+        raise types_hw2.InvalidInputFileException(input_path)
     stats = _aggregate_stats(users, _now)
     with open(output_path, 'w') as out:
         json.dump(stats, out)
