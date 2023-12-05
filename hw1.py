@@ -1,7 +1,24 @@
 """Module for calculating top-3 high and low paid departments."""
 
 
-def top_departments(department: dict[str, dict], limit: float = None) -> dict:
+def average_salary(new: dict, salary: float | int, depts: str) -> None:
+    """
+    Write the average salary of departments to the dictionary .
+
+    Args:
+        new: dict - dictionary with departments and average salary.
+        salary: float | int - salary in the department.
+        depts: str - name of department.
+
+    Raises:
+        ZeroDivisionError:  if len(salary) == 0.
+    """
+    if not salary:
+        raise ZeroDivisionError('На ноль делить нельзя!')
+    new[depts] = round(sum(salary) / len(salary), 2)
+
+
+def top_departments(department: dict[str, dict], limit: float = None) -> tuple:
     """
     Calculate the average salary of departments.
 
@@ -10,23 +27,18 @@ def top_departments(department: dict[str, dict], limit: float = None) -> dict:
         limit: float - optional arg(default=None), above which salaries are not taken into account.
 
     Returns:
-        dict: the first - 3 highly paid, the second - 3 low-paid departments.
-
-    Raises:
-        Exception: if not salaries are found below the entered limit.
+        tuple:  first - 3 highly paid, second - 3 low-paid departments.
     """
     new = {}
     for depts, employee in department.items():
         if limit:
             filt = {employee: salary for employee, salary in employee.items() if salary < limit}
             if not filt:
-                raise Exception('Нет данных по введенному лимиту!')
-            department[depts] = filt
+                continue
             salary = filt.values()
         else:
             salary = employee.values()
-        new[depts] = round(sum(salary) / len(salary), 2)
+        average_salary(new, salary, depts)
     high_paid_res = (sorted(new, key=new.get, reverse=True))[:3]
     low_paid_res = (sorted(new, key=new.get))[:3]
-    return f'Топ высокооплачиваемых отделов: {high_paid_res}', \
-        f'Топ низкооплачиваемых отделов: {low_paid_res}'
+    return high_paid_res, low_paid_res

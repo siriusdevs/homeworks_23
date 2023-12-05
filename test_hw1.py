@@ -1,6 +1,6 @@
 """Testing for module 'top_departments' from hw1."""
-import pytest
 
+import pytest
 from hw1 import top_departments
 
 DATA1 = {
@@ -58,9 +58,7 @@ DATA2 = {
     },
 }
 
-DATA3 = {}
-
-DATA4 = {
+DATA3 = {
     'sales': {'worker1': 56789.367, 'worker2': 93738.63783, 'worker3': 473930.838},
     'arts': {'worker4': 647399.9, 'worker5': 28339.937},
     'architecture': {
@@ -76,44 +74,52 @@ DATA4 = {
     'ecology': {'worker18': 134567.456},
 }
 
+DATA4 = {}
+
 LIMIT1 = 100000
 
 LIMIT2 = 535000
 
-LIMIT3 = 45000
+LIMIT3 = 20000
 
 EXPECTED_DATA1 = (
-    "Топ высокооплачиваемых отделов: ['development', 'information_security', 'hr']",
-    "Топ низкооплачиваемых отделов: ['system_administration', 'support_specialist', 'accounting']",
+    ['development', 'information_security', 'hr'],
+    ['system_administration', 'support_specialist', 'accounting'],
 )
 
 EXPECTED_DATA2 = (
-    "Топ высокооплачиваемых отделов: ['department8', 'department1', 'department6']",
-    "Топ низкооплачиваемых отделов: ['department5', 'department3', 'department2']",
+    ['department8', 'department1', 'department6'],
+    ['department5', 'department3', 'department2'],
 )
 
-EXPECTED_DATA3 = (
-    "Топ высокооплачиваемых отделов: ['accounting', 'support_specialist', 'development']",
-    "Топ низкооплачиваемых отделов: ['information_security', 'hr', 'system_administration']",
-)
+EXPECTED_DATA3 = ([], [])
 
 EXPECTED_DATA4 = (
-    "Топ высокооплачиваемых отделов: ['department6', 'department7', 'department8']",
-    "Топ низкооплачиваемых отделов: ['department1', 'department5', 'department3']",
+    ['accounting', 'support_specialist', 'development'],
+    ['information_security', 'hr', 'system_administration'],
 )
+
+EXPECTED_DATA5 = (
+    ['department6', 'department7', 'department8'],
+    ['department1', 'department5', 'department3'],
+)
+
+EXPECTED_DATA6 = (['smm'], ['smm'])
 
 test_all_departments = (
     (DATA1, EXPECTED_DATA1, None),
     (DATA2, EXPECTED_DATA2, None),
-    (DATA1, EXPECTED_DATA3, LIMIT1),
-    (DATA2, EXPECTED_DATA4, LIMIT2),
+    (DATA4, EXPECTED_DATA3, None),
+    (DATA1, EXPECTED_DATA4, LIMIT1),
+    (DATA2, EXPECTED_DATA5, LIMIT2),
+    (DATA3, EXPECTED_DATA6, LIMIT3),
 )
 
 
 @pytest.mark.parametrize('departments, expected, limit', test_all_departments)
 def test_top_departments(
     departments: dict[str, dict],
-    expected: dict,
+    expected: tuple,
     limit: float | None,
 ):
     """Test detective function with test_all_departments.
@@ -128,15 +134,3 @@ def test_top_departments(
 
     """
     assert top_departments(departments, limit) == expected
-
-
-@pytest.mark.xfail()
-def frs_test_fail_top_departments():
-    """First negative test."""
-    assert top_departments(DATA3)
-
-
-@pytest.mark.xfail()
-def scd_test_fail_top_departments():
-    """Second negative test."""
-    assert top_departments(DATA4, LIMIT3)
