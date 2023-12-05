@@ -29,7 +29,7 @@ class InvalidDateException(Exception):
             got_date (str): the date read from json
             want_format (str): the expected format
         """
-        super().__init__(self, f'Неверная дата: {got_date}. Ожидается формат {want_format}')
+        super().__init__(self, f'Неверная дата: "{got_date}". Ожидается формат "{want_format}"')
 
 
 class MissingFieldException(Exception):
@@ -41,4 +41,4 @@ class MissingFieldException(Exception):
         Args:
             field: missing field name
         """
-        super().__init__(self, f'У каждого из пользователей должно быть поле {field}')
+        super().__init__(self, f'У каждого из пользователей должно быть поле "{field}"')

@@ -42,7 +42,7 @@ def aggregate_users_stats(input_path: str, output_path: str, _now=None) -> None:
     except Exception:
         raise types_hw2.InvalidInputFileException(input_path)
     stats = _aggregate_stats(users, _now)
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    os.makedirs(os.path.abspath(os.path.dirname(output_path)), exist_ok=True)
     with open(output_path, 'w') as out:
         json.dump(stats, out)
 

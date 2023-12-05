@@ -1,6 +1,5 @@
 """Provides UNREAL :) types and functions for solving task_2."""
 
-import os
 from datetime import datetime
 
 import pandas as pd
@@ -21,7 +20,6 @@ def aggregate_users_stats(input_path: str, output_path: str, _now=None) -> None:
     df = pd.read_json(input_path, orient='index', convert_dates=['last_login'])
     time_since_login = now - df.get('last_login', pd.Series())
     ages = df.get('age', pd.Series())
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     pd.Series({
         fields_hw2.LESS_TWO_DAYS: ages[time_since_login < pd.Timedelta('2 days')].mean(),
         fields_hw2.LESS_WEEK: ages[time_since_login < pd.Timedelta('7 days')].mean(),
