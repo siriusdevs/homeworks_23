@@ -35,7 +35,6 @@ def aggregate_users_stats(input_path: str, output_path: str, _now=None) -> None:
 
     Raises:
         InvalidInputFileException: when input_path is invalid
-        InvalidDateException: when user's last_login field is of invalid format
     """
     try:
         with open(input_path, 'r') as inp:
@@ -83,7 +82,10 @@ def _get_login_time(user: JsonDict) -> datetime:
 
 
 def _ages(users: Iterable[JsonDict]) -> list[int]:
-    return [user['age'] for user in users]
+    try:
+        return [user['age'] for user in users]
+    except KeyError:
+        raise types_hw2.MissingFieldException('age')
 
 
 def _average(nums: list[float] | list[int]) -> float:

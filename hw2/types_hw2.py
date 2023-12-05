@@ -3,6 +3,8 @@
 
 from typing import Any
 
+from pydantic import Json
+
 JsonDict = dict[str, Any]
 TimeFilterType = str
 
@@ -30,3 +32,15 @@ class InvalidDateException(Exception):
             want_format (str): the expected format
         """
         super().__init__(self, f'Неверная дата: {got_date}. Ожидается формат {want_format}')
+
+
+class MissingFieldException(Exception):
+    """Exception that occurs when one of the users is missing a field."""
+
+    def __init__(self, field: str) -> None:
+        """Initialize the exception.
+
+        Args:
+            field: missing field name
+        """
+        super().__init__(self, f'У каждого из пользователей должно быть поле {field}')
