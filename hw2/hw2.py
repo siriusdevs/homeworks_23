@@ -35,14 +35,15 @@ def aggregate_users_stats(input_path: str, output_path: str, _now=None) -> None:
 
     Raises:
         InvalidInputFileException: when input_path is invalid
+        InvalidDateException: when user's last_login field is of invalid format
     """
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     try:
         with open(input_path, 'r') as inp:
             users = json.load(inp).values()
     except Exception:
         raise types_hw2.InvalidInputFileException(input_path)
     stats = _aggregate_stats(users, _now)
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, 'w') as out:
         json.dump(stats, out)
 
@@ -75,7 +76,10 @@ def _filter_by_activity(ftype: TimeFilterType, timebound: datetime) -> Callable[
 
 
 def _get_login_time(user: JsonDict) -> datetime:
-    return datetime.strptime(user['last_login'], '%Y-%m-%d')
+    try:
+        return datetime.strptime(user['last_login'], '%Y-%m-%d')
+    except ValueError:
+        raise types_hw2.InvalidDateException(user['last_login'], '2006-08-02')
 
 
 def _ages(users: Iterable[JsonDict]) -> list[int]:

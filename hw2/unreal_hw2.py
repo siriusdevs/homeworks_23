@@ -5,7 +5,7 @@ from datetime import datetime
 
 import pandas as pd
 
-from . import const_hw2, fields_hw2, types_hw2
+from . import const_hw2, fields_hw2
 
 
 def aggregate_users_stats(input_path: str, output_path: str, _now=None) -> None:
@@ -16,18 +16,12 @@ def aggregate_users_stats(input_path: str, output_path: str, _now=None) -> None:
     Args:
         input_path: path to a json file containing user stats
         output_path: path to an output file. json aggregate stats will be written there.
-
-    Raises:
-        InvalidInputFileException: when input_path is invalid
     """
     now = datetime.now() if _now is None else _now  # for tests
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    try:
-        df = pd.read_json(input_path, orient='index', convert_dates=['last_login'])
-    except Exception:
-        raise types_hw2.InvalidInputFileException(input_path)
+    df = pd.read_json(input_path, orient='index', convert_dates=['last_login'])
     time_since_login = now - df.get('last_login', pd.Series())
     ages = df.get('age', pd.Series())
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     pd.Series({
         fields_hw2.LESS_TWO_DAYS: ages[time_since_login < pd.Timedelta('2 days')].mean(),
         fields_hw2.LESS_WEEK: ages[time_since_login < pd.Timedelta('7 days')].mean(),
