@@ -42,4 +42,3 @@ def top_departments(department: dict[str, dict], limit: float = None) -> tuple:
     high_paid_res = (sorted(new, key=new.get, reverse=True))[:3]
     low_paid_res = (sorted(new, key=new.get))[:3]
     return high_paid_res, low_paid_res
-
