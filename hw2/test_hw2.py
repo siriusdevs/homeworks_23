@@ -4,8 +4,8 @@ import json
 import os
 import shutil
 
-import pytest
 import config
+import pytest
 
 from hw2 import process_data
 
