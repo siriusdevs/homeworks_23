@@ -5,7 +5,6 @@ import os
 import shutil
 
 import pytest
-
 import config
 
 from hw2 import process_data
