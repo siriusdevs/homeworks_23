@@ -1,0 +1,16 @@
+{
+    "age_percent": {
+        "0-18": 0,
+        "18-25": 0,
+        "25-45": 0,
+        "45-60": 0,
+        "60+": 0
+    },
+    "last_login_date_percent": {
+        "half year": 0,
+        "less 2 day": 0,
+        "month": 0,
+        "more half year": 0,
+        "week": 0
+    }
+}
