@@ -24,7 +24,7 @@ class Statistics(ABC):
         """Init statistics class.
 
         Args:
-            users_data: a dictionary with custom dictionaries that contain properties.
+            users_data: contains information about users.
             statistic_field: name of the user property key.
             output_format: json file output format.
         """
@@ -111,10 +111,10 @@ class DateStatistics(Statistics):
         output_format: dict[str, timedelta],
         date_format: str = '%Y-%m-%d',
     ) -> None:
-        """Init static class.
+        """Create statistics with user_date, statistics_field_name, output_format and date_fromat.
 
         Args:
-            users_data: a dictionary with custom dictionaries that contain properties.
+            users_data:  contains information about users.
             statistic_field: name of the user property key.
             output_format: key is name, value is date duration.
             date_format: date parsing format.
