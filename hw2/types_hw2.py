@@ -3,8 +3,6 @@
 
 from typing import Any
 
-from pydantic import Json
-
 JsonDict = dict[str, Any]
 TimeFilterType = str
 

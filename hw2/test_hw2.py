@@ -51,6 +51,7 @@ ERROR_PATHS = (
     ('test_data/does_not_exist', types_hw2.InvalidInputFileException),
     ('test_data/invalid_date.json', types_hw2.InvalidDateException),
     ('test_data/missing_age.json', types_hw2.MissingFieldException),
+    ('test_data/missing_last_login.json', types_hw2.MissingFieldException),
 )
 
 

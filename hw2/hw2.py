@@ -77,6 +77,8 @@ def _filter_by_activity(ftype: TimeFilterType, timebound: datetime) -> Callable[
 def _get_login_time(user: JsonDict) -> datetime:
     try:
         return datetime.strptime(user['last_login'], '%Y-%m-%d')
+    except KeyError:
+        raise types_hw2.MissingFieldException('last_login')
     except ValueError:
         raise types_hw2.InvalidDateException(user['last_login'], '2006-08-02')
 
