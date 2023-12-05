@@ -13,16 +13,15 @@ def write(message: str | tuple[str], output_path: str) -> None:
         message: str | tuple[str] - strings to write.
         output_path: str - file to write message.
     """
-    if os.path.dirname(output_path) and not os.path.exists(output_path):
-        os.mkdir(os.path.dirname(output_path))
+    dirname = os.path.dirname(output_path)
+    if dirname and not os.path.exists(dirname):
+        os.makedirs(dirname)
     with open(output_path, 'w') as output_file:
         json.dump(message, output_file)
 
 
 class NonExistentField(Exception):
     """Custom error, calls if field isn't exists."""
-
-    output_path = 
 
     def __init__(self, client: str, field: str, output_path: str) -> None:
         """Initialize error for non existent field.
@@ -68,13 +67,19 @@ class EmailError(Exception):
         super().__init__(message)
 
 
-online_status_count = {
-    'less_than_2_days': 0,
-    'less_than_a_week': 0,
-    'less_than_a_month': 0,
-    'less_than_six_months': 0,
-    'more_than_six_months': 0,
-}
+class NoInputFile(Exception):
+    """Custom error, calls if ninput file not exists."""
+
+    def __init__(self, input_file: str, output_path: str) -> None:
+        """Initialize error for non existent input file.
+
+        Args:
+            input_file: str - unexistent file.
+            output_path: str - file to write error.
+        """
+        message = f'File {input_file} does not exists. Processing is not possible.'
+        write(message, output_path)
+        super().__init__(message)
 
 
 def get_last_login(client: str, client_info: dict, output_path: str) -> str:
@@ -145,10 +150,16 @@ def get_hosts_count(json_data: Any, output_path: str) -> dict:
     return hosts_count
 
 
-def change_online_status_counter(client: str, client_info: dict, output_path: str) -> None:
+def change_online_status_counter(
+    online_status_count: dict[str: int],
+    client: str,
+    client_info: dict,
+    output_path: str,
+        ) -> None:
     """Change online status counter using last login ago.
 
     Args:
+        online_status_count: dict[str: int] - list with online statisctic.
         client: str - client name.
         client_info: dict - info about client: region, registered, last_login, email, age.
         output_path: str - file to write
@@ -177,12 +188,27 @@ def process_data(input_path: str, output_path: str) -> None:
     Args:
         input_path: str - file with data for process.
         output_path: str - file to write statistics.
+
+    Raises:
+        NoInputFile: calls if input file not exists.
     """
+    online_status_count = {
+        'less_than_2_days': 0,
+        'less_than_a_week': 0,
+        'less_than_a_month': 0,
+        'less_than_six_months': 0,
+        'more_than_six_months': 0,
+    }
     hosts_percentage = {}
-    with open(input_path, 'r') as input_file:
-        json_data = json.load(input_file)
+    try:
+        with open(input_path, 'r') as input_file:
+            json_data = json.load(input_file)
+    except FileNotFoundError:
+        raise NoInputFile(input_path, output_path)
+    except json.JSONDecodeError:
+        write('', output_path)
     for client, client_info in json_data.items():
-        change_online_status_counter(client, client_info, output_path)
+        change_online_status_counter(online_status_count, client, client_info, output_path)
     for host_name, count in get_hosts_count(json_data, output_path).items():
         hosts_percentage[host_name] = round((count / len(json_data)) * 100, 2)
     write((online_status_count, hosts_percentage), output_path)
