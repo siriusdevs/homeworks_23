@@ -12,9 +12,9 @@ import json
 from datetime import datetime
 from typing import Callable, Iterable
 
-from const_hw2 import LESS_FILTER, ROUND_UPTO, TIMEDELTAS
-from fields_hw2 import AGE_AVERAGE, AGE_MAX, AGE_MEDIAN, AGE_MIN
-from types_hw2 import JsonDict, TimeFilterType
+from .const_hw2 import LESS_FILTER, ROUND_UPTO, TIMEDELTAS
+from .fields_hw2 import AGE_AVERAGE, AGE_MAX, AGE_MEDIAN, AGE_MIN
+from .types_hw2 import JsonDict, TimeFilterType
 
 
 def aggregate_users_stats(input_path: str, output_path: str, _now=None) -> None:

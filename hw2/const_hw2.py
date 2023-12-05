@@ -2,8 +2,7 @@
 
 from datetime import timedelta
 
-import fields_hw2
-import types_hw2
+from . import fields_hw2, types_hw2
 
 ROUND_UPTO = 2
 

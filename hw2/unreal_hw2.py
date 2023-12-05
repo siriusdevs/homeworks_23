@@ -4,7 +4,7 @@ from datetime import datetime
 
 import pandas as pd
 
-import fields_hw2
+from . import const_hw2, fields_hw2
 
 
 def aggregate_users_stats(input_path: str, output_path: str, _now=None) -> None:
@@ -31,4 +31,4 @@ def aggregate_users_stats(input_path: str, output_path: str, _now=None) -> None:
         fields_hw2.AGE_MIN: ages.min(),
         fields_hw2.AGE_AVERAGE: ages.mean(),
         fields_hw2.AGE_MEDIAN: ages.median(),
-    }).fillna(0).round(fields_hw2.ROUND_UPTO).to_json(output_path)
+    }).fillna(0).round(const_hw2.ROUND_UPTO).to_json(output_path)

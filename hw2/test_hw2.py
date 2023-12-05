@@ -7,8 +7,7 @@ from typing import Any
 
 import pytest
 
-import fields_hw2
-from hw2 import aggregate_users_stats
+from . import fields_hw2, hw2
 
 EMPTY_INPUT_FILE = 'test_data/empty.json'
 TESTS_TABLE = (
@@ -63,7 +62,7 @@ def test_aggregate_users_stats(input_path: str, expected: dict[str, Any]):
         expected: the json value that should be written by aggregate_users_stats()
     """
     with tempfile.NamedTemporaryFile() as output:
-        aggregate_users_stats(input_path, output.name, _now=MOCK_NOW)
+        hw2.aggregate_users_stats(input_path, output.name, _now=MOCK_NOW)
         got = json.load(output)
         assert sorted(got.items()) == sorted(expected.items())
 
@@ -74,6 +73,6 @@ def test_aggregate_users_stats_file_creation():
     output_path = str(tmp_output.name)
     tmp_output.close()  # deletes this file, so that we can check file creation by tested function
 
-    aggregate_users_stats(EMPTY_INPUT_FILE, output_path)
+    hw2.aggregate_users_stats(EMPTY_INPUT_FILE, output_path)
     assert os.path.exists(output_path)
     os.remove(output_path)
