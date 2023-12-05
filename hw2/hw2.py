@@ -10,19 +10,21 @@ Provides types and functions for solving task_2.
 
 import json
 from datetime import datetime
-from typing import Iterable
+from typing import Callable, Iterable
 
-import const_hw2
+from const_hw2 import LESS_FILTER, ROUND_UPTO, TIMEDELTAS
+from fields_hw2 import AGE_AVERAGE, AGE_MAX, AGE_MEDIAN, AGE_MIN
+from types_hw2 import JsonDict, TimeFilterType
 
 
-def aggregate_users_stats(input_path: str, output_path: str, _now: datetime = None) -> None:
+def aggregate_users_stats(input_path: str, output_path: str, _now=None) -> None:
     """Read user stats from input_path, aggregate them and write to output_path.
 
     Schema of the output file is a json object with fields corresponding to keys of
-    const.TIMEDELTAS and values corresponding to average age of users
+    const_hw2.TIMEDELTAS and values corresponding to average age of users
     who have been online according to these timedeltas.
     The output file also contains total age stats with these keys:
-    const.AGE_MAX, const.AGE_MIN, const.AGE_AVERAGE, const.AGE_MEDIAN.
+    const_hw2.AGE_MAX, const_hw2.AGE_MIN, const_hw2.AGE_AVERAGE, const_hw2.AGE_MEDIAN.
 
     Args:
         input_path: path to a json file containing user stats
@@ -35,46 +37,46 @@ def aggregate_users_stats(input_path: str, output_path: str, _now: datetime = No
         json.dump(stats, out)
 
 
-def _aggregate_stats(users: const_hw2.JsonDict, _now: datetime = None) -> const_hw2.JsonDict:
+def _aggregate_stats(users: Iterable[JsonDict], _now=None) -> JsonDict:
     now = datetime.now() if _now is None else _now  # for tests
     return {
         name: _average(_ages(filter(
             _filter_by_activity(filter_type, timebound=now - delta),
             users,
         )))
-        for filter_type, name, delta in const_hw2.TIMEDELTAS
+        for filter_type, name, delta in TIMEDELTAS
     } | _total_stats(_ages(users))
 
 
-def _total_stats(ages: list[int]) -> const_hw2.JsonDict:
+def _total_stats(ages: list[int]) -> JsonDict:
     return {
-       const_hw2.AGE_MAX: max(ages, default=0),
-       const_hw2.AGE_MIN: min(ages, default=0),
-       const_hw2.AGE_AVERAGE: _average(ages),
-       const_hw2.AGE_MEDIAN: _median(ages),
+       AGE_MAX: max(ages, default=0),
+       AGE_MIN: min(ages, default=0),
+       AGE_AVERAGE: _average(ages),
+       AGE_MEDIAN: _median(ages),
     }
 
 
-def _filter_by_activity(filter_type: const_hw2.TimeFilterType, timebound: datetime) -> callable:
+def _filter_by_activity(ftype: TimeFilterType, timebound: datetime) -> Callable[[JsonDict], bool]:
     return lambda user: (
-        _get_login_time(user) > timebound if filter_type == const_hw2.LESS_FILTER else
+        _get_login_time(user) > timebound if ftype == LESS_FILTER else
         _get_login_time(user) < timebound
     )
 
 
-def _get_login_time(user: dict) -> datetime:
+def _get_login_time(user: JsonDict) -> datetime:
     return datetime.strptime(user['last_login'], '%Y-%m-%d')
 
 
-def _ages(users: Iterable[const_hw2.JsonDict]) -> list[int]:
+def _ages(users: Iterable[JsonDict]) -> list[int]:
     return [user['age'] for user in users]
 
 
-def _average(nums: list[float]) -> float:
-    return round(sum(nums) / max(len(nums), 1), const_hw2.ROUND_UPTO)
+def _average(nums: list[float] | list[int]) -> float:
+    return round(sum(nums) / max(len(nums), 1), ROUND_UPTO)
 
 
-def _median(nums: list[float]) -> float:
+def _median(nums: list[float] | list[int]) -> float:
     nums = sorted(nums)
     center = len(nums) // 2
     return (

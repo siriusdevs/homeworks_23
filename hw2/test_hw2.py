@@ -7,43 +7,43 @@ from typing import Any
 
 import pytest
 
-import const_hw2
+import fields_hw2
 from hw2 import aggregate_users_stats
 
 EMPTY_INPUT_FILE = 'test_data/empty.json'
 TESTS_TABLE = (
     (EMPTY_INPUT_FILE, {
-        const_hw2.LESS_TWO_DAYS: 0,
-        const_hw2.LESS_WEEK: 0,
-        const_hw2.LESS_MONTH: 0,
-        const_hw2.LESS_HALFYEAR: 0,
-        const_hw2.GREATER_HALFYEAR: 0,
-        const_hw2.AGE_MAX: 0,
-        const_hw2.AGE_MIN: 0,
-        const_hw2.AGE_AVERAGE: 0,
-        const_hw2.AGE_MEDIAN: 0,
+        fields_hw2.LESS_TWO_DAYS: 0,
+        fields_hw2.LESS_WEEK: 0,
+        fields_hw2.LESS_MONTH: 0,
+        fields_hw2.LESS_HALFYEAR: 0,
+        fields_hw2.GREATER_HALFYEAR: 0,
+        fields_hw2.AGE_MAX: 0,
+        fields_hw2.AGE_MIN: 0,
+        fields_hw2.AGE_AVERAGE: 0,
+        fields_hw2.AGE_MEDIAN: 0,
     }),
     ('test_data/example.json', {
-        const_hw2.LESS_TWO_DAYS: 0,
-        const_hw2.LESS_WEEK: 36,
-        const_hw2.LESS_MONTH: 36,
-        const_hw2.LESS_HALFYEAR: 36,
-        const_hw2.GREATER_HALFYEAR: 18,
-        const_hw2.AGE_MAX: 36,
-        const_hw2.AGE_MIN: 18,
-        const_hw2.AGE_AVERAGE: 27,
-        const_hw2.AGE_MEDIAN: 27,
+        fields_hw2.LESS_TWO_DAYS: 0,
+        fields_hw2.LESS_WEEK: 36,
+        fields_hw2.LESS_MONTH: 36,
+        fields_hw2.LESS_HALFYEAR: 36,
+        fields_hw2.GREATER_HALFYEAR: 18,
+        fields_hw2.AGE_MAX: 36,
+        fields_hw2.AGE_MIN: 18,
+        fields_hw2.AGE_AVERAGE: 27,
+        fields_hw2.AGE_MEDIAN: 27,
     }),
     ('test_data/complex.json', {
-        const_hw2.LESS_TWO_DAYS: 11,
-        const_hw2.LESS_WEEK: 11,
-        const_hw2.LESS_MONTH: 14.67,
-        const_hw2.LESS_HALFYEAR: 23,
-        const_hw2.GREATER_HALFYEAR: 29.4,
-        const_hw2.AGE_MAX: 60,
-        const_hw2.AGE_MIN: 10,
-        const_hw2.AGE_AVERAGE: 25,
-        const_hw2.AGE_MEDIAN: 20,
+        fields_hw2.LESS_TWO_DAYS: 11,
+        fields_hw2.LESS_WEEK: 11,
+        fields_hw2.LESS_MONTH: 14.67,
+        fields_hw2.LESS_HALFYEAR: 23,
+        fields_hw2.GREATER_HALFYEAR: 29.4,
+        fields_hw2.AGE_MAX: 60,
+        fields_hw2.AGE_MIN: 10,
+        fields_hw2.AGE_AVERAGE: 25,
+        fields_hw2.AGE_MEDIAN: 20,
     }),
 )
 

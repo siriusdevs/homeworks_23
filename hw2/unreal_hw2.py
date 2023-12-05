@@ -2,11 +2,12 @@
 
 from datetime import datetime
 
-import const
 import pandas as pd
 
+import fields_hw2
 
-def aggregate_users_stats(input_path: str, output_path: str, _now: datetime = None) -> None:
+
+def aggregate_users_stats(input_path: str, output_path: str, _now=None) -> None:
     """Read user stats from input_path, aggregate them and write to output_path.
 
     See docs for hw2.aggregate_users_stats()
@@ -20,14 +21,14 @@ def aggregate_users_stats(input_path: str, output_path: str, _now: datetime = No
     time_since_login = now - df.get('last_login', pd.Series())
     ages = df.get('age', pd.Series())
     pd.Series({
-        const.LESS_TWO_DAYS: ages[time_since_login < pd.Timedelta('2 days')].mean(),
-        const.LESS_WEEK: ages[time_since_login < pd.Timedelta('7 days')].mean(),
-        const.LESS_MONTH: ages[time_since_login < pd.Timedelta('30 days')].mean(),
-        const.LESS_HALFYEAR: ages[time_since_login < pd.Timedelta('180 days')].mean(),
-        const.GREATER_HALFYEAR: ages[time_since_login > pd.Timedelta('180 days')].mean(),
+        fields_hw2.LESS_TWO_DAYS: ages[time_since_login < pd.Timedelta('2 days')].mean(),
+        fields_hw2.LESS_WEEK: ages[time_since_login < pd.Timedelta('7 days')].mean(),
+        fields_hw2.LESS_MONTH: ages[time_since_login < pd.Timedelta('30 days')].mean(),
+        fields_hw2.LESS_HALFYEAR: ages[time_since_login < pd.Timedelta('180 days')].mean(),
+        fields_hw2.GREATER_HALFYEAR: ages[time_since_login > pd.Timedelta('180 days')].mean(),
 
-        const.AGE_MAX: ages.max(),
-        const.AGE_MIN: ages.min(),
-        const.AGE_AVERAGE: ages.mean(),
-        const.AGE_MEDIAN: ages.median(),
-    }).fillna(0).round(const.ROUND_UPTO).to_json(output_path)
+        fields_hw2.AGE_MAX: ages.max(),
+        fields_hw2.AGE_MIN: ages.min(),
+        fields_hw2.AGE_AVERAGE: ages.mean(),
+        fields_hw2.AGE_MEDIAN: ages.median(),
+    }).fillna(0).round(fields_hw2.ROUND_UPTO).to_json(output_path)
