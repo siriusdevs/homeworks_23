@@ -68,11 +68,8 @@ def test_aggregate_users_stats(input_path: str, expected: dict[str, Any]):
 
 
 def test_aggregate_users_stats_file_creation():
-    """Asserts that aggregate_users_stats() creates the output file if it doesn't exist."""
-    tmp_output = tempfile.TemporaryFile()
-    output_path = str(tmp_output.name)
-    tmp_output.close()  # deletes this file, so that we can check file creation by tested function
-
-    hw2.aggregate_users_stats(EMPTY_INPUT_FILE, output_path)
-    assert os.path.exists(output_path)
-    os.remove(output_path)
+    """Asserts that aggregate_users_stats() creates the output file and path to it."""
+    with tempfile.TemporaryDirectory() as tempdir:
+        output_path = os.path.join(tempdir, 'test', 'inner', 'more_inner', 'output.json')
+        hw2.aggregate_users_stats(EMPTY_INPUT_FILE, output_path)
+        assert os.path.exists(output_path)

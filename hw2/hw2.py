@@ -10,6 +10,7 @@ Provides types and functions for solving task_2.
 
 import json
 from datetime import datetime
+import os
 from typing import Callable, Iterable
 
 from .const_hw2 import LESS_FILTER, ROUND_UPTO, TIMEDELTAS
@@ -30,6 +31,7 @@ def aggregate_users_stats(input_path: str, output_path: str, _now=None) -> None:
         input_path: path to a json file containing user stats
         output_path: path to an output file. json aggregate stats will be written there.
     """
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(input_path, 'r') as inp:
         users = json.load(inp).values()
     stats = _aggregate_stats(users, _now)

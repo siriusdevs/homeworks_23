@@ -1,6 +1,7 @@
 """Provides UNREAL :) types and functions for solving task_2."""
 
 from datetime import datetime
+import os
 
 import pandas as pd
 
@@ -17,6 +18,7 @@ def aggregate_users_stats(input_path: str, output_path: str, _now=None) -> None:
         output_path: path to an output file. json aggregate stats will be written there.
     """
     now = datetime.now() if _now is None else _now  # for tests
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     df = pd.read_json(input_path, orient='index', convert_dates=['last_login'])
     time_since_login = now - df.get('last_login', pd.Series())
     ages = df.get('age', pd.Series())
