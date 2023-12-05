@@ -3,7 +3,6 @@
 from pathlib import Path
 
 import pytest
-
 from main import process_data
 
 DIRECTORY = 'hw2/test_data_hw2/'

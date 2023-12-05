@@ -34,6 +34,7 @@ def duration_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict], int]
     Returns:
         tuple[dict[str, dict], int]: calculated durations and sum of them
     """
+    duration = 0  # flake8 requirers
     duration_mask = {
         'under_2_days': 0,
         'under_week': 0,
