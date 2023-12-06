@@ -13,18 +13,17 @@ def top_salary(*deps: tuple[str, list[float]], lim: float = None) -> tuple[tuple
 
     """
     all_salaries = []
-
     for _, salaries in deps:
         for salary in salaries:
-            if (lim is not None and salary <= lim) or not lim:
+            if lim:
+                if salary <= lim:
+                    all_salaries.append(round(salary, 2))
+            else:
                 all_salaries.append(round(salary, 2))
-
     all_salaries.sort(reverse=True)
     all_sum = sum(all_salaries)
-
     if all_sum == 0:
         return [], 0
-
-    percent = sum(all_salaries[:3]) / all_sum * 100
-
-    return all_salaries[:3], round(percent, 2)
+    top_salaries = all_salaries[:3]
+    percent = sum(top_salaries) / all_sum * 100
+    return top_salaries, round(percent, 2)
