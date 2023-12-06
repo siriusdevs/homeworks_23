@@ -6,7 +6,7 @@ import pytest
 
 import hw2
 
-PATH = 'test_folde/output.json'
+PATH = 'tests_folder/output.json'
 PATH_ERROR = 'error.json'
 
 
