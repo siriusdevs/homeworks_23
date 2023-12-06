@@ -1,3 +1,5 @@
+from typing import Any
+
 """
 Напишите функцию, которая принимает любые ключевые аргументы,
 но ожидает, что название аргумента будет названием отдела компании (str),
@@ -15,6 +17,21 @@
 Написать тесты.
 Проверка линтера и тесты должны работать в github workflows.
 """
+
+
+def check(value: Any, value_type: type, value_name: str) -> None:
+    """Check type of given value.
+
+    Args:
+        value (Any): value that need to check
+        value_type (type): target type
+        value_name (str): name of value that need to check
+
+    Raises:
+        TypeError: if given wrong type of value
+    """
+    if not isinstance(value, value_type):
+        raise TypeError(f'{value_name} type is not {value_type.__name__}')
 
 
 def salaries_statistic(
@@ -37,9 +54,6 @@ def salaries_statistic(
         /Defaults to None.
 
     Raises:
-        TypeError: if dict type not set
-        TypeError: if float type not set
-        TypeError: if str not set
         ValueError: if wrong value given
 
     Returns:
@@ -53,17 +67,15 @@ def salaries_statistic(
     for departament_name, departament in dprts.items():
         total_salary = 0
         for name, salary in departament.items():
-            if not isinstance(name, str) or not isinstance(departament_name, str):
-                raise TypeError('name or departamet_name type is not str')
-            if not isinstance(salary, float):
-                raise TypeError('salary type is not float')
+            check(name, str, 'name')
+            check(departament_name, str, 'department_name')
+            check(salary, float, 'salary')
             salary = round(salary, 2)
             super_total_salary += salary
             if not min_salary:
                 total_salary += salary
             else:
-                if not isinstance(min_salary, float):
-                    raise TypeError('min_salary type is not float')
+                check(min_salary, float, 'min_salary')
                 if salary >= min_salary:
                     total_salary += salary
         answer.append(total_salary)
