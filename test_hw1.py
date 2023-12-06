@@ -219,7 +219,7 @@ TEST_DATA5 = {
         "Arina": 3040.0,
         "Misha": 1090.5,
         "Egor": 3000.0,
-        "Urii": 6009.0,
+        "Urii": 600009.0,
     },
     'CORPORATIVE_MENEGERS': {
         "Kira": 2145432.0,
@@ -484,26 +484,26 @@ W_TEST_DATA6 = {
 
 
 all_data = (
-    (TEST_DATA, EXPECTED_DATA, None),
-    (TEST_DATA1, EXPECTED_DATA1, None),
-    (TEST_DATA2, EXPECTED_DATA2, None),
-    (TEST_DATA3, EXPECTED_DATA3, LIMIT),
-    (TEST_DATA4, EXPECTED_DATA4, LIMIT1),
-    (TEST_DATA5, EXPECTED_DATA5, LIMIT2),
+    (TEST_DATA, None, EXPECTED_DATA),
+    (TEST_DATA1, None, EXPECTED_DATA1),
+    (TEST_DATA2, None, EXPECTED_DATA2),
+    (TEST_DATA3,  LIMIT, EXPECTED_DATA3),
+    (TEST_DATA4, LIMIT1, EXPECTED_DATA4),
+    (TEST_DATA5, LIMIT2, EXPECTED_DATA5),
 )
 
 
-@pytest.mark.parametrize('dprts, expected, min_salary', all_data)
+@pytest.mark.parametrize('dprts, min_salary, expected', all_data)
 def test_salaries_statistic(
     dprts: dict[str, dict[str, float]],
-    expected: tuple,
-    min_salary: float | None = None,
+    min_salary: float | None,
+    expected: float,
 ):
     """Test detective function with test_all_departments.
     Args:
         departments: dict - list of all departments, their employees and their salaries.
         limit: float - the num limit above which salaries are not taken, default (None).
-        expected: dict - an actual expected result.
+        expected: float - an actual expected result.
     Asserts:
         True if the function returns expected results.
     """

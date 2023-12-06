@@ -65,16 +65,18 @@ def salaries_statistic(
                 raise TypeError('salary type is not float')
             salary = round(salary, 2)
             super_total_salary += salary
-            if min_salary:
+            if not min_salary:
+                total_salary += salary 
+            else:
+                if salary >= min_salary:
+                    total_salary += salary   
                 if not isinstance(min_salary, float):
                     raise TypeError('min_salary type is not float')
-                if salary >= min_salary:
-                    total_salary += salary
-            else:
-                total_salary += salary
+                
+            
         answer.append(total_salary)
     if super_total_salary == 0:
-        raise ValueError('super_total_salary = 0, на нуль делить нельзя.')
+        raise ValueError('super_total_salary = 0, на ноль делить нельзя.')
     answer = sorted(answer, reverse=True)[0:3]
     for number in answer:
         number = round(number, 2)
