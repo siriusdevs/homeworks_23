@@ -7,7 +7,7 @@ import pytest
 import hw2
 
 PATH = 'hw2/tests_folder/output.json'
-PATH_ERROR = 'hw2/error.json'
+PATH_ERROR = 'error.json'
 
 
 TEST_DIFFERENT_ARGUMENTS = (
