@@ -134,7 +134,6 @@ def process_data(input_path: str, output_path: str) -> None:
         '< 6 months': online_intervals['<6 m'],
         '> 6 months': online_intervals['>6 m'],
     }
-    print('I av done')
     get_output_file(result_json, path=module_hw2.check_output_extension(output_path))
 
 
