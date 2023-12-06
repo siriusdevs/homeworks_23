@@ -2,12 +2,19 @@
 
 import datetime
 import json
+from pathlib import Path
 
 TWO_DAYS = 2
 WEEK = 7
 MONTH = 30
 HALF_YEAR = 182
 MORE_THAN_HALF_YEAR = 1e9
+
+TWO_DAYS_ONLINE = 'two_days_online'
+ONE_WEEK_ONLINE = 'one_week_online'
+ONE_MONTH_ONLINE = 'one_month_online'
+HALF_YEAR_ONLINE = 'half_year_online'
+MORE_HALF_YEAR_ONLINE = 'more_half_year_online'
 
 
 class NoRequiredDataException(Exception):
@@ -50,12 +57,14 @@ def process_data(input_file_json: str, output_file_json: str, fixed_data: str = 
     """
     try:
         _record_all_data(input_file_json, output_file_json, fixed_data)
-    except NoRequiredDataException as error:
+    except (NoRequiredDataException, FileNotFoundError, ValueError) as error:
         with open(output_file_json, 'w') as output:
             json.dump({'error': str(error)}, output, indent=4)
 
 
 def _record_all_data(input_file_json: str, output_file_json: str, fixed_data: str = None) -> None:
+    output_file = Path(output_file_json)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
     with open(input_file_json, 'r') as config:
         information = json.load(config)
     all_hosts = host_output(information)
@@ -63,6 +72,8 @@ def _record_all_data(input_file_json: str, output_file_json: str, fixed_data: st
     percentage_of_online = online_calculation(users_dates(information), fixed_data=fixed_data)
     all_percentage = percentage_of_every_host
     all_percentage.update(percentage_of_online)
+    output_file = Path(output_file_json)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
     with open(output_file_json, 'w') as output:
         json.dump(all_percentage, output, indent=4)
 
@@ -104,7 +115,7 @@ def interst_calculation(hosts: list[str]) -> dict[str, float]:
     quantity_hosts = {}
     for host in set(hosts):
         quantity = str(hosts.count(host) / len(hosts) * 100)
-        quantity_hosts.update({host: f'{quantity} %'})
+        quantity_hosts[host] = f'{quantity} %'
     return quantity_hosts
 
 
@@ -124,10 +135,9 @@ def users_dates(information: dict) -> list[str]:
     user_lastlogin_date = []
     for user in information.keys():
         if information[user].get('last_login') is None:
-            raise NoRequiredDataException('No lastlogins')
-        if information[user]['last_login'].count('-') == 2:
-            user_data = information[user]['last_login']
-            user_lastlogin_date.append(user_data)
+            raise NoRequiredDataException('No last_logins')
+        user_data = information[user]['last_login']
+        user_lastlogin_date.append(user_data)
     return user_lastlogin_date
 
 
@@ -143,11 +153,11 @@ def online_calculation(user_lastlogin_date: list[str], fixed_data: str) -> dict[
         online_status: dict[str, float] - dict with percentage of how many users use mail.
     """
     online_status = {
-        'two_days_online': 0,
-        'one_week_online': 0,
-        'one_month_online': 0,
-        'half_year_online': 0,
-        'more_half_year_online': 0,
+        TWO_DAYS_ONLINE: 0,
+        ONE_WEEK_ONLINE: 0,
+        ONE_MONTH_ONLINE: 0,
+        HALF_YEAR_ONLINE: 0,
+        MORE_HALF_YEAR_ONLINE: 0,
     }
     if fixed_data is None:
         fixed_data = datetime.date.today()
@@ -163,7 +173,7 @@ def online_calculation(user_lastlogin_date: list[str], fixed_data: str) -> dict[
         ('more_half_year_online', datetime.timedelta(days=MORE_THAN_HALF_YEAR-1)),
     ]
     for login_date in user_lastlogin_date:
-        new_user_lastlogin.append(datetime.date(*list(map(int, login_date.split('-')))))
+        new_user_lastlogin.append(datetime.date.fromisoformat(login_date))
         for interval in intervals:
             if fixed_data - new_user_lastlogin[-1] <= interval[1]:
                 online_status[interval[0]] += 1
