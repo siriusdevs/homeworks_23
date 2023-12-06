@@ -1,0 +1,11 @@
+{
+    "min age": 35,
+    "max age": 43,
+    "avg age": 38,
+    "median age": 38,
+    "< 2 days": 0,
+    "< 1 week": 0,
+    "< 1 month": 0,
+    "< 6 months": 33.3,
+    "> 6 months": 66.7
+}
