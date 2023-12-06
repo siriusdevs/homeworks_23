@@ -50,35 +50,25 @@ def salaries_statistic(
     answer = []
     answer1 = []
     super_total_salary = 0
-    if not isinstance(dprts, dict):
-        raise TypeError('departaments type is not dict')
     for departament_name, departament in dprts.items():
-        if not isinstance(departament, dict):
-            raise TypeError('departament type is not dict')
-        if not isinstance(departament_name, str):
-            raise TypeError('departamet_name type is not str')
         total_salary = 0
         for name, salary in departament.items():
-            if not isinstance(name, str):
-                raise TypeError(' name type is not str')
+            if not isinstance(name, str) or not isinstance(departament_name, str):
+                raise TypeError('name or departamet_name type is not str')
             if not isinstance(salary, float):
                 raise TypeError('salary type is not float')
             salary = round(salary, 2)
             super_total_salary += salary
             if not min_salary:
-                total_salary += salary 
+                total_salary += salary
             else:
-                if salary >= min_salary:
-                    total_salary += salary   
                 if not isinstance(min_salary, float):
                     raise TypeError('min_salary type is not float')
-                
-            
+                if salary >= min_salary:
+                    total_salary += salary
         answer.append(total_salary)
     if super_total_salary == 0:
         raise ValueError('super_total_salary = 0, на ноль делить нельзя.')
     answer = sorted(answer, reverse=True)[0:3]
-    for number in answer:
-        number = round(number, 2)
-        answer1.append(number)
+    [answer1.append(round(number, 2)) for number in answer]
     return answer1, f'{round((sum(answer)/super_total_salary)*100, 2)}%'
