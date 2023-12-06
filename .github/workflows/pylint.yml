@@ -77,7 +77,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8==3.9.0 wemake-python-styleguide==0.15.3 bandit==1.7.2
       - name: Flake8
-        run: cd hw3 && flake8 hw3.py test_hw3.py
+        run: cd hw3 && flake8
   tests_for_hw3:
       name: Тесты для дз3
       runs-on: ubuntu-latest
@@ -93,4 +93,4 @@ jobs:
           pip install pytest==6.2.5
           pip install numpy
       - name: Pytest
-        run: cd hw3 && pytest test_hw3.py      
+        run: cd hw3 && pytest   
