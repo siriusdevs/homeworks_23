@@ -197,12 +197,7 @@ class Order:
 
         Args:
             remove_dish (Dish): dish which we should remove
-
-        Raises:
-            TypeError: if type of remove dish not Dish
         """
-        if not isinstance(remove_dish, Dish):
-            raise TypeError(f'{remove_dish} must be object Dish')
         if remove_dish in self.dishes:
             self.dishes.remove(remove_dish)
 
@@ -238,10 +233,13 @@ class Restorant:
             order (Order): object type Order
 
         Raises:
-            TypeError: if type of client not Client or any in new_dishes not in dishes
+            TypeError: if type of client not Client
+            ValueError: if any in new_dishes not in dishes
         """
-        if not isinstance(order, Order) or order.dishes in self.av_dishes:
-            raise TypeError()
+        if not isinstance(order, Order):
+            raise TypeError(f'{order} must be object type Order')
+        if order.dishes in self.av_dishes:
+            raise ValueError(f'{order.dishes} not avaible dish')
         self.orders.append(order)
 
     def remove_order(self, order_to_remove: Dish) -> None:
@@ -249,12 +247,7 @@ class Restorant:
 
         Args:
             order_to_remove (Dish): dish which we should remove
-
-        Raises:
-            TypeError: if type of order_to_move not Dish
         """
-        if isinstance(order_to_remove, Dish):
-            raise TypeError(f'{order_to_remove} must be object type Dish')
         if order_to_remove in self.orders:
             self.orders.remove(order_to_remove)
 
