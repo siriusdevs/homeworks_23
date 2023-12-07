@@ -1,17 +1,20 @@
 """Process date."""
 
 import json
+from datetime import date
+from typing import Optional
 
 import const
 from user_statistics import AgeStatistics, DateStatistics
 
 
-def process_data(input_path: str, output_path: str) -> None:
+def process_data(input_path: str, output_path: str, current_date: Optional[date] = None) -> None:
     """Create or rewrite a json file with age and date statistics.
 
     Args:
-        input_path (str): path to the input json file.
-        output_path (str): path to the output json file.
+        input_path: path to the input json file.
+        output_path: path to the output json file.
+        current_date: current date (used for tests).
     """
     with open(input_path, 'r') as input_file:
         studen_data = json.loads(input_file.read())
@@ -23,6 +26,7 @@ def process_data(input_path: str, output_path: str) -> None:
         const.DATE_OUTPUT_FIELD_NAME: DateStatistics(
             studen_data, const.DATE_INPUT_FIELD_NAME,
             const.OUTPUT_DATE_STATISTIC_FORM,
+            current_date=current_date,
         ),
     }
     output = {}

@@ -2,7 +2,7 @@
 
 from abc import ABC, abstractmethod
 from datetime import date, datetime, timedelta
-from typing import Any
+from typing import Any, Optional
 
 
 def _calculate_percent(amount: int, total: int) -> int:
@@ -104,12 +104,14 @@ class AgeStatistics(Statistics):
 class DateStatistics(Statistics):
     """Calculacte date statistic."""
 
+    date_format = '%Y-%m-%d'  # date parsing format.
+
     def __init__(
         self,
         users_data: dict[dict[str, Any], Any],
         statistic_field: str,
         output_format: dict[str, timedelta],
-        date_format: str = '%Y-%m-%d',
+        current_date: Optional[date] = None,
     ) -> None:
         """Create statistics with user_date, statistics_field_name, output_format and date_fromat.
 
@@ -117,10 +119,10 @@ class DateStatistics(Statistics):
             users_data:  contains information about users.
             statistic_field: name of the user property key.
             output_format: key is name, value is date duration.
-            date_format: date parsing format.
+            current_date: current date (used for tests).
         """
         super().__init__(users_data, statistic_field, output_format)
-        self.date_format = date_format
+        self._current_date = current_date
 
     def get_statistics(self) -> dict[str, Any]:
         """Сounts the percentage of users by day.
@@ -138,6 +140,9 @@ class DateStatistics(Statistics):
             statistics[name] = _calculate_percent(len(concrete_user), len(dates))
         return statistics
 
+    def _today(self) -> date:
+        return date.today() if self._current_date is None else self._current_date
+
     def _filter_dates(
         self,
         furst_duradion: timedelta,
@@ -147,7 +152,7 @@ class DateStatistics(Statistics):
         return list(
             filter
             (
-                lambda login_date: furst_duradion <= date.today() - login_date < second_duration,
+                lambda login_date: furst_duradion <= self._today() - login_date < second_duration,
                 dates,
             ),
         )
