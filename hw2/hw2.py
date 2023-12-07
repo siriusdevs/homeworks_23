@@ -27,6 +27,8 @@ def process_data(src_file: str = "input.json", dst_file: str = "output.json") ->
 
 
 def _collect_results(src_file: str, dst_file: str) -> None:
+    output_path = Path(dst_file)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(src_file, "r") as input_json:
         users = json.load(input_json)
     years_result = _year_percentage(users)
@@ -35,15 +37,13 @@ def _collect_results(src_file: str, dst_file: str) -> None:
         **age_result,
     }
     full_result.update({"years_statistics": years_result})
-    output_path = Path(dst_file)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(dst_file, "x") as output_json:
         json.dump(full_result, output_json, indent=4)
 
 
 def _age_stats(users: dict) -> dict:
     result_ages = {}
-    ages = [users[user][AGE] for user in users]
+    ages = [users[user][AGE] for user in users] or [0]
     result_ages[MAX_AGE] = max(ages)
     result_ages[MIN_AGE] = min(ages)
     result_ages[AVERAGE_AGE] = sum(ages) / max(len(ages), 1)
@@ -67,5 +67,5 @@ def _year_percentage(users: dict) -> dict:
             years[year] = 1
     count_of_years = len(years)
     for elem in years:
-        years[elem] = (years.get(elem, 0) / count_of_years) * 100
+        years[elem] = (years.get(elem, 0) / max(count_of_years, 1)) * 100
     return years

@@ -1,0 +1,10 @@
+{
+    "max_age": 36,
+    "min_age": 18,
+    "average_age": 27.0,
+    "median_age": 27.0,
+    "years_statistics": {
+        "2012": 50.0,
+        "2022": 50.0
+    }
+}

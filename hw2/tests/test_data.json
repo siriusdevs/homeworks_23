@@ -130,6 +130,16 @@
       "answer": {
         "error": "No \"registered\" entry in user \"user\""
       }
+    },
+    {
+      "test": {},
+      "answer": {
+        "max_age": 0,
+        "min_age": 0,
+        "average_age": 0.0,
+        "median_age": 0,
+        "years_statistics": {}
+      }
     }
   ]
 }
