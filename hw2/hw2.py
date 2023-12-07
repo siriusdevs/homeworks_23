@@ -53,23 +53,19 @@ def get_online_intervals(data_login: list[str]) -> list[str]:
     return online_intervals
 
 
-def get_output_file(result_json: dict, path: str) -> str:
+def create_output_file(result_json: dict, path: str) -> None:
     """
     Write the result JSON to an output file.
 
     Args:
         result_json (dict): Result data.
         path (str): File path to write the output JSON.
-
-    Returns:
-        None
     """
     with open(path, 'w') as output_file:
         json.dump(result_json, output_file, indent=4)
-    return 'Script executed successfully'
 
 
-def get_data(input_data: dict) -> (list[int], list[str]):
+def get_data(input_data: dict) -> tuple[list[int], list[str]]:
     """
     Extract age and login data from input data.
 
@@ -106,19 +102,16 @@ def process_data(input_path: str, output_path: str) -> None:
     Args:
         input_path (str): Path of the input file.
         output_path (str): Path of the output file.
-
-    Returns:
-        None
     """
     if module_hw2.check_errors(input_path, output_path):
-        return 1
+        return
 
     with open(input_path) as input_file:
         input_data = json.load(input_file)
 
     if not isinstance(input_data, dict):
         module_hw2.handle_error('Type of the data should be dict')
-        return 1
+        return
 
     data_age, data_login = get_data(input_data)
     online_intervals = get_online_intervals(data_login)
@@ -134,7 +127,4 @@ def process_data(input_path: str, output_path: str) -> None:
         '< 6 months': online_intervals['<6 m'],
         '> 6 months': online_intervals['>6 m'],
     }
-    get_output_file(result_json, path=module_hw2.check_output_extension(output_path))
-
-
-process_data('tests_folder/test8.json', 'test_folde/output.json')
+    create_output_file(result_json, path=module_hw2.check_output_extension(output_path))
