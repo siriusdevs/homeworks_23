@@ -1,8 +1,29 @@
 """Module that includes the implemented function from Nudga's second task."""
 import json
 from datetime import datetime, timedelta
+from typing import Optional
 
 import module_hw2
+
+
+def countintervals(lower: Optional[timedelta], upper: timedelta, intervals: list[datetime]) -> int:
+    """
+    Count the number of intervals within a specified range.
+
+    Args:
+        lower: The lower bound of the interval range. If None, there is no lower bound.
+        upper: The upper bound of the interval range.
+        intervals: List of datetime objects representing intervals.
+
+    Returns:
+        int: The count of intervals within the specified range.
+    """
+    count = 0
+    for interval in intervals:
+        if (lower is None or lower <= interval) and interval < upper:
+            count += 1
+            intervals.pop(0)
+    return count
 
 
 def get_online_intervals(data_login: list[str]) -> list[str]:
@@ -19,35 +40,16 @@ def get_online_intervals(data_login: list[str]) -> list[str]:
         datetime.now() - datetime.strptime(login, '%Y-%m-%d')
         for login in data_login
         ]
+    total_count = len(t_intervals)
+
     online_intervals = {
-        '<2 d': len(list(filter(
-            lambda dt: dt < timedelta(days=2), t_intervals,
-            ),
-            ),
-            ),
-        '<1 w': len(list(filter(
-            lambda dt: timedelta(days=2) <= dt < timedelta(weeks=1), t_intervals,
-            ),
-            ),
-            ),
-        '<1 m': len(list(filter(
-            lambda dt: timedelta(weeks=1) <= dt < timedelta(weeks=4), t_intervals,
-            ),
-            ),
-            ),
-        '<6 m': len(list(filter(
-            lambda dt: timedelta(weeks=4) <= dt < timedelta(weeks=24), t_intervals,
-            ),
-            ),
-            ),
-        '>6 m': len(list(filter(
-            lambda dt: timedelta(weeks=24) < dt, t_intervals,
-            ),
-            ),
-            ),
+        '<2 d': countintervals(None, timedelta(days=2), t_intervals),
+        '<1 w': countintervals(timedelta(days=2), timedelta(weeks=1), t_intervals),
+        '<1 m': countintervals(timedelta(weeks=1), timedelta(weeks=4), t_intervals),
+        '<6 m': countintervals(timedelta(weeks=4), timedelta(weeks=24), t_intervals),
+        '>6 m': len(t_intervals),
     }
     if t_intervals:
-        total_count = len(t_intervals)
         for time_key in online_intervals.keys():
             online_intervals[time_key] = round(online_intervals[time_key] / total_count * 100, 1)
     return online_intervals
