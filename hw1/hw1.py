@@ -20,27 +20,28 @@ def check_salary_for_negativity(staff: dict[str, float]) -> None:
 
 def get_departments_rating(
     departments: dict[str, dict[str, float]],
-    include_deps: Optional[tuple[str]] = None,
-) -> tuple[list]:
+    included_deps: Optional[tuple[str, ...]] = None,
+) -> tuple[list, list]:
     """Calculate the top 3 highest and the top 3 lowest paid departments in the company.
 
     Args:
         departments (dict[str, dict[str, int]]): company departments with employee salaries.
-        include_deps (Optional[Tuple[str]] = None): departments included in the statistics, \
+        included_deps (Optional[Tuple[str, ...]] = None): departments included in the statistics, \
             defaults to None.
 
     Returns:
-        Tuple[list]: the top 3 highest and the top 3 lowest paid departments in the company.
+        Tuple[list, list]: the top 3 highest and the top 3 lowest paid departments in the company.
     """
     average_salaries = {}
-    for department, staff in departments.items():
-        if not include_deps or department in include_deps:
+    included_deps = set(included_deps)
+    for department_name, staff in departments.items():
+        if not included_deps or department_name in included_deps:
             check_salary_for_negativity(staff)
 
             salaries = staff.values()
             lenth = len(salaries)
             if lenth != 0:
-                average_salaries[department] = round(sum(salaries) / lenth, 2)
+                average_salaries[department_name] = round(sum(salaries) / lenth, 2)
 
     sorted_departments = sorted(average_salaries.items(), key=lambda el: el[1])
     sorted_departments = [sorted_department for sorted_department, _ in sorted_departments]
