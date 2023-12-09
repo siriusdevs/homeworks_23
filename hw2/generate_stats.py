@@ -20,11 +20,11 @@ def generate_stats(
     Returns:
         dict: statistics
     """
-    if user_data in dict_stats.keys():
+    if dict_stats.get(user_data):
         dict_stats[user_data] += 1 / count_users * 100
     else:
         dict_stats[user_data] = 1 / count_users * 100
-    if user_data in dict_stats.keys():
-        res_dict[text_key] = dict_stats
+
+    res_dict[text_key] = dict_stats
 
     return res_dict

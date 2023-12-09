@@ -3,6 +3,7 @@
 import json
 
 from generate_stats import generate_stats
+from make_dir import make_dir
 from open_file import open_file
 
 
@@ -20,7 +21,7 @@ def process_data(file_data_for_stats: str, output_file: str) -> str:
     stats = [{}, {}]
 
     file_data = open_file(file_data_for_stats)
-    count_users = len(file_data.keys())
+    count_users = len(file_data)
 
     for user in file_data.keys():
         for name_of_user_data, user_data in file_data[user].items():
@@ -30,6 +31,7 @@ def process_data(file_data_for_stats: str, output_file: str) -> str:
             if name_of_user_data == 'registered':
                 generate_stats(user_data, stats[1], res_dict, count_users, 'Years')
 
+    make_dir(output_file)
     with open(output_file, 'w') as result_file:
         result_file.write(json.dumps(res_dict))
-        return f'Data was successfully added to {output_file}.'
+    return f'Data was successfully added to {output_file}.'
