@@ -131,6 +131,7 @@ def process_data(input_path: str, output_path: str) -> None:
 
     Raises:
         NoInputFile: calls if input file not exists.
+        ListNotExpected: calls if programm meet list in input file.
     """
     online_status_count = {
         'less_than_2_days': 0,

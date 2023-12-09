@@ -1,6 +1,7 @@
 """process_data function test module."""
 
 import json
+import os
 
 import pytest
 
@@ -53,3 +54,4 @@ def test_process_data(file_name: str):
         assert compare(example_file)
     else:
         assert compare(example_file)
+    os.remove(OUTPUT_FILE)
