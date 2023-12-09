@@ -5,6 +5,8 @@ import os
 from datetime import datetime
 from typing import Any
 
+import error_classes as errors
+
 
 def write(message: str | tuple[str], output_path: str) -> None:
     """Write message in json file.
@@ -18,68 +20,6 @@ def write(message: str | tuple[str], output_path: str) -> None:
         os.makedirs(dirname)
     with open(output_path, 'w') as output_file:
         json.dump(message, output_file)
-
-
-class NonExistentField(Exception):
-    """Custom error, calls if field isn't exists."""
-
-    def __init__(self, client: str, field: str, output_path: str) -> None:
-        """Initialize error for non existent field.
-
-        Args:
-            client: str - client name
-            field: str name of non existent field
-            output_path: str - file to write error.
-        """
-        message = f'{field} field does not exists for client {client}.'
-        write(message, output_path)
-        super().__init__(message)
-
-
-class EmptyField(Exception):
-    """Custom error, calls if field is empty."""
-
-    def __init__(self, client: str, field: str, output_path: str) -> None:
-        """Initialize error for empty field.
-
-        Args:
-            client: str - client name.
-            field: str name of non existent field.
-            output_path: str - file to write error.
-        """
-        message = f'{field} field is empty for client {client}.'
-        write(message, output_path)
-        super().__init__(message)
-
-
-class EmailError(Exception):
-    """Custom error, calls if email is incorrect."""
-
-    def __init__(self, client: str, output_path: str) -> None:
-        """Initialize error for email address without host name.
-
-        Args:
-            client: str - client name.
-            output_path: str - file to write error.
-        """
-        message = f'Wrong email address: empty host name for client {client}.'
-        write(message, output_path)
-        super().__init__(message)
-
-
-class NoInputFile(Exception):
-    """Custom error, calls if ninput file not exists."""
-
-    def __init__(self, input_file: str, output_path: str) -> None:
-        """Initialize error for non existent input file.
-
-        Args:
-            input_file: str - unexistent file.
-            output_path: str - file to write error.
-        """
-        message = f'File {input_file} does not exists. Processing is not possible.'
-        write(message, output_path)
-        super().__init__(message)
 
 
 def get_last_login(client: str, client_info: dict, output_path: str) -> str:
@@ -100,9 +40,9 @@ def get_last_login(client: str, client_info: dict, output_path: str) -> str:
     try:
         last_login = client_info['last_login']
     except KeyError:
-        raise NonExistentField(client, 'last_login', output_path)
+        raise errors.NonExistentField(client, 'last_login', output_path)
     if not last_login:
-        raise EmptyField(client, 'last_login', output_path)
+        raise errors.EmptyField(client, 'last_login', output_path)
     return last_login
 
 
@@ -125,11 +65,11 @@ def get_host(client: str, client_info: dict, output_path: str) -> str:
     try:
         host = client_info['email'].split('@')[1]
     except IndexError:
-        raise EmailError(client, output_path)
+        raise errors.EmailError(client, output_path)
     except KeyError:
-        raise NonExistentField(client, 'email', output_path)
+        raise errors.NonExistentField(client, 'email', output_path)
     if not host:
-        raise EmptyField(client, 'email', output_path)
+        raise errors.EmptyField(client, 'email', output_path)
     return host
 
 
@@ -204,7 +144,7 @@ def process_data(input_path: str, output_path: str) -> None:
         with open(input_path, 'r') as input_file:
             json_data = json.load(input_file)
     except FileNotFoundError:
-        raise NoInputFile(input_path, output_path)
+        raise errors.NoInputFile(input_path, output_path)
     except json.JSONDecodeError:
         write('', output_path)
     for client, client_info in json_data.items():
