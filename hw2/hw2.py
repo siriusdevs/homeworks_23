@@ -147,8 +147,11 @@ def process_data(input_path: str, output_path: str) -> None:
         raise errors.NoInputFile(input_path, output_path)
     except json.JSONDecodeError:
         write('', output_path)
-    for client, client_info in json_data.items():
-        change_online_status_counter(online_status_count, client, client_info, output_path)
+    try:
+        for client, client_info in json_data.items():
+            change_online_status_counter(online_status_count, client, client_info, output_path)
+    except AttributeError:
+        raise errors.ListNotExpected(output_path)
     for host_name, count in get_hosts_count(json_data, output_path).items():
         hosts_percentage[host_name] = round((count / len(json_data)) * 100, 2)
     write((online_status_count, hosts_percentage), output_path)
