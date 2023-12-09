@@ -1,6 +1,7 @@
 """Testing for module 'top_departments' from hw1."""
 
 import pytest
+
 from hw1 import top_departments
 
 DATA1 = {
