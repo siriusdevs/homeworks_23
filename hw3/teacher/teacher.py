@@ -1,4 +1,4 @@
-from courses_owner import CoursesOwner
+from courses_owner.courses_owner import CoursesOwner
 
 
 class Teacher(CoursesOwner):

@@ -1,7 +1,7 @@
 from course.abstract_course import AbstractCourse
 from teacher.teacher import Teacher
 from student.student import Student
-from typing import Optional, Iterable
+from typing import Optional, Iterable, TypeGuard
 from copy import deepcopy
 import courses_owner.courses_owner as courses_owner
 
@@ -51,9 +51,9 @@ class Course(AbstractCourse):
         return deepcopy(self.__students)
 
     @students.setter
-    def students(self, new_students: Iterable[Student]) -> None:
-        if not hasattr(new_students, '__iter__'):
-            raise TypeError('The new students has to a iterable object!')
+    def students(self, new_students: list[Student]) -> None:
+        if not isinstance(new_students, list):
+            raise TypeError('The new students has to a list!')
 
         for index, new_student in enumerate(new_students):
             if not isinstance(new_student, Student):

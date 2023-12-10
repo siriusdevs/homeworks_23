@@ -8,10 +8,10 @@ class TestCourse(abstract_course.AbstractCourse):
     def __init__(self, title: str) -> None:
         super().__init__(title)
 
-    def add_course_owner(self, new_owner: 'courses_owner.CoursesOwner') -> None:
+    def add_course_owner(self, _: 'courses_owner.CoursesOwner') -> None:
         pass
 
-    def remove_course_owner(self, new_owner: 'courses_owner.CoursesOwner') -> None:
+    def remove_course_owner(self, _: 'courses_owner.CoursesOwner') -> None:
         pass
 
 def create_new_test_course() -> TestCourse:

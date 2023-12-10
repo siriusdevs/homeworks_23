@@ -38,6 +38,9 @@ class CoursesOwner(ABC, Person):
 
     @courses.setter
     def courses(self, new_courses: list['abstract_course.AbstractCourse']) -> None:
+        if not isinstance(new_courses, list):
+            raise TypeError('The new courses has to be a list!')
+
         for index, new_course in enumerate(new_courses):
             if not isinstance(new_course, abstract_course.AbstractCourse):
                 raise TypeError(
