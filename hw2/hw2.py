@@ -16,8 +16,12 @@ def process_data(input_path: str, output_path: str, current_date: Optional[date]
         output_path: path to the output json file.
         current_date: current date (used for tests).
     """
-    with open(input_path, 'r') as input_file:
-        studen_data = json.loads(input_file.read())
+    try:
+        with open(input_path, 'r') as input_file:
+            studen_data = json.loads(input_file.read())
+    except (FileNotFoundError, json.JSONDecodeError):
+        studen_data = {}
+
     statistics_by_name = {
         const.AGE_OUTPUT_FIELD_NAME: AgeStatistics(
             studen_data, const.AGE_INPUT_FIELD_NAME,
