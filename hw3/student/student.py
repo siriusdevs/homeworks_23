@@ -1,6 +1,6 @@
-from hw3.courses_owner import CoursesOwner
+import courses_owner.courses_owner as course_owner
 
 
-class Student(CoursesOwner):
+class Student(course_owner.CoursesOwner):
     def __init__(self, name: str, surname: str, age: int) -> None:
         super().__init__(name, surname, age)

@@ -1,1 +1,1 @@
-from hw3.teacher.teacher import Teacher
+from teacher.teacher import Teacher

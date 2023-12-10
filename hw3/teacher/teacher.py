@@ -1,4 +1,4 @@
-from hw3.courses_owner import CoursesOwner
+from courses_owner import CoursesOwner
 
 
 class Teacher(CoursesOwner):

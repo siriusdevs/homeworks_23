@@ -1,9 +1,9 @@
-from hw3.course.abstract_course import AbstractCourse
-from hw3.teacher import Teacher
-from hw3.student import Student
-import hw3.courses_owner
+from course.abstract_course import AbstractCourse
+from teacher.teacher import Teacher
+from student.student import Student
 from typing import Optional, Iterable
 from copy import deepcopy
+import courses_owner.courses_owner as courses_owner
 
 
 class Course(AbstractCourse):
@@ -12,8 +12,8 @@ class Course(AbstractCourse):
         self.__teacher: Optional[Teacher] = None
         super().__init__(title)
 
-    def add_course_owner(self, new_owner: 'hw3.courses_owner.CoursesOwner') -> None:
-        if not isinstance(new_owner, hw3.courses_owner.CoursesOwner):
+    def add_course_owner(self, new_owner: 'courses_owner.CoursesOwner') -> None:
+        if not isinstance(new_owner, courses_owner.CoursesOwner):
             raise TypeError('The new course owner has to be a instance of CoursesOwner!')
 
         match new_owner:
@@ -22,8 +22,8 @@ class Course(AbstractCourse):
             case Student() as new_student:
                 self.__add_student(new_student)
 
-    def remove_course_owner(self, new_owner: 'hw3.courses_owner.CoursesOwner') -> None:
-        if not isinstance(new_owner, hw3.courses_owner.CoursesOwner):
+    def remove_course_owner(self, new_owner: 'courses_owner.CoursesOwner') -> None:
+        if not isinstance(new_owner, courses_owner.CoursesOwner):
             raise TypeError('The new course owner has to be a instance of CoursesOwner!')
 
         match new_owner:

@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-import hw3.courses_owner
+import courses_owner.courses_owner as courses_owner
 
 
 class AbstractCourse(ABC):
@@ -29,9 +29,9 @@ class AbstractCourse(ABC):
 
 
     @abstractmethod
-    def add_course_owner(self, new_owner: 'hw3.courses_owner.CoursesOwner') -> None:
+    def add_course_owner(self, new_owner: 'courses_owner.CoursesOwner') -> None:
         pass
 
     @abstractmethod
-    def remove_course_owner(self, new_owner: 'hw3.courses_owner.CoursesOwner') -> None:
+    def remove_course_owner(self, new_owner: 'courses_owner.CoursesOwner') -> None:
         pass

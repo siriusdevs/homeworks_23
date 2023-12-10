@@ -1,19 +1,19 @@
 from copy import deepcopy
 from abc import ABC, abstractmethod
-from hw3.person import Person
-import hw3.course
+from person.person import Person
 from copy import deepcopy
+import course.abstract_course as abstract_course
 
 
 class CoursesOwner(ABC, Person):
     @abstractmethod
     def __init__(self, name: str, surname: str, age: int) -> None:
-        self.__courses: list['hw3.course.AbstractCourse'] = []
+        self.__courses: list['abstract_course.AbstractCourse'] = []
         super().__init__(name, surname, age)
 
 
-    def add_course(self, new_course: 'hw3.course.AbstractCourse') -> None:
-        if not isinstance(new_course, hw3.course.AbstractCourse):
+    def add_course(self, new_course: 'abstract_course.AbstractCourse') -> None:
+        if not isinstance(new_course, abstract_course.AbstractCourse):
             raise TypeError('This new course has to be a Course instance!')
 
         if new_course in self.__courses:
@@ -22,8 +22,8 @@ class CoursesOwner(ABC, Person):
         self.__courses.append(new_course)
         new_course.add_course_owner(self)
 
-    def remove_course(self, new_course: 'hw3.course.AbstractCourse') -> None:
-        if not isinstance(new_course, hw3.course.AbstractCourse):
+    def remove_course(self, new_course: 'abstract_course.AbstractCourse') -> None:
+        if not isinstance(new_course, abstract_course.AbstractCourse):
             raise TypeError('This new course has to be a Course instance!')
 
         if new_course not in self.__courses:
@@ -33,13 +33,13 @@ class CoursesOwner(ABC, Person):
         new_course.remove_course_owner(self)
 
     @property
-    def courses(self) -> list['hw3.course.AbstractCourse']:
+    def courses(self) -> list['abstract_course.AbstractCourse']:
         return deepcopy(self.__courses)
 
     @courses.setter
-    def courses(self, new_courses: list['hw3.course.AbstractCourse']) -> None:
+    def courses(self, new_courses: list['abstract_course.AbstractCourse']) -> None:
         for index, new_course in enumerate(new_courses):
-            if not isinstance(new_course, hw3.course.AbstractCourse):
+            if not isinstance(new_course, abstract_course.AbstractCourse):
                 raise TypeError(
                     f'The new course of {index} index has to be a instance of AbstractCourse'
                 )
