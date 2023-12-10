@@ -6,9 +6,7 @@ from typing import Any, Optional
 
 
 def _calculate_percent(amount: int, total: int) -> int:
-    if amount == 0:
-        return 0
-    return 100 * amount / total
+    return 0 if total == 0 else 100 * amount / total
 
 
 class Statistics(ABC):
@@ -37,7 +35,7 @@ class Statistics(ABC):
         """Get statistics dict.
 
         Raises:
-            NotImplementedError: function is not implemented
+            NotImplementedError: the method is not implemented.
 
         Returns:
             dict[str, Any]: dict with statistics, key is statistics name.
@@ -93,8 +91,8 @@ class AgeStatistics(Statistics):
             if user_age is not None:
                 ages.append(user[self.statistic_field])
         for name, age_range in self.output_format.items():
-            concrete_user = self._filter_ages(age_range[0], age_range[1], ages)
-            statistics[name] = _calculate_percent(len(concrete_user), len(ages))
+            particular_users = self._filter_ages(age_range[0], age_range[1], ages)
+            statistics[name] = _calculate_percent(len(particular_users), len(ages))
         return statistics
 
     def _filter_ages(self, start_age: int, end_age: int, ages: list[int]):
@@ -133,11 +131,11 @@ class DateStatistics(Statistics):
         dates, statistics = [], {}
         for user in self.users_data.values():
             last_login_date = user.get(self.statistic_field)
-            if (last_login_date is not None):
+            if last_login_date is not None:
                 dates.append(datetime.strptime(last_login_date, self.date_format).date())
         for name, duration in self.output_format.items():
-            concrete_user = self._filter_dates(duration[0], duration[1], dates)
-            statistics[name] = _calculate_percent(len(concrete_user), len(dates))
+            particular_users = self._filter_dates(duration[0], duration[1], dates)
+            statistics[name] = _calculate_percent(len(particular_users), len(dates))
         return statistics
 
     def _today(self) -> date:
