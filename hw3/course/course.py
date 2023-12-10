@@ -8,9 +8,9 @@ from copy import deepcopy
 
 class Course(AbstractCourse):
     def __init__(self, title: str) -> None:
-        self.title = title
         self.__students: list[Student] = []
         self.__teacher: Optional[Teacher] = None
+        super().__init__(title)
 
     def add_course_owner(self, new_owner: 'hw3.courses_owner.CoursesOwner') -> None:
         if not isinstance(new_owner, hw3.courses_owner.CoursesOwner):
@@ -21,27 +21,26 @@ class Course(AbstractCourse):
                 self.teacher = new_teacher
             case Student() as new_student:
                 self.__add_student(new_student)
-            case _:
-                raise TypeError('add_new_owner does not know how to handle your course owner!')
 
     def remove_course_owner(self, new_owner: 'hw3.courses_owner.CoursesOwner') -> None:
         if not isinstance(new_owner, hw3.courses_owner.CoursesOwner):
             raise TypeError('The new course owner has to be a instance of CoursesOwner!')
 
         match new_owner:
-            case Teacher() as new_teacher:
-                self.teacher = new_teacher
-            case Student() as new_student:
-                self.__remove_student(new_student)
-            case _:
-                raise TypeError('remove_course_owner does not know how to handle your course owner!')
+            case Teacher() as teacher:
+                if self.__teacher != teacher:
+                    raise ValueError('The given teacher is not teach this course!')
+
+                self.__teacher = None
+            case Student() as student:
+                self.__remove_student(student)
 
     @property
     def teacher(self) -> Optional[Teacher]:
         return deepcopy(self.__teacher)
 
     @teacher.setter
-    def teacher(self, new_teacher: Optional[Teacher]) -> None:
+    def teacher(self, new_teacher: Teacher) -> None:
         if not isinstance(new_teacher, Teacher):
             raise TypeError('The new teacher has to be a instance of Teacher class!')
 
@@ -79,23 +78,3 @@ class Course(AbstractCourse):
             raise ValueError('This student has not been in this course!')
 
         self.__students.remove(student)
-
-    @property
-    def title(self) -> str:
-        return self.__title
-
-    @title.setter
-    def title(self, new_title: str) -> None:
-        if not isinstance(new_title, str):
-            raise TypeError('The new title has to be a string value!')
-
-        if not len(new_title):
-            raise ValueError('The new title does not have to be a empty string!')
-
-        self.__title = new_title
-
-    def __str__(self) -> str:
-        return f'Course with title = {self.title}'
-
-    def __repr__(self) -> str:
-        return f'Course with title = {self.title}'
