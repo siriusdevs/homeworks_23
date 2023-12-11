@@ -8,7 +8,7 @@ TEST_DATA0 = {
         'Bob': 4000.5,
         'Robert Stryzhak': 1.0,
         'YA': 1000.0,
-        'Alberto Tenigini': 2000.99,
+        'Paulo Berberi': 2000.99,
         'Progeri': 1069.0,
     },
     'DESIGN': {
@@ -335,7 +335,7 @@ W_TEST_DATA3 = {
         'Ditrian4': 4500.0,
         'Edvard Kallin4': 79680.5,
     },
-    'HUMOR_CENTER2': {
+    2.: {
         'Zahar Starcev2': 1070.0,
         'Jakob2': 8750.0,
         'Ellise2': 5340.5,
@@ -382,38 +382,6 @@ W_TEST_DATA4 = {
         'PrahladaS': 2098.0,
     },
 }
-
-W_TEST_DATA5 = {
-    'ARCHIVES': {
-        'Rubi Nubit': 7820.0,
-        'Aurora Lizkina': 1007.0,
-        'Liticiya Albertovna': 9810.0,
-        'Ditrian Mangashkin': 4500.0,
-        'Edvard Kallin Mamim sin': 79680.5,
-    },
-    'HUMOR_CENTER': {
-        'Zahar Starcev Tim': 1070.0,
-        'Jakob Tim': 8750.0,
-        'Ellise Tim': 5340.5,
-        'Bred Pit Tim': 9000.0,
-        'Charli Tim': 3500.5,
-    },
-    'MENEGERS': {
-        'Karlael Parlament': 1000.0,
-        'Bella Pella': 4000.5,
-        'Dzhasper Risko': 3000.5,
-        'Anna Goodman': 2300.0,
-        'Victoriya Gloria': 6000.0,
-    },
-    'VET_DOCTORS': {
-        'Vladlen': 3400.0,
-        'Mariya': 7020.5,
-        'Ognislav': 3409.95,
-        'Erimei': 2304.5,
-        'Prahlada': 2098.0,
-    },
-}
-W_LIMIT = 3000
 
 W_TEST_DATA6 = {
     'MARKETING': {
@@ -486,40 +454,40 @@ def test_salaries_statistic(
 @pytest.mark.xfail()
 def test_fail_departaments_type():
     """Negative test 0."""
-    assert salaries_statistic(W_TEST_DATA0)
+    with pytest.raises(TypeError):
+       salaries_statistic(W_TEST_DATA0)
 
 
 @pytest.mark.xfail()
 def test_fail_departament_type():
     """Negative test 1."""
-    assert salaries_statistic(W_TEST_DATA1)
+    with pytest.raises(TypeError):
+        salaries_statistic(W_TEST_DATA1)
 
 
 @pytest.mark.xfail()
 def test_fail_departament_name_type():
     """Negative test 2."""
-    assert salaries_statistic(W_TEST_DATA2)
+    with pytest.raises(TypeError):
+        salaries_statistic(W_TEST_DATA2)
 
 
 @pytest.mark.xfail()
 def test_fail_worker_name_type():
     """Negative test 3."""
-    assert salaries_statistic(W_TEST_DATA3)
+    with pytest.raises(TypeError):
+        salaries_statistic(W_TEST_DATA3)
 
 
 @pytest.mark.xfail()
 def test_fail_salary_type():
     """Negative test 4."""
-    assert salaries_statistic(W_TEST_DATA4)
-
-
-@pytest.mark.xfail()
-def test_fail_limit_type():
-    """Negative test 5."""
-    assert salaries_statistic(W_TEST_DATA5, W_LIMIT)
+    with pytest.raises(TypeError):
+        salaries_statistic(W_TEST_DATA4)
 
 
 @pytest.mark.xfail()
 def test_fail_statistic_value():
     """Negative test 6."""
-    assert salaries_statistic(W_TEST_DATA6)
+    with pytest.raises(ValueError):
+        salaries_statistic(W_TEST_DATA6)

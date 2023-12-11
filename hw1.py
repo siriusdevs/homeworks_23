@@ -55,26 +55,24 @@ def salaries_statistic(
     """
     answer = []
     super_total_salary = 0
+    check(dprts, dict, 'dprts')
+    if min_salary:
+        check(min_salary, float, 'min_salary')
     for departament_name, departament in dprts.items():
         total_salary = 0
+        check(departament, dict, 'department')
         for name, salary in departament.items():
             check(name, str, 'name')
             check(departament_name, str, 'department_name')
-            check(salary, float, 'salary')
+            check(salary, (float, int), 'salary')
             salary = round(salary, 2)
             super_total_salary += salary
-            if min_salary:
-                check(min_salary, float, 'min_salary')
-                if salary >= min_salary:
-                    total_salary += salary
-            else:
+            if min_salary is None or salary >= min_salary:
                 total_salary += salary
-
         answer.append(round(total_salary, 2))
-
-    if super_total_salary == 0:
-        raise ValueError('super_total_salary = 0, на ноль делить нельзя.')
-
     answer = sorted(answer, reverse=True)[:3]
-    ratio_top_salaries = round((sum(answer) / super_total_salary) * 100, 2)
+    try:
+        ratio_top_salaries = round((sum(answer) / super_total_salary) * 100, 2)
+    except ZeroDivisionError:
+        raise ValueError('super_total_salary = 0, на ноль делить нельзя.')
     return answer, f'{ratio_top_salaries}%'
