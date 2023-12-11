@@ -10,8 +10,8 @@ PERCENT25 = '25%'
 
 TEST_DATA = (
     (
-        'test_data/test_1.json',
-        'result.json',
+        'hw2/test_data/test_1.json',
+        'hw2/result.json',
         {
             'statictik city': {
                 'Saint-Petersburg': PERCENT25,
@@ -25,8 +25,8 @@ TEST_DATA = (
         },
     ),
     (
-        'test_data/test_2.json',
-        'result.json',
+        'hw2/test_data/test_2.json',
+        'hw2/result.json',
         {
             'statictik city': {
                 'region not specified': '75%',
@@ -41,8 +41,8 @@ TEST_DATA = (
         },
     ),
     (
-        'test_data/test_3.json',
-        'result.json',
+        'hw2/test_data/test_3.json',
+        'hw2/result.json',
         {
             'statictik city': {
                 'Las Vegas': PERCENT25,
