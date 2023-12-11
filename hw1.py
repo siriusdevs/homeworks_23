@@ -1,23 +1,23 @@
 """The typing module provides support for defining and using type hints."""
-from typing import Optional, Tuple, Union
+from typing import Optional, Union
 
 
 def check_salary(
-    departments: Tuple[str, dict],
+    departments: tuple[str, dict],
     maxs: Optional[int],
-) -> Tuple[list[float], Union[int, float]]:
+) -> tuple[list[float], Union[int, float]]:
     """_summary_.
 
     Args:
-        departments (Tuple[str, dict]): _description_
-        maxs (Optional[int]): _description_
+        departments (tuple[str, dict]): motorcade with the department and its salaries
+        maxs (Optional[int]): salary limit
 
     Raises:
-        ValueError: _description_
+        ValueError: if the given argument is not in the dictionary
         TypeError: _description_
 
     Returns:
-        Tuple[list[float], Union[int, float]]: _description_
+        tuple[list[float], Union[int, float]]: if department is not a string
     """
     main_list = []
     for department, employees in departments:
@@ -40,7 +40,7 @@ def check_salary(
     return side_list, main_list
 
 
-def salary(*departments: tuple, maxs: Optional[int] = None) -> Tuple[list, Union[int, float]]:
+def salary(*departments: tuple, maxs: Optional[int] = None) -> tuple[list, Union[int, float]]:
     """.
 
     A function that displays the top 3 salaries, the ratio of the top salaries to the
