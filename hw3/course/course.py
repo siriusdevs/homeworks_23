@@ -1,9 +1,9 @@
-from course.abstract_course import AbstractCourse
-from teacher.teacher import Teacher
-from student.student import Student
+from hw3.course.abstract_course import AbstractCourse
+from hw3.teacher.teacher import Teacher
+from hw3.student.student import Student
 from typing import Optional, Iterable, TypeGuard
 from copy import deepcopy
-import courses_owner.courses_owner as courses_owner
+import hw3.courses_owner.courses_owner as courses_owner
 
 
 class Course(AbstractCourse):

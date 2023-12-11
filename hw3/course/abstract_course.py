@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-import courses_owner.courses_owner as courses_owner
+import hw3.courses_owner.courses_owner as courses_owner
 
 
 class AbstractCourse(ABC):
