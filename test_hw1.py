@@ -335,7 +335,7 @@ W_TEST_DATA3 = {
         'Ditrian4': 4500.0,
         'Edvard Kallin4': 79680.5,
     },
-    2.: {
+    2: {
         'Zahar Starcev2': 1070.0,
         'Jakob2': 8750.0,
         'Ellise2': 5340.5,
@@ -455,7 +455,7 @@ def test_salaries_statistic(
 def test_fail_departaments_type():
     """Negative test 0."""
     with pytest.raises(TypeError):
-       salaries_statistic(W_TEST_DATA0)
+        salaries_statistic(W_TEST_DATA0)
 
 
 @pytest.mark.xfail()
