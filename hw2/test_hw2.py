@@ -13,6 +13,7 @@ TEST_CASES = (
     ['hw2/tests/test2.json', OUTPUT_FILE_NAME, 'hw2/tests/answertest2.json'],
     ['hw2/tests/test3.json', OUTPUT_FILE_NAME, 'hw2/tests/answertest3.json'],
     ['hw2/tests/test4.json', OUTPUT_FILE_NAME, 'hw2/tests/answertest4.json'],
+    ['hw2/tests/test5.json', OUTPUT_FILE_NAME, 'hw2/tests/answertest5.json']
 )
 
 

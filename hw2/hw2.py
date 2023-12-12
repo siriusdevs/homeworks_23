@@ -114,7 +114,7 @@ def interst_calculation(hosts: list[str]) -> dict[str, float]:
     """
     quantity_hosts = {}
     for host in set(hosts):
-        quantity = str(hosts.count(host) / len(hosts) * 100)
+        quantity = str(hosts.count(host) / max(len(hosts), 1) * 100)
         quantity_hosts[host] = f'{quantity} %'
     return quantity_hosts
 
@@ -180,6 +180,8 @@ def online_calculation(user_lastlogin_date: list[str], fixed_data: str) -> dict[
                 break
 
     for status in online_status:
-        current_status = str(online_status.get(status) / len(online_status) * 100)
+        current_status = str(online_status.get(status) / max(len(online_status), 1) * 100)
         online_status.update({status: f'{current_status} %'})
     return online_status
+process_data('hw2/test5.json', 'answertest5.json', '2023-06-23')
+
