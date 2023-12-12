@@ -2,7 +2,7 @@
 from typing import Dict, Optional, Tuple
 
 
-def key_sorted(dp: Tuple[str, Dict[str, float]]) -> float:
+def sort_key(dp: Tuple[str, Dict[str, float]]) -> float:
     """Key sorted for sorting departments.
 
     Args:
@@ -19,7 +19,7 @@ def top3(*args: Tuple[str, Dict[str, float]], sl_min: Optional[float] = None) ->
 
     Args:
         args (Tuple): a tuple containing the name of the department, last name, salary.
-        sl_min (int or None): maximum salary limit.
+        sl_min (int or None): mimimum salary limit.
 
     Raises:
         ValueError: sl_min must be float or int.
@@ -41,7 +41,7 @@ def top3(*args: Tuple[str, Dict[str, float]], sl_min: Optional[float] = None) ->
             if sl >= sl_min:
                 departs[num][1][name] = sl
 
-    departs = sorted(departs, key=key_sorted, reverse=True)
+    departs = sorted(departs, key=sort_key, reverse=True)
 
     first_three = [dp[0] for dp in departs[:3]]
     last_three = [dp[0] for dp in departs[:-4:-1]]

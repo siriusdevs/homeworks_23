@@ -1,6 +1,6 @@
 import pytest
 
-from task_1 import top3
+from task1 import top3
 
 
 data = [
