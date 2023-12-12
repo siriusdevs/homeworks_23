@@ -3,7 +3,6 @@
 import json
 
 import pytest
-
 from hm2 import process_data
 
 PERCENT25 = '25%'
