@@ -183,5 +183,3 @@ def online_calculation(user_lastlogin_date: list[str], fixed_data: str) -> dict[
         current_status = str(online_status.get(status) / max(len(online_status), 1) * 100)
         online_status.update({status: f'{current_status} %'})
     return online_status
-process_data('hw2/test5.json', 'answertest5.json', '2023-06-23')
-
