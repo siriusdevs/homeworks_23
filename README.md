@@ -2,7 +2,7 @@
 Репозиторий для домашних заданий, осень 2023, Колледж Сириус
 ============================================================
 
-|overall|24|4|0|0|
+|overall|25|8|0|0|
 | :---: | :---: | :---: | :---: | :---: |
 |Branch|hw1|hw2|hw3|hw4|
 |argun|-|-|-|-|
@@ -16,7 +16,7 @@
 |drobyazko|-|-|-|-|
 |druzhinin|-|-|-|-|
 |dyatlova|+|-|-|-|
-|eremin|+|-|-|-|
+|eremin|+|+|-|-|
 |evstifeev|-|-|-|-|
 |galaktionova|-|-|-|-|
 |grigoryan|+|+|-|-|
@@ -27,7 +27,7 @@
 |ivanov_i|-|-|-|-|
 |karateev|-|-|-|-|
 |kolkareva|-|-|-|-|
-|komarov|+|-|-|-|
+|komarov|+|+|-|-|
 |kordon|-|-|-|-|
 |korenyakin_a|-|-|-|-|
 |korenyakin_g|-|-|-|-|
@@ -45,7 +45,7 @@
 |nehoroshev|-|-|-|-|
 |nikiforov|+|-|-|-|
 |noskov|-|-|-|-|
-|nudga|+|-|-|-|
+|nudga|+|+|-|-|
 |nurgaliev|-|-|-|-|
 |osipov|+|-|-|-|
 |otroshenko|-|-|-|-|
@@ -61,7 +61,7 @@
 |tarasov|+|-|-|-|
 |tatarnikov|+|-|-|-|
 |telegin|+|-|-|-|
-|tereshin|-|-|-|-|
+|tereshin|+|-|-|-|
 |trofimov|-|-|-|-|
 |tsverkunov|-|-|-|-|
 |turapov|-|-|-|-|
@@ -76,4 +76,4 @@
 |zamyatina|-|-|-|-|
 |zinko|-|-|-|-|
 |zorina_a|+|-|-|-|
-|zorina_e|+|-|-|-|
+|zorina_e|+|+|-|-|
