@@ -1,4 +1,4 @@
-from hw3.person.person import Person
+from person.person import Person
 import pytest
 
 person1 = Person('Ilya', 'Kirillov', 23)

@@ -1,4 +1,4 @@
-import hw3.courses_owner.courses_owner as course_owner
+import courses_owner.courses_owner as course_owner
 
 
 class Student(course_owner.CoursesOwner):

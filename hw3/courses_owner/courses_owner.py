@@ -1,8 +1,8 @@
 from copy import deepcopy
 from abc import ABC, abstractmethod
-from hw3.person.person import Person
+from person.person import Person
 from copy import deepcopy
-import hw3.course.abstract_course as abstract_course
+import course.abstract_course as abstract_course
 
 
 class CoursesOwner(ABC, Person):

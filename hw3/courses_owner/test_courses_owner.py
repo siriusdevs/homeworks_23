@@ -1,7 +1,7 @@
 import pytest
 from typing import Any
-from hw3.courses_owner.courses_owner import CoursesOwner
-from hw3.course.course import Course
+from courses_owner.courses_owner import CoursesOwner
+from course.course import Course
 
 class TestCoursesOwner(CoursesOwner):
     __test__ = False

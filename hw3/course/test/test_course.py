@@ -1,8 +1,8 @@
 import pytest
 from typing import Any
-from hw3.course.course import Course
-from hw3.teacher.teacher import Teacher
-from hw3.student.student import Student
+from course.course import Course
+from teacher.teacher import Teacher
+from student.student import Student
 
 teacher1 = Teacher('Teacher1', 'NoSurname1', 30)
 teacher2 = Teacher('Teacher2', 'NoSurname2', 50)
