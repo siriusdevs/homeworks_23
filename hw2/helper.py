@@ -30,7 +30,7 @@ def opener(path_in: str) -> dict[str, dict]:
     return clients
 
 
-def writer(path_out: str, stats: dict[str, dict]):
+def write_to_json(path_out: str, stats: dict[str, dict]):
     """Write data to json.
 
     Args:
@@ -47,7 +47,7 @@ def writer(path_out: str, stats: dict[str, dict]):
         raise ValueError(f'file <{path_out}> not found')
 
 
-def parser(user: dict[str, str | int]) -> int:
+def get_dispersion(user: dict[str, str | int]) -> int:
     """Parse date to days between register and last login.
 
     Args:

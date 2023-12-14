@@ -3,7 +3,7 @@
 from pathlib import Path
 
 import pytest
-from main import process_data
+from task2 import process_data
 
 DIRECTORY = 'hw2/test_data_hw2/'
 test_data = [(f'data_hw2_{cnt}.json', f'output_hw2_{cnt}.json') for cnt in range(5)]
@@ -11,7 +11,7 @@ test_data = [(f'data_hw2_{cnt}.json', f'output_hw2_{cnt}.json') for cnt in range
 
 @pytest.mark.parametrize('source, expected', test_data)
 def test_hw2(source: str, expected: str) -> None:
-    """Test hw2.
+    """Test output stats hw2.
 
     Args:
         source (str): input and output files paths

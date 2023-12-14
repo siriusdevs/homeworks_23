@@ -2,7 +2,7 @@
 
 import re
 
-from helper import opener, parser, writer
+from helper import get_dispersion, opener, write_to_json
 
 HALF_YEAR = 183
 
@@ -19,10 +19,10 @@ def validate_email(email: str) -> bool:
     pattern = r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)'
     try:
         if re.match(pattern, email) is None:
-            return 0
+            return False
     except KeyError:
-        return 0
-    return 1
+        return False
+    return True
 
 
 def duration_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict], int]:
@@ -42,7 +42,7 @@ def duration_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict], int]
         'over_half_year': 0,
     }
     for users in clients.items():
-        how_long = parser(users[1])
+        how_long = get_dispersion(users[1])
         match how_long:
             case None:
                 continue
@@ -115,4 +115,4 @@ def process_data(path_in: str, path_out: str) -> None:
     for duration in duration_disp[0].keys():
         stats['duration_scatter'][duration] = \
             round((duration_disp[0][duration] / duration_disp[1]) * 100, 2)
-    writer(path_out, stats)
+    write_to_json(path_out, stats)
