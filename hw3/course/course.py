@@ -9,7 +9,20 @@ from teacher.teacher import Teacher
 
 
 class Course(AbstractCourse):
-    """Course that has a teacher and students."""
+    """Course that has a teacher and students.
+
+    Attributes:
+        title: The title of course.
+        teacher: The person that is teaching this course.
+        students: The persons that are learning this course.
+
+    Methods:
+        add_course_owner(new_owner: CourseOwner) -> None:
+            Add course owner to course's collection of the type of the given new_owner.
+        remove_course_owner(owner: CourseOwner) -> None:
+            Remove course owner from course's of the type of the given owner.
+
+    """
 
     def __init__(self, title: str) -> None:
         """Init course's instances.
@@ -39,16 +52,15 @@ class Course(AbstractCourse):
             self.__add_student(new_owner)
 
     def remove_course_owner(self, new_owner: 'courses_owner.CoursesOwner') -> None:
-        """Add course owner to course (It can be teacher or student).
+        """Remove course owner from course (It can be teacher or student).
 
         Args:
             new_owner(CoursesOwner): course owner (teacher or student).
 
         Raises:
             TypeError: The given new_owner is not a CourseOwner's instance.
-            ValueError: Student is not in this courses or Teacher is not teach this course.
+            ValueError: Student is not in this courses or teacher is not teach this course.
         """
-
         if not isinstance(new_owner, courses_owner.CoursesOwner):
             raise TypeError('The new course owner has to be a instance of CoursesOwner!')
 
