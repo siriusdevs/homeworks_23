@@ -1,0 +1,16 @@
+{
+    "user": {
+        "region": "Niznii tagil",
+        "registered": "2004-11-17",
+        "last_login": "2011-10-01",
+        "email": "user@mail.ru",
+        "age": 79
+    },
+    "user2": {
+        "region": "Pskov",
+        "registered": "2005-10-30",
+        "last_login": "2019-11-21",
+        "email": "user2@gmail.com",
+        "age": 42
+    }
+}

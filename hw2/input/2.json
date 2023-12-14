@@ -1,0 +1,16 @@
+{
+    "user": {
+        "region": "Ekaterinburg",
+        "registered": "2014-12-22",
+        "last_login": "2011-10-01",
+        "email": "user@icloud.com",
+        "age": 31
+    },
+    "user2": {
+        "region": "Kazan",
+        "registered": "2012-10-30",
+        "last_login": "2010-01-21",
+        "email": "user2@gmail.com",
+        "age": 19
+    }
+}
