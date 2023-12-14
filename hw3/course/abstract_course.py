@@ -1,5 +1,6 @@
 """Module with a abstract course."""
 from abc import ABC, abstractmethod
+
 import courses_owner.courses_owner as courses_owner
 
 
@@ -15,6 +16,7 @@ class AbstractCourse(ABC):
         remove_course_owner(owner: CourseOwner) -> None:
             Remove course owner from course's of the type of the given owner.
     """
+
     @abstractmethod
     def __init__(self, title: str) -> None:
         """Init course.
@@ -68,11 +70,20 @@ class AbstractCourse(ABC):
         """
         return f'Course {self.title}'
 
-
     @abstractmethod
     def add_course_owner(self, new_owner: 'courses_owner.CoursesOwner') -> None:
+        """Add course owner to course's collection of the type of the given new_owner.
+
+        Args:
+            new_owner(CoursesOwner): The instance of courses owner who can be added in course.
+        """
         pass
 
     @abstractmethod
     def remove_course_owner(self, new_owner: 'courses_owner.CoursesOwner') -> None:
+        """Remove course owner from course's of the type of the given owner.
+
+        Args:
+            new_owner(CoursesOwner): The instance of courses owner who can be deleted from course.
+        """
         pass

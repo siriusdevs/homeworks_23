@@ -1,8 +1,9 @@
-import pytest
 from typing import Any
+
+import pytest
 from course.course import Course
-from teacher.teacher import Teacher
 from student.student import Student
+from teacher.teacher import Teacher
 
 teacher1 = Teacher('Teacher1', 'NoSurname1', 30)
 teacher2 = Teacher('Teacher2', 'NoSurname2', 50)

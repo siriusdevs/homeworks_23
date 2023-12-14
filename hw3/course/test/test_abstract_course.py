@@ -1,6 +1,7 @@
-import pytest
 import course.abstract_course as abstract_course
 import courses_owner.courses_owner as courses_owner
+import pytest
+
 
 class TestCourse(abstract_course.AbstractCourse):
     __test__ = False
