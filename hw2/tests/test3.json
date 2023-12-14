@@ -1,0 +1,32 @@
+{
+    "Mops": {
+        "region": "Saint-Petersburg",
+        "registered": "2023-11-01",
+        "email": "mops@mail.ru",
+        "age": 17
+    },
+    "Krevetka": {
+        "region": "Novosibirsk",
+        "registered": "2022-10-30",
+        "email": "krevetka@yandex.com",
+        "age": 17
+    },
+    "Arab": {
+        "region": "Sochi",
+        "registered": "2022-10-30",
+        "email": "arab@mail.ru",
+        "age": 17
+    },
+    "Clown": {
+        "region": "Moskow",
+        "registered": "2022-10-30",
+        "email": "clown@talantiuspeh.ru",
+        "age": 10
+    },
+    "Tiger": {
+        "region": "Krasnodar",
+        "registered": "2022-10-30",
+        "email": "tiger@google.com",
+        "age": 100
+    }
+}
