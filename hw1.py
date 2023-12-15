@@ -19,19 +19,19 @@ from typing import Any
 # Проверка линтера и тесты должны работать в github workflows.
 
 
-def check(value_to_check: Any, value_type: tuple, value_name: str) -> None:
+def check(value_to_check: Any, value_type: type, value_name: str) -> None:
     """Check type of given value.
 
     Args:
         value_to_check (Any): value that need to check
-        value_type (tuple): target type
+        value_type (type): target type
         value_name (str): name of value that need to check
 
     Raises:
         TypeError: if given wrong type of value
     """
     if not isinstance(value_to_check, value_type):
-        raise TypeError(f'{value_name} type is not valid')
+        raise TypeError(f'{value_name} type is not {value_type.__name__}')
 
 
 def salaries_statistic(
@@ -57,7 +57,7 @@ def salaries_statistic(
     super_total_salary = 0
     check(dprts, dict, 'dprts')
     if min_salary:
-        check(min_salary, (float, int), 'min_salary')
+        check(min_salary, float, 'min_salary')
     for departament_name, departament in dprts.items():
         total_salary = 0
         check(departament, dict, 'department')
@@ -66,9 +66,9 @@ def salaries_statistic(
             check(departament_name, str, 'department_name')
             check(salary, (float, int), 'salary')
             salary = round(salary, 2)
+            super_total_salary += salary
             if min_salary is None or salary >= min_salary:
                 total_salary += salary
-            super_total_salary += salary
         answer.append(round(total_salary, 2))
     answer = sorted(answer, reverse=True)[:3]
     try:
