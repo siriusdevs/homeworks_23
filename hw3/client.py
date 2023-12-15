@@ -1,4 +1,4 @@
-"""This module include class architecture for managing orders in a restaurant."""
+"""This module include class Client."""
 
 from typing import Self
 
@@ -38,12 +38,12 @@ class Client:
         self._name = new_name
 
     def __repr__(self) -> str:
-        """Return a string representation of the object for debugging.
+        """Str represent of the object for debug.
 
         Returns:
             str:  A string representation of the object.
         """
-        return f'{self.name}'
+        return self.name
 
     def __eq__(self, __value: Self) -> bool:
         """Check equality two object type Client.

@@ -61,7 +61,7 @@ class Dish:
         self._price = new_price
 
     def __repr__(self) -> str:
-        """Return a string representation of the object for debugging.
+        """Str represent of the object for debug.
 
         Returns:
             str:  A string representation of the object.

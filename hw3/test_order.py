@@ -4,7 +4,16 @@ import pytest
 from client import Client
 from dish import Dish
 from order import Order
-from test_data import add_remove_dishes, clients, order, test_getdishnames_data
+
+clients = ([[Client('Albert')], [Dish('Tomato', 5)]], )
+add_remove_dishes = (Dish('Toast', 4), Dish('Ice Cream', 2), Dish('Popcorn', 9))
+order = Order([Client('Albert')], [Dish('Waffles', 5)])
+test_getdishnames_data = ((
+    Order([Client('Anna')], [Dish('Waffles', 5), Dish('Ice Cream', 2)]), 'Waffles, Ice Cream',
+),
+    (
+    Order([Client('Artem')], [Dish('Toast', 5), Dish('Ice Cream', 2)]), 'Toast, Ice Cream',
+))
 
 
 @pytest.mark.parametrize('clients_name, dishes', clients)
@@ -28,6 +37,7 @@ def test_add_remove(dish: Dish) -> None:
     """
     order.add_dish(dish)
     assert order.dishes[-1] == dish
+
     order.remove_dishes(dish)
     assert dish not in order.dishes
 

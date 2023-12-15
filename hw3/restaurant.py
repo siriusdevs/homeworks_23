@@ -3,7 +3,7 @@ from dish import Dish
 from order import Order
 
 
-class Restorant:
+class Restaurant:
     """This class discribe restorant."""
 
     def __init__(self, orders: list[Order], dishes: list[Dish], av_dishes: list[Dish]) -> None:
