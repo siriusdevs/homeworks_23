@@ -1,0 +1,30 @@
+{
+    "Romodanov": {
+        "region": "Saint-Petersburg",
+        "registered": "2012-12-24",
+        "last_login": "2023-10-01",
+        "email": "user@yandex.ru",
+        "age": 36
+    },
+    "Danilov": {
+        "region": "Sochi",
+        "registered": "2022-10-30",
+        "last_login": "2022-11-21",
+        "email": "user2@gmail.com",
+        "age": 18
+    },
+    "Tatarnikov": {
+        "region": "Saint-Petersburg",
+        "registered": "2010-12-24",
+        "last_login": "2021-10-01",
+        "email": "user@yandex.ru",
+        "age": 36
+    },
+    "Tarasov": {
+        "region": "Sochi",
+        "registered": "1998-10-30",
+        "last_login": "2001-11-21",
+        "email": "user2@gmail.com",
+        "age": 18
+    }
+}

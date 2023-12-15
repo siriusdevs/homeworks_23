@@ -1,0 +1,30 @@
+{
+    "user0": {
+        "region": "Moscow",
+        "registered": "2019-8-20",
+        "last_login": "2020-10-21",
+        "email": "626@outlook.com",
+        "age": 91
+    },
+    "user1": {
+        "region": "New-York",
+        "registered": "2017-7-20",
+        "last_login": "2018-8-23",
+        "email": "712@outlook.com",
+        "age": 87
+    },
+    "user2": {
+        "region": "Saint-Petersburg",
+        "registered": "2012-5-4",
+        "last_login": "2012-6-18",
+        "email": "984@yandex.ru",
+        "age": 57
+    },
+    "user3": {
+        "region": "London",
+        "registered": "2020-1-19",
+        "last_login": "2020-4-22",
+        "email": "777@mail.ru",
+        "age": 57
+    }
+}
