@@ -1,7 +1,7 @@
 """Function for calculating the top 3 salaries and its percentage of all salaries."""
 
 
-def top_salary(*deps: tuple[str, list[float]], lim: float = None) -> tuple[tuple, float]:
+def top_salary(*deps: tuple[str, list[float]], lim: float = None) -> tuple[list, float]:
     """Calculate the top 3 salaries and its percentage of all salaries.
 
     Args:
