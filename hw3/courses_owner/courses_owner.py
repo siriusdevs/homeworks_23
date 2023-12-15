@@ -10,10 +10,10 @@ class CoursesOwner(ABC, Person):
     """The person that owners courses.
 
     Attributes:
-        name: Person's name.
-        surname: Person's surname.
-        age: Person's age.
-        courses: Courses that are being learnt of person.
+        name(str): Person's name.
+        surname(str): Person's surname.
+        age(int): Person's age.
+        courses(list[AbstractCourse]): Courses that are being learnt of person.
 
     Methods:
         add_course_owner(new_owner: CourseOwner) -> None:

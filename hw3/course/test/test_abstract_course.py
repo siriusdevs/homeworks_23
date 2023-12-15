@@ -35,7 +35,7 @@ class TestCourse(abstract_course.AbstractCourse):
 
 
 def create_new_test_course() -> TestCourse:
-    """Create clean test course.
+    """Create a clean test course.
 
     Returns:
         TestCourse: Clean test course.
