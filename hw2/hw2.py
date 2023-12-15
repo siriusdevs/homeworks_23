@@ -21,7 +21,7 @@ def process_data(file_data_for_stats: str, output_file: str) -> str:
     stats = [{}, {}]
 
     file_data = open_file(file_data_for_stats)
-    count_users = len(file_data)
+    count_users = max(len(file_data), 1)
 
     for user in file_data.keys():
         for name_of_user_data, user_data in file_data[user].items():

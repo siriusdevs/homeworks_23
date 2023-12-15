@@ -22,6 +22,11 @@ test_data = {
         './hw2/test_result/test_3.json',
         './hw2/test_answer/answer_test_3.json',
     ),
+    (
+        './hw2/data_file/data_file_3.json',
+        './hw2/test_result/test_4.json',
+        './hw2/test_answer/answer_test_4.json',
+    ),
 }
 
 
