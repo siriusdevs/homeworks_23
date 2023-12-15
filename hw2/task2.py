@@ -5,6 +5,12 @@ import re
 from helper import get_dispersion, opener, write_to_json
 
 HALF_YEAR = 183
+DURATIONS = (
+    ('under_2_days', 2),
+    ('under_week', 7),
+    ('under_half_year', HALF_YEAR),
+    ('over_half_year', float('inf')),
+)
 
 
 def validate_email(email: str) -> bool:
@@ -34,26 +40,13 @@ def duration_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict], int]
     Returns:
         tuple[dict[str, dict], int]: calculated durations and sum of them
     """
-    duration = 0  # flake8 requirers
-    duration_mask = {
-        'under_2_days': 0,
-        'under_week': 0,
-        'under_half_year': 0,
-        'over_half_year': 0,
-    }
+    duration_mask = {key[0]: 0 for key in DURATIONS}
     for users in clients.items():
         how_long = get_dispersion(users[1])
-        match how_long:
-            case None:
-                continue
-            case int(duration) if duration < 2:
-                duration_mask['under_2_days'] += 1
-            case int(duration) if duration < 7:
-                duration_mask['under_week'] += 1
-            case int(duration) if duration < HALF_YEAR:
-                duration_mask['under_half_year'] += 1
-            case _:
-                duration_mask['over_half_year'] += 1
+        for duration in DURATIONS:
+            if how_long < duration[1]:
+                duration_mask[duration[0]] += 1
+                break
         sum_durations = sum(duration_mask.values())
     return duration_mask, sum_durations if sum_durations else 1
 
