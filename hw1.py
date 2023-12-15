@@ -68,7 +68,7 @@ def salaries_statistic(
             salary = round(salary, 2)
             if min_salary is None or salary >= min_salary:
                 total_salary += salary
-            super_total_salary += salary
+                super_total_salary += salary
         answer.append(round(total_salary, 2))
     answer = sorted(answer, reverse=True)[:3]
     try:
@@ -76,3 +76,34 @@ def salaries_statistic(
     except ZeroDivisionError:
         raise ValueError('super_total_salary = 0, на ноль делить нельзя.')
     return answer, f'{ratio_top_salaries}%'
+
+print(salaries_statistic({
+    'ARCHIVE_OTDEL': {
+        'Rubiya': 7820.0,
+        'Aurora Galicina': 1007.0,
+        'Liticiya Mangovna': 9810.0,
+        'Ditrian Aksilim': 4500.0,
+        'Edvard Kallin1': 79680.5,
+    },
+    'HUMOR_CENTER': {
+        'Zahar Starcev': 1070.0,
+        'Jakob': 8750.0,
+        'Ellise': 5340.5,
+        'Bred Pit': 9000.0,
+        'Charli': 3500.5,
+    },
+    'MENEGERS': {
+        'Karlael': 1000.0,
+        'Bella': 4000.5,
+        'Dzhasper': 3000.5,
+        'Anna': 2300.0,
+        'Victoriya': 6000.0,
+    },
+    'VET_DOCTORS': {
+        'Vladlen': 3400.0,
+        'Mariya': 7020.5,
+        'Ognislav': 3409.95,
+        'Erimei': 2304.5,
+        'Prahlada': 2098.0,
+    },
+},3000))
