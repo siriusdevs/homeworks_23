@@ -122,7 +122,7 @@ def test_get_years_statistic(input, output):
 
 @pytest.mark.parametrize('input, test_output, real_output', data_users_statistic)
 def test_process_data(input, test_output, real_output):
-    """Test process data.
+    """Test processing data.
 
     Args:
         input: that's where we get the file from
