@@ -21,7 +21,7 @@ def test_order_ptrs(clients_name: Client, dishes: list[Dish]) -> None:
     """Test for checking parameters.
 
     Args:
-        clients_name (list[Client]): list of object type Client
+        clients_name (Client): object type Client
         dishes (list[Dish]): list of object type Dish
     """
     order_check = Order(clients_name, dishes)

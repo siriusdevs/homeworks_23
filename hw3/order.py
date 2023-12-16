@@ -12,7 +12,7 @@ class Order:
         """Init the class Order.
 
         Args:
-            clients (list[Client]): list of object type Client
+            client (Client): object type Client
             dishes (list[Dish]): list of object type Dish
         """
         self.clients, self.dishes = client, dishes
