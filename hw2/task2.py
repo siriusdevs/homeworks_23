@@ -76,7 +76,7 @@ def email_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict], int]:
         else:
             email_disp[email_host] = 1
     if not count_emails:
-        raise KeyError('data doesn`t have email fields!')
+        return 'data doesn`t have email fields!'
     return email_disp, sum(email_disp.values())
 
 
@@ -96,7 +96,7 @@ def process_data(path_in: str, path_out: str) -> None:
     clients = opener(path_in)
 
     if not clients:
-        raise ValueError('data file is empty!')
+        return 'data file is empty!'
 
     email_disp, duration_disp = email_dispersion(clients), duration_dispersion(clients)
 

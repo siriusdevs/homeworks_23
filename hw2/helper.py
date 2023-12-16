@@ -1,6 +1,7 @@
 """help functions module"."""
 import json
 from math import ceil
+import sys
 
 import dateparser
 
@@ -23,10 +24,12 @@ def opener(path_in: str) -> dict[str, dict]:
     try:
         with open(path_in, 'r') as data_file:
             clients = json.loads(data_file.read())
-    except FileNotFoundError:
-        raise ValueError(f'file <{path_in}> not found')
-    except json.decoder.JSONDecodeError:
-        raise ValueError(f'file <{path_in}> is not valid')
+    except FileNotFoundError as notfoundmsg:
+        sys.stdout.write(str(notfoundmsg))
+        return
+    except json.decoder.JSONDecodeError as jsonerrormsg:
+        sys.stdout.write(str(jsonerrormsg))
+        return
     return clients
 
 
@@ -43,8 +46,9 @@ def write_to_json(path_out: str, stats: dict[str, dict]):
     try:
         with open(path_out, 'w') as output_file:
             json.dump(stats, fp=output_file, indent=4)
-    except FileNotFoundError:
-        raise ValueError(f'file <{path_out}> not found')
+    except FileNotFoundError as notfoundmsg:
+        sys.stdout.write(str(notfoundmsg))
+        return
 
 
 def get_dispersion(user: dict[str, str | int]) -> int:
