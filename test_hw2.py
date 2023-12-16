@@ -46,9 +46,9 @@ def test_valid(input_file_path: str, output_file_path: str, expected_data: dict)
     """Checking for the normality of files.
 
     Args:
-        input_file_path (str): _description_
-        output_file_path (str): _description_
-        expected_data (dict): _description_
+        input_file_path: the path to the input JSON file containing user data
+        output_file_path: the path to the output JSON file where processed data will be saved
+        expected_data: expected result
     """
     process_data(input_file_path, output_file_path)
     with open(output_file_path, 'r') as output_file:
@@ -58,12 +58,12 @@ def test_valid(input_file_path: str, output_file_path: str, expected_data: dict)
 
 @pytest.mark.parametrize('input_file_path, output_file_path, expected_data', INVALID_DATA)
 def test_invalid(input_file_path: str, output_file_path: str, expected_data: dict) -> None:
-    """_summary_.
+    """Cheking invalid files.
 
     Args:
-        input_file_path (str): _description_
-        output_file_path (str): _description_
-        expected_data (dict): _description_
+        input_file_path: the path to the input JSON file containing user data
+        output_file_path: the path to the output JSON file where processed data will be saved
+        expected_data: expected result
     """
     output = process_data(input_file_path, output_file_path)
     assert output == expected_data

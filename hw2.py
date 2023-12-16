@@ -91,7 +91,7 @@ def check_file(input_file: str, output_file: str) -> None | str:
     if not os.path.isfile(output_file):
         out_directory = os.path.dirname(output_file)
         if not os.path.exists(out_directory):
-            os.makedirs(out_directory)
+            os.makedirs(out_directory, exist_ok=True)
 
 
 def get_data(age_data: dict[str, dict]) -> tuple[dict, list] | str:
@@ -103,7 +103,13 @@ def get_data(age_data: dict[str, dict]) -> tuple[dict, list] | str:
     Returns:
         tuple: a tuple with calculated statistics.
     """
-    age_categoties = {'0-18': 0, '18-25': 0, '26-45': 0, '45-59': 0, '60+': 0}
+    age_categoties = {
+        AgeCategories.from_zero_to_eighteen: 0,
+        AgeCategories.from_eighteen_to_twentyfive: 0,
+        AgeCategories.from_twentysix_to_fourtyfive: 0,
+        AgeCategories.from_fourtyfive_to_sixty: 0,
+        AgeCategories.greater_than_sixty: 0,
+        }
     year_reg = []
     for user in age_data.values():
         age = user.get('age', 0)
