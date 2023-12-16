@@ -40,5 +40,5 @@ def test_process_data(test_dir_path: str) -> None:
         expected_result = json.loads(expected_josn.read())
     with open(output_path, 'r') as output_json:
         output_result = json.loads(output_json.read())
-    assert expected_result == output_result
     os.remove(output_path)
+    assert expected_result == output_result
