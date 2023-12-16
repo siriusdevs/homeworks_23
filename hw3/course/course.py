@@ -21,7 +21,6 @@ class Course(AbstractCourse):
             Add course owner to course's collection of the type of the given new_owner.
         remove_course_owner(owner: CourseOwner) -> None:
             Remove course owner from course's of the type of the given owner.
-
     """
 
     def __init__(self, title: str) -> None:

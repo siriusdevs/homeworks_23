@@ -1,8 +1,9 @@
 """Module with Teacher."""
 from courses_owner.courses_owner import CoursesOwner
+from person.person import Person
 
 
-class Teacher(CoursesOwner):
+class Teacher(Person, CoursesOwner):
     """Teacher with name, surname, age, courses."""
 
     def __init__(self, name: str, surname: str, age: int) -> None:

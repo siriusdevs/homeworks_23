@@ -1,18 +1,15 @@
 """Module with courses owner."""
 from abc import ABC, abstractmethod
 from copy import deepcopy
+from typing import Any
 
 import course.abstract_course as abstract_course
-from person.person import Person
 
 
-class CoursesOwner(ABC, Person):
+class CoursesOwner(ABC):
     """The person that owners courses.
 
     Attributes:
-        name(str): Person's name.
-        surname(str): Person's surname.
-        age(int): Person's age.
         courses(list[AbstractCourse]): Courses that are being learnt of person.
 
     Methods:
@@ -23,16 +20,14 @@ class CoursesOwner(ABC, Person):
     """
 
     @abstractmethod
-    def __init__(self, name: str, surname: str, age: int) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         """Init courses owner.
 
         Args:
-            name(str): Person's name.
-            surname(str): Person's surname.
-            age(int): Person's age.
+            kwargs(Any): arguments for any classes in the inheritance chain.
         """
         self.__courses: list['abstract_course.AbstractCourse'] = []
-        super().__init__(name, surname, age)
+        super().__init__(**kwargs)
 
     def add_course(self, new_course: 'abstract_course.AbstractCourse') -> None:
         """Add course for person.

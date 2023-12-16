@@ -1,4 +1,5 @@
 """Module with Person."""
+from typing import Any
 
 
 class Person:
@@ -13,17 +14,19 @@ class Person:
     __min_age = 0
     __max_age = 120
 
-    def __init__(self, name: str, surname: str, age: int) -> None:
+    def __init__(self, name: str, surname: str, age: int, **kwargs: Any) -> None:
         """Init person's instance.
 
         Args:
             name(str): Person's name.
             surname(str): Person's surname.
             age(int): Person's age.
+            kwargs(Any): arguments for any classes in the inheritance chain.
         """
         self.name = name
         self.surname = surname
         self.age = age
+        super().__init__(**kwargs)
 
     @property
     def name(self) -> str:

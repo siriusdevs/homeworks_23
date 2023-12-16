@@ -11,15 +11,9 @@ class TestCoursesOwner(CoursesOwner):
 
     __test__ = False
 
-    def __init__(self, name: str, surname: str, age: int) -> None:
-        """Init new courses owner.
-
-        Args:
-            name(str): Person's name.
-            surname(str): Person's surname.
-            age(int): Person's age.
-        """
-        super().__init__(name, surname, age)
+    def __init__(self) -> None:
+        """Init new courses owner."""
+        super().__init__()
 
 
 course1 = Course('Math')
@@ -33,7 +27,7 @@ def create_test_courses_owner() -> TestCoursesOwner:
     Returns:
         TestCoursesOwner: _description_
     """
-    return TestCoursesOwner('noname', 'nosurname', 33)
+    return TestCoursesOwner()
 
 
 # test getter courses and add_course
