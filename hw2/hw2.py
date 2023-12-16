@@ -115,7 +115,6 @@ def process_data(input_path: str, output_path: str) -> None:
         'more_than_six_months': 0,
     }
     hosts_percentage = {}
-    json_data = None
     try:
         with open(input_path, 'r') as input_file:
             json_data = json.load(input_file)
