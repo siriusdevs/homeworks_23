@@ -50,7 +50,7 @@ def test_process_data(file_name: str):
     example_file = f'{EXAMPLE_PATH}{file_name}'
     try:
         process_data(input_file, OUTPUT_FILE)
-    except Exception:
+    except SystemExit:
         assert compare(example_file)
     else:
         assert compare(example_file)
