@@ -1,25 +1,12 @@
 """Module for calculating the last login of users and the percentage of email hosts."""
 
 import json
-import os
+import sys
 from datetime import datetime
 from typing import Any
 
 import error_classes as errors
-
-
-def write(message: str | tuple[str], output_path: str) -> None:
-    """Write message in json file.
-
-    Args:
-        message: str | tuple[str] - strings to write.
-        output_path: str - file to write message.
-    """
-    dirname = os.path.dirname(output_path)
-    if dirname and not os.path.exists(dirname):
-        os.makedirs(dirname)
-    with open(output_path, 'w') as output_file:
-        json.dump(message, output_file)
+import multi_util as utils
 
 
 def get_last_login(client: str, client_info: dict, output_path: str) -> str:
@@ -32,17 +19,13 @@ def get_last_login(client: str, client_info: dict, output_path: str) -> str:
 
     Returns:
         str: last login date.
-
-    Raises:
-        NonExistentField: calls if client have not last_login field.
-        EmptyField: calls if last_login field is empty.
     """
     try:
         last_login = client_info['last_login']
     except KeyError:
-        raise errors.NonExistentField(client, 'last_login', output_path)
+        errors.NonExistentField(client, 'last_login', output_path)
     if not last_login:
-        raise errors.EmptyField(client, 'last_login', output_path)
+        errors.EmptyField(client, 'last_login', output_path)
     return last_login
 
 
@@ -56,20 +39,15 @@ def get_host(client: str, client_info: dict, output_path: str) -> str:
 
     Returns:
         str: name of email host.
-
-    Raises:
-        NonExistentField: calls if client have not email field.
-        EmailError: calls if client have not correct email.
-        EmptyField: calls if at client email does not exists host name.
     """
     try:
         host = client_info['email'].split('@')[1]
     except IndexError:
-        raise errors.EmailError(client, output_path)
+        errors.EmailError(client, output_path)
     except KeyError:
-        raise errors.NonExistentField(client, 'email', output_path)
+        errors.NonExistentField(client, 'email', output_path)
     if not host:
-        raise errors.EmptyField(client, 'email', output_path)
+        errors.EmptyField(client, 'email', output_path)
     return host
 
 
@@ -128,10 +106,6 @@ def process_data(input_path: str, output_path: str) -> None:
     Args:
         input_path: str - file with data for process.
         output_path: str - file to write statistics.
-
-    Raises:
-        NoInputFile: calls if input file not exists.
-        ListNotExpected: calls if programm meet list in input file.
     """
     online_status_count = {
         'less_than_2_days': 0,
@@ -141,18 +115,20 @@ def process_data(input_path: str, output_path: str) -> None:
         'more_than_six_months': 0,
     }
     hosts_percentage = {}
+    json_data = None
     try:
         with open(input_path, 'r') as input_file:
             json_data = json.load(input_file)
     except FileNotFoundError:
-        raise errors.NoInputFile(input_path, output_path)
+        errors.NoInputFile(input_path, output_path)
     except json.JSONDecodeError:
-        write('', output_path)
+        utils.write('', output_path)
+        sys.exit()
     try:
         for client, client_info in json_data.items():
             change_online_status_counter(online_status_count, client, client_info, output_path)
     except AttributeError:
-        raise errors.ListNotExpected(output_path)
+        errors.ListNotExpected(output_path)
     for host_name, count in get_hosts_count(json_data, output_path).items():
         hosts_percentage[host_name] = round((count / len(json_data)) * 100, 2)
-    write((online_status_count, hosts_percentage), output_path)
+    utils.write((online_status_count, hosts_percentage), output_path)
