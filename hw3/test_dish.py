@@ -6,16 +6,16 @@ from dish import Dish
 names_price_of_dish = (('Eggs', 350), ('Ice cream', 120))
 
 
-@pytest.mark.parametrize('name_dish, price', names_price_of_dish)
-def test_dish_ptrs(name_dish: str, price: int | float) -> None:
+@pytest.mark.parametrize('name, price', names_price_of_dish)
+def test_dish_ptrs(name: str, price: int | float) -> None:
     """Check parameters.
 
     Args:
-        name_dish (str): name of dish
+        name (str): name of dish
         price (int | float): price of dish
     """
-    dish = Dish(name_dish, price)
-    assert dish.name_dish == name_dish and dish.price == price
+    dish = Dish(name, price)
+    assert dish.name == name and dish.price == price
 
 
 @pytest.mark.xfail(raises=TypeError)

@@ -39,13 +39,13 @@ class Order:
         if remove_dish in self.dishes:
             self.dishes.remove(remove_dish)
 
-    def get_dishname(self) -> str:
+    def get_name_dish(self) -> str:
         """Get dishname as str.
 
         Returns:
             Dishname as str
         """
-        return ', '.join(dish.name_dish for dish in self.dishes)
+        return ', '.join(dish.name for dish in self.dishes)
 
     def __eq__(self, __value: Self) -> bool:
         """Check equality two object type Order.

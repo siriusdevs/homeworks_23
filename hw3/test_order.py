@@ -50,4 +50,4 @@ def test_get_dishname(orders: Order, expected: str) -> None:
         orders (Order): object type Order
         expected (str): expected result
     """
-    assert orders.get_dishname() == expected
+    assert orders.get_name_dish() == expected

@@ -12,19 +12,19 @@ class Dish:
             name_dish (str): name of dish
             price (int | float): price of dish
         """
-        self.name_dish, self.price = name_dish, price
+        self.name, self.price = name_dish, price
 
     @property
-    def name_dish(self) -> str:
+    def name(self) -> str:
         """Get name_dish.
 
         Returns:
             str: name_dish
         """
-        return self._name_dish
+        return self._name
 
-    @name_dish.setter
-    def name_dish(self, new_dish: str) -> None:
+    @name.setter
+    def name(self, new_dish: str) -> None:
         """Set name_dish.
 
         Args:
@@ -35,7 +35,7 @@ class Dish:
         """
         if not isinstance(new_dish, str):
             raise TypeError(f'{new_dish} must be str')
-        self._name_dish = new_dish
+        self._name = new_dish
 
     @property
     def price(self) -> int | float:
@@ -66,7 +66,7 @@ class Dish:
         Returns:
             str:  A string representation of the object.
         """
-        return f'{self.name_dish}: {self.price}'
+        return f'{self.name}: {self.price}'
 
     def __eq__(self, __value: Self) -> bool:
         """Check equality two object type Dish.
@@ -78,5 +78,5 @@ class Dish:
             bool: equal two object
         """
         if isinstance(__value, Dish):
-            return self.name_dish == __value.name_dish and self.price == __value.price
+            return self.name == __value.name and self.price == __value.price
         return NotImplemented
