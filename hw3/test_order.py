@@ -5,19 +5,19 @@ from client import Client
 from dish import Dish
 from order import Order
 
-clients = ([[Client('Albert')], [Dish('Tomato', 5)]], )
+clients = ([Client('Albert'), [Dish('Tomato', 5)]], )
 add_remove_dishes = (Dish('Toast', 4), Dish('Ice Cream', 2), Dish('Popcorn', 9))
-order = Order([Client('Albert')], [Dish('Waffles', 5)])
+order = Order(Client('Albert'), [Dish('Waffles', 5)])
 test_getdishnames_data = ((
-    Order([Client('Anna')], [Dish('Waffles', 5), Dish('Ice Cream', 2)]), 'Waffles, Ice Cream',
+    Order(Client('Anna'), [Dish('Waffles', 5), Dish('Ice Cream', 2)]), 'Waffles, Ice Cream',
 ),
     (
-    Order([Client('Artem')], [Dish('Toast', 5), Dish('Ice Cream', 2)]), 'Toast, Ice Cream',
+    Order(Client('Artem'), [Dish('Toast', 5), Dish('Ice Cream', 2)]), 'Toast, Ice Cream',
 ))
 
 
 @pytest.mark.parametrize('clients_name, dishes', clients)
-def test_order_ptrs(clients_name: list[Client], dishes: list[Dish]) -> None:
+def test_order_ptrs(clients_name: Client, dishes: list[Dish]) -> None:
     """Test for checking parameters.
 
     Args:
@@ -50,4 +50,4 @@ def test_get_dishname(orders: Order, expected: str) -> None:
         orders (Order): object type Order
         expected (str): expected result
     """
-    assert orders.get_name_dish() == expected
+    assert orders.get_names_dish() == expected

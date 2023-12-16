@@ -8,14 +8,14 @@ from dish import Dish
 class Order:
     """This class discribe order."""
 
-    def __init__(self, clients: list[Client], dishes: list[Dish]) -> None:
+    def __init__(self, client: Client, dishes: list[Dish]) -> None:
         """Init the class Order.
 
         Args:
             clients (list[Client]): list of object type Client
             dishes (list[Dish]): list of object type Dish
         """
-        self.clients, self.dishes = clients, dishes
+        self.clients, self.dishes = client, dishes
 
     def add_dish(self, new_dish: Dish) -> None:
         """Add dishes new dish.
@@ -39,7 +39,7 @@ class Order:
         if remove_dish in self.dishes:
             self.dishes.remove(remove_dish)
 
-    def get_name_dish(self) -> str:
+    def get_names_dish(self) -> str:
         """Get dishname as str.
 
         Returns:

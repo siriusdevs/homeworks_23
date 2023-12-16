@@ -4,7 +4,7 @@ import pytest
 from order import Client, Dish, Order
 from restaurant import Restaurant
 
-order = Order([Client('Albert')], [Dish('Waffles', 5)])
+order = Order(Client('Albert'), [Dish('Waffles', 5)])
 restaurant_data = ((
     [order],
     [Dish('Rice', 5), Dish('Cheeze', 10), Dish('Butter', 5)],
@@ -41,7 +41,7 @@ def test_restorant(orders: list[Order], dishes: list[Dish], av_dishes: list[Dish
     restor.remove_order(order_toadd)
 
     assert order_toadd not in restor.orders
-    assert restor.get_order() == '[Waffles: 5] [Albert]'
+    assert restor.get_order() == '[Waffles: 5] Albert'
 
 
 @pytest.mark.xfail(raises=(TypeError, ValueError))
