@@ -1,0 +1,44 @@
+{
+    "user1": {
+        "region": "Saint-Petersburg",
+        "registered": "2012-12-24",
+        "last_login": "2023-07-01",
+        "email": "user@yandex.ru",
+        "age": 90
+    },
+    "user2": {
+        "region": "Sochi",
+        "registered": "2022-10-30",
+        "last_login": "2023-11-21",
+        "email": "user2@gmail.com",
+        "age": 21
+    },
+    "user3": {
+        "region": "Saint-Petersburg",
+        "registered": "2012-12-24",
+        "last_login": "2012-12-16",
+        "email": "user@yandex.ru",
+        "age": 4
+    },
+    "user4": {
+        "region": "Sochi",
+        "registered": "2022-10-30",
+        "last_login": "2023-11-05",
+        "email": "user2@gmail.com",
+        "age": 78
+    },
+    "user5": {
+        "region": "Saint-Petersburg",
+        "registered": "2012-12-24",
+        "last_login": "2012-10-01",
+        "email": "user@yandex.ru",
+        "age": 45
+    },
+    "user6": {
+        "region": "Sochi",
+        "registered": "2022-10-30",
+        "last_login": "2023-12-14",
+        "email": "user2@gmail.com",
+        "age": 32
+    }
+}
