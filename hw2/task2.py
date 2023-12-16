@@ -2,6 +2,7 @@
 
 import re
 import sys
+
 from helper import get_dispersion, opener, write_to_json
 
 HALF_YEAR = 183
@@ -57,9 +58,6 @@ def email_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict], int]:
     Args:
         clients (dict[str, dict]): users and information about them
 
-    Raises:
-        KeyError: register or last login date is missing
-
     Returns:
         tuple[dict[str, dict]]: stat of usage each email and sum of all usages
     """
@@ -87,9 +85,6 @@ def process_data(path_in: str, path_out: str) -> None:
     Args:
         path_in (str): path to input file
         path_out (str): path to output file
-
-    Raises:
-        ValueError: file is empty error
 
     Result:
         Json file with calculated stats

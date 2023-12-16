@@ -1,7 +1,7 @@
 """help functions module"."""
 import json
-from math import ceil
 import sys
+from math import ceil
 
 import dateparser
 
@@ -13,10 +13,6 @@ def opener(path_in: str) -> dict[str, dict]:
 
     Args:
         path_in (str): path to file
-
-    Raises:
-        ValueError: file not found error
-        ValueError: file is not valid (ex. invalid syntax)
 
     Returns:
         dict[str, dict]: read data
@@ -39,9 +35,6 @@ def write_to_json(path_out: str, stats: dict[str, dict]):
     Args:
         path_out (str): path to output file
         stats (dict[str, dict]): calculated stats
-
-    Raises:
-        ValueError: file not found error
     """
     try:
         with open(path_out, 'w') as output_file:
