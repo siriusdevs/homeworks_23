@@ -1,7 +1,7 @@
 """Module for calculate stats."""
 
 import re
-
+import sys
 from helper import get_dispersion, opener, write_to_json
 
 HALF_YEAR = 183
@@ -76,7 +76,8 @@ def email_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict], int]:
         else:
             email_disp[email_host] = 1
     if not count_emails:
-        return 'data doesn`t have email fields!'
+        sys.stdout.write(str('data doesn`t have email fields!'))
+        sys.exit(1)
     return email_disp, sum(email_disp.values())
 
 
@@ -96,7 +97,8 @@ def process_data(path_in: str, path_out: str) -> None:
     clients = opener(path_in)
 
     if not clients:
-        return 'data file is empty!'
+        sys.stdout.write('data file is empty!')
+        sys.exit(1)
 
     email_disp, duration_disp = email_dispersion(clients), duration_dispersion(clients)
 

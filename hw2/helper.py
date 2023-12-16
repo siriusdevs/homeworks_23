@@ -26,10 +26,10 @@ def opener(path_in: str) -> dict[str, dict]:
             clients = json.loads(data_file.read())
     except FileNotFoundError as notfoundmsg:
         sys.stdout.write(str(notfoundmsg))
-        return
+        sys.exit(1)
     except json.decoder.JSONDecodeError as jsonerrormsg:
         sys.stdout.write(str(jsonerrormsg))
-        return
+        sys.exit(1)
     return clients
 
 
@@ -48,7 +48,7 @@ def write_to_json(path_out: str, stats: dict[str, dict]):
             json.dump(stats, fp=output_file, indent=4)
     except FileNotFoundError as notfoundmsg:
         sys.stdout.write(str(notfoundmsg))
-        return
+        sys.exit(1)
 
 
 def get_dispersion(user: dict[str, str | int]) -> int:
