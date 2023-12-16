@@ -1,0 +1,12 @@
+{
+    "test_data": {
+
+    },
+    "answer": {
+        "active_for_more_than_half_year_average_age": null,
+        "active_in_last_half_year_average_age": null,
+        "active_in_last_month_average_age": null,
+        "active_in_last_two_days_average_age": null,
+        "active_in_last_week_average_age": null
+    }
+}

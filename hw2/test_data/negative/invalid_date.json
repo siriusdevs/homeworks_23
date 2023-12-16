@@ -1,0 +1,16 @@
+{
+    "user1": {
+        "region": "Moscow",
+        "registered": "2012-12-24",
+        "last_login": "Alfa Bank",
+        "email": "user@yandex.ru",
+        "age": 36
+    },
+    "user2": {
+        "region": "Moscow",
+        "registered": "2012-12-24",
+        "last_login": "2023-10-01",
+        "email": "user@yandex.ru",
+        "age": 36
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "test_data" : {
+        "Biba-IT": {
+            "region": "Saint-Petersburg",
+            "registered": "2012-12-24",
+            "email": "user@yandex.ru",
+            "age": 30
+        },
+        "Boba-Builder": {
+            "region": "Saint-Petersburg",
+            "registered": "2012-12-24",
+            "email": "user@yandex.ru",
+            "age": 43
+        }
+    },
+    "answer": {
+        "active_for_more_than_half_year_average_age": null,
+        "active_in_last_half_year_average_age": null,
+        "active_in_last_month_average_age": null,
+        "active_in_last_two_days_average_age": null,
+        "active_in_last_week_average_age": null,
+        "Saint-Petersburg": 100.0
+    }
+}
