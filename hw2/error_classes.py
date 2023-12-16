@@ -1,10 +1,12 @@
 """Module with custom errors."""
 
 
-import hw2
+import sys
+
+import multi_util as utils
 
 
-class NonExistentField(Exception):
+class NonExistentField:
     """Custom error, calls if field isn't exists."""
 
     def __init__(self, client: str, field: str, output_path: str) -> None:
@@ -16,11 +18,11 @@ class NonExistentField(Exception):
             output_path: str - file to write error.
         """
         message = f'{field} field does not exists for client {client}.'
-        hw2.write(message, output_path)
-        super().__init__(message)
+        utils.write(message, output_path)
+        sys.exit()
 
 
-class EmptyField(Exception):
+class EmptyField:
     """Custom error, calls if field is empty."""
 
     def __init__(self, client: str, field: str, output_path: str) -> None:
@@ -32,11 +34,11 @@ class EmptyField(Exception):
             output_path: str - file to write error.
         """
         message = f'{field} field is empty for client {client}.'
-        hw2.write(message, output_path)
-        super().__init__(message)
+        utils.write(message, output_path)
+        sys.exit()
 
 
-class EmailError(Exception):
+class EmailError:
     """Custom error, calls if email is incorrect."""
 
     def __init__(self, client: str, output_path: str) -> None:
@@ -47,11 +49,11 @@ class EmailError(Exception):
             output_path: str - file to write error.
         """
         message = f'Wrong email address: empty host name for client {client}.'
-        hw2.write(message, output_path)
-        super().__init__(message)
+        utils.write(message, output_path)
+        sys.exit()
 
 
-class NoInputFile(Exception):
+class NoInputFile:
     """Custom error, calls if input file not exists."""
 
     def __init__(self, input_file: str, output_path: str) -> None:
@@ -62,11 +64,11 @@ class NoInputFile(Exception):
             output_path: str - file to write error.
         """
         message = f'File {input_file} does not exists. Processing is not possible.'
-        hw2.write(message, output_path)
-        super().__init__(message)
+        utils.write(message, output_path)
+        sys.exit()
 
 
-class ListNotExpected(Exception):
+class ListNotExpected:
     """Custom error, calls if in input file appear list."""
 
     def __init__(self, output_path: str) -> None:
@@ -76,5 +78,5 @@ class ListNotExpected(Exception):
             output_path: str - file to write error.
         """
         message = 'List not expected in input file.'
-        hw2.write(message, output_path)
-        super().__init__(message)
+        utils.write(message, output_path)
+        sys.exit()
