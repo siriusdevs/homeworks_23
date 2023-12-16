@@ -1,6 +1,7 @@
 """Process date."""
 
 import json
+import os
 from datetime import date
 from typing import Optional
 
@@ -19,8 +20,9 @@ def process_data(input_path: str, output_path: str, current_date: Optional[date]
     try:
         with open(input_path, 'r') as input_file:
             studen_data = json.loads(input_file.read())
-    except (FileNotFoundError, json.JSONDecodeError):
-        studen_data = {}
+    except (FileNotFoundError, json.JSONDecodeError) as error:
+        _write({'error-msg': error.strerror}, output_path)
+        return
 
     statistics_by_name = {
         const.AGE_OUTPUT_FIELD_NAME: AgeStatistics(
@@ -36,5 +38,12 @@ def process_data(input_path: str, output_path: str, current_date: Optional[date]
     output = {}
     for name, statistics in statistics_by_name.items():
         output[name] = statistics.get_statistics()
-    with open(output_path, 'w') as output_file:
-        json.dump(output, output_file)
+    _write(output, output_path)
+
+
+def _write(json_string: str, path):
+    dirpath = os.path.dirname(path)
+    if not os.path.exists(dirpath) and dirpath:
+        os.makedirs(dirpath)
+    with open(path, 'w') as output_file:
+        json.dump(json_string, output_file)
