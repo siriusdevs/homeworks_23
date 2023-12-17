@@ -9,8 +9,13 @@ def check_type_of_input(input_value: Any, expected_type: Any) -> bool:
     Args:
         input_value: Input value
         expected_type: Expected type
+
+    Returns:
+        bool: True if input_value is expected_type, False otherwise
+
     Raises:
         ValueError: If input_value is not expected_type
+    
     """
     if not isinstance(input_value, expected_type):
         raise ValueError(f'Input value must be {expected_type}')
@@ -36,7 +41,8 @@ class Product:
         """
         Return price.
 
-        :return: Price of the product
+        Returns:
+            float: Price of the product
         """
         return self._price
 
@@ -47,6 +53,7 @@ class Product:
 
         Args:
             price_value (float): New price
+
         Raises:
             ValueError: If price_value is negative
         """
@@ -60,7 +67,8 @@ class Product:
         """
         Return name.
 
-        :return: Name of the product
+        Returns:
+            str: Name of the product
         """
         return self._name
 
@@ -96,7 +104,8 @@ class Dish:
         """
         Return name.
 
-        :return: Name of the dish
+        Returns:
+            str: Name of the dish
         """
         return self._name
 
@@ -116,7 +125,8 @@ class Dish:
         """
         Return ingredients.
 
-        :return: List of ingredients
+        Returns:
+            list: List of ingredients
         """
         return self._ingredients
 
@@ -176,7 +186,8 @@ class Restaurant:
         """
         Return name.
 
-        :return: Name of the restaurant
+        Returns:
+            str: Name of the restaurant
         """
         return self._name
 
@@ -196,7 +207,8 @@ class Restaurant:
         """
         Return dishes.
 
-        :return: List of dishes
+        Returns:
+            list: List of dishes
         """
         return self._dishes
 
@@ -218,7 +230,8 @@ class Restaurant:
         """
         Return products.
 
-        :return: List of products
+        Returns:
+            list: List of products
         """
         return self._products
 
@@ -261,7 +274,9 @@ class Restaurant:
 
         Args:
             dish (Dish): Dish to order
-        :return: True if order is successful, False otherwise
+            
+        Returns:
+            bool: True if dish can be ordered, False otherwise
         """
         check_type_of_input(dish, Dish)
         for ingredient in dish.ingredients:
