@@ -1,5 +1,5 @@
 """
-This module contains classes for managing a restaurant.
+Module contains classes for managing a restaurant.
 """
 
 from typing import Any, List
@@ -9,9 +9,10 @@ def check_value_type(value: Any, type_: Any) -> bool:
     """
     Check type of value.
 
-    :param value: value to check
-    :param type_: expected type
-    :raises ValueError: if value is not of expected type
+    :param value: Value to check
+    :param type_: Expected type
+    :return: True if value is of expected type, False otherwise
+    :raises ValueError: If value is not of expected type
     """
     if not isinstance(value, type_):
         raise ValueError(f'Value must be {type_}')
@@ -27,8 +28,8 @@ class Product:
         """
         Create product.
 
-        :param name: name of the product
-        :param price: price of the product
+        :param name: Name of the product
+        :param price: Price of the product
         """
         self.name = name
         self.price = price
@@ -38,7 +39,7 @@ class Product:
         """
         Return price.
 
-        :return: price of the product
+        :return: Price of the product
         """
         return self._price
 
@@ -47,8 +48,8 @@ class Product:
         """
         Set price.
 
-        :param price_value: new price
-        :raises ValueError: if price is not positive
+        :param price_value: New price
+        :raises ValueError: If price is not positive
         """
         check_value_type(price_value, float)
         if price_value < 0:
@@ -60,7 +61,7 @@ class Product:
         """
         Return name.
 
-        :return: name of the product
+        :return: Name of the product
         """
         return self._name
 
@@ -69,7 +70,7 @@ class Product:
         """
         Set name.
 
-        :param name_value: new name
+        :param name_value: New name
         """
         check_value_type(name_value, str)
         self._name = name_value
@@ -84,8 +85,8 @@ class Dish:
         """
         Create dish.
 
-        :param name: name of the dish
-        :param ingredients: list of ingredients
+        :param name: Name of the dish
+        :param ingredients: List of ingredients
         """
         self.name = name
         self.ingredients = ingredients
@@ -95,7 +96,7 @@ class Dish:
         """
         Return name.
 
-        :return: name of the dish
+        :return: Name of the dish
         """
         return self._name
 
@@ -104,7 +105,7 @@ class Dish:
         """
         Set name.
 
-        :param name_value: new name
+        :param name_value: New name
         """
         check_value_type(name_value, str)
         self._name = name_value
@@ -114,7 +115,7 @@ class Dish:
         """
         Return ingredients.
 
-        :return: list of ingredients
+        :return: List of ingredients
         """
         return self._ingredients
 
@@ -123,7 +124,7 @@ class Dish:
         """
         Set ingredients.
 
-        :param ingredients_value: new list of ingredients
+        :param ingredients_value: New list of ingredients
         """
         check_value_type(ingredients_value, list)
         for ingredient in ingredients_value:
@@ -134,7 +135,7 @@ class Dish:
         """
         Add ingredient.
 
-        :param product: product to add
+        :param product: Product to add
         """
         check_value_type(product, Product)
         self._ingredients.append(product)
@@ -143,7 +144,7 @@ class Dish:
         """
         Delete ingredient.
 
-        :param product: product to remove
+        :param product: Product to remove
         """
         check_value_type(product, Product)
         self._ingredients.remove(product)
@@ -158,9 +159,9 @@ class Restaurant:
         """
         Create restaurant.
 
-        :param name: name of the restaurant
-        :param dishes: list of dishes
-        :param products: list of products
+        :param name: Name of the restaurant
+        :param dishes: List of dishes
+        :param products: List of products
         """
         self.name = name
         self.dishes = dishes
@@ -171,7 +172,7 @@ class Restaurant:
         """
         Return name.
 
-        :return: name of the restaurant
+        :return: Name of the restaurant
         """
         return self._name
 
@@ -180,7 +181,7 @@ class Restaurant:
         """
         Set name.
 
-        :param name_value: new name
+        :param name_value: New name
         """
         check_value_type(name_value, str)
         self._name = name_value
@@ -190,7 +191,7 @@ class Restaurant:
         """
         Return dishes.
 
-        :return: list of dishes
+        :return: List of dishes
         """
         return self._dishes
 
@@ -199,7 +200,7 @@ class Restaurant:
         """
         Set dishes.
 
-        :param dishes_value: new list of dishes
+        :param dishes_value: New list of dishes
         """
         check_value_type(dishes_value, list)
         for dish in dishes_value:
@@ -211,7 +212,7 @@ class Restaurant:
         """
         Return products.
 
-        :return: list of products
+        :return: List of products
         """
         return self._products
 
@@ -220,7 +221,7 @@ class Restaurant:
         """
         Set products.
 
-        :param products_value: new list of products
+        :param products_value: New list of products
         """
         check_value_type(products_value, list)
         for product in products_value:
@@ -231,7 +232,7 @@ class Restaurant:
         """
         Add dish.
 
-        :param dish: dish to add
+        :param dish: Dish to add
         """
         check_value_type(dish, Dish)
         self._dishes.append(dish)
@@ -240,7 +241,7 @@ class Restaurant:
         """
         Delete dish.
 
-        :param dish: dish to remove
+        :param dish: Dish to remove
         """
         check_value_type(dish, Dish)
         self._dishes.remove(dish)
@@ -249,7 +250,7 @@ class Restaurant:
         """
         Order dish.
 
-        :param dish: dish to order
+        :param dish: Dish to order
         :return: True if order is successful, False otherwise
         """
         check_value_type(dish, Dish)
