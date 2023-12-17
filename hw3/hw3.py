@@ -205,7 +205,7 @@ class Unit:
             other_unit (Self): other unit.
 
         Returns:
-            _type_: string with attack.
+            str: string with attack.
         """
         return f'{self.name} is attacking {other_unit.name}'
 
