@@ -207,7 +207,7 @@ class Unit:
         Returns:
             str: string with attack.
         """
-        check(other_unit, (Player | Enemy))
+        check(other_unit, (Unit))
         return f'{self.name} is attacking {other_unit.name}'
 
 
