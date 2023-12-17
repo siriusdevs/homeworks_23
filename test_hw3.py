@@ -40,4 +40,4 @@ def test_restaurant():
         restaurant.products = ['Burger', 'Fries']
     assert restaurant.order_dish(dish) is not None
     restaurant.remove_dish(dish)
-    assert restaurant.order_dish(dish) is None
+    assert restaurant.order_dish(dish) is False
