@@ -26,15 +26,15 @@ def check(new_value: Any, classes: tuple[type] | type[Any]):
 class Weapon:
     """Class for weapons."""
 
-    def __init__(self, name_weapon: str, damage: int | float) -> None:
+    def __init__(self, name: str, damage: int | float) -> None:
         """
         Name of weapon and its damage.
 
         Args:
-            name_weapon (str): name of weapon.
+            name (str): name of weapon.
             damage (float): damage of weapon.
         """
-        self.name_weapon = name_weapon
+        self.name = name
         self.damage = damage
 
     def __str__(self) -> str:
@@ -44,28 +44,33 @@ class Weapon:
         Returns:
             str: string with name of weapon.
         """
-        return self.name_weapon
+        return self.name
 
     @property
-    def name_weapon(self) -> str:
+    def name(self) -> str:
         """
         Getter for name of a weapon.
 
         Returns:
             str: name of a weapon.
         """
-        return self._name_weapon
+        return self._name
 
-    @name_weapon.setter
-    def name_weapon(self, new_name_weapon: str) -> None:
+    @name.setter
+    def name(self, new_name: str) -> None:
         """
         Setter for name of a weapon.
 
         Args:
-            new_name_weapon (str): new name of a weapon.
+            new_name (str): new name of a weapon.
+
+        Raises:
+            ValueError: error if name is empty.
         """
-        check(new_name_weapon, (str))
-        self._name_weapon = new_name_weapon
+        check(new_name, (str))
+        if new_name == '':
+            raise ValueError(f'{new_name} must have name!')
+        self._name = new_name
 
     @property
     def damage(self) -> float | int:
@@ -78,7 +83,7 @@ class Weapon:
         return self._damage
 
     @damage.setter
-    def damage(self, new_damage: str) -> None:
+    def damage(self, new_damage: float | int) -> None:
         """
         Setter for damage of a weapon.
 
@@ -90,21 +95,21 @@ class Weapon:
         """
         check(new_damage, (float | int))
         if new_damage < 0:
-            raise ValueError(f'Damage of {self.name_weapon} is less than zero')
+            raise ValueError(f'Damage of {self.name} is less than zero')
         self._damage = new_damage
 
 
 class Unit:
     """Class with units."""
 
-    def __init__(self, name: str, health: int | float, weapon: str) -> None:
+    def __init__(self, name: str, health: int | float, weapon: Weapon) -> None:
         """
         Name, health and weapon for unit.
 
         Args:
             name (str): name of unit.
             health (int | float): health of unit.
-            weapon (str): weapon of unit.
+            weapon (Weapon): weapon of unit.
         """
         self.name = name
         self.health = health
@@ -127,8 +132,13 @@ class Unit:
 
         Args:
             new_name (str): new name of unit.
+
+        Raises:
+            ValueError: error if name is empty.
         """
         check(new_name, (str))
+        if new_name == '':
+            raise ValueError(f'{new_name} must have name!')
         self._name = new_name
 
     @property
@@ -158,25 +168,25 @@ class Unit:
         self._health = float(new_health) if new_health is int else new_health
 
     @property
-    def name_weapon(self) -> str:
+    def weapon(self) -> Weapon:
         """
         Getter for name of weapon.
 
         Returns:
-            str: string with the name of weapon
+            Weapon: string with the name of weapon
         """
-        return self._name_weapon
+        return self._weapon
 
-    @name_weapon.setter
-    def name_weapon(self, new_name_weapon: str) -> None:
+    @weapon.setter
+    def weapon(self, new_weapon: Weapon) -> None:
         """
         Setter for name of weapon.
 
         Args:
-            new_name_weapon (str): string with new name of weapon.
+            new_weapon (Weapon): string with new name of weapon.
         """
-        check(new_name_weapon, (str))
-        self._name_weapon = new_name_weapon
+        check(new_weapon, (Weapon))
+        self._weapon = new_weapon
 
     def __str__(self) -> str:
         """
@@ -203,27 +213,18 @@ class Unit:
 class Player(Unit):
     """Class players."""
 
-    def __init__(self, name: str, health: int | float, weapon: str, level: int) -> None:
+    def __init__(self, name: str, health: int | float, weapon: Weapon, level: int) -> None:
         """
         Create name, health, weapon and level for player.
 
         Args:
             name (str): name of player.
             health (int | float): health of player.
-            weapon (str): weapon of player.
+            weapon (Weapon): weapon of player.
             level (int): level of player.
         """
         super().__init__(name, health, weapon)
         self.level = level
-
-    def __str__(self) -> str:
-        """
-        Display the characteristics of a player.
-
-        Returns:
-            str: string with name of a player.
-        """
-        return self.name
 
     @property
     def level(self) -> int:
@@ -254,15 +255,6 @@ class Player(Unit):
 
 class Enemy(Unit):
     """Class enemies."""
-
-    def __str__(self) -> str:
-        """
-        Display the characteristics of a enemy.
-
-        Returns:
-            str: string with name of a enemy.
-        """
-        return self.name
 
 
 class Game:
@@ -347,17 +339,7 @@ class Game:
         self.players.append(new_player)
 
     def _remove_player(self, old_player: Player) -> None:
-        for index, player in enumerate(self.__players):
-            correct_attrs = (
-                player.name == old_player.name
-                and player.health == old_player.health
-                and player.weapon == old_player.weapon
-                and player.level == old_player.level
-            )
-            if correct_attrs:
-                self.__players.pop(index)
-                return
-        raise ValueError(f'{old_player.name} not in players')
+        self.players.remove(old_player)
 
     @property
     def weapons(self) -> list[Weapon]:
@@ -375,15 +357,7 @@ class Game:
         self.weapons.append(new_wepon)
 
     def _remove_weapon(self, old_weapon: Weapon) -> None:
-        for index, weapon in enumerate(self.__weapons):
-            correct_attrs = (
-                weapon.name_weapon == old_weapon.name_weapon
-                and weapon.damage == old_weapon.damage
-            )
-            if correct_attrs:
-                self.__weapons.pop(index)
-                return
-        raise ValueError(f'{old_weapon.name} not in weapons')
+        self.weapons.remove(old_weapon)
 
     @property
     def enemies(self) -> list[Enemy]:
@@ -401,13 +375,4 @@ class Game:
         self.enemies.append(new_enemy)
 
     def _remove_enemy(self, old_enemy: Enemy) -> None:
-        for index, enemy in enumerate(self.__enemies):
-            correct_attrs = (
-                enemy.name == old_enemy.name
-                and enemy.health == old_enemy.health
-                and enemy.weapon == old_enemy.weapon
-            )
-            if correct_attrs:
-                self.__enemies.pop(index)
-                return
-        raise ValueError(f'{old_enemy.name} not in enemies')
+        self.enemies.remove(old_enemy)
