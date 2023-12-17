@@ -1,7 +1,4 @@
-"""
-Module contains classes for managing a restaurant.
-"""
-
+"""Module for managing a restaurant."""
 from typing import Any, List
 
 
@@ -20,9 +17,7 @@ def check_value_type(value: Any, type_: Any) -> bool:
 
 
 class Product:
-    """
-    Class representing a product.
-    """
+    """Class representing a product."""
 
     def __init__(self, name: str, price: float):
         """
@@ -82,12 +77,10 @@ class Dish:
     """
 
     def __init__(self, name: str, ingredients: List[Product]):
-        """
-        Create dish.
+        """Create dish.
 
         :param name: Name of the dish
-        :param ingredients: List of ingredients
-        """
+        :param ingredients: List of ingredients"""
         self.name = name
         self.ingredients = ingredients
 
@@ -156,13 +149,11 @@ class Restaurant:
     """
 
     def __init__(self, name: str, dishes: List[Dish], products: List[Product]):
-        """
-        Create restaurant.
+        """Create restaurant.
 
         :param name: Name of the restaurant
         :param dishes: List of dishes
-        :param products: List of products
-        """
+        :param products: List of products"""
         self.name = name
         self.dishes = dishes
         self.products = products
