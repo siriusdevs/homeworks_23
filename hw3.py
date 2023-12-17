@@ -1,10 +1,10 @@
 """This module contains classes for representing a person, a student, a teacher, and a course."""
 
-from typing import Any, List, Optional, Tuple, Union
+from typing import Any, List, Optional, Tuple
 
 
 def check_type(
-    input_value: Any, types: Union[type, Tuple[type]],
+    input_value: Any, types: Tuple[type, ...],
     check_positive: Optional[bool] = False,
 ) -> None:
     """
@@ -12,7 +12,7 @@ def check_type(
 
     Args:
         input_value (Any): The value to check.
-        types (Union[type, Tuple[type]]): The type to check against.
+        types (Tuple[type, ...]): The type to check against.
         check_positive (Optional[bool], optional): Check if value is positive. Defaults to False.
 
     Raises:
@@ -20,7 +20,7 @@ def check_type(
         ValueError: If value is not positive.
     """
     if not isinstance(input_value, types):
-        value_type = type(input_value).__name__
+        value_type = type(input_value)
         error_msg = f'Expected type {types}, got {value_type}'
         raise TypeError(error_msg)
     if check_positive and input_value < 0:
@@ -143,7 +143,7 @@ class Student(Person):
         """
         check_type(courses, list)
         for course in courses:
-            check_type(course, 'Course')
+            check_type(course, Course)
         self._courses = courses
 
     def add_course(self, new_course: 'Course') -> None:
@@ -153,7 +153,7 @@ class Student(Person):
         Args:
             new_course (Course): The course to add.
         """
-        check_type(new_course, 'Course')
+        check_type(new_course, Course)
         self._courses.append(new_course)
         new_course.students.append(self)
 
@@ -209,7 +209,7 @@ class Teacher(Person):
         """
         check_type(courses, list)
         for course in courses:
-            check_type(course, 'Course')
+            check_type(course, Course)
         self._courses = courses
 
     def add_course(self, new_course: 'Course') -> None:
@@ -222,7 +222,7 @@ class Teacher(Person):
         Raises:
             ValueError: If the course is already in the list of courses of the teacher.
         """
-        check_type(new_course, 'Course')
+        check_type(new_course, Course)
         if new_course in self._courses:
             raise ValueError(f'Course {new_course.name} is already in the list of courses')
         self._courses.append(new_course)
@@ -248,12 +248,17 @@ class Teacher(Person):
 class Course:
     """Class representing a course."""
 
-    def __init__(self, name: str, teacher: 'Teacher' | None, students: List['Student']) -> None:
+    def __init__(
+        self,
+        name: str,
+        teacher: Teacher,
+        students: List['Student'],
+    ) -> None:
         """Initialize a Course object.
 
         Args:
             name (str): The name of the course.
-            teacher (Teacher | None): The teacher of the course.
+            teacher (Teacher): The teacher of the course.
             students (List[Student]): The students of the course.
         """
         self.name = name
@@ -296,7 +301,7 @@ class Course:
         Args:
             teacher (Teacher): The teacher of the course.
         """
-        check_type(teacher, 'Teacher')
+        check_type(teacher, Teacher)
         self._teacher = teacher
 
     @property
@@ -319,5 +324,5 @@ class Course:
         """
         check_type(students, list)
         for student in students:
-            check_type(student, 'Student')
+            check_type(student, Student)
         self._students = students
