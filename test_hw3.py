@@ -2,7 +2,7 @@
 
 import pytest
 
-from hw3 import Product, Dish, Restaurant
+from hw3 import Dish, Product, Restaurant
 
 MIDDLE_PRICE = 5.0
 LOW_PRICE = 2.0
@@ -18,6 +18,7 @@ def test_product():
     with pytest.raises(ValueError):
         product.name = 123
 
+
 def test_dish():
     """Test Dish class."""
     product1 = Product('Cotlet', MIDDLE_PRICE)
@@ -29,6 +30,7 @@ def test_dish():
         dish.name = 123
     with pytest.raises(ValueError):
         dish.ingredients = ['Cotlet', 'Fries']
+
 
 def test_restaurant():
     """Test Restaurant class."""
