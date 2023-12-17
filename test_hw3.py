@@ -1,10 +1,13 @@
 """test module for hw3.py."""
+
 import pytest
 
 from hw3 import Product, Dish, Restaurant
 
 MIDDLE_PRICE = 5.0
 LOW_PRICE = 2.0
+
+
 def test_product():
     """Test Product class."""
     product = Product('Burger', MIDDLE_PRICE)
