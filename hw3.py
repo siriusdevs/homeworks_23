@@ -2,17 +2,18 @@
 from typing import Any, List
 
 
-def check_value_type(value: Any, type_: Any) -> bool:
+def check_type_of_input(input_value: Any, expected_type: Any) -> bool:
     """
-    Check type of value.
+    Check type of input_value.
 
-    :param value: Value to check
-    :param type_: Expected type
-    :return: True if value is of expected type, False otherwise
-    :raises ValueError: If value is not of expected type
+    Args:
+        input_value: Input value
+        expected_type: Expected type
+    Raises:
+        ValueError: If input_value is not expected_type
     """
-    if not isinstance(value, type_):
-        raise ValueError(f'Value must be {type_}')
+    if not isinstance(input_value, expected_type):
+        raise ValueError(f'Input value must be {expected_type}')
     return True
 
 
@@ -23,8 +24,9 @@ class Product:
         """
         Create product.
 
-        :param name: Name of the product
-        :param price: Price of the product
+        Args:
+            name (str): Name of the product
+            price (float): Price of the product
         """
         self.name = name
         self.price = price
@@ -43,10 +45,12 @@ class Product:
         """
         Set price.
 
-        :param price_value: New price
-        :raises ValueError: If price is not positive
+        Args:
+            price_value (float): New price
+        Raises:
+            ValueError: If price_value is negative
         """
-        check_value_type(price_value, float)
+        check_type_of_input(price_value, float)
         if price_value < 0:
             raise ValueError('Price must be positive')
         self._price = price_value
@@ -65,9 +69,10 @@ class Product:
         """
         Set name.
 
-        :param name_value: New name
+        Args:
+            name_value (str): New name
         """
-        check_value_type(name_value, str)
+        check_type_of_input(name_value, str)
         self._name = name_value
 
 
@@ -79,8 +84,10 @@ class Dish:
     def __init__(self, name: str, ingredients: List[Product]):
         """Create dish.
 
-        :param name: Name of the dish
-        :param ingredients: List of ingredients"""
+        Args:
+            name (str): Name of the dish
+            ingredients (list): List of ingredients
+        """
         self.name = name
         self.ingredients = ingredients
 
@@ -98,9 +105,10 @@ class Dish:
         """
         Set name.
 
-        :param name_value: New name
+        Args:
+            name_value (str): New name
         """
-        check_value_type(name_value, str)
+        check_type_of_input(name_value, str)
         self._name = name_value
 
     @property
@@ -117,29 +125,32 @@ class Dish:
         """
         Set ingredients.
 
-        :param ingredients_value: New list of ingredients
+        Args:
+            ingredients_value (list): New list of ingredients
         """
-        check_value_type(ingredients_value, list)
+        check_type_of_input(ingredients_value, list)
         for ingredient in ingredients_value:
-            check_value_type(ingredient, Product)
+            check_type_of_input(ingredient, Product)
         self._ingredients = ingredients_value
 
     def add_ingredient(self, product: Product):
         """
         Add ingredient.
 
-        :param product: Product to add
+        Args:
+            product (Product): Product to add
         """
-        check_value_type(product, Product)
+        check_type_of_input(product, Product)
         self._ingredients.append(product)
 
     def remove_ingredient(self, product: Product):
         """
         Delete ingredient.
 
-        :param product: Product to remove
+        Args:
+            product (Product): Product to remove
         """
-        check_value_type(product, Product)
+        check_type_of_input(product, Product)
         self._ingredients.remove(product)
 
 
@@ -151,9 +162,11 @@ class Restaurant:
     def __init__(self, name: str, dishes: List[Dish], products: List[Product]):
         """Create restaurant.
 
-        :param name: Name of the restaurant
-        :param dishes: List of dishes
-        :param products: List of products"""
+        Args:
+            name (str): Name of the restaurant
+            dishes (list): List of dishes
+            products (list): List of products
+        """
         self.name = name
         self.dishes = dishes
         self.products = products
@@ -172,9 +185,10 @@ class Restaurant:
         """
         Set name.
 
-        :param name_value: New name
+        Args:
+            name_value (str): New name
         """
-        check_value_type(name_value, str)
+        check_type_of_input(name_value, str)
         self._name = name_value
 
     @property
@@ -191,11 +205,12 @@ class Restaurant:
         """
         Set dishes.
 
-        :param dishes_value: New list of dishes
+        Args:
+            dishes_value (list): New list of dishes
         """
-        check_value_type(dishes_value, list)
+        check_type_of_input(dishes_value, list)
         for dish in dishes_value:
-            check_value_type(dish, Dish)
+            check_type_of_input(dish, Dish)
         self._dishes = dishes_value
 
     @property
@@ -212,40 +227,45 @@ class Restaurant:
         """
         Set products.
 
-        :param products_value: New list of products
+        Args:
+            products_value (list): New list of products
         """
-        check_value_type(products_value, list)
+        check_type_of_input(products_value, list)
         for product in products_value:
-            check_value_type(product, Product)
+            check_type_of_input(product, Product)
         self._products = products_value
 
     def add_dish(self, dish: Dish):
         """
         Add dish.
 
-        :param dish: Dish to add
+        Args:
+            dish (Dish): Dish to add
         """
-        check_value_type(dish, Dish)
+        check_type_of_input(dish, Dish)
         self._dishes.append(dish)
 
     def remove_dish(self, dish: Dish):
         """
         Delete dish.
 
-        :param dish: Dish to remove
+        Args:
+            dish (Dish): Dish to remove
         """
-        check_value_type(dish, Dish)
+        check_type_of_input(dish, Dish)
         self._dishes.remove(dish)
 
     def order_dish(self, dish: Dish) -> bool:
         """
         Order dish.
 
-        :param dish: Dish to order
+        Args:
+            dish (Dish): Dish to order
         :return: True if order is successful, False otherwise
         """
-        check_value_type(dish, Dish)
+        check_type_of_input(dish, Dish)
         for ingredient in dish.ingredients:
             if ingredient not in self._products:
                 return False
         return True
+    
