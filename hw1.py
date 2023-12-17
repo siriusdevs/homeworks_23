@@ -7,7 +7,7 @@ def salary_stats(*departments, limit=None):
     limit (float, optional): A limit below which salaries should not be considered. Defaults to None.
 
     Returns:
-    list, float: A list of top 3 salaries and their ratio to the total salary, both rounded to 2 decimal places.
+    list, .float: A list of top 3 salaries and their ratio to the total salary, both rounded to 2 decimal places.
     """
     all_salaries = []
     for department, salaries in departments:
