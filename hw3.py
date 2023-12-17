@@ -15,7 +15,6 @@ def check_type_of_input(input_value: Any, expected_type: Any) -> bool:
 
     Raises:
         ValueError: If input_value is not expected_type
-    
     """
     if not isinstance(input_value, expected_type):
         raise ValueError(f'Input value must be {expected_type}')
@@ -85,9 +84,7 @@ class Product:
 
 
 class Dish:
-    """
-    Class representing a dish.
-    """
+    """Class representing a dish."""
 
     def __init__(self, name: str, ingredients: List[Product]):
         """Create dish.
@@ -165,9 +162,7 @@ class Dish:
 
 
 class Restaurant:
-    """
-    Class representing a restaurant.
-    """
+    """Class representing a restaurant."""
 
     def __init__(self, name: str, dishes: List[Dish], products: List[Product]):
         """Create restaurant.
@@ -274,7 +269,7 @@ class Restaurant:
 
         Args:
             dish (Dish): Dish to order
-            
+
         Returns:
             bool: True if dish can be ordered, False otherwise
         """
@@ -283,4 +278,3 @@ class Restaurant:
             if ingredient not in self._products:
                 return False
         return True
-    
