@@ -156,6 +156,9 @@ class Dish:
 
         Args:
             product (Product): Product to remove
+        
+        Raises:
+            ValueError: If product is not in self._ingredients
         """
         if product not in self._ingredients:
             raise ValueError('Product not found')
@@ -261,7 +264,7 @@ class Restaurant:
 
         Args:
             dish (Dish): Dish to remove
-        
+
         Raises:
             ValueError: If dish is not in self._dishes
         """
@@ -279,15 +282,11 @@ class Restaurant:
 
         Returns:
             bool: True if dish can be ordered, False otherwise
-
-        Raises:
-            ValueError: If dish is not in self._dishes
         """
         if dish not in self._dishes:
             return False
-        else:
-            check_type_of_input(dish, Dish)
-            for ingredient in dish.ingredients:
-                if ingredient not in self._products:
-                    return False
-            return True
+        check_type_of_input(dish, Dish)
+        for ingredient in dish.ingredients:
+            if ingredient not in self._products:
+                return False
+        return True
