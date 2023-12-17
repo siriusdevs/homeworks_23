@@ -16,7 +16,7 @@ def check_type(
         check_positive (Optional[bool], optional): Check if value is positive. Defaults to False.
 
     Raises:
-        TypeError: If value is not of type ` types`.
+        TypeError: If value is not of type `types`.
         ValueError: If value is not positive.
     """
     if not isinstance(input_value, types):
