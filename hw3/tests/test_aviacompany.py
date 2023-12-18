@@ -93,3 +93,33 @@ def test_delete_flight_nonexisting():
     sut = _create_test_aviacompany()
     with pytest.raises(ValueError):
         sut.delete_flight(Flight('5', 'X', 'Y'))
+
+
+def test_add_passenger_happy():
+    """Asserts that adding passenger to aviacompany works."""
+    sut = _create_test_aviacompany()
+    new_passenger = _T_PASSENGERS[0]
+    want_new_passengers = sut.passengers + list(_T_PASSENGERS[:1])
+    sut.add_passenger(new_passenger)
+    assert sut.passengers == want_new_passengers
+
+
+def test_add_passenger_error():
+    """Asserts that adding passenger with incorrect type raises TypeError."""
+    sut = _create_test_aviacompany()
+    with pytest.raises(TypeError):
+        sut.add_passenger({})
+
+
+def test_delete_passenger_happy():
+    """Asserts that deleting a passenger works."""
+    sut = _create_test_aviacompany()
+    sut.delete_passenger(_T_PASSENGERS[0])
+    assert sut.passengers == list(_T_PASSENGERS[1:])
+
+
+def test_delete_passenger_nonexisting():
+    """Asserts that deleting a non-existing passenger raises ValueError."""
+    sut = _create_test_aviacompany()
+    with pytest.raises(ValueError):
+        sut.delete_passenger(Passenger('Sam', '888888'))

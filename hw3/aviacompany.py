@@ -40,15 +40,38 @@ class Aviacompany:  # noqa: WPS214
     def delete_flight(self, flight: Flight) -> None:
         """Delete a flight.
 
-        If it is not inside flights list, raise ValueError.
-
         Args:
             flight: flight to delete
+
+        Raises:
+            ValueError: when flight is not in flights list
         """
         try:
             self.flights.remove(flight)
         except ValueError:
             raise ValueError(f'unable to find flight {flight} in current flights')
+
+    def add_passenger(self, passenger: Passenger) -> None:
+        """Add new passenger.
+
+        Args:
+            passenger: new passenger
+        """
+        self.passengers += [passenger]
+
+    def delete_passenger(self, passenger: Passenger) -> None:
+        """Delete a passenger.
+
+        Args:
+            passenger: passenger to delete
+
+        Raises:
+            ValueError: when passenger is not in passengers list
+        """
+        try:
+            self.passengers.remove(passenger)
+        except ValueError:
+            raise ValueError(f'unable to find passenger {passenger} in current passengers')
 
     @property
     def name(self) -> str:
