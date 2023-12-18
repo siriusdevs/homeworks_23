@@ -59,7 +59,7 @@ def test_append(task: Task) -> None:
 
 
 @pytest.mark.parametrize('project, expected', my_startup)
-def test_get_dishname(project: Project, expected: str) -> None:
+def test_filtered(project: Project, expected: str) -> None:
     """Function which checking work filtered_task.
 
     Args:
