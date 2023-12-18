@@ -102,8 +102,6 @@ class AgeStatistics(Statistics):
 class DateStatistics(Statistics):
     """Calculacte date statistic."""
 
-    date_format = '%Y-%m-%d'  # date parsing format.
-
     def __init__(
         self,
         users_data: dict[dict[str, Any], Any],
@@ -132,7 +130,7 @@ class DateStatistics(Statistics):
         for user in self.users_data.values():
             last_login_date = user.get(self.statistic_field)
             if last_login_date is not None:
-                dates.append(datetime.strptime(last_login_date, self.date_format).date())
+                dates.append(datetime.strptime(last_login_date, '%Y-%m-%d').date())
         for name, duration in self.output_format.items():
             particular_users = self._filter_dates(duration[0], duration[1], dates)
             statistics[name] = _calculate_percent(len(particular_users), len(dates))
