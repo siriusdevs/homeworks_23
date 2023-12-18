@@ -163,8 +163,8 @@ class Project:
             return self.tasks
         for task in self.tasks:
             if task.state is status:
-                filtered.append(task)
-        return filtered
+                filtered.append(task.title)
+        return f'{[item for item in filtered]}'
 
 
 class Participant:
