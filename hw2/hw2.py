@@ -11,6 +11,7 @@
 (цель состоит в том, чтобы в actions они отображались отдельными галочками).
 """
 import json
+import os
 from datetime import datetime
 
 MONTH = 30
@@ -24,6 +25,34 @@ MORE_THAN_SIX_MONTHS = 'more_than_6_months'
 
 EMAIL_USAGE = 'email_usage'
 TIME_STATS = 'time_stats'
+
+
+def current_date(user_info: dict) -> datetime:
+    """Print date if it is correct.
+
+    Args:
+        user_info: dict - dict with information about user.
+
+    Raises:
+        KeyError: if last_login was not given.
+        ValueError: if wrong date was given.
+        TypeError: if wrong data type given.
+        ValueError: if future date was given.
+
+    Returns:
+        datetime: last_login date.
+    """
+    try:
+        date = datetime.strptime(user_info.get('last_login'), '%Y-%m-%d')
+    except KeyError:
+        raise KeyError('last_login was not found')
+    except ValueError:
+        raise ValueError('wrong last_login date was given')
+    except TypeError:
+        raise TypeError('Must be data not str!!!')
+    if datetime.now() < date:
+        return datetime.today()
+    return date
 
 
 def stats_by_time(information: dict) -> dict[str, list]:
@@ -44,8 +73,9 @@ def stats_by_time(information: dict) -> dict[str, list]:
         MORE_THAN_SIX_MONTHS: [],
     }
     for user_info in information.values():
+        now = current_date(user_info)
         age = user_info.get('age')
-        online = datetime.now() - datetime.strptime(user_info.get('last_login'), '%Y-%m-%d')
+        online = datetime.now() - now
 
         match online.days:
             case online.days if online.days <= 2:
@@ -90,16 +120,22 @@ def stats_by_email(information: dict) -> dict[str, int]:
     return mail_host
 
 
-def write_to_output(file_name: str, msg: str) -> None:
+def write_to_output(file_name: str, data_msg: str | dict[str, dict[str, list]]) -> None:
     """Write message in file.
 
     Args:
-        file_name: str - the name of file where we write
-        msg: str - message we write in file
+        file_name: str - the name of file where we write.
+        data_msg: dict[str, dict[str, list]] - data we write in file.
 
     """
-    with open(file_name, 'w') as output:
-        json.dump(msg, output)
+    if os.path.dirname(file_name) and not os.path.exists(file_name):
+        os.makedirs(os.path.dirname(file_name))
+    if isinstance(data_msg, str):
+        with open(file_name, 'w') as output_msg:
+            json.dump(data_msg, output_msg)
+    if isinstance(data_msg, dict):
+        with open(file_name, 'w') as output_stats:
+            json.dump(data_msg, output_stats, indent=4, ensure_ascii=False)
 
 
 def process_data(input_data, output_data):
@@ -127,9 +163,4 @@ def process_data(input_data, output_data):
         EMAIL_USAGE: mail_host,
         TIME_STATS: time_stats,
         }
-
-    with open(output_data, 'w') as output_file:
-        json.dump(stats, output_file, indent=4, ensure_ascii=False)
-
-
-process_data('data_hw2.json', 'output_test.json')
+    write_to_output(output_data, stats)
