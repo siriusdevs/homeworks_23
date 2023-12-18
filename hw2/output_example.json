@@ -1,0 +1,13 @@
+{
+    "email_usage": {
+        "yandex.ru": 1,
+        "gmail.com": 1
+    },
+    "time_stats": {
+        "less_than_2_days": 0,
+        "less_than_1_week": 0,
+        "less_than_1_month": 0,
+        "less_than_6_months": 36.0,
+        "more_than_6_months": 18.0
+    }
+}
