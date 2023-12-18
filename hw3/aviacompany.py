@@ -6,7 +6,7 @@ from .passenger import Passenger
 from .ticket import Ticket
 
 
-class Aviacompany:  # noqa: WPS214
+class Aviacompany:  # noqa: WPS214 (too many methods, but it is according to the task)
     """Represents an aviacompany that aggregates its flights, passengers and tickets."""
 
     def __init__(
@@ -72,6 +72,28 @@ class Aviacompany:  # noqa: WPS214
             self.passengers.remove(passenger)
         except ValueError:
             raise ValueError(f'unable to find passenger {passenger} in current passengers')
+
+    def add_ticket(self, ticket: Ticket) -> None:
+        """Add new ticket.
+
+        Args:
+            ticket: new ticket
+        """
+        self.tickets += [ticket]
+
+    def delete_ticket(self, ticket: Ticket) -> None:
+        """Delete a ticket.
+
+        Args:
+            ticket: ticket to delete
+
+        Raises:
+            ValueError: when ticket is not in tickets list
+        """
+        try:
+            self.tickets.remove(ticket)
+        except ValueError:
+            raise ValueError(f'unable to find ticket {ticket} in current tickets')
 
     @property
     def name(self) -> str:
@@ -148,4 +170,6 @@ class Aviacompany:  # noqa: WPS214
         Args:
             tickets: new list of tickets
         """
+        hw3.check_type(tickets, list)
+        hw3.check_elements_types(tickets, Ticket)
         self._tickets = tickets
