@@ -47,16 +47,6 @@ def count_user_age(json_file: dict[str:dict[str:Any]]) -> dict:
     current_date = datetime.now()
     users = json_file.keys()
     time_steps = {'Less than 2 days': 2,
-                  'Less then a week': 7,
-                  'Less then a mounth': 31,
-                  'Less than half a year': 186}
-    
-    average_age = {}
-
-def count_user_age(json_file: dict[str:dict[str:Any]]) -> dict:
-    current_date = datetime.now()
-    users = json_file.keys()
-    time_steps = {'Less than 2 days': 2,
                   'Less than a week': 7,
                   'Less than a month': 31,
                   'Less than half a year': 186}
