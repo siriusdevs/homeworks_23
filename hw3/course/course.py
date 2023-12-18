@@ -2,7 +2,7 @@
 from copy import deepcopy
 from typing import Optional
 
-import courses_owner.courses_owner as courses_owner
+import courses_participant.courses_participant as courses_participant
 from course.abstract_course import AbstractCourse
 from student.student import Student
 from teacher.teacher import Teacher
@@ -17,10 +17,10 @@ class Course(AbstractCourse):
         students: The persons that are learning this course.
 
     Methods:
-        add_course_owner(new_owner: CourseOwner) -> None:
-            Add course owner to course's collection of the type of the given new_owner.
-        remove_course_owner(owner: CourseOwner) -> None:
-            Remove course owner from course's of the type of the given owner.
+        add_course_participant(new_participant: CoursesParticipant) -> None:
+            Add course participant to course's collection of the type of the given new_participant.
+        remove_course_participant(participant: CoursesParticipant) -> None:
+            Remove course participant from course's of the type of the given participant.
     """
 
     def __init__(self, title: str) -> None:
@@ -33,43 +33,53 @@ class Course(AbstractCourse):
         self.__teacher: Optional[Teacher] = None
         super().__init__(title)
 
-    def add_course_owner(self, new_owner: 'courses_owner.CoursesOwner') -> None:
-        """Add course owner to course (It can be teacher or student).
+    def add_course_participant(
+        self,
+        new_participant: 'courses_participant.CoursesParticipant',
+    ) -> None:
+        """Add course participant to course (It can be teacher or student).
 
         Args:
-            new_owner(CoursesOwner): course owner (teacher or student).
+            new_participant(CoursesParticipant): course participant (teacher or student).
 
         Raises:
-            TypeError: The given new_owner is not a CourseOwner's instance.
+            TypeError: The given new_participant is not a CoursesParticipant's instance.
         """
-        if not isinstance(new_owner, courses_owner.CoursesOwner):
-            raise TypeError('The new course owner has to be a instance of CoursesOwner!')
+        if not isinstance(new_participant, courses_participant.CoursesParticipant):
+            raise TypeError(
+                'The new course participant has to be a instance of CoursesParticipant!',
+            )
 
-        if isinstance(new_owner, Teacher):
-            self.teacher = new_owner
-        elif isinstance(new_owner, Student):
-            self.__add_student(new_owner)
+        if isinstance(new_participant, Teacher):
+            self.teacher = new_participant
+        elif isinstance(new_participant, Student):
+            self.__add_student(new_participant)
 
-    def remove_course_owner(self, new_owner: 'courses_owner.CoursesOwner') -> None:
-        """Remove course owner from course (It can be teacher or student).
+    def remove_course_participant(
+        self,
+        new_participant: 'courses_participant.CoursesParticipant',
+    ) -> None:
+        """Remove course participant from course (It can be teacher or student).
 
         Args:
-            new_owner(CoursesOwner): course owner (teacher or student).
+            new_participant(CoursesParticipant): course participant (teacher or student).
 
         Raises:
-            TypeError: The given new_owner is not a CourseOwner's instance.
+            TypeError: The given new_participant is not a CoursesParticipant's instance.
             ValueError: Student is not in this courses or teacher is not teach this course.
         """
-        if not isinstance(new_owner, courses_owner.CoursesOwner):
-            raise TypeError('The new course owner has to be a instance of CoursesOwner!')
+        if not isinstance(new_participant, courses_participant.CoursesParticipant):
+            raise TypeError(
+                'The new course participant has to be a instance of CoursesParticipant!',
+            )
 
-        if isinstance(new_owner, Teacher):
-            if self.__teacher != new_owner:
+        if isinstance(new_participant, Teacher):
+            if self.__teacher != new_participant:
                 raise ValueError('The given teacher is not teach this course!')
 
             self.__teacher = None
-        elif isinstance(new_owner, Student):
-            self.__remove_student(new_owner)
+        elif isinstance(new_participant, Student):
+            self.__remove_student(new_participant)
 
     @property
     def teacher(self) -> Optional[Teacher]:

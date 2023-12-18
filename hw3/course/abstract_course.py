@@ -1,7 +1,7 @@
 """Module with a abstract course."""
 from abc import ABC, abstractmethod
 
-import courses_owner.courses_owner as courses_owner
+import courses_participant.courses_participant as courses_participant
 
 
 class AbstractCourse(ABC):
@@ -11,10 +11,10 @@ class AbstractCourse(ABC):
         title: The title of course.
 
     Methods:
-        add_course_owner(new_owner: CourseOwner) -> None:
-            Add course owner to course's collection of the type of the given new_owner.
-        remove_course_owner(owner: CourseOwner) -> None:
-            Remove course owner from course's of the type of the given owner.
+        add_course_participant(new_participant: CoursesParticipant) -> None:
+            Add course participant to course's collection of the type of the given new_participant.
+        remove_course_participant(participant: CoursesParticipant) -> None:
+            Remove course participant from course's of the type of the given participant.
     """
 
     @abstractmethod
@@ -71,19 +71,27 @@ class AbstractCourse(ABC):
         return f'Course {self.title}'
 
     @abstractmethod
-    def add_course_owner(self, new_owner: 'courses_owner.CoursesOwner') -> None:
-        """Add course owner to course's collection of the type of the given new_owner.
+    def add_course_participant(
+        self,
+        new_participant: 'courses_participant.CoursesParticipant',
+    ) -> None:
+        """Add course participant to course's collection of the type of the given new_participant.
 
         Args:
-            new_owner(CoursesOwner): The instance of courses owner who can be added in course.
+            new_participant(CoursesParticipant): The instance of courses participant \
+                who can be added in course.
         """
         pass
 
     @abstractmethod
-    def remove_course_owner(self, new_owner: 'courses_owner.CoursesOwner') -> None:
-        """Remove course owner from course's of the type of the given owner.
+    def remove_course_participant(
+        self,
+        new_participant: 'courses_participant.CoursesParticipant',
+    ) -> None:
+        """Remove course participant from course's of the type of the given participant.
 
         Args:
-            new_owner(CoursesOwner): The instance of courses owner who can be deleted from course.
+            new_participant(CoursesParticipant): The instance of courses \
+                participant who can be deleted from course.
         """
         pass

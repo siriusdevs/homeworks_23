@@ -1,6 +1,6 @@
 """Module for testing abstract course class."""
 import course.abstract_course as abstract_course
-import courses_owner.courses_owner as courses_owner
+import courses_participant.courses_participant as courses_participant
 import pytest
 
 
@@ -17,19 +17,19 @@ class TestCourse(abstract_course.AbstractCourse):
         """
         super().__init__(title)
 
-    def add_course_owner(self, _: 'courses_owner.CoursesOwner') -> None:
-        """Stub for add_course_owner.
+    def add_course_participant(self, _: 'courses_participant.CoursesParticipant') -> None:
+        """Stub for add_course_participant.
 
         Args:
-            _(courses_owner.CoursesOwner): courses owner.
+            _(courses_participant.CoursesParticipant): courses participant.
         """
         pass
 
-    def remove_course_owner(self, _: 'courses_owner.CoursesOwner') -> None:
-        """Stub for add_course_owner.
+    def remove_course_participant(self, _: 'courses_participant.CoursesParticipant') -> None:
+        """Stub for add_course_participant.
 
         Args:
-            _(courses_owner.CoursesOwner): courses owner.
+            _(courses_participant.CoursesParticipant): courses participant.
         """
         pass
 

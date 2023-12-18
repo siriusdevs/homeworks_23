@@ -33,7 +33,7 @@ def test_getter_teacher_empty() -> None:
 def test_getter_teacher_no_empty() -> None:
     """Test teacher getter with some value."""
     course = create_new_course()
-    course.add_course_owner(teacher1)
+    course.add_course_participant(teacher1)
 
     assert course.teacher.name == teacher1.name  # type: ignore
 
@@ -73,7 +73,7 @@ def test_getter_students() -> None:
     course = create_new_course()
 
     for student in students:
-        course.add_course_owner(student)
+        course.add_course_participant(student)
 
     assert len(course.students) == 3
 
@@ -105,58 +105,58 @@ def test_setter_students_incorrect_type(test_data: Any) -> None:
     create_new_course().students = test_data  # type: ignore
 
 
-# test add_course_owner
-def test_add_course_owner_teacher() -> None:
+# test add_course_participant
+def test_add_course_participant_teacher() -> None:
     """Test adding teacher in course."""
     course = create_new_course()
-    course.add_course_owner(teacher1)
+    course.add_course_participant(teacher1)
 
     assert course.teacher.name == teacher1.name  # type: ignore
 
 
-def test_add_course_owner_student() -> None:
+def test_add_course_participant_student() -> None:
     """Test adding student in course."""
     course = create_new_course()
-    course.add_course_owner(student1)
+    course.add_course_participant(student1)
 
     assert course.students[0].name == student1.name
 
 
 @pytest.mark.xfail(raises=TypeError)
-def test_add_course_owner_incorrect_type() -> None:
-    """Test adding course owner that has incorrect type."""
-    create_new_course().add_course_owner(3)  # type: ignore
+def test_add_course_participant_incorrect_type() -> None:
+    """Test adding course participant that has incorrect type."""
+    create_new_course().add_course_participant(3)  # type: ignore
 
 
-# test add_remove_owner
-def test_remove_course_owner_teacher() -> None:
+# test add_remove_participant
+def test_remove_course_participant_teacher() -> None:
     """Test removing teacher from course."""
     course = create_new_course()
-    course.add_course_owner(teacher1)
-    course.remove_course_owner(teacher1)
+    course.add_course_participant(teacher1)
+    course.remove_course_participant(teacher1)
 
     assert course.teacher is None
 
 
-def test_remove_course_owner_student() -> None:
+def test_remove_course_participant_student() -> None:
     """Test removing student from course."""
     course = create_new_course()
-    course.add_course_owner(student1)
-    course.add_course_owner(student2)
-    course.remove_course_owner(student1)
+    course.add_course_participant(student1)
+    course.add_course_participant(student2)
+    course.remove_course_participant(student1)
 
     assert course.students[0].name == student2.name
 
 
 @pytest.mark.xfail(raises=TypeError)
-def test_remove_course_owner_incorrect_type() -> None:
-    """Test removing course owner that has incorrect type."""
-    create_new_course().remove_course_owner(3)  # type: ignore
+def test_remove_course_participant_incorrect_type() -> None:
+    """Test removing course participant that has incorrect type."""
+    create_new_course().remove_course_participant(3)  # type: ignore
 
 
 @pytest.mark.xfail(raises=ValueError)
-def test_remove_course_owner_incorrect_students() -> None:
-    """Test removing course owner that has incorrect value."""
+def test_remove_course_participant_wrong_student() -> None:
+    """Test removing course participant that has incorrect value."""
     course = create_new_course()
-    course.add_course_owner(student1)
-    course.remove_course_owner(student2)
+    course.add_course_participant(student1)
+    course.remove_course_participant(student2)
