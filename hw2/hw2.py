@@ -91,7 +91,7 @@ def stats_by_email(information: dict) -> dict[str, int]:
 
 
 def write_to_output(file_name: str, msg: str) -> None:
-    """Write message in file
+    """Write message in file.
 
     Args:
         file_name: str - the name of file where we write
