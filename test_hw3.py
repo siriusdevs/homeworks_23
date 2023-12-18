@@ -32,20 +32,30 @@ def test_person():
 
 def test_student():
     """Test the Student class."""
-    teacher = Teacher('Jane', 'Doe', AGE35, [])
-    course = Course('Math', teacher, [])
-    student = Student('John', 'Doe', AGE20, [course])
-    assert student.name == 'John'
-    assert student.surname == 'Doe'
+    teacher = Teacher('Albert', 'Tenigin', AGE35, [])
+    course = Course('OOP', teacher, [])
+    student = Student('Alex', 'Murphy', AGE20, [course])
+    assert student.name == 'Alex'
+    assert student.surname == 'Murphy'
     assert student.age == AGE20
     assert student.courses == [course]
 
 
 def test_course():
     """Test the Course class."""
-    teacher = Teacher('Jane', 'Doe', AGE35, [])
-    student = Student('John', 'Doe', AGE20, [])
-    course = Course('Math', teacher, [student])
-    assert course.name == 'Math'
+    teacher = Teacher('Maxim', 'Mikhaylov', AGE35, [])
+    student = Student('Ivan', 'Ivanov', AGE20, [])
+    course = Course('Administrirovanie', teacher=teacher, students=[student])
+    assert course.name == 'Administrirovanie'
     assert course.teacher == teacher
     assert course.students == [student]
+
+
+def test_teacher():
+    """Test the Teacher class."""
+    course = Course('UstanovkaINastroykaPeriferiynogoOborudovaniya', None, [])
+    teacher = Teacher('Dmitry', 'Torshin', AGE20, [])
+    teacher.add_course(course)
+    assert course.teacher == teacher
+    assert teacher.courses == [course]
+    assert teacher.courses[0].name == 'UstanovkaINastroykaPeriferiynogoOborudovaniya'

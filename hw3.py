@@ -1,10 +1,10 @@
 """This module contains classes for representing a person, a student, a teacher, and a course."""
 
-from typing import Any, List, Optional, Tuple
+from typing import Any, Optional
 
 
 def check_type(
-    input_value: Any, types: Tuple[type, ...],
+    input_value: Any, types: tuple[type, ...] | type,
     check_positive: Optional[bool] = False,
 ) -> None:
     """
@@ -12,7 +12,7 @@ def check_type(
 
     Args:
         input_value (Any): The value to check.
-        types (Tuple[type, ...]): The type to check against.
+        types (tuple[type, ...]): The type to check against.
         check_positive (Optional[bool], optional): Check if value is positive. Defaults to False.
 
     Raises:
@@ -110,7 +110,7 @@ class Person:
 class Student(Person):
     """Class representing a student."""
 
-    def __init__(self, name: str, surname: str, age: int, courses: List['Course']) -> None:
+    def __init__(self, name: str, surname: str, age: int, courses: list['Course']) -> None:
         """
         Initialize a Student object.
 
@@ -118,28 +118,28 @@ class Student(Person):
             name (str): The name of the student.
             surname (str): The surname of the student.
             age (int): The age of the student.
-            courses (List[Course]): The courses of the student.
+            courses (list[Course]): The courses of the student.
         """
         super().__init__(name, surname, age)
         self.courses = courses
 
     @property
-    def courses(self) -> List['Course']:
+    def courses(self) -> list['Course']:
         """
         Return the courses of the student.
 
         Returns:
-            List[Course]: The courses of the student.
+            list[Course]: The courses of the student.
         """
         return self._courses
 
     @courses.setter
-    def courses(self, courses: List['Course']) -> None:
+    def courses(self, courses: list['Course']) -> None:
         """
         Set the courses of the student.
 
         Args:
-            courses (List[Course]): The courses of the student.
+            courses (list[Course]): The courses of the student.
         """
         check_type(courses, list)
         for course in courses:
@@ -176,7 +176,7 @@ class Student(Person):
 class Teacher(Person):
     """Class representing a teacher."""
 
-    def __init__(self, name: str, surname: str, age: int, courses: List['Course']) -> None:
+    def __init__(self, name: str, surname: str, age: int, courses: list['Course']) -> None:
         """
         Initialize a Teacher object.
 
@@ -184,28 +184,28 @@ class Teacher(Person):
             name (str): The name of the teacher.
             surname (str): The surname of the teacher.
             age (int): The age of the teacher.
-            courses (List[Course]): The courses of the teacher.
+            courses (list[Course]): The courses of the teacher.
         """
         super().__init__(name, surname, age)
         self.courses = courses
 
     @property
-    def courses(self) -> List['Course']:
+    def courses(self) -> list['Course']:
         """
         Return the courses of the teacher.
 
         Returns:
-            List[Course]: The courses of the teacher.
+            list[Course]: The courses of the teacher.
         """
         return self._courses
 
     @courses.setter
-    def courses(self, courses: List['Course']) -> None:
+    def courses(self, courses: list['Course']) -> None:
         """
         Set the courses of the teacher.
 
         Args:
-            courses (List[Course]): The courses of the teacher.
+            courses (list[Course]): The courses of the teacher.
         """
         check_type(courses, list)
         for course in courses:
@@ -226,7 +226,8 @@ class Teacher(Person):
         if new_course in self._courses:
             raise ValueError(f'Course {new_course.name} is already in the list of courses')
         self._courses.append(new_course)
-        new_course.teacher.remove_course(new_course)
+        if new_course.teacher is not None:
+            new_course.teacher.remove_course()
         new_course.teacher = self
 
     def remove_course(self, course: 'Course') -> None:
@@ -251,15 +252,15 @@ class Course:
     def __init__(
         self,
         name: str,
-        teacher: Teacher,
-        students: List['Student'],
+        teacher: Teacher | None,
+        students: list['Student'],
     ) -> None:
         """Initialize a Course object.
 
         Args:
             name (str): The name of the course.
             teacher (Teacher): The teacher of the course.
-            students (List[Student]): The students of the course.
+            students (list[Student]): The students of the course.
         """
         self.name = name
         self.teacher = teacher
@@ -301,26 +302,27 @@ class Course:
         Args:
             teacher (Teacher): The teacher of the course.
         """
-        check_type(teacher, Teacher)
+        if teacher is not None:
+            check_type(teacher, Teacher)
         self._teacher = teacher
 
     @property
-    def students(self) -> List['Student']:
+    def students(self) -> list['Student']:
         """
         Return the students of the course.
 
         Returns:
-            List[Student]: The students of the course.
+            list[Student]: The students of the course.
         """
         return self._students
 
     @students.setter
-    def students(self, students: List['Student']) -> None:
+    def students(self, students: list['Student']) -> None:
         """
         Set the students of the course.
 
         Args:
-            students (List[Student]): The students of the course.
+            students (list[Student]): The students of the course.
         """
         check_type(students, list)
         for student in students:
