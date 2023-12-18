@@ -79,3 +79,17 @@ def test_add_flight_error():
     sut = _create_test_aviacompany()
     with pytest.raises(TypeError):
         sut.add_flight(123)
+
+
+def test_delete_flight_happy():
+    """Asserts that deleting a flight works."""
+    sut = _create_test_aviacompany()
+    sut.delete_flight(_T_FLIGHTS[0])
+    assert sut.flights == list(_T_FLIGHTS[1:])
+
+
+def test_delete_flight_nonexisting():
+    """Asserts that deleting a non-existing flight raises ValueError."""
+    sut = _create_test_aviacompany()
+    with pytest.raises(ValueError):
+        sut.delete_flight(Flight('5', 'X', 'Y'))

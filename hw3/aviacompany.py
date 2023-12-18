@@ -30,7 +30,25 @@ class Aviacompany:  # noqa: WPS214
         self.tickets = tickets
 
     def add_flight(self, flight: Flight) -> None:
+        """Add new flight.
+
+        Args:
+            flight: new flight
+        """
         self.flights += [flight]
+
+    def delete_flight(self, flight: Flight) -> None:
+        """Delete a flight.
+
+        If it is not inside flights list, raise ValueError.
+
+        Args:
+            flight: flight to delete
+        """
+        try:
+            self.flights.remove(flight)
+        except ValueError:
+            raise ValueError(f'unable to find flight {flight} in current flights')
 
     @property
     def name(self) -> str:
