@@ -14,6 +14,8 @@ _T_TICKETS = (
     Ticket('321', _T_PASSENGERS[1], _T_FLIGHTS[1]),
 )
 
+def _create_test_aviacompany() -> Aviacompany:
+    return Aviacompany('Fly Emirates', list(_T_FLIGHTS), list(_T_PASSENGERS), list(_T_TICKETS))
 
 def test_aviacompany_getters_happy():
     """Creates an aviacompany and asserts on its getters."""
@@ -26,7 +28,7 @@ def test_aviacompany_getters_happy():
 
 def test_aviacompany_setters_happy():
     """Uses aviacompany's setters and asserts they truly modify properties."""
-    sut = Aviacompany('Aeroflot', list(_T_FLIGHTS), list(_T_PASSENGERS), list(_T_TICKETS))
+    sut = _create_test_aviacompany()
     sut.name = 'S7 Airlines'
     sut.flights = list(reversed(_T_FLIGHTS))
     sut.passengers = list(reversed(_T_PASSENGERS))
@@ -39,7 +41,7 @@ def test_aviacompany_setters_happy():
 
 def test_aviacompany_setters_errors():
     """Asserts that aviacompany constructors raise errors on inappriate types."""
-    sut = Aviacompany('Fly Emirates', list(_T_FLIGHTS), list(_T_PASSENGERS), list(_T_TICKETS))
+    sut = _create_test_aviacompany()
 
     with pytest.raises(TypeError):
         sut.name = 1234
@@ -53,7 +55,7 @@ def test_aviacompany_setters_errors():
 
 def test_aviacompany_list_setters_errors():
     """Asserts that aviacompany constructors raise errors on inappriate types inside lists."""
-    sut = Aviacompany('Fly Emirates', list(_T_FLIGHTS), list(_T_PASSENGERS), list(_T_TICKETS))
+    sut = _create_test_aviacompany()
 
     with pytest.raises(TypeError):
         sut.flights = list(_T_FLIGHTS[:1]) + [55]
@@ -61,3 +63,19 @@ def test_aviacompany_list_setters_errors():
         sut.passengers = ['hello'] + list(_T_PASSENGERS[:1])
     with pytest.raises(TypeError):
         sut.tickets = [Flight()] + list(_T_TICKETS[:1])
+
+
+def test_add_flight_happy():
+    """Asserts that adding flight to aviacompany works."""
+    sut = _create_test_aviacompany()
+    new_flight = _T_FLIGHTS[0]
+    want_new_flights = sut.flights + list(_T_FLIGHTS[:1])
+    sut.add_flight(new_flight)
+    assert sut.flights == want_new_flights
+
+
+def test_add_flight_error():
+    """Asserts that adding flight with incorrect type raises TypeError."""
+    sut = _create_test_aviacompany()
+    with pytest.raises(TypeError):
+        sut.add_flight(123)

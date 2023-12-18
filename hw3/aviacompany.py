@@ -29,6 +29,9 @@ class Aviacompany:  # noqa: WPS214
         self.passengers = passengers
         self.tickets = tickets
 
+    def add_flight(self, flight: Flight) -> None:
+        self.flights += [flight]
+
     @property
     def name(self) -> str:
         """Getter for name.
