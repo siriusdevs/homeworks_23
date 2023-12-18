@@ -2,7 +2,7 @@
 Репозиторий для домашних заданий, осень 2023, Колледж Сириус
 ============================================================
 
-|overall|25|7|0|0|
+|overall|27|11|1|0|
 | :---: | :---: | :---: | :---: | :---: |
 |Branch|hw1|hw2|hw3|hw4|
 |argun|-|-|-|-|
@@ -12,7 +12,7 @@
 |blagodarova|-|-|-|-|
 |butenko|-|-|-|-|
 |danilov|-|-|-|-|
-|demyanenko|+|-|-|-|
+|demyanenko|+|+|-|-|
 |drobyazko|-|-|-|-|
 |druzhinin|-|-|-|-|
 |dyatlova|+|-|-|-|
@@ -20,13 +20,13 @@
 |evstifeev|-|-|-|-|
 |galaktionova|-|-|-|-|
 |grigoryan|+|+|-|-|
-|inozemtsev|+|-|-|-|
+|inozemtsev|+|+|-|-|
 |isaeva|-|-|-|-|
 |istomin|-|-|-|-|
 |ivanov_a|-|-|-|-|
 |ivanov_i|-|-|-|-|
 |karateev|-|-|-|-|
-|kolkareva|-|-|-|-|
+|kolkareva|+|-|-|-|
 |komarov|+|+|-|-|
 |kordon|-|-|-|-|
 |korenyakin_a|-|-|-|-|
@@ -34,7 +34,7 @@
 |krdyan|+|-|-|-|
 |kristev|-|-|-|-|
 |krivenko|-|-|-|-|
-|kuznetsova|-|-|-|-|
+|kuznetsova|+|-|-|-|
 |lebedev|-|-|-|-|
 |litvinov|+|-|-|-|
 |main|-|-|-|-|
@@ -43,7 +43,7 @@
 |mashtaler|-|-|-|-|
 |mens|-|-|-|-|
 |nehoroshev|-|-|-|-|
-|nikiforov|+|-|-|-|
+|nikiforov|+|+|-|-|
 |noskov|-|-|-|-|
 |nudga|+|+|-|-|
 |nurgaliev|-|-|-|-|
@@ -71,7 +71,7 @@
 |vasilenko|+|+|-|-|
 |vavilov|-|-|-|-|
 |vershinina|-|-|-|-|
-|zagora|+|-|-|-|
+|zagora|+|+|+|-|
 |zaitsev|-|-|-|-|
 |zamyatina|-|-|-|-|
 |zinko|-|-|-|-|
