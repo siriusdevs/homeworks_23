@@ -15,7 +15,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8==3.9.0 wemake-python-styleguide==0.15.3 bandit==1.7.2
     - name: Flake8
-      run: flake8 hw1/
+      run: flake8 hw1
   tests_hw1:
     name: Тесты hw1
     runs-on: ubuntu-latest
@@ -38,14 +38,14 @@ jobs:
     - uses: actions/checkout@v2
     - name: Установка Python
       uses: actions/setup-python@v2
-    with:
+      with:
         python-version: 3.12.0
     - name: Установка зависимостей
       run: |
         python -m pip install --upgrade pip
         pip install flake8==6.1.0 flake8_isort==6.1.0 wemake-python-styleguide==0.18.0 bandit==1.7.5
     - name: Flake8
-      run: flake8 hw2/
+      run: flake8 hw2
   tests_hw2:
     name: Тесты hw2
     runs-on: ubuntu-latest
