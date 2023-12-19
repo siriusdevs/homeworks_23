@@ -91,7 +91,7 @@ def test_check_ages_type():
         hw2.check_ages_type('some wrong value')
 
 
-@pytest.mark.xfail(raises=ValueError)
+@pytest.mark.xfail(raises=FileNotFoundError)
 def test_get_users_from_json_exception():
     """Checking that the function throws exceptions with incorrect files."""
     hw2.get_users_from_json('asd')

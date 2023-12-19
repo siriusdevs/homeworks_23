@@ -21,7 +21,7 @@ def exceptions_to_json(function: Callable) -> None:
     def wrapper(*args):
         try:
             function(*args)
-        except (TypeError, NotFoundAgeException, ValueError) as error:
+        except Exception as error:
             error_message = json.dumps({'error': str(error)})
             write_json(args[1], error_message)
     return wrapper
@@ -72,19 +72,12 @@ def get_users_from_json(path: str) -> dict:
     Args:
         path (str): The path to json file
 
-    Raises:
-        ValueError: raise this exception if file is incorrect
 
     Returns:
         dict: The dict of users
     """
-    try:
-        with open(path) as users_file:
-            return json.load(users_file)
-    except FileNotFoundError:
-        raise ValueError(f'The file with path: {path} is not found!')
-    except json.decoder.JSONDecodeError:
-        raise ValueError(f'The file with path: {path} is not valid!')
+    with open(path) as users_file:
+        return json.load(users_file)
 
 
 def check_ages_type(ages: list):
