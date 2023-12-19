@@ -19,7 +19,7 @@ my_project = (Project('Hell', [Task('Work in VK', 'nc', 'in progress')]))
 
 my_startup = (
     (
-        Project('Anna', [Task('HW', 'start', 'done'), Task('Test', 'write', 'in progress')]),
+        Project('FEDYASYS', [Task('HW', 'start', 'done'), Task('Test', 'write', 'in progress')]),
         "['HW']",
     ),
     (

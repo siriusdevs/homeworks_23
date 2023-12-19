@@ -228,8 +228,8 @@ class Participant:
             ValueError: If the new maximum number of tasks is less than 1.
         """
         check(new_max, int)
-        if new_max >= 0:
-            raise ValueError(f'Maximum task >= 1, not be {new_max}')
+        if new_max < 0:
+            raise ValueError(f'Maximum task <= 1, not be {new_max}')
         self._max_tsk = new_max
 
     @property
@@ -253,8 +253,8 @@ class Participant:
             ValueError: if new_max >= 0
         """
         check(new_max, int)
-        if new_max >= 0:
-            raise ValueError(f'Maximum task >= 1, not be {new_max}')
+        if new_max < 0:
+            raise ValueError(f'Maximum task > 0, not be {new_max}')
         self._max_proj = new_max
 
 

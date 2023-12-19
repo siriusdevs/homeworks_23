@@ -1,7 +1,7 @@
 """Module include tests on Task and description."""
 import pytest
 
-from homework3.hw3 import Task
+from hw3 import Task
 
 tasks = (
     ('Homework', 'Solve and add hw on github', 'In progress'),
