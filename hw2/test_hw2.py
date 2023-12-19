@@ -3,14 +3,14 @@ import json
 
 import pytest
 
-from hw2 import process_data
+from HW.basics_of_programming.hw2.hw2 import process_data
 
 VALID_TEST_DATA = (
-    ('input/data_1.json', 'output/result_1.json', 'expected/expected_1.json'),
-    ('input/data_2.json', 'output/result_2.json', 'expected/expected_2.json'),
-    ('input/data_3.json', 'output/result_3.json', 'expected/expected_3.json'),
-    ('input/data_4.json', 'output/result_4.json', 'expected/expected_4.json'),
-    ('input/data_5.json', 'output/result_5.json', 'expected/expected_5.json'),
+    ('hw2/input/data_1.json', 'hw2/output/result_1.json', 'hw2/expected/expected_1.json'),
+    ('hw2/input/data_2.json', 'hw2/output/result_2.json', 'hw2/expected/expected_2.json'),
+    ('hw2/input/data_3.json', 'hw2/output/result_3.json', 'hw2/expected/expected_3.json'),
+    ('hw2/input/data_4.json', 'hw2/output/result_4.json', 'hw2/expected/expected_4.json'),
+    ('hw2/input/data_5.json', 'hw2/output/result_5.json', 'hw2/expected/expected_5.json'),
 )
 
 
@@ -32,9 +32,9 @@ def test_process_data(input_file: str, output_file: str, expected: str) -> None:
 
 
 INVALID_TEST_DATA = (
-    ('input/data_6.json', 'error/result_1.json', 'expected/expected_6.json'),
-    ('input/data_.json', 'error/result_2.json', 'expected/expected_7.json'),
-    ('input/data_7.txt', 'error/result_3.json', 'expected/expected_8.json'),
+    ('hw2/input/data_6.json', 'hw2/error/result_1.json', 'hw2/expected/expected_6.json'),
+    ('hw2/input/data_.json', 'hw2/error/result_2.json', 'hw2/expected/expected_7.json'),
+    ('hw2/input/data_7.txt', 'hw2/error/result_3.json', 'hw2/expected/expected_8.json'),
 )
 
 

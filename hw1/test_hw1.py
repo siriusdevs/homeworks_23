@@ -2,7 +2,7 @@
 
 import pytest
 
-from hw1 import top_departments
+from HW.basics_of_programming.hw1.hw1 import top_departments
 
 DATA1 = {
     'development': {
