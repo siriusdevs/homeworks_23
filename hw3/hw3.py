@@ -211,14 +211,25 @@ class Client:
         self.accounts = accounts or []
 
     def check_money(self, money):
+        """
+        Check and convert the input to a valid numeric value.
+
+        Args:
+            money: The input value to check.
+
+        Returns:
+            float: The valid numeric value.
+
+        Raises:
+            ValueError: If the input is not a valid numeric value or if it's negative.
+        """
         try:
             money = float(money)
         except ValueError:
             raise ValueError('Invalid money. Please provide a valid numeric value.')
         if money < 0:
             raise ValueError('Money is expected to be positive.')
-        else:
-            return money
+        return money
 
     def put_money(self, account_number: int, money: int = 0) -> str:
         """
