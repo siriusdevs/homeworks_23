@@ -45,11 +45,11 @@ def current_date(user_info: dict) -> datetime:
     try:
         date = datetime.strptime(user_info.get('last_login'), '%Y-%m-%d')
     except KeyError:
-        raise KeyError('last_login was not found')
+        date = datetime.strptime(user_info.get('registered'), '%Y-%m-%d')
     except ValueError:
-        raise ValueError('wrong last_login date was given')
+        date = datetime.strptime(user_info.get('registered'), '%Y-%m-%d')
     except TypeError:
-        raise TypeError('Must be data not str!!!')
+        date = datetime.strptime(user_info.get('registered'), '%Y-%m-%d')
     if datetime.now() < date:
         return datetime.today()
     return date
@@ -73,9 +73,9 @@ def stats_by_time(information: dict) -> dict[str, list]:
         MORE_THAN_SIX_MONTHS: [],
     }
     for user_info in information.values():
-        now = current_date(user_info)
+        last_login = current_date(user_info)
         age = user_info.get('age')
-        online = datetime.now() - now
+        online = datetime.now() - last_login
 
         match online.days:
             case online.days if online.days <= 2:
