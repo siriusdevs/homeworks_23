@@ -251,6 +251,7 @@ class AbstractRestaurant:
 
 class Restaurant(AbstractRestaurant):
     """Class representing a restaurant."""
+
     def add_dish(self, dish: Dish):
         """
         Add dish.
