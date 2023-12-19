@@ -1,9 +1,10 @@
 """Top 3 departments module."""
 
 
-def salary_statistics(*departments: tuple[str, list[float]],
-                      salary_limit: float | None = None
-                      ) -> tuple[list[tuple[str, float]], list[tuple[str, float]]]:
+def salary_statistics(
+    *departments: tuple[str, list[float]],
+    salary_limit: float | None = None,
+) -> tuple[list]:
     """Find three most- and least-paid departments in a given tuple by average value.
 
     Args:
@@ -14,14 +15,15 @@ def salary_statistics(*departments: tuple[str, list[float]],
         stats: tuple of top 3 most and least paid departments with their average salaries.
     """
     filtered = {}
-    print(departments, type(departments), type(departments[0]))
     for department, salaries in departments:
-        salaries = list(
-            filter(lambda salary: salary_limit is None or salary <= salary_limit, salaries)
-        )
+        salaries = [
+            salary for salary in salaries if salary_limit is None or salary <= salary_limit
+        ]
         filtered[department] = round(sum(salaries) / len(salaries), 2) if salaries else .0
 
-    filtered = sorted(filtered.items(),
-                      key=lambda department_info: department_info[1],
-                      reverse=True)
+    filtered = sorted(
+        filtered.items(),
+        key=lambda department_info: department_info[1],
+        reverse=True,
+    )
     return filtered[:3], filtered[-3:]
