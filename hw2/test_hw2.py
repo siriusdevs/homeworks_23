@@ -54,10 +54,8 @@ def test_assemble_data(test_filename: str, expected: JsonStats) -> None:
         test_filename (str): name of a file that is used for testing.
         expected (JsonStats): expected JSON output value that main function writes.
     """
-    input_abspath = get_abspath(test_filename, 'inputs')
-    output_abspath = get_abspath(test_filename, 'outputs')
-    assemble_data(input_abspath, output_abspath)
-    with open(output_abspath, 'r') as output:
+    assemble_data(test_filename, test_filename)
+    with open(get_abspath(test_filename, 'outputs'), 'r') as output:
         collected = json.load(output)
     assert collected == expected
 
@@ -70,8 +68,5 @@ def test_assemble_data_exceptions(test_filename: str, expected: type):
         test_filename (str): name of a file that is used for testing.
         expected (type): exception that would be raised by function.
     """
-    input_dir = 'inputs'
-    input_abspath = get_abspath(test_filename, input_dir if test_filename == INVALID_PATH else '')
-    output_abspath = get_abspath(test_filename, 'outputs')
     with pytest.raises(expected):
-        assemble_data(input_abspath, output_abspath)
+        assemble_data(test_filename, test_filename)
