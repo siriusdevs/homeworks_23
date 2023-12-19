@@ -110,3 +110,24 @@ def test_unexist_data(input_data4: str, expected_error: str, output_data: str):
     with open(expected_error) as expected:
         test_exp = json.load(expected)
     assert test_output == test_exp
+
+
+@pytest.mark.parametrize('input_data1, expected_output, output_data', test_date)
+def test_uncorrect_data(input_data1: str, expected_output: str, output_data: str):
+    """Function.
+
+    Args:
+        input_data1: str - file name with input data.
+        expected_output: str - file name with expected output.
+        output_data: str - file name with output data.
+
+    Asserts:
+        True if the function returns expected results.
+
+    """
+    process_data(input_data1, output_data)
+    with open(output_data) as output:
+        test_output = json.load(output)
+    with open(expected_output) as expected:
+        test_exp = json.load(expected)
+    assert test_output == test_exp

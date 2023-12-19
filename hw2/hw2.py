@@ -33,19 +33,11 @@ def current_date(user_info: dict) -> datetime:
     Args:
         user_info: dict - dict with information about user.
 
-    Raises:
-        KeyError: if last_login was not given.
-        ValueError: if wrong date was given.
-        TypeError: if wrong data type given.
-        ValueError: if future date was given.
-
     Returns:
         datetime: last_login date.
     """
     try:
         date = datetime.strptime(user_info.get('last_login'), '%Y-%m-%d')
-    except KeyError:
-        date = datetime.strptime(user_info.get('registered'), '%Y-%m-%d')
     except ValueError:
         date = datetime.strptime(user_info.get('registered'), '%Y-%m-%d')
     except TypeError:
@@ -91,7 +83,7 @@ def stats_by_time(information: dict) -> dict[str, list]:
 
     for time, quantity in time_stats.items():
         if quantity:
-            time_stats[time] = sum(quantity) / len(quantity)
+            time_stats[time] = round(sum(quantity) / len(quantity), 2)
         else:
             time_stats[time] = 0
     return time_stats
@@ -128,7 +120,7 @@ def write_to_output(file_name: str, data_msg: str | dict[str, dict[str, list]]) 
         data_msg: dict[str, dict[str, list]] - data we write in file.
 
     """
-    if os.path.dirname(file_name) and not os.path.exists(file_name):
+    if os.path.dirname(file_name) and not os.path.exists(os.path.dirname(file_name)):
         os.makedirs(os.path.dirname(file_name))
     if isinstance(data_msg, str):
         with open(file_name, 'w') as output_msg:
