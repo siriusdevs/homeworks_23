@@ -27,7 +27,7 @@ EMAIL_USAGE = 'email_usage'
 TIME_STATS = 'time_stats'
 
 
-def current_date(user_info: dict) -> datetime:
+def last_login_date(user_info: dict) -> datetime:
     """Print date if it is correct.
 
     Args:
@@ -39,9 +39,9 @@ def current_date(user_info: dict) -> datetime:
     try:
         date = datetime.strptime(user_info.get('last_login'), '%Y-%m-%d')
     except ValueError:
-        date = datetime.strptime(user_info.get('registered'), '%Y-%m-%d')
+        date = datetime.today()
     except TypeError:
-        date = datetime.strptime(user_info.get('registered'), '%Y-%m-%d')
+        date = datetime.today()
     if datetime.now() < date:
         return datetime.today()
     return date
@@ -65,7 +65,7 @@ def stats_by_time(information: dict) -> dict[str, list]:
         MORE_THAN_SIX_MONTHS: [],
     }
     for user_info in information.values():
-        last_login = current_date(user_info)
+        last_login = last_login_date(user_info)
         age = user_info.get('age')
         online = datetime.now() - last_login
 
