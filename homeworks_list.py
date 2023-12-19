@@ -3,7 +3,7 @@ import subprocess  # noqa: S404
 
 from mdutils.mdutils import MdUtils
 
-HW_COUNT = 4
+HW_COUNT = 3
 MD_FILENAME = 'README.md'
 MD_TITLE = 'Репозиторий для домашних заданий, осень 2023, Колледж Сириус'
 
