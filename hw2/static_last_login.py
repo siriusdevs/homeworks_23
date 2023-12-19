@@ -45,7 +45,12 @@ def find_was_online(last_logins: list) -> dict:
     static = {}
     today = date.today()
     for last_login in last_logins:
-        last_login = date.fromisoformat(last_login)
+        try:
+            last_login = date.fromisoformat(last_login)
+        except (ValueError, TypeError):
+            return None
+        if last_login > today:
+            return None
         day = (today - last_login).days
         msg = get_last_login(day)
         if msg in static.keys():

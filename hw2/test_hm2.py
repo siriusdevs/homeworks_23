@@ -51,6 +51,11 @@ FAILED_TEST_DATA = (
         'hw2/test_data/empty_file.json',
         'Файл hw2/test_data/empty_file.json пустой!',
     ),
+    (
+        'hw2/test_data/test_invalid_date.json',
+        'hw2/test_data/result.json',
+        'Некорректная дата',
+    ),
 )
 
 

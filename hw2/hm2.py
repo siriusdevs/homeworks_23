@@ -53,6 +53,9 @@ def process_data(path_to_file_data: str, path_to_file_result: str) -> None | str
     statistics['statistic last login'] = find_was_online(last_logins)
     statistics['statistic city'] = get_static_sity(cities)
 
+    if not statistics['statistic last login']:
+        return 'Некорректная дата'
+
     if check_file(path_to_file_result):
         return f'Файла {path_to_file_result} не существует!'
 
