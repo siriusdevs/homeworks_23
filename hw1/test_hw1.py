@@ -1,7 +1,7 @@
 """Tests for HW1."""
 import pytest
 
-from hw1 import salaries_statistic
+from hw1.hw1 import salaries_statistic
 
 TEST_DATA0 = {
     'DEVS': {
