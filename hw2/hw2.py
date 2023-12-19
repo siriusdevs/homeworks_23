@@ -98,7 +98,7 @@ def _check_age(age: int) -> None:
         raise ValueError(f'age {age} should be positive')
 
 
-def get_avg_age(users: dict[str, Any]) -> float:
+def get_avg_age(users: dict[str, Any]) -> float | None:
     """Calculate average age of users.
 
     Args:
