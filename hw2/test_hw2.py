@@ -9,7 +9,7 @@ from ages_operations import get_average_age, get_median_age
 from hw2 import (check_ages_type, get_users_from_json, get_years_statistic,
                  process_data, ratio)
 
-BASE_PACKAGE = 'test_data_hw2/'
+BASE_PACKAGE = 'hw2/test_data_hw2/'
 BASE_INPUT = 'data_hw2_'
 BASE_TEST_OUTPUT = 'test_output_'
 BASE_OUTPUT = 'output_hw2_'
