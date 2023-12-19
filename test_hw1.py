@@ -56,6 +56,6 @@ def test_data(
         company: tuple with departments names their values.
         limit: the maximum wage value (float) to be taken into account.
         expected: A tuple containing top salary and the ratio of the amount \
-            of this top to the entire amount of payments in the company
+            of this top to entire amount of payments in the company
     """
     assert calculate_salary_stats(*company, salary_limit=limit) == expected
