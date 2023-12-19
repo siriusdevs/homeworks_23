@@ -166,7 +166,7 @@ class Dish:
         self._ingredients.remove(product)
 
 
-class Restaurant:
+class AbstractRestaurant:
     """Class representing a restaurant."""
 
     def __init__(self, name: str, dishes: list[Dish], products: list[Product]):
@@ -248,6 +248,8 @@ class Restaurant:
             check_type_of_input(product, Product)
         self._products = products_value
 
+
+class Restaurant(AbstractRestaurant):
     def add_dish(self, dish: Dish):
         """
         Add dish.
