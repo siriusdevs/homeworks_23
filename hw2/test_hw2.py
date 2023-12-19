@@ -50,6 +50,12 @@ data_users_statistic = [
      ) for num in range(4)
 ]
 
+process_data_exceptions = (
+    (f'{BASE_PACKAGE}wrong_data{JSON_TYPE}', f'{BASE_PACKAGE}age_is_not_found{JSON_TYPE}'),
+    (f'{BASE_PACKAGE}', f'{BASE_PACKAGE}directory_error{JSON_TYPE}'),
+    (f'{BASE_PACKAGE}awdd{JSON_TYPE}', f'{BASE_PACKAGE}no_such_file_directory{JSON_TYPE}'),
+)
+
 
 @pytest.mark.parametrize('ages, excepted', data_median_ages)
 def test_get_median_age(ages, excepted):
@@ -98,11 +104,17 @@ def test_get_users_from_json_exception():
     hw2.get_users_from_json('test_data_hw2/some_text.txt')
 
 
-def test_process_data_exception():
-    """Checking that the function throws exceptions with incorrect files."""
-    hw2.process_data('test_data_hw2/wrong_data.json', 'test_data_hw2/t.json')
+@pytest.mark.parametrize('test_data, error_data', process_data_exceptions)
+def test_process_data_exception(test_data, error_data):
+    """Checking that the function throws exceptions with incorrect files.
+
+    Args:
+        test_data: incorrect test data.
+        error_data: link to <json> with correct error data.
+    """
+    hw2.process_data(test_data, f'{BASE_PACKAGE}t.json')
     with open(f'{BASE_PACKAGE}t.json') as test_file:
-        with open(f'{BASE_PACKAGE}age_is_not_found.json') as real_file:
+        with open(error_data) as real_file:
             assert test_file.readline() == real_file.readline()
 
 

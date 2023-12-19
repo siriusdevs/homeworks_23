@@ -42,7 +42,7 @@ def process_data(input_path: str, output_path: str) -> None:
     try:
         ages = [user['age'] for user in users.values()]
     except KeyError:
-        raise NotFoundAgeException('The parametr <age> is not found.')
+        raise NotFoundAgeException()
 
     check_ages_type(ages)
 
@@ -61,7 +61,7 @@ def write_json(output: str, message: any) -> None:
         message (any): Some data which we write.
     """
     if not os.path.exists(output):
-        os.mkdir('test_data_hw2')
+        os.mkdir('hw2/test_data_hw2')
     with open(output, 'w+') as output_file:
         output_file.write(message)
 
