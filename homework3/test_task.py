@@ -1,6 +1,5 @@
 """Module include tests on Task and description."""
 import pytest
-
 from hw3 import Task
 
 tasks = (

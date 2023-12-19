@@ -58,7 +58,7 @@ def test_append(member: Participant) -> None:
     assert member not in my_team.members
 
 
-@pytest.mark.parametrize('teams, expected', my_startup)
+@pytest.mark.parametrize('team, expected', my_startup)
 def test_filtered(team: Team, expected: str) -> None:
     """Function which checking work __str__.
 
