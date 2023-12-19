@@ -130,7 +130,7 @@ def write_to_output(file_name: str, data_msg: str | dict[str, dict[str, list]]) 
             json.dump(data_msg, output_stats, indent=4, ensure_ascii=False)
 
 
-def process_data(input_data, output_data):
+def process_data(input_data, output_data) -> None:
     """Calculate websites usage statistics.
 
     Args:
