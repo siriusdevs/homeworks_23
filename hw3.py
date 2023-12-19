@@ -1,5 +1,5 @@
 """Module for managing a restaurant."""
-from typing import Any, List
+from typing import Any
 
 
 def check_type_of_input(input_value: Any, expected_type: Any) -> bool:
@@ -56,7 +56,7 @@ class Product:
         Raises:
             ValueError: If price_value is negative
         """
-        check_type_of_input(price_value, float)
+        check_type_of_input(price_value, (float, int))
         if price_value < 0:
             raise ValueError('Price must be positive')
         self._price = price_value
@@ -86,12 +86,12 @@ class Product:
 class Dish:
     """Class representing a dish."""
 
-    def __init__(self, name: str, ingredients: List[Product]):
+    def __init__(self, name: str, ingredients: list[Product]):
         """Create dish.
 
         Args:
             name (str): Name of the dish
-            ingredients (list): List of ingredients
+            ingredients (list): list of ingredients
         """
         self.name = name
         self.ingredients = ingredients
@@ -118,17 +118,17 @@ class Dish:
         self._name = name_value
 
     @property
-    def ingredients(self) -> List[Product]:
+    def ingredients(self) -> list[Product]:
         """
         Return ingredients.
 
         Returns:
-            list: List of ingredients
+            list: list of ingredients
         """
         return self._ingredients
 
     @ingredients.setter
-    def ingredients(self, ingredients_value: List[Product]):
+    def ingredients(self, ingredients_value: list[Product]):
         """
         Set ingredients.
 
@@ -169,13 +169,13 @@ class Dish:
 class Restaurant:
     """Class representing a restaurant."""
 
-    def __init__(self, name: str, dishes: List[Dish], products: List[Product]):
+    def __init__(self, name: str, dishes: list[Dish], products: list[Product]):
         """Create restaurant.
 
         Args:
             name (str): Name of the restaurant
-            dishes (list): List of dishes
-            products (list): List of products
+            dishes (list): list of dishes
+            products (list): list of products
         """
         self.name = name
         self.dishes = dishes
@@ -203,17 +203,17 @@ class Restaurant:
         self._name = name_value
 
     @property
-    def dishes(self) -> List[Dish]:
+    def dishes(self) -> list[Dish]:
         """
         Return dishes.
 
         Returns:
-            list: List of dishes
+            list: list of dishes
         """
         return self._dishes
 
     @dishes.setter
-    def dishes(self, dishes_value: List[Dish]):
+    def dishes(self, dishes_value: list[Dish]):
         """
         Set dishes.
 
@@ -226,17 +226,17 @@ class Restaurant:
         self._dishes = dishes_value
 
     @property
-    def products(self) -> List[Product]:
+    def products(self) -> list[Product]:
         """
         Return products.
 
         Returns:
-            list: List of products
+            list: list of products
         """
         return self._products
 
     @products.setter
-    def products(self, products_value: List[Product]):
+    def products(self, products_value: list[Product]):
         """
         Set products.
 
