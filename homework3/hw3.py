@@ -24,7 +24,7 @@ def check(new_value, classes: tuple[type] | type[Any]):
 class Task:
     """A class that represents an object with a title, description, and state."""
 
-    _states = ['in progress', 'done', 'not started']
+    states = ['in progress', 'done', 'not started']
 
     def __init__(self, title: str, description: str, state: str) -> None:
         """Initialize a new instance of the class with the specified title, description, and state.
@@ -96,15 +96,13 @@ class Task:
 
         """
         check(new_state, str)
-        if new_state.lower() not in self._states:
-            raise ValueError(f'{new_state} is not in list, states include: {self._states}')
+        if new_state.lower() not in self.states:
+            raise ValueError(f'{new_state} is not in list, states include: {self.states}')
         self._state = new_state
 
 
 class Project:
     """A class that represents an object with a title, description, and state."""
-
-    _statuses = ['in progress', 'done', 'not started', 'all']
 
     def __init__(self, title: str, tasks: list[Task]) -> None:
         """Initialize an instance of the class.
@@ -157,8 +155,8 @@ class Project:
             ValueError: If the given status is not found in the list of available statuses.
         """
         filtered = []
-        if status.lower() not in self._statuses:
-            raise ValueError(f'Filtered status {status} is not found, use: {self._statuses}!')
+        if status.lower() not in Task.states:
+            raise ValueError(f'Filtered status {status} is not found, use: {Task.states}!')
         if status.lower() == 'all':
             return self.tasks
         for task in self.tasks:
