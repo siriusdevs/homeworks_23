@@ -10,11 +10,11 @@ TEST_SALARIES = (
                 ('department_1', [1, 2, 3]),
                 ('department_2', [1, 2, 4]),
                 ('department_3', [1, 2, 5]),
-                ('department_4', [1, 2, 6]),
+                ('department_4', [1, 2, 6])
             ), None, ([
                 ('department_4', 3.0),
                 ('department_3', 2.67),
-                ('department_2', 2.33),
+                ('department_2', 2.33)
                                   ], [
                 ('department_3', 2.67),
                 ('department_2', 2.33),
@@ -26,11 +26,11 @@ TEST_SALARIES = (
                 ('department_1', [1, 2, 3]),
                 ('department_2', [4, 5, 6]),
                 ('department_3', [7, 8, 9]),
-                ('department_4', [10, 11, 12]),
+                ('department_4', [10, 11, 12])
             ), 9., ([
                 ('department_3', 8.0),
                 ('department_2', 5.0),
-                ('department_1', 2.0),
+                ('department_1', 2.0)
                                   ], [
                 ('department_2', 5.0),
                 ('department_1', 2.0),
@@ -42,7 +42,7 @@ TEST_SALARIES = (
                 ('department_1', [1, 2, 3]),
                 ('department_2', [4, 5, 6]),
                 ('department_3', [7, 8, 9]),
-                ('department_4', [10, 11, 12]),
+                ('department_4', [10, 11, 12])
             ), .0, ([
                 ('department_1', 0.0),
                 ('department_2', 0.0),

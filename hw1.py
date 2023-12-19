@@ -1,5 +1,4 @@
 """Top 3 departments module."""
-from typing import Tuple, List
 
 
 def salary_statistics(*departments: tuple[str, list[float]],
@@ -15,6 +14,7 @@ def salary_statistics(*departments: tuple[str, list[float]],
         stats: tuple of top 3 most and least paid departments with their average salaries.
     """
     filtered = {}
+    print(departments, type(departments), type(departments[0]))
     for department, salaries in departments:
         salaries = list(
             filter(lambda salary: salary_limit is None or salary <= salary_limit, salaries)
