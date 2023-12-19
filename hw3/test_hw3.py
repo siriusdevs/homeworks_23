@@ -3,15 +3,15 @@ from typing import Any
 
 import pytest
 
-from hw3 import Mediafile, AudioFile, VideoFile, Mediateka
+import hw3
 
 SAMPLE_DURATION = 14
 SAMPLE_DURATION2 = 333
 SAMPLE_VALUE = 3.5
-VIDEO1 = VideoFile('Yo', '.mov', (10, 12), 1)
-VIDEO2 = VideoFile('aaaaaaaaa', '.mp4', (10, 12), SAMPLE_DURATION)
-VIDEO3 = VideoFile('Coolname', '.mov', (123, 44), 10)
-AUDIO = AudioFile('aaaa', '.mp3', SAMPLE_DURATION2, 'Jacob')
+VIDEO1 = hw3.VideoFile('Yo', '.mov', (10, 12), 1)
+VIDEO2 = hw3.VideoFile('aaaaaaaaa', '.mp4', (10, 12), SAMPLE_DURATION)
+VIDEO3 = hw3.VideoFile('Coolname', '.mov', (123, 44), 10)
+AUDIO = hw3.AudioFile('aaaa', '.mp3', SAMPLE_DURATION2, 'Jacob')
 FILENAME = 'aaaaaaaaa'
 VIDEO_FORMAT = '.mp4'
 AUDIO_FORMAT = '.mp3'
@@ -66,19 +66,19 @@ def test_comparison_valid_video(
         param2 (Any): second parameter of instance
         expected (str): awaited str representation of instance
     """
-    test_str = str(VideoFile(filename, filetype, param1, param2))
+    test_str = str(hw3.VideoFile(filename, filetype, param1, param2))
     assert test_str == expected
 
 
 @pytest.mark.parametrize('files_list, expected', test_mediateka_data)
-def test_mediateka(files_list: list[Mediafile], expected: str) -> None:
+def test_mediateka(files_list: list[hw3.Mediafile], expected: str) -> None:
     """Test for valid Mediateka work process.
 
     Args:
         files_list (list[Mediafile]): list of the files in mediateka
         expected (str): awaited result list of files in meidateka
     """
-    lib = Mediateka(files_list)
+    lib = hw3.Mediateka(files_list)
     lib.append_file(VIDEO3)
     lib.remove_file(AUDIO)
     test_list = lib.get_files_list()
@@ -102,29 +102,29 @@ def test_comparison_valid_small(
         param2 (Any): second parameter of the instance
         expected (str): awaited str representation of instance
     """
-    test_str = str(AudioFile(filename, filetype, param1, param2))
+    test_str = str(hw3.AudioFile(filename, filetype, param1, param2))
     assert test_str == expected
 
 
 @pytest.mark.xfail
 def test_for_fail_audio_fst():
     """Test for fail in AudioFile creation with error in fst param."""
-    AudioFile(FILENAME, AUDIO_FORMAT, -1, 'yo')
+    hw3.AudioFile(FILENAME, AUDIO_FORMAT, -1, 'yo')
 
 
 @pytest.mark.xfail
 def test_for_fail_audio_snd():
     """Test for fail in AudioFile creation with error in snd param."""
-    AudioFile(FILENAME, AUDIO_FORMAT, 1000, [])
+    hw3.AudioFile(FILENAME, AUDIO_FORMAT, 1000, [])
 
 
 @pytest.mark.xfail
 def test_for_fail_video_first():
     """Test for fail in VideoFile creation with error in fst param."""
-    VideoFile(FILENAME, VIDEO_FORMAT, ('asd', 12), SAMPLE_DURATION)
+    hw3.VideoFile(FILENAME, VIDEO_FORMAT, ('asd', 12), SAMPLE_DURATION)
 
 
 @pytest.mark.xfail
 def test_for_fail_video_snd():
     """Test for fail in VideoFile creation with error in snd param."""
-    VideoFile(FILENAME, VIDEO_FORMAT, (10, 12), -1)
+    hw3.VideoFile(FILENAME, VIDEO_FORMAT, (10, 12), -1)
