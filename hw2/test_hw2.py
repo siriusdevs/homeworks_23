@@ -4,9 +4,8 @@
 import json
 
 import pytest
-
 from ages_operations import get_average_age, get_median_age
-from app_exceptions import NotFoundAgeException
+
 from hw2 import (check_ages_type, get_users_from_json, get_years_statistic,
                  process_data, ratio)
 
@@ -100,10 +99,12 @@ def test_get_users_from_json_exception():
     get_users_from_json('test_data_hw2/some_text.txt')
 
 
-@pytest.mark.xfail(raises=NotFoundAgeException)
 def test_process_data_exception():
     """Checking that the function throws exceptions with incorrect files."""
     process_data('test_data_hw2/wrong_data.json', 'test_data_hw2/t.json')
+    with open(f'{BASE_PACKAGE}t.json') as test_file:
+        with open(f'{BASE_PACKAGE}age_is_not_found.json') as real_file:
+            assert test_file.readline() == real_file.readline()
 
 
 @pytest.mark.parametrize('input, output', data_years_statistic)
@@ -120,6 +121,13 @@ def test_get_years_statistic(input, output):
         assert get_years_statistic(users) == excepted
 
 
+@pytest.mark.xfail(raises=ValueError)
+def test_get_years_statistic_exception():
+    """Test raises exception if data is wrong."""
+    users = get_users_from_json(f'{BASE_PACKAGE}wrong_data.json')
+    get_years_statistic(users)
+
+
 @pytest.mark.parametrize('input, test_output, real_output', data_users_statistic)
 def test_process_data(input, test_output, real_output):
     """Test processing data.
@@ -129,6 +137,7 @@ def test_process_data(input, test_output, real_output):
         test_output: that's Where the file is saved
         real_output: The data that should be in the new file
     """
+    print(input, test_output)
     process_data(input, test_output)
     test_users = get_users_from_json(test_output)
     real_users = get_users_from_json(real_output)

@@ -2,11 +2,31 @@
 
 
 import json
+from typing import Callable
 
 from app_exceptions import NotFoundAgeException
 from user_statistic import UserStatistic
 
 
+def exceptions_to_json(function: Callable) -> None:
+    """Convert exceptions to json.
+
+    Args:
+        function (Callable): function.
+
+    Returns:
+        None: returns function-wrapper
+    """
+    def wrapper(*args):
+        try:
+            function(*args)
+        except (TypeError, NotFoundAgeException, ValueError) as e:
+            error_message = json.dumps({'error': str(e)})
+            write_json(args[1], error_message)
+    return wrapper
+
+
+@exceptions_to_json
 def process_data(input: str, output: str) -> None:
     """Take data and writes the statictic by age and registrations by years to the json file.
 
@@ -21,7 +41,7 @@ def process_data(input: str, output: str) -> None:
     try:
         ages = [user['age'] for user in users.values()]
     except KeyError:
-        raise NotFoundAgeException('The paramers "age" is not found.')
+        raise NotFoundAgeException('The parametr <age> is not found.')
 
     check_ages_type(ages)
 
@@ -29,8 +49,21 @@ def process_data(input: str, output: str) -> None:
 
     user_stats = UserStatistic(ages, stats).to_json()
 
-    with open(output, 'w+') as file:
-        file.write(user_stats)
+    write_json(output, user_stats)
+
+
+def write_json(output: str, message: any) -> None:
+    """Write json with message to output.
+
+    Args:
+        output (str): The place where we save json file.
+        message (any): Some data which we write.
+    """
+    try:
+        with open(output, 'w+') as file:
+            file.write(message)
+    except FileNotFoundError:
+        print(f'The file with path: {output} is not found.')
 
 
 def get_users_from_json(path: str) -> dict:
@@ -75,14 +108,20 @@ def get_years_statistic(users: list[dict]) -> dict:
     Args:
         users (list[dict]): list of users
 
+    Raises:
+        ValueError: raise excepton if a field "registered": is not found
+
     Returns:
         dict: The statistic of registered users by years
     """
     all_count = len(users)
     stats = {}
-    for user in users.values():
-        date = user['registered']
-        stats[date] = stats.get(date, 0) + 1
+    try:
+        for user in users.values():
+            date = user['registered']
+            stats[date] = stats.get(date, 0) + 1
+    except KeyError:
+        raise ValueError('The parametr <registered> is not found.')
 
     stats = {year: ratio(count, all_count) for year, count in stats.items()}
 
