@@ -17,11 +17,11 @@ def salary_stat(
     Returns:
         tuple[list[float], float]: top 3 salaries and their sum percentage.
     """
-    if exclude is None:
-        exclude = ()
+    if exclude is not None:
+        exclude = set(exclude)
     salaries = []
     for department, department_salaries in args:
-        if department not in exclude:
+        if exclude and department not in exclude:
             for salary in department_salaries:
                 check_type(salary, float, check_positive=True)
             salaries.extend(department_salaries)
