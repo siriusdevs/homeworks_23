@@ -48,7 +48,10 @@ def process_time(dano: dict[str, dict[str, any]]) -> dict:
     answer = [0, 0, 0, 0, 0]
 
     for user in dano.values():
-        date_len = TIME - datetime.strptime(user['last_login'], '%Y-%m-%d')
+        try:
+            date_len = TIME - datetime.strptime(user['last_login'], '%Y-%m-%d')
+        except KeyError:
+            date_len = timedelta(YEAR_TIME, MONTH_TIME, DAY_TIME)
         match date_len:
             case date_len if date_len <= two_days_latency:
                 answer[0] += 1
@@ -62,7 +65,10 @@ def process_time(dano: dict[str, dict[str, any]]) -> dict:
                 answer[4] += 1
 
     for ind, _ in enumerate(answer):
-        answer[ind] = answer[ind] / len(list(dano)) * 100
+        try:
+            answer[ind] = answer[ind] / len(list(dano)) * 100
+        except ZeroDivisionError:
+            answer[ind] = None
 
     return {
         'less_than_two_days': answer[0],
@@ -84,39 +90,13 @@ def process_cities(dano: dict[str, dict[str, any]]) -> dict:
     """
     cities_dano = {}
     for user in dano.values():
-        if user['region'] in list(cities_dano):
-            cities_dano[user['region']] += 1
-        else:
-            cities_dano[user['region']] = 1
+        try:
+            region = user['region']
+        except KeyError:
+            region = 'None'
+        cities_dano[region] = cities_dano.get(region, 0) + 1
+
     return cities_dano
-
-
-def open_json(file_path: str, output_path: str) -> None:
-    """Json file opener.
-
-    Args:
-        file_path (str): input file with dicts
-        output_path(str): for raise errors
-
-    Returns:
-        dano with ifo
-    """
-    if op.dirname(file_path) and not op.exists(file_path):
-        os.makedirs(op.dirname(file_path))
-    try:
-        with open(file_path, 'r') as filelot:
-            dano = json.load(filelot)
-    except FileNotFoundError:
-        with open(output_path, 'w') as out_file:
-            json.dump(
-                {'No file was given': None}, fp=out_file,
-            )
-    except json.JSONDecodeError:
-        with open(output_path, 'w') as empty_out_file:
-            json.dump(
-                {'Given file was empty': None}, fp=empty_out_file,
-            )
-    return dano
 
 
 def process_data(source_path: str, dist_path: str) -> None:
@@ -126,7 +106,22 @@ def process_data(source_path: str, dist_path: str) -> None:
         source_path (str): input file
         dist_path (str): none file if source file were empty
     """
-    dano = open_json(source_path, dist_path)
+    try:
+        with open(source_path, 'r') as filelot:
+            dano = json.load(filelot)
+    except FileNotFoundError:
+        with open(dist_path, 'w') as out_file:
+            json.dump(
+                {'No file was given': None}, fp=out_file,
+            )
+    except json.JSONDecodeError:
+        with open(dist_path, 'w') as empty_out_file:
+            json.dump(
+                {'Given file was empty': None}, fp=empty_out_file,
+            )
+    if op.dirname(source_path) and not op.exists(source_path):
+        os.makedirs(op.dirname(source_path))
+
     time_results = process_time(dano)
     cities_results = process_cities(dano)
     with open(dist_path, 'w') as lotfile:
