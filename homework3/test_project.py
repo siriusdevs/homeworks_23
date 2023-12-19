@@ -20,14 +20,14 @@ my_project = (Project('Hell', [Task('Work in VK', 'nc', 'in progress')]))
 my_startup = (
     (
         Project('FEDYASYS', [Task('HW', 'start', 'done'), Task('Test', 'write', 'in progress')]),
-        "['HW']",
+        ['HW'],
     ),
     (
         Project('Typical Plan day', [Task('Pet the cat', 'some', 'done'), Task(
             'Getting a masters student to write code', 'write', 'not started',
             ),
         ]),
-        "['Pet the cat']",
+        ['Pet the cat'],
     ),
 )
 
