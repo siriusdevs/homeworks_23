@@ -33,7 +33,7 @@ def get_last_login(day: int) -> str:
     return msg
 
 
-def find_was_online(last_logins: list) -> dict:
+def find_was_online(last_logins: list) -> dict | None:
     """Получить статистику последнего входа.
 
     Args:
@@ -41,6 +41,7 @@ def find_was_online(last_logins: list) -> dict:
 
     Returns:
         dict: словарь со статистикой последнего входа
+        none: если дата некорректна
     """
     static = {}
     today = date.today()
