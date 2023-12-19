@@ -19,6 +19,7 @@ def statistics(*departments: Department, department_names: tuple[str] = None) ->
         statistics of average, maximum and median salaries
     """
     all_salaries = []
+    department_names = set(department_names) if department_names is not None else None
     for name, salaries in departments:
         if department_names is None or name in department_names:
             all_salaries += salaries
