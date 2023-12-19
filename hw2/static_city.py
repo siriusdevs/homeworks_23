@@ -1,7 +1,7 @@
 """Модуль для получения статистики по городам."""
 
 
-def get_static_sity(cities: list):
+def get_static_sity(cities: list) -> dict:
     """Получить статистику по городам.
 
     Args:

@@ -5,9 +5,16 @@ from datetime import date
 
 SIX_MONTHS = 182
 MONTHS = 30
+WAS_ONLINE = 'было в сети менее'
+msg_tuple = (
+    (1, f'{WAS_ONLINE} недели назад'),
+    (6, f'{WAS_ONLINE} месяца назад'),
+    (MONTHS, f'{WAS_ONLINE} полугода назад'),
+    (SIX_MONTHS, 'было в сети более полугода назад'),
+)
 
 
-def get_last_login(day: int):
+def get_last_login(day: int) -> str:
     """Получить статистику когда был последний вход.
 
     Args:
@@ -16,21 +23,17 @@ def get_last_login(day: int):
     Returns:
         str: сообщение о том когда был последний вход
     """
-    if day > SIX_MONTHS:
-        msg = 'было в сети более полугода назад'
-    elif day > MONTHS:
-        msg = 'было в сети менее полугода назад'
-    elif day > 6:
-        msg = 'было в сети менее месяца назад'
-    elif day > 1:
-        msg = 'было в сети менее недели назад'
-    else:
-        msg = 'было в сети менее 2 дней назад'
+    msg = f'{WAS_ONLINE} 2 дней назад'
+    for current in msg_tuple:
+        if day > current[0]:
+            msg = current[1]
+        else:
+            break
 
     return msg
 
 
-def find_was_online(last_logins: list):
+def find_was_online(last_logins: list) -> dict:
     """Получить статистику последнего входа.
 
     Args:
@@ -40,7 +43,7 @@ def find_was_online(last_logins: list):
         dict: словарь со статистикой последнего входа
     """
     static = {}
-    today = date.fromisoformat('2023-12-10')
+    today = date.today()
     for last_login in last_logins:
         last_login = date.fromisoformat(last_login)
         day = (today - last_login).days
