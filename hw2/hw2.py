@@ -9,8 +9,8 @@ hw2. Тесты используют различные json-файлы. В work
 линтера разных домашних, отдельные работы для тестов разных домашних (цель состоит в том,
 чтобы в actions они отображались отдельными галочками).
 """
-
 import json
+import os
 import re
 from datetime import datetime, timedelta
 from typing import Any
@@ -34,21 +34,12 @@ class InvalidFilePath(Exception):
         super().__init__(f'file {path_to_file} does not exist.')
 
 
-def process_data(path_to_input_json: str, path_to_output_json: str) -> None:
-    """Process user data.
-
-    Args:
-        path_to_input_json: str - the path to the json file with users.
-        path_to_output_json: str - the path to the file where the processed data is saved.
-
-    Raises:
-        InvalidFilePath: input json file does not exist.
-    """
+def _aggregate_users_stats(input_path: str, output_path: str) -> None:
     try:
-        with open(path_to_input_json, 'r') as input_json:
+        with open(input_path, 'r') as input_json:
             users = json.load(input_json)
     except FileNotFoundError:
-        raise InvalidFilePath(path_to_input_json)
+        raise InvalidFilePath(input_path)
 
     users_stat = get_regions_stat(users)
 
@@ -63,8 +54,23 @@ def process_data(path_to_input_json: str, path_to_output_json: str) -> None:
     dates = [(cur_date - date[0], date[1]) for date in dates]
     users_stat.update(filter_users_by_dates(users, dates))
 
-    with open(path_to_output_json, 'w') as output_json:
+    with open(output_path, 'w') as output_json:
         json.dump(users_stat, output_json)
+
+
+def process_data(path_to_input_json: str, path_to_output_json: str) -> None:
+    """Process user data.
+
+    Args:
+        path_to_input_json: str - the path to the json file with users.
+        path_to_output_json: str - the path to the file where the processed data is saved.
+    """
+    os.makedirs(os.path.abspath(os.path.dirname(path_to_output_json)), exist_ok=True)
+    try:
+        _aggregate_users_stats(path_to_input_json, path_to_output_json)
+    except Exception as error:
+        with open(path_to_output_json, 'w') as output_json:
+            json.dump({'error': '{0}: {1}'.format(type(error).__name__, error)}, output_json)
 
 
 def _check_date(date: str) -> None:
