@@ -3,7 +3,7 @@ from typing import Type
 
 import pytest
 
-from hw.hw1 import statistics
+from hw1 import statistics
 
 TEST_DATA = (
     (
