@@ -91,7 +91,7 @@ def record_age(information: dict, age_category: dict) -> None:
     age = information.get('age')
     if not isinstance(age, (int, float)):
         age = None
-    elif age <= EIGHTEEN:
+    if age <= EIGHTEEN:
         age_category['0-18'] += 1
     elif age <= TWENTY_FIVE:
         age_category['19-25'] += 1
