@@ -17,10 +17,10 @@ def make_tests():
     """
     res = []
     for num in range(1, COUNTTESTFILE):
-        input_file = f'hw2/input/{num}.json'
-        output_file = f'hw2/output/{num}.json'
+        input_file = f'input/{num}.json'
+        output_file = f'output/{num}.json'
 
-        with open(f'hw2/expected/{num}.json') as file_excepted:
+        with open(f'expected/{num}.json') as file_excepted:
             excepted = json.load(file_excepted)
         res.append((input_file, output_file, excepted))
     return tuple(res)
