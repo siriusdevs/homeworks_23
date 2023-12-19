@@ -1,0 +1,15 @@
+{
+    "time_results": {
+        "less_than_two_days": 0.0,
+        "less_than_week": 0.0,
+        "less_than_month": 0.0,
+        "less_than_half_year": 33.33333333333333,
+        "more_than_half_year": 66.66666666666666
+    },
+    "cities_results": {
+        "Antaliya": 2,
+        "Afinyi": 1,
+        "Noviyi-Arlean": 1,
+        "Essentuki": 2
+    }
+}

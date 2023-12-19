@@ -1,0 +1,44 @@
+{
+    "Citrin": {
+        "region": "Antaliya",
+        "registered": "2006-05-17",
+        "last_login": "2023-09-17",
+        "email": "antonAlbertovich@yandex.ru",
+        "age": 27
+    },
+    "Avgust": {
+        "region": "Afinyi",
+        "registered": "2022-03-30",
+        "last_login": "2023-11-01",
+        "email": "galka@gmail.com",
+        "age": 52
+    },
+    "Slava": {
+        "region": "Antaliya",
+        "registered": "2010-05-18",
+        "last_login": "2022-12-04",
+        "email": "UltraMyachik@yandex.ru",
+        "age": 36
+    },
+    "Vika": {
+        "region": "Noviyi-Arlean",
+        "registered": "2007-09-12",
+        "last_login": "2022-11-10",
+        "email": "stitch@gmail.com",
+        "age": 15
+    },
+    "Victor": {
+        "region": "Essentuki",
+        "registered": "2011-11-11",
+        "last_login": "2018-04-15",
+        "email": "fenix@yandex.ru",
+        "age": 2
+    },
+    "Bob": {
+        "region": "Essentuki",
+        "registered": "2016-09-20",
+        "last_login": "2021-03-21",
+        "email": "doctor@gmail.com",
+        "age": 61
+    }
+}

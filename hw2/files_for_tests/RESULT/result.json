@@ -1,0 +1,15 @@
+{
+    "time_results": {
+        "less_than_two_days": 16.666666666666664,
+        "less_than_week": 0.0,
+        "less_than_month": 0.0,
+        "less_than_half_year": 33.33333333333333,
+        "more_than_half_year": 50.0
+    },
+    "cities_results": {
+        "Gettoberg": 1,
+        "Lipeck": 1,
+        "Kishinev": 2,
+        "Kazan": 2
+    }
+}

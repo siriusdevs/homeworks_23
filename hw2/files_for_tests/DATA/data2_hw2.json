@@ -1,0 +1,44 @@
+{
+    "Venera": {
+        "region": "Citi",
+        "registered": "2019-09-09",
+        "last_login": "2022-02-07",
+        "email": "folga@yandex.ru",
+        "age": 23
+    },
+    "Luna": {
+        "region": "Izhevsk",
+        "registered": "2012-12-13",
+        "last_login": "2023-08-18",
+        "email": "dron_sdr@gmail.com",
+        "age": 86
+    },
+    "Izumrud": {
+        "region": "Kaluga",
+        "registered": "2001-06-19",
+        "last_login": "2007-04-14",
+        "email": "Bebrus@yandex.ru",
+        "age": 45
+    },
+    "Onix": {
+        "region": "Kaluga",
+        "registered": "2003-02-17",
+        "last_login": "2020-12-28",
+        "email": "Haip2288@gmail.com",
+        "age": 30
+    },
+    "Peredot": {
+        "region": "Kaluga",
+        "registered": "2019-07-19",
+        "last_login": "2023-11-25",
+        "email": "bottle_fridge@yandex.ru",
+        "age": 48
+    },
+    "Serdovik": {
+        "region": "Aktobiya",
+        "registered": "2021-12-23",
+        "last_login": "2023-01-23",
+        "email": "cookies@gmail.com",
+        "age": 34
+    }
+}
