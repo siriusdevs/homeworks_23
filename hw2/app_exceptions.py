@@ -1,7 +1,9 @@
 """Module for main exceptions."""
 
 
-class NotFoundAgeException(BaseException):
+class NotFoundAgeException(Exception):
     """Exception for age if it is not found."""
 
-    pass
+    def __init__(self) -> None:
+        """init."""
+        super().__init__('The parametr <age> is not found!')

@@ -2,6 +2,7 @@
 
 
 import json
+import os
 from typing import Callable
 
 from app_exceptions import NotFoundAgeException
@@ -20,24 +21,24 @@ def exceptions_to_json(function: Callable) -> None:
     def wrapper(*args):
         try:
             function(*args)
-        except (TypeError, NotFoundAgeException, ValueError) as e:
-            error_message = json.dumps({'error': str(e)})
+        except (TypeError, NotFoundAgeException, ValueError) as error:
+            error_message = json.dumps({'error': str(error)})
             write_json(args[1], error_message)
     return wrapper
 
 
 @exceptions_to_json
-def process_data(input: str, output: str) -> None:
+def process_data(input_path: str, output_path: str) -> None:
     """Take data and writes the statictic by age and registrations by years to the json file.
 
     Args:
-        input (str): the path where the json comes from.
-        output (str): path where json is saved.
+        input_path (str): the path where the json comes from.
+        output_path (str): path where json is saved.
 
     Raises:
         NotFoundAgeException: raise exception if we don't find 'age' in users.
     """
-    users = get_users_from_json(input)
+    users = get_users_from_json(input_path)
     try:
         ages = [user['age'] for user in users.values()]
     except KeyError:
@@ -49,7 +50,7 @@ def process_data(input: str, output: str) -> None:
 
     user_stats = UserStatistic(ages, stats).to_json()
 
-    write_json(output, user_stats)
+    write_json(output_path, user_stats)
 
 
 def write_json(output: str, message: any) -> None:
@@ -59,11 +60,10 @@ def write_json(output: str, message: any) -> None:
         output (str): The place where we save json file.
         message (any): Some data which we write.
     """
-    try:
-        with open(output, 'w+') as file:
-            file.write(message)
-    except FileNotFoundError:
-        print(f'The file with path: {output} is not found.')
+    if not os.path.exists(output):
+        os.mkdir('test_data_hw2')
+    with open(output, 'w+') as output_file:
+        output_file.write(message)
 
 
 def get_users_from_json(path: str) -> dict:
@@ -79,13 +79,12 @@ def get_users_from_json(path: str) -> dict:
         dict: The dict of users
     """
     try:
-        with open(path) as file:
-            data = json.load(file)
-            return data
+        with open(path) as users_file:
+            return json.load(users_file)
     except FileNotFoundError:
         raise ValueError(f'The file with path: {path} is not found!')
     except json.decoder.JSONDecodeError:
-        raise ValueError(f'The file: {file.name} is not valid!')
+        raise ValueError(f'The file with path: {path} is not valid!')
 
 
 def check_ages_type(ages: list):
@@ -123,9 +122,7 @@ def get_years_statistic(users: list[dict]) -> dict:
     except KeyError:
         raise ValueError('The parametr <registered> is not found.')
 
-    stats = {year: ratio(count, all_count) for year, count in stats.items()}
-
-    return stats
+    return {year: ratio(count, all_count) for year, count in stats.items()}
 
 
 def ratio(figure: int | float, to_figure: int | float):

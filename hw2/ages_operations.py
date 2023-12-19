@@ -17,8 +17,8 @@ def get_median_age(ages: list[int]) -> int:
 
     if len_ages % 2 == 0:
         return (middle_number + sort_ages[half_len_ages - 1]) // 2
-    else:
-        return middle_number
+
+    return middle_number
 
 
 def get_average_age(ages):
@@ -30,4 +30,7 @@ def get_average_age(ages):
     Returns:
         age: the average age.
     """
-    return int(round(sum(ages) / len(ages), 0))
+    len_ages = len(ages)
+    if len_ages == 0:
+        return 0
+    return int(round(sum(ages) / len_ages, 0))
