@@ -38,6 +38,9 @@ def process_time(dano: dict[str, dict[str, any]]) -> dict:
     Args:
         dano (dict[str, dict[str, any]]): consist names of users with their info
 
+    Raises:
+        ValueError: if file with no info
+
     Returns:
         dict: with time result
     """
@@ -46,6 +49,8 @@ def process_time(dano: dict[str, dict[str, any]]) -> dict:
     one_month_latency = timedelta(days=MONTH)
     six_monts_latency = timedelta(days=HALFYEAR)
     answer = [0, 0, 0, 0, 0]
+    if not dano:
+        raise ValueError('Your file doesn`t consist any info')
 
     for user in dano.values():
         try:
@@ -106,6 +111,8 @@ def process_data(source_path: str, dist_path: str) -> None:
         source_path (str): input file
         dist_path (str): none file if source file were empty
     """
+    if op.dirname(source_path) and not op.exists(source_path):
+        os.makedirs(op.dirname(source_path))
     try:
         with open(source_path, 'r') as filelot:
             dano = json.load(filelot)
@@ -119,8 +126,6 @@ def process_data(source_path: str, dist_path: str) -> None:
             json.dump(
                 {'Given file was empty': None}, fp=empty_out_file,
             )
-    if op.dirname(source_path) and not op.exists(source_path):
-        os.makedirs(op.dirname(source_path))
 
     time_results = process_time(dano)
     cities_results = process_cities(dano)
