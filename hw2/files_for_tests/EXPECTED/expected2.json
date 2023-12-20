@@ -1,0 +1,15 @@
+{
+    "time_results": {
+        "less_than_two_days": 0.0,
+        "less_than_week": 0.0,
+        "less_than_month": 16.666666666666664,
+        "less_than_half_year": 16.666666666666664,
+        "more_than_half_year": 66.66666666666666
+    },
+    "cities_results": {
+        "Citi": 1,
+        "Izhevsk": 1,
+        "Kaluga": 3,
+        "Aktobiya": 1
+    }
+}

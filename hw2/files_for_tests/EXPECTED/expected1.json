@@ -1,0 +1,16 @@
+{
+    "time_results": {
+        "less_than_two_days": 16.666666666666664,
+        "less_than_week": 0.0,
+        "less_than_month": 0.0,
+        "less_than_half_year": 16.666666666666664,
+        "more_than_half_year": 66.66666666666666
+    },
+    "cities_results": {
+        "Saint-Petersburg": 2,
+        "Sochi": 1,
+        "Moscow": 1,
+        "Praga": 1,
+        "Nicca": 1
+    }
+}
