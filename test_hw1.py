@@ -3,7 +3,7 @@
 
 import pytest
 
-from hm1 import salary_statistics
+from hw1 import salary_statistics
 
 TEST_DATA = (
     (

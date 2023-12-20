@@ -4,6 +4,18 @@
 # низкооплачиваемых (по средней зарплате в отделе).
 
 
+class MyError(Exception):
+    """Ошибка деление на 0."""
+
+    def __init__(self, arg) -> None:
+        """Инициализация.
+
+        Args:
+            arg: аргумент.
+        """
+        super().__init__(f'В отделе {arg} нет сотрудников!')
+
+
 def salary_statistics(
     exclude_department: tuple[str] = None,
         **department: dict[str: dict[str, float]],
@@ -22,14 +34,14 @@ def salary_statistics(
         и топ-3 самых низкооплачиваемых.
 
     Raises:
-        Exception: когда в отделе нет сотрудников.
+        MyError: когда в отделе нет сотрудников.
     """
     average_salaries = []
 
     for dep in department.keys():
         len_dep = len(department[dep])
         if len_dep == 0:
-            raise Exception(f'В отделе {dep} нет сотрудников!')
+            raise MyError(dep)
         if exclude_department is None or dep not in exclude_department:
             average_salary = round(sum(department[dep].values()) / len_dep, 2)
             average_salaries.append([dep, average_salary])
