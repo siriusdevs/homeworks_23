@@ -1,4 +1,5 @@
 import json, os
+import sys
 from typing import Any
 from datetime import datetime
 from statistics import mean
@@ -20,16 +21,23 @@ def check_extention(path_to_file: str, extention: str) -> None:
     if not cur_extention == extention:
         raise ExtentionError(cur_extention, extention)
     
-def open_json(path_to_file: str) -> dict[str:dict[str:Any]]:
+def print_error(path_to_file: str, text: str):
+    with open(path_to_file, 'w') as f:
+        f.write(text)
+    sys.exit()
+    
+def open_json(path_to_file: str, output_path: str) -> dict[str:dict[str:Any]]:
     try:
         check_path(path_to_file)
     except PathError:
-        pass
+        text = 'A file with an invalid path is given. Have a nice day!'
+        print_error(output_path, text)
 
     try:
         check_extention(path_to_file, '.json')
     except ExtentionError:
-        pass
+        text = 'The input file should have a JSON extension, but another one is given. Have a nice day!'
+        print_error(output_path, text)
 
     
     with open(path_to_file) as file:
@@ -37,13 +45,21 @@ def open_json(path_to_file: str) -> dict[str:dict[str:Any]]:
 
     return data
 
-def count_email_domain(json_file: dict[str:dict[str:Any]]) -> dict:
+def count_email_domain(json_file: dict[str:dict[str:Any]], output_path: str) -> dict:
     users = json_file.keys()
     amount_of_users = len(users)
     email_statistics = {}
 
+    if amount_of_users == 0:
+        text = 'There is no user information in the file. Have a nice day!'
+        print_error(output_path, text)
+
     for user in users:
-        email = json_file[user]['email'].split('@')[1]
+        try:
+            email = json_file[user]['email'].split('@')[1]
+        except IndexError:
+            text = 'Mail with an invalid email has been entered in the file. Have a nice day!'
+            print_error(output_path, text)
 
         if not email in email_statistics.keys():
             email_statistics[email] = 1
@@ -56,7 +72,7 @@ def count_email_domain(json_file: dict[str:dict[str:Any]]) -> dict:
 
     return email_statistics
 
-def count_user_age(json_file: dict[str:dict[str:Any]]) -> dict:
+def count_user_age(json_file: dict[str:dict[str:Any]], output_file) -> dict:
     current_date = datetime.now()
     users = json_file.keys()
     time_steps = {'Less than 2 days': 2,
@@ -69,7 +85,11 @@ def count_user_age(json_file: dict[str:dict[str:Any]]) -> dict:
 
     for user in users:
         age = json_file[user]['age']
-        last_login = datetime.strptime(json_file[user]['last_login'], '%Y-%m-%d')
+        try:
+            last_login = datetime.strptime(json_file[user]['last_login'], '%Y-%m-%d')
+        except ValueError:
+            text = 'The file contains a date in a non-correct format. Have a nice day!'
+            print_error(output_file, text)
         days_from_last_login = (current_date - last_login).days
         added = False
 
@@ -104,10 +124,12 @@ def write_result_to_json(path_to_file: str,
   
 
 def main(path_to_json: str, path_to_result: str) -> None:
-    json = open_json(path_to_json)
+    json = open_json(path_to_json, path_to_result)
     write_result_to_json(path_to_result,
-                         count_email_domain(json),
-                         count_user_age(json),
+                         count_email_domain(json, path_to_result),
+                         count_user_age(json, path_to_result),
                          )
-    
-main('hw2/data_hw2.json', 'hw2/test.json')
+
+
+if __name__ == '__main__':
+    main('hw2/data_hw2.json', 'hw2/test.json')
