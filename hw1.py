@@ -22,7 +22,7 @@ def calculate_salary_stats(
     for _, salaries in departments:
         for salary in salaries:
             if salary_limit is None or salary >= salary_limit:
-                all_salaries.append(salary)
+                all_salaries.append(round(salary, 2))
 
     all_salaries = sorted(all_salaries, reverse=True)
 
