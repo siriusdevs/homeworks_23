@@ -1,5 +1,6 @@
 """Module include tests on Participant with name and maximum number."""
 import pytest
+
 from hw3 import Participant
 
 participants = (
