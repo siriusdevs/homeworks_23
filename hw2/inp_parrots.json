@@ -1,0 +1,41 @@
+{
+    "popug": {
+        "region": "World",
+        "registered": "2016-03-22",
+        "last_login": "2018-08-30",
+        "email": "popug@yandex.ru",
+        "age": 11
+    },
+    "popugay": {
+        "region": "World",
+        "registered": "2016-03-22",
+        "last_login": "2018-08-13",
+        "email": "popugay@yandex.ru",
+        "age": 11
+    },
+    "kesha": {
+        "region": "Moscow",
+        "registered": "2012-05-01",
+        "last_login": "2012-05-06",
+        "email": "kesha@gmail.com",
+        "age": 3
+    },
+    "byklya": {
+        "region": "London",
+        "registered": "2006-01-25",
+        "last_login": "2006-04-30",
+        "email": "byklya@mail.ru",
+        "age": 4
+    },
+    "ra": {
+        "region": "Sun",
+        "email": "ra@mail.ru",
+        "age": 6
+    },
+    "lemon": {
+        "registered": "2007-01-29",
+        "last_login": "2007-01-30",
+        "email": "lemon@mail.ru",
+        "age": 2
+    }
+}

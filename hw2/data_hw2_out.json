@@ -1,0 +1,13 @@
+{
+    "geo_distribution": {
+        "Saint-Petersburg": 0.5,
+        "Sochi": 0.5
+    },
+    "online_stats": {
+        "less than 2 days": 0.0,
+        "less than week": 0.0,
+        "less than month": 0.5,
+        "less than 6 months": 0.0,
+        "great than 6 months": 0.5
+    }
+}
