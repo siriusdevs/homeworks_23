@@ -17,7 +17,7 @@ jobs:
     - name: Flake8
       run: flake8 hw1 test_hw1
   tests_hw1:
-    name: Тесты
+    name: Тесты hw1
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -33,7 +33,7 @@ jobs:
     - name: Pytest
       run: pytest test_hw1
   linter_hw2:
-    name: Линтер hw1
+    name: Линтер hw2
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -46,9 +46,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8==3.9.0 wemake-python-styleguide==0.15.3 bandit==1.7.2
     - name: Flake8
-      run: ./hw2
+      run: |
+        cd hw2
+        flake8
   tests_hw2:
-    name: Тесты
+    name: Тесты hw2
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -62,4 +64,6 @@ jobs:
         pip install pytest==6.2.5
         pip install numpy
     - name: Pytest
-      run: pytest ./hw2
+      run: |
+        cd hw2
+        pytest
