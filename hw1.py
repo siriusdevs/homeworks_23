@@ -8,9 +8,15 @@ def sort_key(dp: Tuple[str, Dict[str, float]]) -> float:
     Args:
         dp (Tuple): a tuple containing the name of the company department, last name, salary.
 
+    Raises:
+        ValueError: departs_count must be more than zero.
+
     Returns:
         float: sum salaries.
     """
+    departs_count = len(dp[1])
+    if departs_count == 0:
+        raise ValueError(f'{departs_count=} must be more than zero')
     return sum(list(dp[1].values())) / len(dp[1])
 
 

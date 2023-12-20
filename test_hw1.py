@@ -1,7 +1,6 @@
+"""test for hw1.py."""
 import pytest
-
 from hw1 import top3
-
 
 data = [
         (
@@ -10,7 +9,8 @@ data = [
                 ("Department 2", {"Alice Johnson": 70000, "Bob Smith": 80000}),
                 ("Department 3", {"Mike Brown": 90000, "Emily Davis": 100000}),
             ),
-            [['Department 3', 'Department 2', 'Department 1'], ['Department 1', 'Department 2', 'Department 3']],
+            [['Department 3', 'Department 2', 'Department 1'], 
+             ['Department 1', 'Department 2', 'Department 3']],
         ),
         (
             (
@@ -18,7 +18,8 @@ data = [
                 ("Department B", {"Alice Davis": 80000, "Bob Johnson": 70000}),
                 ("Department C", {"Mike Smith": 100000, "Emily Brown": 90000}),
             ),
-            [['Department C', 'Department B', 'Department A'], ['Department A', 'Department B', 'Department C']],
+            [['Department C', 'Department B', 'Department A'], 
+             ['Department A', 'Department B', 'Department C']],
         ),
     ]
 
