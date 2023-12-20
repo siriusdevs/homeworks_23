@@ -147,7 +147,7 @@ class NoAbstractOwner:
         return self._car_park
 
     @car_park.setter
-    def car_park(self, new_car_park):
+    def car_park(self, new_car_park: list[Car]) -> None:
         """
         Set the car park of the owner.
 
@@ -218,7 +218,7 @@ class CarShowroom:
         return self._name
 
     @name.setter
-    def name(self, new_name):
+    def name(self, new_name: str) -> None:
         """
         Set the name of the car showroom.
 
