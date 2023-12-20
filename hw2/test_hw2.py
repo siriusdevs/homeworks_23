@@ -1,9 +1,10 @@
+"""Tests for hw2."""
+
 import json
-from datetime import datetime
 
 import pytest
 
-from hw2 import av_user_age, convert_date, process_data
+from hw2 import av_user_age, process_data
 
 LT_DAYS = 'lt_2_days'
 LT_WEEK = 'lt_week'
@@ -48,48 +49,72 @@ age = (
 
 
 @pytest.mark.parametrize('user, ages, expected', age)
-def test_av_user_age(user, expected, ages):
+def test_av_user_age(user, ages, expected):
+    """
+    Test function for av_user_age.
+
+    Args:
+        user (dict): The user dictionary containing the user's details.
+        ages (dict): The age dictionary to be updated.
+        expected (dict): The expected result.
+    """
     assert av_user_age(user, ages) == expected
+
+
+OUTPUT = 'output.json'
 
 files = (
     (
-        'tests/test1.json',
-        'output.json',
-        'tests/test1_answer.json',
+        'hw2/tests/test1.json',
+        OUTPUT,
+        'hw2/tests/test1_answer.json',
     ),
     (
-        'tests/test2.json',
-        'output.json',
-        'tests/test2_answer.json',
+        'hw2/tests/test2.json',
+        OUTPUT,
+        'hw2/tests/test2_answer.json',
     ),
     (
-        'tests/test3.json',
-        'output.json',
-        'tests/test3_answer.json',
+        'hw2/tests/test3.json',
+        OUTPUT,
+        'hw2/tests/test3_answer.json',
     ),
     (
-        'tests/test4.json',
-        'output.json',
-        'tests/test4_answer.json',
+        'hw2/tests/test4.json',
+        OUTPUT,
+        'hw2/tests/test4_answer.json',
     ),
     (
-        'tests/test5.json',
-        'output.json',
-        'tests/test5_answer.json',
+        'hw2/tests/test5.json',
+        OUTPUT,
+        'hw2/tests/test5_answer.json',
     ),
     (
-        'tests/test6.json',
-        'output.json',
-        'tests/test6_answer.json',
+        'hw2/tests/test6.json',
+        OUTPUT,
+        'hw2/tests/test6_answer.json',
     ),
     (
-        'tests/test7.json',
-        'output.json',
-        'tests/test7_answer.json',
+        'hw2/tests/test7.json',
+        OUTPUT,
+        'hw2/tests/test7_answer.json',
     ),
 )
 
-@pytest.mark.parametrize('inp, out, expected', files)
-def test_process_data(inp, out, expected):
+
+@pytest.mark.parametrize('inp, out, exp', files)
+def test_process_data(inp, out, exp):
+    """
+    Test function for process_data.
+
+    Args:
+        inp (str): The path to the input JSON file containing the user data.
+        out (str): The path to the output JSON file where the results will be dumped.
+        exp (str): The path to the expected output JSON file.
+    """
     process_data(inp, out)
-    assert json.load(open(out, 'r')) == json.load(open(expected, 'r'))
+    with (  # noqa: WPS316
+        open(out, 'r') as output,
+        open(exp, 'r') as expected,
+    ):
+        assert json.load(output) == json.load(expected)
