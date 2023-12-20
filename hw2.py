@@ -16,9 +16,7 @@ def user_year_reg(year_reg: Counter, count_year: int) -> dict:
     Returns:
         dict: the percentage of the number of users registered in a given year.
     """
-    if not year_reg:
-        year_reg = 1
-    return {year: (count / count_year) * 100 for year, count in year_reg.items()}
+    return {year: (count / count_year) * 100 if count_year else 0 for year, count in year_reg.items()}
 
 
 def load_input_file(input_file: str) -> dict | str:
@@ -47,7 +45,7 @@ def user_age(age_categories: dict) -> dict:
     Returns:
         dict: A dictionary with a percentage distribution of age categories.
     """
-    age_count = sum(age_categories.values()) if sum(age_categories.values()) else 1
+    age_count = sum(age_categories.values()) if sum(age_categories.values()) else 0
     return {age: (count / age_count) * 100 for age, count in age_categories.items()}
 
 
