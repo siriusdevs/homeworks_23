@@ -3,7 +3,7 @@
 import re
 import sys
 
-from helper import get_dispersion, opener, write_to_json
+from helper import DIRECTORY, get_dispersion, opener, write_to_json
 
 HALF_YEAR = 183
 DURATIONS = (
@@ -74,7 +74,7 @@ def email_dispersion(clients: dict[str, dict]) -> tuple[dict[str, dict], int]:
         else:
             email_disp[email_host] = 1
     if not count_emails:
-        sys.stdout.write(str('data doesn`t have email fields!'))
+        write_to_json(f'{DIRECTORY}error_log.json', 'Data doesn`t have email fields!')
         sys.exit(1)
     return email_disp, sum(email_disp.values())
 
@@ -93,6 +93,7 @@ def process_data(path_in: str, path_out: str) -> None:
 
     if not clients:
         sys.stdout.write('data file is empty!')
+        write_to_json(f'{DIRECTORY}error_log.json', f'{path_in} file is empty')
         sys.exit(1)
 
     email_disp, duration_disp = email_dispersion(clients), duration_dispersion(clients)

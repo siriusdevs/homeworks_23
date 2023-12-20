@@ -2,10 +2,14 @@
 import json
 import sys
 from math import ceil
+from os import getcwd
+from pathlib import Path
+from typing import Any
 
 import dateparser
 
 DAYS_CONST = 60 * 60 * 24
+DIRECTORY = 'hw2/test_data_hw2/'
 
 
 def opener(path_in: str) -> dict[str, dict]:
@@ -21,26 +25,27 @@ def opener(path_in: str) -> dict[str, dict]:
         with open(path_in, 'r') as data_file:
             clients = json.loads(data_file.read())
     except FileNotFoundError as notfoundmsg:
-        sys.stdout.write(str(notfoundmsg))
+        write_to_json(f'{DIRECTORY}error_log.json', str(notfoundmsg))
         sys.exit(1)
     except json.decoder.JSONDecodeError as jsonerrormsg:
-        sys.stdout.write(str(jsonerrormsg))
+        write_to_json(f'{DIRECTORY}error_log.json', str(jsonerrormsg))
         sys.exit(1)
     return clients
 
 
-def write_to_json(path_out: str, stats: dict[str, dict]):
+def write_to_json(path_out: str, data_or_error: dict[str, dict] | Any):
     """Write data to json.
 
     Args:
         path_out (str): path to output file
-        stats (dict[str, dict]): calculated stats
+        data_or_error (dict[str, dict] | Any): calculated stats, or error message
     """
     try:
         with open(path_out, 'w') as output_file:
-            json.dump(stats, fp=output_file, indent=4)
+            json.dump(data_or_error, fp=output_file, indent=4)
     except FileNotFoundError as notfoundmsg:
-        sys.stdout.write(str(notfoundmsg))
+        sys.stdout.write('{0} is exists: {1}'.format(DIRECTORY, str(Path(DIRECTORY).exists())))
+        write_to_json(getcwd(), notfoundmsg)
         sys.exit(1)
 
 
