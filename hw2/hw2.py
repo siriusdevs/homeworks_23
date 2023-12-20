@@ -53,10 +53,10 @@ def process_time(dano: dict[str, dict[str, any]]) -> dict:
         raise ValueError('Your file doesn`t consist any info')
 
     for user in dano.values():
-        try:
-            date_len = TIME - datetime.strptime(user['last_login'], '%Y-%m-%d')
-        except KeyError:
-            date_len = timedelta(YEAR_TIME, MONTH_TIME, DAY_TIME)
+        date_len = TIME - datetime.strptime(
+            user.get('last_login', f'{YEAR_TIME}-{MONTH_TIME}-{DAY_TIME}'),
+            '%Y-%m-%d',
+            )
         match date_len:
             case date_len if date_len <= two_days_latency:
                 answer[0] += 1
@@ -95,10 +95,7 @@ def process_cities(dano: dict[str, dict[str, any]]) -> dict:
     """
     cities_dano = {}
     for user in dano.values():
-        try:
-            region = user['region']
-        except KeyError:
-            region = 'None'
+        region = user.get('region', None)
         cities_dano[region] = cities_dano.get(region, 0) + 1
 
     return cities_dano
@@ -117,12 +114,13 @@ def process_data(source_path: str, dist_path: str) -> None:
         with open(source_path, 'r') as filelot:
             dano = json.load(filelot)
     except FileNotFoundError:
+        os.makedirs(dist_path, exist_ok=True)
         with open(dist_path, 'w') as out_file:
             json.dump(
                 {'No file was given': None}, fp=out_file,
             )
     except json.JSONDecodeError:
-        
+        os.makedirs(dist_path, exist_ok=True)
         with open(dist_path, 'w') as empty_out_file:
             json.dump(
                 {'Given file was empty': None}, fp=empty_out_file,
