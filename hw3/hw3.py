@@ -1,6 +1,6 @@
 """Module for ordering dishes and managing products."""
 
-from traitlets import Any
+from typing import Any
 
 UNDERSCORE = '_'
 PRODUCTS = 'products'
