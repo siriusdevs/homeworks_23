@@ -8,23 +8,49 @@ import error_classes as errors
 import multi_util as utils
 
 
+def call_change_counter(
+    online_status_count: dict[str: int],
+    output_path: str,
+    json_data: Any,
+        ) -> None:
+    """Call change_counter for every client.
+
+    Args:
+        online_status_count: dict[str: int] - variable with statuses.
+        output_path: str - path for write.
+        json_data: Any - loaded json.
+
+    Raises:
+        ListNotExpected: raises if program meets list in input file.
+    """
+    try:
+        for client, client_info in json_data.items():
+            change_counter(online_status_count, client, client_info, output_path)
+    except AttributeError:
+        raise errors.ListNotExpected(output_path)
+
+
 def get_last_login(client: str, client_info: dict, output_path: str) -> str:
     """Find client email host.
 
     Args:
         client: str - client name.
         client_info: dict - info about client: region, registered, last_login, email, age.
-        output_path: str - file to write
+        output_path: str - file to write.
 
     Returns:
         str: last login date.
+
+    Raises:
+        NonExistentField: raises if the last_login field does not exist.
+        EmptyField: raises if the last_login field are empty.
     """
     try:
         last_login = client_info['last_login']
     except KeyError:
-        errors.NonExistentField(client, 'last_login', output_path)
+        raise errors.NonExistentField(client, 'last_login', output_path)
     if not last_login:
-        errors.EmptyField(client, 'last_login', output_path)
+        raise errors.EmptyField(client, 'last_login', output_path)
     return last_login
 
 
@@ -38,15 +64,20 @@ def get_host(client: str, client_info: dict, output_path: str) -> str:
 
     Returns:
         str: name of email host.
+
+    Raises:
+        EmailError: calls if email haven't @ symbol.
+        NonExistentField: raises if the email field does not exist.
+        EmptyField: raises if the email field are empty.
     """
     try:
         host = client_info['email'].split('@')[1]
     except IndexError:
-        errors.EmailError(client, output_path)
+        raise errors.EmailError(client, output_path)
     except KeyError:
-        errors.NonExistentField(client, 'email', output_path)
+        raise errors.NonExistentField(client, 'email', output_path)
     if not host:
-        errors.EmptyField(client, 'email', output_path)
+        raise errors.EmptyField(client, 'email', output_path)
     return host
 
 
@@ -65,6 +96,18 @@ def get_hosts_count(json_data: Any, output_path: str) -> dict:
         host = get_host(client, client_info, output_path)
         hosts_count[host] = hosts_count.get(host, 0) + 1
     return hosts_count
+
+
+def fill_hosts_percentage(json_data: Any, output_path: str, hosts_percentage: dict) -> None:
+    """Fill meets percantage for every host.
+
+    Args:
+        json_data: Any - loaded json.
+        output_path: str - file to write.
+        hosts_percentage: dict - hosts and meet percentage.
+    """
+    for host_name, count in get_hosts_count(json_data, output_path).items():
+        hosts_percentage[host_name] = round((count / len(json_data)) * 100, 2)
 
 
 def change_counter(
@@ -124,16 +167,11 @@ def process_data(input_path: str, output_path: str) -> None:
         utils.write('', output_path)
         return
     try:
-        for client, client_info in json_data.items():
-            change_counter(online_status_count, client, client_info, output_path)
-    except AttributeError:
-        errors.ListNotExpected(output_path)
-        return
+        call_change_counter(online_status_count, output_path, json_data)
     except Exception:
         return
     try:
-        for host_name, count in get_hosts_count(json_data, output_path).items():
-            hosts_percentage[host_name] = round((count / len(json_data)) * 100, 2)
+        fill_hosts_percentage(json_data, output_path, hosts_percentage)
     except Exception:
         return
     utils.write((online_status_count, hosts_percentage), output_path)
