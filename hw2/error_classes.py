@@ -1,8 +1,6 @@
 """Module with custom errors."""
 
 
-import sys
-
 import multi_util as utils
 
 
