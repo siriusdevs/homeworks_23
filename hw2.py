@@ -11,11 +11,13 @@ def user_year_reg(year_reg: Counter, count_year: int) -> dict:
 
     Args:
         year_reg: the number of users registered in each year
-        count_year: total number of years
+        count_year: total number of year
 
     Returns:
         dict: the percentage of the number of users registered in a given year.
     """
+    if not year_reg:
+        year_reg = 1
     return {year: (count / count_year) * 100 for year, count in year_reg.items()}
 
 
