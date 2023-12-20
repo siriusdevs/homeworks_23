@@ -1,5 +1,6 @@
 """Calculate and return the top 3 salaries and their ratio to the total salary."""
 
+
 def salary_stats(*departments, limit=None):
     """
     Calculate and return the top 3 salaries and their ratio to the total salary.
@@ -12,7 +13,7 @@ def salary_stats(*departments, limit=None):
         tuple: Tuple containing list of top 3 salaries and their ratio to the total salary.
     """
     all_salaries = []
-    for department, salaries in departments:
+    for _, salaries in departments:
         if limit is not None:
             salaries = [salary for salary in salaries if salary > limit]
         all_salaries.extend(salaries)
