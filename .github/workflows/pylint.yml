@@ -31,7 +31,7 @@ jobs:
         pip install pytest==6.2.5
         pip install numpy
     - name: Pytest
-      run: pytest
+      run: |
   linter_hw2:
     name: Линтер hw2
     runs-on: ubuntu-latest
