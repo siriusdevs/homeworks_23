@@ -16,8 +16,8 @@ def _calculate_statistics_in_json(json_data: JsonData) -> JsonStats:
         if reference not in statistics:
             statistics[reference] = {}
         statistics_field = statistics[reference]
-        for name, user_info in json_data.items():
-            attr = _get_value_from_field(user_info, reference, name)
+        for user_info in json_data.values():
+            attr = _get_value_from_field(user_info, reference)
             if attr not in statistics_field:
                 statistics_field[attr] = 1
             else:
@@ -30,26 +30,25 @@ def _calculate_statistics_in_json(json_data: JsonData) -> JsonStats:
     return statistics
 
 
-def _get_value_from_field(user_info: UserData, field: str, name: str) -> str:
+def _get_value_from_field(user_info: UserData, field: str) -> str:
     if field not in user_info:
         raise err.JSONMissingFieldException((field))
 
     string = user_info[field]
 
-    match field:
-        case 'email':
-            separ = '@'
-            if string.count(separ) != 1:
-                raise err.JSONIncorrectFieldFormat(f'email [{string}]', '<username>@<domain>')
+    if field == SEARCHING_REFERENCES[0]:
+        separ = '@'
+        if string.count(separ) != 1:
+            raise err.JSONIncorrectFieldFormat(f'email [{string}]', '<username>@<domain>')
 
-            return string.split(separ)[1]
+        return string.split(separ)[1]
 
-        case 'registered':
-            separ = '-'
-            if re.match(r'\d{4}-\d{2}-\d{2}', string) is None:
-                raise err.JSONIncorrectFieldFormat(f'date [{string}]', 'YYYY-MM-DD')
+    if field == SEARCHING_REFERENCES[1]:
+        separ = '-'
+        if re.match(r'\d{4}-\d{2}-\d{2}', string) is None:
+            raise err.JSONIncorrectFieldFormat(f'date [{string}]', 'YYYY-MM-DD')
 
-            return string.split(separ)[0]
+        return string.split(separ)[0]
 
 
 def get_abspath(filename: str, directory: str) -> str:
