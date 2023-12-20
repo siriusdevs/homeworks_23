@@ -1,123 +1,170 @@
+"""Module for ordering dishes and managing products."""
+
 from traitlets import Any
 
-
-def check_type(obj_: Any, class_or_tuple: tuple[type] | type):
-    if not isinstance(obj_, class_or_tuple):
-        raise TypeError(f"{obj_} is not {class_or_tuple}.")
-
-
-def check_type_of_list(list_: list[Any], class_or_tuple: tuple[type] | type):
-    check_type(list_, list)
-    for item in list_:
-        check_type(item, class_or_tuple)
+UNDERSCORE = '_'
+PRODUCTS = 'products'
+PRODUCT = 'product'
+DISHES = 'dishes'
+DISH = 'dish'
+NAME = 'name'
+PRICE = 'price'
 
 
+def _check_type(object_being_checked: Any, class_or_tuple: tuple[type] | type) -> type:
+    if not isinstance(object_being_checked, class_or_tuple):
+        raise TypeError(f'{object_being_checked} is not {class_or_tuple}.')
+
+
+def _check_type_of_list(entries: list[Any], class_or_tuple: tuple[type, ...] | type) -> type:
+    _check_type(entries, list)
+    for entry in entries:
+        _check_type(entry, class_or_tuple)
+
+
+def _add_property(property_name: str, class_or_tuple: type | tuple[type, ...]) -> type:
+    def wrapper(cls):
+        def _get(self):
+            return getattr(cls, f'{UNDERSCORE}{property_name}')
+
+        def _set(self, new_value):
+            _check_type(new_value, class_or_tuple)
+            setattr(cls, f'{UNDERSCORE}{property_name}', new_value)
+        getter = property(_get)
+        setattr(cls, property_name, getter)
+        setattr(cls, property_name, getter.setter(_set))
+        return cls
+    return wrapper
+
+
+def _add_list_property(list_name: str, class_or_tuple: type | tuple[type, ...]) -> type:
+    def wrapper(cls):
+        def _get(self):
+            return getattr(cls, f'{UNDERSCORE}{list_name}')
+
+        def _set(self, new_value: list[Any]):
+            _check_type_of_list(new_value, class_or_tuple)
+            setattr(cls, f'{UNDERSCORE}{list_name}', new_value)
+
+        getter = property(_get)
+        setattr(cls, list_name, getter)
+        setattr(cls, list_name, getter.setter(_set))
+        return cls
+    return wrapper
+
+
+def _add_adding_removeing_method(
+    list_name: str,
+    method_name: str,
+    class_or_tuple: type | tuple[type, ...],
+) -> type:
+    def wrapper(cls):
+        def remove(self, entry: Any):
+            _check_type(entry, class_or_tuple)
+            entries = getattr(cls, f'{UNDERSCORE}{list_name}')
+            if entry not in entries:
+                ValueError(f"{entry} doesn't exist.")
+            entries.remove(entry)
+
+        def add(self, entry: Any):
+            _check_type(entry, class_or_tuple)
+            entries = getattr(cls, f'{UNDERSCORE}{list_name}')
+            entries.append(entry)
+
+        setattr(cls, f'remove_{method_name}', remove)
+        setattr(cls, f'add_{method_name}', add)
+        return cls
+    return wrapper
+
+
+@_add_property(NAME, str)
+@_add_property(PRICE, int)
 class Product:
+    """Product for eating."""
+
     def __init__(self, name: str, price: int) -> None:
+        """Create a named product with a price.
+
+        Args:
+            name: product name.
+            price (int): product price.
+        """
         self.name, self.price = name, price
 
-    @property
-    def name(self) -> str:
-        return self._name
 
-    @name.setter
-    def name(self, new_name: str) -> None:
-        check_type(new_name, str)
-        self._name = new_name
-
-
+@_add_adding_removeing_method(PRODUCTS, PRODUCT, Product)
+@_add_list_property(PRODUCTS, Product)
+@_add_property(NAME, str)
 class Dish:
+    """Dish consisting of products.
+
+    Methods
+    -------
+    add_products(product: Product)
+        add the product to the list of products.
+    remove_products(product: Product)
+        delete the existing product from the product list.
+    """
+
     def __init__(self, name: str, products: list[Product]) -> None:
+        """Create named dish with create a named dish with the products it consists of.
+
+        Args:
+            name (str): _description_
+            products (list[Product]): _description_
+        """
         self.name, self.products = name, products
 
-    @property
-    def name(self) -> str:
-        return self._name
 
-    @name.setter
-    def name(self, new_name: str) -> None:
-        check_type(new_name, str)
-        self._name = new_name
-
-    @property
-    def products(self) -> list[Product]:
-        return self._products
-
-    @products.setter
-    def products(self, new_products: list[Product]) -> None:
-        check_type_of_list(new_products, Product)
-        self._products = new_products
-
-    def add_product(self, product: Product):
-        check_type(product, Product)
-        self.products.append(product)
-
-    def remove_product(self, product: Product):
-        check_type(product, Product)
-        if product not in self.products:
-            ValueError(f'{product} is not exist.')
-        self.products.remove(product)
-
-
+@_add_adding_removeing_method(PRODUCTS, PRODUCT, Product)
+@_add_list_property(PRODUCTS, Product)
+@_add_adding_removeing_method(DISHES, DISH, Dish)
+@_add_list_property(DISHES, Dish)
+@_add_property(NAME, str)
 class Restaurant:
+    """Restaurant with dishes and a warehouse for products.
+
+    Methods
+    -------
+    add_products(product: Product)
+        add the product to the list of products.
+    remove_products(product: Product)
+        delete the existing product from the product list.
+    add_dish(dish: Dish)
+        add the dish to the list of dishes.
+    remove_products(dish: Dish)
+        delete the existing dish from the dish list.
+    order_dish(dish_name: str)
+        return the dish if it is in the restaurant, otherwise return None.
+    """
+
     def __init__(self, name: str, dishes: list[Dish], products: list[Product]) -> None:
-        self.name, self.dishes = name, dishes
-        self.products = products
+        """Create restaurant with dishes and products.
 
-    @property
-    def name(self) -> str:
-        return self._name
-
-    @name.setter
-    def name(self, new_name: str) -> None:
-        check_type(new_name, str)
-        self._name = new_name
-
-    @property
-    def dishes(self) -> list[Dish]:
-        return self._dishes
-
-    @dishes.setter
-    def dishes(self, new_dishes: list[Dish]) -> None:
-        check_type_of_list(new_dishes, Dish)
-        self._dishes = new_dishes
-
-    def add_dish(self, dish: Dish):
-        check_type(dish, Dish)
-        self.dishes.append(dish)
-
-    def remove_dish(self, dish: Dish):
-        check_type(dish, Dish)
-        if dish not in self.dishes:
-            ValueError(f'{dish} is not exist.')
-        self.dishes.remove(dish)
-
-    @property
-    def products(self) -> list[Product]:
-        return self._products
-
-    @products.setter
-    def products(self, new_products: list[Product]) -> None:
-        check_type_of_list(new_products, Product)
-        self._products = new_products
-
-    def add_product(self, product: Product):
-        check_type(product, Product)
-        self.products.append(product)
-
-    def remove_product(self, product: Product):
-        check_type(product, Product)
-        if product not in self.products:
-            ValueError(f'{product} is not exist.')
-        self.products.remove(product)
+        Args:
+            name: product name.
+            dishes: list of dishes.
+            products: list of products.
+        """
+        self.name, self.dishes, self.products = name, dishes, products
 
     def order_dish(self, dish_name: str) -> Dish | None:
+        """Find selected dish by name.
+
+        Args:
+            dish_name (str): name of the selected dish.
+
+        Returns:
+            Dish | None: dish if it is in the restaurant, otherwise return None.
+        """
         dishes = list(filter(lambda dish: dish.name == dish_name, self.dishes))
         if not dishes:
             return None
         first_dish = dishes[0]
-        if set(first_dish.products).issubset(self.products):
-            self.products = list(filter(lambda i: i not in first_dish.products, self.products))
-            self.remove_dish(first_dish)
-            return first_dish
-        return None
+        if not set(first_dish.products).issubset(self.products):
+            return None
+        self.products = list(filter(
+            lambda product: product not in first_dish.products, self.products,
+        ))
+        self.remove_dish(first_dish)
+        return first_dish
