@@ -60,4 +60,4 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest==7.4.2
     - name: Pytest
-      run: cd hw2 && pytest .
+      run: pytest hw2/test_hw2.py

@@ -84,6 +84,7 @@ def assemble_data(input_filename: str, output_filename: str) -> None:
 
     statistics = _calculate_statistics_in_json(json_data)
     output_abspath = get_abspath(output_filename, 'outputs')
+    os.makedirs(os.path.abspath(os.path.dirname(f'src/outputs/{output_filename}')), exist_ok=True)
     with open(output_abspath, 'w') as output_file:
         json.dump(statistics, fp=output_file, indent=4)
 
