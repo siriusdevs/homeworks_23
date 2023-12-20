@@ -1,0 +1,88 @@
+{
+    "test_data": {
+        "V0VaN": {
+            "region": "Lipetsk",
+            "registered": "2018-03-02",
+            "last_login": "2023-05-18",
+            "email": "v0va_genius@not_equal.ru",
+            "age": 18
+        },
+        "Killer882": {
+            "region": "San_Francisco",
+            "registered": "2020-01-23",
+            "last_login": "2022-05-07",
+            "email": "kirill_best21@ego.com",
+            "age": 15
+        },
+        "BePositive": {
+            "region": "Lipetsk",
+            "registered": "2005-03-04",
+            "last_login": "2023-06-01",
+            "email": "positive_person_228@not_depondecy.live",
+            "age": 33
+        },
+        "Patrick_Bateman": {
+            "region": "America",
+            "registered": "2010-11-24",
+            "last_login": "2019-08-15",
+            "email": "patrick_bateman@gmain.com",
+            "age": 27
+        },
+        "Gandalf": {
+            "region": "Valinor",
+            "registered": "1800-4-15",
+            "last_login": "2000-09-03",
+            "email": "gandalf_magic@mentality.wizard",
+            "age": 24000
+        },
+        "Spider-man": {
+            "region": "New_York",
+            "registered": "2015-12-24",
+            "last_login": "2023-12-15",
+            "email": "friendly_neighbor@spidy.com",
+            "age": 17
+        },
+        "PinkBatman": {
+            "region": "New_York",
+            "registered": "2003-07-07",
+            "last_login": "2023-12-14",
+            "email": "batman_retribution@night.scary",
+            "age": 30
+        },
+        "ZXCKolyan": {
+            "region": "Pridonia_gardens",
+            "registered": "2019-12-24",
+            "last_login": "2023-09-23",
+            "email": "kolya_school@edu.com",
+            "age": 20
+        },
+        "Zakhar": {
+            "region": "Sirius",
+            "registered": "2020-06-19",
+            "last_login": "2023-11-22",
+            "email": "zakhar_esports_player@dota.two",
+            "age": 18
+        },
+        "Roma": {
+            "region": "Sirius",
+            "registered": "2021-05-06",
+            "last_login": "2023-08-10",
+            "email": "romchik342@healthy.life",
+            "age": 18
+        }
+    },
+    "answer": {
+        "active_for_more_than_half_year_average_age": 4818.6,
+        "active_in_last_half_year_average_age": 20.6,
+        "active_in_last_month_average_age": 21.666666666666668,
+        "active_in_last_two_days_average_age": 17.0,
+        "active_in_last_week_average_age": 23.5,
+        "America": 10.0,
+        "Lipetsk": 20.0,
+        "New_York": 20.0,
+        "Pridonia_gardens": 10.0,
+        "San_Francisco": 10.0,
+        "Sirius": 20.0,
+        "Valinor": 10.0
+    }
+}

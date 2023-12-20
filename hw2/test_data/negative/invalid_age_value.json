@@ -1,0 +1,14 @@
+{
+    "test_data": {
+        "user1": {
+            "region": "Moscow",
+            "registered": "2012-12-24",
+            "last_login": "2023-10-01",
+            "email": "user@yandex.ru",
+            "age": -12
+        }
+    },
+    "answer": {
+        "error": "ValueError: age -12 should be positive"
+    }
+}

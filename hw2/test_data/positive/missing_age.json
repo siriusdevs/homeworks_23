@@ -1,0 +1,25 @@
+{
+    "test_data": {
+        "Anti-Slavik": {
+            "region": "Moscow",
+            "registered": "2012-12-24",
+            "last_login": "2023-10-01",
+            "email": "user@yandex.ru"
+        },
+        "Vlad Mukaseev": {
+            "region": "Saint-Petersburg",
+            "registered": "2023-12-01",
+            "last_login": "2023-12-02",
+            "email": "mukaseev@english.com"
+        }
+    },
+    "answer": {
+        "active_for_more_than_half_year_average_age": null,
+        "active_in_last_half_year_average_age": null,
+        "active_in_last_month_average_age": null,
+        "active_in_last_two_days_average_age": null,
+        "active_in_last_week_average_age": null,
+        "Saint-Petersburg": 50.0,
+        "Moscow": 50.0
+    }
+}
