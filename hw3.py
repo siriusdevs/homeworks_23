@@ -20,6 +20,7 @@ def check_type(input_value: Any, expected_type: type) -> bool:
         raise ValueError(f"Expected type {expected_type}, got {type(input_value)}")
     return True
 
+
 class Car:
     """Class for a car."""
 
@@ -99,7 +100,8 @@ class Car:
         check_type(new_year, int)
         self._year = new_year
 
-class Owner:
+
+class AbstractOwner:
     """Class for an owner."""
 
     def __init__(self, name: str, car_park: list[Car]):
@@ -186,6 +188,7 @@ class Owner:
         """
         return self._car_park
 
+
 class CarShowroom:
     """Class for a car showroom."""
 
@@ -244,6 +247,10 @@ class CarShowroom:
             check_type(car, Car)
         self._cars = new_cars
 
+
+class Owner(AbstractOwner):
+    """Class for an owner."""
+
     def add_car(self, car: Car):
         """
         Add a car to the car showroom.
@@ -264,10 +271,11 @@ class CarShowroom:
         check_type(car, Car)
         self._cars.remove(car)
 
-class Sale:
+
+class AbstractSale:
     """Class for a sale."""
 
-    def __init__(self, car_for_sale: Car, owner: Owner, car_showroom: CarShowroom):
+    def __init__(self, car_for_sale: Car, owner: AbstractOwner, car_showroom: CarShowroom):
         """
         Initialize the sale object.
 
@@ -342,6 +350,10 @@ class Sale:
         """
         check_type(new_car_showroom, CarShowroom)
         self._car_showroom = new_car_showroom
+
+
+class Sale(AbstractSale):
+    """Class for a sale."""
 
     def sell_car(self):
         """
