@@ -1,0 +1,23 @@
+{
+    "joe": {
+        "region": "America",
+        "registered": "2008-04-24",
+        "last_login": "2022-01-01",
+        "email": "americonets@pendosia.us",
+        "age": 27
+    },
+    "jane": {
+        "region": "Brazil",
+        "registered": "2019-01-01",
+        "last_login": "2022-09-09",
+        "email": "jane@jane.jane",
+        "age": 22
+    },
+    "pyotr": {
+        "region": "Sochi",
+        "registered": "2022-10-30",
+        "last_login": "2022-11-21",
+        "email": "pyotr@pyotr.pyotr",
+        "age": 18
+    }
+}

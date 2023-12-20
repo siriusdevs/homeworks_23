@@ -1,0 +1,12 @@
+{
+    "age_stats": {
+        "lt_2_days": 0.0,
+        "lt_week": 0.0,
+        "lt_month": 0.0,
+        "lt_half_year": 0.0,
+        "gt_half_year": 81.0
+    },
+    "region_stats": {
+        "Moscow": 2.0
+    }
+}

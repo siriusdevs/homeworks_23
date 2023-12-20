@@ -1,0 +1,13 @@
+{
+    "age_stats": {
+        "lt_2_days": 0.0,
+        "lt_week": 0.0,
+        "lt_month": 0.0,
+        "lt_half_year": 36.0,
+        "gt_half_year": 18.0
+    },
+    "region_stats": {
+        "Saint-Petersburg": 1.0,
+        "Sochi": 1.0
+    }
+}
