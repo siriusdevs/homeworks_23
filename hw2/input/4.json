@@ -1,0 +1,16 @@
+{
+    "user": {
+        "region": "Omsk",
+        "registered": "2019-10-15",
+        "last_login": "2013-09-09",
+        "email": "user@yandex.ru",
+        "age": 61
+    },
+    "user2": {
+        "region": "Tomsk",
+        "registered": "1999-03-07",
+        "last_login": "2008-07-22",
+        "email": "user2@gmail.com",
+        "age": 45
+    }
+}

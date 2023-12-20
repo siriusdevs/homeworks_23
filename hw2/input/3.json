@@ -1,0 +1,16 @@
+{
+    "user": {
+        "region": "Penza",
+        "registered": "2012-12-24",
+        "last_login": "2023-10-01",
+        "email": "user@yandex.ru",
+        "age": 29
+    },
+    "user2": {
+        "region": "Balashov",
+        "registered": "2017-04-26",
+        "last_login": "2022-11-21",
+        "email": "user2@icloud.com",
+        "age": 16
+    }
+}
