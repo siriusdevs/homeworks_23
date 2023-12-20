@@ -19,5 +19,12 @@
         "last_login": "2022-04-21",
         "email": "user6@gmail.com",
         "age": 20
+    },
+    "user6": {
+        "region": "Sochi",
+        "registered": "2022-10-30",
+        "last_login": "2022-04-21",
+        "email": "user6@oleg.com",
+        "age": 190
     }
 }

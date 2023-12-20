@@ -1,6 +1,6 @@
 import json, os
 from typing import Any
-from datetime import date, datetime
+from datetime import datetime
 from statistics import mean
 
 class PathError(Exception):
@@ -11,13 +11,26 @@ class ExtentionError(Exception):
     def __init__(self, extention: str, expected: str) -> None:
         super().__init__(f'File must be {expected}, but got {extention}')
 
-def open_json(path_to_file: str) -> dict[str:dict[str:Any]]:
+def check_path(path_to_file: str) -> None:
     if not os.path.isfile(path_to_file):
         raise PathError(path_to_file)
     
-    extention = os.path.splitext(path_to_file)[1]
-    if not extention == '.json':
-        raise ExtentionError(extention, '.json')
+def check_extention(path_to_file: str, extention: str) -> None:
+    cur_extention = os.path.splitext(path_to_file)[1]
+    if not cur_extention == extention:
+        raise ExtentionError(cur_extention, extention)
+    
+def open_json(path_to_file: str) -> dict[str:dict[str:Any]]:
+    try:
+        check_path(path_to_file)
+    except PathError:
+        pass
+
+    try:
+        check_extention(path_to_file, '.json')
+    except ExtentionError:
+        pass
+
     
     with open(path_to_file) as file:
         data = json.load(file)
@@ -78,3 +91,23 @@ def count_user_age(json_file: dict[str:dict[str:Any]]) -> dict:
 
     return average_age
     
+def write_result_to_json(path_to_file: str,
+                         email_statistics: dict[str:str],
+                         average_age: dict[str:float|str],
+                        ) -> None:
+
+    to_json = {'email statistics':email_statistics,
+               'average_age':average_age}
+    
+    with open(path_to_file, 'w') as f:
+        f.write(json.dumps(to_json))
+  
+
+def main(path_to_json: str, path_to_result: str) -> None:
+    json = open_json(path_to_json)
+    write_result_to_json(path_to_result,
+                         count_email_domain(json),
+                         count_user_age(json),
+                         )
+    
+main('hw2/data_hw2.json', 'hw2/test.json')
