@@ -75,7 +75,7 @@ def assemble_data(input_filename: str, output_filename: str) -> None:
         InvalidFilePathException: occurs if reading JSON by not existing path.
     """
     input_abspath = get_abspath(input_filename, 'inputs')
-    if not os.path.exists(input_abspath):
+    if not os.path.isfile(input_abspath):
         raise err.InvalidFilePathException(input_abspath)
 
     with open(input_abspath, 'r') as input_file:
@@ -95,5 +95,7 @@ def log_error_to_json(error: Error, output_filename: str) -> None:
         error (Error): class of occured error.
         output_filename (str): name of output JSON file to write.
     """
-    with open(get_abspath(output_filename, 'outputs'), 'w') as output_file:
+    output_abspath = get_abspath(output_filename, 'outputs')
+    os.makedirs(os.path.abspath(os.path.dirname(output_abspath)), exist_ok=True)
+    with open(output_abspath, 'w') as output_file:
         json.dump(error, fp=output_file, indent=4)
