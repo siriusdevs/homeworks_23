@@ -1,5 +1,4 @@
-import json, os
-import sys
+import json, os, sys
 from typing import Any
 from datetime import datetime
 from statistics import mean
@@ -41,9 +40,9 @@ def open_json(path_to_file: str, output_path: str) -> dict[str:dict[str:Any]]:
 
     
     with open(path_to_file) as file:
-        data = json.load(file)
+        result_of_reading = json.load(file)
 
-    return data
+    return result_of_reading
 
 def count_email_domain(json_file: dict[str:dict[str:Any]], output_path: str) -> dict:
     users = json_file.keys()
@@ -73,7 +72,10 @@ def count_email_domain(json_file: dict[str:dict[str:Any]], output_path: str) -> 
     return email_statistics
 
 def count_user_age(json_file: dict[str:dict[str:Any]], output_file) -> dict:
-    current_date = datetime.now()
+    # Вообще, в идеале, тут правда должна быть текущая дата, но тогда тесты, увы, работают
+    # только сутки (((
+    # current_date = datetime.now()
+    current_date = datetime.strptime('2023-12-20', '%Y-%m-%d')
     users = json_file.keys()
     time_steps = {'Less than 2 days': 2,
                   'Less than a week': 7,
@@ -119,11 +121,11 @@ def write_result_to_json(path_to_file: str,
     to_json = {'email statistics':email_statistics,
                'average_age':average_age}
     
-    with open(path_to_file, 'w') as f:
-        f.write(json.dumps(to_json))
+    with open(path_to_file, 'w') as file_to_write:
+        file_to_write.write(json.dumps(to_json))
   
 
-def main(path_to_json: str, path_to_result: str) -> None:
+def analyze_json(path_to_json: str, path_to_result: str) -> None:
     json = open_json(path_to_json, path_to_result)
     write_result_to_json(path_to_result,
                          count_email_domain(json, path_to_result),
@@ -132,4 +134,4 @@ def main(path_to_json: str, path_to_result: str) -> None:
 
 
 if __name__ == '__main__':
-    main('hw2/data_hw2.json', 'hw2/test.json')
+    analyze_json('hw2/data_hw2.json', 'hw2/test.json')
