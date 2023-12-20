@@ -1,7 +1,6 @@
 """Module for calculating the last login of users and the percentage of email hosts."""
 
 import json
-import sys
 from datetime import datetime
 from typing import Any
 
@@ -68,7 +67,7 @@ def get_hosts_count(json_data: Any, output_path: str) -> dict:
     return hosts_count
 
 
-def change_online_status_counter(
+def change_counter(
     online_status_count: dict[str: int],
     client: str,
     client_info: dict,
@@ -120,12 +119,13 @@ def process_data(input_path: str, output_path: str) -> None:
             json_data = json.load(input_file)
     except FileNotFoundError:
         errors.NoInputFile(input_path, output_path)
+        return
     except json.JSONDecodeError:
         utils.write('', output_path)
-        sys.exit()
+        return
     try:
         for client, client_info in json_data.items():
-            change_online_status_counter(online_status_count, client, client_info, output_path)
+            change_counter(online_status_count, client, client_info, output_path)
     except AttributeError:
         errors.ListNotExpected(output_path)
         return
