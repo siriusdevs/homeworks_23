@@ -48,10 +48,6 @@ def test_process_data(file_name: str):
     """
     input_file = f'{INPUT_PATH}{file_name}'
     example_file = f'{EXAMPLE_PATH}{file_name}'
-    try:
-        process_data(input_file, OUTPUT_FILE)
-    except SystemExit:
-        assert compare(example_file)
-    else:
-        assert compare(example_file)
+    process_data(input_file, OUTPUT_FILE)
+    assert compare(example_file)
     os.remove(OUTPUT_FILE)
