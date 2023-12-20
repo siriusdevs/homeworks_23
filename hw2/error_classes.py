@@ -4,7 +4,7 @@
 import multi_util as utils
 
 
-class NonExistentField:
+class NonExistentField(Exception):
     """Custom error, calls if field isn't exists."""
 
     def __init__(self, client: str, field: str, output_path: str) -> None:
@@ -19,7 +19,7 @@ class NonExistentField:
         utils.write(message, output_path)
 
 
-class EmptyField:
+class EmptyField(Exception):
     """Custom error, calls if field is empty."""
 
     def __init__(self, client: str, field: str, output_path: str) -> None:
@@ -34,7 +34,7 @@ class EmptyField:
         utils.write(message, output_path)
 
 
-class EmailError:
+class EmailError(Exception):
     """Custom error, calls if email is incorrect."""
 
     def __init__(self, client: str, output_path: str) -> None:
@@ -48,7 +48,7 @@ class EmailError:
         utils.write(message, output_path)
 
 
-class NoInputFile:
+class NoInputFile(Exception):
     """Custom error, calls if input file not exists."""
 
     def __init__(self, input_file: str, output_path: str) -> None:
@@ -62,7 +62,7 @@ class NoInputFile:
         utils.write(message, output_path)
 
 
-class ListNotExpected:
+class ListNotExpected(Exception):
     """Custom error, calls if in input file appear list."""
 
     def __init__(self, output_path: str) -> None:
