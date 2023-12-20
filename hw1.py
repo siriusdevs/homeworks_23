@@ -15,7 +15,7 @@ def salary_stats(*departments, limit=None):
     all_salaries = []
     for _, salaries in departments:
         if limit is not None:
-            salaries = [salary for salary in salaries if salary > limit]
+            salaries = [salary for salary in salaries if salary >= limit]
         all_salaries.extend(salaries)
 
     all_salaries.sort()
