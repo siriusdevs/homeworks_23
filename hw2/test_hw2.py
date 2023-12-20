@@ -3,37 +3,12 @@ import json
 
 import errors as err
 import pytest
-from consts import JsonStats
 from json_parsing import assemble_data, get_abspath
 
 GOOD_RESULT = (
-    ('empty.json', {
-        'email': {},
-        'registered': {},
-    }),
-    ('example.json', {
-        'email': {
-            'mail.ru': 42.86,
-            'gmail.com': 28.57,
-            'mail.bel': 14.29,
-            'soplya.ru': 14.29,
-        },
-        'registered': {
-            '2012': 57.14,
-            '2011': 28.57,
-            '2013': 14.29,
-        },
-    }),
-    ('simple.json', {
-        'email': {
-            'yandex.ru': 50.0,
-            'gmail.com': 50.0,
-        },
-        'registered': {
-            '2012': 50.0,
-            '2022': 50.0,
-        },
-    }),
+    ('example.json'),
+    ('empty.json'),
+    ('simple.json'),
 )
 
 INVALID_PATH = 'invalid_path.json'
@@ -46,15 +21,16 @@ ERROR_RESULTS = (
 )
 
 
-@pytest.mark.parametrize('test_filename, expected', GOOD_RESULT)
-def test_assemble_data(test_filename: str, expected: JsonStats) -> None:
-    """Asserts that function assemble_data(input_filename, output_filename) writes $expected.
+@pytest.mark.parametrize('test_filename', GOOD_RESULT)
+def test_assemble_data(test_filename: str) -> None:
+    """Asserts that function assemble_data(input_filename) writes $expected.
 
     Args:
         test_filename (str): name of a file that is used for testing.
-        expected (JsonStats): expected JSON output value that main function writes.
     """
     assemble_data(test_filename, test_filename)
+    with open(get_abspath(test_filename, 'expected'), 'r') as expect_out:
+        expected = json.load(expect_out)
     with open(get_abspath(test_filename, 'outputs'), 'r') as output:
         collected = json.load(output)
     assert collected == expected
