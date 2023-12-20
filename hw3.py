@@ -1,4 +1,5 @@
 """Module for Homework 3."""
+
 from typing import Any
 
 
@@ -101,7 +102,7 @@ class Car:
         self._year = new_year
 
 
-class NoAbstractOwner:
+class OneOwner:
     """Class for an owner."""
 
     def __init__(self, name: str, car_park: list[Car]):
@@ -160,7 +161,7 @@ class NoAbstractOwner:
         self._car_park = new_car_park
 
 
-class Owner(NoAbstractOwner):
+class Owner(OneOwner):
     """Class for an owner."""
 
     def add_car(self, car: Car):
@@ -275,7 +276,7 @@ class CarShowroom:
 class AbstractSale:
     """Class for a sale."""
 
-    def __init__(self, car_for_sale: Car, owner: NoAbstractOwner, car_showroom: CarShowroom):
+    def __init__(self, car_for_sale: Car, owner: OneOwner, car_showroom: CarShowroom):
         """
         Initialize the sale object.
 
@@ -320,7 +321,7 @@ class AbstractSale:
         return self._owner
 
     @owner.setter
-    def owner(self, new_owner: NoAbstractOwner) -> None:
+    def owner(self, new_owner: OneOwner) -> None:
         """
         Set the owner of the car.
 
