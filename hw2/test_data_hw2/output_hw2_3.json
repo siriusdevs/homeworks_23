@@ -1,0 +1,14 @@
+{
+    "email_scatter": {
+        "gmail.com": 33.33,
+        "outlook.com": 16.67,
+        "mail.ru": 16.67,
+        "yandex.ru": 33.33
+    },
+    "duration_scatter": {
+        "under_2_days": 16.67,
+        "under_week": 0.0,
+        "under_half_year": 0.0,
+        "over_half_year": 83.33
+    }
+}

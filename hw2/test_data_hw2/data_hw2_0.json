@@ -1,0 +1,44 @@
+{
+    "user0": {
+        "region": "Moscow",
+        "registered": "2015-11-18",
+        "last_login": "2018-11-20",
+        "email": "251@outlook.com",
+        "age": 91
+    },
+    "user1": {
+        "region": "New-York",
+        "registered": "2020-8-15",
+        "last_login": "2021-8-15",
+        "email": "510@mail.ru",
+        "age": 25
+    },
+    "user2": {
+        "region": "Moscow",
+        "registered": "2013-7-24",
+        "last_login": "2015-9-26",
+        "email": "818@gmail.com",
+        "age": 21
+    },
+    "user3": {
+        "region": "Moscow",
+        "registered": "2016-4-10",
+        "last_login": "2021-7-27",
+        "email": "764@outlook.com",
+        "age": 98
+    },
+    "user4": {
+        "region": "Moscow",
+        "registered": "2010-8-22",
+        "last_login": "2015-9-23",
+        "email": "375@mail.ru",
+        "age": 86
+    },
+    "user5": {
+        "region": "New-York",
+        "registered": "2022-2-14",
+        "last_login": "2022-8-18",
+        "email": "192@outlook.com",
+        "age": 68
+    }
+}
