@@ -1,4 +1,4 @@
-"""Module for Homework 3"""
+"""Module for Homework 3."""
 from typing import Any
 
 
@@ -17,7 +17,7 @@ def check_type(input_value: Any, expected_type: type) -> bool:
         ValueError: If the input value is not of the expected type.
     """
     if not isinstance(input_value, expected_type):
-        raise ValueError(f"Expected type {expected_type}, got {type(input_value)}")
+        raise ValueError('The input value is not of the expected type.')
     return True
 
 
@@ -159,6 +159,10 @@ class AbstractOwner:
             check_type(car, Car)
         self._car_park = new_car_park
 
+
+class Owner(AbstractOwner):
+    """Class for an owner."""
+
     def add_car(self, car: Car):
         """
         Add a car to the car park.
@@ -246,10 +250,6 @@ class CarShowroom:
         for car in new_cars:
             check_type(car, Car)
         self._cars = new_cars
-
-
-class Owner(AbstractOwner):
-    """Class for an owner."""
 
     def add_car(self, car: Car):
         """
@@ -366,4 +366,4 @@ class Sale(AbstractSale):
             self.car_showroom.remove_car(self.car_for_sale)
             self.owner.add_car(self.car_for_sale)
         else:
-            raise ValueError("The car is not in the car showroom.")
+            raise ValueError('The car is not in the car showroom.')
