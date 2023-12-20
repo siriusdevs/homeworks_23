@@ -28,4 +28,4 @@ def calculate_department_statistics(
     top_3_highest = sorted_departments[:3]
     top_3_lowest = sorted_departments[-3:]
 
-    return (top_3_highest, top_3_lowest)
+    return top_3_highest, top_3_lowest
