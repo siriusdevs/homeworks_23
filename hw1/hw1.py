@@ -33,7 +33,7 @@ def get_departments_rating(
         Tuple[list, list]: the top 3 highest and the top 3 lowest paid departments in the company.
     """
     average_salaries = {}
-    included_deps = set(included_deps)
+    included_deps = set(included_deps) if included_deps is not None else set()
     for department_name, staff in departments.items():
         if not included_deps or department_name in included_deps:
             check_salary_for_negativity(staff)
