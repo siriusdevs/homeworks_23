@@ -87,6 +87,9 @@ def count_user_age(json_file: dict[str:dict[str:Any]], output_file) -> dict:
 
     for user in users:
         age = json_file[user]['age']
+        if not isinstance(age, int):
+            text = 'An incorrect age value has been entered. Have a nice day!'
+            print_error(output_file, text)
         try:
             last_login = datetime.strptime(json_file[user]['last_login'], '%Y-%m-%d')
         except ValueError:
