@@ -24,7 +24,7 @@ def check_type(input_value: Any, expected_type: type) -> bool:
 class Car:
     """Class for a car."""
 
-    def __init__(self, brand, model, year):
+    def __init__(self, brand, model, year: int) -> None:
         """
         Initialize the car object.
 
@@ -48,7 +48,7 @@ class Car:
         return self._brand
 
     @brand.setter
-    def brand(self, new_brand):
+    def brand(self, new_brand: str) -> None:
         """
         Set the brand of the car.
 
@@ -69,7 +69,7 @@ class Car:
         return self._model
 
     @model.setter
-    def model(self, new_model):
+    def model(self, new_model: str) -> None:
         """
         Set the model of the car.
 
@@ -90,7 +90,7 @@ class Car:
         return self._year
 
     @year.setter
-    def year(self, new_year):
+    def year(self, new_year: int) -> None:
         """
         Set the year of the car.
 
@@ -101,7 +101,7 @@ class Car:
         self._year = new_year
 
 
-class AbstractOwner:
+class NoAbstractOwner:
     """Class for an owner."""
 
     def __init__(self, name: str, car_park: list[Car]):
@@ -126,7 +126,7 @@ class AbstractOwner:
         return self._name
 
     @name.setter
-    def name(self, new_name):
+    def name(self, new_name: str) -> None:
         """
         Set the name of the owner.
 
@@ -160,7 +160,7 @@ class AbstractOwner:
         self._car_park = new_car_park
 
 
-class Owner(AbstractOwner):
+class Owner(NoAbstractOwner):
     """Class for an owner."""
 
     def add_car(self, car: Car):
@@ -239,7 +239,7 @@ class CarShowroom:
         return self._cars
 
     @cars.setter
-    def cars(self, new_cars):
+    def cars(self, new_cars: list[Car]) -> None:
         """
         Set the cars in the car showroom.
 
@@ -275,7 +275,7 @@ class CarShowroom:
 class AbstractSale:
     """Class for a sale."""
 
-    def __init__(self, car_for_sale: Car, owner: AbstractOwner, car_showroom: CarShowroom):
+    def __init__(self, car_for_sale: Car, owner: NoAbstractOwner, car_showroom: CarShowroom):
         """
         Initialize the sale object.
 
@@ -299,7 +299,7 @@ class AbstractSale:
         return self._car_for_sale
 
     @car_for_sale.setter
-    def car_for_sale(self, new_car_for_sale):
+    def car_for_sale(self, new_car_for_sale: Car) -> None:
         """
         Set the car for sale.
 
@@ -320,7 +320,7 @@ class AbstractSale:
         return self._owner
 
     @owner.setter
-    def owner(self, new_owner):
+    def owner(self, new_owner: NoAbstractOwner) -> None:
         """
         Set the owner of the car.
 
@@ -341,7 +341,7 @@ class AbstractSale:
         return self._car_showroom
 
     @car_showroom.setter
-    def car_showroom(self, new_car_showroom):
+    def car_showroom(self, new_car_showroom: CarShowroom) -> None:
         """
         Set the car showroom of the car.
 
