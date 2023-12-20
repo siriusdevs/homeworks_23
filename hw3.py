@@ -13,7 +13,7 @@ def check_type(input_value: Any, expected_type: type) -> bool:
 class Car:
     """Class for a car."""
     def __init__(self, brand, model, year):
-        """Initialize the car object.""  "
+        """Initialize the car object."""
         self.model = model
         self.year = year
         self.brand = brand
