@@ -2,7 +2,7 @@ name: Проверка
 on: [push]
 jobs:
   linter_for_hw1:
-    name: Линтер для дз1
+    name: Flake8 Homework 1
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
