@@ -1,17 +1,18 @@
 """Module for Homework 3"""
-
 from typing import Any
 
 
 def check_type(input_value: Any, expected_type: type) -> bool:
     """
     Check if the input value is of the expected type.
-    
+
     Args:
         input_value: The input value to check.
         expected_type: The expected type of the input value.
+
     Returns:
         True if the input value is of the expected type.
+
     Raises:
         ValueError: If the input value is not of the expected type.
     """
@@ -46,15 +47,15 @@ class Car:
         return self._brand
 
     @brand.setter
-    def brand(self, value):
+    def brand(self, new_brand):
         """
         Set the brand of the car.
 
         Args:
-            value: The brand of the car.
+            new_brand: The brand of the car.
         """
-        check_type(value, str)
-        self._brand = value
+        check_type(new_brand, str)
+        self._brand = new_brand
 
     @property
     def model(self):
@@ -67,15 +68,15 @@ class Car:
         return self._model
 
     @model.setter
-    def model(self, value):
+    def model(self, new_model):
         """
         Set the model of the car.
 
         Args:
-            value: The model of the car.
+            new_model: The model of the car.
         """
-        check_type(value, str)
-        self._model = value
+        check_type(new_model, str)
+        self._model = new_model
 
     @property
     def year(self):
@@ -88,15 +89,15 @@ class Car:
         return self._year
 
     @year.setter
-    def year(self, value):
+    def year(self, new_year):
         """
         Set the year of the car.
 
         Args:
-            value: The year of the car.
+            new_year: The year of the car.
         """
-        check_type(value, int)
-        self._year = value
+        check_type(new_year, int)
+        self._year = new_year
 
 class Owner:
     """Class for an owner."""
@@ -123,15 +124,15 @@ class Owner:
         return self._name
 
     @name.setter
-    def name(self, value):
+    def name(self, new_name):
         """
         Set the name of the owner.
 
         Args:
-            value: The name of the owner.
+            new_name: The name of the owner.
         """
-        check_type(value, str)
-        self._name = value
+        check_type(new_name, str)
+        self._name = new_name
 
     @property
     def car_park(self):
@@ -144,17 +145,17 @@ class Owner:
         return self._car_park
 
     @car_park.setter
-    def car_park(self, value):
+    def car_park(self, new_car_park):
         """
         Set the car park of the owner.
 
         Args:
-            value: The car park of the owner.
+            new_car_park: The car park of the owner.
         """
-        check_type(value, list)
-        for car in value:
+        check_type(new_car_park, list)
+        for car in new_car_park:
             check_type(car, Car)
-        self._car_park = value
+        self._car_park = new_car_park
 
     def add_car(self, car: Car):
         """
@@ -210,15 +211,15 @@ class CarShowroom:
         return self._name
 
     @name.setter
-    def name(self, value):
+    def name(self, new_name):
         """
         Set the name of the car showroom.
 
         Args:
-            value: The name of the car showroom.
+            new_name: The name of the car showroom.
         """
-        check_type(value, str)
-        self._name = value
+        check_type(new_name, str)
+        self._name = new_name
 
     @property
     def cars(self):
@@ -231,17 +232,17 @@ class CarShowroom:
         return self._cars
 
     @cars.setter
-    def cars(self, value):
+    def cars(self, new_cars):
         """
         Set the cars in the car showroom.
 
         Args:
-            value: The cars in the car showroom.
+            new_cars: The cars in the car showroom.
         """
-        check_type(value, list)
-        for car in value:
+        check_type(new_cars, list)
+        for car in new_cars:
             check_type(car, Car)
-        self._cars = value
+        self._cars = new_cars
 
     def add_car(self, car: Car):
         """
@@ -290,15 +291,15 @@ class Sale:
         return self._car_for_sale
 
     @car_for_sale.setter
-    def car_for_sale(self, value):
+    def car_for_sale(self, new_car_for_sale):
         """
         Set the car for sale.
 
         Args:
-            value: The car for sale.
+            new_car_for_sale: The car for sale.
         """
-        check_type(value, Car)
-        self._car_for_sale = value
+        check_type(new_car_for_sale, Car)
+        self._car_for_sale = new_car_for_sale
 
     @property
     def owner(self):
@@ -311,15 +312,15 @@ class Sale:
         return self._owner
 
     @owner.setter
-    def owner(self, value):
+    def owner(self, new_owner):
         """
         Set the owner of the car.
 
         Args:
-            value: The owner of the car.
+            new_owner: The owner of the car.
         """
-        check_type(value, Owner)
-        self._owner = value
+        check_type(new_owner, Owner)
+        self._owner = new_owner
 
     @property
     def car_showroom(self):
@@ -332,15 +333,15 @@ class Sale:
         return self._car_showroom
 
     @car_showroom.setter
-    def car_showroom(self, value):
+    def car_showroom(self, new_car_showroom):
         """
         Set the car showroom of the car.
 
         Args:
-            value: The car showroom of the car.
+            new_car_showroom: The car showroom of the car.
         """
-        check_type(value, CarShowroom)
-        self._car_showroom = value
+        check_type(new_car_showroom, CarShowroom)
+        self._car_showroom = new_car_showroom
 
     def sell_car(self):
         """
