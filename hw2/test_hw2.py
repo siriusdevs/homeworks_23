@@ -3,7 +3,8 @@
 import json
 
 import pytest
-from hm2 import process_data
+
+from hw2 import process_data
 
 TEST_DATA = (
     (
