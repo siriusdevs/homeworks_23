@@ -1,4 +1,4 @@
-"""Модуль тест для hm2."""
+"""Модуль тест для hw2."""
 
 import json
 
@@ -8,16 +8,16 @@ from hw2 import process_data
 
 TEST_DATA = (
     (
-        'hw2/test_data/test_1.json',
-        'hw2/test_data/result_1.json',
+        'test_data/test_1.json',
+        'test_data/result_1.json',
     ),
     (
-        'hw2/test_data/test_2.json',
-        'hw2/test_data/result_2.json',
+        'test_data/test_2.json',
+        'test_data/result_2.json',
     ),
     (
-        'hw2/test_data/test_3.json',
-        'hw2/test_data/result_3.json',
+        'test_data/test_3.json',
+        'test_data/result_3.json',
     ),
 )
 
@@ -38,23 +38,23 @@ def test_process_data(from_path: str, expected: str) -> None:
 
 FAILED_TEST_DATA = (
     (
-        'hw2/test_data/no_file11.json',
-        'hw2/test_data/result_1.json',
-        'Файла hw2/test_data/no_file11.json не существует!',
+        'test_data/no_file11.json',
+        'test_data/result_1.json',
+        'Файла test_data/no_file11.json не существует!',
     ),
     (
-        'hw2/test_data/test_1.json',
-        'hw2/test_data/no_file22.json',
-        'Файла hw2/test_data/no_file22.json не существует!',
+        'test_data/test_1.json',
+        'test_data/no_file22.json',
+        'Файла test_data/no_file22.json не существует!',
     ),
     (
-        'hw2/test_data/empty_file.json',
-        'hw2/test_data/empty_file.json',
-        'Файл hw2/test_data/empty_file.json пустой!',
+        'test_data/empty_file.json',
+        'test_data/empty_file.json',
+        'Файл test_data/empty_file.json пустой!',
     ),
     (
-        'hw2/test_data/test_invalid_date.json',
-        'hw2/test_data/result.json',
+        'test_data/test_invalid_date.json',
+        'test_data/result.json',
         'Некорректная дата',
     ),
 )
