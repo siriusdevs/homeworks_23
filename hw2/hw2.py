@@ -128,6 +128,7 @@ def process_data(source_path: str, dist_path: str) -> None:
 
     time_results = process_time(dano)
     cities_results = process_cities(dano)
+    os.makedirs(os.path.dirname(dist_path), exist_ok=True)
     with open(dist_path, 'w') as lotfile:
         json.dump(
             {
