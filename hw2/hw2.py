@@ -150,6 +150,3 @@ def process_data(inpath: str, outpath: str) -> None:
         cities[user[REGION]] += 1
 
     _dump_json(outpath, _combine_results(ages, cities))
-
-
-process_data('./tests/test1.json', 'a')
