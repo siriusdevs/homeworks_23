@@ -122,6 +122,7 @@ def process_data(source_path: str, dist_path: str) -> None:
                 {'No file was given': None}, fp=out_file,
             )
     except json.JSONDecodeError:
+        
         with open(dist_path, 'w') as empty_out_file:
             json.dump(
                 {'Given file was empty': None}, fp=empty_out_file,
