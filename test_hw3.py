@@ -19,7 +19,7 @@ def test_owner_creation():
     """Test owner creation."""
     car = Car('Dodge', 'Mazda', YEAR)
     owner = Owner('Kia', [car])
-    assert owner.name == 'John Doe'
+    assert owner.name == 'Kia'
     assert owner.car_park == [car]
 
 
