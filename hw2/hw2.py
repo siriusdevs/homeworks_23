@@ -60,7 +60,7 @@ def write_json(output: str, message: any) -> None:
         output (str): The place where we save json file.
         message (any): Some data which we write.
     """
-    os.makedirs('hw2/test_data_hw2', exist_ok=True)
+    os.makedirs(output, exist_ok=True)
     with open(output, 'w+') as output_file:
         output_file.write(message)
 
