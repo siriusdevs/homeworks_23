@@ -2,7 +2,7 @@
 Репозиторий для домашних заданий, осень 2023, Колледж Сириус
 ============================================================
 
-|overall|32|15|5|
+|overall|34|19|7|
 | :---: | :---: | :---: | :---: |
 |Branch|hw1|hw2|hw3|
 |argun|-|-|-|
@@ -27,14 +27,14 @@
 |ivanov_i|-|-|-|
 |karateev|-|-|-|
 |kolkareva|+|+|-|
-|komarov|+|+|-|
+|komarov|+|+|+|
 |kordon|-|-|-|
-|korenyakin_a|-|-|-|
+|korenyakin_a|+|+|-|
 |korenyakin_g|-|-|-|
 |krdyan|+|+|-|
 |kristev|+|-|-|
 |krivenko|-|-|+|
-|kuznetsova|+|-|-|
+|kuznetsova|+|+|-|
 |lebedev|-|-|-|
 |litvinov|+|+|-|
 |main|-|-|-|
@@ -59,13 +59,13 @@
 |sheina|-|-|-|
 |startsev|-|-|-|
 |tarasov|+|+|-|
-|tatarnikov|+|-|-|
+|tatarnikov|+|+|-|
 |telegin|+|-|-|
 |tereshin|+|-|-|
 |trofimov|+|-|-|
 |tsverkunov|-|-|-|
 |turapov|-|-|-|
-|tyapkova|-|-|-|
+|tyapkova|+|-|-|
 |tyurin|+|-|-|
 |urbanovich|-|-|-|
 |vasilenko|+|+|-|
@@ -75,5 +75,5 @@
 |zaitsev|+|-|+|
 |zamyatina|-|-|-|
 |zinko|-|-|-|
-|zorina_a|+|-|-|
-|zorina_e|+|+|-|
+|zorina_a|+|+|-|
+|zorina_e|+|+|+|
