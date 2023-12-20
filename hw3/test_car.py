@@ -9,7 +9,7 @@ def test_car_creation():
     """Test for car creation."""
     car = Car('Subaru', 'ABC125', 'Sedan')
     assert car.label == 'Subaru'
-    assert car.license_plate == 'ABC123'
+    assert car.license_plate == 'ABC125'
     assert car.car_body == 'Sedan'
 
 
