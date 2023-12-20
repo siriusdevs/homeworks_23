@@ -60,3 +60,11 @@ def test_wrong_type_args():
         Client('John John3', [SavingsAccount(1029.5, 1241, 0.5)])
     with pytest.raises(TypeError, match='Name is expected to be str.'):
         Client(133123, [SavingsAccount(1029, 1241, 0.5)])
+
+
+def test_wrong_type_bank():
+    """Test for the wrong type of bank."""
+    with pytest.raises(TypeError, match='Bank accounts should be list'):
+        Client('Maksim', '123')
+    with pytest.raises(TypeError, match='Your bank account is not instance Bank Account'):
+        Client('Maksim', [123, '123'])

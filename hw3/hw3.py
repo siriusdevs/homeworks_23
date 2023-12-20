@@ -1,112 +1,25 @@
 """Main module of hw3."""
 from abc import ABC, abstractmethod
-from typing import Callable, Iterable
+
+import module_hw3
 
 
-def ensure(attr: str, funcs: Iterable[Callable]) -> Callable:
+def check_bank(input_value: list):
     """
-    Add property with specified checks to a class.
-
-    Args:
-        attr (str): Name of the attribute.
-        funcs (Iterable[Callable]): List of functions to check the attribute.
-
-    Returns:
-        Callable: Decorator function.
-    """
-    def add_property(class_name: type) -> type:
-        """
-        Add property to a class.
-
-        Args:
-            class_name (type): Class to which property is added.
-
-        Returns:
-            type: Class with added property.
-        """
-        def getter(self):
-            """
-            Getter method for the property.
-
-            Args:
-                self: self.
-
-            Returns:
-                Any: The value of the property.
-            """
-            return getattr(self, f'_{attr}')
-
-        def setter(self, input_value):
-            """
-            Setter method for the property.
-
-            Args:
-                self: self.
-                input_value: The value to set for the property.
-            """
-            for func in funcs:
-                func(input_value)
-            setattr(self, f'_{attr}', input_value)
-
-        setattr(class_name, attr, property(getter, setter))
-        return class_name
-    return add_property
-
-
-def check_int(input_value):
-    """
-    Check if the value is an integer.
+    Check if the input_value is a list and his value is BankAccount.
 
     Args:
         input_value: Value to be checked.
 
     Raises:
-        TypeError: If the value is not an integer.
+        TypeError: If the input_value is not list.
+        TypeError: If the value is not BankAccount.
     """
-    if not isinstance(input_value, int):
-        raise TypeError('Value is expected to be int.')
-
-
-def check_float(input_value):
-    """
-    Check if the value is an integer or float.
-
-    Args:
-        input_value: Value to be checked.
-
-    Raises:
-        TypeError: If the value is not an integer or float.
-    """
-    if not isinstance(input_value, (float, int)):
-        raise TypeError('Value is expected to be int or float.')
-
-
-def check_positive(input_value):
-    """
-    Check if the value is positive.
-
-    Args:
-        input_value: Value to be checked.
-
-    Raises:
-        ValueError: If the value is not positive.
-    """
-    if input_value < 0:
-        raise ValueError('Value is expected to be positive.')
-
-
-def check_str(input_value):
-    """
-    Check if the value is a string.
-
-    Args:
-        input_value: Value to be checked.
-
-    Raises:
-        TypeError: If the value is not a string.
-    """
-    if not isinstance(input_value, str):
-        raise TypeError('Name is expected to be str.')
+    if not isinstance(input_value, list):
+        raise TypeError('Bank accounts should be list')
+    for account in input_value:
+        if not isinstance(account, BankAccount):
+            raise TypeError('Your bank account is not instance Bank Account')
 
 
 class Memento(ABC):
@@ -143,8 +56,8 @@ class Memento(ABC):
         self._state = self.__dict__.copy()
 
 
-@ensure('account_number', (check_int, check_positive))
-@ensure('balance', (check_float, check_positive))
+@module_hw3.ensure('account_number', (module_hw3.check_int, module_hw3.check_positive))
+@module_hw3.ensure('balance', (module_hw3.check_float, module_hw3.check_positive))
 class BankAccount(Memento, ABC):
     """Abstract class representing a bank account."""
 
@@ -161,7 +74,7 @@ class BankAccount(Memento, ABC):
         super().__init__()
 
 
-@ensure('credit_limit', (check_float, check_positive))
+@module_hw3.ensure('credit_limit', (module_hw3.check_float, module_hw3.check_positive))
 class CurrentAccount(BankAccount):
     """Class representing a current bank account."""
 
@@ -178,7 +91,7 @@ class CurrentAccount(BankAccount):
         super().__init__(account_number, balance)
 
 
-@ensure('procents', (check_float, check_positive))
+@module_hw3.ensure('procents', (module_hw3.check_float, module_hw3.check_positive))
 class SavingsAccount(BankAccount):
     """Class representing a savings bank account."""
 
@@ -195,7 +108,8 @@ class SavingsAccount(BankAccount):
         super().__init__(account_number, balance)
 
 
-@ensure('name', (check_str,))
+@module_hw3.ensure('accounts', (check_bank,))
+@module_hw3.ensure('name', (module_hw3.check_str,))
 class Client:
     """Class representing a bank client."""
 
