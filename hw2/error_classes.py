@@ -19,7 +19,6 @@ class NonExistentField:
         """
         message = f'{field} field does not exists for client {client}.'
         utils.write(message, output_path)
-        sys.exit()
 
 
 class EmptyField:
@@ -35,7 +34,6 @@ class EmptyField:
         """
         message = f'{field} field is empty for client {client}.'
         utils.write(message, output_path)
-        sys.exit()
 
 
 class EmailError:
@@ -50,7 +48,6 @@ class EmailError:
         """
         message = f'Wrong email address: empty host name for client {client}.'
         utils.write(message, output_path)
-        sys.exit()
 
 
 class NoInputFile:
@@ -65,7 +62,6 @@ class NoInputFile:
         """
         message = f'File {input_file} does not exists. Processing is not possible.'
         utils.write(message, output_path)
-        sys.exit()
 
 
 class ListNotExpected:
@@ -79,4 +75,3 @@ class ListNotExpected:
         """
         message = 'List not expected in input file.'
         utils.write(message, output_path)
-        sys.exit()
