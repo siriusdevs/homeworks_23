@@ -151,8 +151,10 @@ def test_error_path(path_in: str, path_out: str):
     """
     expected_message = 'FileError: input file does not exists'
     hw2.process_data(path_in, path_out)
-    if not os.path.exists(path_out):
-        path_out = 'default_output.json'
+
+    if not os.path.exists(path_out) and os.path.isdir(path_out):
+        path_out = os.path.join(path_out, 'default_output.json')
+
     with open(path_out, 'r') as output_file:
         output_message = json.load(output_file)
     os.remove(path_out)
