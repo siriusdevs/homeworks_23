@@ -224,9 +224,12 @@ class Order:
 
         Raises:
             ValueError: If the dish is already in the list of dishes.
+            TypeError: If the dish is not class Dish
         """
         if dish in self.list_of_dishes:
             raise ValueError(f'Dish {dish} is on the list')
+        if not isinstance(dish, Dish):
+            raise TypeError(f'Value must be Dish, not {type(dish).__name__}')
         self.list_of_dishes.append(dish)
 
     def remove(self, dish: Dish) -> None:
@@ -264,9 +267,9 @@ class Restaurant:
 
     def __init__(
         self,
-        orders: list[Order],
         all_dishes: list[Dish],
         available_dishes: list[Dish],
+        orders: list[Order],
     ) -> None:
         """Initialize a Restaurant object with a list of orders, all dishes, and available dishes.
 
