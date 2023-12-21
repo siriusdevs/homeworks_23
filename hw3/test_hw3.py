@@ -40,7 +40,7 @@ WRONG_PROC_NAME_DATA = 'amf1100000'
 WRONG_CON_NAME_DATA = 'ussr'
 COMPUTER_TEST_DATA = (
     (
-        'abcd', 300, 'WiNdOwS', 'INTELi7',
+        'gigachad', 300, 'WiNdOwS', 'INTELi7',
     ),
     (
         'fulmultigamergbmega', 299.99, 'macos', 'intel',
@@ -49,6 +49,31 @@ COMPUTER_TEST_DATA = (
         'yyyaaaaa', 0, 'UBUNTu', 'amd ryzen 9', 
     ),
 )
+MONITOR_TEST_DATA = (
+    (
+        'samsam', 300, 25, 'UsB',
+    ),
+    (
+        'atas', 299.99, 24.99, 'hdmi',
+    ),
+    (
+        'next', 1, 1, 'vGa',
+    ),
+    (
+        'next', 1, 1, 'tHunDerBolt',
+    ),
+    (
+        'next', 1, 1, 'DISPLAY PORT',
+    ),
+    (
+        'next', 1, 1, 'dvi',
+    ),
+)
+
+
+@pytest.mark.parametrize('name, price, size, con_type', MONITOR_TEST_DATA)
+def test_monitor(name: str, price: int | float, size: int | float, con_type: str):
+    assert Monitor(name, price, size, con_type)
 
 
 @pytest.mark.parametrize('name, price, os, processor', COMPUTER_TEST_DATA)
