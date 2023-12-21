@@ -76,20 +76,21 @@ def _combine_results(users: dict) -> dict:
         AGE_STATS: {},
         REGION_STATS: {},
     }
+    cities = output[REGION_STATS]
 
     for user in users.values():
         output[AGE_STATS].update(av_user_age(user, output[AGE_STATS]))
-        if output[REGION_STATS].get(user[REGION]) is not False:
-            output[REGION_STATS][user[REGION]] = 1
+        if cities.get(user[REGION]) is not False:
+            cities[user[REGION]] = 1
         else:
-            output[REGION_STATS][user[REGION]] += 1
+            cities[user[REGION]] += 1
 
     for span, age in output[AGE_STATS].items():
         non_zero_age = max(len(age), 1)
         output[AGE_STATS][span] = round(sum(age) / non_zero_age, 2)
 
-    for reg, num in output[REGION_STATS].items():
-        output[REGION_STATS][reg] = round(num / len(output[REGION_STATS]), 2)
+    for reg, num in cities.items():
+        cities[reg] = round(num / len(cities), 2)
 
     return output
 

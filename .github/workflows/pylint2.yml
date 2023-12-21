@@ -17,7 +17,7 @@ jobs:
     - name: Flake8
       run: flake8 hw2
   tests:
-    name: Тесты HW1
+    name: Тесты HW2
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
