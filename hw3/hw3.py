@@ -63,6 +63,8 @@ class Computer(Product):
 
 
 class Monitor(Product):
+    __con_types = ['usb', 'hdmi', 'thunderbolt', 'vga', 'display port', 'dvi']
+
     def __init__(self, name: str, price: int | float, size: int | float, con_type: str) -> None:
         self.size = size
         self.con_type = con_type
@@ -84,6 +86,9 @@ class Monitor(Product):
     @con_type.setter
     def con_type(self, new_con_type: str) -> None:
         self.is_str(new_con_type)
+        if new_con_type not in self.__con_types:
+            types = ', '.join(self.__con_types)
+            raise ValueError(f'Wrong value for coonection_type. Supported: {types}')
         self._con_type = new_con_type
 
 
