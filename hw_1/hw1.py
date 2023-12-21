@@ -5,14 +5,13 @@ from typing import Dict, Optional, Tuple
 
 def company_salary_stats(
     exclude_departments: Optional[Tuple[str]] = None,
-    **departments: Dict[str, float]
+    **departments: Dict[str, float],
 ) -> Dict[str, float]:
     """Calculate statistics of salaries in the company.
 
     Args:
         exclude_departments: optional argument to exclude specific departments from the statistics.
-        departments: keyword arguments where department names are keys and values are dictionaries
-                 with employee names (str) as keys and salaries (float) as values.
+        departments: keyword arguments where department names are keys and values are dictionaries with employee names (str) as keys and salaries (float) as values.
 
     Returns:
         dictionary: containing the average, maximum, and median salaries in the company.
@@ -32,4 +31,4 @@ def company_salary_stats(
         'average_salary': average_salary,
         'max_salary': max_salary,
         'median_salary': median_salary
-    }
+    },
