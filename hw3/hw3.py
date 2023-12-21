@@ -230,6 +230,14 @@ class Shop:
         self.product_list = product_list
 
     def is_product(self, product: Product) -> None:
+        """Check if the given object is an instance of the Product class.
+
+        Args:
+            product: Product - object to check.
+
+        Raises:
+            TypeError: if the object is not an instance of the Product class.
+        """
         if not isinstance(product, Product):
             product_type = type(product).__name__
             err_message = f'{product} should be Product not {product_type}'
@@ -237,10 +245,23 @@ class Shop:
 
     @property
     def product_list(self) -> list[Product]:
+        """Get the list of products available in the store.
+
+        Returns:
+            list[Product]: list of products available in the store.
+        """
         return self._product_list
 
     @product_list.setter
     def product_list(self, new_product_list: tuple[Product] | list[Product]) -> None:
+        """Set the list of products available in the store.
+
+        Args:
+            new_product_list: tuple | list - new list of products for the store.
+
+        Raises:
+            TypeError: if the input is not a tuple or list, or if any item in the list is not a Product.
+        """
         if not isinstance(new_product_list, (tuple, list)):
             list_type = type(new_product_list).__name__
             err_message = f'{new_product_list} should be tuple or list not {list_type}'
@@ -250,12 +271,27 @@ class Shop:
         self._product_list = list(new_product_list)
 
     def add_product(self, product: Product) -> None:
+        """Add a product to the store product list.
+
+        Args:
+            product: Product - product to add to the product list.
+        """
         self.is_product(product)
         self._product_list.append(product)
 
     def remove_product(self, product: Product) -> None:
+        """Remove a product from the store product list.
+
+        Args:
+            product: Product - product to remove from the product list.
+        """
         self.is_product(product)
         self._product_list.remove(product)
 
     def get_all_products(self) -> list[Product]:
+        """Get a list of all products available in the store.
+
+        Returns:
+            list[Product]: list of products available in the store.
+        """
         return self._product_list
