@@ -17,7 +17,8 @@ def check_extension(input_path: str, output_path: str) -> tuple[str]:
     """
     if not input_path.endswith('.json'):
         input_path = ''
-    if not output_path.endswith('.json'):
+
+    if not output_path.endswith('.json') and not output_path.endswith('/'):
         output_path, _ = os.path.splitext(output_path)
         output_path = f'{output_path}.json'
     return input_path, output_path
@@ -25,20 +26,25 @@ def check_extension(input_path: str, output_path: str) -> tuple[str]:
 
 def check_path(input_path: str, output_path: str) -> tuple[str]:
     """
-    Check the existence of the specified file paths.
+    Check the existence of input and output paths. Modifies the paths if necessary.
 
     Args:
-        input_path: The path to the input file.
-        output_path: The path to the output file.
+        input_path (str): The input path to check.
+        output_path (str): The output path to check.
 
     Returns:
-        tuple: A tuple containing the updated input and output file paths.
+        tuple[str]: A tuple containing the modified input and output paths.
     """
     if not os.path.exists(input_path):
         input_path = ''
 
     if not os.path.exists(output_path):
-        output_path = 'default_output.json'
+        if output_path.endswith('/'):
+            os.makedirs(output_path)
+            output_path = os.path.join(output_path, 'default_output.json')
+
+        if os.path.dirname(output_path):
+            os.makedirs(os.path.dirname(output_path))
     return input_path, output_path
 
 
