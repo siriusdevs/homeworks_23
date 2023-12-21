@@ -5,7 +5,8 @@ import pytest
 from .hw3 import Dish, Product, Restaurant
 
 RAISES_TYPE_ERROR = pytest.raises(TypeError)
-RAISES_TYPE_VALUE = pytest.raises(ValueError)
+RAISES_VALUE_ERROR = pytest.raises(ValueError)
+PORRIDGE = 'porridge'
 
 
 def _get_banana(): return Product('banana', 13)
@@ -20,7 +21,7 @@ def _get_cereal(): return Product('cereal', 5)
 def test_dish_property_error() -> None:
     """Test dish property for an error call."""
     numbers = [1, 2, 3]
-    porridge = Dish('porridge', [])
+    porridge = Dish(PORRIDGE, [])
     with RAISES_TYPE_ERROR:
         porridge.products = _get_apple()
     with RAISES_TYPE_ERROR:
@@ -32,7 +33,7 @@ def test_dish_property_error() -> None:
 def test_dish_method() -> None:
     """Test add_product, remove_product for correct working."""
     apple, banana, cereal = _get_apple(), _get_banana(), _get_cereal()
-    porridge = Dish('porridge', [apple, banana, cereal])
+    porridge = Dish(PORRIDGE, [apple, banana, cereal])
     porridge.remove_product(apple)
     honey = Product('honey', 30)
     porridge.add_product(honey)
@@ -41,10 +42,10 @@ def test_dish_method() -> None:
 
 def test_dish_method_error() -> None:
     """Test dish add_product and remove_product method for an error call."""
-    porridge = Dish('porridge', [])
+    porridge = Dish(PORRIDGE, [])
     with RAISES_TYPE_ERROR:
         porridge.add_product('')
-    with RAISES_TYPE_VALUE:
+    with RAISES_VALUE_ERROR:
         porridge.remove_product(_get_apple())
     with RAISES_TYPE_ERROR:
         porridge.remove_product('')
