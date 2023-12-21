@@ -24,7 +24,7 @@ def check_extension(input_path: str, output_path: str) -> tuple[str]:
     return input_path, output_path
 
 
-def check_path(input_path: str, output_path: str) -> tuple[str]:
+def check_path(input_path: str, output_path: str) -> tuple[str, str]:
     """
     Check the existence of input and output paths. Modifies the paths if necessary.
 
@@ -61,7 +61,7 @@ def is_file_empty(input_path: str) -> bool:
     return os.stat(input_path).st_size == 0
 
 
-def check_type_in_file(input_path: str) -> str:
+def check_type_in_file(input_path: str) -> dict:
     """
     Check if the input_data has type "dict".
 
@@ -69,27 +69,24 @@ def check_type_in_file(input_path: str) -> str:
         input_path: The input data to be checked.
 
     Returns:
-        str: an empty string if the input data is of type "dict" else an error message.
+        dict: an empty dict if the input data is not of type "dict" else an users' data.
     """
     with open(input_path, 'r') as input_file:
         input_data = json.load(input_file)
     if not isinstance(input_data, dict):
-        return 'TypeError: Type of input data is not a dictionary'
-    return ''
+        return {}
+    return input_data
 
 
-def filter_user_inf(input_path: str) -> tuple[dict, dict]:
+def filter_user_inf(input_data: dict) -> tuple[dict, dict]:
     """Filter input json-file for function 'process_data'.
 
     Args:
-        input_path: path of file, which stores information about users
+        input_data: data of file, which stores information about users
 
     Returns:
         Two dictionaries, which store quantity users with a certain age, city
     """
-    with open(input_path, 'r') as input_file:
-        input_data = json.load(input_file)
-
     regions = {}
     ages = {}
     for user in input_data.keys():
@@ -111,25 +108,24 @@ def filter_user_inf(input_path: str) -> tuple[dict, dict]:
     return ages, regions
 
 
-def count_statistic(input_path: str, output_path: str):
+def count_statistic(input_data: dict):
     """Count and calculate statistics based on user information data.
 
     Args:
-        input_path: The path to the input file containing user information data.
-        output_path: The path to the output file where the calculated statistics will be written.
+        input_data: data of input file containing user information data.
 
     Returns:
         dict: A dictionary containing the calculated statistics for ages and regions.
     """
-    filtered_data = filter_user_inf(input_path)
+    ages, regions = filter_user_inf(input_data)
     output_data = {'ages': {}, 'regions': {}}
 
-    for age, time in filtered_data[0].items():
-        percentage = time/sum(filtered_data[0].values())*100
+    for age, time in ages.items():
+        percentage = time/sum(ages.values())*100
         output_data['ages'][age] = round(percentage, 2)
 
-    for region, vol in filtered_data[1].items():
-        percentage = vol/sum(filtered_data[1].values())*100
+    for region, vol in regions.items():
+        percentage = vol/sum(regions.values())*100
         output_data['regions'][region] = round(percentage, 2)
 
     return output_data
@@ -167,12 +163,12 @@ def process_data(input_path: str, output_path: str) -> None:
         dumps_to_file_error('FileError: input file is empty', output_path)
         return
 
-    type_in_file = check_type_in_file(input_path)
-    if type_in_file:
-        dumps_to_file_error(type_in_file, output_path)
+    input_data = check_type_in_file(input_path)
+    if not input_data:
+        dumps_to_file_error('TypeError: Type of input data is not a dictionary', output_path)
         return
 
-    output_data = count_statistic(input_path, output_path)
+    output_data = count_statistic(input_data)
 
     with open(output_path, 'w') as output_file:
         json.dump(output_data, output_file, indent=4)
