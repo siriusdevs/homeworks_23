@@ -38,7 +38,7 @@ def get_age_stats(input_dict: dict) -> dict:
         dict with age stats
     """
     age_stats = {
-        '0': 0,
+        '0-18': 0,
         '18-25': 0,
         '25-45': 0,
         '45-60': 0,
