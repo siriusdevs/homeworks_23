@@ -19,12 +19,28 @@ class Product(ABC):
         self.price = price
 
     def is_str(self, operand: str) -> None:
+        """Check if the operand is a string.
+
+        Args:
+            operand: str - operand to check.
+
+        Raises:
+            TypeError: if the operand is not a string.
+        """
         if not isinstance(operand, str):
             object_type = type(operand).__name__
             err_message = f'{operand} should be str not {object_type}'
             raise TypeError(err_message)
 
     def is_int_or_float(self, operand: int | float) -> None:
+        """Check if the operand is an int or a float.
+
+        Args:
+            operand: int | float - operand to check.
+
+        Raises:
+            TypeError: if the operand is not an integer or a float.
+        """
         if not isinstance(operand, (int, float)):
             object_type = type(operand).__name__
             err_message = f'{operand} should be int or float not {object_type}'
@@ -32,19 +48,39 @@ class Product(ABC):
 
     @property
     def name(self) -> str:
+        """Get the name of the product.
+
+        Returns:
+            str: name of the product.
+        """
         return self._name
 
     @name.setter
     def name(self, new_name: str) -> None:
+        """Set the name of the product.
+
+        Args:
+            new_name: str - new name for the product.
+        """
         self.is_str(new_name)
         self._name = new_name
 
     @property
     def price(self) -> int | float:
+        """Get the price of the product.
+
+        Returns:
+            int | float: price of the product.
+        """
         return self._price
 
     @price.setter
     def price(self, new_price: int | float) -> None:
+        """Set the price of the product.
+
+        Args:
+            new_price: int | float - new price for the product.
+        """
         self.is_int_or_float(new_price)
         self._price = new_price
 
