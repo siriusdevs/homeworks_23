@@ -47,11 +47,17 @@ def get_stat(dataa: dict) -> dict:
     city_distrib = {}
     year_distrib = {}
 
-    for user in dataa.keys():
-        city = dataa[user]['region']
-        city_distrib[city] = city_distrib.get(city, 0) + 1
-        year_of_regisrt = datetime.strptime(dataa[user]['registered'], '%Y-%m-%d').year
-        year_distrib[year_of_regisrt] = year_distrib.get(year_of_regisrt, 0) + 1
+    try:
+        for user in dataa.keys():
+            if 'region' in dataa[user] and 'registered' in dataa[user]:
+                city = dataa[user]['region']
+                city_distrib[city] = city_distrib.get(city, 0) + 1
+                year_of_regisrt = datetime.strptime(dataa[user]['registered'], '%Y-%m-%d').year
+                year_distrib[year_of_regisrt] = year_distrib.get(year_of_regisrt, 0) + 1
+            else:
+                return f'Keys not found in user data: {user}'
+    except Exception:
+        return 'Error processing data'
     total_users = len(dataa.keys())
     city_distrib = {city: count / total_users * 100 for city, count in city_distrib.items()}
     year_distrib = {year: count / total_users * 100 for year, count in year_distrib.items()}
