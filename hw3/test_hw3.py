@@ -50,8 +50,8 @@ def test_dish_method_error() -> None:
         porridge.remove_product('')
 
 
-def test_restorant_property_error() -> None:
-    """Test restorant property for an error call."""
+def test_restaurant_property_error() -> None:
+    """Test restaurant property for an error call."""
     apple_juice = Dish('apple juice', [_get_apple()])
     restaurant = Restaurant('', [], [])
     numbers = [1, 2, 3]
