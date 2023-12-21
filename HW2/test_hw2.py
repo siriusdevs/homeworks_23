@@ -30,7 +30,7 @@ def test_process_data():
 
 def test_data():
     """Test data."""
-    process_data('./data_hw2.json', './data_hw2_output.json')
+    process_data('./HW2/data_hw2.json', './data_hw2_output.json')
     with open('./data_hw2_output.json', 'r') as output_file:
         output_data = json.load(output_file)
     assert output_data == {
