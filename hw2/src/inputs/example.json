@@ -1,0 +1,51 @@
+{
+    "frost": {
+        "region": "Nizhniy-Novgorod",
+        "registered": "2012-10-02",
+        "last_login": "2022-11-21",
+        "email": "vyzhyvanievbutylke@mail.ru",
+        "age": 18
+    },
+    "lololoshka": {
+        "region": "Barnaul",
+        "registered": "2012-05-28",
+        "last_login": "2022-11-21",
+        "email": "zimneletniepohozhdenia@gmail.com",
+        "age": 18
+    },
+    "mistik": {
+        "region": "Belgorod",
+        "registered": "2011-05-27",
+        "last_login": "2022-11-21",
+        "email": "prohozhdeniekart@gmail.com",
+        "age": 18
+    },
+    "lagger": {
+        "region": "Lida",
+        "registered": "2011-12-27",
+        "last_login": "2022-11-21",
+        "email": "tnt@mail.bel",
+        "age": 18
+    },
+    "firamir": {
+        "region": "Novosibirsk",
+        "registered": "2013-09-06",
+        "last_login": "2022-11-21",
+        "email": "dversozhgli@soplya.ru",
+        "age": 18
+    },
+    "vladnext": {
+        "region": "Perm",
+        "registered": "2012-03-28",
+        "last_login": "2022-11-21",
+        "email": "achivki@mail.ru",
+        "age": 18
+    },
+    "aid": {
+        "region": "Yekaterinburg",
+        "registered": "2012-12-21",
+        "last_login": "2022-11-21",
+        "email": "bedwars@mail.ru",
+        "age": 18
+    }
+}
