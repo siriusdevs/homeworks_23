@@ -1,10 +1,8 @@
 import pytest
-
 import json
-
 import os
 
-from HW2.hw2 import process_data
+from hw2 import *
 
 def test_process_data():
     test_data = {
@@ -13,11 +11,11 @@ def test_process_data():
         "client3": {"age": 40, "last_login": "2022-03-01"},
     }
 
-    with open("test_data.json", "w") as f:
+    with open("./HW2/test_data.json", "w") as f:
         json.dump(test_data, f)
 
 
-    process_data("test_data.json", "test_result.json")
+    process_data("./HW2/test_data.json", "test_result.json")
 
 
     with open("test_result.json", "r") as f:
@@ -27,14 +25,14 @@ def test_process_data():
     assert result["age_percentages"] == [0.0, 33.33, 33.33, 33.33, 0.0]
     assert result["last_online_percentages"] == [100.0, 0.0, 0.0, 0.0, 0.0]
     
-    os.remove("test_data.json")
+    os.remove("./HW2/test_data.json")
     os.remove("test_result.json")
 
 
 def test_example():
     """Test for example."""
-    process_data('./HW2/input/data_hw2.json', './HW2/output/test_output.json')
-    with open('./HW2/output/test_output.json', 'r') as output_file:
+    process_data('./HW2/data_hw2.json', 'test_output.json')
+    with open('test_output.json', 'r') as output_file:
         output_dict = json.load(output_file)
         assert output_dict == {
             'age_stats': {
@@ -53,4 +51,4 @@ def test_example():
             },
         }
 
-    os.remove('./HW2/output/test_output.json')
+    os.remove('test_output.json')

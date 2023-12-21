@@ -35,4 +35,5 @@ def process_data(input_file, output_file):
     with open(output_file, 'w') as f:
         json.dump(result, f)
 
-process_data("data_hw2.json", 'result.json')
+if __name__ == '__main__':
+    process_data("data_hw2.json", 'result.json')
