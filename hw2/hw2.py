@@ -182,4 +182,3 @@ def process_data(data_in: str, data_out: str) -> None | str:
 
     with open(data_out, 'w') as json_file:
         json.dump(combined_data, json_file, indent=4)
-
