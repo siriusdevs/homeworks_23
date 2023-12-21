@@ -1,9 +1,7 @@
 """Testing top 3 salaries function."""
-
 import pytest
 
 from hw1 import top3_salaries
-
 
 test_deps = (
     (
@@ -37,8 +35,7 @@ def test_deps_salaries(
         including: tuple - departments to be included
         expected: tuple - expected stats
 
-    Returns:
+    Return:
         state of answer - correct or not
     """
     assert top3_salaries(*args, including=including) == expected
-
