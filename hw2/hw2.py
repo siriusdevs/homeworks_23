@@ -92,7 +92,7 @@ def is_valid_date(date: str) -> bool:
         return True if the date is valid and not in the future else False
     """
     if not date:
-        return 'Error'
+        return 'Error, date is not found'
     try:
         date = datetime.fromisoformat(date)
     except ValueError:
@@ -147,7 +147,7 @@ def get_login_stats(datafile: dict) -> dict:
                 break
 
     if not login_stats:
-        return 'Login stats is empty'
+        return 'Login statistic is empty'
 
     return {interval: (count / len(last_logins)) * 100 for interval, count in login_stats.items()}
 
