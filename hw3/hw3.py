@@ -29,7 +29,7 @@ class InvalidTypeError(TypeError):
 
 
 class Car(ABC):
-    """Car with info."""
+    """Car with details."""
 
     @abstractmethod
     def __init__(self, model: str, year: int, price: int) -> None:
@@ -88,7 +88,7 @@ class Car(ABC):
         if new_year <= 0:
             raise NegativeNumberError(new_year)
         if not isinstance(new_year, int):
-            raise InvalidTypeError(new_year, 'str')
+            raise InvalidTypeError(new_year, 'number')
         self._year = new_year
 
     @property
@@ -114,7 +114,7 @@ class Car(ABC):
         if new_price <= 0:
             raise NegativeNumberError(new_price)
         if not isinstance(new_price, int):
-            raise InvalidTypeError(new_price, 'str')
+            raise InvalidTypeError(new_price, 'number')
         self._price = new_price
 
     def __str__(self) -> str:
@@ -127,7 +127,7 @@ class Car(ABC):
 
 
 class Motorcar(Car):
-    """Motorcar."""
+    """Motorcar model."""
 
     def __init__(self, model: str, year: int, price: int, seats: int) -> None:
         """Init Motorcar.
@@ -169,7 +169,7 @@ class Motorcar(Car):
 
 
 class CargoCar(Car):
-    """CargoCar."""
+    """CargoCar model."""
 
     def __init__(self, model: str, year: int, price: int, payload: int) -> None:
         """Init CargoCar.
@@ -193,7 +193,7 @@ class CargoCar(Car):
         return self._payload
 
     @payload.setter
-    def payload(self, new_payload: int) -> None:
+    def payload(self, new_payload: int | float) -> None:
         """Set new payload for the car.
 
         Args:
@@ -205,13 +205,13 @@ class CargoCar(Car):
         """
         if new_payload <= 0:
             raise NegativeNumberError(new_payload)
-        if not isinstance(new_payload, int):
+        if not isinstance(new_payload, (int, float)):
             raise InvalidTypeError(new_payload, 'number')
         self._payload = new_payload
 
 
 class AutoPark:
-    """AutoPark with car."""
+    """AutoPark with cars."""
 
     def __init__(self, cars: Optional[list[Car]] = None) -> None:
         """Init AutoPark.
