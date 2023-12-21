@@ -74,6 +74,15 @@ def test_add_remove_get_shop(
     computer2: tuple,
     expected: str,
         ):
+    """Test add, remove product and return all products.
+
+    Args:
+        monitor1: tuple - first product.
+        monitor2: tuple - second product.
+        computer1: tuple - third product, for removing.
+        computer2: tuple - fourth product, for adding.
+        expected: str - result.
+    """
     mon1 = Monitor(*monitor1)
     mon2 = Monitor(*monitor2)
     pc1 = Computer(*computer1)
@@ -87,44 +96,67 @@ def test_add_remove_get_shop(
 
 @pytest.mark.parametrize('name, price, size, con_type', MONITOR_TEST_DATA)
 def test_monitor(name: str, price: int | float, size: int | float, con_type: str):
+    """Test creating monitor with various data.
+
+    Args:
+        name: str - monitor name.
+        price: int | float - monitor price.
+        size: int | float - monitor diagonal size.
+        con_type: str - connection type.
+    """
     assert Monitor(name, price, size, con_type)
 
 
 @pytest.mark.parametrize('name, price, os, processor', COMPUTER_TEST_DATA)
 def test_computer(name: str, price: int | float, os: str, processor: str):
+    """Test creating computer with various data.
+
+    Args:
+        name: str - computer name.
+        price: int | float - computer price.
+        os: str - operating system installed on computer.
+        processor: str - processor in a computer.
+    """
     assert Computer(name, price, os, processor)
 
 
 @pytest.mark.xfail(reason=ValueError)
 def test_negative_price():
+    """Try create product with negative price."""
     assert Computer(DEFAULT[0], NEGATIVE_PRICE, DEFAULT[2], DEFAULT[3])
 
 
 @pytest.mark.xfail(reason=TypeError)
 def test_shop_wrong_product():
+    """Try create shop with wrong product in tuple."""
     assert Shop(SHOP_INCORRECT_PRODUCT_DATA)
 
 
 @pytest.mark.xfail(reason=TypeError)
 def test_monitor_wrong_size():
+    """Try create monitor with incorrect type of size field."""
     assert Monitor(*MONITOR_INCORRECT_TYPES_DATA[0])
 
 
 @pytest.mark.xfail(reason=TypeError)
 def test_monitor_wrong_con():
+    """Try create monitor with wrong connector type."""
     assert Monitor(*MONITOR_INCORRECT_TYPES_DATA[1])
 
 
 @pytest.mark.xfail(reason=TypeError)
 def test_computer_wrong_os():
+    """Try create computer with wrong os type."""
     assert Computer(*COMPUTER_INCORRECT_TYPES_DATA[0])
 
 
 @pytest.mark.xfail(reason=TypeError)
 def test_computer_wrong_processor():
+    """Try create computer with wring processor type."""
     assert Computer(*COMPUTER_INCORRECT_TYPES_DATA[1])
 
 
 @pytest.mark.xfail(reason=TypeError)
-def test_create_abstract_product(name: str, price: int):
+def test_create_abstract_product():
+    """Try create abstract Product."""
     assert Product(DEFAULT[0], DEFAULT[1])
