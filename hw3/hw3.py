@@ -11,7 +11,7 @@ class Product:
             object_type = type(operand).__name__
             err_message = f'{operand} should be str not {object_type}'
             raise TypeError(err_message)
-    
+
     def is_int_or_float(self, operand: int | float) -> None:
         if not isinstance(operand, (int, float)):
             object_type = type(operand).__name__
@@ -60,3 +60,28 @@ class Computer(Product):
     def processor(self, new_processor: str) -> None:
         self.is_str(new_processor)
         self._processor = new_processor
+
+
+class Monitor(Product):
+    def __init__(self, name: str, price: int | float, size: int | float, con_type: str) -> None:
+        self.size = size
+        self.con_type = con_type
+        super().__init__(name, price)
+
+    @property
+    def size(self) -> int | float:
+        return self._size
+
+    @size.setter
+    def size(self, new_size: int | float) -> None:
+        self.is_int_or_float(new_size)
+        self._size = new_size
+
+    @property
+    def con_type(self) -> str:
+        return self._con_type
+
+    @con_type.setter
+    def con_type(self, new_con_type: str) -> None:
+        self.is_str(new_con_type)
+        self._con_type = new_con_type
