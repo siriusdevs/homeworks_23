@@ -106,10 +106,23 @@ class Computer(Product):
 
     @property
     def os(self) -> str:
+        """Get the operating system of the computer.
+
+        Returns:
+            str: operating system of the computer.
+        """
         return self._os
 
     @os.setter
     def os(self, new_os: str) -> None:
+        """Set the operating system of the computer.
+
+        Args:
+            new_os: str - new operating system for the computer.
+
+        Raises:
+            ValueError: if the OS is not one of the known.
+        """
         self.is_str(new_os)
         if new_os.lower() not in self.__op_systems:
             systems = ', '.join(self.__op_systems)
@@ -118,10 +131,23 @@ class Computer(Product):
 
     @property
     def processor(self) -> str:
+        """Get the processor type of the computer.
+
+        Returns:
+            str: processor type of the computer.
+        """
         return self._processor
 
     @processor.setter
     def processor(self, new_processor: str) -> None:
+        """Set the processor type of the computer.
+
+        Args:
+            new_processor: str - new processor type for the computer.
+
+        Raises:
+            ValueError: if the processor does not start with a resolved name.
+        """
         self.is_str(new_processor)
         if not new_processor.lower().startswith(self.__processor_types):
             types = ' or '.join(self.__processor_types)
