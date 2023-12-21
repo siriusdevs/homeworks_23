@@ -7,7 +7,7 @@
         "gt_half_year": 18.0
     },
     "region_stats": {
-        "Saint-Petersburg": 1.0,
-        "Sochi": 1.0
+        "Saint-Petersburg": 0.5,
+        "Sochi": 0.5
     }
 }

@@ -38,7 +38,7 @@ age = (
     (
         {AGE: 30, LAST_LOGIN: '2023-12-20'},
         {LT_DAYS: [], LT_WEEK: [], LT_MONTH: [], LT_HALF_YEAR: [], GT_HALF_YEAR: [25]},
-        {LT_DAYS: [30], LT_WEEK: [30], LT_MONTH: [30], LT_HALF_YEAR: [30], GT_HALF_YEAR: [25]},
+        {LT_DAYS: [], LT_WEEK: [30], LT_MONTH: [30], LT_HALF_YEAR: [30], GT_HALF_YEAR: [25]},
     ),
     (
         {AGE: 40, LAST_LOGIN: '2023-12-18'},
