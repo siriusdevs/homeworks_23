@@ -1,4 +1,4 @@
-"""Process client data, analyze emails and last login, and save statistics in JSON file."""
+"""Process client data analyze emails and last login and save statistics in JSON file."""
 
 import json
 from datetime import datetime

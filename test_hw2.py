@@ -15,9 +15,7 @@ test_data = [('data_hw2.json', 'result_test_hw2.py', {
         "Less than 6 months": 50.0,
         "More than 6 months": 50.0
     }
-}
-)
-]
+})]
 
 
 @pytest.mark.parametrize("input_file, output_file, data", test_data)
