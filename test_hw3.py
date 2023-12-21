@@ -1,26 +1,26 @@
 """Test module for Bank Account Management module."""
 import pytest
 
-from hw3 import Client, Current_account, Deposit_account
+from hw3 import Client, CurrentAccount, DepositAccount
 
 DEPOSIT_ACCOUNT_NUMBER = 99999999999999999999
 CREDIT_ACCOUNT_NUMBER = 99999999999999999998
 
-deposit_account = Deposit_account(DEPOSIT_ACCOUNT_NUMBER, 99999999999, 100.0)
-credit_account = Current_account(CREDIT_ACCOUNT_NUMBER, 10, 1000)
+deposit_account = DepositAccount(DEPOSIT_ACCOUNT_NUMBER, 99999999999, 100.0)
+credit_account = CurrentAccount(CREDIT_ACCOUNT_NUMBER, 10, 1000)
 
 
 def test_current_account_creation():
-    """Test for Current_account object creation."""
-    account = Current_account(10000000000000000001, 0, 55)
+    """Test for CurrentAccount object creation."""
+    account = CurrentAccount(10000000000000000001, 0, 55)
     assert account.account_number == 10000000000000000001
     assert account.balance == 0
     assert account.credit_limit == 55
 
 
 def test_deposit_account_creation():
-    """Test for Deposit_account object creation."""
-    account = Deposit_account(10000000000000000001, 0, 3)
+    """Test for DepositAccount object creation."""
+    account = DepositAccount(10000000000000000001, 0, 3)
     assert account.account_number == 10000000000000000001
     assert account.balance == 0
     assert account.interest_rate == 3
@@ -55,8 +55,8 @@ def transactions_test():
 def test_creation_raises_error():
     """Test for wrong arguments."""
     with pytest.raises(ValueError):
-        Current_account(1000000000, 0, 5.5)
+        CurrentAccount(1000000000, 0, 5.5)
     with pytest.raises(TypeError):
-        Current_account(DEPOSIT_ACCOUNT_NUMBER, '0', 5.5)
+        CurrentAccount(DEPOSIT_ACCOUNT_NUMBER, '0', 5.5)
     with pytest.raises(TypeError):
-        Current_account(DEPOSIT_ACCOUNT_NUMBER, 0, '5.5')
+        CurrentAccount(DEPOSIT_ACCOUNT_NUMBER, 0, '5.5')

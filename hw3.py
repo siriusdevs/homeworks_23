@@ -1,12 +1,37 @@
 """Bank Account Management module."""
+from typing import Any
 
 
-class Bank_account:
+def check_type(
+    input_object: Any,
+    types: tuple[type, ...] | type,
+    object_name: str = 'object',
+) -> None:
+    """
+    Check if the input_object is of type `types`.
+
+    Args:
+        input_object (Any): The value to check.
+        types (tuple[type, ...]): The type to check against.
+        object_name (str): Object name.
+
+    Raises:
+        TypeError: If value is not of type `types`.
+    """
+    if not isinstance(input_object, types):
+        value_type = type(input_object)
+        error_msg = f'The {object_name} type must be {types}, not {value_type}'
+        raise TypeError(error_msg)
+
+
+class BankAccount:
     """Class representing a bank account."""
+
+    _account_number_len = 20
 
     def __init__(self, account_number: int, balance: float | int) -> None:
         """
-        Initialize a Bank_account object.
+        Initialize a BankAccount object.
 
         Args:
             account_number (int): The number of the bank account.
@@ -32,13 +57,16 @@ class Bank_account:
 
         Args:
             new_number (int): The number of the bank account.
+
+        Raises:
+            ValueError: If account number len does not match the value of _account_number_len.
         """
-        if not isinstance(new_number, int):
-            raise TypeError(
-                f'The account number type must be int, not {type(new_number).__name__}'
+        check_type(new_number, int, 'account number')
+        number_len = len(str(new_number))
+        if number_len != self._account_number_len:
+            raise ValueError(
+                f'The account number len must be {self._account_number_len}, not {number_len}',
             )
-        elif len(str(new_number)) != 20:
-            raise ValueError(f'The account number len must be 20, not {len(str(new_number))}')
         self._account_number = new_number
 
     @property
@@ -59,24 +87,21 @@ class Bank_account:
         Args:
             new_balance (float | int): The balance of the client's bank account.
         """
-        if not isinstance(new_balance, (float, int)):
-            raise TypeError(
-                f'The balance type must be int or float, not {type(new_balance).__name__}'
-            )
+        check_type(new_balance, (float, int), 'balance')
         self._balance = new_balance
 
 
-class Current_account(Bank_account):
+class CurrentAccount(BankAccount):
     """Class representing a current bank account."""
 
     def __init__(
         self,
         account_number: int,
         balance: float | int,
-        credit_limit: float | int
+        credit_limit: float | int,
     ) -> None:
         """
-        Initialize a Current_account object.
+        Initialize a CurrentAccount object.
 
         Args:
             account_number (int): The number of the bank account.
@@ -103,27 +128,27 @@ class Current_account(Bank_account):
 
         Args:
             new_limit (float | int): The credit limit on the bank account.
+
+        Raises:
+            ValueError: If credit limit is negative.
         """
-        if not isinstance(new_limit, (float, int)):
-            raise TypeError(
-                f'The credit limit must be int or float, not {type(new_limit).__name__}'
-            )
-        elif new_limit < 0:
+        check_type(new_limit, (float, int), 'credit limit')
+        if new_limit < 0:
             raise ValueError("The credit limit mustn't be negative")
         self._credit_limit = new_limit
 
 
-class Deposit_account(Bank_account):
+class DepositAccount(BankAccount):
     """Class representing a deposit bank account."""
 
     def __init__(
         self,
         account_number: int,
         balance: float | int,
-        interest_rate: float | int
+        interest_rate: float | int,
     ) -> None:
         """
-        Initialize a Deposit_account object.
+        Initialize a DepositAccount object.
 
         Args:
             account_number (int): The number of the bank account.
@@ -150,12 +175,12 @@ class Deposit_account(Bank_account):
 
         Args:
             new_rate (float | int): The interest rate on the deposit.
+
+        Raises:
+            ValueError: If interest rate is negative.
         """
-        if not isinstance(new_rate, (float, int)):
-            raise TypeError(
-                f'The interest rate must be int or float, not {type(new_rate).__name__}'
-            )
-        elif new_rate < 0:
+        check_type(new_rate, (float, int), 'interest rate')
+        if new_rate < 0:
             raise ValueError("The interest rate mustn't be negative")
         self._interest_rate = new_rate
 
@@ -163,17 +188,19 @@ class Deposit_account(Bank_account):
 class Client:
     """Class representing a bank's client."""
 
+    _name_len = 1478
+
     def __init__(
         self,
         name: str,
-        accounts: list[Bank_account]
+        accounts: list[BankAccount],
     ) -> None:
         """
         Initialize a Client object.
 
         Args:
             name (str): The name of the client.
-            accounts (list[Bank_account]): The list of the client's bank accounts.
+            accounts (list[BankAccount]): The list of the client's bank accounts.
         """
         self.name = name
         self.accounts = accounts
@@ -195,43 +222,40 @@ class Client:
 
         Args:
             new_name (str): The name of the person.
+
+        Raises:
+            ValueError: If the name length exceeds the _name_len value.
         """
-        if not isinstance(new_name, str):
-            raise TypeError(f'The name type must be str, not {type(new_name).__name__}')
-        elif len(new_name) > 1478:
-            raise ValueError('The name len exceeds 1478 characters')
+        check_type(new_name, str, 'name')
+        if len(new_name) > self._name_len:
+            raise ValueError(f'The name len exceeds {self.name_len} characters')
         self._name = new_name
 
     @property
-    def accounts(self) -> list[Bank_account]:
+    def accounts(self) -> list[BankAccount]:
         """
         Return the client's bank accounts.
 
         Returns:
-            list[Bank_account]: The client's bank accounts.
+            list[BankAccount]: The client's bank accounts.
         """
         return self._accounts
 
     @accounts.setter
-    def accounts(self, new_accounts: list[Bank_account]) -> None:
+    def accounts(self, new_accounts: list[BankAccount]) -> None:
         """
         Set the client's bank accounts.
 
         Args:
-            new_accounts (list[Bank_account]): The client's bank accounts.
+            new_accounts (list[BankAccount]): The client's bank accounts.
         """
         for account in new_accounts:
-            if not isinstance(account, (Current_account, Deposit_account)):
-                raise TypeError(
-                    f'All accounts must be inherited from Bank_account,'
-                    f' not {type(account).__name__}'
-                )
+            check_type(account, (CurrentAccount, DepositAccount), 'accounts')
         self._accounts = new_accounts
 
     def get_account(self, account_number: int, money: float):
         """
-        Checks the transaction for the possibility of execution
-        and returns the index of the account in the list.
+        Find the index of the account in the list.
 
         Args:
             account_number (int): The number of the client's bank account.
@@ -239,19 +263,17 @@ class Client:
 
         Returns:
             int: The index of the account in the list of the client's bank accounts.
+
+        Raises:
+            ValueError: If the amount of money is negative or account id wasn't found.
         """
-        if not isinstance(account_number, int):
-            raise TypeError(
-                f'The account id type must be int, not {type(account_number).__name__}'
-            )
+        check_type(account_number, int, 'account id')
         account_id = [
-            index for index, account in self.accounts
-            if account_number == account.account_number
+            index for index, account in self.accounts if account_number == account.account_number
         ]
+        check_type(money, float, 'money')
         if not account_id:
             raise ValueError('No such id was found')
-        elif not isinstance(money, float):
-            raise TypeError(f'The money type must be float, not {type(money).__name__}')
         elif money <= 0:
             raise ValueError('Amount of money must be positive number')
         return account_id[0]
@@ -274,15 +296,18 @@ class Client:
         Args:
             account_number (int): The number of the client's bank account.
             money (float): The amount of money to withdraw.
+
+        Raises:
+            ValueError: If there are not enough funds on the balance.
         """
         account_id = self.get_account(account_number, money)
         account = self.accounts[account_id]
-        reserve = account.interest_rate if isinstance(account, Deposit_account) else 0
+        available_money = account.interest_rate if isinstance(account, DepositAccount) else 0
+        available_money += account.balance
 
-        if money > account.balance + reserve:
+        if money > available_money:
             raise ValueError(
-                f'На вашем балансе недостаточно средств!'
-                f'Максимальная сумма {account.balance + reserve}'
+                f'There are not enough funds on the balance ({available_money}).',
             )
 
         self.accounts[account_id].balance -= money
