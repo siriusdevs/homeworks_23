@@ -4,7 +4,7 @@ from typing import Dict, Optional, Tuple
 
 
 def company_salary_stats(
-    exclude_departments: Optional[Tuple[str]] = None, 
+    exclude_departments: Optional[Tuple[str]] = None,
     **departments: Dict[str, float]
 ) -> Dict[str, float]:
     """
@@ -15,7 +15,7 @@ def company_salary_stats(
     departments: Keyword arguments where department names are keys and values are dictionaries
                  with employee names (str) as keys and salaries (float) as values.
 
-    Returns: 
+    Returns:
     A dictionary containing the average, maximum, and median salaries in the company.
     All numbers are rounded to two decimal places.
     """
@@ -24,7 +24,7 @@ def company_salary_stats(
         if exclude_departments and department in exclude_departments:
             continue
         all_salaries.extend(employees.values())
-    
+
     average_salary = round(sum(all_salaries) / len(all_salaries), 2) if all_salaries else 0
     max_salary = round(max(all_salaries), 2) if all_salaries else 0
     median_salary = round(median(all_salaries), 2) if all_salaries else 0
