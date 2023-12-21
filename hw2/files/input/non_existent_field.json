@@ -1,0 +1,60 @@
+{
+    "user": {
+        "region": "Saint-Petersburg",
+        "registered": "2012-12-24",
+        "last_login": "2023-10-24",
+        "email": "user@yandex.ru",
+        "age": 36
+    },
+    "user2": {
+        "registered": "2022-10-30",
+        "last_login": "2022-11-21",
+        "email": "user2@gmail.com",
+        "age": 18
+    },
+    "user3": {
+        "region": "Sochi",
+        "registered": "2022-10-30",
+        "last_login": "2022-11-21",
+        "email": "user2@gmail.com",
+        "age": 18
+    },
+    "user4": {
+        "region": "Краснодар",
+        "last_login": "2020-10-25",
+        "email": "user4@yandex.ru",
+        "age": 25
+    },
+    "user5": {
+        "region": "Moscow",
+        "registered": "2021-10-30",
+        "last_login": "2023-2-16",
+        "email": "user5@mail.ru"
+    },
+    "user6": {
+        "region": "Orel",
+        "registered": "2022-10-30",
+        "email": "user6@vk.ru",
+        "age": 31
+    },
+    "user7": {
+        "region": "Saint-Petersburg",
+        "registered": "2012-12-24",
+        "last_login": "2023-10-24",
+        "age": 30
+    },
+    "user8": {
+        "region": "Moscow",
+        "registered": "2006-10-30",
+        "last_login": "2022-11-21",
+        "email": "user8@gmail.com",
+        "age": 28
+    },
+    "user9": {
+        "region": "Kaliningrad",
+        "registered": "2017-10-30",
+        "last_login": "2023-11-26",
+        "email": "user9@xmail.ru",
+        "age": 15
+    }
+}
