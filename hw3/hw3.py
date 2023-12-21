@@ -9,6 +9,12 @@ class Product(ABC):
 
     @abstractmethod
     def __init__(self, name: str, price: int | float) -> None:
+        """Initialize a new Product instance with a name and price.
+
+        Args:
+            name: str - product name.
+            price: int | float - product price.
+        """
         self.name = name
         self.price = price
 
@@ -50,6 +56,14 @@ class Computer(Product):
     __processor_types = ('amd', 'intel')
 
     def __init__(self, name: str, price: int | float, os: str, processor: str) -> None:
+        """Initialize a new Computer instance.
+
+        Args:
+            name: str - computer name.
+            price: int | float - price of computer.
+            os: str - operation system installed on computer.
+            processor: str - processor in a computer.
+        """
         self.os = os
         self.processor = processor
         super().__init__(name, price)
@@ -85,6 +99,14 @@ class Monitor(Product):
     __con_types = ('usb', 'hdmi', 'thunderbolt', 'vga', 'display port', 'dvi')
 
     def __init__(self, name: str, price: int | float, size: int | float, con_type: str) -> None:
+        """Initialize a new Monitor instance.
+
+        Args:
+            name: str - monitor name.
+            price: int | float - monitor price.
+            size: int | float - monitor size (diagonal).
+            con_type: str - type of connector for connecting a monitor to a computer.
+        """
         self.size = size
         self.con_type = con_type
         super().__init__(name, price)
@@ -115,6 +137,11 @@ class Shop:
     """Class representing a computer hardware store."""
 
     def __init__(self, product_list: tuple[Product] | list[Product]) -> None:
+        """Initialize a new Shop instance.
+
+        Args:
+            product_list: tuple[Product] | list[Product] - list of products available in the store.
+        """
         self.product_list = product_list
 
     def is_product(self, product: Product) -> None:
