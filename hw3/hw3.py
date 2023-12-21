@@ -2,6 +2,7 @@
 
 
 from abc import ABC, abstractmethod
+from typing import Any
 
 
 class Product(ABC):
@@ -18,11 +19,11 @@ class Product(ABC):
         self.name = name
         self.price = price
 
-    def is_str(self, operand: str) -> None:
+    def is_str(self, operand: Any) -> None:
         """Check if the operand is a string.
 
         Args:
-            operand: str - operand to check.
+            operand: Any - operand to check.
 
         Raises:
             TypeError: if the operand is not a string.
@@ -32,11 +33,11 @@ class Product(ABC):
             err_message = f'{operand} should be str not {object_type}'
             raise TypeError(err_message)
 
-    def is_int_or_float(self, operand: int | float) -> None:
+    def is_int_or_float(self, operand: Any) -> None:
         """Check if the operand is an int or a float.
 
         Args:
-            operand: int | float - operand to check.
+            operand: Any - operand to check.
 
         Raises:
             TypeError: if the operand is not an integer or a float.
@@ -229,11 +230,11 @@ class Shop:
         """
         self.product_list = product_list
 
-    def is_product(self, product: Product) -> None:
+    def is_product(self, product: Any) -> None:
         """Check if the given object is an instance of the Product class.
 
         Args:
-            product: Product - object to check.
+            product: Any - object to check.
 
         Raises:
             TypeError: if the object is not an instance of the Product class.
