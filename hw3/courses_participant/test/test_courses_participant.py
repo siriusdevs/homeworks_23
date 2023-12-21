@@ -2,7 +2,8 @@
 from typing import Any
 
 import pytest
-from course.course import Course
+from course_with_participants.course_with_participants import \
+    CourseWithParticipants
 from courses_participant.courses_participant import CoursesParticipant
 
 
@@ -16,8 +17,8 @@ class TestCoursesParticipant(CoursesParticipant):
         super().__init__()
 
 
-course1 = Course('Math')
-course2 = Course('Programming')
+course1 = CourseWithParticipants('Math')
+course2 = CourseWithParticipants('Programming')
 courses = (course1, course2)
 
 
@@ -40,7 +41,7 @@ def test_getter_courses_and_add_course() -> None:
     assert len(courses_participant.courses) == 2
 
     for course in courses_participant.courses:
-        assert isinstance(course, Course)
+        assert isinstance(course, CourseWithParticipants)
 
 
 # test setter courses
@@ -52,7 +53,7 @@ def test_setter_courses() -> None:
     assert len(courses_participant.courses) == 2
 
     for course in courses_participant.courses:
-        assert isinstance(course, Course)
+        assert isinstance(course, CourseWithParticipants)
 
 
 @pytest.mark.xfail(raises=TypeError)
