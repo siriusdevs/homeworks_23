@@ -17,8 +17,6 @@ def test_process_data():
     """Test the process_data function."""
     process_data(input_file_path, output_file_path)
 
-    assert os.path.exists(output_file_path)
-
     with open(output_file_path, 'r') as output_file:
         statistics = json.load(output_file)
 
