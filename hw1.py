@@ -1,10 +1,8 @@
 """Calculate the top 3 salaries and their ratio to the total salary."""
 
 
-def get_salary_stats(
-    limit: tuple = None,
-    **departments: dict[str, dict[str, float]]
-) -> tuple[list, float]:
+def get_salary_stats(limit: tuple = None,
+    **departments: dict[str, dict[str, float]]) -> tuple[list, float]:
     """
     Calculate the top 3 salaries and their ratio to the total salary.
 
