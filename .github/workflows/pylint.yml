@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        homework: ['HW1', 'HW2', 'HW3']
+        homework: ['HW1', 'HW3', 'HW2']
     steps:
     - uses: actions/checkout@v2
     - name: Установка Python
@@ -37,5 +37,5 @@ jobs:
         pip install pytest==6.2.5
         pip install numpy
     - name: Pytest
-      run: pwd && pytest ${{ matrix.homework }}
+      run: pytest ${{ matrix.homework }}
 
