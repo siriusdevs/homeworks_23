@@ -4,22 +4,8 @@ import os
 
 from hw2 import calculate_email_host, calculate_registration_year, process_data
 
-user_data = {
-    'user': {
-        'region': 'Saint-Petersburg',
-        'registered': '2012-12-24',
-        'last_login': '2023-10-01',
-        'email': 'user@yandex.ru',
-        'age': 36,
-    },
-    'user2': {
-        'region': 'Sochi',
-        'registered': '2022-10-30',
-        'last_login': '2022-11-21',
-        'email': 'user2@gmail.com',
-        'age': 18,
-    },
-}
+with open('./HW2/input/data_hw2.json', 'r') as user_file:
+    user_data = json.load(user_file)
 
 
 def test_calculate_email_host():
@@ -36,8 +22,8 @@ def test_calculate_registration_year():
 
 def test_hw2():
     """Test the process data."""
-    process_data('./HW2/data_hw2.json', 'output_data.json')
-    with open('output_data.json', 'r') as output_file:
+    process_data('./HW2/input/data_hw2.json', './HW2/output/output_data.json')
+    with open('./HW2/output/output_data.json', 'r') as output_file:
         output_data = json.load(output_file)
     assert output_data == {
         'email_host_percentages': {
@@ -49,4 +35,4 @@ def test_hw2():
             '2022': 50.0,
         },
     }
-    os.remove('output_data.json')
+    os.remove('./HW2/output/output_data.json')
