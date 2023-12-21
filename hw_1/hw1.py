@@ -15,7 +15,7 @@ def company_salary_stats(
     departments: Keyword arguments where department names are keys and values are dictionaries
                  with employee names (str) as keys and salaries (float) as values.
 
-    Returns:
+    Returns: 
     A dictionary containing the average, maximum, and median salaries in the company.
     All numbers are rounded to two decimal places.
     """
