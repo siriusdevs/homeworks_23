@@ -36,4 +36,4 @@ def process_data(input_file, output_file):
         json.dump(result, f)
 
 if __name__ == '__main__':
-    process_data("data_hw2.json", 'result.json')
+    process_data('data_hw2.json', 'result.json')

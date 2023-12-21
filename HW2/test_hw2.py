@@ -6,27 +6,27 @@ from hw2 import *
 
 def test_process_data():
     test_data = {
-        "client1": {"age": 20, "last_login": "2022-01-01"},
-        "client2": {"age": 30, "last_login": "2022-02-01"},
-        "client3": {"age": 40, "last_login": "2022-03-01"},
+        'client1': {'age': 20, 'last_login': '2022-01-01'},
+        'client2': {'age': 30, 'last_login': '2022-02-01'},
+        'client3': {'age': 40, 'last_login': '2022-03-01'},
     }
 
-    with open("./HW2/test_data.json", "w") as f:
+    with open('./HW2/test_data.json', 'w') as f:
         json.dump(test_data, f)
 
 
-    process_data("./HW2/test_data.json", "test_result.json")
+    process_data('./HW2/test_data.json', 'test_result.json')
 
 
-    with open("test_result.json", "r") as f:
+    with open('test_result.json', 'r') as f:
         result = json.load(f)
 
 
-    assert result["age_percentages"] == [0.0, 33.33, 33.33, 33.33, 0.0]
-    assert result["last_online_percentages"] == [100.0, 0.0, 0.0, 0.0, 0.0]
+    assert result['age_percentages'] == [0.0, 33.33, 33.33, 33.33, 0.0]
+    assert result['last_online_percentages'] == [100.0, 0.0, 0.0, 0.0, 0.0]
     
-    os.remove("./HW2/test_data.json")
-    os.remove("test_result.json")
+    os.remove('./HW2/test_data.json')
+    os.remove('test_result.json')
 
 
 def test_example():
