@@ -24,8 +24,8 @@ def check_type(input_value: Any, expected_type: type) -> bool:
 
 class Car:
     """Class for a car."""
-
-    def __init__(self, brand, model, year: int) -> None:
+    
+    def __init__(self, brand: str, model: str, year: int) -> None:
         """
         Initialize the car object.
 
@@ -34,9 +34,9 @@ class Car:
             model: The model of the car.
             year: The year of the car.
         """
+        self.brand = brand
         self.model = model
         self.year = year
-        self.brand = brand
 
     @property
     def brand(self):

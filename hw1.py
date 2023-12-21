@@ -1,7 +1,7 @@
 """Calculate the top 3 salaries and their ratio to the total salary."""
 
 
-def get_salary_stats(limit: tuple = None, **kwargs: dict[str, dict[str, float]]):
+def get_salary_stats(limit: tuple = None, **departments: dict[str, dict[str, float]]):
     """
     Calculate the top 3 salaries and their ratio to the total salary.
 
@@ -13,7 +13,7 @@ def get_salary_stats(limit: tuple = None, **kwargs: dict[str, dict[str, float]])
         The top 3 salaries and their ratio to the total salary.
     """
     salaries = []
-    for department, employees in kwargs.items():
+    for department, employees in departments.items():
         if limit is not None:
             if department in limit:
                 salaries.extend(employees.values())

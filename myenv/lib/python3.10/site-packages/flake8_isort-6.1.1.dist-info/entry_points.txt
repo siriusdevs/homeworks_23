@@ -1,0 +1,2 @@
+[flake8.extension]
+I00 = flake8_isort:Flake8Isort
