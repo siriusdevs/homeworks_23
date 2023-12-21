@@ -1,6 +1,5 @@
 """Test for hw1.py module."""
 import pytest
-
 from hw1 import salary_stat
 
 
