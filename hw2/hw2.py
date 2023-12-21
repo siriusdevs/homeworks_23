@@ -20,7 +20,6 @@
 
 import json
 import os
-import shutil
 from datetime import datetime, timedelta
 from types import MappingProxyType
 
@@ -41,8 +40,6 @@ REGION = 'region'
 
 AGE_STATS = 'age_stats'
 REGION_STATS = 'region_stats'
-
-OVERWRITE_FILES = False
 
 
 def _convert_time_ranges(time_ranges: MappingProxyType) -> dict:
@@ -68,27 +65,31 @@ def _get_json(inpath: str) -> dict:
 def _dump_json(outpath: str, output: dict) -> None:
     dirs = outpath.rfind('/')
     if dirs > -1 and not os.path.isdir(outpath[:dirs]):
-        os.makedirs(outpath[:dirs])
-
-    if OVERWRITE_FILES is False and os.path.exists(outpath):
-        shutil.move(outpath, '{0}-old'.format(outpath))
+        os.makedirs(outpath[:dirs], exist_ok=True)
 
     with open(outpath, 'w') as outfile:
         json.dump(output, outfile, indent=4)
 
 
-def _combine_results(ages: dict, cities: dict) -> dict:
+def _combine_results(users: dict) -> dict:
     output = {
         AGE_STATS: {},
         REGION_STATS: {},
     }
 
-    for span, age in ages.items():
+    for user in users.values():
+        output[AGE_STATS].update(av_user_age(user, output[AGE_STATS]))
+        if output[REGION_STATS].get(user[REGION]) is not False:
+            output[REGION_STATS][user[REGION]] = 1
+        else:
+            output[REGION_STATS][user[REGION]] += 1
+
+    for span, age in output[AGE_STATS].items():
         non_zero_age = max(len(age), 1)
         output[AGE_STATS][span] = round(sum(age) / non_zero_age, 2)
 
-    for reg, num in cities.items():
-        output[REGION_STATS][reg] = round(num / len(cities), 2)
+    for reg, num in output[REGION_STATS].items():
+        output[REGION_STATS][reg] = round(num / len(output[REGION_STATS]), 2)
 
     return output
 
@@ -140,13 +141,18 @@ def process_data(inpath: str, outpath: str) -> None:
         inpath (str): The path to the input JSON file containing the user data.
         outpath (str): The path to the output JSON file where the results will be dumped.
     """
-    users = _get_json(inpath)
+    try:
+        users = _get_json(inpath)
+    except FileNotFoundError as file_error:
+        _dump_json(outpath, {'error': '{0}: {1}'.format(
+            file_error.__class__.__name__, file_error,
+        )})
+        return
 
-    ages = {}
-    cities = {user[REGION]: 1 for user in users.values()}
+    try:
+        combined = _combine_results(users)
+    except (ValueError, KeyError, TypeError) as error:
+        _dump_json(outpath, {'error': '{0}: {1}'.format(error.__class__.__name__, error)})
+        return
 
-    for user in users.values():
-        ages.update(av_user_age(user, ages))
-        cities[user[REGION]] += 1
-
-    _dump_json(outpath, _combine_results(ages, cities))
+    _dump_json(outpath, combined)
