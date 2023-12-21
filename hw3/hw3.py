@@ -175,19 +175,42 @@ class Monitor(Product):
 
     @property
     def size(self) -> int | float:
+        """Get the diagonal size of the monitor.
+
+        Returns:
+            int | float: diagonal size of the monitor.
+        """
         return self._size
 
     @size.setter
     def size(self, new_size: int | float) -> None:
+        """Set the diagonal size of the monitor.
+
+        Args:
+            new_size: int | float - new diagonal size for the monitor.
+        """
         self.is_int_or_float(new_size)
         self._size = new_size
 
     @property
     def con_type(self) -> str:
+        """Get the connection type of the monitor.
+
+        Returns:
+            str: connection type of the monitor.
+        """
         return self._con_type
 
     @con_type.setter
     def con_type(self, new_con_type: str) -> None:
+        """Set the connection type of the monitor.
+
+        Args:
+            new_con_type: str - new connection type for the monitor.
+
+        Raises:
+            ValueError: if the connection type is unknown.
+        """
         self.is_str(new_con_type)
         if new_con_type.lower() not in self.__con_types:
             types = ', '.join(self.__con_types)
