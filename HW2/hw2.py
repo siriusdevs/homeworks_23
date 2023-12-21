@@ -13,11 +13,7 @@ def process_data(input_file: str, output_file: str) -> int:
         output_file: json file with stats
 
     Returns:
-        0 if all is ok
-        1 if input_file not found
-        2 if input_file is not a valid json file
-        3 if output_file not found
-        4 if output_file is not writable
+        int: 0 if all ok, else other
     """
     try:
         with open(input_file, 'r') as input_file_data:

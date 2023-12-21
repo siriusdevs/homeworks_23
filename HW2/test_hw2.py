@@ -2,22 +2,27 @@
 import json
 import os
 
+import pytest
 from hw2 import process_data
 
-
-def test_file_not_found():
-    """Test for FileNotFoundError."""
-    assert process_data('vydumanniy_file.json', 'test_output.json') == 1
-
-
-def test_file_not_json():
-    """Test for json.decoder.JSONDecodeError."""
-    assert process_data('./HW2/input/decoderError.json', 'test_output.json') == 2
+TEST_DATA = (
+    ('vydumanniy_file.json', 'test_output.json', 1),
+    ('./HW2/input/decoderError.json', 'test_output.json', 2),
+    ('./HW2/input/data_hw2.json', '/nesuchestvuyushaya_papka/1/1/1/1.json', 3),
+)
 
 
-def test_output_file_not_found():
-    """Test for FileNotFoundError."""
-    assert process_data('./HW2/input/data_hw2.json', '/nesuchestvuyushaya_papka/1/1/1/1.json') == 3
+@pytest.mark.parametrize('input_file, output_file, expected', TEST_DATA)
+def test_with_error_code(input_file: str, output_file: str, expected: int):
+    """
+    Сhecking returned error codes.
+
+    Args:
+        input_file (str): name of input file.
+        output_file (str): name of output file.
+        expected (int): expected function error code.
+    """
+    assert process_data(input_file, output_file) == expected
 
 
 def test_example():

@@ -1,28 +1,29 @@
 """Utils for HW2."""
 from datetime import date
 
+AGE18 = 18
+AGE25 = 25
+AGE45 = 45
+AGE60 = 60
+
 
 def get_age_group(age: int) -> str:
     """
     Return age group for age.
 
     Args:
-        age: age of client
+        age (int): age of client
 
     Returns:
-        age group
+        str: age group
     """
-    age18 = 18
-    age25 = 25
-    age45 = 45
-    age60 = 60
-    if age < age18:
+    if age < AGE18:
         return '0-18'
-    elif age < age25:
+    elif age < AGE25:
         return '18-25'
-    elif age < age45:
+    elif age < AGE45:
         return '25-45'
-    elif age < age60:
+    elif age < AGE60:
         return '45-60'
     return '60+'
 
@@ -32,10 +33,10 @@ def get_age_stats(input_dict: dict) -> dict:
     Calculate age stats for input_dict and return a dictionary with the stats.
 
     Args:
-        input_dict: dict with data about clients
+        input_dict (dict): dict with data about clients
 
     Returns:
-        dict with age stats
+        dict: dict with age stats
     """
     age_stats = {
         '0-18': 0,
@@ -56,10 +57,10 @@ def get_last_login_stats(input_dict: dict) -> dict:
     Calculate last login stats for input_dict and return a dictionary with the stats.
 
     Args:
-        input_dict: dict with data about clients
+        input_dict (dict): dict with data about clients
 
     Returns:
-        dict with last login stats
+        dict: dict with last login stats
     """
     last_login = {
         'less2days': 0,
@@ -80,10 +81,10 @@ def get_last_login_group(last_login_str: str) -> str:
     Return last login group for last_login_str.
 
     Args:
-        last_login_str: last login of client
+        last_login_str (str): last login of client
 
     Returns:
-        last login group
+        str: last login group
     """
     six_months = 180
     month = 30
