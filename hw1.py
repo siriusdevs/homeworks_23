@@ -1,7 +1,7 @@
 """Calculate and return the top 3 salaries and their ratio to the total salary."""
 
 
-def salary_stats(*departments, limit=None):
+def salary_stats(*departments: tuple[str, list[int]], limit: int | float = None):
     """
     Calculate and return the top 3 salaries and their ratio to the total salary.
 
