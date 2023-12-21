@@ -51,16 +51,17 @@ def calculate_email_host(data_dict: dict) -> dict:
 
     Returns:
         dict: percentage of usage of each mail host in client mails.
-
-    Raises:
-        ValueError: Email key not found.
     """
     email_hosts = {}
     total_emails = 0
 
     for client in data_dict.keys():
-        if 'email' not in data_dict[client].keys():
-            raise ValueError('Email key not found')
+        try:
+            if 'email' not in data_dict[client].keys():
+                return 'Email key not found'
+        except KeyError:
+            return 'Email key not found'
+
         email_domain = data_dict[client]['email'].split('@')[1]
         email_hosts[email_domain] = email_hosts.get(email_domain, 0) + 1
         total_emails += 1
@@ -79,16 +80,17 @@ def calculate_registration_year(data_dict: dict) -> dict:
 
     Returns:
         dict: percentage of user registrations by year.
-
-    Raises:
-        ValueError: Registered key not found.
     """
     registration_years = {}
     total_users = len(data_dict.keys())
 
     for client in data_dict.keys():
-        if 'registered' not in data_dict[client].keys():
-            raise ValueError('Registered key not found')
+        try:
+            if 'registered' not in data_dict[client].keys():
+                return 'Registered key not found'
+        except KeyError:
+            return 'Registered key not found'
+
         registration_year = data_dict[client]['registered'].split('-')[0]
         registration_years[registration_year] = registration_years.get(registration_year, 0) + 1
 
