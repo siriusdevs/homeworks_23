@@ -9,12 +9,12 @@ def company_salary_stats(
 ) -> Dict[str, float]:
     """Calculate statistics of salaries in the company.
 
-    Args:
+        Args:
         exclude_departments: optional argument to exclude specific departments from the statistics.
         departments: keyword arguments where department names are keys and values are dictionaries
         with employee names (str) as keys and salaries (float) as values.
 
-    Returns:
+        Returns:
         dictionary: containing the average, maximum, and median salaries in the company.
         All numbers are rounded to two decimal places.
     """
