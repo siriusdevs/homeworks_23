@@ -9,7 +9,7 @@ def test_file_not_found():
 
 def test_file_not_json():
     """Test for json.decoder.JSONDecodeError."""
-    assert process_data('input/decoderError.json', 'test_output.json') == 2
+    assert process_data('./input/decoderError.json', 'test_output.json') == 2
 
 
 def test_output_file_not_found():

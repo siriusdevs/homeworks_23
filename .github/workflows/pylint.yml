@@ -37,5 +37,5 @@ jobs:
         pip install pytest==6.2.5
         pip install numpy
     - name: Pytest
-      run: pytest ${{ matrix.homework }}
+      run: pytest ${{ matrix.homework }} && pwd
 
