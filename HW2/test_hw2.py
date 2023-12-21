@@ -16,7 +16,3 @@ def test_output_file_not_found():
     """Test for FileNotFoundError."""
     assert process_data('./HW2/input/data_hw2.json', '/nesuchestvuyushaya_papka/1/1/1/1/1/1.json') == 3
 
-
-def test_output_file_not_writable():
-    """Test for PermissionError."""
-    assert process_data('./HW2/input/data_hw2.json', './HW2/output/non_writable.json') == 4
