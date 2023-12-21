@@ -5,6 +5,8 @@ from abc import ABC, abstractmethod
 
 
 class Product(ABC):
+    """Abstract base class representing a generic product."""
+
     @abstractmethod
     def __init__(self, name: str, price: int | float) -> None:
         self.name = name
@@ -42,6 +44,8 @@ class Product(ABC):
 
 
 class Computer(Product):
+    """Class representing a computer product, inheriting from Product."""
+
     __op_systems = ('windows', 'ubuntu', 'macos')
     __processor_types = ('amd', 'intel')
 
@@ -76,6 +80,8 @@ class Computer(Product):
 
 
 class Monitor(Product):
+    """Class representing a monitor product, inheriting from Product."""
+
     __con_types = ('usb', 'hdmi', 'thunderbolt', 'vga', 'display port', 'dvi')
 
     def __init__(self, name: str, price: int | float, size: int | float, con_type: str) -> None:
@@ -106,6 +112,8 @@ class Monitor(Product):
 
 
 class Shop:
+    """Class representing a computer hardware store."""
+
     def __init__(self, product_list: tuple[Product] | list[Product]) -> None:
         self.product_list = product_list
 
