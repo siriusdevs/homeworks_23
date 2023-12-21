@@ -12,7 +12,7 @@ def company_salary_stats(
     Args:
         exclude_departments: optional argument to exclude specific departments from the statistics.
         departments: keyword arguments where department names are keys and values are dictionaries
-                    with employee names (str) as keys and salaries (float) as values.
+        with employee names (str) as keys and salaries (float) as values.
 
     Returns:
         dictionary: containing the average, maximum, and median salaries in the company.
