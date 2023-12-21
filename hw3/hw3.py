@@ -135,6 +135,3 @@ class Shop:
 
     def get_all_products(self) -> list[Product]:
         return self._product_list
-
-
-pc = Computer('gig', 12, 'WINDOWS', 'AMg')
