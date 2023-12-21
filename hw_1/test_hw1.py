@@ -1,8 +1,8 @@
 """Module that tests the main file."""
 
 import pytest
+from hw1 import company_salary_stats
 
-from task1 import company_salary_stats
 TEST_DATA_WITH_ARG = (
     (
         300,

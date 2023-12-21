@@ -9,7 +9,7 @@ def company_salary_stats(
 ) -> Dict[str, float]:
     """Calculate statistics of salaries in the company.
 
-    Args:
+Args:
         exclude_departments: optional argument to exclude specific departments from the statistics.
         departments: keyword arguments where department names are keys and values are dictionaries
         with employee names (str) as keys and salaries (float) as values.
@@ -28,4 +28,4 @@ def company_salary_stats(
     max_salary = round(max(all_salaries), 2) if all_salaries else 0
     median_salary = round(median(all_salaries), 2) if all_salaries else 0
 
-    return {'average_salary': average_salary, 'max_salary': max_salary, 'median_salary': median_salary}
+    return {'average': average_salary, 'max': max_salary, 'median': median_salary}
