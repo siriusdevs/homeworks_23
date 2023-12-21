@@ -5,24 +5,36 @@ import pytest
 from hw3 import Computer, Monitor, Product, Shop
 
 NEGATIVE_PRICE = -1
+
+# Default values: name, price, os, processor, size, connector_type
 DEFAULT = ('cheese', 300, 'ubuntu', 'intel', 25, 'usb')
+
 COMPUTER_INCORRECT_TYPES_DATA = (
+    # Некорректное имя ОС
     (
         'bell', 300, 13, 'intel33',
     ),
+    # Некорректное имя процессора
     (
         'bell', 300, 'windows', 3,
     ),
 )
+
 MONITOR_INCORRECT_TYPES_DATA = (
+    # Некорректно заданый размер
     (
         'atas', 100, '4d', 'hdmi',
     ),
+    # Некорректно задано название разъема для подключения
     (
         'atas', 100, 23.6, 4,
     ),
 )
+
+# Второй объект в кортеже не Product
 SHOP_INCORRECT_PRODUCT_DATA = (Monitor('asus', 4, 2, 'usb'), 5)
+
+# Всякое разное - и капс, и int | float и все возможные процессоры и ОС
 COMPUTER_TEST_DATA = (
     (
         'gigachad', 300, 'WiNdOwS', 'INTELi7',
@@ -34,6 +46,8 @@ COMPUTER_TEST_DATA = (
         'yyyaaaaa', 0, 'UBUNTu', 'amd ryzen 9',
     ),
 )
+
+# Всякое разное - и капс, и int | float и все возможные разъемы для подключения
 MONITOR_TEST_DATA = (
     (
         'samsam', 300, 25, 'UsB',
@@ -54,6 +68,8 @@ MONITOR_TEST_DATA = (
         'n', 1, 1, 'dvi',
     ),
 )
+
+# Набор товаров для дальнейшей работы
 TEST_ADD_REMOVE_GET_PRODUCTS = (
     (
         MONITOR_TEST_DATA[0], MONITOR_TEST_DATA[1],
