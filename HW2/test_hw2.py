@@ -6,9 +6,20 @@ import pytest
 from hw2 import process_data
 
 TEST_DATA = (
-    ('vydumanniy_file.json', 'test_output.json', 1),
-    ('./HW2/input/decoderError.json', 'test_output.json', 2),
-    ('./HW2/input/data_hw2.json', '/nesuchestvuyushaya_papka/1/1/1/1.json', 3),
+    (
+        'vydumanniy_file.json',
+        'test_output.json', 'file vydumanniy_file.json does not exist!',
+    ),
+    (
+        './HW2/input/decoderError.json',
+        'test_output.json',
+        'file ./HW2/input/decoderError.json is not in JSON format!',
+    ),
+    (
+        './HW2/input/data_hw2.json',
+        './non_existent_folder/1.json',
+        'invalid file path ./non_existent_folder/1.json',
+    ),
 )
 
 

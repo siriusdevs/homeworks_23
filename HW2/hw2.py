@@ -4,7 +4,7 @@ import json
 from utilites import get_age_stats, get_last_login_stats
 
 
-def process_data(input_file: str, output_file: str) -> int:
+def process_data(input_file: str, output_file: str) -> str:
     """
     Read data from input_file, calculate stats, and write it to output_file.
 
@@ -13,15 +13,15 @@ def process_data(input_file: str, output_file: str) -> int:
         output_file: json file with stats
 
     Returns:
-        int: 0 if all ok, else other
+        str: error message
     """
     try:
         with open(input_file, 'r') as input_file_data:
             input_dict = json.load(input_file_data)
     except FileNotFoundError:
-        return 1
+        return f'file {input_file} does not exist!'
     except json.decoder.JSONDecodeError:
-        return 2
+        return f'file {input_file} is not in JSON format!'
 
     stats = {
         'age_stats': get_age_stats(input_dict),
@@ -31,7 +31,7 @@ def process_data(input_file: str, output_file: str) -> int:
         with open(output_file, 'w') as output_file_data:
             json.dump(stats, output_file_data, indent=4)
     except FileNotFoundError:
-        return 3
+        return f'invalid file path {output_file}'
     except PermissionError:
-        return 4
-    return 0
+        return f'not permission to write to file {output_file}'
+    return 'The prograp was completed without errors.'
