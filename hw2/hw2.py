@@ -40,7 +40,6 @@ def process_data(input_file_path: str, output_file_path: str) -> None:
         'online_percentages': calculate_percentages(online_status, total_users),
     }
 
-    os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
     try:
         with open(output_file_path, 'w') as out_file:
             json.dump(output, out_file, indent=2)
