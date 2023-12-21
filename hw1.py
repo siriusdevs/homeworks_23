@@ -7,7 +7,7 @@ def get_salary_stats(limit: tuple = None, **departments: dict[str, dict[str, flo
 
     Args:
         limit: The departments to consider.
-        kwargs: The department and employee salary information.
+        departments: The department and employee salary information.
 
     Returns:
         The top 3 salaries and their ratio to the total salary.

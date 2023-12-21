@@ -24,7 +24,7 @@ def check_type(input_value: Any, expected_type: type) -> bool:
 
 class Car:
     """Class for a car."""
-    
+
     def __init__(self, brand: str, model: str, year: int) -> None:
         """
         Initialize the car object.
