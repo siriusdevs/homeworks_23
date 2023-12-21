@@ -1,50 +1,52 @@
 """Homework about processing user data statistics."""
 
 import json
-from datetime import datetime
 import os
+from datetime import datetime
+
+AGE_CATEGORIES = ('0-18', '18-25', '25-45', '45-60', '60+')
+ONLINE_STATUS_CATEGORIES = ('<2 days', '1 week', '1 month', '6 months', '>6 months')
+
+AGE_THRESHOLD = (18, 25, 45, 60)
+ONLINE_THRESHOLD = (2, 7, 30, 180)
 
 
-def process_data(input_file: str, output_file: str) -> None:
+def process_data(input_file_path: str, output_file_path: str) -> None:
     """Process data from a JSON file and generate statistics.
 
     Args:
-        input_file (str): The path to the input JSON file containing user data.
-        output_file (str): The path to the output JSON file where the statistics will be written.
+        input_file_path (str): The path to the input JSON file.
+        output_file_path (str): The path to the output JSON file.
+
+    Returns:
+        output (dict): Output data with calculated percentages.
     """
-    AGE_CATEGORIES = ('0-18', '18-25', '25-45', '45-60', '60+')
-    ONLINE_STATUS_CATEGORIES = ('<2 days', '1 week', '1 month', '6 months', '>6 months')
-
     try:
-        with open(input_file, 'r') as file:
-            data = json.load(file)
+        with open(input_file_path, 'r') as input_file:
+            database = json.load(input_file)
     except FileNotFoundError:
-        return {"msg": "Input file not found"}
+        return {'msg': 'Input file not found'}
 
-    total_users = len(data)
+    total_users = len(database)
     age_categories = {cat: 0 for cat in AGE_CATEGORIES}
     online_status = {cat: 0 for cat in ONLINE_STATUS_CATEGORIES}
 
-    for user in data.values():
+    for user in database.values():
         categorize_age(user, age_categories)
         calculate_online_status(user, online_status)
 
-    age_percentages = calculate_percentages(age_categories, total_users)
-    online_percentages = calculate_percentages(online_status, total_users)
-
-    result = {
-        'age_percentages': age_percentages,
-        'online_percentages': online_percentages
+    output = {
+        'age_percentages': calculate_percentages(age_categories, total_users),
+        'online_percentages': calculate_percentages(online_status, total_users),
     }
 
+    os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
     try:
-        os.makedirs(os.path.dirname(output_file), exist_ok=True)
-        with open(output_file, 'w') as out_file:
-            json.dump(result, out_file, indent=2)
-    except OSError as e:
-        return {"msg": f"Error writing to output file: {e}"}
-    
-    return result
+        with open(output_file_path, 'w') as out_file:
+            json.dump(output, out_file, indent=2)
+    except OSError as error:
+        return {'msg': f'Error writing to output file: {error}'}
+    return output
 
 
 def categorize_age(user: dict, age_categories: dict) -> None:
@@ -56,11 +58,11 @@ def categorize_age(user: dict, age_categories: dict) -> None:
     """
     age = user.get('age', 0)
     category_switch = {
-        age <= 18: '0-18',
-        18 < age <= 25: '18-25',
-        25 < age <= 45: '25-45',
-        45 < age <= 60: '45-60',
-        age > 60: '60+',
+        age <= AGE_THRESHOLD[0]: '0-18',
+        AGE_THRESHOLD[0] < age <= AGE_THRESHOLD[1]: '18-25',
+        AGE_THRESHOLD[1] < age <= AGE_THRESHOLD[2]: '25-45',
+        AGE_THRESHOLD[2] < age <= AGE_THRESHOLD[3]: '45-60',
+        age > AGE_THRESHOLD[3]: '60+',
     }
     age_category = category_switch.get(True, 'Unknown')
     age_categories[age_category] += 1
@@ -77,11 +79,11 @@ def calculate_online_status(user: dict, online_status: dict) -> None:
     days_since_last_login = (datetime.now() - last_login_date).days
 
     status_switch = {
-        days_since_last_login < 2: '<2 days',
-        2 <= days_since_last_login < 7: '1 week',
-        7 <= days_since_last_login < 30: '1 month',
-        30 <= days_since_last_login < 180: '6 months',
-        days_since_last_login >= 180: '>6 months',
+        days_since_last_login < ONLINE_THRESHOLD[0]: '<2 days',
+        ONLINE_THRESHOLD[0] <= days_since_last_login < ONLINE_THRESHOLD[1]: '1 week',
+        ONLINE_THRESHOLD[1] <= days_since_last_login < ONLINE_THRESHOLD[2]: '1 month',
+        ONLINE_THRESHOLD[2] <= days_since_last_login < ONLINE_THRESHOLD[3]: '6 months',
+        days_since_last_login >= ONLINE_THRESHOLD[3]: '>6 months',
     }
     # If the number of days does not match any of the existing keys, the default value is Unknown
     online_status_category = status_switch.get(True, 'Unknown')
@@ -93,9 +95,9 @@ def calculate_percentages(data_dict: dict, total_users: dict) -> dict:
 
     Args:
         data_dict (dict): Dictionary containing the count of users in different categories.
-        total_users (int): Total number of users.
+        total_users (dict): Total number of users.
 
     Returns:
         dict: Dictionary containing the percentage of users in each category.
     """
-    return {key: (count / total_users) * 100 for key, count in data_dict.items()} 
+    return {key: (count / total_users) * 100 for key, count in data_dict.items()}
