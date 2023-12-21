@@ -16,7 +16,7 @@ def get_salary_stats(limit: tuple = None, **departments: dict[str, dict[str, flo
     if limit is not None:
         limit = set(limit)
     for department, employees in departments.items():
-        if limit is not None or department in limit:
+        if limit is None or department in limit:
             salaries.extend(employees.values())
 
     salaries.sort()
