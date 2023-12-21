@@ -1,7 +1,10 @@
 """Calculate the top 3 salaries and their ratio to the total salary."""
 
 
-def get_salary_stats(limit: tuple = None, **departments: dict[str, dict[str, float]]):
+def get_salary_stats(
+    limit: tuple = None,
+    **departments: dict[str, dict[str, float]]
+) -> tuple[list, float]:
     """
     Calculate the top 3 salaries and their ratio to the total salary.
 
@@ -13,11 +16,10 @@ def get_salary_stats(limit: tuple = None, **departments: dict[str, dict[str, flo
         The top 3 salaries and their ratio to the total salary.
     """
     salaries = []
+    if limit is not None:
+        limit = set(limit)
     for department, employees in departments.items():
-        if limit is not None:
-            if department in limit:
-                salaries.extend(employees.values())
-        else:
+        if limit is not None or department in limit:
             salaries.extend(employees.values())
 
     salaries.sort()

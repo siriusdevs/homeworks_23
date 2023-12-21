@@ -1,5 +1,9 @@
 import pytest
+
 import json
+
+import os
+
 from hw2 import process_data
 
 def test_process_data():
