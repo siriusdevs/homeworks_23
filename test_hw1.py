@@ -26,4 +26,3 @@ def test_get_salary_stats_no_salaries():
     """Test get_salary_stats with no salaries."""
     stats = get_salary_stats()
     assert stats == ([], 0)
-
