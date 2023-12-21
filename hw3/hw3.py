@@ -38,6 +38,8 @@ class Product:
 
 
 class Computer(Product):
+    __op_systems = ('windows', 'ubuntu', 'macos')
+
     def __init__(self, name: str, price: int | float, os: str, processor: str) -> None:
         self.os = os
         self.processor = processor
@@ -50,6 +52,9 @@ class Computer(Product):
     @os.setter
     def os(self, new_os: str) -> None:
         self.is_str(new_os)
+        if new_os.lower() not in self.__op_systems:
+            systems = ', '.join(self.__op_systems)
+            raise ValueError(f'Wrong value for OS. Supported: {systems}')
         self._os = new_os
 
     @property
@@ -63,7 +68,7 @@ class Computer(Product):
 
 
 class Monitor(Product):
-    __con_types = ['usb', 'hdmi', 'thunderbolt', 'vga', 'display port', 'dvi']
+    __con_types = ('usb', 'hdmi', 'thunderbolt', 'vga', 'display port', 'dvi')
 
     def __init__(self, name: str, price: int | float, size: int | float, con_type: str) -> None:
         self.size = size
@@ -86,9 +91,9 @@ class Monitor(Product):
     @con_type.setter
     def con_type(self, new_con_type: str) -> None:
         self.is_str(new_con_type)
-        if new_con_type not in self.__con_types:
+        if new_con_type.lower() not in self.__con_types:
             types = ', '.join(self.__con_types)
-            raise ValueError(f'Wrong value for coonection_type. Supported: {types}')
+            raise ValueError(f'Wrong value for connection_type. Supported: {types}')
         self._con_type = new_con_type
 
 
@@ -126,3 +131,6 @@ class Shop:
 
     def get_all_products(self) -> list[Product]:
         return self._product_list
+
+
+pc = Computer('gig', 12, 'WINDOWS', 'AMg')
