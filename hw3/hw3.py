@@ -35,3 +35,28 @@ class Product:
     def price(self, new_price: int | float) -> None:
         self.is_int_or_float(new_price)
         self._price = new_price
+
+
+class Computer(Product):
+    def __init__(self, name: str, price: int | float, os: str, processor: str) -> None:
+        self.os = os
+        self.processor = processor
+        super().__init__(name, price)
+
+    @property
+    def os(self) -> str:
+        return self._os
+
+    @os.setter
+    def os(self, new_os: str) -> None:
+        self.is_str(new_os)
+        self._os = new_os
+
+    @property
+    def processor(self) -> str:
+        return self._processor
+
+    @processor.setter
+    def processor(self, new_processor: str) -> None:
+        self.is_str(new_processor)
+        self._processor = new_processor
