@@ -1,7 +1,7 @@
 name: Проверка
 on: [push]
 jobs:
-  linter:
+  linter for hw1:
     name: Линтер
     runs-on: ubuntu-latest
     steps:
@@ -14,9 +14,13 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install flake8==3.9.0 wemake-python-styleguide==0.15.3 bandit==1.7.2
+    - name: Переход в папку hw1
+      run: cd ./hw1/
     - name: Flake8
       run: flake8 .
-  tests:
+    - name: Выход из папки
+      run: cd ..
+  tests for hw1:
     name: Тесты
     runs-on: ubuntu-latest
     steps:
@@ -29,6 +33,30 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pytest==6.2.5
+    - name: Переход в папку hw1
+      run: cd ./hw1/
     - name: Pytest
       run: pytest
+    - name: Выход из папки Hw1
+      run: cd ..
+  tests for hw2:
+    name: Тесты
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Установка Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10.6
+    - name: Установка зависимостей
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest==6.2.5
+    - name: Переход в папку hw1
+      run: cd ./hw2/
+    - name: Pytest
+      run: pytest
+    - name: Выход из папки Hw1
+      run: cd ..
+    
 
