@@ -1,7 +1,11 @@
 """Class architecture for managing a computer hardware store."""
 
 
-class Product:
+from abc import ABC, abstractmethod
+
+
+class Product(ABC):
+    @abstractmethod
     def __init__(self, name: str, price: int | float) -> None:
         self.name = name
         self.price = price
