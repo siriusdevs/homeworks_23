@@ -11,7 +11,8 @@ def company_salary_stats(
 
     Args:
         exclude_departments: optional argument to exclude specific departments from the statistics.
-        departments: keyword arguments where department names are keys and values are dictionaries with employee names (str) as keys and salaries (float) as values.
+        departments: keyword arguments where department names are keys and values are dictionaries
+        with employee names (str) as keys and salaries (float) as values.
 
     Returns:
         dictionary: containing the average, maximum, and median salaries in the company.
@@ -27,8 +28,4 @@ def company_salary_stats(
     max_salary = round(max(all_salaries), 2) if all_salaries else 0
     median_salary = round(median(all_salaries), 2) if all_salaries else 0
 
-    return {
-        'average_salary': average_salary,
-        'max_salary': max_salary,
-        'median_salary': median_salary
-    },
+    return {'average_salary': average_salary, 'max_salary': max_salary, 'median_salary': median_salary}
