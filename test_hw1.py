@@ -23,3 +23,4 @@ def test_get_salary_stats_with_limit():
 def test_get_salary_stats_no_salaries():
     stats = get_salary_stats()
     assert stats == ([], 0)
+

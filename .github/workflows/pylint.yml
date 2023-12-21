@@ -4,9 +4,6 @@ jobs:
   linter:
     name: Линтер
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        homework: ['hw1.py test_hw1.py', 'hw3.py test_hw3.py']
     steps:
     - uses: actions/checkout@v2
     - name: Установка Python
@@ -22,9 +19,6 @@ jobs:
   tests:
     name: Тесты
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        homework: ['test_hw1.py', 'test_hw3.py']
     steps:
     - uses: actions/checkout@v2
     - name: Установка Python
@@ -38,3 +32,4 @@ jobs:
         pip install numpy
     - name: Pytest
       run: pytest
+
