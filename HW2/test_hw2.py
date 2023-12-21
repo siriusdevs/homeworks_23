@@ -1,9 +1,8 @@
 """Test module for the functions defined in hw2.py."""
-
 import json
 import os
 
-from HW2.hw2 import calculate_email_host, calculate_registration_year, process_data
+from hw2 import calculate_email_host, calculate_registration_year, process_data
 
 user_data = {
     'user': {
@@ -37,7 +36,7 @@ def test_calculate_registration_year():
 
 def test_hw2():
     """Test the process data."""
-    process_data('data_hw2.json', 'output_data.json')
+    process_data('./HW2/data_hw2.json', 'output_data.json')
     with open('output_data.json', 'r') as output_file:
         output_data = json.load(output_file)
     assert output_data == {
