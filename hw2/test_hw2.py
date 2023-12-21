@@ -7,17 +7,16 @@ from hw2 import process_data
 
 age_percentages = 'age_percentages'
 online_percentages = 'online_percentages'
-input_file_path = '../data_hw2.json'
-output_file_path = './output_data.json'
+input_file_path = '/hw2/data_hw2.json'
+output_file_path = '/hw2/output_data.json'
 age_mapping = {'0-18': 50.0, '18-25': 0, '25-45': 50.0, '45-60': 0, '60+': 0}
 online_mapping = {'<2 days': 0, '1 week': 0, '1 month': 0, '6 months': 50.0, '>6 months': 50.0}
 
 
 def test_process_data():
     """Test the process_data function."""
-    a = process_data(input_file_path, output_file_path)
+    process_data(input_file_path, output_file_path)
 
-    print(a)
     assert os.path.exists(output_file_path)
 
     with open(output_file_path, 'r') as output_file:
