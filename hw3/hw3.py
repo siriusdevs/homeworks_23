@@ -81,6 +81,9 @@ class Product(ABC):
 
         Args:
             new_price: int | float - new price for the product.
+
+        Raises:
+            ValueError: if price is negative.
         """
         self.is_int_or_float(new_price)
         if new_price < 0:
