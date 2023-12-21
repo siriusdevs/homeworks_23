@@ -1,7 +1,6 @@
 """Homework about processing user data statistics."""
 
 import json
-import os
 from datetime import datetime
 
 AGE_CATEGORIES = ('0-18', '18-25', '25-45', '45-60', '60+')
