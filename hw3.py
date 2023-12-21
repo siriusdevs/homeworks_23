@@ -185,7 +185,7 @@ class Group:
     """
 
     def __init__(self, group_number):
-        """Initialize a Group whis given a group name.
+        """Initialize a Group whis given the group name.
 
         Args:
             group_number (str): The name of the group.

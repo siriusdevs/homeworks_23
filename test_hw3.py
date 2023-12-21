@@ -1,5 +1,6 @@
 from hw3 import Teacher, Student, Course, Group, EducationalInstitution
 
+
 def test_teacher_create_course():
     teacher = Teacher("Иванов")
     course = teacher.create_course("Программирование")
