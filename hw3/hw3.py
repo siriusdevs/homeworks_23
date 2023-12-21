@@ -83,6 +83,8 @@ class Product(ABC):
             new_price: int | float - new price for the product.
         """
         self.is_int_or_float(new_price)
+        if new_price < 0:
+            raise ValueError('Price cannot be less than zero!')
         self._price = new_price
 
 
