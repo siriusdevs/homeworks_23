@@ -53,7 +53,7 @@ def _add_list_property(list_name: str, class_or_tuple: type | tuple[type, ...]) 
     return wrapper
 
 
-def _add_adding_removeing_method(
+def _add_list_method(
     list_name: str,
     method_name: str,
     class_or_tuple: type | tuple[type, ...],
@@ -92,7 +92,7 @@ class Product:
         self.name, self.price = name, price
 
 
-@_add_adding_removeing_method(PRODUCTS, PRODUCT, Product)
+@_add_list_method(PRODUCTS, PRODUCT, Product)
 @_add_list_property(PRODUCTS, Product)
 @_add_property(NAME, str)
 class Dish:
@@ -116,9 +116,9 @@ class Dish:
         self.name, self.products = name, products
 
 
-@_add_adding_removeing_method(PRODUCTS, PRODUCT, Product)
+@_add_list_method(PRODUCTS, PRODUCT, Product)
 @_add_list_property(PRODUCTS, Product)
-@_add_adding_removeing_method(DISHES, DISH, Dish)
+@_add_list_method(DISHES, DISH, Dish)
 @_add_list_property(DISHES, Dish)
 @_add_property(NAME, str)
 class Restaurant:
