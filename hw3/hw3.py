@@ -39,6 +39,7 @@ class Product:
 
 class Computer(Product):
     __op_systems = ('windows', 'ubuntu', 'macos')
+    __processor_types = ('amd', 'intel')
 
     def __init__(self, name: str, price: int | float, os: str, processor: str) -> None:
         self.os = os
@@ -64,6 +65,9 @@ class Computer(Product):
     @processor.setter
     def processor(self, new_processor: str) -> None:
         self.is_str(new_processor)
+        if not new_processor.lower().startswith(self.__processor_types):
+            types = ' or '.join(self.__processor_types)
+            raise ValueError(f'Processor name should starts with {types}')
         self._processor = new_processor
 
 
