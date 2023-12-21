@@ -7,119 +7,139 @@ import pytest
 
 from hw1 import get_departments_rating
 
-test_data = (
+DEPARTMENT_A = 'Department A'
+DEPARTMENT_B = 'Department B'
+DEPARTMENT_C = 'Department C'
+DEPARTMENT_D = 'Department D'
+
+EMPLOYEE_A = 'Employee A'
+EMPLOYEE_B = 'Employee B'
+EMPLOYEE_C = 'Employee C'
+EMPLOYEE_D = 'Employee D'
+EMPLOYEE_E = 'Employee E'
+EMPLOYEE_F = 'Employee F'
+EMPLOYEE_G = 'Employee G'
+EMPLOYEE_H = 'Employee H'
+
+SALARY_A = 90000
+SALARY_B = 100000
+SALARY_C = 500000
+SALARY_D = 150000
+SALARY_F = -50000
+
+VALID_TEST_DATA = (
     ({}, None, ([], [])),
     ({}, (), ([], [])),
     (
         {},
         (
-            'Отдел финансов',
-            'Отдел разработки',
-            'Отдел маркетинга и продаж',
+            DEPARTMENT_A,
+            DEPARTMENT_B,
+            DEPARTMENT_C,
         ),
         ([], []),
     ),
     (
         {
-            'Отдел финансов': {
-                'Ноунеймов': 90000,
-                'Тестов': 100000,
+            DEPARTMENT_A: {
+                EMPLOYEE_A: SALARY_A,
+                EMPLOYEE_B: SALARY_B,
             },
-            'Отдел разработки': {
-                'Данилов': 500000,
-                'Иноземцев': 500000,
-                'Ромоданов': 500000,
-                'Татарников': 500000,
-                'Тарасов': 500000,
+            DEPARTMENT_B: {
+                EMPLOYEE_C: SALARY_C,
+                EMPLOYEE_D: SALARY_C,
+                EMPLOYEE_E: SALARY_C,
+                EMPLOYEE_F: SALARY_C,
+                EMPLOYEE_G: SALARY_C,
             },
-            'Отдел маркетинга и продаж': {
-                'Челикович': 150000,
+            DEPARTMENT_C: {
+                EMPLOYEE_H: SALARY_D,
             },
         },
         None,
         (
             [
-                'Отдел разработки',
-                'Отдел маркетинга и продаж',
-                'Отдел финансов',
+                DEPARTMENT_B,
+                DEPARTMENT_C,
+                DEPARTMENT_A,
             ],
             [
-                'Отдел финансов',
-                'Отдел маркетинга и продаж',
-                'Отдел разработки',
-            ],
-        ),
-    ),
-    (
-        {
-            'Отдел финансов': {
-                'Ноунеймов': 90000,
-                'Тестов': 100000,
-            },
-            'Отдел разработки': {
-                'Данилов': 500000,
-                'Иноземцев': 500000,
-                'Ромоданов': 500000,
-                'Татарников': 500000,
-                'Тарасов': 500000,
-            },
-            'Отдел маркетинга и продаж': {
-                'Челикович': 150000,
-            },
-        },
-        (
-            'Отдел финансов',
-            'Отдел маркетинга и продаж',
-        ),
-        (
-            [
-                'Отдел маркетинга и продаж',
-                'Отдел финансов',
-            ],
-            [
-                'Отдел финансов',
-                'Отдел маркетинга и продаж',
+                DEPARTMENT_A,
+                DEPARTMENT_C,
+                DEPARTMENT_B,
             ],
         ),
     ),
     (
         {
-            'Отдел финансов': {
-                'Ноунеймов': 90000,
-                'Тестов': 100000,
+            DEPARTMENT_A: {
+                EMPLOYEE_A: SALARY_A,
+                EMPLOYEE_B: SALARY_B,
             },
-            'Отдел разработки': {
-                'Данилов': 500000,
-                'Иноземцев': 500000,
-                'Ромоданов': 500000,
-                'Татарников': 500000,
-                'Тарасов': 500000,
+            DEPARTMENT_B: {
+                EMPLOYEE_C: SALARY_C,
+                EMPLOYEE_D: SALARY_C,
+                EMPLOYEE_E: SALARY_C,
+                EMPLOYEE_F: SALARY_C,
+                EMPLOYEE_G: SALARY_C,
             },
-            'Отдел маркетинга и продаж': {
-                'Челикович': 150000,
+            DEPARTMENT_C: {
+                EMPLOYEE_H: SALARY_D,
             },
-            'Отдел тестирования': {},
         },
         (
-            'Отдел финансов',
-            'Отдел маркетинга и продаж',
-            'Отдел тестирования',
+            DEPARTMENT_A,
+            DEPARTMENT_C,
         ),
         (
             [
-                'Отдел маркетинга и продаж',
-                'Отдел финансов',
+                DEPARTMENT_C,
+                DEPARTMENT_A,
             ],
             [
-                'Отдел финансов',
-                'Отдел маркетинга и продаж',
+                DEPARTMENT_A,
+                DEPARTMENT_C,
+            ],
+        ),
+    ),
+    (
+        {
+            DEPARTMENT_A: {
+                EMPLOYEE_A: SALARY_A,
+                EMPLOYEE_B: SALARY_B,
+            },
+            DEPARTMENT_B: {
+                EMPLOYEE_C: SALARY_C,
+                EMPLOYEE_D: SALARY_C,
+                EMPLOYEE_E: SALARY_C,
+                EMPLOYEE_F: SALARY_C,
+                EMPLOYEE_G: SALARY_C,
+            },
+            DEPARTMENT_C: {
+                EMPLOYEE_H: SALARY_D,
+            },
+            DEPARTMENT_D: {},
+        },
+        (
+            DEPARTMENT_A,
+            DEPARTMENT_C,
+            DEPARTMENT_D,
+        ),
+        (
+            [
+                DEPARTMENT_C,
+                DEPARTMENT_A,
+            ],
+            [
+                DEPARTMENT_A,
+                DEPARTMENT_C,
             ],
         ),
     ),
 )
 
 
-@pytest.mark.parametrize('departments, include_deps, expected', test_data)
+@pytest.mark.parametrize('departments, include_deps, expected', VALID_TEST_DATA)
 def test_get_stats(
     departments: dict[str, dict[str, float]],
     include_deps: Optional[tuple[str]],
@@ -135,10 +155,19 @@ def test_get_stats(
     assert get_departments_rating(departments, include_deps) == expected
 
 
-invalid_test_data = ({'Отдел разработки': {'Ноунеймов': -50000}}, None)
+invalid_test_data = (
+    (
+        {
+            DEPARTMENT_A: {
+                EMPLOYEE_A: SALARY_F,
+            },
+        },
+    ),
+)
 
 
 @pytest.mark.xfail(raises=ValueError)
 def test_invalid_test_data():
     """Check error handling."""
-    get_departments_rating(*invalid_test_data)
+    for invalid_test_data_elem in invalid_test_data:
+        get_departments_rating(*invalid_test_data_elem)
