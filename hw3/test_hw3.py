@@ -5,54 +5,75 @@ import pytest
 
 from hw3 import Product, Computer, Monitor, Shop
 
-PRODUCT_DATA = (
-    (
-        'cheese',
-        230,
-    ),
-)
+DEFAULT_NAME = 'cheese'
+DEFAULT_PRICE = 300
+NEGATIVE_PRICE = -1
+DEFAULT_PROC = 'intel'
+DEFAULT_OS = 'ubuntu'
+DEFAULT_SIZE = 25
+DEFAULT_CON = 'usb'
 COMPUTER_INCORRECT_TYPES_DATA = (
     (
-        123, 123, 'windows', 'intel'
+        123, 123, 'windows', 'intel',
     ),
     (
-        'bell', 'three hundred', 'windows', 'intel'
+        'bell', 'three hundred', 'windows', 'intel',
     ),
     (
-        'bell', 300, 13, 'intel'
+        'bell', 300, 13, 'intel',
     ),
     (
-        'bell', 300, 'windows', 3
+        'bell', 300, 'windows', 3,
     ),
 )
 MONITOR_INCORRECT_TYPES_DATA = (
     (
-        'atas', 100, '4d', 'hdmi'
+        'atas', 100, '4d', 'hdmi',
     ),
     (
-        'atas', 100, 23.6, 4
+        'atas', 100, 23.6, 4,
     ),
 )
 SHOP_INCORRECT_PRODUCT_DATA = (Monitor('asus', 4, 21, 'usb'), 5)
 WRONG_OS_NAME_DATA = 'winds'
 WRONG_PROC_NAME_DATA = 'amf1100000'
 WRONG_CON_NAME_DATA = 'ussr'
+COMPUTER_TEST_DATA = (
+    (
+        'abcd', 300, 'WiNdOwS', 'INTELi7',
+    ),
+    (
+        'fulmultigamergbmega', 299.99, 'macos', 'intel',
+    ),
+    (
+        'yyyaaaaa', 0, 'UBUNTu', 'amd ryzen 9', 
+    ),
+)
 
+
+@pytest.mark.parametrize('name, price, os, processor', COMPUTER_TEST_DATA)
+def test_computer(name: str, price: int | float, os: str, processor: str):
+    assert Computer(name, price, os, processor)
+
+
+@pytest.mark.xfail(reason=ValueError)
+def test_negative_price():
+    assert Computer(DEFAULT_NAME, NEGATIVE_PRICE, DEFAULT_OS, DEFAULT_PROC)
 
 
 @pytest.mark.xfail(reason=ValueError)
 def test_os_wrong_name():
-    assert Computer('gigachad', 300, WRONG_OS_NAME_DATA, 'intel i7')
+    assert Computer(DEFAULT_NAME, DEFAULT_PRICE, WRONG_OS_NAME_DATA, DEFAULT_PROC)
 
 
 @pytest.mark.xfail(reason=ValueError)
 def test_proc_wrong_name():
-    assert Computer('gigachad', 300, 'Windows', WRONG_PROC_NAME_DATA)
+    assert Computer(DEFAULT_NAME, DEFAULT_PRICE, DEFAULT_OS, WRONG_PROC_NAME_DATA)
 
 
 @pytest.mark.xfail(reason=ValueError)
 def test_con_wrong_name():
-    assert Monitor('samsam', 100, 25, WRONG_CON_NAME_DATA)
+    assert Monitor(DEFAULT_NAME, DEFAULT_PRICE, DEFAULT_SIZE, WRONG_CON_NAME_DATA)
 
 
 @pytest.mark.xfail(reason=TypeError)
@@ -92,4 +113,4 @@ def test_computer_wrong_processor():
 
 @pytest.mark.xfail(reason=TypeError)
 def test_create_abstract_product(name: str, price: int):
-    assert Product(*PRODUCT_DATA[0])
+    assert Product(DEFAULT_NAME, DEFAULT_PRICE)
