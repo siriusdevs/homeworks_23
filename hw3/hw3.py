@@ -85,3 +85,39 @@ class Monitor(Product):
     def con_type(self, new_con_type: str) -> None:
         self.is_str(new_con_type)
         self._con_type = new_con_type
+
+
+class Shop:
+    def __init__(self, product_list: tuple[Product] | list[Product]) -> None:
+        self.product_list = product_list
+
+    def is_product(self, product: Product) -> None:
+        if not isinstance(product, Product):
+            product_type = type(product).__name__
+            err_message = f'{product} should be Product not {product_type}'
+            raise TypeError(err_message)
+
+    @property
+    def product_list(self) -> list[Product]:
+        return self._product_list
+
+    @product_list.setter
+    def product_list(self, new_product_list: tuple[Product] | list[Product]) -> None:
+        if not isinstance(new_product_list, (tuple, list)):
+            list_type = type(new_product_list).__name__
+            err_message = f'{new_product_list} should be tuple or list not {list_type}'
+            raise TypeError(err_message)
+        for product in new_product_list:
+            self.is_product(product)
+        self._product_list = list(new_product_list)
+
+    def add_product(self, product: Product) -> None:
+        self.is_product(product)
+        self._product_list.append(product)
+
+    def remove_product(self, product: Product) -> None:
+        self.is_product(product)
+        self._product_list.remove(product)
+
+    def get_all_products(self) -> list[Product]:
+        return self._product_list
