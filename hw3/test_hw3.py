@@ -20,7 +20,7 @@ def _get_cereal(): return Product('cereal', 5)
 def test_dish_property_error() -> None:
     """Test dish property for an error call."""
     numbers = [1, 2, 3]
-    porridge = Dish('porrige', [])
+    porridge = Dish('porridge', [])
     with RAISES_TYPE_ERROR:
         porridge.products = _get_apple()
     with RAISES_TYPE_ERROR:
@@ -41,7 +41,7 @@ def test_dish_method() -> None:
 
 def test_dish_method_error() -> None:
     """Test dish add_product and remove_product method for an error call."""
-    porridge = Dish('porrige', [])
+    porridge = Dish('porridge', [])
     with RAISES_TYPE_ERROR:
         porridge.add_product('')
     with RAISES_TYPE_VALUE:
@@ -65,7 +65,7 @@ def test_restaurant_property_error() -> None:
         restaurant.name = 5
 
 
-def test_restorant_methods_error() -> None:
+def test_restaurant_methods_error() -> None:
     """Test dish add_product and remove_product method for an error call."""
     restaurant = Restaurant('', [], [])
     with RAISES_TYPE_ERROR:
@@ -78,7 +78,7 @@ def test_restorant_methods_error() -> None:
         restaurant.remove_product('')
 
 
-def test_restorant_methods() -> None:
+def test_restaurant_methods() -> None:
     """Test add_product, add_dish, remove_product, remove_dish for correct working."""
     apple, banana, cereal = _get_apple(), _get_banana(), _get_cereal()
     apple_juice = Dish('apple juice', [apple])
@@ -95,7 +95,7 @@ def test_restorant_methods() -> None:
 def test_order_dish() -> None:
     """Test order_dish method."""
     banana, apple = _get_banana(), _get_apple()
-    banana_porridge = Dish('banan_porridge', [banana])
+    banana_porridge = Dish('banana_porridge', [banana])
     restaurant = Restaurant('', [banana_porridge], [banana])
     restaurant.add_product(apple)
     order_dish = restaurant.order_dish(banana_porridge.name)
