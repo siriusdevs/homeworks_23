@@ -5,7 +5,6 @@ This module contains tests for the classes and functions defined in hw3.
 """
 
 import pytest
-
 from hw3 import Course, Person, Student, Teacher, check_type
 
 AGE30 = 30
