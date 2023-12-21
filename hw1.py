@@ -2,21 +2,20 @@
 
 
 def top3_salaries(
-    *args,
+    *departments,
     including: tuple[str, ...] = None,
 ) -> tuple[tuple[str, float], tuple[str, float]]:
     """Find 3 most- and least-paid departments in a given tuple by average value.
 
     Args:
         departments: a tuple with departments names their values.
-        excluding: tuple with names of departments to be excluded from stats, defaults to None.
+        including: tuple with names of departments to be excluded from stats, defaults to None.
 
     Returns:
         stats: tuple of top 3 most and least paid departments with their average salaries.
     """
     avg_salaries = {}
-    for dept in args:
-        department, workers = dept
+    for department, workers in departments:
         if including is None or department in including:
             salaries = workers.values()
             avg_salary = round(sum(salaries) / len(salaries), 2) if salaries else 0
