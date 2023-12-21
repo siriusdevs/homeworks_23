@@ -2,8 +2,11 @@ name: Проверка
 on: [push]
 jobs:
   linter:
-    name: Линтер
+    name: Линтер для домашки
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        homework: ['hw1.py test_hw1.py', 'hw2.py test_hw2.py', 'hw3.py test_hw3.py']
     steps:
     - uses: actions/checkout@v2
     - name: Установка Python
@@ -15,10 +18,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8==3.9.0 wemake-python-styleguide==0.15.3 bandit==1.7.2
     - name: Flake8
-      run: flake8 .
+      run: flake8 ${{ matrix.homework }} && flake8 ${{ matrix.homework }}
   tests:
     name: Тесты
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        homework: ['hw1.py test_hw1.py', 'hw2.py test_hw2.py', 'hw3.py test_hw3.py']
     steps:
     - uses: actions/checkout@v2
     - name: Установка Python
@@ -31,5 +37,4 @@ jobs:
         pip install pytest==6.2.5
         pip install numpy
     - name: Pytest
-      run: pytest
-
+      run: pytest ${{ matrix.homework }}
