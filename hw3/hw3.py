@@ -260,7 +260,7 @@ class Shop:
             new_product_list: tuple | list - new list of products for the store.
 
         Raises:
-            TypeError: if the input is not a tuple or list, or if any item in the list is not a Product.
+            TypeError: if the input is not a tuple or list, or if any item inside is not a Product.
         """
         if not isinstance(new_product_list, (tuple, list)):
             list_type = type(new_product_list).__name__
@@ -288,10 +288,11 @@ class Shop:
         self.is_product(product)
         self._product_list.remove(product)
 
-    def get_all_products(self) -> list[Product]:
-        """Get a list of all products available in the store.
+    def get_all_products(self) -> str:
+        """Get names of all products available in the store.
 
         Returns:
-            list[Product]: list of products available in the store.
+            str: names of all products available in the store.
         """
-        return self._product_list
+        products_string = ', '.join([product.name for product in self._product_list])
+        return f'Products are: {products_string}'
