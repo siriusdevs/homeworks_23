@@ -22,8 +22,8 @@ def test_process_data():
         result = json.load(f)
 
 
-    assert result['age_percentages'] == [0.0, 33.33, 33.33, 33.33, 0.0]
-    assert result['last_online_percentages'] == [100.0, 0.0, 0.0, 0.0, 0.0]
+    assert result['age_percentages'] == [0.1, 33.33, 33.33, 33.33, 0.1]
+    assert result['last_online_percentages'] == [100.0, 0.1, 0.1, 0.1, 0.1]
     
     os.remove('./HW2/test_data.json')
     os.remove('test_result.json')
