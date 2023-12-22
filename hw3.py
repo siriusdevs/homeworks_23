@@ -388,18 +388,3 @@ class Airline:
         if ticket not in self._tickets:
             raise ValueError(f'Ticket {ticket} was not found among sold tickets')
         self._tickets.remove(ticket)
-
-PASSENGER_DEFAULT = Passenger('Alexey', '123456')
-FLIGHT_DEFAULT = Flight('AB1234', 'Moscow', 'Ekaterinburg')
-TICKET_DEFAULT = Ticket(FLIGHT_DEFAULT, PASSENGER_DEFAULT, 'ID0001')
-AIRLINE_DEFAULT = Airline('SpaceX', [FLIGHT_DEFAULT], [PASSENGER_DEFAULT], [TICKET_DEFAULT])
-
-PASSENGER_TWO = Passenger('Boris', '987654')
-FLIGHT_TWO = Flight('CD5678', 'Sochi', 'Irkutsk')
-TICKET_TWO = Ticket(FLIGHT_TWO, PASSENGER_TWO, 'ID0002')
-AIRLINE_TWO = Airline('CosmosY', [FLIGHT_TWO], [PASSENGER_TWO], [TICKET_TWO])
-
-airline = AIRLINE_DEFAULT
-print(airline.flights)
-airline.remove_flight(FLIGHT_DEFAULT)
-print(airline.flights)
