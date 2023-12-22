@@ -8,7 +8,7 @@ def calculate_department_statistics(
     """Calculate department statistics.
 
     Args:
-        *departments (tuple[str, dict]): Tuple of department name and employees dictionary.
+        *departments (tuple[str, dict]): Tuple of department name and employees dictionary.*
         excluded_departments (list[str], optional): Departments to be excluded. Defaults to None.
 
     Returns:
