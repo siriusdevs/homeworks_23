@@ -212,8 +212,4 @@ def test_cancel_ticket():
     assert airline.passengers == []
 
     with pytest.raises(ValueError):
-<<<<<<< HEAD
         airline.cancel_ticket(TICKET_TWO)
-=======
-        airline.cancel_ticket(TICKET_TWO)
->>>>>>> c0ad81303cfddb3be3213c1a854fa8eba9ba3b45

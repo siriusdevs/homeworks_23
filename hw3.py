@@ -7,7 +7,7 @@ def check(new_value: Any, class_: type[Any]):
 
     Args:
         new_value (Any): New value of an object.
-        classes (type[Any]): Class to compare with.
+        class_ (type[Any]): Class to compare with.
 
     Raises:
         TypeError: When new value of an object doesn't match with given class.
@@ -135,7 +135,7 @@ class Flight:
         Returns:
             str: Where does the flight arrive at.
         """
-        return self._from_airport
+        return self._to_airport
 
     @to_airport.setter
     def to_airport(self, new_airport: str) -> None:
@@ -240,6 +240,25 @@ class Airline:
         self.flights = flights
         self.passengers = passengers
         self.tickets = tickets
+
+    @property
+    def title(self) -> str:
+        """Title of the Airline.
+
+        Returns:
+            str: Name of the aviacompany.
+        """
+        return self._title
+
+    @title.setter
+    def title(self, title: str):
+        """Set new title of the Airline.
+
+        Args:
+            title (str): New Airline's name.
+        """
+        check(title, str)
+        self._title = title
 
     @property
     def flights(self) -> list[Flight]:
@@ -368,8 +387,19 @@ class Airline:
         """
         if ticket not in self._tickets:
             raise ValueError(f'Ticket {ticket} was not found among sold tickets')
-<<<<<<< HEAD
         self._tickets.remove(ticket)
-=======
-        self._tickets.remove(ticket)
->>>>>>> c0ad81303cfddb3be3213c1a854fa8eba9ba3b45
+
+PASSENGER_DEFAULT = Passenger('Alexey', '123456')
+FLIGHT_DEFAULT = Flight('AB1234', 'Moscow', 'Ekaterinburg')
+TICKET_DEFAULT = Ticket(FLIGHT_DEFAULT, PASSENGER_DEFAULT, 'ID0001')
+AIRLINE_DEFAULT = Airline('SpaceX', [FLIGHT_DEFAULT], [PASSENGER_DEFAULT], [TICKET_DEFAULT])
+
+PASSENGER_TWO = Passenger('Boris', '987654')
+FLIGHT_TWO = Flight('CD5678', 'Sochi', 'Irkutsk')
+TICKET_TWO = Ticket(FLIGHT_TWO, PASSENGER_TWO, 'ID0002')
+AIRLINE_TWO = Airline('CosmosY', [FLIGHT_TWO], [PASSENGER_TWO], [TICKET_TWO])
+
+airline = AIRLINE_DEFAULT
+print(airline.flights)
+airline.remove_flight(FLIGHT_DEFAULT)
+print(airline.flights)
