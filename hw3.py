@@ -368,8 +368,4 @@ class Airline:
         """
         if ticket not in self._tickets:
             raise ValueError(f'Ticket {ticket} was not found among sold tickets')
-<<<<<<< HEAD
         self._tickets.remove(ticket)
-=======
-        self._tickets.remove(ticket)
->>>>>>> c0ad81303cfddb3be3213c1a854fa8eba9ba3b45
