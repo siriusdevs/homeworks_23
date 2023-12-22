@@ -33,6 +33,8 @@ def get_json_data(
     try:
         with open(input_path) as json_file:
             json_data = json.load(json_file)
+    except FileNotFoundError:
+        raise ValueError(f'Файл {input_path} не существует')
     except json.decoder.JSONDecodeError:
         raise ValueError(f'Передан пустой файл {input_path}')
 
