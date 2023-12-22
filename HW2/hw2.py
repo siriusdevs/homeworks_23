@@ -2,6 +2,22 @@
 
 import json
 import os
+from pathlib import Path
+
+
+def write_file(file_path: str, writable_data: str):
+    """
+    Write errors to output file.
+
+    Args:
+        file_path (str): The path to the output file.
+        writable_data (str): Writable data.
+    """
+    path = Path(file_path)
+    if not path.exists():
+        os.makedirs(path.parent)
+    with open(file_path, 'w') as output_file:
+        output_file.write(writable_data)
 
 
 def process_data(input_file_path: str, output_file_path: str):
@@ -12,19 +28,23 @@ def process_data(input_file_path: str, output_file_path: str):
         input_file_path (str): The path to the input file path.
         output_file_path (str): The path to the output file path.
 
-    Returns:
-        0 - all good work
-        'Input file not found!' - input_file_path  not found
-        'File is not json' - input_file_path is not a valid json file
-        'No write permission' - output_file_path is not writable
+    Raises:
+        FileNotFoundError: If input file not found.
+        ValueError: If input file is incorrect.
     """
     try:
         with open(input_file_path, 'r') as input_file:
             input_data = json.load(input_file)
     except FileNotFoundError:
-        return 'Input file not found!'
+        write_file(output_file_path, 'Input file not found!')
+        raise FileNotFoundError(f'Input file {input_file_path} not found!')
     except json.JSONDecodeError:
-        return 'File is not json'
+        write_file(output_file_path, 'File is not json!')
+        raise ValueError(f'File {input_file_path} is not json')
+
+    if not input_data:
+        write_file(output_file_path, 'Received empty data')
+        raise ValueError('Received empty data')
 
     email_host_percentages = calculate_email_host(input_data)
     registration_year_percentages = calculate_registration_year(input_data)
@@ -35,35 +55,31 @@ def process_data(input_file_path: str, output_file_path: str):
     }
     if not os.path.exists(os.path.dirname(output_file_path)):
         os.makedirs(os.path.dirname(output_file_path))
-    try:
-        with open(output_file_path, 'w') as output_file:
-            json.dump(percentages, output_file, indent=4)
-    except PermissionError:
-        return 'No write permission'
+    with open(output_file_path, 'w') as output_file:
+        json.dump(percentages, output_file, indent=4)
 
 
-def calculate_email_host(data_dict: dict) -> dict:
+def calculate_email_host(clients_data: dict) -> dict:
     """
     Calculate percentage of usage of each mail host in client mails.
 
     Args:
-        data_dict (dict): The value to check.
+        clients_data (dict): The value to check.
 
     Returns:
         dict: percentage of usage of each mail host in client mails.
-
-    Raises:
-        ValueError: if received empty data: emails.
     """
     email_hosts = {}
-    total_emails = len(data_dict)
-    if total_emails == 0:
-        raise ValueError('Received empty data: emails')
-    for client in data_dict.keys():
-        email_domain = data_dict[client].get('email', 'default@defaultEmailHost').split('@')[1]
-        email_hosts[email_domain] = email_hosts.get(email_domain, 0) + 1
+    for client_data in clients_data.values():
+        if 'email' not in client_data:
+            continue
+        email_host = client_data['email'].split('@')[1]
+        if email_host not in email_hosts:
+            email_hosts[email_host] = 0
+        email_hosts[email_host] += 1
+
     return {
-        host: (count / total_emails) * 100 for host, count in email_hosts.items()
+        host: (count / len(clients_data)) * 100 for host, count in email_hosts.items()
     }
 
 
@@ -76,23 +92,16 @@ def calculate_registration_year(data_dict: dict) -> dict:
 
     Returns:
         dict: percentage of user registrations by year.
-
-    Raises:
-        ValueError: if received empty data: users.
     """
     registration_years = {}
-    total_users = len(data_dict)
-    if total_users == 0:
-        raise ValueError('Received empty data: users')
-    for client in data_dict.keys():
-        registration_year = data_dict[client].get('registered', '2000-01-01').split('-')[0]
-        registration_years[registration_year] = registration_years.get(registration_year, 0) + 1
+    for client_data in data_dict.values():
+        if 'registered' not in client_data:
+            continue
+        registration_year = client_data['registered'].split('-')[0]
+        if registration_year not in registration_years:
+            registration_years[registration_year] = 0
+        registration_years[registration_year] += 1
 
     return {
-        year: (count / total_users) * 100 for year, count in registration_years.items()
+        year: (count / len(data_dict)) * 100 for year, count in registration_years.items()
     }
-
-
-# Пример использования:
-if __name__ == '__main__':
-    process_data('./HW2/input/data_hw2.json', './aaaa/aaaaa/aaaa/a.json')
