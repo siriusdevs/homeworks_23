@@ -29,8 +29,6 @@ def get_json_data(
     Raises:
         ValueError: If there is an unsuitable file in the input data.
     """
-    if not os.path.exists(input_path):
-        raise ValueError(f'Файл {input_path} не существует')
 
     try:
         with open(input_path) as json_file:
