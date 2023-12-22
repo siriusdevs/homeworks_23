@@ -53,13 +53,12 @@ def calculate_email_host(data_dict: dict) -> dict:
         dict: percentage of usage of each mail host in client mails.
     """
     email_hosts = {}
-    total_emails = 0
-
+    total_emails = len(data_dict)
+    if total_emails == 0:
+        raise ValueError('Received empty data: emails')
     for client in data_dict.keys():
         email_domain = data_dict[client].get('email', 'default@defaultEmailHost').split('@')[1]
         email_hosts[email_domain] = email_hosts.get(email_domain, 0) + 1
-        total_emails += 1
-
     return {
         host: (count / total_emails) * 100 for host, count in email_hosts.items()
     }
@@ -76,8 +75,9 @@ def calculate_registration_year(data_dict: dict) -> dict:
         dict: percentage of user registrations by year.
     """
     registration_years = {}
-    total_users = len(data_dict.keys())
-
+    total_users = len(data_dict)
+    if total_users == 0:
+        raise ValueError('Received empty data: users')
     for client in data_dict.keys():
         registration_year = data_dict[client].get('registered', '2000-01-01').split('-')[0]
         registration_years[registration_year] = registration_years.get(registration_year, 0) + 1
