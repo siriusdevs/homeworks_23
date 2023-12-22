@@ -25,5 +25,11 @@ data = [
 
 @pytest.mark.parametrize("departments, expected_result", data)
 def test_top3(departments, expected_result):
+    """Test for funck top3.
+
+    Args:
+        departments (tuple): The departments for the test data.
+        expected_result (list): The test date result of the funck.
+    """    
     result = top3(*departments)
     assert result == expected_result
