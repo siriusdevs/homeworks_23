@@ -64,4 +64,4 @@ jobs:
         pip install numpy
     - name: Pytest
       run: |
-         pytest hw3
+         pytest hw3.py
