@@ -51,6 +51,9 @@ def calculate_email_host(data_dict: dict) -> dict:
 
     Returns:
         dict: percentage of usage of each mail host in client mails.
+
+    Raises:
+        ValueError: if received empty data: emails.
     """
     email_hosts = {}
     total_emails = len(data_dict)
@@ -73,6 +76,9 @@ def calculate_registration_year(data_dict: dict) -> dict:
 
     Returns:
         dict: percentage of user registrations by year.
+
+    Raises:
+        ValueError: if received empty data: users.
     """
     registration_years = {}
     total_users = len(data_dict)
