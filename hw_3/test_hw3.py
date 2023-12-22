@@ -1,8 +1,8 @@
 """Module that tests the main file."""
 
 import pytest
+
 from hw3 import Computer, Screen, Product, Store
-import pytest
 
 ERORR_DATA_COMPUTER = (
     ('bell', 9112, 98, 'qpps22'),
