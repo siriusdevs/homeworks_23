@@ -32,7 +32,7 @@ jobs:
         pip install numpy
     - name: Pytest
       run: |
-        pytest hw1
+        pytest test_hw1.py
   linter_hw2:
     name: Линтер hw3
     runs-on: ubuntu-latest
@@ -64,4 +64,4 @@ jobs:
         pip install numpy
     - name: Pytest
       run: |
-         pytest hw3.py
+         pytest test_hw3.py
