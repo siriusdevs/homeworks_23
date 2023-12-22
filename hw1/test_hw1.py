@@ -31,7 +31,7 @@ def test_no_salaries():
 
 def test_empty_department():
     """
-    This test checks companysalarystats with no employees in any department.
+    This test checks company_salary_stats with no employees in any department.
 
     It checks if the function returns the expected dictionary with average,
     maximum, and median salaries all being 0.
