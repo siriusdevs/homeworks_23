@@ -1,7 +1,7 @@
 name: Проверка
 on: [push]
 jobs:
-  linter for hw1:
+  linter_for_hw1:
     name: Линтер
     runs-on: ubuntu-latest
     steps:
@@ -20,7 +20,7 @@ jobs:
       run: flake8 .
     - name: Выход из папки
       run: cd ..
-  tests for hw1:
+  tests_for_hw1:
     name: Тесты
     runs-on: ubuntu-latest
     steps:
@@ -39,7 +39,7 @@ jobs:
       run: pytest
     - name: Выход из папки Hw1
       run: cd ..
-  tests for hw2:
+  tests_for_hw2:
     name: Тесты
     runs-on: ubuntu-latest
     steps:
