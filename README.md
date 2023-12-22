@@ -2,14 +2,14 @@
 Репозиторий для домашних заданий, осень 2023, Колледж Сириус
 ============================================================
 
-|overall|35|22|17|
+|overall|37|23|22|
 | :---: | :---: | :---: | :---: |
 |Branch|hw1|hw2|hw3|
 |argun|-|-|-|
 |arsenovich|+|-|-|
 |bahtinov|-|-|-|
 |bashutskaya|-|-|-|
-|blagodarova|+|-|-|
+|blagodarova|+|+|+|
 |butenko|-|-|-|
 |danilov|-|-|-|
 |demyanenko|+|+|+|
@@ -26,17 +26,17 @@
 |ivanov_a|-|-|-|
 |ivanov_i|-|-|-|
 |karateev|-|-|-|
-|kolkareva|+|+|-|
+|kolkareva|+|+|+|
 |komarov|+|+|+|
 |kordon|-|-|-|
 |korenyakin_a|+|+|-|
 |korenyakin_g|-|-|-|
 |krdyan|+|+|+|
 |kristev|+|-|-|
-|krivenko|-|-|+|
+|krivenko|+|-|+|
 |kuznetsova|+|+|-|
 |lebedev|-|-|-|
-|litvinov|+|+|-|
+|litvinov|+|+|+|
 |main|-|-|-|
 |malanin|+|-|-|
 |malygin|-|-|-|
@@ -44,7 +44,7 @@
 |mens|-|-|-|
 |nehoroshev|-|-|-|
 |nikiforov|+|+|-|
-|noskov|+|-|-|
+|noskov|+|-|+|
 |nudga|+|+|+|
 |nurgaliev|-|-|-|
 |osipov|+|-|+|
@@ -54,7 +54,7 @@
 |roganov|+|+|+|
 |romodanov|+|+|+|
 |safikanov|-|-|-|
-|safronova|-|-|-|
+|safronova|+|-|-|
 |sannikov|-|-|-|
 |sheina|-|-|-|
 |startsev|-|-|-|
@@ -66,7 +66,7 @@
 |tsverkunov|-|-|-|
 |turapov|-|-|-|
 |tyapkova|+|-|-|
-|tyurin|+|+|-|
+|tyurin|+|+|+|
 |urbanovich|-|-|-|
 |vasilenko|+|+|-|
 |vavilov|-|-|-|
