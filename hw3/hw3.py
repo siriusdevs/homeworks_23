@@ -88,7 +88,7 @@ class Car(ABC):
         if new_year <= 0:
             raise NegativeNumberError(new_year)
         if not isinstance(new_year, int):
-            raise InvalidTypeError(new_year, 'number')
+            raise InvalidTypeError(new_year, 'int')
         self._year = new_year
 
     @property
@@ -114,7 +114,7 @@ class Car(ABC):
         if new_price <= 0:
             raise NegativeNumberError(new_price)
         if not isinstance(new_price, int):
-            raise InvalidTypeError(new_price, 'number')
+            raise InvalidTypeError(new_price, 'int')
         self._price = new_price
 
     def __str__(self) -> str:
@@ -164,7 +164,7 @@ class Motorcar(Car):
         if new_seats <= 0:
             raise NegativeNumberError(new_seats)
         if not isinstance(new_seats, int):
-            raise InvalidTypeError(new_seats, 'number')
+            raise InvalidTypeError(new_seats, 'int')
         self._seats = new_seats
 
 
