@@ -3,7 +3,6 @@ import json
 import os
 
 import pytest
-
 from hw2 import calculate_email_host, calculate_registration_year, process_data
 
 TEST_DATA_FILES = (
