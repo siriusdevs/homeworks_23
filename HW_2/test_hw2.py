@@ -2,19 +2,18 @@
 import os
 
 import pytest
-
 from hw2 import process_data
 
 SUCCESSFUL_TESTS = (
-    ('test.json', 'output.json', 'output_test.json'),
-    ('test.json', 'dir1/dir2/output.json', 'output_test.json'),
+    ('./HW_2/tests/test.json', './HW_2/output.json', './HW_2/tests/output_test.json'),
+    ('./HW_2/tests/test.json', './HW_2/dir1/dir2/output.json', './HW_2/tests/output_test.json'),
 )
 
 ERROR_TESTS = (
-    ('error_test.json', ValueError),
-    ('empty_test.json', ValueError),
-    ('empty_file.json', ValueError),
-    ('undefined.json', ValueError),
+    ('./HW_2/tests/error_test.json', ValueError),
+    ('./HW_2/tests/empty_test.json', ValueError),
+    ('./HW_2/tests/empty_file.json', ValueError),
+    ('./HW_2/tests/undefined.json', ValueError),
 )
 
 
