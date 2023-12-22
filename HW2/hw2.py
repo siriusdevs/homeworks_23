@@ -56,13 +56,7 @@ def calculate_email_host(data_dict: dict) -> dict:
     total_emails = 0
 
     for client in data_dict.keys():
-        try:
-            if 'email' not in data_dict[client].keys():
-                return 'Email key not found'
-        except KeyError:
-            return 'Email key not found'
-
-        email_domain = data_dict[client]['email'].split('@')[1]
+        email_domain = data_dict[client].get('email', 'default@defaultEmailHost').split('@')[1]
         email_hosts[email_domain] = email_hosts.get(email_domain, 0) + 1
         total_emails += 1
 
@@ -85,13 +79,7 @@ def calculate_registration_year(data_dict: dict) -> dict:
     total_users = len(data_dict.keys())
 
     for client in data_dict.keys():
-        try:
-            if 'registered' not in data_dict[client].keys():
-                return 'Registered key not found'
-        except KeyError:
-            return 'Registered key not found'
-
-        registration_year = data_dict[client]['registered'].split('-')[0]
+        registration_year = data_dict[client].get('registered', '2000-01-01').split('-')[0]
         registration_years[registration_year] = registration_years.get(registration_year, 0) + 1
 
     return {
