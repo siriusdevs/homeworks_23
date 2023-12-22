@@ -26,6 +26,7 @@ def test_company_statistics_included_departments_it():
     sorted_salaries, percentage = result
     assert sorted_salaries == [6000, 5500, 5200]
     assert percentage == 53.87
+    
 
 # Test case 4: Test with empty departments
 def test_company_statistics_empty_departments():
@@ -41,3 +42,12 @@ def test_company_statistics_single_department():
     sorted_salaries, percentage = result
     assert sorted_salaries == [6000, 5000, 4500]
     assert percentage == 100.0
+
+# Test case 6: Test with float
+def test_company_statistics_included_float():
+    department1 = ('IT_1', {'John': 598.675, 'Alice': 6857.64, 'Bob': 45.3546})
+    department2 = ('IT_2', {'Emma': 55.088, 'David': 489.8678, 'Olivia': 52.896})
+    result = company_statistics(department1, department2, included_departments=['IT_1', 'IT_2'])
+    sorted_salaries, percentage = result
+    assert sorted_salaries == [6857.64, 598.67, 489.87]
+    assert percentage == 98.11
