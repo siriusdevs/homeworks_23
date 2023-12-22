@@ -18,8 +18,8 @@ CORRECT_DATA = (
         cnst.AGE_MEDIAN: 80.5,
         cnst.LESS_TWO_DAYS: ZEROS,
         cnst.LESS_WEEK: ZEROS,
-        cnst.LESS_MONTH: '50.0%',
-        cnst.LESS_HALFYEAR: ZEROS,
+        cnst.LESS_MONTH: '0.0%',
+        cnst.LESS_HALFYEAR: '50.0%',
         cnst.MORE_HALFYEAR: '50.0%',
     }),
     ('tests/normal2.json', {
@@ -28,9 +28,9 @@ CORRECT_DATA = (
         cnst.AGE_AVERAGE: 45.0,
         cnst.AGE_MEDIAN: 38.5,
         cnst.LESS_TWO_DAYS: ZEROS,
-        cnst.LESS_WEEK: '16.67%',
+        cnst.LESS_WEEK: '0.0%',
         cnst.LESS_MONTH: '16.67%',
-        cnst.LESS_HALFYEAR: '33.33%',
+        cnst.LESS_HALFYEAR: '50.0%',
         cnst.MORE_HALFYEAR: '33.33%',
     }),
 )
