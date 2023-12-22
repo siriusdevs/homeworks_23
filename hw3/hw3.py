@@ -262,7 +262,7 @@ class Member:
         """
         Checkers.check_type(new_max, int)
         Checkers.check_less_than_zero(new_max)
-        self.___max_projects = new_max
+        self.__max_projects = new_max
 
 
 class Team:
