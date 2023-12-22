@@ -4,9 +4,9 @@ import os
 import shutil
 
 import pytest
-
 import test_answers
 import testcases
+
 from hw2 import analyze_json
 
 POSITIVE_TEST_ID = (
