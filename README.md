@@ -2,7 +2,7 @@
 Репозиторий для домашних заданий, осень 2023, Колледж Сириус
 ============================================================
 
-|overall|34|19|7|
+|overall|35|21|12|
 | :---: | :---: | :---: | :---: |
 |Branch|hw1|hw2|hw3|
 |argun|-|-|-|
@@ -16,11 +16,11 @@
 |drobyazko|-|-|-|
 |druzhinin|+|-|-|
 |dyatlova|-|-|-|
-|eremin|+|+|-|
+|eremin|+|+|+|
 |evstifeev|-|-|-|
 |galaktionova|-|-|-|
 |grigoryan|+|+|+|
-|inozemtsev|+|+|-|
+|inozemtsev|+|+|+|
 |isaeva|-|-|-|
 |istomin|-|-|-|
 |ivanov_a|-|-|-|
@@ -45,13 +45,13 @@
 |nehoroshev|-|-|-|
 |nikiforov|+|+|-|
 |noskov|+|-|-|
-|nudga|+|+|-|
+|nudga|+|+|+|
 |nurgaliev|-|-|-|
 |osipov|+|-|-|
-|otroshenko|-|-|-|
+|otroshenko|+|-|+|
 |ozornin|+|-|-|
 |pazych|-|-|-|
-|roganov|+|-|-|
+|roganov|+|+|+|
 |romodanov|+|+|-|
 |safikanov|-|-|-|
 |safronova|-|-|-|
@@ -66,7 +66,7 @@
 |tsverkunov|-|-|-|
 |turapov|-|-|-|
 |tyapkova|+|-|-|
-|tyurin|+|-|-|
+|tyurin|+|+|-|
 |urbanovich|-|-|-|
 |vasilenko|+|+|-|
 |vavilov|-|-|-|
