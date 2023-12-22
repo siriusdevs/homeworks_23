@@ -56,6 +56,7 @@ def prepare_data(test_id: int, positive: bool = True) -> tuple[str, str]:
     This function selects the test data based on the test_id and the nature of the test
     (positive or negative), writes it to a JSON file, and prepares a path for the result file.
     """
+    test_id = str(test_id)
     test_data = testcases.positive_test_data[test_id] \
         if positive else testcases.negative_test_data[test_id]
 
