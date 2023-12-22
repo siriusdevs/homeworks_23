@@ -27,6 +27,7 @@ def company_statistics(*args, included_departments=None):
             all_salaries.extend(employees.values())
 
     sorted_salaries = sorted(all_salaries, reverse=True)[:3]
+    sorted_salaries = [round(salary, 2) for salary in sorted_salaries]
     total_payments = sum(all_salaries)
 
     if total_payments == 0:
