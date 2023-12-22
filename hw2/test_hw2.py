@@ -9,7 +9,9 @@ import pytest
 import hw2
 
 TEST_DIFFERENT_ARGUMENTS = (
-    (f'input{str(num)}.json', f'expected{str(num)}.json') for num in range(1, 3)
+    (
+        f'input{str(num)}.json', f'expected{str(num)}.json',
+    ) for num in range(1, 3)
 )
 
 
@@ -36,7 +38,9 @@ def test_diff_args(path_in, expected_path):
 
 
 TEST_NO_ARGUMENTS = (
-    (f'input{str(num)}.json', f'expected{str(num)}.json') for num in range(1, 3)
+    (
+        f'input{str(num)}.json', f'expected{str(num)}.json',
+    ) for num in range(1, 3)
 )
 
 
@@ -63,7 +67,9 @@ def test_no_args(path_in: str, expected_path: str):
 
 
 TEST_SIMPLE_ARGUMENTS = (
-    (f'input{str(num)}.json', f'expected{str(num)}.json') for num in range(1, 4)
+    (
+        f'input{str(num)}.json', f'expected{str(num)}.json',
+    ) for num in range(1, 4)
 )
 
 
