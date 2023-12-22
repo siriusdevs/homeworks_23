@@ -60,14 +60,14 @@ ITEM_CONTROL_TEST = (
 
 WRONG_PRICE = -20
 
-STANDARD_SPECIFIC = ('cheese', 7800, 'linux', 'intel', 16, 'usb')
+STANDARD_SPEC = ('cheese', 7800, 'linux', 'intel', 16, 'usb')
 # Standard values: name, price, os, processor, diag, connection_method
 
 
 @pytest.mark.xfail(reason=ValueError)
 def test_wrong_price():
     """Attempt to create a product with a negative price."""
-    assert hw3.Computer(STANDARD_SPECIFIC[0], WRONG_PRICE, STANDARD_SPECIFIC[2], STANDARD_SPECIFIC[3])
+    assert hw3.Computer(STANDARD_SPEC[0], WRONG_PRICE, STANDARD_SPEC[2], STANDARD_SPEC[3])
 
 
 @pytest.mark.xfail(reason=TypeError)
@@ -97,7 +97,7 @@ def test_computer_incorrect_processor():
 @pytest.mark.xfail(reason=TypeError)
 def test_create_abstract_class():
     """Attempt to create object from abstract class."""
-    assert hw3.Product(STANDARD_SPECIFIC[0], STANDARD_SPECIFIC[1])
+    assert hw3.Product(STANDARD_SPEC[0], STANDARD_SPEC[1])
 
 
 @pytest.mark.parametrize(
