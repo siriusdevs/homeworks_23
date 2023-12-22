@@ -5,9 +5,9 @@ import shutil
 
 import pytest
 
+import test_answers
+import testcases
 from hw2 import analyze_json
-from testcases import negative_test_data, positive_test_data
-from test_answers import test_answers
 
 POSITIVE_TEST_ID = (
     (1, True),
@@ -56,7 +56,8 @@ def prepare_data(test_id: int, positive: bool = True) -> tuple[str, str]:
     This function selects the test data based on the test_id and the nature of the test
     (positive or negative), writes it to a JSON file, and prepares a path for the result file.
     """
-    test_data = positive_test_data[test_id] if positive else negative_test_data[test_id]
+    test_data = testcases.positive_test_data[test_id] \
+        if positive else testcases.negative_test_data[test_id]
 
     to_json = test_data
     path_to_json = create_file('./tests/', f'test_{test_id}.json')
@@ -95,7 +96,7 @@ def positive_tests(test_id: int) -> bool:
     path_to_json, path_to_result = prepare_data(test_id)
     analyze_json(path_to_json, path_to_result)
 
-    return get_result(path_to_result) == test_answers[test_id]
+    return get_result(path_to_result) == test_answers.test_answers[test_id]
 
 
 def negative_tests(test_id: int) -> bool:
@@ -115,7 +116,7 @@ def negative_tests(test_id: int) -> bool:
     try:
         analyze_json(path_to_json, path_to_result)
     except SystemExit:
-        return get_result(path_to_result) == test_answers[test_id]
+        return get_result(path_to_result) == test_answers.test_answers[test_id]
 
 
 @pytest.mark.parametrize('test_id, expected', POSITIVE_TEST_ID)
