@@ -2,7 +2,7 @@
 from typing import Any
 
 
-def check_type_of_input(input_value: Any, expected_type: Any) -> bool:
+def check_type_of_input(input_value: Any, expected_type: type) -> bool:
     """
     Check type of input_value.
 
