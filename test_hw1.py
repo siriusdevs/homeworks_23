@@ -1,6 +1,6 @@
-import pytest
-from task1 import company_statistics
-# Test case 1: Test with included_departments=None
+from hw1 import company_statistics
+
+
 def test_company_statistics_included_departments_none():
     department1 = ('Отдел1', {'John': 5000, 'Alice': 6000, 'Bob': 4500})
     department2 = ('Отдел2', {'Emma': 5500, 'David': 4800, 'Olivia': 5200})
@@ -9,7 +9,7 @@ def test_company_statistics_included_departments_none():
     assert sorted_salaries == [6000, 5500, 5200]
     assert percentage == 53.87
 
-# Test case 2: Test with included_departments=['HR']
+
 def test_company_statistics_included_departments_hr():
     department1 = ('Отдел1', {'John': 5000, 'Alice': 6000, 'Bob': 4500})
     department2 = ('Отдел2', {'Emma': 5500, 'David': 4800, 'Olivia': 5200})
@@ -18,7 +18,7 @@ def test_company_statistics_included_departments_hr():
     assert sorted_salaries == []
     assert percentage == 0
 
-# Test case 3: Test with included_departments=['IT']
+
 def test_company_statistics_included_departments_it():
     department1 = ('IT_1', {'John': 5000, 'Alice': 6000, 'Bob': 4500})
     department2 = ('IT_2', {'Emma': 5500, 'David': 4800, 'Olivia': 5200})
@@ -26,16 +26,15 @@ def test_company_statistics_included_departments_it():
     sorted_salaries, percentage = result
     assert sorted_salaries == [6000, 5500, 5200]
     assert percentage == 53.87
-    
 
-# Test case 4: Test with empty departments
+
 def test_company_statistics_empty_departments():
     result = company_statistics()
     sorted_salaries, percentage = result
     assert sorted_salaries == []
     assert percentage == 0
 
-# Test case 5: Test with single department
+
 def test_company_statistics_single_department():
     department = ('Отдел1', {'John': 5000, 'Alice': 6000, 'Bob': 4500})
     result = company_statistics((department), included_departments=None)
@@ -43,7 +42,7 @@ def test_company_statistics_single_department():
     assert sorted_salaries == [6000, 5000, 4500]
     assert percentage == 100.0
 
-# Test case 6: Test with float
+
 def test_company_statistics_included_float():
     department1 = ('IT_1', {'John': 598.675, 'Alice': 6857.64, 'Bob': 45.3546})
     department2 = ('IT_2', {'Emma': 55.088, 'David': 489.8678, 'Olivia': 52.896})
@@ -51,3 +50,4 @@ def test_company_statistics_included_float():
     sorted_salaries, percentage = result
     assert sorted_salaries == [6857.64, 598.67, 489.87]
     assert percentage == 98.11
+    
