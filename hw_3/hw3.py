@@ -131,7 +131,8 @@ class Computer(Product):
         """
         self.check_str_type(new_processor)
         if not new_processor.lower().startswith(self.__processor_form):
-            raise ValueError(f'Processor name should starts with {' or '.join(self.__processor_form)}')
+            msg = ' or '.join(self.__processor_form)
+            raise ValueError(f'Processor name should starts with {msg}')
         self._processor = new_processor
 
     @property

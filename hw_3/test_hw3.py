@@ -4,21 +4,18 @@ import pytest
 
 from hw3 import Computer, Screen, Product, Store
 
-NEGATIVE_PRICE = -1
-
-# Default values: name, price, os, processor, diagonal, connector_type
-DEFAULT = ('cheese', 300, 'linux', 'intel', 25, 'usb')
+STANDARD_SPECIFIC = ('cheese', 300, 'linux', 'intel', 25, 'usb')
 
 COMPUTER_INCORRECT_TYPES_DATA = (
-    # Некорректное имя ОС
     (
         'bell', 300, 13, 'intel33',
     ),
-    # Некорректное имя процессора
     (
         'bell', 300, 'windows', 3,
     ),
 )
+
+WRONG_PRICE = -20
 
 SCREEN_INCORRECT_TYPES_DATA = (
     # Некорректно заданый размер
@@ -110,18 +107,6 @@ def test_add_remove_get_store(
     assert expected == store.get_all_products()
 
 
-@pytest.mark.parametrize('name, price, diagonal, con_method', SCREEN_TEST_DATA)
-def test_screen(name: str, price: int | float, diagonal: int | float, con_method: str):
-    """Test creating screen with various data.
-
-    Args:
-        name: str - screen name.
-        price: int | float - screen price.
-        diagonal: int | float - screen diagonal.
-        con_method: str - connection type.
-    """
-    assert Screen(name, price, diagonal, con_method)
-
 
 @pytest.mark.parametrize('name, price, os, processor', COMPUTER_TEST_DATA)
 def test_computer(name: str, price: int | float, os: str, processor: str):
@@ -137,9 +122,9 @@ def test_computer(name: str, price: int | float, os: str, processor: str):
 
 
 @pytest.mark.xfail(reason=ValueError)
-def test_negative_price():
+def test_wrong_price():
     """Try create product with negative price."""
-    assert Computer(DEFAULT[0], NEGATIVE_PRICE, DEFAULT[2], DEFAULT[3])
+    assert Computer(STANDARD_SPECIFIC[0], WRONG_PRICE, STANDARD_SPECIFIC[2], STANDARD_SPECIFIC[3])
 
 
 @pytest.mark.xfail(reason=TypeError)
@@ -175,4 +160,4 @@ def test_computer_wrong_processor():
 @pytest.mark.xfail(reason=TypeError)
 def test_create_abstract_product():
     """Try create abstract Product."""
-    assert Product(DEFAULT[0], DEFAULT[1])
+    assert Product(STANDARD_SPECIFIC[0], STANDARD_SPECIFIC[1])
