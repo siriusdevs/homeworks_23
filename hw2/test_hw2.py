@@ -6,8 +6,8 @@ import shutil
 import pytest
 
 from hw2 import analyze_json
-from test_answers import test_answers
 from testcases import negative_test_data, positive_test_data
+from test_answers import test_answers
 
 POSITIVE_TEST_ID = (
     (1, True),
