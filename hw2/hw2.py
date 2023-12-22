@@ -170,6 +170,8 @@ def process_data(data_in: str, data_out: str) -> None | str:
     datafile = get_datafile(data_in)
     if not isinstance(datafile, dict):
         return datafile
+    if not datafile:
+        return 'Data in file is empty'
     combined_data = {}
     login_stats = get_login_stats(datafile)
     if isinstance(login_stats, str):

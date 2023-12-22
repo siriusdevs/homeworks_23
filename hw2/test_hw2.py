@@ -13,7 +13,7 @@ class FileNumberEnum(IntEnum):
     leftboardvalid = 1
     rightboardvalid = 3
     leftdoardinvalid = 3
-    rightboardinvalid = 6
+    rightboardinvalid = 7
 
 
 def make_test_data(leftboard: int, rightboard: int) -> tuple:
