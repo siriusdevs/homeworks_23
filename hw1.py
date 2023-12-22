@@ -55,27 +55,19 @@ def check_sum_salary(
         list_all_salaries.extend(departments[ind][1])
 
     list_all_salaries.sort(reverse=True)
-    list_all_salaries = [round(salary, 2)
-                        for salary in list_all_salaries
-                        if salary >= 0
-                        ]
-    
-
-
-    list_three_max_salaries= three_max_selaries(
+    list_all_salaries = [
+        round(salary, 2)
+        for salary in list_all_salaries
+        if salary >= 0
+    ]    
+    list_three_max_salaries = three_max_selaries(
         list_all_salaries,
         salary_cap,
             )
 
-    
-
     sum_all_sal = sum(list_all_salaries)
-    print(list_three_max_salaries, sum_all_sal)
 
     return (
         list_three_max_salaries,
         round((sum(list_three_max_salaries) / sum_all_sal)*100, 2),
         ) if sum_all_sal > 0 else 0
-
-
-print(check_sum_salary(('b', [1, 0.1, 3]), ('n', [0, 5, 1.1])))
