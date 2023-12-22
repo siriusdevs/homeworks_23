@@ -1,91 +1,11 @@
 """Module, that provide analyzing of JSON."""
 import json
-import os
-import sys
 from datetime import datetime
 from statistics import mean
 from typing import Any
 
-
-class PathError(Exception):
-    """
-    Exception raised for errors in the input path.
-
-    Attributes:
-        path (str): The path that caused the error.
-    """
-
-    def __init__(self, path: str) -> None:
-        """
-        Initialize the PathError exception with a specific file path.
-
-        Args:
-            path (str): The path of the file that does not exist.
-        """
-        super().__init__(f'File with path: {path} is not exist')
-
-
-class ExtensionError(Exception):
-    """
-    Exception raised for errors in the file extension.
-
-    Attributes:
-        extension (str): The actual extension of the file.
-        expected (str): The expected extension of the file.
-    """
-
-    def __init__(self, extension: str, expected: str) -> None:
-        """
-        Initialize the ExtensionError exception with the file extension and the expected extension.
-
-        Args:
-            extension (str): The actual extension of the file.
-            expected (str): The expected extension for the file.
-        """
-        super().__init__(f'File must be {expected}, but got {extension}')
-
-
-def check_path(path_to_file: str) -> None:
-    """
-    Check if the given file path points to an existing file.
-
-    Raises:
-        PathError: If the file at the given path does not exist.
-
-    Args:
-        path_to_file (str): Path to the file to check.
-    """
-    if not os.path.isfile(path_to_file):
-        raise PathError(path_to_file)
-
-
-def check_extension(path_to_file: str, extension: str) -> None:
-    """
-    Check if the file at the given path has the specified extension.
-
-    Raises:
-        ExtensionError: If the file's extension does not match the expected extension.
-
-    Args:
-        path_to_file (str): Path to the file to check.
-        extension (str): Expected file extension.
-    """
-    current_extension = os.path.splitext(path_to_file)[1]
-    if current_extension != extension:
-        raise ExtensionError(current_extension, extension)
-
-
-def print_error(path_to_file: str, text: str) -> None:
-    """
-    Write an error message to a file and then exit the program.
-
-    Args:
-        path_to_file (str): Path to the file where the error message will be written.
-        text (str): Error message to be written.
-    """
-    with open(path_to_file, 'w') as file_to_write:
-        file_to_write.write(text)
-    sys.exit()
+from checkers import check_extension, check_path
+from errors import ExtensionError, PathError, print_error
 
 
 def open_json(path_to_file: str, output_path: str) -> dict:
@@ -152,13 +72,25 @@ def count_email_domain(json_file: dict, output_path: str) -> dict:
 
     return email_statistics
 
-def get_required_variables(json_file: dict[str : dict[str:Any]]
-                           ) -> tuple[datetime, list, dict, list]:
-    # Вообще, в идеале, тут правда должна быть текущая дата, но тогда тесты, увы, работают
-    # только сутки (((
-    # current_date = datetime.now()
+
+def get_required_variables(
+    json_file: dict[str, dict[str, Any]],
+) -> tuple[datetime, list[str], dict, dict]:
+    """
+    Extract and compute necessary variables from a JSON file.
+
+    Args:
+        json_file: A dictionary representing the JSON file contents.
+
+    Returns:
+        A tuple containing the current date, list of users, time steps,\
+            and average age categorized by time lapses.
+
+    Note:
+        The current date is set to a fixed date '2023-12-20' for consistent testing.
+    """
     current_date = datetime.strptime('2023-12-20', '%Y-%m-%d')
-    users = json_file.keys()
+    users = list(json_file.keys())
     time_steps = {
         'Less than 2 days': 2,
         'Less than a week': 7,
@@ -167,60 +99,145 @@ def get_required_variables(json_file: dict[str : dict[str:Any]]
     }
     average_age = {time_lapse: [] for time_lapse in time_steps.keys()}
     average_age['More than half a year'] = []
+
     return current_date, users, time_steps, average_age
 
-def count_user_age(json_file: dict[str : dict[str:Any]], output_file) -> dict:
-    current_date, users, time_steps, average_age = get_required_variables(json_file)
 
-    for user in users:
-        age = json_file[user]['age']
-        if not isinstance(age, int):
-            text = 'An incorrect age value has been entered. Have a nice day!'
-            print_error(output_file, text)
-        try:
-            last_login = datetime.strptime(json_file[user]['last_login'], '%Y-%m-%d')
-        except ValueError:
-            text = 'The file contains a date in a non-correct format. Have a nice day!'
-            print_error(output_file, text)
-        days_from_last_login = (current_date - last_login).days
-        added = False
+def parse_user_data(
+    user: str, json_file: dict[str, dict[str, Any]], current_date: datetime, output_file,
+) -> tuple[int, int]:
+    """
+    Parse and validate the age and last login data for a given user.
 
-        for time_lapse, days in time_steps.items():
-            if days_from_last_login < days:
-                average_age[time_lapse].append(age)
-                added = True
-                break
+    Args:
+        user: The user for whom the data is being parsed.
+        json_file: A dictionary representing the JSON file contents.
+        current_date: The current date for calculating days from last login.
+        output_file: The output file for logging errors.
 
-        if not added:
-            average_age['More than half a year'].append(age)
+    Returns:
+        tuple containing the age of the user and days from last login.
+    """
+    age = json_file[user]['age']
+    if not isinstance(age, int):
+        text = 'An incorrect age value has been entered. Have a nice day!'
+        print_error(output_file, text)
 
+    try:
+        last_login = datetime.strptime(json_file[user]['last_login'], '%Y-%m-%d')
+    except ValueError:
+        text = 'The file contains a date in a non-correct format. Have a nice day!'
+        print_error(output_file, text)
+
+    days_from_last_login = (current_date - last_login).days
+    return age, days_from_last_login
+
+
+def categorize_by_time_lapse(
+    age: int,
+    days_from_last_login: int,
+    time_steps: dict[str, int],
+    average_age: dict[str, list[int]],
+):
+    """
+    Categorizes a user's age into a time lapse category based on days from last login.
+
+    Args:
+        age: The age of the user.
+        days_from_last_login: Days elapsed since the user's last login.
+        time_steps: A dictionary defining time lapse categories.
+        average_age: A dictionary to store the average ages categorized by time lapses.
+    """
+    added = False
+    for time_lapse, days in time_steps.items():
+        if days_from_last_login < days:
+            average_age[time_lapse].append(age)
+            added = True
+            break
+
+    if not added:
+        average_age['More than half a year'].append(age)
+
+
+def calculate_average_ages(average_age: dict[str, list[int]]) -> dict:
+    """
+    Calculate the average age for each time lapse category.
+
+    Args:
+        average_age: A dictionary containing ages categorized by time lapses.
+
+    Returns:
+        A dictionary with the average age for each time lapse category.
+    """
     for time_lapse in average_age.keys():
         if average_age[time_lapse]:
             mean_age = mean(average_age[time_lapse])
             average_age[time_lapse] = mean_age
         else:
             average_age[time_lapse] = 'NaN'
-
     return average_age
+
+
+def count_user_age(json_file: dict[str, dict[str, Any]], output_file) -> dict:
+    """
+    Count the average age of users categorized by time since their last login.
+
+    Args:
+        json_file: A dictionary representing the JSON file contents.
+        output_file: The output file for logging errors.
+
+    Returns:
+        A dictionary with the average age for each time lapse category.
+    """
+    current_date, users, time_steps, average_age = get_required_variables(json_file)
+
+    for user in users:
+        age, days_from_last_login = parse_user_data(
+            user, json_file, current_date, output_file,
+        )
+        categorize_by_time_lapse(age, days_from_last_login, time_steps, average_age)
+
+    return calculate_average_ages(average_age)
 
 
 def write_result_to_json(
     path_to_file: str,
-    email_statistics: dict[str:str],
-    average_age: dict[str : float | str],
+    email_statistics: dict[str, str],
+    average_age: dict[str, float | str],
 ) -> None:
+    """
+    Write email statistics and average age data to a JSON file.
+
+    Args:
+        path_to_file: The path to the file where the data will be written.
+        email_statistics: A dictionary containing email statistics.
+        average_age: A dictionary containing the average age data.
+
+    This function converts the combined data into a JSON format\
+        and writes it to the specified file.
+    """
     to_json = {'email statistics': email_statistics, 'average_age': average_age}
 
     with open(path_to_file, 'w') as file_to_write:
-        file_to_write.write(json.dumps(to_json))
+        json.dump(to_json, file_to_write)
 
 
 def analyze_json(path_to_json: str, path_to_result: str) -> None:
-    json = open_json(path_to_json, path_to_result)
+    """
+    Analyzes a JSON file and writes the results to another file.
+
+    Args:
+        path_to_json: The path to the JSON file to be analyzed.
+        path_to_result: The path to the file where the analysis results will be written.
+
+    This function opens and processes the JSON file, then invokes write_result_to_json
+    to write the analysis results.
+    """
+    json_data = open_json(path_to_json, path_to_result)
     write_result_to_json(
         path_to_result,
-        count_email_domain(json, path_to_result),
-        count_user_age(json, path_to_result),
+        count_email_domain(json_data, path_to_result),
+        count_user_age(json_data, path_to_result),
     )
 
 
