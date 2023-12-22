@@ -20,6 +20,13 @@ test_data = [('data_hw2.json', 'result_test_hw2.py', {
 
 @pytest.mark.parametrize("input_file, output_file, data", test_data)
 def test_process_data(input_file, output_file, data):
+    """The test for funck process_data. 
+
+    Args:
+        input_file (str): The name of file input.
+        output_file (str): The name of file output.
+        data (dict): TThe test date result of the funck. 
+    """    
     process_data(input_file_path=input_file, output_file_path=output_file)
     with open(output_file, 'r') as output_data:
         result = json.load(output_data)

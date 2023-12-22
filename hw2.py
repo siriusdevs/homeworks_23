@@ -11,8 +11,8 @@ online_duration = {
     'More than 6 months': 0,
     }
 
-len_month = 30
-len_half_year = 180
+LEN_MONTH = 30
+LEN_HALF_YEAR = 180
 hosts_count = {}
 
 
@@ -60,9 +60,9 @@ def online_count(days_since_last_login: int) -> None:
         online_duration['Less than 2 days'] += 1
     elif days_since_last_login < 7:
         online_duration['Less than 1 week'] += 1
-    elif days_since_last_login < len_month:
+    elif days_since_last_login < LEN_MONTH:
         online_duration['Less than 1 month'] += 1
-    elif days_since_last_login < len_half_year:
+    elif days_since_last_login < LEN_HALF_YEAR:
         online_duration['Less than 6 months'] += 1
     else:
         online_duration['More than 6 months'] += 1
