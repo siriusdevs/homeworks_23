@@ -1,5 +1,4 @@
 """Test module for Clients statistics module."""
-
 import os
 
 import pytest
@@ -7,14 +6,14 @@ import pytest
 from hw2 import process_data
 
 SUCCESSFUL_TESTS = (
-    ('tests/test.json', 'output.json', 'tests/output_test.json'),
-    ('tests/test.json', 'dir1/dir2/output.json', 'tests/output_test.json'),
+    ('test.json', 'output.json', 'output_test.json'),
+    ('test.json', 'dir1/dir2/output.json', 'output_test.json'),
 )
 
 ERROR_TESTS = (
-    ('tests/error_test.json', ValueError),
-    ('tests/empty_test.json', ValueError),
-    ('tests/empty_file.json', ValueError),
+    ('error_test.json', ValueError),
+    ('empty_test.json', ValueError),
+    ('empty_file.json', ValueError),
     ('undefined.json', ValueError),
 )
 
@@ -39,7 +38,6 @@ def test_module(
     with open(expected_file) as expected_data:
         answers = expected_data.read()
     assert checking_data == answers
-    os.remove(output_file)
 
 
 @pytest.mark.parametrize('input_file, error', ERROR_TESTS)

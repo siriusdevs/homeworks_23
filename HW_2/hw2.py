@@ -29,7 +29,6 @@ def get_json_data(
     Raises:
         ValueError: If there is an unsuitable file in the input data.
     """
-
     try:
         with open(input_path) as json_file:
             json_data = json.load(json_file)
