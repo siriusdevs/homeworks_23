@@ -1,8 +1,6 @@
 """Module that tests the main file."""
-
+import hw3
 import pytest
-
-from hw3 import Computer, Screen, Product, Store
 
 ERORR_DATA_COMPUTER = (
     ('bell', 9112, 98, 'qpps22'),
@@ -69,37 +67,37 @@ STANDARD_SPECIFIC = ('cheese', 7800, 'linux', 'intel', 16, 'usb')
 @pytest.mark.xfail(reason=ValueError)
 def test_wrong_price():
     """Attempt to create a product with a negative price."""
-    assert Computer(STANDARD_SPECIFIC[0], WRONG_PRICE, STANDARD_SPECIFIC[2], STANDARD_SPECIFIC[3])
+    assert hw3.Computer(STANDARD_SPECIFIC[0], WRONG_PRICE, STANDARD_SPECIFIC[2], STANDARD_SPECIFIC[3])
 
 
 @pytest.mark.xfail(reason=TypeError)
 def test_screen_incorrect_diagonal():
     """Attempt to create a screen with an incorrect type of diagonal field."""
-    assert Screen(*ERORR_DATA_SCREEN[0])
+    assert hw3.Screen(*ERORR_DATA_SCREEN[0])
 
 
 @pytest.mark.xfail(reason=TypeError)
 def test_screen_incorrect_connection():
     """Attempt to create screen with incorrect connector type."""
-    assert Screen(*ERORR_DATA_SCREEN[1])
+    assert hw3.Screen(*ERORR_DATA_SCREEN[1])
 
 
 @pytest.mark.xfail(reason=TypeError)
 def test_computer_incorrect_os():
     """Attempt to create computer with incorrect os type."""
-    assert Computer(*ERORR_DATA_COMPUTER[0])
+    assert hw3.Computer(*ERORR_DATA_COMPUTER[0])
 
 
 @pytest.mark.xfail(reason=TypeError)
 def test_computer_incorrect_processor():
     """Attempt to create computer with incorrect processor type."""
-    assert Computer(*ERORR_DATA_COMPUTER[1])
+    assert hw3.Computer(*ERORR_DATA_COMPUTER[1])
 
 
 @pytest.mark.xfail(reason=TypeError)
 def test_create_abstract_class():
     """Attempt to create object from abstract class."""
-    assert Product(STANDARD_SPECIFIC[0], STANDARD_SPECIFIC[1])
+    assert hw3.Product(STANDARD_SPECIFIC[0], STANDARD_SPECIFIC[1])
 
 
 @pytest.mark.parametrize(
@@ -122,12 +120,12 @@ def test_crud_store(
         computer2: tuple - 4 product, for add.
         expected: str - result.
     """
-    mon1 = Screen(*screen1)
-    mon2 = Screen(*screen2)
-    pc1 = Computer(*computer1)
-    pc2 = Computer(*computer2)
+    mon1 = hw3.Screen(*screen1)
+    mon2 = hw3.Screen(*screen2)
+    pc1 = hw3.Computer(*computer1)
+    pc2 = hw3.Computer(*computer2)
     prod_list = (mon1, mon2, pc1)
-    store = Store(prod_list)
+    store = hw3.Store(prod_list)
     store.add_product(pc2)
     store.remove_product(pc1)
     assert expected == store.get_all_products()
@@ -143,4 +141,4 @@ def test_computer(name: str, price: int | float, os: str, processor: str):
         os: str - operating system installed on computer.
         processor: str - processor in a computer.
     """
-    assert Computer(name, price, os, processor)
+    assert hw3.Computer(name, price, os, processor)
