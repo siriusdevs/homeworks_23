@@ -57,13 +57,32 @@ class Book:
         """
         return self._year
 
-    def __str__(self) -> str:
-        """Get a string representation of the book.
+    @title.setter
+    def title(self, new_title: str) -> None:
+        """Set the title of the book.
 
-        Returns:
-            str: A string representation of the book.
+        Args:
+            new_title (str): New title value to assign to the title variable.
         """
-        return f'{self._title} by {self._author} ({self._year})'
+        self._title = new_title
+
+    @author.setter
+    def author(self, new_author: str) -> None:
+        """Set the author of the book.
+
+        Args:
+            new_author (str): New author value to assign to the author variable.
+        """
+        self._author = new_author
+
+    @year.setter
+    def year(self, new_year: int) -> None:
+        """Set the publication year of the book.
+
+        Args:
+            new_year (int): New year value to assign to the year variable.
+        """
+        self._year = new_year
 
 
 class Library:
@@ -84,6 +103,12 @@ class Library:
 
         get_all_books(self) -> list[Book]:
             Gets a list of all books in the library.
+
+        borrow_book(self, reader: Reader, book: Book) -> None:
+            Borrows a book from the library.
+
+        return_book(self, reader: Reader, book: Book) -> None:
+            Returns a borrowed book to the library.
 
     """
 
@@ -121,6 +146,30 @@ class Library:
         """
         return self.books
 
+    def borrow_book(self, reader: 'Reader', book: Book) -> None:
+        """Borrow a book from the library.
+
+        Args:
+            reader (Reader): The reader borrowing the book.
+            book (Book): The book to be borrowed.
+
+        Raises:
+            ValueError: If the specified book is not available in the library.
+        """
+        if book in self.books:
+            self.books.remove(book)
+        else:
+            raise ValueError('Book not available in the library')
+
+    def return_book(self, reader: 'Reader', book: Book) -> None:
+        """Return a borrowed book to the library.
+
+        Args:
+            reader (Reader): The reader returning the book.
+            book (Book): The book to be returned.
+        """
+        self.books.append(book)
+
 
 class Reader:
     """A class representing a reader.
@@ -157,20 +206,23 @@ class Reader:
         """
         return self._name
 
+    @name.setter
+    def name(self, new_name: str) -> None:
+        """Set the name of the reader.
+
+        Args:
+            new_name (str): New name value to assign to the name variable.
+        """
+        self._name = new_name
+
     def borrow_book(self, library: Library, book: Book) -> None:
         """Borrow a book from the library.
 
         Args:
             library (Library): The library from which the book is borrowed.
             book (Book): The book to be borrowed.
-
-        Raises:
-            ValueError: If the specified book is not available in the library.
         """
-        if book in library.get_all_books():
-            library.remove_book(book)
-        else:
-            raise ValueError('Book not available in the library')
+        library.borrow_book(self, book)
 
     def return_book(self, library: Library, book: Book) -> None:
         """Return a borrowed book to the library.
@@ -179,7 +231,7 @@ class Reader:
             library (Library): The library to which the book is returned.
             book (Book): The book to be returned.
         """
-        library.add_book(book)
+        library.return_book(self, book)
 
 
 class Librarian:
@@ -217,22 +269,11 @@ class Librarian:
         """
         return self._name
 
-    def lend_book(self, reader: Reader, library: Library, book: Book) -> None:
-        """Lend a book to a reader.
+    @name.setter
+    def name(self, new_name: str) -> None:
+        """Set the name of the librarian.
 
         Args:
-            reader (Reader): The reader to whom the book is lent.
-            library (Library): The library from which the book is lent.
-            book (Book): The book to be lent.
+            new_name (str): New name value to assign to the name variable.
         """
-        reader.borrow_book(library, book)
-
-    def accept_book(self, reader: Reader, library: Library, book: Book) -> None:
-        """Accept a returned book from a reader.
-
-        Args:
-            reader (Reader): The reader returning the book.
-            library (Library): The library to which the book is returned.
-            book (Book): The returned book.
-        """
-        reader.return_book(library, book)
+        self._name = new_name
