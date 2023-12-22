@@ -1,3 +1,4 @@
+"""Module for checkers for hw2."""
 import os
 
 from errors import ExtensionError, PathError

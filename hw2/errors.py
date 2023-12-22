@@ -1,4 +1,6 @@
+"""File with custom errors and error processing."""
 import sys
+
 
 class PathError(Exception):
     """
@@ -36,6 +38,7 @@ class ExtensionError(Exception):
             expected (str): The expected extension for the file.
         """
         super().__init__(f'File must be {expected}, but got {extension}')
+
 
 def print_error(path_to_file: str, text: str) -> None:
     """
