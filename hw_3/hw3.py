@@ -19,32 +19,32 @@ class Product(ABC):
         self.price = price
         self.name = name
 
-    def check_str_type(self, value: Any) -> None:
+    def check_str_type(self, exmple_value: Any) -> None:
         """Check if the value is a str.
 
         Args:
-            value: Any - value to check.
+            exmple_value: Any - value to check.
 
         Raises:
             TypeError: if the value is not a str.
         """
-        if not isinstance(value, str):
-            value_type = type(value).__name__
-            msg = f'{value} should be str not {value_type}'
+        if not isinstance(exmple_value, str):
+            exmple_value_type = type(exmple_value).__name__
+            msg = f'{exmple_value} should be str not {exmple_value_type}'
             raise TypeError(msg)
 
-    def check_num_type(self, value: Any) -> None:
+    def check_num_type(self, exmple_value: Any) -> None:
         """Check if the value is an int or a float.
 
         Args:
-            value: Any - value to check.
+            exmple_value: Any - value to check.
 
         Raises:
             TypeError: if the value is not an integer or a float.
         """
-        if not isinstance(value, (int, float)):
-            value_type = type(value).__name__
-            msg = f'{value} should be int or float, not {value_type}'
+        if not isinstance(exmple_value, (int, float)):
+            exmple_value_type = type(exmple_value).__name__
+            msg = f'{exmple_value} should be int or float, not {exmple_value_type}'
             raise TypeError(msg)
 
     @property
@@ -160,21 +160,22 @@ class Computer(Product):
             raise ValueError(f'Incorrect value for the operating system, need one of: {systems}')
         self._os = new_os
 
+
 class Screen(Product):
     """Class representing a screen product, inheriting from Product."""
 
     __connection_method = ('usb', 'vga', 'hdmi', 'display port')
 
-    def __init__(self, name: str, price: int | float, diagonal: int | float, con_method: str) -> None:
+    def __init__(self, name: str, price: int | float, diag: int | float, con_method: str) -> None:
         """Initialize a new instance of the Screen.
 
         Args:
             name: str - screen name.
             price: int | float - screen price.
-            diagonal: int | float - screen diagonal.
+            diag: int | float - screen diagonal.
             con_method: str - type of connector for connecting a screen to a computer.
         """
-        self.diagonal = diagonal
+        self.diag = diag
         self.con_method = con_method
         super().__init__(name, price)
 
@@ -204,23 +205,24 @@ class Screen(Product):
         self._con_method = new_con_method
 
     @property
-    def diagonal(self) -> int | float:
+    def diag(self) -> int | float:
         """Find out the diagonal of the screen.
 
         Returns:
             int | float: diagonal of the screen.
         """
-        return self._diagonal
+        return self._diag
 
-    @diagonal.setter
-    def diagonal(self, new_diagonal: int | float) -> None:
-        """Set a new diagonal diagonal of the screen.
+    @diag.setter
+    def diag(self, new_diag: int | float) -> None:
+        """Set a new diagonal of the screen.
 
         Args:
-            new_diagonal: int | float - new diagonal diagonal for the screen.
+            new_diag: int | float - new diagonal for the screen.
         """
-        self.check_num_type(new_diagonal)
-        self._diagonal = new_diagonal
+        self.check_num_type(new_diag)
+        self._diag = new_diag
+
 
 class Store:
     """Class that embodies a computer hardware store."""
@@ -264,7 +266,7 @@ class Store:
             new_grocery_list: tuple | list - new list of products for the store.
 
         Raises:
-            TypeError: if the input is not a tuple or list, or if any individual item is not a Product.
+            TypeError: if the input is not a tuple or list, or if any item is not a Product.
         """
         if not isinstance(new_grocery_list, (tuple, list)):
             list_type = type(new_grocery_list).__name__

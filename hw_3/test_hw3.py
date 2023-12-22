@@ -1,99 +1,127 @@
 """Module that tests the main file."""
 
 import pytest
-
 from hw3 import Computer, Screen, Product, Store
 
-STANDARD_SPECIFIC = ('cheese', 300, 'linux', 'intel', 25, 'usb')
-
-COMPUTER_INCORRECT_TYPES_DATA = (
+ERORR_DATA_COMPUTER = (
     (
-        'bell', 300, 13, 'intel33',
+        'bell', 9112, 98, 'qpps22',
     ),
     (
-        'bell', 300, 'windows', 3,
+        'bell', 12, 'weroff', 2,
+    ),
+)
+
+ERORR_DATA_SCREEN = (
+    (
+        'pok', 20, '2d', 'ddfg',
+    ),
+    (
+        'pok', 20, 15, 9, 4,
+    ),
+)
+
+COMPUTER_TEST_DATA = (
+    (
+        'mypc', 55000, 'liNUX', 'INTELi3',
+    ),
+    (
+        'EVM-1', 29999.01, 'mac', 'intel',
+    ),
+    (
+        'siriuspc', 10, 'winDows', 'amd',
+    ),
+)
+
+SCREEN_TEST_DATA = (
+    (
+        'dexp', 20, 13456, 'vgA',
+    ),
+    (
+        'logiteh', 1, 0.1, 'uSB',
+    ),
+    (
+        'uiopikj', 0, 34987, 'vGa',
+    ),
+    (
+        'ytr', 999999.9999, 0, 'usb',
+    ),
+    (
+        'werty', 8766.9, 33, 'DISPLAY PORT',
+    ),
+    (
+        '12345', 33, 34, 'dvi',
+    ),
+)
+
+ITEM_CONTROL_TEST = (
+    (
+        SCREEN_TEST_DATA[0], SCREEN_TEST_DATA[1],
+        COMPUTER_TEST_DATA[2], COMPUTER_TEST_DATA[0],
+        'Products are: dexp, logiteh, mypc',
     ),
 )
 
 WRONG_PRICE = -20
 
-SCREEN_INCORRECT_TYPES_DATA = (
-    # Некорректно заданый размер
-    (
-        'atas', 100, '4d', 'hdmi',
-    ),
-    # Некорректно задано название разъема для подключения
-    (
-        'atas', 100, 23.6, 4,
-    ),
-)
+STANDARD_SPECIFIC = ('cheese', 7800, 'linux', 'intel', 16, 'usb')
+# Standard values: name, price, os, processor, diag, connection_method
 
-# Второй объект в кортеже не Product
-STORE_INCORRECT_PRODUCT_DATA = (Screen('asus', 4, 2, 'usb'), 5)
 
-# Всякое разное - и капс, и int | float и все возможные процессоры и ОС
-COMPUTER_TEST_DATA = (
-    (
-        'gigachad', 300, 'WiNdOwS', 'INTELi7',
-    ),
-    (
-        'fulmultigamergbmega', 299.99, 'mac', 'intel',
-    ),
-    (
-        'yyyaaaaa', 0, 'linux', 'amd ryzen 9',
-    ),
-)
+@pytest.mark.xfail(reason=ValueError)
+def test_wrong_price():
+    """Attempt to create a product with a negative price."""
+    assert Computer(STANDARD_SPECIFIC[0], WRONG_PRICE, STANDARD_SPECIFIC[2], STANDARD_SPECIFIC[3])
 
-# Всякое разное - и капс, и int | float и все возможные разъемы для подключения
-SCREEN_TEST_DATA = (
-    (
-        'samsam', 300, 25, 'UsB',
-    ),
-    (
-        'atas', 299.99, 24.99, 'hdmi',
-    ),
-    (
-        'next', 1, 1, 'vGa',
-    ),
-    (
-        'nex', 1, 1, 'tHunDerBolt',
-    ),
-    (
-        'ne', 1, 1, 'DISPLAY PORT',
-    ),
-    (
-        'n', 1, 1, 'dvi',
-    ),
-)
 
-# Набор товаров для дальнейшей работы
-TEST_ADD_REMOVE_GET_PRODUCTS = (
-    (
-        SCREEN_TEST_DATA[0], SCREEN_TEST_DATA[1],
-        COMPUTER_TEST_DATA[2], COMPUTER_TEST_DATA[0],
-        'Products are: samsam, atas, gigachad',
-    ),
-)
+@pytest.mark.xfail(reason=TypeError)
+def test_screen_incorrect_diagonal():
+    """Attempt to create a screen with an incorrect type of diagonal field."""
+    assert Screen(*ERORR_DATA_SCREEN[0])
+
+
+@pytest.mark.xfail(reason=TypeError)
+def test_screen_incorrect_connection():
+    """Attempt to create screen with incorrect connector type."""
+    assert Screen(*ERORR_DATA_SCREEN[1])
+
+
+@pytest.mark.xfail(reason=TypeError)
+def test_computer_incorrect_os():
+    """Attempt to create computer with incorrect os type."""
+    assert Computer(*ERORR_DATA_COMPUTER[0])
+
+
+@pytest.mark.xfail(reason=TypeError)
+def test_computer_incorrect_processor():
+    """Attempt to create computer with incorrect processor type."""
+    assert Computer(*ERORR_DATA_COMPUTER[1])
+
+
+@pytest.mark.xfail(reason=TypeError)
+def test_create_abstract_class():
+    """Attempt to create object from abstract class."""
+    assert Product(STANDARD_SPECIFIC[0], STANDARD_SPECIFIC[1])
 
 
 @pytest.mark.parametrize(
     'screen1, screen2, computer1, computer2, expected',
-    TEST_ADD_REMOVE_GET_PRODUCTS,
+    ITEM_CONTROL_TEST,
 )
-def test_add_remove_get_store(
+def test_crud_store(
     screen1: tuple,
     screen2: tuple,
     computer1: tuple,
     computer2: tuple,
     expected: str,
         ):
-    """Test add, remove product and return all products.
+    """Test add, remove and return all products.
 
     Args:
-        screen1: tuple - first product.
-        screen2: tuple - second product.
-        computer1: tuple - third product, for removing.
-        computer2: tuple - fourth product, for adding.
+        screen1: tuple - 1 product.
+        screen2: tuple - 2 product.
+        computer1: tuple - 3 product, for remove.
+        computer2: tuple - 4 product, for add.
         expected: str - result.
     """
     mon1 = Screen(*screen1)
@@ -107,7 +135,6 @@ def test_add_remove_get_store(
     assert expected == store.get_all_products()
 
 
-
 @pytest.mark.parametrize('name, price, os, processor', COMPUTER_TEST_DATA)
 def test_computer(name: str, price: int | float, os: str, processor: str):
     """Test creating computer with various data.
@@ -119,45 +146,3 @@ def test_computer(name: str, price: int | float, os: str, processor: str):
         processor: str - processor in a computer.
     """
     assert Computer(name, price, os, processor)
-
-
-@pytest.mark.xfail(reason=ValueError)
-def test_wrong_price():
-    """Try create product with negative price."""
-    assert Computer(STANDARD_SPECIFIC[0], WRONG_PRICE, STANDARD_SPECIFIC[2], STANDARD_SPECIFIC[3])
-
-
-@pytest.mark.xfail(reason=TypeError)
-def test_store_wrong_product():
-    """Try create store with wrong product in tuple."""
-    assert Store(STORE_INCORRECT_PRODUCT_DATA)
-
-
-@pytest.mark.xfail(reason=TypeError)
-def test_screen_wrong_diagonal():
-    """Try create screen with incorrect type of diagonal field."""
-    assert Screen(*SCREEN_INCORRECT_TYPES_DATA[0])
-
-
-@pytest.mark.xfail(reason=TypeError)
-def test_screen_wrong_con():
-    """Try create screen with wrong connector type."""
-    assert Screen(*SCREEN_INCORRECT_TYPES_DATA[1])
-
-
-@pytest.mark.xfail(reason=TypeError)
-def test_computer_wrong_os():
-    """Try create computer with wrong os type."""
-    assert Computer(*COMPUTER_INCORRECT_TYPES_DATA[0])
-
-
-@pytest.mark.xfail(reason=TypeError)
-def test_computer_wrong_processor():
-    """Try create computer with wring processor type."""
-    assert Computer(*COMPUTER_INCORRECT_TYPES_DATA[1])
-
-
-@pytest.mark.xfail(reason=TypeError)
-def test_create_abstract_product():
-    """Try create abstract Product."""
-    assert Product(STANDARD_SPECIFIC[0], STANDARD_SPECIFIC[1])
