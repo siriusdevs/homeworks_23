@@ -1,4 +1,0 @@
-{
-    "error": "JSONDecodeError",
-    "information": "Input file is not a valid JSON string or is empty"
-}
