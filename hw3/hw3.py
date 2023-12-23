@@ -259,8 +259,6 @@ class Librarian:
 class Reader:
     """A class to represent a reader."""
 
-    books: list[Book] = []
-
     def __init__(self, name: str) -> None:
         """
         Initialize a reader.
@@ -269,6 +267,7 @@ class Reader:
             name (str): The name of the reader.
         """
         self.name = name
+        self.books = []
 
     def take_book(self, book: Book, librarian: Librarian) -> None:
         """
