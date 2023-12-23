@@ -182,6 +182,8 @@ class Owner(OneOwner):
             car: The car to remove from the car park.
         """
         check_type(car, Car)
+        if car not in self.car_park:
+            raise ValueError('There are no such cars')
         self._car_park.remove(car)
 
     def get_all_cars(self):
@@ -270,6 +272,8 @@ class CarShowroom:
             car: The car to remove from the car showroom.
         """
         check_type(car, Car)
+        if car not in self.cars:
+            raise ValueError('The car is out of stock')
         self._cars.remove(car)
 
 
@@ -357,14 +361,6 @@ class Sale(AbstractSale):
     """Class for a sale."""
 
     def sell_car(self):
-        """
-        Sell the car.
-
-        Raises:
-            ValueError: If the car is not in the car showroom.
-        """
-        if self.car_for_sale in self.car_showroom.cars:
-            self.car_showroom.remove_car(self.car_for_sale)
-            self.owner.add_car(self.car_for_sale)
-        else:
-            raise ValueError('The car is not in the car showroom.')
+        """Sell the car."""
+        self.car_showroom.remove_car(self.car_for_sale)
+        self.owner.add_car(self.car_for_sale)
