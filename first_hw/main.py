@@ -1,4 +1,3 @@
-"""sdf"""
 import statistics
 from typing import Dict, Optional
 
