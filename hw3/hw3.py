@@ -13,9 +13,6 @@ class Book:
         __init__(self, title: str, author: str, year: int) -> None:
             Initializes a new Book instance with the specified title, author, and year.
 
-        __str__(self) -> str:
-            Returns a string representation of the book in the format "title by author (year)".
-
     """
 
     def __init__(self, title: str, author: str, year: int) -> None:
@@ -104,12 +101,6 @@ class Library:
         get_all_books(self) -> list[Book]:
             Gets a list of all books in the library.
 
-        borrow_book(self, reader: Reader, book: Book) -> None:
-            Borrows a book from the library.
-
-        return_book(self, reader: Reader, book: Book) -> None:
-            Returns a borrowed book to the library.
-
     """
 
     def __init__(self) -> None:
@@ -152,16 +143,17 @@ class Reader:
 
     Attributes:
         name (str): The name of the reader.
+        borrowed_books (list[Book]): The list of books borrowed by the reader.
 
     Methods:
         __init__(self, name: str) -> None:
             Initializes a new Reader instance with the specified name.
 
-        borrow_book(self, library: Library, book: Book) -> None:
-            Borrows a book from the library.
+        borrow_book(self, librarian: 'Librarian', book: Book) -> None:
+            Borrows a book from the library through the librarian.
 
-        return_book(self, library: Library, book: Book) -> None:
-            Returns a borrowed book to the library.
+        return_book(self, librarian: 'Librarian', book: Book) -> None:
+            Returns a borrowed book to the library through the librarian.
 
     """
 
@@ -172,6 +164,7 @@ class Reader:
             name (str): The name of the reader.
         """
         self._name = name
+        self.borrowed_books: list[Book] = []
 
     @property
     def name(self) -> str:
@@ -191,23 +184,23 @@ class Reader:
         """
         self._name = new_name
 
-    def borrow_book(self, library: Library, book: Book) -> None:
-        """Borrow a book from the library.
+    def borrow_book(self, librarian: 'Librarian', book: Book) -> None:
+        """Borrow a book from the library through the librarian.
 
         Args:
-            library (Library): The library from which the book is borrowed.
+            librarian (Librarian): The librarian facilitating the borrowing process.
             book (Book): The book to be borrowed.
         """
-        library.borrow_book(self, book)
+        librarian.lend_book(self, book)
 
-    def return_book(self, library: Library, book: Book) -> None:
-        """Return a borrowed book to the library.
+    def return_book(self, librarian: 'Librarian', book: Book) -> None:
+        """Return a borrowed book to the library through the librarian.
 
         Args:
-            library (Library): The library to which the book is returned.
+            librarian (Librarian): The librarian facilitating the return process.
             book (Book): The book to be returned.
         """
-        library.return_book(self, book)
+        librarian.accept_book(self, book)
 
 
 class Librarian:
@@ -215,26 +208,29 @@ class Librarian:
 
     Attributes:
         name (str): The name of the librarian.
+        library (Library): The library associated with the librarian.
 
     Methods:
-        __init__(self, name: str) -> None:
-            Initializes a new Librarian instance with the specified name.
+        __init__(self, name: str, library: Library) -> None:
+            Initializes a new Librarian instance with the specified name and associated library.
 
-        lend_book(self, reader: Reader, library: Library, book: Book) -> None:
-            Lends a book to a reader.
+        lend_book(self, reader: Reader, book: Book) -> None:
+            Allows a reader to borrow a book from the library.
 
-        accept_book(self, reader: Reader, library: Library, book: Book) -> None:
-            Accepts a returned book from a reader.
+        accept_book(self, reader: Reader, book: Book) -> None:
+            Accepts a returned book from a reader and returns it to the library.
 
     """
 
-    def __init__(self, name: str) -> None:
+    def __init__(self, name: str, library: 'Library') -> None:
         """Initialize a new Librarian instance.
 
         Args:
             name (str): The name of the librarian.
+            library (Library): The library associated with the librarian.
         """
         self._name = name
+        self._library = library
 
     @property
     def name(self) -> str:
@@ -245,6 +241,15 @@ class Librarian:
         """
         return self._name
 
+    @property
+    def library(self) -> 'Library':
+        """Get the associated library.
+
+        Returns:
+            Library: The associated library.
+        """
+        return self._library
+
     @name.setter
     def name(self, new_name: str) -> None:
         """Set the name of the librarian.
@@ -253,3 +258,31 @@ class Librarian:
             new_name (str): New name value to assign to the name variable.
         """
         self._name = new_name
+
+    @library.setter
+    def library(self, new_library: 'Library') -> None:
+        """Set the library of the librarian.
+
+        Args:
+            new_library (Library): New value to assign to the library variable.
+        """
+
+    def lend_book(self, reader: Reader, book: Book) -> None:
+        """Allow a reader to borrow a book from the library.
+
+        Args:
+            reader (Reader): The reader borrowing the book.
+            book (Book): The book to be borrowed.
+        """
+        self.library.remove_book(book)
+        reader.borrowed_books.append(book)
+
+    def accept_book(self, reader: Reader, book: Book) -> None:
+        """Accept a returned book from a reader and returns it to the library.
+
+        Args:
+            reader (Reader): The reader returning the book.
+            book (Book): The returned book.
+        """
+        self.library.add_book(book)
+        reader.borrowed_books.remove(book)
