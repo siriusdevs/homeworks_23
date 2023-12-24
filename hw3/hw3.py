@@ -146,30 +146,6 @@ class Library:
         """
         return self.books
 
-    def borrow_book(self, reader: 'Reader', book: Book) -> None:
-        """Borrow a book from the library.
-
-        Args:
-            reader (Reader): The reader borrowing the book.
-            book (Book): The book to be borrowed.
-
-        Raises:
-            ValueError: If the specified book is not available in the library.
-        """
-        if book in self.books:
-            self.books.remove(book)
-        else:
-            raise ValueError('Book not available in the library')
-
-    def return_book(self, reader: 'Reader', book: Book) -> None:
-        """Return a borrowed book to the library.
-
-        Args:
-            reader (Reader): The reader returning the book.
-            book (Book): The book to be returned.
-        """
-        self.books.append(book)
-
 
 class Reader:
     """A class representing a reader.

@@ -43,20 +43,6 @@ def test_reader_initialization():
     assert reader.name == READER_NAME_ONE
 
 
-def test_reader_borrow_and_return_book():
-    """Test borrowing and returning a book in the Reader class."""
-    library = Library()
-    book = Book(title=BOOK_TITLE_THREE, author=BOOK_AUTHOR_THREE, year=BOOK_YEAR_THREE)
-    reader = Reader(name=READER_NAME_TWO)
-
-    library.add_book(book)
-    reader.borrow_book(library, book)
-    assert not library.get_all_books()
-
-    reader.return_book(library, book)
-    assert library.get_all_books()
-
-
 def test_librarian_initialization():
     """Test the initialization of the Librarian class."""
     librarian = Librarian(name=LIBRARIAN_NAME_ONE)
