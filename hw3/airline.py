@@ -6,17 +6,12 @@ from .passenger import Passenger
 from .ticket import Ticket
 
 
-class Airline(Passenger, Flight, Ticket):
-    """Class that represents aircompany.
-
-    Args:
-        Passenger (Passenger): passenger class
-        Flight (Flight): flight class
-        Ticket (Ticket): ticket class
-    """
+class Airline:
+    """Class that represents aircompany."""
 
     def __init__(
         self,
+        name: str,
         flights: list[Flight],
         passengers: list[Passenger],
         tickets: list[Ticket],
@@ -24,13 +19,38 @@ class Airline(Passenger, Flight, Ticket):
         """Initialize Airline.
 
         Args:
+            name (str): name of airline
             flights (list[Flight]): list of flights.
             passengers (list[Passenger]): list of passengers.
             tickets (list[Ticket]): list of lickets.
         """
+        self.name = name
         self.flights = flights if flights else []
         self.passengers = passengers if passengers else []
         self.tickets = tickets if tickets else []
+
+    @property
+    def name(self) -> str:
+        """Getter for airline name.
+
+        Returns:
+            _name (str): airline current name
+        """
+        return self._name
+
+    @name.setter
+    def name(self, new_name: str) -> None:
+        """Setter for airline name.
+
+        Args:
+            new_name (str): new name for airline
+
+        Raises:
+            InvalidType: when new_name type is not str
+        """
+        if not isinstance(new_name, str):
+            raise hw3.InvalidType(new_name, str)
+        self._name = new_name
 
     @property
     def flights(self) -> list[Flight]:
