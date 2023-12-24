@@ -8,9 +8,15 @@ from hw2 import process_data
 age_percentages = 'age_percentages'
 online_percentages = 'online_percentages'
 input_file_path = 'data_hw2.json'
+input_file_two_path = 'data_hw2_2.json'
 output_file_path = 'output_data.json'
+output_file_two_path = 'output_data_2.json'
 age_mapping = {'0-18': 50.0, '18-25': 0, '25-45': 50.0, '45-60': 0, '60+': 0}
 online_mapping = {'<2 days': 0, '1 week': 0, '1 month': 0, '6 months': 50.0, '>6 months': 50.0}
+zero_error = {
+    'age_percentages': {'Exception': 'ZeroDivisionError'},
+    'online_percentages': {'Exception': 'ZeroDivisionError'},
+}
 
 
 def test_process_data():
@@ -30,3 +36,17 @@ def test_process_data():
     )
 
     os.remove(output_file_path)
+
+
+def test_process_data_with_uncorrect_values():
+    """Test the process_data with uncorrect value."""
+    process_data(input_file_two_path, output_file_two_path)
+
+    assert os.path.exists(output_file_two_path)
+
+    with open(output_file_two_path, 'r') as output_file:
+        statistics = json.load(output_file)
+
+    assert statistics == zero_error
+
+    os.remove(output_file_two_path)

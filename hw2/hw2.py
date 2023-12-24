@@ -98,4 +98,7 @@ def calculate_percentages(data_dict: dict, total_users: dict) -> dict:
     Returns:
         dict: Dictionary containing the percentage of users in each category.
     """
-    return {key: (count / total_users) * 100 for key, count in data_dict.items()}
+    try:
+        return {key: (count / total_users) * 100 for key, count in data_dict.items()}
+    except ZeroDivisionError:
+        return {'Exception': 'ZeroDivisionError'}
