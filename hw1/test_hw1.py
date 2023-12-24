@@ -3,7 +3,7 @@ import pytest
 
 from hw1 import top3_salaries
 
-test_deps = (
+TEST_DEPS = (
     (
         (
             ('Dept', {'Krivenko': 1200}),
@@ -22,7 +22,7 @@ test_deps = (
 )
 
 
-@pytest.mark.parametrize('args, including, expected', test_deps)
+@pytest.mark.parametrize('args, including, expected', TEST_DEPS)
 def test_deps_salaries(
     args,
     including: tuple[str, ...],
