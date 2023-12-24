@@ -1,8 +1,8 @@
-name: Main test
+name: Tests for HW2
 on: [push]
 jobs:
-  linter_hw1:
-    name: Linter for HW1
+  linter_hw2:
+    name: Linter for HW2
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -16,10 +16,10 @@ jobs:
         pip install flake8==3.9.0 wemake-python-styleguide==0.15.3 bandit==1.7.2
     - name: Flake8
       run: |
-        cd hw1
+        cd hw2
         flake8 
-  tests_for_hw1:
-    name: Tests for hw1
+  tests_for_hw2:
+    name: Tests for hw2
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -34,5 +34,5 @@ jobs:
         pip install numpy
     - name: Pytest
       run: |
-        cd hw1
+        cd hw2
         pytest
