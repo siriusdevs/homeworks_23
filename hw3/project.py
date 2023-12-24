@@ -77,7 +77,7 @@ class Project:
                 raise TypeError(f'{msg} должен быть Task!')
         self._task_list = new_task_list
 
-    def add(self, task: Task) -> None | str:
+    def add_task(self, task: Task) -> None | str:
         """Добавить задачу в проект.
 
         Args:
@@ -97,7 +97,7 @@ class Project:
         else:
             return f'задача {task.task_name} уже есть в проекте!'
 
-    def remove(self, task: Task) -> None | str:
+    def remove_task(self, task: Task) -> None | str:
         """Удалить задачу из проекта.
 
         Args:
@@ -117,7 +117,7 @@ class Project:
         else:
             return f'задачи {task.task_name} нету в проекте!'
 
-    def get(self, filt: str = None) -> None | list:
+    def get_list_task(self, filt: str = None) -> None | list:
         """получить список всех задач в проекте с возможностью передачи фильтра статуса задач.
 
         Args:

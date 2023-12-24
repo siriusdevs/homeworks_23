@@ -74,7 +74,7 @@ class Member:
         if not isinstance(new_value, int):
             msg = type(new_value).__name__
             raise TypeError(f'{msg} должно быть int!')
-        if new_value < 0:
+        if new_value <= 0:
             raise ValueError(f'{new_value} должно быть не меньше 0!')
         self._max_count_tasks = new_value
 
@@ -101,6 +101,6 @@ class Member:
         if not isinstance(new_value, int):
             msg = type(new_value).__name__
             raise TypeError(f'{msg} должно быть int!')
-        if new_value < 0:
+        if new_value <= 0:
             raise ValueError(f'{new_value} должно быть не меньше 0!')
         self._max_count_projects = new_value

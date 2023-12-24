@@ -77,7 +77,7 @@ class Team:
                 raise TypeError(f'{msg} должен быть Member!')
         self._list_members = new_list_members
 
-    def add(self, member: Member) -> None | str:
+    def add_member(self, member: Member) -> None | str:
         """Добавить участника в команду.
 
         Args:
@@ -97,7 +97,7 @@ class Team:
         else:
             return f'Участник {member.name} уже есть в команде!'
 
-    def remove(self, member: Member) -> None | str:
+    def remove_member(self, member: Member) -> None | str:
         """Удалить участника из команды.
 
         Args:
@@ -117,7 +117,7 @@ class Team:
         else:
             return f'задачи {member.name} нету в проекте!'
 
-    def get(self) -> list:
+    def get_list_member(self) -> list:
         """Получить список всех участников команды.
 
         Returns:

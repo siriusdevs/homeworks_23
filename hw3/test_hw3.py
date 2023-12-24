@@ -130,7 +130,7 @@ def test_project(information: tuple[str, list[Task]], expected: Project) -> None
         expected (Project): проект
     """
     res = Project(*information)
-    assert res.get() == expected.get() and str(res) == str(expected)
+    assert res.get_list_task() == expected.get_list_task() and str(res) == str(expected)
 
 
 @pytest.mark.parametrize(f'project{COMMA} task{COMMA} {EXPECTED}', ADD_PROJECT_DATA)
@@ -142,8 +142,8 @@ def test_add_project(project: Project, task: Task, expected: list[Task]):
         task (Task): задача
         expected (list[Task]): список задач
     """
-    project.add(task)
-    assert project.get() == [arg.task_name for arg in expected]
+    project.add_task(task)
+    assert project.get_list_task() == [arg.task_name for arg in expected]
 
 
 @pytest.mark.parametrize(f'project{COMMA} task{COMMA} {EXPECTED}', REMOVE_PROJECT_DATA)
@@ -155,8 +155,8 @@ def test_remove_project(project: Project, task: Task, expected: list[Task]):
         task (Task): задача
         expected (list[Task]): список задач
     """
-    project.remove(task)
-    assert project.get() == [arg.task_name for arg in expected]
+    project.remove_task(task)
+    assert project.get_list_task() == [arg.task_name for arg in expected]
 
 
 @pytest.mark.parametrize(f'{INFORMATION}{COMMA} {EXPECTED}', MEMBER_DATA)
@@ -179,7 +179,7 @@ def test_team(information: tuple[str, list[Member]], expected: Team) -> None:
         expected (Team): команда
     """
     res = Team(*information)
-    assert res.get() == expected.get() and str(res) == str(expected)
+    assert res.get_list_member() == expected.get_list_member() and str(res) == str(expected)
 
 
 @pytest.mark.parametrize(f'team{COMMA} member{COMMA} {EXPECTED}', ADD_TEAM_DATA)
@@ -191,8 +191,8 @@ def test_add_team(team: Team, member: Member, expected: list[Member]):
         member (Member): участник
         expected (list[Member]): список участников
     """
-    team.add(member)
-    assert team.get() == [arg.name for arg in expected]
+    team.add_member(member)
+    assert team.get_list_member() == [arg.name for arg in expected]
 
 
 @pytest.mark.parametrize(f'team{COMMA} member{COMMA} {EXPECTED}', REMOVE_TEAM_DATA)
@@ -204,5 +204,5 @@ def test_remove_team(team: Team, member: Member, expected: list[Member]):
         member (Member): участник
         expected (list[Member]): список участников
     """
-    team.remove(member)
-    assert team.get() == [arg.name for arg in expected]
+    team.remove_member(member)
+    assert team.get_list_member() == [arg.name for arg in expected]

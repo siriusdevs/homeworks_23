@@ -76,6 +76,9 @@ INVALID_MEMBER_DATA = (
     (
         'саша', 4, 2, ValueError,
     ),
+    (
+        'Саша', -5, 4, ValueError,
+    ),
 )
 
 INVALID_TEAM_DATA = (
@@ -146,7 +149,7 @@ def test_invalid_add_project(project: Project, task: Task, error: Exception):
         error (Exception): ошибка
     """
     with pytest.raises(error):
-        project.add(task)
+        project.add_task(task)
 
 
 @pytest.mark.parametrize('project, task, error', INVALID_REMOVE_PROJECT_DATA)
@@ -159,7 +162,7 @@ def test_invalid_remove_project(project: Project, task: Task, error: Exception):
         error (Exception): ошибка
     """
     with pytest.raises(error):
-        project.remove(task)
+        project.remove_task(task)
 
 
 @pytest.mark.parametrize('name, max_count_tasks, max_count_projects, eror', INVALID_MEMBER_DATA)
@@ -199,7 +202,7 @@ def test_invalid_add_team(team: Team, member: Member, error: Exception):
         error (Exception): ошибка
     """
     with pytest.raises(error):
-        team.add(member)
+        team.add_member(member)
 
 
 @pytest.mark.parametrize('team, member, error', INVALID_REMOVE_TEAM_DATA)
@@ -212,4 +215,4 @@ def test_invalid_remove_team(team: Team, member: Member, error: Exception):
         error (Exception): ошибка
     """
     with pytest.raises(error):
-        team.remove(member)
+        team.remove_member(member)
