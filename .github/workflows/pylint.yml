@@ -6,7 +6,7 @@ jobs:
   flake:
     strategy:
       matrix:
-        name: ['hw1', 'hw3']
+        name: ['hw1', 'hw2', 'hw3']
     name: ${{ matrix.name }}. Flake8
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +24,7 @@ jobs:
   pytest:
     strategy:
       matrix:
-        name: ['hw1', 'hw3']
+        name: ['hw1', 'hw2', 'hw3']
     name: ${{ matrix.name }}. Pytest
     runs-on: ubuntu-latest
     steps:

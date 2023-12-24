@@ -1,0 +1,9 @@
+{
+  "test": {
+    "region": "Saint-Petersburg",
+    "registered": "2020-01-01",
+    "last_login": "01-01-2022",
+    "email": "user@yandex.ru",
+    "age": 36
+  }
+}

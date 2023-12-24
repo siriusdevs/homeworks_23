@@ -1,0 +1,65 @@
+{
+    "user0": {
+        "region": "Saint-Petersburg",
+        "registered": "2021-01-01",
+        "last_login": "2022-08-31",
+        "email": "piter@yandex.ru",
+        "age": 29
+    },
+    "user1": {
+       "region": "Moscow",
+       "registered": "2021-01-01",
+       "last_login": "2020-02-02",
+       "email": "moscow@yandex.ru",
+       "age": 32
+    },
+    "user2": {
+       "region": "Sochi",
+       "registered": "2021-01-01",
+       "last_login": "2022-08-27",
+       "email": "sochi@yandex.ru",
+       "age": 80
+    },
+    "user3": {
+        "region": "Rostov_on_Don",
+        "registered": "2021-01-01",
+        "last_login": "2022-08-31",
+        "email": "rostov_don@yandex.ru",
+        "age": 44
+    },
+    "user4": {
+       "region": "Krasnodar",
+       "registered": "2021-01-01",
+       "last_login": "1986-04-26",
+       "email": "krasnodar@yandex.ru",
+       "age": 84
+    },
+    "user5": {
+       "region": "Vladivostok",
+       "registered": "2021-01-01",
+       "last_login": "2022-08-03",
+       "email": "vladivostok@yandex.ru",
+       "age": 8
+    },
+    "user6": {
+       "region": "Kaliningrad",
+       "registered": "2021-01-01",
+       "last_login": "2022-06-01",
+       "email": "kaliningrad@yandex.ru",
+       "age": 21
+    },
+    "user7": {
+       "region": "Novosibirsk",
+       "registered": "2021-01-01",
+       "last_login": "2022-09-01",
+       "email": "novosibirsk@yandex.ru",
+       "age": 16
+    },
+    "user8": {
+       "region": "Sirius",
+       "registered": "2021-01-01",
+       "last_login": "2021-09-01",
+       "email": "sirius@yandex.ru",
+       "age": 25
+    }
+}
