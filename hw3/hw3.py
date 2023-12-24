@@ -266,6 +266,7 @@ class Librarian:
         Args:
             new_library (Library): New value to assign to the library variable.
         """
+        self._library = new_library
 
     def lend_book(self, reader: Reader, book: Book) -> None:
         """Allow a reader to borrow a book from the library.
