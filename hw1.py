@@ -11,13 +11,6 @@ def company_statistics(*args, included_departments=None):
     Кортеж, содержащий:
     - список трех самых высоких зарплат из всех отделов,
     - процент суммы этих зарплат от общих затрат на зарплаты всех отделов.
-
-    Example:
-    department1 = ('Отдел1', {'John': 5000, 'Alice': 6000, 'Bob': 4500})
-    department2 = ('Отдел2', {'Emma': 5500, 'David': 4800, 'Olivia': 5200})
-    result = company_statistics(department1, department2, included_departments=None)
-    sorted_salaries, percentage = result
-    print(sorted_salaries, percentage)  # Выводит три самые высокие зарплаты из всех отделов
     """
 
     all_salaries = []
