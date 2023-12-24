@@ -10,7 +10,7 @@ from ..ticket import Ticket
 
 def test_airline_setter_good():
     """Test for airline setter with good outcome."""
-    airline = Airline('Emirates', None, None, None)
+    airline = Airline('some_name', None, None, None)
     passenger = Passenger('Vadim', '111111')
     flight = Flight(1, 'some_airport', 'another_airport')
     ticket = Ticket(1, flight, passenger)
