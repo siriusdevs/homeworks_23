@@ -113,8 +113,6 @@ def test_process_data(inp, out, exp):
         exp (str): The path to the expected output JSON file.
     """
     process_data(inp, out)
-    with (  # noqa: WPS316
-        open(out, 'r') as output,
-        open(exp, 'r') as expected,
-    ):
-        assert json.load(output) == json.load(expected)
+    with open(out) as output:
+        with open(exp) as expected:
+            assert json.load(output) == json.load(expected)
