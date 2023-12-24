@@ -3,16 +3,15 @@
 from abc import ABC, abstractmethod
 
 
-def check(name, expansion):
+def check(name: str, expansion: str):
     """_summary_.
 
     Args:
-        name (_type_): _description_
-        expansion (_type_): _description_
+        name (str): the name of the object
+        expansion (str): object expansion
 
     Raises:
-        ValueError: _description_
-        ValueError: _description_
+        ValueError: type check
     """
     if not isinstance(name, str):
         raise ValueError('the type should be str')
@@ -24,23 +23,22 @@ class MediaFile(ABC):
     """_summary_.
 
     Args:
-        ABC (_type_): _description_
+        ABC : inheritance class
 
     Raises:
-        TypeError: _description_
-        TypeError: _description_
+        TypeError: checking for the correct type of variable
 
     Returns:
-        _type_: _description_
+        nothing
     """
 
     @abstractmethod
     def __init__(self, name: str, expansion: str) -> None:
-        """_summary_.
+        """initialize.
 
         Args:
-            name (str): _description_
-            expansion (str): _description_
+            name (str): the name of the object
+            expansion (str):  object expansion
         """
         self._name = name
         self._expansion = expansion
@@ -48,19 +46,19 @@ class MediaFile(ABC):
 
     @property
     def name(self) -> None:
-        """_summary_.
+        """Returns name.
 
         Returns:
-            _type_: _description_
+            name(str): the name of the object
         """
         return self._name
 
     @name.setter
-    def name(self, new_name) -> None:
-        """_summary_.
+    def name(self, new_name: str) -> None:
+        """Redefine name.
 
         Args:
-            new_name (_type_): _description_
+            new_name (str): the new name of the object
 
         Raises:
             TypeError: wrong type error
@@ -71,19 +69,19 @@ class MediaFile(ABC):
 
     @property
     def expansion(self) -> None:
-        """_summary_.
+        """Retuns expension.
 
         Returns:
-            _type_: _description_
+            expansion: object expansion
         """
         return self._expansion
 
     @expansion.setter
     def expension(self, new_expension) -> None:
-        """_summary_.
+        """Redefine the expansion.
 
         Args:
-            new_expension (_type_): _description_
+            new_expension (str): new expansion
 
         Raises:
             TypeError: wrong type error
@@ -94,20 +92,20 @@ class MediaFile(ABC):
 
 
 class AudioFile(MediaFile):
-    """_summary_.
+    """creates a class.
 
     Args:
-        MediaFile (_type_): _description_
+        MediaFile (_type_): nothing
     """
 
     def __init__(self, name: str, expansion: str, author: str, time: int | float) -> None:
-        """_summary_.
+        """initialize.
 
         Args:
-            name (str): _description_
-            expansion (str): _description_
-            author (str): _description_
-            time (int | float): _description_
+            name (str): the name of the object
+            expansion (str): object expansion
+            author (str): the author of the file
+            time (int | float): file duration
         """
         super().__init__(name, expansion)
         self._author = author
@@ -115,19 +113,19 @@ class AudioFile(MediaFile):
 
     @property
     def executor(self) -> None:
-        """_summary_.
+        """Retuns author.
 
         Returns:
-            _type_: _description_
+            author(str): the author of the file
         """
         return self._author
 
     @executor.setter
     def executor(self, new_author):
-        """_summary_.
+        """Do a check and redefine.
 
         Args:
-            new_author (_type_): _description_
+            new_author (_type_):   the new author of the file
 
         Raises:
             TypeError: wrong type error
@@ -139,19 +137,19 @@ class AudioFile(MediaFile):
 
     @property
     def time(self) -> None:
-        """_summary_.
+        """Retuns time.
 
         Returns:
-            _type_: _description_
+            self.time : time
         """
         return self._time
 
     @time.setter
-    def time(self, new_time) -> None:
-        """_summary_.
+    def time(self, new_time: int | float) -> None:
+        """Redefines the time.
 
         Args:
-            new_time (_type_): _description_
+            new_time (int | float): new time
 
         Raises:
             TypeError: wrong type error
@@ -161,29 +159,29 @@ class AudioFile(MediaFile):
         self._time = new_time
 
     def __str__(self) -> None:
-        """_summary_.
+        """Return the line.
 
         Returns:
-            _type_: _description_
+            str: nothing
         """
         return f'audio_file: {self.name}, {self.expansion}, {self._author}, {self.time}'
 
 
 class VideoFile(MediaFile):
-    """_summary_.
+    """creates a class.
 
     Args:
-        MediaFile (_type_): _description_
+        MediaFile (class): class Mediafile
     """
 
     def __init__(self, name: str, expansion: str, resolution: int, duration: int | float) -> None:
-        """_summary_.
+        """Initialize.
 
         Args:
-            name (str): _description_
-            expansion (str): _description_
-            resolution (int): _description_
-            duration (int | float): _description_
+            name (str):  the name of the object
+            expansion (str): expansion object
+            resolution (int): file resolution
+            duration (int | float): duration file
         """
         super().__init__(name, expansion)
         self._resolution = resolution
@@ -191,19 +189,19 @@ class VideoFile(MediaFile):
 
     @property
     def resolution(self) -> None:
-        """_summary_.
+        """Retuns self._resolution.
 
         Returns:
-            _type_: _description_
+            self._resolution: file resolution
         """
         return self._resolution
 
     @resolution.setter
     def resolution(self, new_resolution) -> None:
-        """_summary_.
+        """Do a check and redefine.
 
         Args:
-            new_resolution (_type_): _description_
+            new_resolution (int): new resolution
 
         Raises:
             TypeError: wrong type error
@@ -214,72 +212,72 @@ class VideoFile(MediaFile):
 
     @property
     def duration(self) -> None:
-        """_summary_.
+        """Retuns duration.
 
         Returns:
-            _type_: _description_
+            self._duration:  duration
         """
         return self._duration
 
     @duration.setter
     def duration(self, new_duration):
-        """_summary_.
+        """Do a check and redefine.
 
         Args:
-            new_duration (_type_): _description_
+            new_duration (int): new duration
 
         Raises:
-            TypeError: _description_
+            TypeError: checking for the type of variable
         """
         if not isinstance(new_duration, int | float):
             raise TypeError(f'the wrong type {new_duration}')
         self.duration = new_duration
 
     def __str__(self) -> str:
-        """_summary_.
+        """Output a string representation.
 
         Returns:
-            str: _description_
+            str: nothing
         """
         return f'Video_file: {self.name}, {self.expansion} {self.resolution}, {self._duration}'
 
 
 class MediaLibrary:
-    """_summary_."""
+    """creates a class."""
 
     def __init__(self) -> None:
-        """_summary_."""
+        """Initialize."""
         self.list_of_media: list = []
 
     def add_media_file(self, media_file: MediaFile) -> None:
-        """_summary_.
+        """Add it to the list and display it.
 
         Args:
-            media_file: _description_
+            media_file(MediaFile): instance of the class
 
         Returns:
-            _type_: _description_
+            self.list_of_media : a list with files
         """
         self.list_of_media.append(media_file)
         return self.list_of_media
 
     def remove_media_file(self, media_file: MediaFile) -> None:
-        """_summary_.
+        """Delete the file and display the list.
 
         Args:
-            media_file: _description_
+            media_file( MediaFile): instance of the class
 
         Returns:
-            _type_: _description_
+            self.list_of_media: a list with files
         """
         self.list_of_media.remove(media_file)
         return self.list_of_media
 
     def __str__(self) -> None:
-        """_summary_.
+        """Output a string representation.
 
         Returns:
-            _type_: _description_
+            str: a string with files
         """
         m_list = [' ; '.join(str(file_list) for file_list in self.list_of_media)]
 
