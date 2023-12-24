@@ -43,9 +43,6 @@ def get_stat(dataa: dict) -> dict:
 
     Returns:
         dict: Dict with stat.
-
-    Raises:
-        ValueError: If the input data is empty (no users).
     """
     city_distrib = {}
     year_distrib = {}
@@ -57,7 +54,7 @@ def get_stat(dataa: dict) -> dict:
         year_distrib[year_of_regisrt] = year_distrib.get(year_of_regisrt, 0) + 1
     total_users = len(dataa.keys())
     if total_users == 0:
-        raise ValueError('Received empty data')
+        return {}
     city_distrib = {city: count / total_users * 100 for city, count in city_distrib.items()}
     year_distrib = {year: count / total_users * 100 for year, count in year_distrib.items()}
     return {

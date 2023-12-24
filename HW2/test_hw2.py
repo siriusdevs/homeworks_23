@@ -8,43 +8,48 @@ from hw2 import get_stat, process_data
 
 REGION = 'region'
 REGISTERED = 'registered'
+TEST1_EXPECTED = {
+    'city_distribution': {
+        'Moscow': 2/3*100,
+        'Saint Petersburg': 1/3*100,
+    },
+    'year_distribution': {
+        '2020': 2/3*100,
+        '2021': 1/3*100,
+    },
+}
+TEST2_EXPECTED = {
+    'city_distribution': {
+        'Sochi': 50.0,
+        'Saint-Petersburg': 50.0,
+    },
+    'year_distribution': {
+        '2012': 50.0,
+        '2022': 50.0,
+    },
+}
+TEST_DATA = (
+    ('./HW2/data_test.json', './data_test_output.json', TEST1_EXPECTED),
+    ('./HW2/data_hw2.json', './data_hw2_output.json', TEST2_EXPECTED),
+)
 
 
-def test_process_data():
-    """Test process_data function."""
-    process_data('./HW2/data_test.json', './data_test_output.json')
+@pytest.mark.parametrize('input_file, output_file, expected', TEST_DATA)
+def test(input_file, output_file, expected):
+    """
+    Test function for the `process_data` function.
 
-    with open('./data_test_output.json', 'r') as output_file:
-        output_data = json.load(output_file)
-    assert output_data == {
-        'city_distribution': {
-            'Moscow': 2/3*100,
-            'Saint Petersburg': 1/3*100,
-        },
-        'year_distribution': {
-            '2020': 2/3*100,
-            '2021': 1/3*100,
-        },
-    }
-    os.remove('./data_test_output.json')
+    Args:
+        input_file (str): Path to the input file containing test data.
+        output_file (str): Path to the output file where `process_data` will write the result.
+        expected: The expected result to compare with the output_data.
+    """
+    process_data(input_file, output_file)
 
-
-def test_data():
-    """Test data."""
-    process_data('./HW2/data_hw2.json', './data_hw2_output.json')
-    with open('./data_hw2_output.json', 'r') as output_file:
-        output_data = json.load(output_file)
-    assert output_data == {
-        'city_distribution': {
-            'Sochi': 50.0,
-            'Saint-Petersburg': 50.0,
-        },
-        'year_distribution': {
-            '2012': 50.0,
-            '2022': 50.0,
-        },
-    }
-    os.remove('./data_hw2_output.json')
+    with open(output_file, 'r') as outputt_file:
+        output_data = json.load(outputt_file)
+    assert output_data == expected
+    os.remove(output_file)
 
 
 def create_sample_input_file(tmp_path):
@@ -107,8 +112,11 @@ def test_process_data_empty_data(tmp_path):
 
     sample_output_file = create_sample_output_file(tmp_path)
 
-    with pytest.raises(ValueError, match='Received empty data'):
-        process_data(str(empty_input_file), sample_output_file)
+    process_data(empty_input_file, sample_output_file)
+    with open(sample_output_file, 'r') as file_output:
+        data_from_file = json.load(file_output)
+    empty_dict = {}
+    assert data_from_file == empty_dict
 
 
 def test_get_stat():
