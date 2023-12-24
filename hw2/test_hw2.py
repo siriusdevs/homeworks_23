@@ -23,7 +23,7 @@ age = (
     (
         {AGE: 30, LAST_LOGIN: '2023-12-17'},
         {},
-        {LT_DAYS: [], LT_WEEK: [30], LT_MONTH: [30], LT_HALF_YEAR: [30], GT_HALF_YEAR: []},
+        {LT_DAYS: [], LT_WEEK: [], LT_MONTH: [30], LT_HALF_YEAR: [30], GT_HALF_YEAR: []},
     ),
     (
         {AGE: 35, LAST_LOGIN: '2023-6-30'},
@@ -33,7 +33,7 @@ age = (
     (
         {AGE: 40, LAST_LOGIN: '2023-12-18'},
         {},
-        {LT_DAYS: [], LT_WEEK: [40], LT_MONTH: [40], LT_HALF_YEAR: [40], GT_HALF_YEAR: []},
+        {LT_DAYS: [], LT_WEEK: [], LT_MONTH: [40], LT_HALF_YEAR: [40], GT_HALF_YEAR: []},
     ),
     (
         {AGE: 30, LAST_LOGIN: '2023-12-20'},
@@ -43,7 +43,7 @@ age = (
     (
         {AGE: 40, LAST_LOGIN: '2023-12-18'},
         {LT_DAYS: [], LT_WEEK: [], LT_MONTH: [], LT_HALF_YEAR: [35], GT_HALF_YEAR: []},
-        {LT_DAYS: [], LT_WEEK: [40], LT_MONTH: [40], LT_HALF_YEAR: [35, 40], GT_HALF_YEAR: []},
+        {LT_DAYS: [], LT_WEEK: [], LT_MONTH: [40], LT_HALF_YEAR: [35, 40], GT_HALF_YEAR: []},
     ),
 )
 
