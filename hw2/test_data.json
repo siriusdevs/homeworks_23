@@ -1,0 +1,98 @@
+{
+    "tests": [
+      {
+        "test": {
+          "user": {
+            "region": "Saint-Petersburg",
+            "registered": "2012-12-24",
+            "last_login": "2023-10-01",
+            "email": "user@yandex.ru",
+            "age": 36
+          },
+          "user2": {
+            "region": "Sochi",
+            "registered": "2022-10-30",
+            "last_login": "2022-11-21",
+            "email": "user2@gmail.com",
+            "age": 18
+          }
+        },
+        "answer": {
+          "max_age": 36,
+          "min_age": 18,
+          "average_age": 27.0,
+          "median_age": 27.0,
+          "years_statistics": {
+            "2012": 50.0,
+            "2022": 50.0
+          }
+        }
+      },
+      {
+        "test": {
+          "joe": {
+            "region": "Ysbek",
+            "registered": "2000-05-19",
+            "last_login": "2023-02-05",
+            "email": "yaysbek@ddd",
+            "age": 27
+          },
+          "jane": {
+            "region": "Adygea",
+            "registered": "2010-05-19",
+            "last_login": "2020-07-09",
+            "email": "aaaaa@yy",
+            "age": 22
+          },
+          "pyotr": {
+            "region": "Abkhazia",
+            "registered": "2019-05-19",
+            "last_login": "2022-11-11",
+            "email": "eeee@rrrr",
+            "age": 18
+          }
+        },
+        "answer": {
+          "max_age": 27,
+          "min_age": 18,
+          "average_age": 22.333333333333332,
+          "median_age": 22,
+          "years_statistics": {
+            "2000": 33.33333333333333,
+            "2010": 33.33333333333333,
+            "2019": 33.33333333333333
+          }
+        }
+      },
+      {
+        "test": {
+          "bobby": {
+            "region": "Krasnodar",
+            "registered": "2013-04-12",
+            "last_login": "2019-08-10",
+            "email": "assdfjkl@aaa",
+            "age": 6
+          }
+        },
+        "answer": {
+          "max_age": 6,
+          "min_age": 6,
+          "average_age": 6.0,
+          "median_age": 6,
+          "years_statistics": {
+            "2013": 100.0
+          }
+        }
+      },
+      {
+        "test": {},
+        "answer": {
+          "max_age": 0,
+          "min_age": 0,
+          "average_age": 0.0,
+          "median_age": 0,
+          "years_statistics": {}
+        }
+      }
+    ]
+  }
