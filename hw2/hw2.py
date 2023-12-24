@@ -90,7 +90,7 @@ def _combine_results(users: dict) -> dict:
         output[AGE_STATS][span] = round(sum(age) / non_zero_age, 2)
 
     for reg, num in cities.items():
-        cities[reg] = round(num / len(cities), 2)
+        cities[reg] = round(num / max(len(cities), 1), 2)
 
     return output
 
