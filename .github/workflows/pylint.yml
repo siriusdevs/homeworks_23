@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        homework: ['hw1.py test_hw1.py', 'hw3.py test_hw3.py']
+        homework: ['hw1.py test_hw1.py', './HW2/', 'hw3.py test_hw3.py']
     steps:
     - uses: actions/checkout@v2
     - name: Установка Python
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        homework: ['test_hw1.py', 'test_hw3.py']
+        homework: ['test_hw1.py', './HW2/', 'test_hw3.py']
     steps:
     - uses: actions/checkout@v2
     - name: Установка Python
