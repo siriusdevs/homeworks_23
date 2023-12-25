@@ -3,7 +3,7 @@
 
 import pytest
 
-from ..hw3 import Passenger, Flight, Ticket, Airline
+from hw3 import Passenger, Flight, Ticket, Airline
 
 PASSENGER_DEFAULT = Passenger('Alexey', '123456')
 FLIGHT_DEFAULT = Flight('AB1234', 'Moscow', 'Ekaterinburg')
