@@ -4,10 +4,7 @@
 def top3_salaries_stats(
     departments: dict[str, float | int],
     excluding: tuple[str, ...] = None,
-    )-> tuple[
-        tuple[str, float | int],
-        tuple[str, float | int],
-    ]:
+) -> tuple[tuple[str, float], tuple[str, float]]:
     """Find 3 most- and least-paid departments in a given dictionary by average value.
 
     Args:

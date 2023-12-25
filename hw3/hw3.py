@@ -1,4 +1,6 @@
 """Airline module, uses aggregation Passenger, Flight -> Ticket -> Airline."""
+
+
 from typing import Any
 
 
@@ -19,6 +21,7 @@ def check(new_value: Any, compare_class: type) -> None:
 
 class Passenger:
     """Passenger of a flight. Has passport (id)."""
+
     def __init__(self, name: str, passport_id: str) -> None:
         """Create a passenger with name and passport.
 
@@ -42,7 +45,7 @@ class Passenger:
         """Set new name of a passenger.
 
         Args:
-            new_id (str): New name.
+            name (str): New name.
         """
         check(name, str)
         self._name = name
@@ -136,7 +139,7 @@ class Flight:
         Returns:
             str: Where does the flight arrive at.
         """
-        return self._from_airport
+        return self._to_airport
 
     @to_airport.setter
     def to_airport(self, new_airport: str) -> None:
@@ -151,6 +154,7 @@ class Flight:
 
 class Ticket:
     """Ticket neccesary for attending a flight."""
+
     def __init__(self, flight: Flight, passenger: Passenger, ticket_id: str) -> None:
         """Create Passenger's ticket for a Flight.
 
@@ -212,7 +216,7 @@ class Ticket:
 
     @ticket_id.setter
     def ticket_id(self, new_id: str) -> None:
-        """Set new ticket's ID
+        """Set new ticket's ID.
 
         Args:
             new_id (str): New ID of a Ticket.
@@ -243,6 +247,25 @@ class Airline:
         self.flights = flights
         self.passengers = passengers
         self.tickets = tickets
+
+    @property
+    def title(self) -> str:
+        """Title of the Airline.
+
+        Returns:
+            str: Name of the aviacompany.
+        """
+        return self._title
+
+    @title.setter
+    def title(self, title: str):
+        """Set new title of the Airline.
+
+        Args:
+            title (str): New Airline's name.
+        """
+        check(title, str)
+        self._title = title
 
     @property
     def flights(self) -> list[Flight]:
@@ -276,7 +299,7 @@ class Airline:
 
     @passengers.setter
     def passengers(self, new_passengers: list[Passenger]) -> None:
-        """Set new passengers list of an Airline
+        """Set new passengers list of an Airline.
 
         Args:
             new_passengers (list[Passenger]): List of passengers.
