@@ -28,6 +28,8 @@ def error_info(output_file: str, invalid_file: str, message: str) -> None:
         invalid_file: str - input data file, which does not meet the conditions.
         message: str - text, that occurs in an error.
     """
+    if os.path.dirname(output_file) and not os.path.exists(output_file):
+        os.makedirs(os.path.dirname(output_file))
     with open(output_file, 'w') as out_file:
         json.dump(
             obj={'error': invalid_file, 'information': message},
