@@ -235,6 +235,13 @@ class Airline:
         passengers: list[Passenger],
         tickets: list[Ticket],
     ) -> None:
+    def __init__(
+        self,
+        title: str,
+        flights: list[Flight],
+        passengers: list[Passenger],
+        tickets: list[Ticket],
+    ) -> None:
         """Create an airline with Flights, Passengers and Tickets.
 
         Args:
@@ -405,3 +412,14 @@ PASSENGER_TWO = Passenger('Boris', '987654')
 FLIGHT_TWO = Flight('CD5678', 'Sochi', 'Irkutsk')
 TICKET_TWO = Ticket(FLIGHT_TWO, PASSENGER_TWO, 'ID0002')
 AIRLINE_TWO = Airline('CosmosY', [FLIGHT_TWO], [PASSENGER_TWO], [TICKET_TWO])
+
+PASSENGER_DEFAULT = Passenger('Alexey', '123456')
+FLIGHT_DEFAULT = Flight('AB1234', 'Moscow', 'Ekaterinburg')
+TICKET_DEFAULT = Ticket(FLIGHT_DEFAULT, PASSENGER_DEFAULT, 'ID0001')
+AIRLINE_DEFAULT = Airline('SpaceX', [FLIGHT_DEFAULT], [PASSENGER_DEFAULT], [TICKET_DEFAULT])
+
+PASSENGER_TWO = Passenger('Boris', '987654')
+FLIGHT_TWO = Flight('CD5678', 'Sochi', 'Irkutsk')
+TICKET_TWO = Ticket(FLIGHT_TWO, PASSENGER_TWO, 'ID0002')
+AIRLINE_TWO = Airline('CosmosY', [FLIGHT_TWO], [PASSENGER_TWO], [TICKET_TWO])
+
