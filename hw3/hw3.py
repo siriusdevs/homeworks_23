@@ -1,48 +1,27 @@
 """Airline module, uses aggregation Passenger, Flight -> Ticket -> Airline."""
+
+
 from typing import Any
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD:hw3.py
-def check(new_value: Any, class_: type[Any]):
-=======
-def check(new_value: Any, classs: type) -> None:
->>>>>>> b05d3cb (moved hw3 and tests to <hw3> directory, modified pylint):hw3/hw3.py
-=======
 def check(new_value: Any, compare_class: type) -> None:
->>>>>>> a90cf15 (updated hw3.py and its tests)
     """Check if new value is an instance of a class.
 
     Args:
         new_value (Any): New value of an object.
-<<<<<<< HEAD
-        classes (type[Any]): Class to compare with.
-=======
         compare_class (type): Class to compare with.
->>>>>>> a90cf15 (updated hw3.py and its tests)
 
     Raises:
         TypeError: When new value of an object doesn't match with given class.
     """
-<<<<<<< HEAD
-<<<<<<< HEAD:hw3.py
-    if not isinstance(new_value, class_):
-        raise TypeError(f'{new_value} must be {class_.__name__} instance, \
-got {type(new_value).__name__}')
-=======
-    if not isinstance(new_value, classs):
-        value_type = type(new_value).__name__
-        raise TypeError(f'{new_value} must be {classs.__name__} instance, got {value_type}')
->>>>>>> b05d3cb (moved hw3 and tests to <hw3> directory, modified pylint):hw3/hw3.py
-=======
     if not isinstance(new_value, compare_class):
         value_type = type(new_value).__name__
         raise TypeError(f'{new_value} must be {compare_class.__name__} instance, got {value_type}')
->>>>>>> a90cf15 (updated hw3.py and its tests)
 
 
 class Passenger:
     """Passenger of a flight. Has passport (id)."""
+
     def __init__(self, name: str, passport_id: str) -> None:
         """Create a passenger with name and passport.
 
@@ -66,7 +45,7 @@ class Passenger:
         """Set new name of a passenger.
 
         Args:
-            new_id (str): New name.
+            name (str): New name.
         """
         check(name, str)
         self._name = name
@@ -160,7 +139,7 @@ class Flight:
         Returns:
             str: Where does the flight arrive at.
         """
-        return self._from_airport
+        return self._to_airport
 
     @to_airport.setter
     def to_airport(self, new_airport: str) -> None:
@@ -175,6 +154,7 @@ class Flight:
 
 class Ticket:
     """Ticket neccesary for attending a flight."""
+
     def __init__(self, flight: Flight, passenger: Passenger, ticket_id: str) -> None:
         """Create Passenger's ticket for a Flight.
 
@@ -236,7 +216,7 @@ class Ticket:
 
     @ticket_id.setter
     def ticket_id(self, new_id: str) -> None:
-        """Set new ticket's ID
+        """Set new ticket's ID.
 
         Args:
             new_id (str): New ID of a Ticket.
@@ -247,14 +227,6 @@ class Ticket:
 
 class Airline:
     """A company that aggregates Flights, Passengers and Tickets."""
-<<<<<<< HEAD
-    def __init__(self,
-                 title: str,
-                 flights: list[Flight],
-                 passengers: list[Passenger],
-                 tickets: list[Ticket],
-                 ) -> None:
-=======
 
     def __init__(
         self,
@@ -263,7 +235,6 @@ class Airline:
         passengers: list[Passenger],
         tickets: list[Ticket],
     ) -> None:
->>>>>>> 12031ff (modified setup.cfg, updated hw3.py and tests)
         """Create an airline with Flights, Passengers and Tickets.
 
         Args:
@@ -276,6 +247,25 @@ class Airline:
         self.flights = flights
         self.passengers = passengers
         self.tickets = tickets
+
+    @property
+    def title(self) -> str:
+        """Title of the Airline.
+
+        Returns:
+            str: Name of the aviacompany.
+        """
+        return self._title
+
+    @title.setter
+    def title(self, title: str):
+        """Set new title of the Airline.
+
+        Args:
+            title (str): New Airline's name.
+        """
+        check(title, str)
+        self._title = title
 
     @property
     def flights(self) -> list[Flight]:
@@ -309,7 +299,7 @@ class Airline:
 
     @passengers.setter
     def passengers(self, new_passengers: list[Passenger]) -> None:
-        """Set new passengers list of an Airline
+        """Set new passengers list of an Airline.
 
         Args:
             new_passengers (list[Passenger]): List of passengers.
@@ -404,19 +394,4 @@ class Airline:
         """
         if ticket not in self._tickets:
             raise ValueError(f'Ticket {ticket} was not found among sold tickets')
-<<<<<<< HEAD
         self._tickets.remove(ticket)
-=======
-        self._tickets.remove(ticket)
-
-PASSENGER_DEFAULT = Passenger('Alexey', '123456')
-FLIGHT_DEFAULT = Flight('AB1234', 'Moscow', 'Ekaterinburg')
-TICKET_DEFAULT = Ticket(FLIGHT_DEFAULT, PASSENGER_DEFAULT, 'ID0001')
-AIRLINE_DEFAULT = Airline('SpaceX', [FLIGHT_DEFAULT], [PASSENGER_DEFAULT], [TICKET_DEFAULT])
-
-PASSENGER_TWO = Passenger('Boris', '987654')
-FLIGHT_TWO = Flight('CD5678', 'Sochi', 'Irkutsk')
-TICKET_TWO = Ticket(FLIGHT_TWO, PASSENGER_TWO, 'ID0002')
-AIRLINE_TWO = Airline('CosmosY', [FLIGHT_TWO], [PASSENGER_TWO], [TICKET_TWO])
-
->>>>>>> 12031ff (modified setup.cfg, updated hw3.py and tests)
