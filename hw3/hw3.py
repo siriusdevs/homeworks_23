@@ -60,7 +60,7 @@ class Product:
         Устанавливает цену товара.
 
         Args:
-            price_value (str)
+            price_value (str): значение цены продукта
 
         Raises:
             TypeError: если значение не является str
@@ -69,7 +69,7 @@ class Product:
         if not isinstance(price_value, float):
             raise TypeError('Цена {0} должно быть float, а не {1}'.format(
                 price_value,
-                type(price_value).price
+                type(price_value).__price__,
             ))
         if price_value <= 0:
             raise ValueError('Цена должна быть положительным числом')
@@ -89,7 +89,7 @@ class Dish:
         self._name = name
         self._products = []
 
-    @property
+    @property   
     def name(self) -> str:
         """
         Возвращает название блюда.
@@ -166,4 +166,82 @@ class Restaurant:
     def name(self) -> str:
         """
         Возвращает название ресторана.
+
+        Returns:
+            _name (str): название ресторана
         """
+        return self._name
+
+    @name.setter
+    def name(self, name_value: str):
+        """
+        Устанавливает название ресторана.
+
+        Args:
+            name_value (str): значение названия ресторана
+
+        Raises:
+            TypeError: если значение не является str
+        """
+        if not isinstance(name_value, str):
+            raise TypeError('Имя {0} должно быть str, а не {1}'.format(
+                name_value,
+                type(name_value).name
+            ))
+        self._name = name_value
+
+    @property
+    def dishes(self) -> List[Dish]:
+        """
+        Возвращает список блюд, предлагаемых рестораном.
+
+        Returns:
+            List: список блюд
+        """
+        return self._dishes
+
+    def add_dish(self, dish: Dish):
+        """
+        Добавляет блюдо в меню.
+
+        Args:
+            dish (Dish): объект продукта
+        """
+        self._dishes.append(dish)
+
+    def remove_dish(self, dish: Dish):
+        """
+        Удаляет блюдо из меню.
+
+        Args:
+            dish: объект продукта
+        """
+        self._dishes.remove(dish)
+
+    @property
+    def inventory(self) -> List[Product]:
+        """
+        Возвращает инвентарь ресторана.
+
+        Returns:
+            List (list): список продуктов для блюда.
+        """
+        return self._inventory
+
+    def order_dish(self, dish: Dish) -> str:
+        """
+        Заказывает блюдо, и обновляет инвентарь соответственно.
+
+        Args:
+            dish: объект продукта
+
+        Returns:
+            str: уведомление о статусе заказа
+        """
+        dish_products = dish.products
+        for product in dish_products:
+            if product not in self._inventory:
+                return 'Не хватает товаров на складе'
+        for product in dish_products:
+            self._inventory.remove(product)
+        return 'Блюдо заказано успешно'
