@@ -48,7 +48,7 @@ jobs:
     - name: Flake8
       run: |
         flake8 hw3.py
-        cd tests_hw3 && flake8
+        cd hw3 && flake8
   tests_3:
     name: Тесты HW3
     runs-on: ubuntu-latest
