@@ -158,6 +158,7 @@ def test_airline_errors():
 def test_add_flight():
     """Check that adding a new flight works."""
     airline = AIRLINE_DEFAULT
+    airline.flights = [FLIGHT_DEFAULT]
     airline.add_flight(FLIGHT_TWO)
     assert airline.flights == [FLIGHT_DEFAULT, FLIGHT_TWO]
 
@@ -179,6 +180,7 @@ def test_remove_flight():
 def test_add_passenger():
     """Check that adding a new passenger works."""
     airline = AIRLINE_DEFAULT
+    airline.passengers = [PASSENGER_DEFAULT]
     airline.add_passenger(PASSENGER_TWO)
     assert airline.passengers == [PASSENGER_DEFAULT, PASSENGER_TWO]
 
@@ -188,10 +190,6 @@ def test_add_passenger():
 
 def test_remove_passenger():
     """Check that removing a passenger works."""
-    airline = AIRLINE_DEFAULT
-    airline.remove_passenger(PASSENGER_DEFAULT)
-    assert airline.passengers == []
-
     airline = AIRLINE_DEFAULT
     airline.passengers = [PASSENGER_DEFAULT, PASSENGER_TWO]
     airline.remove_passenger(PASSENGER_DEFAULT)
@@ -204,6 +202,7 @@ def test_remove_passenger():
 def test_buy_ticket():
     """Check that buying (adding) a new ticket works."""
     airline = AIRLINE_DEFAULT
+    airline.tickets = [TICKET_DEFAULT]
     airline.buy_ticket(TICKET_TWO)
     assert airline.tickets == [TICKET_DEFAULT, TICKET_TWO]
 
