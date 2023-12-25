@@ -180,6 +180,9 @@ class Owner(OneOwner):
 
         Args:
             car: The car to remove from the car park.
+
+        Raises:
+            ValueError: if the car is not in car_park.
         """
         check_type(car, Car)
         if car not in self.car_park:
@@ -270,6 +273,9 @@ class CarShowroom:
 
         Args:
             car: The car to remove from the car showroom.
+
+        Raises:
+            ValueError: The machine does not exist..
         """
         check_type(car, Car)
         if car not in self.cars:
