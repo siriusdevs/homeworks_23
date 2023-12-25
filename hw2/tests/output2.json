@@ -1,0 +1,11 @@
+{
+    "Saint-Petersburg": 20.0,
+    "Sochi": 20.0,
+    "Moscow": 40.0,
+    "Elista": 20.0,
+    "less_than_two_days": 20.0,
+    "less_than_a_week": 0.0,
+    "less_than_a_month": 0.0,
+    "less_than_half_a_year": 40.0,
+    "more_than_half_a_year": 40.0
+}
