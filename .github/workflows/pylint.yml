@@ -1,7 +1,7 @@
 name: Проверка
 on: [push]
 jobs:
-  linter:
+  linter_hw1:
     name: Линтер hw1
     runs-on: ubuntu-latest
     steps:
@@ -16,7 +16,7 @@ jobs:
         pip install flake8==3.9.0 wemake-python-styleguide==0.15.3 bandit==1.7.2
     - name: Flake8
       run: flake8 hw1
-  tests:
+  tests_hw1:
     name: Тесты
     runs-on: ubuntu-latest
     steps:
@@ -32,8 +32,7 @@ jobs:
         pip install numpy
     - name: Pytest hw1
       run: pytest hw1
-jobs:
-  linter:
+  linter_hw2:
     name: Линтер hw2
     runs-on: ubuntu-latest
     steps:
@@ -48,7 +47,7 @@ jobs:
         pip install flake8==3.9.0 wemake-python-styleguide==0.15.3 bandit==1.7.2
     - name: Flake8
       run: flake8 hw2
-  tests:
+  tests_hw2:
     name: Тесты
     runs-on: ubuntu-latest
     steps:
@@ -64,8 +63,7 @@ jobs:
         pip install numpy
     - name: Pytest hw2
       run: pytest hw2
-jobs:
-  linter:
+  linter_hw3:
     name: Линтер hw3
     runs-on: ubuntu-latest
     steps:
@@ -80,7 +78,7 @@ jobs:
         pip install flake8==3.9.0 wemake-python-styleguide==0.15.3 bandit==1.7.2
     - name: Flake8
       run: flake8 hw3
-  tests:
+  tests_hw3:
     name: Тесты
     runs-on: ubuntu-latest
     steps:
