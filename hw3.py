@@ -3,7 +3,7 @@
 from abc import ABC, abstractmethod
 
 
-def check(name: str, expansion: str):
+def check_media_file(name: str, expansion: str):
     """_summary_.
 
     Args:
@@ -17,6 +17,22 @@ def check(name: str, expansion: str):
         raise ValueError('the type should be str')
     if not isinstance(expansion, str):
         raise ValueError('the type should be int')
+
+
+def check_video(resolution: int, duration: int | float):
+    """Check.
+
+    Args:
+        resolution (int):  file resolution
+        duration (int | float): file duration
+
+    Raises:
+        TypeError: type check
+    """
+    if not isinstance(resolution, int):
+        raise TypeError('Resolution must be a string.')
+    if not isinstance(duration, (int, float)):
+        raise TypeError('Duration must be a numeric value.')
 
 
 class MediaFile(ABC):
@@ -42,7 +58,7 @@ class MediaFile(ABC):
         """
         self._name = name
         self._expansion = expansion
-        check(self.name, self.expansion)
+        check_media_file(self.name, self.expansion)
 
     @property
     def name(self) -> None:
@@ -61,10 +77,10 @@ class MediaFile(ABC):
             new_name (str): the new name of the object
 
         Raises:
-            TypeError: wrong type error
+            TypeError: check
         """
         if not isinstance(new_name, str):
-            raise TypeError('wrong type')
+            raise TypeError('check')
         self._name = new_name
 
     @property
@@ -87,7 +103,7 @@ class MediaFile(ABC):
             TypeError: wrong type error
         """
         if not isinstance(new_expension, str):
-            raise TypeError('the wrong type')
+            raise TypeError('check')
         self._expansion = new_expension
 
 
@@ -128,11 +144,11 @@ class AudioFile(MediaFile):
             new_author (_type_):   the new author of the file
 
         Raises:
-            TypeError: wrong type error
+            TypeError: check
 
         """
         if not isinstance(new_author, str):
-            raise TypeError('the wrong type')
+            raise TypeError('ty not string')
         self._author = new_author
 
     @property
@@ -152,10 +168,10 @@ class AudioFile(MediaFile):
             new_time (int | float): new time
 
         Raises:
-            TypeError: wrong type error
+            TypeError: check
         """
         if not isinstance(new_time, float | int):
-            raise TypeError('the wrong type')
+            raise TypeError('wrong type')
         self._time = new_time
 
     def __str__(self) -> None:
@@ -164,7 +180,7 @@ class AudioFile(MediaFile):
         Returns:
             str: nothing
         """
-        return f'audio_file: {self.name}, {self.expansion}, {self._author}, {self.time}'
+        return f' audio_file:{self.name},{self.expansion},{self._author},{self.time}'
 
 
 class VideoFile(MediaFile):
@@ -186,6 +202,7 @@ class VideoFile(MediaFile):
         super().__init__(name, expansion)
         self._resolution = resolution
         self._duration = duration
+        check_video(resolution, duration)
 
     @property
     def resolution(self) -> None:

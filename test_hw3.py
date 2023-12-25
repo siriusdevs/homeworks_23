@@ -1,82 +1,122 @@
 """testing module."""
-from hw3 import AudioFile, VideoFile, MediaLibrary
-
 import pytest
 
-VIDEO_RESOLUTION = 180
-TIME = 300
-DURATION = 120
+from hw3 import AudioFile, MediaLibrary, VideoFile, check_media_file
+
+DURATION = 13.2
 
 
-@pytest.fixture
-def sample_audio_file():
-    """_summary_.
-
-    Returns:
-        _type_: _description_
-    """
-    return AudioFile('audio_name', 'mp3', 'author_name', DURATION)
-
-
-@pytest.fixture
-def sample_video_file():
-    """_summary_.
-
-    Returns:
-        _type_: _description_
-    """
-    return VideoFile('video_name', 'mp4', VIDEO_RESOLUTION, TIME)
-
-
-@pytest.fixture
-def sample_media_library():
-    """_summary_.
-
-    Returns:
-        _type_: _description_
-    """
-    return MediaLibrary()
-
-
-def test_audio_file_init(sample_audio_file):
-    """_summary_.
+@pytest.mark.parametrize('name, expansion', [('file1', 'mp5'), ('file2', 'mp4')])
+def test_check_valid_types(name: str, expansion: str):
+    """Protest types.
 
     Args:
-        sample_audio_file (_type_): _description_
+        name (str): file name
+        expansion (str): file expansion
     """
-    assert sample_audio_file.name == 'audio_name'
-    assert sample_audio_file.expansion == 'mp3'
-    assert sample_audio_file.executor == 'author_name'
-    assert sample_audio_file.time == DURATION
+    assert check_media_file(name, expansion) is None
 
 
-def test_video_file_init(sample_video_file):
-    """_summary_.
+@pytest.mark.parametrize('name, expansion', [(1, 'mp1'), ('file2', 123)])
+def test_check_invalid_types(name: str, expansion: str):
+    """Protect incorrect types.
 
     Args:
-        sample_video_file (_type_): _description_
+        name (str): file name
+        expansion (str): file expansion
     """
-    assert sample_video_file.name == 'video_name'
-    assert sample_video_file.expansion == 'mp4'
-    assert sample_video_file.resolution == VIDEO_RESOLUTION
-    assert sample_video_file.duration == TIME
+    with pytest.raises(ValueError):
+        check_media_file(name, expansion)
 
 
-def test_media_library_add_remove(sample_media_library, sample_audio_file, sample_video_file):
-    """_summary_.
+@pytest.mark.parametrize(
+    'name, expansion, author, time',
+    [('audio1', 'mp2', 'author1', 5), ('audio2', 'wav', 'author2', 10)],
+        )
+def test_audio_file_creation(name: str, expansion: str, author: str, time: int | float):
+    """Test the audio file.
 
     Args:
-        sample_media_library (_type_): _description_
-        sample_audio_file (_type_): _description_
-        sample_video_file (_type_): _description_
+        name (str): file name
+        expansion (str): file expansion
+        author (str): file author
+        time (int | float): file time
     """
-    assert len(sample_media_library.list_of_media) == 0
+    audio_file = AudioFile(name, expansion, author, time)
+    assert audio_file.name == name
+    assert audio_file.expansion == expansion
+    assert audio_file.executor == author
+    assert audio_file.time == time
 
-    sample_media_library.add_media_file(sample_audio_file)
-    sample_media_library.add_media_file(sample_video_file)
 
-    assert len(sample_media_library.list_of_media) == 2
+@pytest.mark.parametrize(
+    'name, expansion, resolution, duration',
+    [('video3', 'mp4', 1080, 15.5), ('video4', 'avi', 720, 20)],
+        )
+def test_video_file_creation(name: str, expansion: str, resolution: int, duration: int | float):
+    """Test video file.
 
-    sample_media_library.remove_media_file(sample_audio_file)
-    assert len(sample_media_library.list_of_media) == 1
-    assert sample_audio_file not in sample_media_library.list_of_media
+    Args:
+        name (str): file name
+        expansion (str): file expansion
+        resolution (int): file resolutional
+        duration (int | float): file duration
+    """
+    video_file = VideoFile(name, expansion, resolution, duration)
+    assert video_file.name == name
+    assert video_file.expansion == expansion
+    assert video_file.resolution == resolution
+    assert video_file.duration == duration
+
+
+def test_media_library_add_remove_files():
+    """Add to media and deleate."""
+    media_library = MediaLibrary()
+
+    audio_file = AudioFile('audio1', 'mp3', 'author1', 5)
+    video_file = VideoFile('video2', 'mp4', 1000, DURATION)
+
+    media_library.add_media_file(audio_file)
+    media_library.add_media_file(video_file)
+
+    assert len(media_library.list_of_media) == 2
+
+    media_library.remove_media_file(audio_file)
+
+    assert len(media_library.list_of_media) == 1
+    assert video_file in media_library.list_of_media
+    assert audio_file not in media_library.list_of_media
+
+
+@pytest.mark.parametrize(
+    'name, expansion, resolution, duration',
+    [('video1', 'mp7', '1080p', 15)],
+    )
+def test_invalid_resolution_type(
+    name: str, expansion: str, resolution: int, duration: int | float,
+        ):
+    """Test_invalid.
+
+    Args:
+        name (str): file name
+        expansion (str): expansion file
+        resolution (int): file resolution
+        duration (int | float): duration file
+    """
+    with pytest.raises(TypeError):
+        VideoFile(name, expansion, resolution, duration)
+
+
+@pytest.mark.parametrize('name, expansion, resolution, duration', [('video1', 'mp6', 1080, '15s')])
+def test_invalid_duration_type(name, expansion, resolution, duration):
+    """Check for invalidity.
+
+    Args:
+        name (str): _description_
+        expansion (int): _description_
+        resolution (int): _description_
+        duration (int | float): _description_
+    """
+    with pytest.raises(TypeError):
+        VideoFile(name, expansion, resolution, duration)
+
