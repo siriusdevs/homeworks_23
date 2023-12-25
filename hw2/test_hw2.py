@@ -1,9 +1,9 @@
 """Класс тестирования для функции process_data."""
 import json
-import os 
-
+import os
 import unittest
-from hw2  import process_data
+
+from hw2 import process_data
 
 
 class TestProcessData(unittest.TestCase):
