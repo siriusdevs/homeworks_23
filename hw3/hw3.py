@@ -27,21 +27,22 @@ class Product:
         return self._name
 
     @name.setter
-    def name(self, value: str):
+    def name(self, name_value: str):
         """
         Устанавливает название товара.
 
         Args:
-            value (str): значения имени
+            name_value (str): значения имени
 
         Raises:
             TypeError: если значение не является str
         """
-        if not isinstance(value, str):
+        if not isinstance(name_value, str):
             raise TypeError('Имя {0} должно быть str, а не {1}'.format(
-                value, type(value).name
+                name_value,
+                type(name_value).name
             ))
-        self._name = value
+        self._name = name_value
 
     @property
     def price(self) -> float:
@@ -54,24 +55,25 @@ class Product:
         return self._price
 
     @price.setter
-    def price(self, value: float):
+    def price(self, price_value: float):
         """
         Устанавливает цену товара.
 
         Args:
-            value (str)
+            price_value (str)
 
         Raises:
             TypeError: если значение не является str
             ValueError: если цена меньше 0
         """
-        if not isinstance(value, float):
+        if not isinstance(price_value, float):
             raise TypeError('Цена {0} должно быть float, а не {1}'.format(
-                value, type(value).price
+                price_value,
+                type(price_value).price
             ))
-        if value <= 0:
+        if price_value <= 0:
             raise ValueError('Цена должна быть положительным числом')
-        self._price = value
+        self._price = price_value
 
 
 class Dish:
@@ -98,21 +100,22 @@ class Dish:
         return self._name
 
     @name.setter
-    def name(self, value: str):
+    def name(self, name_value: str):
         """
         Устанавливает название блюда.
 
         Args:
-            value (str): название блюда
+            name_value (str): название блюда
 
         Raises:
             TypeError: если значение не является str
         """
-        if not isinstance(value, str):
+        if not isinstance(name_value, str):
             raise TypeError('Имя {0} должно быть str, а не {1}'.format(
-                value, type(value).name
+                name_value,
+                type(name_value).name
             ))
-        self._name = value
+        self._name = name_value
 
     @property
     def products(self) -> List[Product]:
@@ -170,21 +173,22 @@ class Restaurant:
         return self._name
 
     @name.setter
-    def name(self, value: str):
+    def name(self, name_value: str):
         """
         Устанавливает название ресторана.
 
         Args:
-            value (str): значение названия ресторана
+            name_value (str): значение названия ресторана
 
         Raises:
             TypeError: если значение не является str
         """
-        if not isinstance(value, str):
+        if not isinstance(name_value, str):
             raise TypeError('Имя {0} должно быть str, а не {1}'.format(
-                value, type(value).name
+                name_value,
+                type(name_value).name
             ))
-        self._name = value
+        self._name = name_value
 
     @property
     def dishes(self) -> List[Dish]:

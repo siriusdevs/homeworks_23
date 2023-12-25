@@ -3,7 +3,6 @@ import unittest
 
 from hw3.hw3 import Dish, Product, Restaurant
 
-
 BANANA_PRICE = 2.0
 ORANGE_PRICE = 1.5
 

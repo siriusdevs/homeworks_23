@@ -2,7 +2,6 @@
 import json
 from datetime import datetime
 
-
 MONTH = 30
 HALF_YEAR = 180
 
