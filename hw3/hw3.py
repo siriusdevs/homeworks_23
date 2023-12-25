@@ -38,7 +38,7 @@ class Product:
             TypeError: если значение не является str
         """
         if not isinstance(value, str):
-            raise TypeError(f"Имя {value} должно быть str, а не {type(value).name}")
+            raise TypeError(f'Имя {value} должно быть str, а не {type(value).name}')
         self._name = value
 
     @property
@@ -64,9 +64,9 @@ class Product:
             ValueError: если цена меньше 0
         """
         if not isinstance(value, float):
-            raise TypeError(f"Цена {value} должно быть float, а не {type(value).price}")
+            raise TypeError(f'Цена {value} должно быть float, а не {type(value).price}')
         if value <= 0:
-            raise ValueError("Цена должна быть положительным числом")
+            raise ValueError('Цена должна быть положительным числом')
         self._price = value
 
 
@@ -105,7 +105,7 @@ class Dish:
             TypeError: если значение не является str
         """
         if not isinstance(value, str):
-            raise TypeError(f"Имя {value} должно быть str, а не {type(value).name}")
+            raise TypeError(f'Имя {value} должно быть str, а не {type(value).name}')
         self._name = value
 
     @property
@@ -175,7 +175,7 @@ class Restaurant:
             TypeError: если значение не является str
         """
         if not isinstance(value, str):
-            raise TypeError(f"Имя {value} должно быть str, а не {type(value).name}")
+            raise TypeError(f'Имя {value} должно быть str, а не {type(value).name}')
         self._name = value
 
     @property
@@ -229,7 +229,7 @@ class Restaurant:
         dish_products = dish.products
         for product in dish_products:
             if product not in self._inventory:
-                return "Не хватает товаров на складе"
+                return 'Не хватает товаров на складе'
         for product in dish_products:
             self._inventory.remove(product)
-        return "Блюдо заказано успешно"
+        return 'Блюдо заказано успешно'

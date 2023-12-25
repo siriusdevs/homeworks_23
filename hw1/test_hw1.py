@@ -1,7 +1,7 @@
 """Testing module hw1.py."""
 import pytest
 
-from hw1 import calculate_salary
+from hw1.hw1 import calculate_salary
 
 TEST_CASES = (
     (
