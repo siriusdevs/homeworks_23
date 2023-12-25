@@ -25,7 +25,7 @@ def test_passenger_valid():
     passenger.passport_id = '987654'
     assert passenger.name == 'Boris'
     assert passenger.passport_id == '987654'
-
+    
 
 def test_passenger_errors():
     """Create passenger with invalid values. Check value and type errors."""
