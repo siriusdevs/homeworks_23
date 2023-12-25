@@ -3,7 +3,7 @@
 
 class Constants:
     """Класс инициализации глобальных переменных."""
-    
+
     regions_list = ['regions']
     total_list = ['total']
     online_days = ['online_days']
