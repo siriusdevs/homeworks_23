@@ -22,7 +22,7 @@ def check_sum_salary(
         salary_cap = float('inf')
 
     list_all_salaries: list[float] = []
-    print(departments)
+
     for ind, _ in enumerate(departments):
         if not isinstance(departments[ind][0], str):
             raise TypeError('Не верное название компании, попробуй задать ')
@@ -33,8 +33,8 @@ def check_sum_salary(
     list_all_salaries = [
         round(salary, 2)
         for salary in list_all_salaries
-        if  0 <= salary < salary_cap
-    ]  
+        if 0 <= salary < salary_cap
+    ]
     list_three_max_salaries = list_all_salaries[:3]
 
     sum_all_sal = sum(list_all_salaries)
