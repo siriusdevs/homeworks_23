@@ -60,7 +60,7 @@ class Product:
         Устанавливает цену товара.
 
         Args:
-            price_value (str): значение цены продукта
+            price_value (float): значение цены продукта
 
         Raises:
             TypeError: если значение не является str

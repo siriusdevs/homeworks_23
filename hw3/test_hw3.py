@@ -1,10 +1,12 @@
 """Файл тестирования классов."""
 import unittest
 
-from hw3 import Dish, Product, MenuManager, RestaurantDetails
+from hw3 import Dish, MenuManager, Product, RestaurantDetails
 
 BANANA_PRICE = 2.0
 ORANGE_PRICE = 1.5
+PIZZA = 'Pizza'
+PASTA = 'Pasta'
 
 
 class TestRestaurantClasses(unittest.TestCase):
@@ -19,7 +21,7 @@ class TestRestaurantClasses(unittest.TestCase):
         self.dish.add_product(self.product1)
         self.dish.add_product(self.product2)
 
-        self.restaurant_details = RestaurantDetails('Test Restaurant', ['Pizza', 'Pasta'])
+        self.restaurant_details = RestaurantDetails('Test Restaurant', [PIZZA, PASTA])
 
     def test_product_attributes(self):
         """Проверка атрибутов продукта."""
@@ -42,33 +44,42 @@ class TestRestaurantClasses(unittest.TestCase):
 
 class TestRestaurantDetails(unittest.TestCase):
     def setUp(self):
-        self.restaurant_details = RestaurantDetails('Test Restaurant', ['Pizza', 'Pasta'])
+        """Метод инициализации перед тестированием."""
+        self.restaurant_details = RestaurantDetails('Test Restaurant', [PIZZA, PASTA])
 
     def test_name(self):
+        """Проверка имени."""
         self.assertEqual(self.restaurant_details.name, 'Test Restaurant')
 
     def test_inventory(self):
-        self.assertEqual(self.restaurant_details.inventory, ['Pizza', 'Pasta'])
+        """Проверка продуктов для блюда."""
+        self.assertEqual(self.restaurant_details.inventory, [PIZZA, PASTA])
 
     def test_set_name(self):
+        """Проверка сеттера имени."""
         self.restaurant_details.name = 'New Name'
         self.assertEqual(self.restaurant_details.name, 'New Name')
 
 
 class TestMenuManager(unittest.TestCase):
+    """Класс тестирования функционала."""
     def setUp(self):
-        self.menu_manager = MenuManager(['Pizza', 'Pasta'])
+        """Метод инициализации перед тестами."""
+        self.menu_manager = MenuManager([PIZZA, PASTA])
 
     def test_dishes(self):
-        self.assertEqual(self.menu_manager.dishes, ['Pizza', 'Pasta'])
+        """Тестирование блюд."""
+        self.assertEqual(self.menu_manager.dishes, [PIZZA, PASTA])
 
     def test_add_dish(self):
+        """Тест добавления блюда."""
         self.menu_manager.add_dish('Salad')
-        self.assertEqual(self.menu_manager.dishes, ['Pizza', 'Pasta', 'Salad'])
+        self.assertEqual(self.menu_manager.dishes, [PIZZA, PASTA, 'Salad'])
 
     def test_remove_dish(self):
-        self.menu_manager.remove_dish('Pizza')
-        self.assertEqual(self.menu_manager.dishes, ['Pasta'])
+        """Тест удаления блюда."""
+        self.menu_manager.remove_dish(PIZZA)
+        self.assertEqual(self.menu_manager.dishes, [PASTA])
 
 
 if __name__ == '__main__':
