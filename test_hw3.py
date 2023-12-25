@@ -119,18 +119,18 @@ def test_airline_valid():
     """Create airline with valid values. Check getters and setters."""
     airline = AIRLINE_DEFAULT
     assert airline.title == 'SpaceX'
-    assert airline.flights == list(FLIGHT_DEFAULT)
-    assert airline.passengers == list(PASSENGER_DEFAULT)
-    assert airline.tickets == list(TICKET_DEFAULT)
+    assert airline.flights == [FLIGHT_DEFAULT]
+    assert airline.passengers == [PASSENGER_DEFAULT]
+    assert airline.tickets == [TICKET_DEFAULT]
 
     airline.title = 'CosmosY'
-    airline.flights = list(FLIGHT_TWO)
-    airline.passengers = list(PASSENGER_TWO)
-    airline.tickets = list(TICKET_TWO)
+    airline.flights = [FLIGHT_TWO]
+    airline.passengers = [PASSENGER_TWO]
+    airline.tickets = [TICKET_TWO]
     assert airline.title == 'CosmosY'
-    assert airline.flights == list(FLIGHT_TWO)
-    assert airline.passengers == list(PASSENGER_TWO)
-    assert airline.tickets == list(TICKET_TWO)
+    assert airline.flights == [FLIGHT_TWO]
+    assert airline.passengers == [PASSENGER_TWO]
+    assert airline.tickets == [TICKET_TWO]
 
 
 def test_airline_errors():
@@ -168,11 +168,12 @@ def test_add_flight():
 def test_remove_flight():
     """Check that removing a flight works."""
     airline = AIRLINE_DEFAULT
+    airline.flights = [FLIGHT_DEFAULT, FLIGHT_TWO]
     airline.remove_flight(FLIGHT_DEFAULT)
-    assert airline.flights == []
+    assert airline.flights == [FLIGHT_TWO]
 
     with pytest.raises(ValueError):
-        airline.remove_flight(FLIGHT_TWO)
+        airline.remove_flight(FLIGHT_DEFAULT)
 
 
 def test_add_passenger():
@@ -191,8 +192,13 @@ def test_remove_passenger():
     airline.remove_passenger(PASSENGER_DEFAULT)
     assert airline.passengers == []
 
+    airline = AIRLINE_DEFAULT
+    airline.passengers = [PASSENGER_DEFAULT, PASSENGER_TWO]
+    airline.remove_passenger(PASSENGER_DEFAULT)
+    assert airline.passengers == [PASSENGER_TWO]
+
     with pytest.raises(ValueError):
-        airline.remove_passenger(FLIGHT_TWO)
+        airline.remove_passenger(PASSENGER_DEFAULT)
 
 
 def test_buy_ticket():
@@ -208,8 +214,9 @@ def test_buy_ticket():
 def test_cancel_ticket():
     """Check that cancelling (removing) a ticket works."""
     airline = AIRLINE_DEFAULT
+    airline.tickets = [TICKET_DEFAULT, TICKET_TWO]
     airline.cancel_ticket(TICKET_DEFAULT)
-    assert airline.passengers == []
+    assert airline.tickets == [TICKET_TWO]
 
     with pytest.raises(ValueError):
-        airline.cancel_ticket(TICKET_TWO)
+        airline.cancel_ticket(TICKET_DEFAULT)
