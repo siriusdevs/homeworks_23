@@ -1,4 +1,6 @@
 """Airline module, uses aggregation Passenger, Flight -> Ticket -> Airline."""
+
+
 from typing import Any
 
 
@@ -13,12 +15,13 @@ def check(new_value: Any, class_: type[Any]):
         TypeError: When new value of an object doesn't match with given class.
     """
     if not isinstance(new_value, class_):
-        raise TypeError(f'{new_value} must be {class_.__name__} instance, \
-got {type(new_value).__name__}')
+        value_type = type(new_value).__name__
+        raise TypeError(f'{new_value} must be {class_.__name__} instance, got {value_type}')
 
 
 class Passenger:
     """Passenger of a flight. Has passport (id)."""
+
     def __init__(self, name: str, passport_id: str) -> None:
         """Create a passenger with name and passport.
 
@@ -42,7 +45,7 @@ class Passenger:
         """Set new name of a passenger.
 
         Args:
-            new_id (str): New name.
+            name (str): New name.
         """
         check(name, str)
         self._name = name
@@ -150,6 +153,7 @@ class Flight:
 
 class Ticket:
     """Ticket neccesary for attending a flight."""
+
     def __init__(self, flight: Flight, passenger: Passenger, ticket_id: str) -> None:
         """Create Passenger's ticket for a Flight.
 
@@ -211,7 +215,7 @@ class Ticket:
 
     @ticket_id.setter
     def ticket_id(self, new_id: str) -> None:
-        """Set new ticket's ID
+        """Set new ticket's ID.
 
         Args:
             new_id (str): New ID of a Ticket.
@@ -222,6 +226,7 @@ class Ticket:
 
 class Airline:
     """A company that aggregates Flights, Passengers and Tickets."""
+
     def __init__(self,
                  title: str,
                  flights: list[Flight],
@@ -292,7 +297,7 @@ class Airline:
 
     @passengers.setter
     def passengers(self, new_passengers: list[Passenger]) -> None:
-        """Set new passengers list of an Airline
+        """Set new passengers list of an Airline.
 
         Args:
             new_passengers (list[Passenger]): List of passengers.
