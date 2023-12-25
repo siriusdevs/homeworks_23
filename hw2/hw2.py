@@ -7,7 +7,7 @@ HALF_YEAR = 180
 
 
 def process_data(
-    input_path: str = "data_hw2.json", output_path: str = "data_result.json"
+    input_path: str = 'data_hw2.json', output_path: str = 'data_result.json',
 ):
     """
     Функция реализующая анализ существующего json и соберет из него новую статистику.

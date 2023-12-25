@@ -40,7 +40,7 @@ class Product:
         if not isinstance(name_value, str):
             raise TypeError('Имя {0} должно быть str, а не {1}'.format(
                 name_value,
-                type(name_value).name
+                type(name_value).name,
             ))
         self._name = name_value
 
@@ -69,7 +69,7 @@ class Product:
         if not isinstance(price_value, float):
             raise TypeError('Цена {0} должно быть float, а не {1}'.format(
                 price_value,
-                type(price_value).__price__,
+                type(price_value).price,
             ))
         if price_value <= 0:
             raise ValueError('Цена должна быть положительным числом')
@@ -89,7 +89,7 @@ class Dish:
         self._name = name
         self._products = []
 
-    @property   
+    @property
     def name(self) -> str:
         """
         Возвращает название блюда.
@@ -113,7 +113,7 @@ class Dish:
         if not isinstance(name_value, str):
             raise TypeError('Имя {0} должно быть str, а не {1}'.format(
                 name_value,
-                type(name_value).name
+                type(name_value).name,
             ))
         self._name = name_value
 
@@ -146,20 +146,18 @@ class Dish:
         self._products.remove(product)
 
 
-class Restaurant:
+class RestaurantDetails:
     """Класс, представляющий ресторан."""
 
-    def __init__(self, name: str, dishes: List[Dish], inventory: List[Product]):
+    def __init__(self, name: str, inventory: List[Product]):
         """
-        Инициализирует новый экземпляр класса Restaurant.
+        Инициализирует новый экземпляр класса RestaurantDetails.
 
         Args:
             name (str): название ресторана
-            dishes (List): список блюд
             inventory (List): список продуктов, из которых приготовлено блюдо
         """
         self._name = name
-        self._dishes = dishes
         self._inventory = inventory
 
     @property
@@ -186,9 +184,32 @@ class Restaurant:
         if not isinstance(name_value, str):
             raise TypeError('Имя {0} должно быть str, а не {1}'.format(
                 name_value,
-                type(name_value).name
+                type(name_value).name,
             ))
         self._name = name_value
+
+    @property
+    def inventory(self) -> List[Product]:
+        """
+        Возвращает инвентарь ресторана.
+
+        Returns:
+            List (list): список продуктов для блюда.
+        """
+        return self._inventory
+
+
+class MenuManager:
+    """Класс, управляющий меню ресторана."""
+
+    def __init__(self, dishes: List[Dish]):
+        """
+        Инициализирует новый экземпляр класса MenuManager.
+
+        Args:
+            dishes (List): список блюд
+        """
+        self._dishes = dishes
 
     @property
     def dishes(self) -> List[Dish]:
@@ -218,30 +239,21 @@ class Restaurant:
         """
         self._dishes.remove(dish)
 
-    @property
-    def inventory(self) -> List[Product]:
-        """
-        Возвращает инвентарь ресторана.
-
-        Returns:
-            List (list): список продуктов для блюда.
-        """
-        return self._inventory
-
-    def order_dish(self, dish: Dish) -> str:
+    def order_dish(self, dish: Dish, restaurant_details: RestaurantDetails) -> str:
         """
         Заказывает блюдо, и обновляет инвентарь соответственно.
 
         Args:
             dish: объект продукта
+            restaurant_details: объект с информацией о ресторане
 
         Returns:
             str: уведомление о статусе заказа
         """
         dish_products = dish.products
         for product in dish_products:
-            if product not in self._inventory:
+            if product not in restaurant_details.inventory:
                 return 'Не хватает товаров на складе'
-        for product in dish_products:
-            self._inventory.remove(product)
+        for dish_product in dish_products:
+            restaurant_details.inventory.remove(dish_product)
         return 'Блюдо заказано успешно'
