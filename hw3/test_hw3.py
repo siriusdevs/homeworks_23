@@ -4,20 +4,25 @@ import unittest
 from hw3.hw3 import Dish, Product, Restaurant
 
 
+BANANA_PRICE = 2.0
+ORANGE_PRICE = 1.5
+
+
 class TestRestaurantClasses(unittest.TestCase):
     """Тесты для классов Product, Dish и Restaurant."""
 
     def setUp(self):
         """Настройка перед выполнением каждого теста."""
         self.product1 = Product('Яблоко', 1.0)
-        self.product2 = Product('Банан', 2.0)
+        self.product2 = Product('Банан', BANANA_PRICE)
 
         self.dish = Dish('Фруктовый салат')
         self.dish.add_product(self.product1)
         self.dish.add_product(self.product2)
 
         self.restaurant = Restaurant(
-            'Наш ресторан', [self.dish], [self.product1, self.product2]
+            'Наш ресторан', [self.dish],
+            [self.product1, self.product2]
         )
 
     def test_product_attributes(self):
@@ -46,7 +51,7 @@ class TestRestaurantClasses(unittest.TestCase):
 
     def test_add_and_remove_product_from_dish(self):
         """Проверка добавления и удаления продукта из блюда."""
-        new_product = Product('Апельсин', 1.5)
+        new_product = Product('Апельсин', ORANGE_PRICE)
         self.dish.add_product(new_product)
         self.assertIn(new_product, self.dish.products)
         self.dish.remove_product(new_product)
@@ -54,17 +59,17 @@ class TestRestaurantClasses(unittest.TestCase):
 
     def test_order_dish_with_available_inventory(self):
         """Проверка успешного заказа блюда с доступным инвентарем."""
-        result = self.restaurant.order_dish(self.dish)
-        self.assertEqual(result, 'Блюдо заказано успешно')
+        dish_result = self.restaurant.order_dish(self.dish)
+        self.assertEqual(dish_result, 'Блюдо заказано успешно')
         self.assertEqual(len(self.restaurant.inventory), 0)
 
     def test_order_dish_without_enough_inventory(self):
         """Проверка заказа блюда без достаточного инвентаря."""
         self.restaurant.order_dish(self.dish)
-        result = self.restaurant.order_dish(self.dish)
-        self.assertEqual(result, 'Не хватает товаров на складе')
+        dish_result = self.restaurant.order_dish(self.dish)
+        self.assertEqual(dish_result, 'Не хватает товаров на складе')
         self.assertEqual(len(self.restaurant.inventory), 0)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

@@ -6,6 +6,7 @@ from datetime import datetime
 MONTH = 30
 HALF_YEAR = 180
 
+
 def process_data(
     input_path: str = 'data_hw2.json',
     output_path: str = 'data_result.json'
@@ -34,24 +35,23 @@ def process_data(
         ages.append(user_info['age'])
         last_login_dates.append(last_login)
 
-
+    total = len(json_data)
     region_distribution = {
-        region: (count / len(json_data)) * 100 for region, count in regions.items()
+        region: (count / total) * 100 for region, count in regions.items()
     }
-
 
     online_times = [datetime.now() - date for date in last_login_dates]
     online_days = [time.total_seconds() / (60 * 60 * 24) for time in online_times]
 
     stats = {
         'region_distribution': region_distribution,
-        'average_age': sum(ages) / len(json_data),
+        'average_age': sum(ages) / total,
         'online_times': {
-            '<2 days': sum(day < 2 for day in online_days) / len(json_data),
-            '<1 week': sum(day < 7 for day in online_days) / len(json_data),
-            '<1 month': sum(day < MONTH for day in online_days) / len(json_data),
-            '<6 months': sum(day < HALF_YEAR for day in online_days) / len(json_data),
-            '>6 months': sum(day > HALF_YEAR for day in online_days) / len(json_data),
+            '<2 days': sum(day < 2 for day in online_days) / total,
+            '<1 week': sum(day < 7 for day in online_days) / total,
+            '<1 month': sum(day < MONTH for day in online_days) / total,
+            '<6 months': sum(day < HALF_YEAR for day in online_days) / total,
+            '>6 months': sum(day > HALF_YEAR for day in online_days) / total,
         },
     }
 

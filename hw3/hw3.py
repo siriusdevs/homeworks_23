@@ -38,7 +38,9 @@ class Product:
             TypeError: если значение не является str
         """
         if not isinstance(value, str):
-            raise TypeError(f'Имя {value} должно быть str, а не {type(value).name}')
+            raise TypeError('Имя {0} должно быть str, а не {1}'.format(
+                value, type(value).name
+            ))
         self._name = value
 
     @property
@@ -64,7 +66,9 @@ class Product:
             ValueError: если цена меньше 0
         """
         if not isinstance(value, float):
-            raise TypeError(f'Цена {value} должно быть float, а не {type(value).price}')
+            raise TypeError('Цена {0} должно быть float, а не {1}'.format(
+                value, type(value).price
+            ))
         if value <= 0:
             raise ValueError('Цена должна быть положительным числом')
         self._price = value
@@ -105,7 +109,9 @@ class Dish:
             TypeError: если значение не является str
         """
         if not isinstance(value, str):
-            raise TypeError(f'Имя {value} должно быть str, а не {type(value).name}')
+            raise TypeError('Имя {0} должно быть str, а не {1}'.format(
+                value, type(value).name
+            ))
         self._name = value
 
     @property
@@ -175,7 +181,9 @@ class Restaurant:
             TypeError: если значение не является str
         """
         if not isinstance(value, str):
-            raise TypeError(f'Имя {value} должно быть str, а не {type(value).name}')
+            raise TypeError('Имя {0} должно быть str, а не {1}'.format(
+                value, type(value).name
+            ))
         self._name = value
 
     @property
