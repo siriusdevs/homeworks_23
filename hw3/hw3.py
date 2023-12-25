@@ -80,9 +80,12 @@ class Person:
 
         Raises:
             TypeError: if type of new_age not int.
+            ValueError: if new_age lower then 0
         """
         if not isinstance(new_age, int):
             raise TypeError(f'{new_age} must be int')
+        if new_age < 0:
+            raise ValueError(f'{new_age} lower then 0')
         self._age = new_age
 
 
@@ -143,9 +146,12 @@ class Student(Person):
 
         Raises:
             TypeError: if Faculty of teacher.
+            ValueError: if new_age lower then 0
         """
         if not isinstance(new_scholarship, int):
             raise TypeError(f'{new_scholarship} should be int')
+        if new_scholarship < 0:
+            raise ValueError(f'{new_scholarship} lower then 0')
         self._scholarship = new_scholarship
 
 
@@ -312,7 +318,9 @@ class Course:
 
         Raises:
             ValueError: if self_list_teachers is empty.
-            ValueError: if self_list_students is empty.
+
+        Returns:
+            Random teacher and students to conduct classes
         """
         people_of_course = []
         if not self.list_teachers:
@@ -323,6 +331,6 @@ class Course:
         people_of_course.append(f'Teacher: {random_teacher.name} {random_teacher.surname}')
         num_students_to_attend = random.randint(1, len(self.list_students))
         random_students = random.sample(self.list_students, num_students_to_attend)
-        people_of_course.append('Students attending the class:')
         for student in random_students:
             people_of_course.append(f'{student.name} {student.surname}')
+        return people_of_course

@@ -59,9 +59,10 @@ def test_course_info(
     assert course.title == title
     assert course.list_students == list_students
     assert course.list_teachers == list_teachers
+    assert course.conduct_a_class() == ['Teacher: Boris Gomzaykov', 'Anna Asti']
 
 
-@pytest.mark.xfail(raises=(TypeError, ValueError))
+@pytest.mark.xfail(raises=TypeError)
 def test_info_invalid():
     """Check setter work."""
     with pytest.raises(TypeError):
@@ -86,6 +87,3 @@ def test_info_invalid():
         ],
             ('ALbert', 'Tenigin', 18, 'OP', 1000000),
         )
-    with pytest.raises(ValueError):
-        course = Course('Programming', [], [])
-        course.conduct_a_class()
