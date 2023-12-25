@@ -1,0 +1,23 @@
+{
+    "user": {
+        "region": "town1",
+        "registered": "2008-08-10",
+        "last_login": "2023-10-01",
+        "email": "user@yandex.ru",
+        "age": 26
+    },
+    "user2": {
+        "region": "town2",
+        "registered": "1998-10-30",
+        "last_login": "2022-11-21",
+        "email": "user2@gmail.com",
+        "age": 74
+    },
+    "user3": {
+        "region": "town3",
+        "registered": "2011-03-08",
+        "last_login": "2023-12-09",
+        "email": "user3@yandex.ru",
+        "age": 53
+    }
+}

@@ -1,0 +1,37 @@
+{
+    "Danil": {
+        "region": "Moskow",
+        "registered": "2017-08-10",
+        "last_login": "2023-10-01",
+        "email": "danil@yandex.ru",
+        "age": 9
+    },
+    "Kristina": {
+        "region": "Ekaterinburg",
+        "registered": "2023-10-30",
+        "last_login": "2023-11-21",
+        "email": "kristina@gmail.com",
+        "age": 1
+    },
+    "Nikita": {
+        "region": "Rostov",
+        "registered": "2020-03-21",
+        "last_login": "2023-07-10",
+        "email": "nikita@yandex.ru",
+        "age": 4
+    },
+    "Aleksey": {
+        "region": "Saint-Petersburg",
+        "registered": "2000-11-11",
+        "last_login": "2022-12-12",
+        "email": "aleksey@yandex.ru",
+        "age": 7
+    },
+    "Polina": {
+        "region": "Vladivostok",
+        "registered": "2021-03-08",
+        "last_login": "2023-12-09",
+        "email": "polina@yandex.ru",
+        "age": 3
+    }
+}
