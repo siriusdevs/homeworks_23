@@ -44,7 +44,7 @@ class TestRestaurantClasses(unittest.TestCase):
 
 class TestRestaurantDetails(unittest.TestCase):
     """Класс тестирования параметров ресторана."""
-    
+
     def setUp(self):
         """Метод инициализации перед тестированием."""
         self.restaurant_details = RestaurantDetails('Test Restaurant', [PIZZA, PASTA])
@@ -65,7 +65,7 @@ class TestRestaurantDetails(unittest.TestCase):
 
 class TestMenuManager(unittest.TestCase):
     """Класс тестирования функционала."""
-    
+
     def setUp(self):
         """Метод инициализации перед тестами."""
         self.menu_manager = MenuManager([PIZZA, PASTA])
