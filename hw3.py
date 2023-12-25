@@ -71,8 +71,9 @@ class Passenger:
             ValueError: When ID contains non-digit characters.
         """
         check(new_id, str)
-        if len(new_id) != 6:
-            raise ValueError(f'Passport ID must contain 6 characters, got {len(new_id)}')
+        id_length = len(new_id)
+        if id_length != 6:
+            raise ValueError(f'Passport ID must contain 6 characters, got {id_length}')
         if not all(char.isdigit() for char in new_id):
             raise ValueError(f'Passport ID must contain digits only, got {new_id}')
         self._passport_id = new_id
@@ -227,12 +228,13 @@ class Ticket:
 class Airline:
     """A company that aggregates Flights, Passengers and Tickets."""
 
-    def __init__(self,
-                 title: str,
-                 flights: list[Flight],
-                 passengers: list[Passenger],
-                 tickets: list[Ticket],
-                 ) -> None:
+    def __init__(
+        self,
+        title: str,
+        flights: list[Flight],
+        passengers: list[Passenger],
+        tickets: list[Ticket],
+    ) -> None:
         """Create an airline with Flights, Passengers and Tickets.
 
         Args:
