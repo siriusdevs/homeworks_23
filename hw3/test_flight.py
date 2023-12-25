@@ -3,7 +3,7 @@
 
 import pytest
 
-from ..hw3 import Flight
+from hw3 import Flight
 
 FLIGHT_DEFAULT = Flight('AB1234', 'Moscow', 'Ekaterinburg')
 FLIGHT_TWO = Flight('CD5678', 'Sochi', 'Irkutsk')

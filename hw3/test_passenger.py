@@ -3,7 +3,7 @@
 
 import pytest
 
-from ..hw3 import Passenger
+from hw3 import Passenger
 
 PASSENGER_DEFAULT = Passenger('Alexey', '123456')
 PASSENGER_TWO = Passenger('Boris', '987654')
