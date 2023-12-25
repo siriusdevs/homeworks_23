@@ -29,7 +29,9 @@ all_departments = {
     },
 }
 top_salaries = [156000.80, 136590.70, 77000.90]
+top_salaries2 = [77000.90, 72000.74, 68000.89]
 test_data = [(all_departments, (top_salaries, 40.0))]
+test_data2 = [(all_departments, ('financy_department', 'hr_department'), (top_salaries2, 43.0))]
 test_data_invalid = {
     'financy_department': {
     },
@@ -58,3 +60,17 @@ def test_salary_departments(department_name: dict[str, float],
 def test_invalid_salary_departments():
     """Test the salary_departments function for errors."""
     salary_departments(test_data_invalid)
+
+
+@pytest.mark.parametrize("department_name, required_departments, expected", test_data2)
+def test_salary_departments_with_req(department_name: dict[str, float],
+                                     required_departments: tuple[str],
+                                     expected: tuple[list, float]):
+    """Function test salary_departments with required departments.
+
+    Args:
+        department_name (dict[str, float]): test data.
+        required_departments (tuple[str]): selected departments.
+        expected (tuple[list, float]): expected result.
+    """
+    assert salary_departments(required_departments, **department_name) == expected
