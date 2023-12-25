@@ -3,7 +3,7 @@ import json
 import os 
 
 import unittest
-from hw2.hw2  import process_data
+from hw2  import process_data
 
 
 class TestProcessData(unittest.TestCase):
