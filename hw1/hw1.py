@@ -6,8 +6,7 @@ def calculate_salary(
     **departments: dict[str, float],
 ) -> tuple[float, list[float]]:
     """
-    Calculate the percentage of the top 3 salaries
-    compared to the total sum of all salaries.
+    Подсчитывает статистику по зарплатам в отделах.
 
     Args:
         departments: keyword arguments, where values containing employees names and salaries.
