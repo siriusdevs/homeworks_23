@@ -2,20 +2,29 @@
 from typing import Any
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD:hw3.py
 def check(new_value: Any, class_: type[Any]):
 =======
 def check(new_value: Any, classs: type) -> None:
 >>>>>>> b05d3cb (moved hw3 and tests to <hw3> directory, modified pylint):hw3/hw3.py
+=======
+def check(new_value: Any, compare_class: type) -> None:
+>>>>>>> a90cf15 (updated hw3.py and its tests)
     """Check if new value is an instance of a class.
 
     Args:
         new_value (Any): New value of an object.
+<<<<<<< HEAD
         classes (type[Any]): Class to compare with.
+=======
+        compare_class (type): Class to compare with.
+>>>>>>> a90cf15 (updated hw3.py and its tests)
 
     Raises:
         TypeError: When new value of an object doesn't match with given class.
     """
+<<<<<<< HEAD
 <<<<<<< HEAD:hw3.py
     if not isinstance(new_value, class_):
         raise TypeError(f'{new_value} must be {class_.__name__} instance, \
@@ -25,6 +34,11 @@ got {type(new_value).__name__}')
         value_type = type(new_value).__name__
         raise TypeError(f'{new_value} must be {classs.__name__} instance, got {value_type}')
 >>>>>>> b05d3cb (moved hw3 and tests to <hw3> directory, modified pylint):hw3/hw3.py
+=======
+    if not isinstance(new_value, compare_class):
+        value_type = type(new_value).__name__
+        raise TypeError(f'{new_value} must be {compare_class.__name__} instance, got {value_type}')
+>>>>>>> a90cf15 (updated hw3.py and its tests)
 
 
 class Passenger:
