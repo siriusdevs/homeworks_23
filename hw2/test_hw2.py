@@ -4,8 +4,8 @@ import os
 import shutil
 
 import pytest
-
 import testcases
+
 from hw2 import analyze_json
 
 
