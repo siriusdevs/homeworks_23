@@ -61,6 +61,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest==6.2.5
         pip install numpy
-    - name: Pytest hw3
+    - name: Pytest hw3.
       run: pytest hw3
       
