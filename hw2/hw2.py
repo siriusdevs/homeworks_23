@@ -37,11 +37,14 @@ def process_data(
         result_data['last_login_dates'].append(last_login)
 
     result_data['region_distribution'] = {
-        region: (count / result_data['total']) * 100 for region, count in result_data['regions'].items()
+        region: (count / result_data['total']) * 100
+        for region, count in result_data['regions'].items()
     }
 
-    result_data['online_times'] = [datetime.now() - date for date in result_data['last_login_dates']]
-    result_data['online_days'] = [time.total_seconds() / (60 * 60 * 24) for time in result_data['online_times']]
+    result_data['online_times'] = [datetime.now() - date
+                                   for date in result_data['last_login_dates']]
+    result_data['online_days'] = [time.total_seconds() / (60 * 60 * 24) 
+                                  for time in result_data['online_times']]
 
     const = result_data['total']
     const2 = result_data['online_days']
