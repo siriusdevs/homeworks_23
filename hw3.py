@@ -4,12 +4,12 @@
 from typing import Any
 
 
-def check(new_value: Any, class_: type[Any]):
+def check(new_value: Any, class_: type) -> None:
     """Check if new value is an instance of a class.
 
     Args:
         new_value (Any): New value of an object.
-        class_ (type[Any]): Class to compare with.
+        class_ (type): Class to compare with.
 
     Raises:
         TypeError: When new value of an object doesn't match with given class.
@@ -395,3 +395,13 @@ class Airline:
         if ticket not in self._tickets:
             raise ValueError(f'Ticket {ticket} was not found among sold tickets')
         self._tickets.remove(ticket)
+
+PASSENGER_DEFAULT = Passenger('Alexey', '123456')
+FLIGHT_DEFAULT = Flight('AB1234', 'Moscow', 'Ekaterinburg')
+TICKET_DEFAULT = Ticket(FLIGHT_DEFAULT, PASSENGER_DEFAULT, 'ID0001')
+AIRLINE_DEFAULT = Airline('SpaceX', [FLIGHT_DEFAULT], [PASSENGER_DEFAULT], [TICKET_DEFAULT])
+
+PASSENGER_TWO = Passenger('Boris', '987654')
+FLIGHT_TWO = Flight('CD5678', 'Sochi', 'Irkutsk')
+TICKET_TWO = Ticket(FLIGHT_TWO, PASSENGER_TWO, 'ID0002')
+AIRLINE_TWO = Airline('CosmosY', [FLIGHT_TWO], [PASSENGER_TWO], [TICKET_TWO])
