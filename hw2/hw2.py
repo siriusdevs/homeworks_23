@@ -36,7 +36,7 @@ def error_info(output_file: str, invalid_file: str, message: str) -> None:
         )
 
 
-def load_input_data(input_file: str, output_file: str) -> dict[str, dict]:
+def load_input_data(input_file: str, output_file: str) -> dict[str, dict] | bool:
     """Take data from the input file.
 
     Args:
@@ -48,7 +48,7 @@ def load_input_data(input_file: str, output_file: str) -> dict[str, dict]:
     """
     try:
         with open(input_file, 'r') as test_json:
-            json.load(test_json)
+            input_data = json.load(test_json)
     except FileNotFoundError as invalid_info:
         message = 'Is not a file'
         error_info(output_file, type(invalid_info).__name__, message)
@@ -58,8 +58,6 @@ def load_input_data(input_file: str, output_file: str) -> dict[str, dict]:
         error_info(output_file, type(invalid_info).__name__, message)
         return False
 
-    with open(input_file, 'r') as json_file_int:
-        input_data = json.load(json_file_int)
     return input_data
 
 
@@ -71,8 +69,6 @@ def record_age(information: dict, age_category: dict) -> None:
         age_category: dict - data on the age of people.
     """
     age = information.get('age')
-    if not isinstance(age, (int, float)):
-        age = None
     if age <= EIGHTEEN:
         age_category['0-18'] += 1
     elif age <= TWENTY_FIVE:
@@ -101,7 +97,7 @@ def calculate_age(input_data: dict[str, dict]) -> dict:
         LAP_TO_HAP_AGE_STRING: 0,
         HIGHEST_AND_ABOVE_AP_AGE_STRING: 0,
         }
-    for _, information in input_data.items():
+    for information in input_data.values():
         record_age(information, age_category)
 
     return age_category
@@ -117,7 +113,7 @@ def calculate_year(input_data: dict[str, dict]) -> dict:
         dict: statistics of the years of registration of all entered people.
     """
     regist_y = {}
-    for _, information in input_data.items():
+    for information in input_data.values():
         registered_year = information.get(REGISTERED)
         if registered_year:
             regist_year_obj = str((datetime.datetime.strptime(registered_year, '%Y-%m-%d')).year)
