@@ -119,4 +119,3 @@ def test_invalid_duration_type(name, expansion, resolution, duration):
     """
     with pytest.raises(TypeError):
         VideoFile(name, expansion, resolution, duration)
-
