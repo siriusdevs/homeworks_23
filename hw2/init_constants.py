@@ -7,5 +7,5 @@ class Constants:
     total_list = ['total']
     online_days = ['online_days']
     total_list_two = ['total']
-    MONTH = 30
-    HALF_YEAR = 180
+    month = 30
+    half_year = 180
