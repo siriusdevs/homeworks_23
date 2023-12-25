@@ -10,8 +10,7 @@ def calculate_salary(
     compared to the total sum of all salaries.
 
     Args:
-        departments: keyword arguments, where values
-            containing employees names and salaries.
+        departments: keyword arguments, where values containing employees names and salaries.
         limit: Salary limit to consider. Defaults to None.
 
     Returns:
