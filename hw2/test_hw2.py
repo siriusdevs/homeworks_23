@@ -4,17 +4,18 @@ import os
 import shutil
 
 import pytest
-import test_answers
-import testcases
 
+import testcases
 from hw2 import analyze_json
 
-POSITIVE_TEST_ID = (
-    (1, True),
-    (2, True),
-    (3, True),
-)
 
+def _get_answers() -> dict:
+    with open('test_answers.json', 'r') as result_line:
+        test_answers = json.load(result_line)
+    return test_answers
+
+
+POSITIVE_TEST_ID = ((1, True), (2, True), (3, True))
 NEGATIVE_TEST_ID = ((4, True), (5, True), (6, True), (7, True))
 
 
@@ -56,8 +57,11 @@ def prepare_data(test_id: int, positive: bool = True) -> tuple[str, str]:
     This function selects the test data based on the test_id and the nature of the test
     (positive or negative), writes it to a JSON file, and prepares a path for the result file.
     """
-    test_data = testcases.positive_test_data[test_id] \
-        if positive else testcases.negative_test_data[test_id]
+    test_data = (
+        testcases.positive_test_data[test_id]
+        if positive
+        else testcases.negative_test_data[test_id]
+    )
 
     to_json = test_data
     path_to_json = create_file('./tests/', f'test_{test_id}.json')
@@ -80,7 +84,9 @@ def get_result(path_to_result: str) -> str:
     """
     with open(path_to_result, 'r') as result_json:
         result_line = result_json.read()
-    return result_line
+
+    result_line = result_line.replace("'", '')
+    return result_line.replace('"', '')
 
 
 def positive_tests(test_id: int) -> bool:
@@ -96,7 +102,10 @@ def positive_tests(test_id: int) -> bool:
     path_to_json, path_to_result = prepare_data(test_id)
     analyze_json(path_to_json, path_to_result)
 
-    return get_result(path_to_result) == test_answers.test_answers[test_id]
+    answer = str(_get_answers()[str(test_id)])
+    answer = answer.replace("'", '')
+    answer = answer.replace('"', '')
+    return get_result(path_to_result) == answer
 
 
 def negative_tests(test_id: int) -> bool:
@@ -116,7 +125,7 @@ def negative_tests(test_id: int) -> bool:
     try:
         analyze_json(path_to_json, path_to_result)
     except SystemExit:
-        return get_result(path_to_result) == test_answers.test_answers[test_id]
+        return get_result(path_to_result) == _get_answers()[str(test_id)]
 
 
 @pytest.mark.parametrize('test_id, expected', POSITIVE_TEST_ID)
