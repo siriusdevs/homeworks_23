@@ -4,19 +4,19 @@
 from typing import Any
 
 
-def check(new_value: Any, classs: type) -> None:
+def check(new_value: Any, compare_class: type) -> None:
     """Check if new value is an instance of a class.
 
     Args:
         new_value (Any): New value of an object.
-        class_ (type): Class to compare with.
+        compare_class (type): Class to compare with.
 
     Raises:
         TypeError: When new value of an object doesn't match with given class.
     """
-    if not isinstance(new_value, classs):
+    if not isinstance(new_value, compare_class):
         value_type = type(new_value).__name__
-        raise TypeError(f'{new_value} must be {classs.__name__} instance, got {value_type}')
+        raise TypeError(f'{new_value} must be {compare_class.__name__} instance, got {value_type}')
 
 
 class Passenger:

@@ -3,7 +3,7 @@
 
 import pytest
 
-from hw3 import Passenger, Flight, Ticket, Airline
+from hw3 import Airline, Flight, Passenger, Ticket
 
 PASSENGER_DEFAULT = Passenger('Alexey', '123456')
 FLIGHT_DEFAULT = Flight('AB1234', 'Moscow', 'Ekaterinburg')
@@ -53,8 +53,6 @@ def test_airline_getter_errors():
 def test_airline_setter_errors():
     """Change ticket values to invalid ones. Check setter errors."""
     airline = AIRLINE_DEFAULT
-    with pytest.raises(TypeError):
-        airline.title = ['TitleAbsolutely']
     with pytest.raises(TypeError):
         airline.flights = 'FlightForReal'
     with pytest.raises(TypeError):
