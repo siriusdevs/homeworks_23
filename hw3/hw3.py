@@ -2,43 +2,19 @@
 from typing import Any
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD:hw3.py
-def check(new_value: Any, class_: type[Any]):
-=======
-def check(new_value: Any, classs: type) -> None:
->>>>>>> b05d3cb (moved hw3 and tests to <hw3> directory, modified pylint):hw3/hw3.py
-=======
 def check(new_value: Any, compare_class: type) -> None:
->>>>>>> a90cf15 (updated hw3.py and its tests)
     """Check if new value is an instance of a class.
 
     Args:
         new_value (Any): New value of an object.
-<<<<<<< HEAD
-        classes (type[Any]): Class to compare with.
-=======
         compare_class (type): Class to compare with.
->>>>>>> a90cf15 (updated hw3.py and its tests)
 
     Raises:
         TypeError: When new value of an object doesn't match with given class.
     """
-<<<<<<< HEAD
-<<<<<<< HEAD:hw3.py
-    if not isinstance(new_value, class_):
-        raise TypeError(f'{new_value} must be {class_.__name__} instance, \
-got {type(new_value).__name__}')
-=======
-    if not isinstance(new_value, classs):
-        value_type = type(new_value).__name__
-        raise TypeError(f'{new_value} must be {classs.__name__} instance, got {value_type}')
->>>>>>> b05d3cb (moved hw3 and tests to <hw3> directory, modified pylint):hw3/hw3.py
-=======
     if not isinstance(new_value, compare_class):
         value_type = type(new_value).__name__
         raise TypeError(f'{new_value} must be {compare_class.__name__} instance, got {value_type}')
->>>>>>> a90cf15 (updated hw3.py and its tests)
 
 
 class Passenger:
@@ -247,14 +223,6 @@ class Ticket:
 
 class Airline:
     """A company that aggregates Flights, Passengers and Tickets."""
-<<<<<<< HEAD
-    def __init__(self,
-                 title: str,
-                 flights: list[Flight],
-                 passengers: list[Passenger],
-                 tickets: list[Ticket],
-                 ) -> None:
-=======
 
     def __init__(
         self,
@@ -263,7 +231,6 @@ class Airline:
         passengers: list[Passenger],
         tickets: list[Ticket],
     ) -> None:
->>>>>>> 12031ff (modified setup.cfg, updated hw3.py and tests)
         """Create an airline with Flights, Passengers and Tickets.
 
         Args:
@@ -404,19 +371,4 @@ class Airline:
         """
         if ticket not in self._tickets:
             raise ValueError(f'Ticket {ticket} was not found among sold tickets')
-<<<<<<< HEAD
         self._tickets.remove(ticket)
-=======
-        self._tickets.remove(ticket)
-
-PASSENGER_DEFAULT = Passenger('Alexey', '123456')
-FLIGHT_DEFAULT = Flight('AB1234', 'Moscow', 'Ekaterinburg')
-TICKET_DEFAULT = Ticket(FLIGHT_DEFAULT, PASSENGER_DEFAULT, 'ID0001')
-AIRLINE_DEFAULT = Airline('SpaceX', [FLIGHT_DEFAULT], [PASSENGER_DEFAULT], [TICKET_DEFAULT])
-
-PASSENGER_TWO = Passenger('Boris', '987654')
-FLIGHT_TWO = Flight('CD5678', 'Sochi', 'Irkutsk')
-TICKET_TWO = Ticket(FLIGHT_TWO, PASSENGER_TWO, 'ID0002')
-AIRLINE_TWO = Airline('CosmosY', [FLIGHT_TWO], [PASSENGER_TWO], [TICKET_TWO])
-
->>>>>>> 12031ff (modified setup.cfg, updated hw3.py and tests)
