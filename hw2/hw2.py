@@ -36,7 +36,7 @@ def error_info(output_file: str, invalid_file: str, message: str) -> None:
         )
 
 
-def load_input_data(input_file: str, output_file: str) -> dict[str, dict]:
+def load_input_data(input_file: str, output_file: str) -> dict[str, dict] | bool:
     """Take data from the input file.
 
     Args:
@@ -48,7 +48,7 @@ def load_input_data(input_file: str, output_file: str) -> dict[str, dict]:
     """
     try:
         with open(input_file, 'r') as test_json:
-            json.load(test_json)
+            input_data = json.load(test_json)
     except FileNotFoundError as invalid_info:
         message = 'Is not a file'
         error_info(output_file, type(invalid_info).__name__, message)
@@ -58,8 +58,6 @@ def load_input_data(input_file: str, output_file: str) -> dict[str, dict]:
         error_info(output_file, type(invalid_info).__name__, message)
         return False
 
-    with open(input_file, 'r') as json_file_int:
-        input_data = json.load(json_file_int)
     return input_data
 
 
