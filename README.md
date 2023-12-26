@@ -2,10 +2,10 @@
 Репозиторий для домашних заданий, осень 2023, Колледж Сириус
 ============================================================
 
-|overall|39|25|24|
+|overall|42|26|27|
 | :---: | :---: | :---: | :---: |
 |Branch|hw1|hw2|hw3|
-|argun|-|-|-|
+|argun|+|-|-|
 |arsenovich|+|-|-|
 |bahtinov|-|-|-|
 |bashutskaya|-|-|-|
@@ -15,7 +15,7 @@
 |demyanenko|+|+|+|
 |drobyazko|-|-|-|
 |druzhinin|+|-|-|
-|dyatlova|-|-|-|
+|dyatlova|+|+|+|
 |eremin|+|+|+|
 |evstifeev|-|-|-|
 |galaktionova|-|-|-|
@@ -42,7 +42,7 @@
 |malygin|-|-|-|
 |mashtaler|-|-|-|
 |mens|-|-|-|
-|nehoroshev|+|-|-|
+|nehoroshev|+|-|+|
 |nikiforov|+|+|-|
 |noskov|+|-|+|
 |nudga|+|+|+|
@@ -64,7 +64,7 @@
 |tereshin|+|+|+|
 |trofimov|+|-|-|
 |tsverkunov|-|-|-|
-|turapov|-|-|-|
+|turapov|+|-|-|
 |tyapkova|+|-|-|
 |tyurin|+|+|+|
 |urbanovich|-|-|-|
@@ -75,5 +75,5 @@
 |zaitsev|+|+|+|
 |zamyatina|-|-|-|
 |zinko|-|-|-|
-|zorina_a|+|+|-|
+|zorina_a|+|+|+|
 |zorina_e|+|+|+|
