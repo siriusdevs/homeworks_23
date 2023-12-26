@@ -61,13 +61,38 @@ def _calculate_statistics(json_file: str, today: datetime) -> tuple:
 
     Returns:
         tuple: A tuple containing the data, the city distribution and the online distribution.
+
+    Raises:
+        ValueError: If the file is not in JSON format.
     """
+    if not json_file.endswith('.json'):
+        raise ValueError('File is not in JSON format')
     with open(json_file, 'r') as j_file:
         datafile = json.load(j_file)
 
+    _checker_json(datafile)
     city_distrib = _calculate_city_distribution(datafile)
     online_distrib = _calculate_online_distribution(datafile, today)
     return datafile, city_distrib, online_distrib
+
+
+def _checker_json(json_file: str) -> None:
+    """
+    Check if the file is in our JSON format.
+
+    Args:
+        json_file (str): The path to the JSON file.
+
+    Raises:
+        ValueError: If the file is empty.
+        KeyError: If the file is not in our JSON format.
+    """
+    if not json_file:
+        raise ValueError('JSON is empty')
+    required_keys = ['region', 'last_login']
+    for user in json_file.values():
+        if not all(key in user for key in required_keys):
+            raise KeyError('File is not in our JSON format')
 
 
 def _calculate_city_distribution(datafile: dict) -> dict:
