@@ -10,78 +10,78 @@ from hw2 import process_data
 
 valid_test_data = (
     (
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/input_data/input_1.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/output_data/output_1.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/expected_data/expected_1.json',
+        './test_data/IO_data/valid_data/input_data/input_1.json',
+        './test_data/IO_data/valid_data/output_data/output_1.json',
+        './test_data/expected_data/expected_1.json',
     ),
     (
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/input_data/input_2.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/output_data/output_2.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/expected_data/expected_2.json',
+        './test_data/IO_data/valid_data/input_data/input_2.json',
+        './test_data/IO_data/valid_data/output_data/output_2.json',
+        './test_data/expected_data/expected_2.json',
     ),
     (
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/input_data/input_3.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/output_data/output_3.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/expected_data/expected_3.json',
+        './test_data/IO_data/valid_data/input_data/input_3.json',
+        './test_data/IO_data/valid_data/output_data/output_3.json',
+        './test_data/expected_data/expected_3.json',
     ),
     (
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/input_data/input_4.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/output_data/output_4.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/expected_data/expected_4.json',
+        './test_data/IO_data/valid_data/input_data/input_4.json',
+        './test_data/IO_data/valid_data/output_data/output_4.json',
+        './test_data/expected_data/expected_4.json',
     ),
     (
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/input_data/input_5.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/output_data/output_5.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/expected_data/expected_5.json',
+        './test_data/IO_data/valid_data/input_data/input_5.json',
+        './test_data/IO_data/valid_data/output_data/output_5.json',
+        './test_data/expected_data/expected_5.json',
     ),
 )
 
 invalid_test_data = (
-    (123, '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/output_data/output_1.json'),
+    (123, './test_data/IO_data/valid_data/output_data/output_1.json'),
     (
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/invalid_data/not_json.txt',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/output_data/output_1.json',
+        './test_data/IO_data/invalid_data/not_json.txt',
+        './test_data/IO_data/valid_data/output_data/output_1.json',
     ),
     (
         'non_existent_file.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/output_data/output_1.json',
+        './test_data/IO_data/valid_data/output_data/output_1.json',
     ),
     (
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/invalid_data/empty.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/output_data/output_1.json',
+        './test_data/IO_data/invalid_data/empty.json',
+        './test_data/IO_data/valid_data/output_data/output_1.json',
     ),
     (
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/invalid_data/input_1.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/output_data/output_1.json',
+        './test_data/IO_data/invalid_data/input_1.json',
+        './test_data/IO_data/valid_data/output_data/output_1.json',
     ),
     (
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/invalid_data/input_2.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/output_data/output_1.json',
+        './test_data/IO_data/invalid_data/input_2.json',
+        './test_data/IO_data/valid_data/output_data/output_1.json',
     ),
     (
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/invalid_data/input_3.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/output_data/output_1.json',
+        './test_data/IO_data/invalid_data/input_3.json',
+        './test_data/IO_data/valid_data/output_data/output_1.json',
     ),
     (
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/invalid_data/input_4.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/output_data/output_1.json',
+        './test_data/IO_data/invalid_data/input_4.json',
+        './test_data/IO_data/valid_data/output_data/output_1.json',
     ),
     (
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/invalid_data/input_5.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/output_data/output_1.json',
+        './test_data/IO_data/invalid_data/input_5.json',
+        './test_data/IO_data/valid_data/output_data/output_1.json',
     ),
     (
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/invalid_data/input_6.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/output_data/output_1.json',
+        './test_data/IO_data/invalid_data/input_6.json',
+        './test_data/IO_data/valid_data/output_data/output_1.json',
     ),
 
-    ('/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/input_data/input_1.json', 123),
+    ('./test_data/IO_data/valid_data/input_data/input_1.json', 123),
     (
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/input_data/input_1.json',
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/invalid_data/not_json.txt',
+        './test_data/IO_data/valid_data/input_data/input_1.json',
+        './test_data/IO_data/invalid_data/not_json.txt',
     ),
     (
-        '/media/ilya/KINGSTON/homeworks_/homeworks_23/hw2/test_data/IO_data/valid_data/input_data/input_1.json',
+        './test_data/IO_data/valid_data/input_data/input_1.json',
         'non_existent_file.json',
     ),
 )
