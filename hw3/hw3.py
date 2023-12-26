@@ -1,19 +1,7 @@
 """HW3 task."""
 
 
-class FlightMetod:
-    """Flight metod instance."""
-
-    def __str__(self) -> str:
-        """Representation of the instance in string.
-
-        Returns:
-            str: string visualisation of the instance.
-        """
-        return f'{self.flight_number} {self.departure_airport} {self.arrival_airport}'
-
-
-class Flight(FlightMetod):
+class BaseFlight:
     """Flight instance."""
 
     def __init__(self, flight_number: str, departure_airport: str, arrival_airport: str):
@@ -96,6 +84,18 @@ class Flight(FlightMetod):
         if not isinstance(new_aa, str):
             raise TypeError('Your arrival airport should be str')
         self._arrival_airport = new_aa
+
+
+class FlightStr(BaseFlight):
+    """Flight metod instance."""
+
+    def __str__(self) -> str:
+        """Representation of the instance in string.
+
+        Returns:
+            str: string visualisation of the instance.
+        """
+        return f'{self.flight_number} {self.departure_airport} {self.arrival_airport}'
 
 
 class Passenger:
@@ -181,7 +181,7 @@ class TicketMetod:
 class Ticket(TicketMetod):
     """Ticket instance."""
 
-    def __init__(self, ticket_number: str, flight: Flight, passenger: Passenger):
+    def __init__(self, ticket_number: str, flight: BaseFlight, passenger: Passenger):
         """Ticket initializaition.
 
         Args:
@@ -217,7 +217,7 @@ class Ticket(TicketMetod):
         self._ticket_number = new_tn
 
     @property
-    def flight(self) -> Flight:
+    def flight(self) -> FlightStr:
         """Getter of flight of the instance.
 
         Returns:
@@ -226,7 +226,7 @@ class Ticket(TicketMetod):
         return self._flight
 
     @flight.setter
-    def flight(self, new_flight: Flight) -> None:
+    def flight(self, new_flight: FlightStr) -> None:
         """Setter of flight of the instance.
 
         Args:
@@ -235,7 +235,7 @@ class Ticket(TicketMetod):
         Raises:
             TypeError: if data wrong type
         """
-        if not isinstance(new_flight, Flight):
+        if not isinstance(new_flight, FlightStr):
             raise TypeError('Your flight should be class Flight')
         self._flight = new_flight
 
@@ -339,7 +339,7 @@ class AirlineSettersAndGetters:
 class AirlainMetods(AirlineSettersAndGetters):
     """Airline metods instance."""
 
-    def add_flight(self, flight: Flight) -> None:
+    def add_flight(self, flight: FlightStr) -> None:
         """Add flight to flights list.
 
         Args:
@@ -348,11 +348,11 @@ class AirlainMetods(AirlineSettersAndGetters):
         Raises:
             TypeError: if data wrong type
         """
-        if not isinstance(flight, Flight):
+        if not isinstance(flight, FlightStr):
             raise TypeError('Your flight should be class Flight')
         self.flights.append(flight)
 
-    def remove_flight(self, flight: Flight) -> None:
+    def remove_flight(self, flight: FlightStr) -> None:
         """Return flight from flights list.
 
         Args:
@@ -362,7 +362,7 @@ class AirlainMetods(AirlineSettersAndGetters):
             TypeError: if data wrong type
             ValueError: if there no data for removing
         """
-        if not isinstance(flight, Flight):
+        if not isinstance(flight, FlightStr):
             raise TypeError('Your flight should be class Flight')
         if flight not in self.flights:
             raise ValueError(f'Your flight {flight.flight_number} in your flights list')
@@ -433,7 +433,7 @@ class Airline(AirlainMetods):
     def __init__(
         self,
         airline_name: str,
-        flights: list[Flight],
+        flights: list[FlightStr],
         passengers: list[Passenger],
         tickets: list[Ticket],
     ) -> None:

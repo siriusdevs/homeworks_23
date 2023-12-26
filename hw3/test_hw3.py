@@ -3,7 +3,7 @@ import pytest
 
 import hw3
 
-FLIGHT = hw3.Flight('007R43', 'sochi airport', 'novokuzneck')
+FLIGHT = hw3.FlightStr('007R43', 'sochi airport', 'novokuzneck')
 PASSANGER = hw3.Passenger('Vika', 8)
 
 DATA_FLIGHT = (
@@ -57,7 +57,7 @@ def test_flight_fst(input_data: tuple, expected: str) -> None:
         input_data (tuple): info about flight
         expected (str): output info from code
     """
-    test_flight = str(hw3.Flight(*input_data))
+    test_flight = str(hw3.FlightStr(*input_data))
     assert test_flight == expected
 
 
@@ -97,7 +97,7 @@ def test_ticket_sec(input_data5: tuple, expected: str) -> None:
     assert test_ticket == expected
 
 
-FLIGHT1 = hw3.Flight('0079KK0', 'Dubai airportt', 'Moskow airport')
+FLIGHT1 = hw3.FlightStr('0079KK0', 'Dubai airportt', 'Moskow airport')
 PASSANGER1 = hw3.Passenger('Alex', 8)
 TICKET = hw3.Ticket('T4300', FLIGHT, PASSANGER)
 TICKET1 = hw3.Ticket('MN0T5', FLIGHT1, PASSANGER1)
@@ -126,7 +126,7 @@ def test_airline_fst(input_data6: tuple, expected: str) -> None:
     assert test_airline == expected
 
 
-FLIGHT2 = hw3.Flight('008K0', 'Spritc airportt', 'Downtown airport')
+FLIGHT2 = hw3.FlightStr('008K0', 'Spritc airportt', 'Downtown airport')
 PASSANGER2 = hw3.Passenger('Soniya', 6)
 TICKET2 = hw3.Ticket('0T000005', FLIGHT2, PASSANGER2)
 AIRLINE_METODS_TEST = (
@@ -164,7 +164,7 @@ def test_airline_sec(input_data7: tuple, expected: str) -> None:
 @pytest.mark.xfail
 def test_fail_thr():
     """Error test for flight."""
-    hw3.Flight(1, 'sharik', 'novosib airport')
+    hw3.FlightStr(1, 'sharik', 'novosib airport')
 
 
 @pytest.mark.xfail
