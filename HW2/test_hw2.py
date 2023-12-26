@@ -30,41 +30,17 @@ SUCCESSFUL_TEST = (
     (
         './HW2/input/data1_hw2.json',
         './HW2/output/output_data.json',
-        {
-            'email_host_percentages': {
-                'yandex.ru': 50.,
-                'gmail.com': 50.,
-            },
-            'registration_year_percentages': {
-                '2012': 50.,
-                '2022': 50.,
-            },
-        },
+        './HW2/expected/data1_hw2_expected.json',
     ),
     (
         './HW2/input/data2_hw2.json',
         './HW2/output/output_data.json',
-        {
-            'email_host_percentages': {
-                'yahoo.com': 100.,
-            },
-            'registration_year_percentages': {
-                '2016': 50.,
-                '2014': 50.,
-            },
-        },
+        './HW2/expected/data2_hw2_expected.json',
     ),
     (
         './HW2/input/empty_key.json',
         './HW2/output/output_data.json',
-        {
-            'email_host_percentages': {
-                'yahoo.com': 50.,
-            },
-            'registration_year_percentages': {
-                '2016': 50.,
-            },
-        },
+        './HW2/expected/empty_key_expected.json',
     ),
 )
 
@@ -88,20 +64,22 @@ def test_with_error_code(input_file: str, output_file: str, expected: str, error
     assert error_text == expected
 
 
-@pytest.mark.parametrize('input_file, output_file, expected', SUCCESSFUL_TEST)
-def test_functional(input_file: str, output_file: str, expected: str):
+@pytest.mark.parametrize('input_file, output_file, expected_file', SUCCESSFUL_TEST)
+def test_functional(input_file: str, output_file: str, expected_file: str):
     """
     Test module for functional.
 
     Args:
         input_file (str): The path to the input file path.
         output_file (str): The path to the output file path.
-        expected (str): Expexted output value.
+        expected_file (str): Expexted output value.
     """
     process_data(input_file, output_file)
     assert os.path.exists(output_file)
     with open(output_file) as final_file:
         output_data = json.load(final_file)
+    with open(expected_file) as exp:
+        expected = json.load(exp)
     assert output_data == expected
 
 
