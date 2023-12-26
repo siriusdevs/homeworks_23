@@ -29,9 +29,9 @@ all_departments = {
     },
 }
 top_salaries = [156000.80, 136590.70, 77000.90]
-top_salaries2 = [77000.90, 72000.74, 68000.89]
+top_salaries_2 = [77000.90, 72000.74, 68000.89]
 test_data = [(all_departments, (top_salaries, 40.0))]
-test_data2 = [(all_departments, ('financy_department', 'hr_department'), (top_salaries2, 43.0))]
+test_data2 = [(all_departments, ('financy_department', 'hr_department'), (top_salaries_2, 43.0))]
 test_data_invalid = {
     'financy_department': {
     },
