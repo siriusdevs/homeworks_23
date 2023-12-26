@@ -263,7 +263,62 @@ class TicketMetod(Ticket):
         return f'{self.ticket_number} {self.flight} {self.passenger}'
 
 
-class AirlineSettersAndGetters:
+class Airline:
+    """Ailine instance."""
+
+    def __init__(
+        self,
+        airline_name: str,
+        flights: list[BaseFlight],
+        passengers: list[Passenger],
+        tickets: list[Ticket],
+    ) -> None:
+        """Airline initialization.
+
+        Args:
+            airline_name (str): name of airline company
+            flights (list[BaseFlight]): list of flights
+            passengers (list[Passenger]): list of passsengers
+            tickets (list[Ticket]): list of tickets
+        """
+        self.airline_name = airline_name
+        self.flights = flights
+        self.passengers = passengers
+        self.tickets = tickets
+
+    @property
+    def airline_name(self) -> str:
+        """Getter of airline name of the instance.
+
+        Returns:
+            str: airline name
+        """
+        return self._airline_name
+
+    @airline_name.setter
+    def airline_name(self, new_an: str) -> None:
+        """Setter of airline name of the instance.
+
+        Args:
+            new_an (str): new airline name
+
+        Raises:
+            TypeError: if data wrong type
+        """
+        if not isinstance(new_an, str):
+            raise TypeError('Your airline name should be str')
+        self._airline_name = new_an
+
+    def __str__(self) -> str:
+        """Representation of the instance in string.
+
+        Returns:
+            str: string visualisation of the instance.
+        """
+        return f'{self.airline_name} {self.flights} {self.passengers} {self.tickets}'
+
+
+class AirlineSettersAndGetters(Airline):
     """Airline setters and getters instance."""
 
     @property
@@ -425,58 +480,3 @@ class AirlainMetods(AirlineSettersAndGetters):
         if ticket not in self.tickets:
             raise ValueError(f'There is not ticket {ticket.ticket_number}')
         self.tickets.remove(ticket)
-
-
-class Airline(AirlainMetods):
-    """Ailine instance."""
-
-    def __init__(
-        self,
-        airline_name: str,
-        flights: list[BaseFlight],
-        passengers: list[Passenger],
-        tickets: list[Ticket],
-    ) -> None:
-        """Airline initialization.
-
-        Args:
-            airline_name (str): name of airline company
-            flights (list[BaseFlight]): list of flights
-            passengers (list[Passenger]): list of passsengers
-            tickets (list[Ticket]): list of tickets
-        """
-        self.airline_name = airline_name
-        self.flights = flights
-        self.passengers = passengers
-        self.tickets = tickets
-
-    @property
-    def airline_name(self) -> str:
-        """Getter of airline name of the instance.
-
-        Returns:
-            str: airline name
-        """
-        return self._airline_name
-
-    @airline_name.setter
-    def airline_name(self, new_an: str) -> None:
-        """Setter of airline name of the instance.
-
-        Args:
-            new_an (str): new airline name
-
-        Raises:
-            TypeError: if data wrong type
-        """
-        if not isinstance(new_an, str):
-            raise TypeError('Your airline name should be str')
-        self._airline_name = new_an
-
-    def __str__(self) -> str:
-        """Representation of the instance in string.
-
-        Returns:
-            str: string visualisation of the instance.
-        """
-        return f'{self.airline_name} {self.flights} {self.passengers} {self.tickets}'

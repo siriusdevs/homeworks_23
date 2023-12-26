@@ -150,7 +150,7 @@ def test_airline_sec(input_data7: tuple, expected: str) -> None:
         input_data7 (tuple): info about airline
         expected (str): output info from code
     """
-    test_airline = hw3.Airline(*input_data7)
+    test_airline = hw3.AirlainMetods(*input_data7)
     test_airline.add_flight(FLIGHT2)
     test_airline.remove_flight(FLIGHT1)
     test_airline.add_passenger(PASSANGER2)
