@@ -1,5 +1,6 @@
-from abc import ABC
 """This is solution for hw3."""
+
+from abc import ABC
 
 
 class Client:
