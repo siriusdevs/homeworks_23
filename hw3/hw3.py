@@ -333,9 +333,15 @@ class EducationalInstitution:
 
         Args:
             course (Course): The course to remove.
+
+        Raises:
+            ValueError: If the course is not in the institution.
         """
         check_type(course, Course)
-        self.courses.remove(course)
+        if course in self.courses:
+            self.courses.remove(course)
+        else:
+            raise ValueError('The course is not in the institution')
 
     def take_courses(self) -> list[Course]:
         """Return the list of courses in educational institution.
@@ -359,9 +365,15 @@ class EducationalInstitution:
 
         Args:
             group (Group): The removed group.
+
+        Raises:
+            ValueError: If the group is not in the institution.
         """
         check_type(group, Group)
-        self.groups.remove(group)
+        if group in self.groups:
+            self.groups.remove(group)
+        else:
+            raise ValueError('The group is not in the institution')
 
     def take_groups(self) -> list[Group]:
         """Return the list of groups in educational institution.
