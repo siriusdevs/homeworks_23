@@ -1,5 +1,5 @@
 import pytest
-from hw3.hw3 import Car, PassengerCar, Truck, CarPark
+from hw3 import Car, PassengerCar, Truck, CarPark
 
 
 passenger_car = PassengerCar('mazda', 2007, 35, 2)
