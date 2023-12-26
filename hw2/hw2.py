@@ -27,6 +27,9 @@ def process_data(
 
     Args:
         output_path (str): путь для записи итогового .json файла.
+
+    Returns:
+        str: предупреждение о делении на 0.
     """
     json_data = load_json_data()
     result_data = {
@@ -78,8 +81,8 @@ def process_data(
                 / result_data['total'],
             },
         }
-    except ZeroDivisionError as e:
-        print(f"На ноль делить нельзя!\n{e}")
+    except ZeroDivisionError as error:
+        return f'На ноль делить нельзя!\n{error}'
 
     with open(output_path, 'w') as output_file:
         json.dump(result_data['stats'], output_file)
