@@ -1,0 +1,12 @@
+{
+    "Saint-Petersburg": 20.0,
+    "Novosibirsk": 20.0,
+    "Sochi": 20.0,
+    "Moskow": 20.0,
+    "Krasnodar": 20.0,
+    "less_than_two_days": 20.0,
+    "less_than_a_week": 20.0,
+    "less_than_a_month": 20.0,
+    "less_than_half_a_year": 20.0,
+    "more_than_half_a_year": 20.0
+}
