@@ -20,14 +20,12 @@ def load_json_data(input_path: str = 'data_hw2.json'):
 
 
 def process_data(
-    input_path: str = 'data_hw2.json',
     output_path: str = 'data_result.json',
 ):
     """
     Функция реализующая анализ существующего json и соберет из него новую статистику.
 
     Args:
-        input_path (str): путь, где находится .json файл.
         output_path (str): путь для записи итогового .json файла.
     """
     json_data = load_json_data()
@@ -60,25 +58,28 @@ def process_data(
         time.total_seconds() / (60 * 60 * 24) for time in result_data['online_times']
     ]
 
-    result_data['stats'] = {
-        'region_distribution': result_data['region_distribution'],
-        'average_age': sum(result_data['ages']) / result_data[Constants.total_list[0]],
-        'online_times': {
-            '<2 days': sum(day < 2 for day in result_data[Constants.online_days[0]])
-            / result_data[Constants.total_list[0]],
-            '<1 week': sum(day < 7 for day in result_data[Constants.online_days[0]])
-            / result_data[Constants.total_list_two[0]],
-            '<1 month': sum(
-                day < Constants.month for day in result_data[Constants.online_days[0]]
-            )
-            / result_data[Constants.total_list_two[0]],
-            '>6 months': sum(
-                day > Constants.half_year
-                for day in result_data[Constants.online_days[0]]
-            )
-            / result_data['total'],
-        },
-    }
+    try:
+        result_data['stats'] = {
+            'region_distribution': result_data['region_distribution'],
+            'average_age': sum(result_data['ages']) / result_data[Constants.total_list[0]],
+            'online_times': {
+                '<2 days': sum(day < 2 for day in result_data[Constants.online_days[0]])
+                / result_data[Constants.total_list[0]],
+                '<1 week': sum(day < 7 for day in result_data[Constants.online_days[0]])
+                / result_data[Constants.total_list_two[0]],
+                '<1 month': sum(
+                    day < Constants.month for day in result_data[Constants.online_days[0]]
+                )
+                / result_data[Constants.total_list_two[0]],
+                '>6 months': sum(
+                    day > Constants.half_year
+                    for day in result_data[Constants.online_days[0]]
+                )
+                / result_data['total'],
+            },
+        }
+    except ZeroDivisionError as e:
+        print(f"На ноль делить нельзя!\n{e}")
 
     with open(output_path, 'w') as output_file:
         json.dump(result_data['stats'], output_file)

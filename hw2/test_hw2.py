@@ -11,18 +11,29 @@ class TestProcessData(unittest.TestCase):
 
     def test_process_data(self):
         """Метод тестирования возвращаемого json файла."""
-        input_path = os.path.join('data_hw2.json')
         output_path = os.path.join('data_result.json')
 
-        process_data(input_path, output_path)
+        process_data(output_path)
 
-        with open(output_path, 'r') as output_file:
-            stats = json.load(output_file)
+        with open(output_path, 'r') as input_file:
+            stats = json.load(input_file)
 
         self.assertIsInstance(stats, dict)
-        self.assertIn('region_distribution', stats)
-        self.assertIn('average_age', stats)
-        self.assertIn('online_times', stats)
+
+        if 'region_distribution' not in stats:
+            self.fail("Ключ 'region_distribution' не найден в итоговом JSON.")
+        else:
+            self.assertIsInstance(stats['region_distribution'], dict)
+
+        if 'average_age' not in stats:
+            self.fail("Ключ 'average_age' не найден в итоговом JSON.")
+        else:
+            self.assertIsInstance(stats['average_age'], (int, float))
+
+        if 'online_times' not in stats:
+            self.fail("Ключ 'online_times' не найден в итоговом JSON.")
+        else:
+            self.assertIsInstance(stats['online_times'], dict)
 
 
 if __name__ == '__main__':
