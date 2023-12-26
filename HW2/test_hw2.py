@@ -125,11 +125,24 @@ def test_get_stat():
         'user1': {REGION: 'City1', REGISTERED: '2022-01-01'},
         'user2': {REGION: 'City2', REGISTERED: '2022-02-01'},
     }
+    test_stat = {
+        'city_distribution': {
+            'City1': 50.0,
+            'City2': 50.0,
+        },
+        'year_distribution': {
+            '2022': 100.0,
+        },
+    }
     result_obtained = get_stat(data_dict)
-    assert 'city_distribution' in result_obtained
-    assert 'year_distribution' in result_obtained
+    assert result_obtained == test_stat
 
 
 def test_process_data_file_not_found():
     """Test the process_data function when the input file is not found."""
     assert process_data('nonexist_file.json', 'output.json') == 'nonexist_file.json not found'
+
+
+def test_process_data_json_decode_error():
+    """Test the 'process_data' function for JSONDecodeError."""
+    assert process_data('./HW2/test.txt', 'test_output.json') == './HW2/test.txt has not json'

@@ -50,7 +50,7 @@ def get_stat(dataa: dict) -> dict:
     for user in dataa.keys():
         city = dataa[user].get('region', 'defaultRegion')
         city_distrib[city] = city_distrib.get(city, 0) + 1
-        year_of_regisrt = datetime.strptime(dataa[user]['registered'], '%Y-%m-%d').year
+        year_of_regisrt = str(datetime.strptime(dataa[user]['registered'], '%Y-%m-%d').year)
         year_distrib[year_of_regisrt] = year_distrib.get(year_of_regisrt, 0) + 1
     total_users = len(dataa.keys())
     if total_users == 0:
