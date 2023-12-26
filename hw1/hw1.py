@@ -26,20 +26,27 @@ def calculate_salary(
     all_salaries.sort()
 
     top_salaries = all_salaries[:3]
+    sum_salary = sum(all_salaries)
+    if sum(all_salaries) > 0:
+        percentage = round((sum_salary / sum_salary) * 100, 2)
 
-    if sum(all_salaries) == 0:
-        return ()
+        rounded_salaries = [round(salary, 2) for salary in top_salaries]
 
-    percentage = round((sum(top_salaries) / sum(all_salaries)) * 100, 2)
+        return percentage, rounded_salaries
+    elif sum(all_salaries) < 0:
+        percentage = round((sum(top_salaries) / sum_salary) * 100, 2)
 
-    rounded_salaries = [round(salary, 2) for salary in top_salaries]
+        rounded_salaries = [round(salary, 2) for salary in top_salaries]
 
-    return percentage, rounded_salaries
+        return percentage, rounded_salaries
+    elif sum(all_salaries) == 0:
+        return 0, [0, 0, 0]
+    return ()
 
 
 (
     calculate_salary(
-        IT={'John': 5000.0, 'Jane': 5000.0, 'Bob': 5000.0},
-        Phone={'Alex': 2500.66, 'Alice': 2512.1428},
+        IT={'John': 0, 'Jane': 0, 'Bob': 0},
+        Phone={'Alex': 0, 'Alice': 0},
     )
 )
