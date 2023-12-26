@@ -166,19 +166,7 @@ class Passenger:
         return f'{self.name} {self.passport_number}'
 
 
-class TicketMetod:
-    """Ticket metod instance."""
-
-    def __str__(self) -> str:
-        """Representation of the instance in string type.
-
-        Returns:
-            str: string visualisation of the instance.
-        """
-        return f'{self.ticket_number} {self.flight} {self.passenger}'
-
-
-class Ticket(TicketMetod):
+class Ticket:
     """Ticket instance."""
 
     def __init__(self, ticket_number: str, flight: FlightStr, passenger: Passenger):
@@ -261,6 +249,18 @@ class Ticket(TicketMetod):
         if not isinstance(new_passenger, Passenger):
             raise TypeError('Your passenger should be class Passager')
         self._passenger = new_passenger
+
+
+class TicketMetod(Ticket):
+    """Ticket metod instance."""
+
+    def __str__(self) -> str:
+        """Representation of the instance in string type.
+
+        Returns:
+            str: string visualisation of the instance.
+        """
+        return f'{self.ticket_number} {self.flight} {self.passenger}'
 
 
 class AirlineSettersAndGetters:

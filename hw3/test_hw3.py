@@ -81,7 +81,7 @@ def test_ticket_fst(input_data4: tuple, expected: str) -> None:
         input_data4 (tuple): info about ticket
         expected (str): output info from code
     """
-    test_ticket = str(hw3.Ticket(*input_data4))
+    test_ticket = str(hw3.TicketMetod(*input_data4))
     assert test_ticket == expected
 
 
@@ -93,14 +93,14 @@ def test_ticket_sec(input_data5: tuple, expected: str) -> None:
         input_data5 (tuple): info about ticket
         expected (str): output info from code
     """
-    test_ticket = str(hw3.Ticket(*input_data5))
+    test_ticket = str(hw3.TicketMetod(*input_data5))
     assert test_ticket == expected
 
 
 FLIGHT1 = hw3.FlightStr('0079KK0', 'Dubai airportt', 'Moskow airport')
 PASSANGER1 = hw3.Passenger('Alex', 8)
-TICKET = hw3.Ticket('T4300', FLIGHT, PASSANGER)
-TICKET1 = hw3.Ticket('MN0T5', FLIGHT1, PASSANGER1)
+TICKET = hw3.TicketMetod('T4300', FLIGHT, PASSANGER)
+TICKET1 = hw3.TicketMetod('MN0T5', FLIGHT1, PASSANGER1)
 AIRLINE_TEST = (
     (
         (
@@ -128,7 +128,7 @@ def test_airline_fst(input_data6: tuple, expected: str) -> None:
 
 FLIGHT2 = hw3.FlightStr('008K0', 'Spritc airportt', 'Downtown airport')
 PASSANGER2 = hw3.Passenger('Soniya', 6)
-TICKET2 = hw3.Ticket('0T000005', FLIGHT2, PASSANGER2)
+TICKET2 = hw3.TicketMetod('0T000005', FLIGHT2, PASSANGER2)
 AIRLINE_METODS_TEST = (
     (
         (
@@ -176,7 +176,7 @@ def test_fail_fif():
 @pytest.mark.xfail
 def test_fail_six():
     """Error test for ticket."""
-    hw3.Ticket('21FPL0099', FLIGHT, 1)
+    hw3.TicketMetod('21FPL0099', FLIGHT, 1)
 
 
 @pytest.mark.xfail
