@@ -181,12 +181,12 @@ class TicketMetod:
 class Ticket(TicketMetod):
     """Ticket instance."""
 
-    def __init__(self, ticket_number: str, flight: BaseFlight, passenger: Passenger):
+    def __init__(self, ticket_number: str, flight: FlightStr, passenger: Passenger):
         """Ticket initializaition.
 
         Args:
             ticket_number (str): info about number of passenger ticket
-            flight (BaseFlight): info about flight class (data from that class)
+            flight (FlightStr): info about flight class (data from that class)
             passenger (Passenger): info aboutpassenger class (data from that class)
         """
         self.ticket_number = ticket_number
@@ -236,7 +236,7 @@ class Ticket(TicketMetod):
             TypeError: if data wrong type
         """
         if not isinstance(new_flight, BaseFlight):
-            raise TypeError('Your flight should be class Flight')
+            raise TypeError('Your flight should be class BaseFlight')
         self._flight = new_flight
 
     @property
