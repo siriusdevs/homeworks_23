@@ -3,6 +3,10 @@ import pytest
 
 from hw3 import Course, EducationalInstitution, Group, Student, Teacher
 
+MARKO = Student('Marko')
+MATH = Course('Math', Teacher('Sergey'))
+PROGRAMMING = Group('K0709')
+
 
 def test_teacher_create_course():
     """Test teacher create course."""
@@ -70,8 +74,8 @@ def test_creation_raises_error():
     with pytest.raises(TypeError):
         Group.add_student(1)
     with pytest.raises(TypeError):
-        Course.remove_student('MARKO')
+        Course.remove_student(MARKO)
     with pytest.raises(ValueError):
-        Student.drop_course('MARKO')
+        MARKO.drop_course(MATH)
     with pytest.raises(ValueError):
-        Group.remove_student('MARKO')
+        PROGRAMMING.remove_student(MARKO)
