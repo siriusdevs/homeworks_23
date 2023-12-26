@@ -74,6 +74,6 @@ class Restaurant:
         """Get order as str.
 
         Returns:
-        Order as str
-         """
+            Order as str
+        """
         return '\n'.join([f'{order.get_dish_names()} {order.client}' for order in self.orders])
