@@ -71,3 +71,7 @@ def test_creation_raises_error():
         Group.add_student(1)
     with pytest.raises(TypeError):
         Course.remove_student('MARKO')
+    with pytest.raises(ValueError):
+        Student.drop_course('MARKO')
+    with pytest.raises(ValueError):
+        Group.remove_student('MARKO')
