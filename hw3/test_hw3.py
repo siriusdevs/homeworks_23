@@ -46,7 +46,7 @@ def test_reader_borrow_book():
     library.add_book(book)
     librarian = Librarian(LIBRARIAN_NAME, library)
     reader = Reader(READER_NAME)
-    reader.borrow_book(librarian, book)
+    librarian.lend_book(reader, book)
     assert not library.get_all_books()
 
 
@@ -57,6 +57,6 @@ def test_reader_return_book():
     library.add_book(book)
     librarian = Librarian(LIBRARIAN_NAME, library)
     reader = Reader(READER_NAME)
-    reader.borrow_book(librarian, book)
+    librarian.lend_book(reader, book)
     reader.return_book(librarian, book)
-    assert library.get_all_books()[0] == book
+    assert (book in library.get_all_books())

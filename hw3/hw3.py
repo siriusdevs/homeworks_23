@@ -164,7 +164,7 @@ class Reader:
             name (str): The name of the reader.
         """
         self._name = name
-        self.borrowed_books: list[Book] = []
+        self._borrowed_book: Book = None
 
     @property
     def name(self) -> str:
@@ -191,7 +191,8 @@ class Reader:
             librarian (Librarian): The librarian facilitating the borrowing process.
             book (Book): The book to be borrowed.
         """
-        librarian.lend_book(self, book)
+        book = librarian.lend_book(book)
+        self._borrowed_book = book
 
     def return_book(self, librarian: 'Librarian', book: Book) -> None:
         """Return a borrowed book to the library through the librarian.
@@ -200,7 +201,8 @@ class Reader:
             librarian (Librarian): The librarian facilitating the return process.
             book (Book): The book to be returned.
         """
-        librarian.accept_book(self, book)
+        librarian.return_book(book)
+        self._borrowed_book = None
 
 
 class Librarian:
@@ -274,16 +276,17 @@ class Librarian:
         Args:
             reader (Reader): The reader borrowing the book.
             book (Book): The book to be borrowed.
+
+        Returns:
+            book (Book): The book to be borrowed.
         """
         self.library.remove_book(book)
-        reader.borrowed_books.append(book)
+        return book
 
-    def accept_book(self, reader: Reader, book: Book) -> None:
+    def return_book(self, book: Book) -> None:
         """Accept a returned book from a reader and returns it to the library.
 
         Args:
-            reader (Reader): The reader returning the book.
             book (Book): The returned book.
         """
         self.library.add_book(book)
-        reader.borrowed_books.remove(book)
