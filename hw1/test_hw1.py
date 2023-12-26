@@ -156,18 +156,15 @@ def test_get_stats(
 
 
 invalid_test_data = (
-    (
-        {
-            DEPARTMENT_A: {
-                EMPLOYEE_A: SALARY_F,
-            },
+    {
+        DEPARTMENT_A: {
+            EMPLOYEE_A: SALARY_F,
         },
-    ),
+    },
 )
 
 
 @pytest.mark.xfail(raises=ValueError)
 def test_invalid_test_data():
     """Check error handling."""
-    for invalid_test_data_elem in invalid_test_data:
-        get_departments_rating(*invalid_test_data_elem)
+    get_departments_rating(*invalid_test_data)
