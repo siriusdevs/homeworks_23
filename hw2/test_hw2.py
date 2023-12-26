@@ -42,3 +42,9 @@ def test_process_data_no_file_error():
     """
     with pytest.raises(FileNotFoundError):
         process_data('nonexistent_file.json', OUTPUT_FILE, TODAY)
+
+    with pytest.raises(ValueError):
+        process_data('tests/test4.json', 'nonexistent_file.json', TODAY)
+
+    with pytest.raises(KeyError):
+        process_data('tests/test5.json', OUTPUT_FILE, TODAY)
