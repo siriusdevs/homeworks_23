@@ -133,8 +133,14 @@ class Dish:
 
         Args:
             product (Product): объект продукта.
+
+        Raises:
+            ValueError: обработка случаев отсутствия параметра.
         """
-        self._products.append(product)
+        if product:
+            self._products.append(product)
+        else:
+            raise ValueError('Продукт должен существовать, чтобы его добавить.')
 
     def remove_product(self, product: Product):
         """
@@ -142,8 +148,14 @@ class Dish:
 
         Args:
             product (Product): объект продукта
+
+        Raises:
+            ValueError: обработка случая None продукта.
         """
-        self._products.remove(product)
+        if product:
+            self._products.remove(product)
+        else:
+            raise ValueError('Продукт должен существовать, чтобы его удалить.')
 
 
 class RestaurantDetails:
@@ -227,8 +239,14 @@ class MenuManager:
 
         Args:
             dish (Dish): объект продукта
+
+        Raises:
+            ValueError: обработка случая, если блюдо не существует.
         """
-        self._dishes.append(dish)
+        if dish:
+            self._dishes.append(dish)
+        else:
+            raise ValueError('Блюдо должно существовать, чтобы его добавить.')
 
     def remove_dish(self, dish: Dish):
         """
@@ -236,8 +254,14 @@ class MenuManager:
 
         Args:
             dish: объект продукта
+
+        Raises:
+            ValueError: обработка случая, если блюдо не существует.
         """
-        self._dishes.remove(dish)
+        if dish:
+            self._dishes.remove(dish)
+        else:
+            raise ValueError('Блюдо должно существовать, чтобы его удалить.')
 
     def order_dish(self, dish: Dish, restaurant_details: RestaurantDetails) -> str:
         """
