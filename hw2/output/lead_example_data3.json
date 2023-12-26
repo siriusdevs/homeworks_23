@@ -1,0 +1,16 @@
+{
+    "age_stats": {
+        "0-18": 0,
+        "18-25": 4,
+        "25-45": 6,
+        "45-60": 3,
+        "60+": 2
+    },
+    "time_stats": {
+        "less_than_2_days": 28.0,
+        "less_than_1_week": 0,
+        "less_than_1_month": 28.0,
+        "less_than_6_months": 34.14,
+        "more_than_6_months": 55.0
+    }
+}

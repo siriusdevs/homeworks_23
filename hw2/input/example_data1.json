@@ -1,0 +1,30 @@
+{
+    "user": {
+        "region": "Saint-Mar",
+        "registered": "2016-12-02",
+        "last_login": "2020-10-01",
+        "email": "rdeswzxd@yo.su",
+        "age": 70
+    },
+    "user2": {
+        "region": "New",
+        "registered": "2022-10-30",
+        "last_login": "2023-11-21",
+        "email": "resaXCVB@gmail.com",
+        "age": 18
+    },
+    "user3": {
+        "region": "Brazilio",
+        "registered": "2022-07-08",
+        "last_login": "2023-12-25",
+        "email": "fdssssss@gmail.com",
+        "age": 33
+    },
+    "user4": {
+        "region": "Sochi",
+        "registered": "2000-10-30",
+        "last_login": "2023-09-09",
+        "email": "vcxxxx@gmail.com",
+        "age": 46
+    }
+}
