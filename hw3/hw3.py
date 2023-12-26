@@ -92,7 +92,7 @@ class Person:
 class Student(Person):
     """Student that is inherited from a Person."""
 
-    def __init__(self, name: str, surname: str, age: int, group: str, scholarship: int):
+    def __init__(self, name: str, surname: str, age: int, group: str, scholarship: int | float):
         """Name, surname, age, group and scholarship of student.
 
         Args:
@@ -100,7 +100,7 @@ class Student(Person):
             surname (str): surname of person
             age (int): age of person
             group (str): group of student
-            scholarship (int): scholarship of student
+            scholarship (int | float): scholarship of student
         """
         super().__init__(name, surname, age)
         self.group, self.scholarship = group, scholarship
@@ -129,7 +129,7 @@ class Student(Person):
         self._group = new_group
 
     @property
-    def scholarship(self) -> int:
+    def scholarship(self) -> int | float:
         """Scholarship of student.
 
         Returns:
@@ -138,7 +138,7 @@ class Student(Person):
         return self._scholarship
 
     @scholarship.setter
-    def scholarship(self, new_scholarship: int) -> None:
+    def scholarship(self, new_scholarship: int | float) -> None:
         """Set new scholarship.
 
         Args:
@@ -146,10 +146,10 @@ class Student(Person):
 
         Raises:
             TypeError: if Faculty of teacher.
-            ValueError: if new_age lower then 0
+            ValueError: if new_scholarship lower then 0
         """
-        if not isinstance(new_scholarship, int):
-            raise TypeError(f'{new_scholarship} should be int')
+        if not isinstance(new_scholarship, int | float):
+            raise TypeError(f'{new_scholarship} should be int | float')
         if new_scholarship < 0:
             raise ValueError(f'{new_scholarship} lower then 0')
         self._scholarship = new_scholarship
@@ -158,7 +158,14 @@ class Student(Person):
 class Teacher(Person):
     """Teacher that is inherited from a Person."""
 
-    def __init__(self, name: str, surname: str, age: int, faculty: str, salary: int) -> None:
+    def __init__(
+        self,
+        name: str,
+        surname: str,
+        age: int,
+        faculty: str,
+        salary: int | float,
+    ) -> None:
         """Name, surname, age, faculty and salary of student.
 
         Args:
@@ -166,7 +173,7 @@ class Teacher(Person):
             surname (str): surname of person
             age (int): age of person
             faculty (str): faculty of teacher
-            salary (int): saalry of teacher
+            salary (int | float): saalry of teacher
         """
         super().__init__(name, surname, age)
         self.faculty, self.salary = faculty, salary
@@ -195,7 +202,7 @@ class Teacher(Person):
         self._faculty = new_faculty
 
     @property
-    def salary(self) -> int:
+    def salary(self) -> int | float:
         """Salary of teacher.
 
         Returns:
@@ -204,7 +211,7 @@ class Teacher(Person):
         return self._salary
 
     @salary.setter
-    def salary(self, new_salary: int) -> None:
+    def salary(self, new_salary: int | float) -> None:
         """Set new salary.
 
         Args:
@@ -212,9 +219,12 @@ class Teacher(Person):
 
         Raises:
             TypeError: if type of new_salary not int.
+            ValueError: if new_salary lower then 0
         """
-        if not isinstance(new_salary, int):
-            raise TypeError(f'{new_salary} must be int')
+        if not isinstance(new_salary, int | float):
+            raise TypeError(f'{new_salary} must be int | float')
+        if new_salary < 0:
+            raise ValueError(f'{new_salary} lower then 0')
         self._salary = new_salary
 
 
