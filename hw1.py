@@ -51,7 +51,7 @@ def salary(*departments: tuple, maxs: Optional[int] = None) -> tuple[list, Union
         maxs: (int or None) - maximum salary limit.
 
     returns:
-        typle - top 3 maximum salary and attitude
+        tuple - top 3 maximum salary and attitude
 
     Raises:
         ValueError: if the salary is zero.
