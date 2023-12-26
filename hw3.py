@@ -19,7 +19,23 @@ def check_media_file(name: str, expansion: str):
         raise ValueError('the type should be int')
 
 
-def check_video(resolution: int, duration: int | float):
+def check_audio_file(author: str, time: int | float):
+    """Сheck the type.
+
+    Args:
+        author (str): file author
+        time (int | float): file time
+
+    Raises:
+        TypeError: type check
+    """
+    if not isinstance(author, str):
+        raise TypeError('should be str')
+    if not isinstance(time, int | float):
+        raise TypeError(' should be int | float')
+
+
+def check_video_file(resolution: int, duration: int | float):
     """Check.
 
     Args:
@@ -126,6 +142,7 @@ class AudioFile(MediaFile):
         super().__init__(name, expansion)
         self._author = author
         self._time = time
+        check_audio_file(author, time)
 
     @property
     def executor(self) -> None:
@@ -202,7 +219,7 @@ class VideoFile(MediaFile):
         super().__init__(name, expansion)
         self._resolution = resolution
         self._duration = duration
-        check_video(resolution, duration)
+        check_video_file(resolution, duration)
 
     @property
     def resolution(self) -> None:
