@@ -186,7 +186,7 @@ class Ticket(TicketMetod):
 
         Args:
             ticket_number (str): info about number of passenger ticket
-            flight (Flight): info about flight class (data from that class)
+            flight (BaseFlight): info about flight class (data from that class)
             passenger (Passenger): info aboutpassenger class (data from that class)
         """
         self.ticket_number = ticket_number
@@ -221,7 +221,7 @@ class Ticket(TicketMetod):
         """Getter of flight of the instance.
 
         Returns:
-            Flight: flight class
+            FlightStr: flight class
         """
         return self._flight
 
@@ -230,7 +230,7 @@ class Ticket(TicketMetod):
         """Setter of flight of the instance.
 
         Args:
-            new_flight (Flight): new flight
+            new_flight (FlightStr): new flight
 
         Raises:
             TypeError: if data wrong type
@@ -343,7 +343,7 @@ class AirlainMetods(AirlineSettersAndGetters):
         """Add flight to flights list.
 
         Args:
-            flight (Flight): addeble flight
+            flight (FlightStr): addeble flight
 
         Raises:
             TypeError: if data wrong type
@@ -356,7 +356,7 @@ class AirlainMetods(AirlineSettersAndGetters):
         """Return flight from flights list.
 
         Args:
-            flight (Flight): flight for remove
+            flight (FlightStr): flight for remove
 
         Raises:
             TypeError: if data wrong type
