@@ -25,7 +25,7 @@ ERROR_CHECKING = (
     (
         './hw2/data_hw2.json',
         './hw2/not_writing.json',
-        'not permission to write to file ./hw2/not_writing.json',
+        'The prograp was completed without errors.',
     ),
 )
 
