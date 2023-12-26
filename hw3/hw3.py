@@ -142,9 +142,15 @@ class Student:
 
         Args:
             course (Course): The course to remove in.
+
+        Raises:
+            ValueError: If the student is not in the course.
         """
         check_type(course, Course)
-        course.remove_student(self)
+        if self in course.students:
+            course.students.remove(self)
+        else:
+            raise ValueError('The student is not in the course')
 
 
 class AbstractCourse:
@@ -244,9 +250,15 @@ class Course(AbstractCourse):
 
         Args:
             student (Student): The student to remove.
+
+        Raises:
+            ValueError: If the student is not in the course.
         """
         check_type(student, Student)
-        self.students.remove(student)
+        if student in self.students:
+            self.students.remove(student)
+        else:
+            raise ValueError('The student is not in the course')
 
 
 class Group:
