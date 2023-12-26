@@ -31,6 +31,8 @@ def process_data(input_file_path: str, output_file_path: str) -> None:
     online_status = {cat: 0 for cat in ONLINE_STATUS_CATEGORIES}
 
     for user in database.values():
+        if 'last_login' not in user.keys():
+            return {'KeyError': 'last_login'}
         categorize_age(user, age_categories)
         calculate_online_status(user, online_status)
 
