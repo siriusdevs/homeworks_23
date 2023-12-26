@@ -1,0 +1,37 @@
+{
+    "Oleg": {
+        "region": "Vladimir",
+        "registered": "2019-03-18",
+        "last_login": "2022-04-12",
+        "email": "vladimir@yandex.ru",
+        "age": 44
+    },
+    "Maxim": {
+       "region": "Saratov",
+       "registered": "2020-06-03",
+       "last_login": "2022-04-08",
+       "email": "saratov@yandex.ru",
+       "age": 22
+    },
+    "Bob": {
+       "region": "Saratov",
+       "registered": "2018-05-01",
+       "last_login": "2022-03-19",
+       "email": "saratov@yandex.ru",
+       "age": 60
+    },
+    "Petr": {
+        "region": "Krasnodar",
+        "registered": "2020-04-13",
+        "last_login": "2022-01-31",
+        "email": "krasnodar@yandex.ru",
+        "age": 36
+    },
+    "Egor": {
+       "region": "Sirius",
+       "registered": "2019-01-11",
+       "last_login": "2021-06-13",
+       "email": "sirius@yandex.ru",
+       "age": 45
+    }
+}
