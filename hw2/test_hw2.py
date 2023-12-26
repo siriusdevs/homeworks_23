@@ -137,7 +137,7 @@ def test_process_data_with_data3():
     """Test to process the input data and write the result to the output file."""
     input_data = './hw2/input/example_data3.json'
     expected_output = './hw2/output/lead_example_data3.json'
-    actual_output = './hw2/hw2/output/ans_example_data3.json'
+    actual_output = './hw2/output/ans_example_data3.json'
 
     # Выполняем функцию, которую тестируем
     hw2.process_data(input_data, actual_output)
