@@ -1,0 +1,9 @@
+{
+    "email_host_percentages": {
+        "yahoo.com": 100.0
+    },
+    "registration_year_percentages": {
+        "2016": 50.0,
+        "2014": 50.0
+    }
+}
