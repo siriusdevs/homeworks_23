@@ -16,7 +16,7 @@ def user_year_reg(year_reg: Counter, count_year: int) -> dict:
     Returns:
         dict: the percentage of the number of users registered in a given year.
     """
-    return {year: (count / count_year) * 100 if count_year else 0 for year, count in year_reg.items()}
+    return {yr: (count / count_year) * 100 if count_year else 0 for yr, count in year_reg.items()}
 
 
 def load_input_file(input_file: str) -> dict | str:
