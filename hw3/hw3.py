@@ -270,11 +270,10 @@ class Librarian:
         """
         self._library = new_library
 
-    def lend_book(self, reader: Reader, book: Book) -> None:
+    def lend_book(self, book: Book) -> None:
         """Allow a reader to borrow a book from the library.
 
         Args:
-            reader (Reader): The reader borrowing the book.
             book (Book): The book to be borrowed.
 
         Returns:
