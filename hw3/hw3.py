@@ -1,3 +1,4 @@
+from abc import ABC
 """This is solution for hw3."""
 
 
@@ -36,7 +37,7 @@ class Client:
         self._name = new_name
 
 
-class DishMethods:
+class DishMethods(ABC):
     """Dish methods."""
 
     def __str__(self) -> str:
@@ -110,7 +111,7 @@ class Dish(DishMethods):
         self._price = new_price
 
 
-class OrderMethods:
+class OrderMethods(ABC):
     """Order methods."""
 
     def add_dish(self, dish: Dish) -> None:
@@ -220,7 +221,7 @@ class Order(OrderMethods):
         self._dishes = new_dishes
 
 
-class RestaurantMethods:
+class RestaurantMethods(ABC):
     """Restaurant methods."""
 
     def create_order(self, client: Client, order_dishes: list[Dish]) -> Order:
