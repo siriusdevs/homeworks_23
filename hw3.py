@@ -103,7 +103,7 @@ class Car:
 
 
 class OneOwner:
-    """Class for an owner."""
+    """Class for an OneOwner."""
 
     def __init__(self, name: str, car_park: list[Car]):
         """
@@ -162,7 +162,7 @@ class OneOwner:
 
 
 class Owner(OneOwner):
-    """Class for an owner."""
+    """Class for an owner(OneOwner)."""
 
     def add_car(self, car: Car):
         """
