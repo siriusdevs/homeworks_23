@@ -33,8 +33,8 @@ def test_stats_by_time():
 
 def test_process_data():
     """Test for process_data function."""
-    input_file = '/home/fenechka/python/homeworks_23/hw2/input/data_hw2.json'
-    output_file = '/home/fenechka/python/homeworks_23/hw2/output/data_output.json'
+    input_file = './input/data_hw2.json'
+    output_file = './output/data_output.json'
     expected_output = 'The program was completed without errors.'
     assert hw2.process_data(input_file, output_file) == expected_output
 
@@ -97,9 +97,9 @@ def test_process_data_invalid_file_path():
 
 def test_process_data_with_data1():
     """Test to process the input data and write the result to the output file."""
-    input_data = '/home/fenechka/python/homeworks_23/hw2/input/example_data1.json'
-    expected_output = '/home/fenechka/python/homeworks_23/hw2/output/lead_example_data1.json'
-    actual_output = '/home/fenechka/python/homeworks_23/hw2/output/ans_example_data1.json'
+    input_data = './input/example_data1.json'
+    expected_output = './output/lead_example_data1.json'
+    actual_output = './output/ans_example_data1.json'
 
     # Выполняем функцию, которую тестируем
     hw2.process_data(input_data, actual_output)
@@ -116,9 +116,9 @@ def test_process_data_with_data1():
 
 def test_process_data_with_data2():
     """Test to process the input data and write the result to the output file."""
-    input_data = '/home/fenechka/python/homeworks_23/hw2/input/example_data2.json'
-    expected_output = '/home/fenechka/python/homeworks_23/hw2/output/lead_example_data2.json'
-    actual_output = '/home/fenechka/python/homeworks_23/hw2/output/ans_example_data2.json'
+    input_data = './input/example_data2.json'
+    expected_output = './output/lead_example_data2.json'
+    actual_output = './output/ans_example_data2.json'
 
     # Выполняем функцию, которую тестируем
     hw2.process_data(input_data, actual_output)
@@ -135,9 +135,9 @@ def test_process_data_with_data2():
 
 def test_process_data_with_data3():
     """Test to process the input data and write the result to the output file."""
-    input_data = '/home/fenechka/python/homeworks_23/hw2/input/example_data3.json'
-    expected_output = '/home/fenechka/python/homeworks_23/hw2/output/lead_example_data3.json'
-    actual_output = '/home/fenechka/python/homeworks_23/hw2/output/ans_example_data3.json'
+    input_data = './input/example_data3.json'
+    expected_output = './output/lead_example_data3.json'
+    actual_output = './output/ans_example_data3.json'
 
     # Выполняем функцию, которую тестируем
     hw2.process_data(input_data, actual_output)
