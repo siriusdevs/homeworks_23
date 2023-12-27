@@ -1,0 +1,14 @@
+{
+    "age_stats": {
+        "lt_2_days": 0.0,
+        "lt_week": 0.0,
+        "lt_month": 0.0,
+        "lt_half_year": 0.0,
+        "gt_half_year": 22.33
+    },
+    "region_stats": {
+        "America": 0.33,
+        "Brazil": 0.33,
+        "Sochi": 0.33
+    }
+}
