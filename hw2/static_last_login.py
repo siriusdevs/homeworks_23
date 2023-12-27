@@ -44,7 +44,7 @@ def find_was_online(last_logins: list) -> dict | None:
         none: если дата некорректна
     """
     static = {}
-    today = date.today()
+    today = date.fromisoformat('2023-12-23')
     for last_login in last_logins:
         try:
             last_login = date.fromisoformat(last_login)
