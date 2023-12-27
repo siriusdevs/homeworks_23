@@ -1,12 +1,13 @@
 """Modul for testing."""
 
 import pytest
-from hw_1 import get_salaries
+
+from homeworks_23.hw1 import get_salaries
 
 TEST_DATA_WITH_NONE = (
     (
         (
-            ('Finance department', {'Gary': 52000.0, 'Mary': 53000.0, 'John': 60000.0}),
+            ('Finance department', {'Gary': 52000.0, 'Mary': 53000.0, 'Johny': 60000.0}),
             ('Marketing department', {'Tom': 44000.0, 'Sam': 43000.0, 'Sarah': 50000.0}),
             ('Sales department', {'Biba': 44000.0, 'Boba': 43000.0, 'Vlad': 50000.0}),
         ),
@@ -16,9 +17,9 @@ TEST_DATA_WITH_NONE = (
     ),
     (
         (
-            ('Finance department', {'Gary': 52450, 'Mary': 53340, 'John': 23500}),
-            ('Marketing department', {'Tom': 43400, 'Sam': 45670, 'Sarah': 67000}),
-            ('Sales department', {'Biba': 44547, 'Boba': 43452, 'Vlad': 50670}),
+            ('Finance department', {'Sonya': 52450, 'Mary': 53340, 'Vova': 23500}),
+            ('Marketing department', {'Tom': 43400, 'Alexandr': 45670, 'Sasha': 67000}),
+            ('Sales department', {'Biba': 44547, 'Boba': 43452, 'Dasha': 50670}),
         ),
         (
             [67000, 53340, 52450], 0.41,
@@ -30,11 +31,11 @@ TEST_DATA_WITHOUT_NONE = (
     (
         (
             ('Finance department', {'Gary': 52000.0, 'Mary': 53000.0, 'John': 60000.0}),
-            ('Marketing department', {'Tom': 44000.0, 'Sam': 43000.0, 'Sarah': 50000.0}),
-            ('Sales department', {'Biba': 44000.0, 'Boba': 43000.0, 'Vlad': 50000.0}),
+            ('Marketing department', {'Angela': 44000.0, 'Sus': 43000.0, 'Sarah': 50000.0}),
+            ('Sales department', {'Mixail': 44000.0, 'User': 43000.0, 'Vlad': 50000.0}),
         ),
         (
-                'Finance department'
+            'Finance department',
         ),
         (
             [50000.0, 50000.0, 44000.0], 0.53,
@@ -42,12 +43,12 @@ TEST_DATA_WITHOUT_NONE = (
     ),
     (
         (
-            ('Finance department', {'Gary': 52450, 'Mary': 53340, 'John': 23500}),
-            ('Marketing department', {'Tom': 43400, 'Sam': 45670, 'Sarah': 67000}),
-            ('Sales department', {'Biba': 44547, 'Boba': 43452, 'Vlad': 50670}),
+            ('Security department', {'Rin': 52450, 'Masha': 53340, 'John': 23500}),
+            ('Marketing department', {'Tom': 43400, 'Sem': 45670, 'Liza': 67000}),
+            ('Sales department', {'Varya': 44547, 'Bob': 43452, 'Vlad': 50670}),
         ),
         (
-            'Finance department', 'Marketing department'
+            'Security department', 'Marketing department',
         ),
         (
             [50670, 44547, 43452], 1.0,
@@ -61,7 +62,7 @@ def test_with_none(source: tuple[tuple[str, dict[str]]], expected: tuple[list, f
     """Test data with dept_exp = None.
 
     Args:
-        source (tuple[tuple[str, dict[str]]]): data for testing.
+        source (tuple[tuple]): data for testing.
         expected (tuple[list, float]): expected values.
     """
     assert get_salaries(*source) == expected
@@ -71,12 +72,12 @@ def test_with_none(source: tuple[tuple[str, dict[str]]], expected: tuple[list, f
 def test_without_none(
     source: tuple[tuple[str, dict[str]]],
     dept_exept: list[str],
-    expected: tuple[list, float]
+    expected: tuple[list, float],
 ):
     """Test data have some velues in dept_exp.
 
     Args:
-        source (tuple[tuple[str, dict[str]]]): data for testing.
+        source (tuple[tuple]): data for testing.
         dept_exept (list[str]): exception for department data.
         expected (tuple[list, float]): expected values.
     """

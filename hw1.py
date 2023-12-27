@@ -3,13 +3,12 @@
 
 def get_salaries(
     *departments: tuple[str, dict[str, float]],
-    dept_exp: tuple[str] = None
+    dept_exp: tuple[str] = None,
 ) -> tuple[list, float]:
     """Calculate the statistic of emploee salaries.
 
     Args:
-        departments (tuple[str, dict[str, float]]):
-            All departments with its respective employee names as keys.
+        departments (tuple[str, dict): names of departments and their employees.
         dept_exp (tuple[str], optional): Excluded departments. Defaults to None.
 
     Returns:
@@ -20,7 +19,7 @@ def get_salaries(
         if dept_exp is None or department[0] not in dept_exp:
             all_salaries += list(department[1].values())
     sum_salaries = sum(all_salaries)
-    top_3 = sorted(all_salaries, reverse=True)[:3]
-    percent_of_top = 0 if sum_salaries == 0 else round(sum(top_3) / sum_salaries, 2)
+    top3 = sorted(all_salaries, reverse=True)[:3]
+    percent_of_top = 0 if sum_salaries == 0 else round(sum(top3) / sum_salaries, 2)
 
-    return top_3, percent_of_top
+    return top3, percent_of_top
