@@ -1,6 +1,7 @@
 """Tests for hw2."""
 
 import json
+from datetime import datetime, timedelta
 
 import pytest
 
@@ -13,35 +14,36 @@ LT_HALF_YEAR = 'lt_half_year'
 GT_HALF_YEAR = 'gt_half_year'
 AGE = 'age'
 LAST_LOGIN = 'last_login'
+CURR_DATE = datetime.now()
 
 age = (
     (
-        {AGE: 25, LAST_LOGIN: '2023-1-1'},
+        {AGE: 25, LAST_LOGIN: 365},
         {},
         {LT_DAYS: [], LT_WEEK: [], LT_MONTH: [], LT_HALF_YEAR: [], GT_HALF_YEAR: [25]},
     ),
     (
-        {AGE: 30, LAST_LOGIN: '2023-12-17'},
+        {AGE: 30, LAST_LOGIN: 10},
         {},
         {LT_DAYS: [], LT_WEEK: [], LT_MONTH: [30], LT_HALF_YEAR: [30], GT_HALF_YEAR: []},
     ),
     (
-        {AGE: 35, LAST_LOGIN: '2023-6-30'},
+        {AGE: 35, LAST_LOGIN: 40},
         {},
         {LT_DAYS: [], LT_WEEK: [], LT_MONTH: [], LT_HALF_YEAR: [35], GT_HALF_YEAR: []},
     ),
     (
-        {AGE: 40, LAST_LOGIN: '2023-12-18'},
+        {AGE: 40, LAST_LOGIN: 9},
         {},
         {LT_DAYS: [], LT_WEEK: [], LT_MONTH: [40], LT_HALF_YEAR: [40], GT_HALF_YEAR: []},
     ),
     (
-        {AGE: 30, LAST_LOGIN: '2023-12-20'},
+        {AGE: 30, LAST_LOGIN: 6},
         {LT_DAYS: [], LT_WEEK: [], LT_MONTH: [], LT_HALF_YEAR: [], GT_HALF_YEAR: [25]},
         {LT_DAYS: [], LT_WEEK: [30], LT_MONTH: [30], LT_HALF_YEAR: [30], GT_HALF_YEAR: [25]},
     ),
     (
-        {AGE: 40, LAST_LOGIN: '2023-12-18'},
+        {AGE: 40, LAST_LOGIN: 9},
         {LT_DAYS: [], LT_WEEK: [], LT_MONTH: [], LT_HALF_YEAR: [35], GT_HALF_YEAR: []},
         {LT_DAYS: [], LT_WEEK: [], LT_MONTH: [40], LT_HALF_YEAR: [35, 40], GT_HALF_YEAR: []},
     ),
@@ -58,6 +60,9 @@ def test_av_user_age(user, ages, expected):
         ages (dict): The age dictionary to be updated.
         expected (dict): The expected result.
     """
+    delta = timedelta(user[LAST_LOGIN])
+    date = str(CURR_DATE - delta).split(' ')[0]
+    user[LAST_LOGIN] = date
     assert av_user_age(user, ages) == expected
 
 
