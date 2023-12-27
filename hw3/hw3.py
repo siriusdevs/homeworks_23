@@ -1,7 +1,5 @@
 """This is solution for hw3."""
 
-from abc import ABC
-
 
 class Client:
     """Instance of a client."""
@@ -38,19 +36,7 @@ class Client:
         self._name = new_name
 
 
-class DishMethods(ABC):
-    """Dish methods."""
-
-    def __str__(self) -> str:
-        """Visualisaion of instance in string.
-
-        Returns:
-            str: representation of instance.
-        """
-        return f'{self.__class__.__name__} with price: {self.price}'
-
-
-class Dish(DishMethods):
+class Dish:
     """Instance of a dish."""
 
     def __init__(self, name: str, price: int | float) -> None:
@@ -112,42 +98,8 @@ class Dish(DishMethods):
         self._price = new_price
 
 
-class OrderMethods(ABC):
-    """Order methods."""
-
-    def add_dish(self, dish: Dish) -> None:
-        """Add dish in order.
-
-        Args:
-            dish: Dish - Dish class object.
-
-        Raises:
-            TypeError: if not Dish given.
-        """
-        if not isinstance(dish, Dish):
-            raise TypeError(f'{type(dish).__name__} was given instead of Dish')
-        self._dishes.append(dish)
-
-    def remove_dish(self, dish: Dish) -> None:
-        """Remove dish in order.
-
-        Args:
-            dish: Dish - Dish class object.
-
-        Raises:
-            ValueError: if object not in the list.
-        """
-        if dish not in self._dishes:
-            raise ValueError(f'You cannot delete {dish} because it is not in the list')
-        self._dishes.remove(dish)
-
-    def get_dishes(self) -> list[Dish]:
-        """Fun function to get dish in the order.
-
-        Returns:
-            list[Dish]: dish in the order.
-        """
-        return self._dishes
+class DishMethods(Dish):
+    """Dish methods."""
 
     def __str__(self) -> str:
         """Visualisaion of instance in string.
@@ -155,11 +107,10 @@ class OrderMethods(ABC):
         Returns:
             str: representation of instance.
         """
-        return f'{self.__class__.__name__} recipient: {self.client} \
-composition of the order: {self.dishes}'
+        return f'{self.__class__.__name__} with price: {self.price}'
 
 
-class Order(OrderMethods):
+class Order:
     """Order instance."""
 
     def __init__(self, client: Client, dishes: list[Dish]):
@@ -222,60 +173,54 @@ class Order(OrderMethods):
         self._dishes = new_dishes
 
 
-class RestaurantMethods(ABC):
-    """Restaurant methods."""
+class OrderMethods(Order):
+    """Order methods."""
 
-    def create_order(self, client: Client, order_dishes: list[Dish]) -> Order:
-        """Create an order.
+    def add_dish(self, dish: Dish) -> None:
+        """Add dish in order.
 
         Args:
-            client: Client - Client class object.
-            order_dishes: list[Dish] - dish in order.
+            dish: Dish - Dish class object.
 
-        Returns:
-            Order: Order class object.
+        Raises:
+            TypeError: if not Dish given.
         """
-        if all(dish in self.available_dishes for dish in order_dishes):
-            order = Order(client, order_dishes)
-            self._orders.append(order)
-            return order
+        if not isinstance(dish, Dish):
+            raise TypeError(f'{type(dish).__name__} was given instead of Dish')
+        self._dishes.append(dish)
 
-        return 'Not all dishes are available.'
-
-    def remove_order(self, order: Order) -> None:
-        """Remove order.
+    def remove_dish(self, dish: Dish) -> None:
+        """Remove dish in order.
 
         Args:
-            order: Order - Order class object.
+            dish: Dish - Dish class object.
 
         Raises:
             ValueError: if object not in the list.
         """
-        if order not in self._orders:
-            raise ValueError(f'You cannot delete {order} because it is not in the list')
-        self._orders.remove(order)
+        if dish not in self._dishes:
+            raise ValueError(f'You cannot delete {dish} because it is not in the list')
+        self._dishes.remove(dish)
 
-    def get_orders(self) -> list:
-        """Fun function to get all orders.
+    def get_dishes(self) -> list[Dish]:
+        """Fun function to get dish in the order.
 
         Returns:
-            list: all orders.
+            list[Dish]: dish in the order.
         """
-        return self._orders
+        return self._dishes
 
     def __str__(self) -> str:
         """Visualisaion of instance in string.
 
         Returns:
-            str:  representation of instance.
+            str: representation of instance.
         """
-        name = self.__class__.__name__
-        dishes = self.all_dishes
-        avalable_dishes = self.available_dishes
-        return f'Menu {name}: {dishes}, available dishes: {avalable_dishes}'
+        return f'{self.__class__.__name__} recipient: {self.client} \
+composition of the order: {self.dishes}'
 
 
-class Restaurant(RestaurantMethods):
+class Restaurant:
     """Restaurant instance."""
 
     def __init__(
@@ -373,3 +318,56 @@ class Restaurant(RestaurantMethods):
             if not isinstance(dish, Dish):
                 raise TypeError(f'{type(dish).__name__} should be Dish')
         self._available_dishes = new_available_dishes
+
+
+class RestaurantMethods(Restaurant):
+    """Restaurant methods."""
+
+    def create_order(self, client: Client, order_dishes: list[Dish]) -> Order:
+        """Create an order.
+
+        Args:
+            client: Client - Client class object.
+            order_dishes: list[Dish] - dish in order.
+
+        Returns:
+            Order: Order class object.
+        """
+        if all(dish in self.available_dishes for dish in order_dishes):
+            order = Order(client, order_dishes)
+            self._orders.append(order)
+            return order
+
+        return 'Not all dishes are available.'
+
+    def remove_order(self, order: Order) -> None:
+        """Remove order.
+
+        Args:
+            order: Order - Order class object.
+
+        Raises:
+            ValueError: if object not in the list.
+        """
+        if order not in self._orders:
+            raise ValueError(f'You cannot delete {order} because it is not in the list')
+        self._orders.remove(order)
+
+    def get_orders(self) -> list:
+        """Fun function to get all orders.
+
+        Returns:
+            list: all orders.
+        """
+        return self._orders
+
+    def __str__(self) -> str:
+        """Visualisaion of instance in string.
+
+        Returns:
+            str:  representation of instance.
+        """
+        name = self.__class__.__name__
+        dishes = self.all_dishes
+        avalable_dishes = self.available_dishes
+        return f'Menu {name}: {dishes}, available dishes: {avalable_dishes}'
