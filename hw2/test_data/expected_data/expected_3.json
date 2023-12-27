@@ -1,0 +1,19 @@
+{
+    "Ages data": {
+        "Minimum age among users": 6,
+        "Maximum age among users": 90,
+        "Average age of users": 24.5,
+        "Median age of users": 18.0
+    },
+    "Last logins data": {
+        "Percentage of users who logged in less than": {
+            "two days ago": "16.67",
+            "week ago": "50.0",
+            "month ago": "58.33",
+            "half year ago": "91.67"
+        },
+        "Percentage of users who logged in more than": {
+            "half year ago": "8.33"
+        }
+    }
+}
