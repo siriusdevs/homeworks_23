@@ -3,7 +3,7 @@
 
 import json
 
-import hw2_exceptions
+import hw2_exceptions as exceptions
 import pytest
 
 from hw2 import process_data
@@ -110,7 +110,7 @@ def test_input_file_path_not_str():
     process_data(*invalid_test_data[0])
 
 
-@pytest.mark.xfail(raises=hw2_exceptions.FileIsNotJsonError)
+@pytest.mark.xfail(raises=exceptions.FileIsNotJsonError)
 def test_input_file_extension_other_than_json():
     """Test the error for the fact that the input file has a extension other than .json."""
     process_data(*invalid_test_data[1])
@@ -122,7 +122,7 @@ def test_input_file_not_found():
     process_data(*invalid_test_data[2])
 
 
-@pytest.mark.xfail(raises=hw2_exceptions.FileIsEmptyError)
+@pytest.mark.xfail(raises=exceptions.FileIsEmptyError)
 def test_input_file_empty():
     """Test the error for the fact that the input file is empty."""
     process_data(*invalid_test_data[3])
@@ -171,7 +171,7 @@ def test_output_file_path_not_str():
     process_data(*invalid_test_data[10])
 
 
-@pytest.mark.xfail(raises=hw2_exceptions.FileIsNotJsonError)
+@pytest.mark.xfail(raises=exceptions.FileIsNotJsonError)
 def test_output_file_extension_other_than_json():
     """Test the error for the fact that the output file has a extension other than .json."""
     process_data(*invalid_test_data[11])
