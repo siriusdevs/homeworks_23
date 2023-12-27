@@ -31,5 +31,9 @@ def salary_departments(
     if not list_salary:
         raise ValueError('List salary cannot be a empty')
     top_salaries = list_salary[:3]
-    total_salaries = round(sum(top_salaries) / sum(list_salary), 2) * 100
+    try:
+        total_salaries = round(sum(top_salaries) / sum(list_salary), 2) * 100
+    except ZeroDivisionError:
+        return 'You cannot divide by zero'
+
     return top_salaries, total_salaries
