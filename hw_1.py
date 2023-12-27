@@ -1,4 +1,4 @@
-"""Modul for calculation salary statistic"""
+"""Modul for calculation salary statistic."""
 
 
 def get_salaries(
