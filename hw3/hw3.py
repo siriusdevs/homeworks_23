@@ -97,10 +97,6 @@ class Dish:
             raise ValueError(f'{new_price} should be positive')
         self._price = new_price
 
-
-class DishMethods(Dish):
-    """Dish methods."""
-
     def __str__(self) -> str:
         """Visualisaion of instance in string.
 
@@ -172,6 +168,15 @@ class Order:
                 raise TypeError(f'{type(dish).__name__} was given instead of Dish')
         self._dishes = new_dishes
 
+    def __str__(self) -> str:
+        """Visualisaion of instance in string.
+
+        Returns:
+            str: representation of instance.
+        """
+        return f'{self.__class__.__name__} recipient: {self.client} \
+composition of the order: {self.dishes}'
+
 
 class OrderMethods(Order):
     """Order methods."""
@@ -210,15 +215,6 @@ class OrderMethods(Order):
         """
         return self._dishes
 
-    def __str__(self) -> str:
-        """Visualisaion of instance in string.
-
-        Returns:
-            str: representation of instance.
-        """
-        return f'{self.__class__.__name__} recipient: {self.client} \
-composition of the order: {self.dishes}'
-
 
 class Restaurant:
     """Restaurant instance."""
@@ -256,15 +252,6 @@ class Restaurant:
         """
         return self._all_dishes
 
-    @property
-    def available_dishes(self) -> list[Dish]:
-        """Getter for the available dishes property of the instance.
-
-        Returns:
-            list[Dish]: available dishes in restaurant.
-        """
-        return self._available_dishes
-
     @orders.setter
     def orders(self, new_orders: list[Order]) -> None:
         """Setter for the orders property of the instance.
@@ -301,6 +288,30 @@ class Restaurant:
                 raise TypeError(f'{type(dish).__name__} was given instead of Dish')
         self._all_dishes = new_all_dishes
 
+    def __str__(self) -> str:
+        """Visualisaion of instance in string.
+
+        Returns:
+            str:  representation of instance.
+        """
+        name = self.__class__.__name__
+        dishes = self.all_dishes
+        avalable_dishes = self.available_dishes
+        return f'Menu {name}: {dishes}, available dishes: {avalable_dishes}'
+
+
+class RestaurantMethods(Restaurant):
+    """Restaurant methods."""
+
+    @property
+    def available_dishes(self) -> list[Dish]:
+        """Getter for the available dishes property of the instance.
+
+        Returns:
+            list[Dish]: available dishes in restaurant.
+        """
+        return self._available_dishes
+
     @available_dishes.setter
     def available_dishes(self, new_available_dishes: list[Dish]) -> None:
         """Setter for the available dishes property of the instance.
@@ -318,10 +329,6 @@ class Restaurant:
             if not isinstance(dish, Dish):
                 raise TypeError(f'{type(dish).__name__} should be Dish')
         self._available_dishes = new_available_dishes
-
-
-class RestaurantMethods(Restaurant):
-    """Restaurant methods."""
 
     def create_order(self, client: Client, order_dishes: list[Dish]) -> Order:
         """Create an order.
@@ -360,14 +367,3 @@ class RestaurantMethods(Restaurant):
             list: all orders.
         """
         return self._orders
-
-    def __str__(self) -> str:
-        """Visualisaion of instance in string.
-
-        Returns:
-            str:  representation of instance.
-        """
-        name = self.__class__.__name__
-        dishes = self.all_dishes
-        avalable_dishes = self.available_dishes
-        return f'Menu {name}: {dishes}, available dishes: {avalable_dishes}'
