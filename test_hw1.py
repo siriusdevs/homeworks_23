@@ -21,7 +21,7 @@ TEST_DATA = (
 )
 
 
-@pytest.mark.parametrize('ivisions, lim, expected', TEST_DATA)
+@pytest.mark.parametrize('divisions, lim, expected', TEST_DATA)
 def test_statistic(divisions, lim, expected):
     """
     Test funcion of statistics.
