@@ -28,6 +28,7 @@ def statistics(*divisions: tuple[str, dict[str, float]], lim: float | None = Non
             wages_limit.append(wage)
 
     top_wages = sorted(wages_limit, reverse=True)[:3]
-    percent = round(sum(top_wages) / sum(wages_limit) * 100, 2)
+    wages_sum = sum(wages_limit)
+    percent = round(sum(top_wages) / wages_sum * 100, 2) if wages_sum else 0
 
     return top_wages, percent
