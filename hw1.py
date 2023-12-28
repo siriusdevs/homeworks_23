@@ -17,9 +17,10 @@ def get_salaries(
     all_salaries = []
     for department in departments:
         if dept_exp is None or department[0] not in dept_exp:
-            all_salaries += list(department[1].values())
+            all_salaries += list((department[1].values()))
     sum_salaries = sum(all_salaries)
     top3 = sorted(all_salaries, reverse=True)[:3]
+    top3 = [round(n, 2) for n in top3]
     percent_of_top = 0 if sum_salaries == 0 else round(sum(top3) / sum_salaries, 2)
 
     return top3, percent_of_top

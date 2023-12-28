@@ -17,12 +17,12 @@ TEST_DATA_WITH_NONE = (
     ),
     (
         (
-            ('Finance department', {'Sonya': 52450, 'Mary': 53340, 'Vova': 23500}),
-            ('Marketing department', {'Tom': 43400, 'Alexandr': 45670, 'Sasha': 67000}),
-            ('Sales department', {'Biba': 44547, 'Boba': 43452, 'Dasha': 50670}),
+            ('Finance department', {'Sonya': 52450.0, 'Mary': 53340.0, 'Vova': 23500.0}),
+            ('Marketing department', {'Tom': 43400.0, 'Alexandr': 45670.0, 'Sasha': 67000.0}),
+            ('Sales department', {'Biba': 44547.0, 'Boba': 43452.0, 'Dasha': 50670.0}),
         ),
         (
-            [67000, 53340, 52450], 0.41,
+            [67000.0, 53340.0, 52450], 0.41,
         ),
     ),
 )
@@ -43,15 +43,15 @@ TEST_DATA_WITHOUT_NONE = (
     ),
     (
         (
-            ('Security department', {'Rin': 52450, 'Masha': 53340, 'John': 23500}),
-            ('Another department', {'Tom': 43400, 'Sem': 45670, 'Liza': 67000}),
-            ('Sales department', {'Varya': 44547, 'Bob': 43452, 'Vlad': 50670}),
+            ('Security department', {'Rin': 52450.0, 'Masha': 53340.0, 'John': 23500.0}),
+            ('Another department', {'Tom': 43400.0, 'Sem': 45670.0, 'Liza': 67000.0}),
+            ('Sales department', {'Varya': 44547.0, 'Bob': 43452.0, 'Vlad': 50670.0}),
         ),
         (
             'Security department', 'Another department',
         ),
         (
-            [50670, 44547, 43452], 1.0,
+            [50670.0, 44547.0, 43452.0], 1.0,
         ),
     ),
 )
