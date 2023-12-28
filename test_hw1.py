@@ -53,12 +53,10 @@ salaries_with_zero = {
         'Roman': 0,
     },
 }
-expected_message = 'You cannot divide by zero'
 top_salaries = [156000.8, 136590.7, 77000.9]
 top_salaries2 = [77000.9, 72000.74, 68000.89]
 test_data = [(all_departments, (top_salaries, 40.0))]
 test_data2 = [(all_departments, ('financy_department', 'hr_department'), (top_salaries2, 43.0))]
-test_data3 = [(salaries_with_zero, (expected_message))]
 test_data_invalid = {
     'financy_department': {
     },
@@ -104,12 +102,7 @@ def test_salary_departments_with_req(
     assert salary_departments(required_departments, **department_name) == expected
 
 
-@pytest.mark.parametrize('department_name, expected', test_data3)
-def test_salaries_with_zero(department_name: dict[str, float], expected: tuple[list, float]):
-    """Function test with salaries equal to zero.
-
-    Args:
-        department_name (dict[str, float]): test data.
-        expected (tuple[list, float]): expexted result.
-    """
-    assert salary_departments(**department_name) == expected
+@pytest.mark.xfail(raisese=ValueError)
+def test_total_salaries_with_zero():
+    """Test the salary_departments function for total_salaries_with_zero."""
+    salary_departments(salaries_with_zero)

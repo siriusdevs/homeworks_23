@@ -34,6 +34,6 @@ def salary_departments(
     try:
         total_salaries = round(sum(top_salaries) / sum(list_salary), 2) * 100
     except ZeroDivisionError:
-        return 'You cannot divide by zero'
+        raise ValueError('total salaries cannot be zero')
 
     return top_salaries, total_salaries
