@@ -17,8 +17,7 @@ def statistics(*divisions: tuple[str, dict[str, float]], lim: float | None = Non
     wages_limit = []
 
     for division in divisions:
-        worker = division[1]
-        for wages in worker.values():
+        for wages in division[1].values():
             all_wages.append(wages)
 
     for wage in all_wages:
