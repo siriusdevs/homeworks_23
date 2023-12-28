@@ -1,4 +1,8 @@
+"""Test for hw1."""
+
+
 import pytest
+
 from hw1 import statistics
 
 TEST_DATA = (
@@ -12,19 +16,21 @@ TEST_DATA = (
             ('sixth_division', {'Masha': 5222.2, 'Popi': 199.1, 'Nikita': 422.8}),
         ),
         None,
-        ([61173.9, 28868.0, 24511.3], 65.0)
+        ([61173.9, 28868.0, 24511.3], 65.0),
     ),
 )
 
 
-@pytest.mark.parametrize("divisions, lim, expected", TEST_DATA)
-def test_statistics_1(divisions, lim, expected):
-    """Test funcion of statistics.
+@pytest.mark.parametrize('ivisions, lim, expected', TEST_DATA)
+def test_statistic(divisions, lim, expected):
+    """
+    Test funcion of statistics.
 
     Args:
         divisions: tuple[str, dict[str, float]]
-        limit: float | None = None
+        lim: float | None = None
         expected: tuple[list, float]
+
     Asserts:
         True if the answer is correct.
     """
@@ -47,14 +53,16 @@ TEST_DATA1 = (
 )
 
 
-@pytest.mark.parametrize("divisions, lim, expected", TEST_DATA1)
+@pytest.mark.parametrize('divisions, lim, expected', TEST_DATA1)
 def test_statistics(divisions, lim, expected) -> None:
-    """Test funcion of statistics.
+    """
+    Test funcion of statistics.
 
     Args:
         divisions: tuple[str, dict[str, float]]
-        limit: float | None = None
+        lim: float | None = None
         expected: tuple[list, float]
+
     Asserts:
         True if the answer is correct.
     """

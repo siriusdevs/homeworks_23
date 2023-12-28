@@ -2,16 +2,16 @@
 
 
 def statistics(*divisions: tuple[str, dict[str, float]], lim: float | None = None) -> tuple[str]:
-    """Extract top 3 salaries and percentage.
+    """
+    Extract top 3 salaries and percentage.
 
     Args:
         divisions: tuple[str, dict[str, float]] - tuple of divisions names and wages.
-        limit: float | None = None - limit from which wages are taken.
+        lim: float | None = None - limit from which wages are taken.
 
     Returns:
         tuple[list, float] - tuple of the three highest salaries and the percentage.
     """
-
     top_wages = []
     all_wages = []
     wages_limit = []
