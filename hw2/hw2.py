@@ -10,7 +10,9 @@ Task_2:
 которые были онлайн менее двух дней, недели, месяца, полугода, и более полугода назад.
 """
 import json
+import logging
 import os
+import sys
 from statistics import get_all_stats
 from typing import Iterable
 
@@ -19,6 +21,22 @@ from exceptions import InvalidInputFileError
 
 
 def process_data(input_path: str, output_path: str) -> None:
+    """Catch process_users() function errors and records them in logs.
+
+    See process_users() docs to find more information.
+
+    Args:
+        input_path: path to input JSON file with users data
+        output_path: path to output JSON file to write statistics
+    """
+    try:
+        process_users(input_path, output_path)
+    except Exception as exc:
+        logging.error(exc)
+        sys.exit(1)
+
+
+def process_users(input_path: str, output_path: str) -> None:
     """Read input JSON file and write statistics in output file.
 
     Input JSON file must contain users with user_name as key and

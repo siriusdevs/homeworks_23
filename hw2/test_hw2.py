@@ -10,7 +10,7 @@ import constants
 import exceptions
 import pytest
 
-from hw2 import process_data
+from hw2 import process_data, process_users
 
 TEST_DATA_FOLDER = 'hw2/test_data/'
 LONG_PATH = 'the/longest/path/ever/output.json'
@@ -90,4 +90,4 @@ def test_exceptions(input_path: str, error_type: Type[Exception]) -> None:
         True if function with current test data returns correct error type.
     """
     with pytest.raises(error_type):
-        process_data(f'{TEST_DATA_FOLDER}{input_path}', OUTPUT_FILE_PATH)
+        process_users(f'{TEST_DATA_FOLDER}{input_path}', OUTPUT_FILE_PATH)
