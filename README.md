@@ -2,7 +2,7 @@
 Репозиторий для домашних заданий, осень 2023, Колледж Сириус
 ============================================================
 
-|overall|43|27|29|
+|overall|45|27|31|
 | :---: | :---: | :---: | :---: |
 |Branch|hw1|hw2|hw3|
 |argun|+|-|-|
@@ -11,7 +11,7 @@
 |bashutskaya|-|-|-|
 |blagodarova|+|+|+|
 |butenko|-|-|-|
-|danilov|+|+|-|
+|danilov|+|+|+|
 |demyanenko|+|+|+|
 |drobyazko|-|-|-|
 |druzhinin|+|-|-|
@@ -21,7 +21,7 @@
 |galaktionova|-|-|-|
 |grigoryan|+|+|+|
 |inozemtsev|+|+|+|
-|isaeva|-|-|-|
+|isaeva|+|-|+|
 |istomin|-|-|-|
 |ivanov_a|-|-|-|
 |ivanov_i|-|-|-|
@@ -70,7 +70,7 @@
 |urbanovich|-|-|-|
 |vasilenko|+|+|-|
 |vavilov|-|-|-|
-|vershinina|-|-|-|
+|vershinina|+|-|-|
 |zagora|+|+|+|
 |zaitsev|+|+|+|
 |zamyatina|-|-|-|
