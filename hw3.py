@@ -61,7 +61,7 @@ class MediaFile(ABC):
         TypeError: checking for the correct type of variable
 
     Returns:
-        nothing
+        Class
     """
 
     @abstractmethod
@@ -195,7 +195,7 @@ class AudioFile(MediaFile):
         """Return the line.
 
         Returns:
-            str: nothing
+            str: returns name, expansion, author, time
         """
         return f' audio_file:{self.name},{self.expansion},{self._author},{self.time}'
 
@@ -271,7 +271,7 @@ class VideoFile(MediaFile):
         """Output a string representation.
 
         Returns:
-            str: nothing
+            str: returns name, expansion,resolution,duration
         """
         return f'Video_file: {self.name}, {self.expansion} {self.resolution}, {self._duration}'
 
