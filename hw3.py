@@ -127,7 +127,7 @@ class AudioFile(MediaFile):
     """creates a class.
 
     Args:
-        MediaFile (_type_): nothing
+        MediaFile (_type_): new Class
     """
 
     def __init__(self, name: str, expansion: str, author: str, time: int | float) -> None:
@@ -249,7 +249,7 @@ class VideoFile(MediaFile):
         """Retuns duration.
 
         Returns:
-            self._duration:  duration
+            self._duration: duration
         """
         return self._duration
 
