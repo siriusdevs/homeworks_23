@@ -1,0 +1,30 @@
+{
+    "Cat": {
+        "region": "Voronezh",
+        "registered": "2017-07-04",
+        "last_login": "2024-02-03",
+        "email": "koskimyshki@mail.ru",
+        "age": 8
+    },
+    "Dog": {
+        "region": "Voronezh",
+        "registered": "2017-05-22",
+        "last_login": "2024-02-05",
+        "email": "d0ggy_123@mail.ru",
+        "age": 9
+    },
+    "Parrot": {
+        "region": "Sochi",
+        "registered": "2020-08-13",
+        "last_login": "2024-01-09",
+        "email": "yarrrpirateman@gmail.com",
+        "age": 6
+    },
+    "Fish": {
+        "region": "Kaliningrad",
+        "registered": "2023-09-30",
+        "last_login": "2024-02-04",
+        "email": "seaoffishes@mail.ru",
+        "age": 10
+    }
+}

@@ -1,0 +1,58 @@
+{
+    "Ivan P.": {
+        "region": "Moscow",
+        "registered": "2010-09-19",
+        "last_login": "2024-01-10",
+        "email": "ivanpetrenko@mail.ru",
+        "age": 32
+    },
+    "Petya V.": {
+        "region": "Moscow",
+        "registered": "2015-07-23",
+        "last_login": "2024-02-05",
+        "email": "avrora_best@gmail.com",
+        "age": 27
+    },
+    "Maxim P.": {
+        "region": "Sochi",
+        "registered": "2023-07-09",
+        "last_login": "2024-02-05",
+        "email": "pepper12man@gmail.com",
+        "age": 42
+    },
+    "Maxim B.": {
+        "region": "Kaliningrad",
+        "registered": "2012-02-29",
+        "last_login": "2024-01-04",
+        "email": "b4r4din0v@mail.ru",
+        "age": 31
+    },
+    "Katya M.": {
+        "region": "Moscow",
+        "registered": "2021-11.29",
+        "last_login": "2023-03-18",
+        "email": "katya_mor@yandex.ru",
+        "age": 25
+    },
+    "Margarita S.": {
+        "region": "Volgograd",
+        "registered": "2017-07-21",
+        "last_login": "2023-12-07",
+        "email": "margaritka@yandex.ru",
+        "age": 30
+    },
+    "Dmitry P.": {
+        "region": "Volgograd",
+        "registered": "2009-05-05",
+        "last_login": "2017-05-01",
+        "email": "tsepkilapki@mail.ru",
+        "age": 46
+    },
+    "Vlad P.": {
+        "region": "Saint-Petersburg",
+        "registered": "2018-10-23",
+        "last_login": "2024-01-10",
+        "email": "tsepeshisl1v3@gmail.com",
+        "age": 24
+    }
+}

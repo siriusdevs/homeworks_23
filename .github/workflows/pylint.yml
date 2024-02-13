@@ -36,3 +36,38 @@ jobs:
       run: |
         cd hw1
         pytest
+  linter_hw2:
+    name: Линтер HW2
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Python installation
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10.6
+    - name: Dependencies installtion
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8==3.9.0 wemake-python-styleguide==0.15.3 bandit==1.7.2
+    - name: Flake8
+      run: |
+        cd hw2
+        flake8 
+  tests_for_hw2:
+    name: Тесты hw2
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Python installation
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10.6
+    - name: Dependencies installation
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest==6.2.5
+        pip install numpy
+    - name: Pytest
+      run: |
+        cd hw2
+        pytest
