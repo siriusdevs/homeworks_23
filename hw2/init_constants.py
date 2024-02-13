@@ -1,6 +1,7 @@
 """Константы для файла hw2."""
 from hw2 import load_json_data
 
+
 class Constants:
     """Класс инициализации глобальных переменных."""
 
