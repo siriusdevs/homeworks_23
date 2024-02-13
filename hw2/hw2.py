@@ -63,11 +63,13 @@ def process_data(
     result_data['online_days'] = [
         time.total_seconds() / (60 * 60 * 24) for time in result_data['online_times']
     ]
-    if (
-        (result_data[Constants.total_list[0]] != 0) and \
-        (result_data[Constants.total_list_two[0]] != 0) and \
-        (result_data['total'] != 0)
-    ):
+    be_true = (
+        result_data[Constants.total_list[0]] != 0 and
+        result_data[Constants.total_list_two[0]] != 0 and
+        result_data['total'] != 0
+    )
+
+    if be_true:
         try:
             result_data['stats'] = {
                 'region_distribution': result_data['region_distribution'],
