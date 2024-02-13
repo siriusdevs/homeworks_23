@@ -5,6 +5,20 @@ from datetime import datetime
 from init_constants import Constants
 
 
+def load_json_data(input_path: str = 'data_hw2.json'):
+    """
+    Функция подгрузки json информации.
+
+    Args:
+        input_path (str): путь к файлу json.
+
+    Returns:
+        dict: загруженный json.
+    """
+    with open(input_path, 'r') as input_file:
+        return json.load(input_file)
+
+
 def process_data(
     output_path: str = 'data_result.json',
 ):
@@ -17,15 +31,15 @@ def process_data(
     Returns:
         str: предупреждение о делении на 0.
     """
-    Constants.json_data = Constants.json_data()
+    json_data = load_json_data()
     result_data = {
         'regions': {},
         'ages': [],
         'last_login_dates': [],
-        f'{Constants.total_list[0]}': len(Constants.json_data),
+        f'{Constants.total_list[0]}': len(json_data),
     }
 
-    for _user, user_info in Constants.json_data.items():
+    for _user, user_info in json_data.items():
         last_login = datetime.strptime(user_info['last_login'], '%Y-%m-%d')
 
         if user_info['region'] not in result_data[Constants.regions_list[0]]:
