@@ -31,15 +31,14 @@ def process_data(
     Returns:
         str: предупреждение о делении на 0.
     """
-    json_data = load_json_data()
     result_data = {
         'regions': {},
         'ages': [],
         'last_login_dates': [],
-        f'{Constants.total_list[0]}': len(json_data),
+        f'{Constants.total_list[0]}': len(load_json_data()),
     }
 
-    for _user, user_info in json_data.items():
+    for _user, user_info in (load_json_data()).items():
         last_login = datetime.strptime(user_info['last_login'], '%Y-%m-%d')
 
         if user_info['region'] not in result_data[Constants.regions_list[0]]:
