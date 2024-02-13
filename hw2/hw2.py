@@ -33,11 +33,12 @@ def process_data(
         str: предупреждение о делении на 0.
     """
     json_data = load_json_data()
+    total_key = Constants.total_list[0]
     result_data = {
         'regions': {},
         'ages': [],
         'last_login_dates': [],
-        f'{Constants.total_list[0]}': len(json_data),
+        f'{total_key}': len(json_data),
     }
 
     for _user, user_info in json_data.items():
@@ -50,14 +51,13 @@ def process_data(
         result_data['ages'].append(user_info['age'])
         result_data['last_login_dates'].append(last_login)
 
-    if Constants.total_list[0] != 0:
+    if total_key != 0:
         result_data['region_distribution'] = {
             region: (count / result_data[Constants.total_list[0]]) * 100
             for region, count in result_data[Constants.regions_list[0]].items()
         }
     else:
-        print('На ноль делить нельзя!')
-        sys.exit(1)
+        return 'На ноль делить нельзя!'
 
     result_data['online_times'] = [
         datetime.now() - date for date in result_data['last_login_dates']
@@ -66,7 +66,7 @@ def process_data(
         time.total_seconds() / (60 * 60 * 24) for time in result_data['online_times']
     ]
     if (
-        result_data[Constants.total_list[0]] != 0
+        result_data[total_key] != 0
         and result_data[Constants.total_list_two[0]] != 0
         and result_data['total'] != 0
     ):
