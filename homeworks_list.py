@@ -12,7 +12,7 @@ REMOTE_PREFIX = 'remotes/origin/'
 
 
 def _get_branches():
-    def _filter(branch: str) -> bool:
+    def _filter(branch: str) -> bool:  # noqa: WPS430
         excludes = 'HEAD', 'patch'
         return not any(excluded in branch for excluded in excludes)
     process = subprocess.run(['git', 'branch', '--all'], capture_output=True)  # noqa: S607, S603
@@ -21,7 +21,7 @@ def _get_branches():
     return [line for line in lines if line.startswith(REMOTE_PREFIX) and _filter(line)]
 
 
-def _branch_has_path(branch: str, path: str) -> bool: 
+def _branch_has_path(branch: str, path: str) -> bool:  # noqa: W291
     cmd = ['git', 'cat-file', '-e', f'{branch}:{path}']
     process = subprocess.run(cmd, capture_output=True)  # noqa: S603
     return process.returncode == 0
@@ -64,9 +64,9 @@ def write_homework_stats_to_md(stats: HomeworkStats):
     for branch, hws in sorted_stats:
         table.append(branch)
         table += ['+' if hws[hw] else '-' for hw in range(1, HW_COUNT+1)]
-  
+
     if sorted_stats:
-        table = [sum([hws[hw] for _, hws in sorted_stats]) for hw in range(1, HW_COUNT+1)] + table
+        table = [sum([hws[hw] for _, hws in sorted_stats]) for hw in range(1, HW_COUNT+1)] + table  # noqa: WPS221, WPS441
         table.insert(0, 'overall')
 
     cols, rows = HW_COUNT + 1, len(stats) + 2
