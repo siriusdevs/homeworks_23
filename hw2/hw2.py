@@ -5,20 +5,6 @@ from datetime import datetime
 from init_constants import Constants
 
 
-def load_json_data(input_path: str = 'data_hw2.json'):
-    """
-    Функция подгрузки json информации.
-
-    Args:
-        input_path (str): путь к файлу json.
-
-    Returns:
-        dict: загруженный json.
-    """
-    with open(input_path, 'r') as input_file:
-        return json.load(input_file)
-
-
 def process_data(
     output_path: str = 'data_result.json',
 ):

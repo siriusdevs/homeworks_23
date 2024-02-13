@@ -1,5 +1,5 @@
 """Константы для файла hw2."""
-from hw2 import load_json_data
+import json
 
 
 class Constants:
@@ -12,4 +12,17 @@ class Constants:
     total_list_two = ['total']
     month = 30
     half_year = 180
-    json_data = load_json_data()
+    json_data = None
+
+    def load_json_data(self, input_path='data_hw2.json'):
+        """
+        Метод для загрузки json данных.
+
+        Args:
+            input_path (str): Путь к файлу json.
+
+        Returns:
+            dict: Загруженный json.
+        """
+        with open(input_path, 'r') as input_file:
+            self.json_data = json.load(input_file)
