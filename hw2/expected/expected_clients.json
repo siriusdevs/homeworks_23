@@ -1,0 +1,16 @@
+{
+    "regions_stats": {
+        "Moscow": 37.5,
+        "Sochi": 12.5,
+        "Kaliningrad": 12.5,
+        "Volgograd": 25.0,
+        "Saint-Petersburg": 12.5
+    },
+    "last_login_stats": {
+        "less_than_two_days": 0.0,
+        "less_than_one_week": 0.0,
+        "less_than_one month": 25.0,
+        "less_than_half_year": 50.0,
+        "more_than_half_year": 25.0
+    }
+}

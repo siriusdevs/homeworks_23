@@ -1,8 +1,8 @@
 {
     "user": {
-        "region": "Saint-Petersburg",
+        "1": "Saint-Petersburg",
         "registered": "2012-12-24",
-        "last_login": "2023-10-01",
+        "3": "2023-10-01",
         "email": "user@yandex.ru",
         "age": 36
     },

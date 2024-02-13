@@ -1,0 +1,12 @@
+{
+    "regions_stats": {
+        "Sochi": 100.0
+    },
+    "last_login_stats": {
+        "less_than_two_days": 0.0,
+        "less_than_one_week": 0.0,
+        "less_than_one month": 0.0,
+        "less_than_half_year": 0.0,
+        "more_than_half_year": 100.0
+    }
+}
