@@ -66,7 +66,7 @@ def write_homework_stats_to_md(stats: HomeworkStats):
         table += ['+' if hws[hw] else '-' for hw in range(1, HW_COUNT+1)]
 
     if sorted_stats:
-        table = [sum([hws[hw] for _, hws in sorted_stats]) for hw in range(1, HW_COUNT+1)] + table  # noqa: WPS221, WPS441
+        table = [sum([hws[hw] for _, hws in sorted_stats]) for hw in range(1, HW_COUNT+1)] + table  # noqa: WPS221, WPS441, E501
         table.insert(0, 'overall')
 
     cols, rows = HW_COUNT + 1, len(stats) + 2
