@@ -1,5 +1,5 @@
 """Константы для файла hw2."""
-
+from hw2 import load_json_data
 
 class Constants:
     """Класс инициализации глобальных переменных."""
@@ -11,3 +11,4 @@ class Constants:
     total_list_two = ['total']
     month = 30
     half_year = 180
+    json_data = load_json_data()
