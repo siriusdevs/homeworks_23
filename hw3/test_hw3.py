@@ -1,283 +1,142 @@
-"""Архитектура классов для учета товаров в ресторане."""
-from typing import List
+"""Файл тестирования классов."""
+import unittest
+
+from hw3 import Dish, MenuManager, Product, RestaurantDetails
+
+BANANA_PRICE = 2.0
+ORANGE_PRICE = 1.5
+PIZZA = 'Pizza'
+PASTA = 'Pasta'
 
 
-class Product:
-    """Класс, представляющий товар."""
+class TestRestaurantClasses(unittest.TestCase):
+    """Тесты для классов Product, Dish и Restaurant."""
 
-    def __init__(self, name: str, price: float):
-        """
-        Инициализирует новый экземпляр класса Product.
+    def setUp(self):
+        """Настройка перед выполнением каждого теста."""
+        self.product1 = Product('Яблоко', 1.0)
+        self.product2 = Product('Банан', BANANA_PRICE)
+        self.product_non_exist = Product(1, BANANA_PRICE)
 
-        Args:
-            name (str): название продукта
-            price (float): цена продукта
-        """
-        self._name = name
-        self._price = price
+        self.dish = Dish('Фруктовый салат')
+        self.dish.add_product(self.product1)
+        self.dish.add_product(self.product2)
 
-    @property
-    def name(self) -> str:
-        """
-        Возвращает название товара.
+        self.dish_non_exist = Dish(None)
+        self.dish_non_exist.add_product(self.product_non_exist)
 
-        Returns:
-            _name (str): название продукта
-        """
-        return self._name
+        self.restaurant_details = RestaurantDetails('Test Restaurant', [PIZZA, PASTA])
 
-    @name.setter
-    def name(self, name_value: str):
-        """
-        Устанавливает название товара.
+    def test_product_attributes(self):
+        """Проверка атрибутов продукта."""
+        self.assertEqual(self.product1.name, 'Яблоко')
+        self.assertEqual(self.product1.price, 1.0)
 
-        Args:
-            name_value (str): значения имени
+    def test_product_name_none(self):
+        """Тест на проверку None имени."""
+        self.assertEqual(None, None)
 
-        Raises:
-            TypeError: если значение не является str
-        """
-        if not isinstance(name_value, str):
-            raise TypeError('Имя {0} должно быть str, а не {1}'.format(
-                name_value,
-                type(name_value).name,
-            ))
-        self._name = name_value
+    def test_dish_with_none_product(self):
+        """Тест на проверку блюда с None атрибутами."""
+        self.assertEqual(self.dish_non_exist.name, None)
+        self.assertEqual(len(self.dish_non_exist.products), 1)
 
-    @property
-    def price(self) -> float:
-        """
-        Возвращает цену товара.
+    def test_dish_attributes(self):
+        """Проверка атрибутов блюда."""
+        self.assertEqual(self.dish.name, 'Фруктовый салат')
+        self.assertEqual(len(self.dish.products), 2)
 
-        Returns:
-            _price (float): цена продукта
-        """
-        return self._price
-
-    @price.setter
-    def price(self, price_value: float):
-        """
-        Устанавливает цену товара.
-
-        Args:
-            price_value (float): значение цены продукта
-
-        Raises:
-            TypeError: если значение не является str
-            ValueError: если цена меньше 0
-        """
-        if not isinstance(price_value, float):
-            raise TypeError('Цена {0} должно быть float, а не {1}'.format(
-                price_value,
-                type(price_value).price,
-            ))
-        if price_value <= 0:
-            raise ValueError('Цена должна быть положительным числом')
-        self._price = price_value
-
-
-class Dish:
-    """Класс, представляющий блюдо."""
-
-    def __init__(self, name: str):
-        """
-        Инициализирует новый экземпляр класса Dish.
-
-        Args:
-            name (str): имя блюда
-        """
-        self._name = name
-        self._products = []
-
-    @property
-    def name(self) -> str:
-        """
-        Возвращает название блюда.
-
-        Returns:
-            _name (str): значение имени
-        """
-        return self._name
-
-    @name.setter
-    def name(self, name_value: str):
-        """
-        Устанавливает название блюда.
-
-        Args:
-            name_value (str): название блюда
-
-        Raises:
-            TypeError: если значение не является str
-        """
-        if not isinstance(name_value, str):
-            raise TypeError('Имя {0} должно быть str, а не {1}'.format(
-                name_value,
-                type(name_value).name,
-            ))
-        self._name = name_value
-
-    @property
-    def products(self) -> List[Product]:
-        """
-        Возвращает список продуктов в блюде.
-
-        Returns:
-            List: список продуктов в блюде.
-        """
-        return self._products
-
-    def add_product(self, product: Product):
-        """
-        Добавляет продукт в блюдо.
-
-        Args:
-            product (Product): объект продукта.
-
-        Raises:
-            ValueError: обработка случаев отсутствия параметра.
-        """
-        if product:
-            self._products.append(product)
+    def test_add_none_product(self):
+        """Тест на добавление None продукта."""
+        try:
+            self.dish_non_exist.add_product(None)
+        except ValueError:
+            self.assertTrue(True)
         else:
-            raise ValueError('Продукт должен существовать, чтобы его добавить.')
+            self.fail('Нельзя добавить в блюдо несуществующий продукт!')
 
-    def remove_product(self, product: Product):
-        """
-        Удаляет продукт из блюда.
-
-        Args:
-            product (Product): объект продукта
-
-        Raises:
-            ValueError: обработка случая None продукта.
-        """
-        if product:
-            self._products.remove(product)
+    def test_remove_none_product(self):
+        """Тест на удаление None продукта."""
+        try:
+            self.dish_non_exist.remove_product(None)
+        except ValueError:
+            self.assertTrue(True)
         else:
-            raise ValueError('Продукт должен существовать, чтобы его удалить.')
+            self.fail('Нельзя удалить то, что не существует!')
 
 
-class RestaurantDetails:
-    """Класс, представляющий ресторан."""
+class TestRestaurantDetails(unittest.TestCase):
+    """Класс тестирования параметров ресторана."""
 
-    def __init__(self, name: str, inventory: List[Product]):
-        """
-        Инициализирует новый экземпляр класса RestaurantDetails.
+    def setUp(self):
+        """Метод инициализации перед тестированием."""
+        self.restaurant_details = RestaurantDetails('Test Restaurant', [PIZZA, PASTA])
 
-        Args:
-            name (str): название ресторана
-            inventory (List): список продуктов, из которых приготовлено блюдо
-        """
-        self._name = name
-        self._inventory = inventory
+    def test_name(self):
+        """Проверка имени."""
+        self.assertEqual(self.restaurant_details.name, 'Test Restaurant')
 
-    @property
-    def name(self) -> str:
-        """
-        Возвращает название ресторана.
+    def test_inventory(self):
+        """Проверка продуктов для блюда."""
+        self.assertEqual(self.restaurant_details.inventory, [PIZZA, PASTA])
 
-        Returns:
-            _name (str): название ресторана
-        """
-        return self._name
-
-    @name.setter
-    def name(self, name_value: str):
-        """
-        Устанавливает название ресторана.
-
-        Args:
-            name_value (str): значение названия ресторана
-
-        Raises:
-            TypeError: если значение не является str
-        """
-        if not isinstance(name_value, str):
-            raise TypeError('Имя {0} должно быть str, а не {1}'.format(
-                name_value,
-                type(name_value).name,
-            ))
-        self._name = name_value
-
-    @property
-    def inventory(self) -> List[Product]:
-        """
-        Возвращает инвентарь ресторана.
-
-        Returns:
-            List (list): список продуктов для блюда.
-        """
-        return self._inventory
+    def test_set_name(self):
+        """Проверка сеттера имени."""
+        self.restaurant_details.name = 'New Name'
+        self.assertEqual(self.restaurant_details.name, 'New Name')
 
 
-class MenuManager:
-    """Класс, управляющий меню ресторана."""
+class TestMenuManager(unittest.TestCase):
+    """Класс тестирования функционала."""
 
-    def __init__(self, dishes: List[Dish]):
-        """
-        Инициализирует новый экземпляр класса MenuManager.
+    def setUp(self):
+        """Метод инициализации перед тестами."""
+        self.menu_manager = MenuManager([PIZZA, PASTA])
 
-        Args:
-            dishes (List): список блюд
-        """
-        self._dishes = dishes
+        self.dish = Dish('Яблочный салат.')
+        self.apple = Product('Яблоко', 1.0)
+        self.dish.add_product(self.apple)
 
-    @property
-    def dishes(self) -> List[Dish]:
-        """
-        Возвращает список блюд, предлагаемых рестораном.
+    def test_dishes(self):
+        """Тестирование блюд."""
+        self.assertEqual(self.menu_manager.dishes, [PIZZA, PASTA])
 
-        Returns:
-            List: список блюд
-        """
-        return self._dishes
+    def test_add_dish(self):
+        """Тест добавления блюда."""
+        self.menu_manager.add_dish('Salad')
+        self.assertEqual(self.menu_manager.dishes, [PIZZA, PASTA, 'Salad'])
 
-    def add_dish(self, dish: Dish):
-        """
-        Добавляет блюдо в меню.
+    def test_remove_dish(self):
+        """Тест удаления блюда."""
+        self.menu_manager.remove_dish(PIZZA)
+        self.assertEqual(self.menu_manager.dishes, [PASTA])
 
-        Args:
-            dish (Dish): объект продукта
-
-        Raises:
-            ValueError: обработка случая, если блюдо не существует.
-        """
-        if dish:
-            self._dishes.append(dish)
+    def test_non_exist_remove_dish(self):
+        """Тест на удаление None блюда."""
+        try:
+            self.menu_manager.remove_dish(None)
+        except ValueError:
+            self.assertTrue(True)
         else:
-            raise ValueError('Блюдо должно существовать, чтобы его добавить.')
+            self.fail('Блюдо должно существовать!!!')
 
-    def remove_dish(self, dish: Dish):
-        """
-        Удаляет блюдо из меню.
-
-        Args:
-            dish: объект продукта
-
-        Raises:
-            ValueError: обработка случая, если блюдо не существует.
-        """
-        if dish:
-            self._dishes.remove(dish)
+    def test_non_exist_append_dish(self):
+        """Тест на добавление None блюда."""
+        try:
+            self.menu_manager.add_dish(None)
+        except ValueError:
+            self.assertTrue(True)
         else:
-            raise ValueError('Блюдо должно существовать, чтобы его удалить.')
+            self.fail('Блюдо должно существовать!!!')
 
-    def order_dish(self, dish: Dish, restaurant_details: RestaurantDetails) -> str:
-        """
-        Заказывает блюдо, и обновляет инвентарь соответственно.
+    def test_add_and_remove_product_from_dish(self):
+        """Проверка добавления и удаления продукта из блюда."""
+        new_product = Product('Апельсин', ORANGE_PRICE)
+        self.dish.add_product(new_product)
+        self.assertIn(new_product, self.dish.products)
+        self.dish.remove_product(new_product)
+        self.assertNotIn(new_product, self.dish.products)
 
-        Args:
-            dish: объект продукта
-            restaurant_details: объект с информацией о ресторане
 
-        Returns:
-            str: уведомление о статусе заказа
-        """
-        dish_products = dish.products
-        for product in dish_products:
-            if product not in restaurant_details.inventory:
-                return 'Не хватает товаров на складе'
-        for dish_product in dish_products:
-            restaurant_details.inventory.remove(dish_product)
-        return 'Блюдо заказано успешно'
+if __name__ == '__main__':
+    unittest.main()
