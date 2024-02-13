@@ -64,8 +64,8 @@ def process_data(
         time.total_seconds() / (60 * 60 * 24) for time in result_data['online_times']
     ]
     if (
-        (result_data[Constants.total_list[0]] != 0) and
-        (result_data[Constants.total_list_two[0]] != 0) and
+        (result_data[Constants.total_list[0]] != 0) and \
+        (result_data[Constants.total_list_two[0]] != 0) and \
         (result_data['total'] != 0)
     ):
         try:
