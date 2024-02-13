@@ -64,20 +64,20 @@ def process_data(
         time.total_seconds() / (60 * 60 * 24) for time in result_data['online_times']
     ]
     if (
-        result_data[Constants.total_list[0]] != 0 and
-        result_data[Constants.total_list_two[0]] != 0 and
-        result_data['total'] != 0
+        (result_data[Constants.total_list[0]] != 0) and
+        (result_data[Constants.total_list_two[0]] != 0) and
+        (result_data['total'] != 0)
     ):
         try:
             result_data['stats'] = {
                 'region_distribution': result_data['region_distribution'],
                 'average_age': sum(result_data['ages'])
-                / result_data[Constants.total_list[0]],
+                / result_data[Constants.total_key[0]],
                 'online_times': {
                     '<2 days': sum(
                         day < 2 for day in result_data[Constants.online_days[0]]
                     )
-                    / result_data[Constants.total_list[0]],
+                    / result_data[Constants.total_key[0]],
                     '<1 week': sum(
                         day < 7 for day in result_data[Constants.online_days[0]]
                     )
