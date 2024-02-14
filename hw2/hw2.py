@@ -129,10 +129,11 @@ def process_data(output_path: str = 'data_result.json'):
         time.total_seconds() / (60 * 60 * 24) for time in result_data['online_times']
     ]
 
-    if result_data[Constants.total_list[0]] != 0 and \
-            result_data[Constants.total_list_two[0]] != 0 and \
-            result_data['total'] != 0:
+    condition = result_data[Constants.total_list[0]] != 0 and \
+        result_data[Constants.total_list_two[0]] != 0 and \
+        result_data['total'] != 0
 
+    if condition:
         average_age = calculate_statistics(result_data, Constants.total_key[0])
         online_times = calculate_online_times_statistics(
             result_data,
