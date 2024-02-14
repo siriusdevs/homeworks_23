@@ -1,5 +1,3 @@
-"""Файл с ДЗ 2."""
-
 import json
 from datetime import datetime
 
@@ -7,48 +5,18 @@ from init_constants import Constants
 
 
 def load_json_data(input_path: str = 'data_hw2.json'):
-    """
-    Функция подгрузки json информации.
-
-    Args:
-        input_path (str): путь к файлу json.
-
-    Returns:
-        dict: загруженный json.
-    """
     with open(input_path, 'r') as input_file:
         return json.load(input_file)
 
 
 def calculate_statistics(result_data, key):
-    """
-    Функция подсчета среднего возраста.
-
-    Args:
-        result_data: dict, содержащий в себе данные.
-        key: dict, ключ поиска по словарю.
-
-    Returns:
-         Union[int: средний возраст, dict: ошибка о делении на 0]
-    """
     try:
         return sum(result_data['ages']) / result_data[key]
     except ZeroDivisionError:
-        return {'ошибка': 'Деление на 0 запрещено.'}
+        return {'ошибка': 'Деление на  0 запрещено.'}
 
 
 def calculate_online_times_statistics(result_data, online_days_key, total_key):
-    """
-    Вычисляет статистику онлайн-времени пользователей.
-
-    Args:
-        result_data: dict, словарь с данными.
-        online_days_key: str, ключ для словаря result_data.
-        total_key: str, ключ для словаря result_data.
-
-    Returns:
-        dict: Словарь с данными после анализа/Ошибка о делении на 0.
-    """
     try:
         return {
             '<2 days': sum(day < 2 for day in result_data[online_days_key])
@@ -65,21 +33,22 @@ def calculate_online_times_statistics(result_data, online_days_key, total_key):
             / result_data[total_key],
         }
     except ZeroDivisionError:
-        return {'ошибка': 'Деление на 0 запрещено.'}
+        return {'ошибка': 'Деление на  0 запрещено.'}
 
 
-def process_data(
-    output_path: str = 'data_result.json',
-):
-    """
-    Функция реализующая анализ существующего json и соберет из него новую статистику.
+def gather_regional_data(result_data, user_info):
+    if user_info['region'] not in result_data[Constants.regions_list[0]]:
+        result_data[Constants.regions_list[0]][user_info['region']] = 0
+    result_data[Constants.regions_list[0]][user_info['region']] += 1
 
-    Args:
-        output_path (str): путь для записи итогового .json файла.
 
-    Returns:
-        str: dict, предупреждение о делении на 0.
-    """
+def gather_age_and_last_login_dates(result_data, user_info):
+    result_data['ages'].append(user_info['age'])
+    last_login = datetime.strptime(user_info['last_login'], '%Y-%m-%d')
+    result_data['last_login_dates'].append(last_login)
+
+
+def process_data(output_path: str = 'data_result.json'):
     result_data = {
         'regions': {},
         'ages': [],
@@ -88,17 +57,11 @@ def process_data(
     }
 
     for _user, user_info in (load_json_data()).items():
-        last_login = datetime.strptime(user_info['last_login'], '%Y-%m-%d')
-
-        if user_info['region'] not in result_data[Constants.regions_list[0]]:
-            result_data[Constants.regions_list[0]][user_info['region']] = 0
-        result_data[Constants.regions_list[0]][user_info['region']] += 1
-
-        result_data['ages'].append(user_info['age'])
-        result_data['last_login_dates'].append(last_login)
+        gather_regional_data(result_data, user_info)
+        gather_age_and_last_login_dates(result_data, user_info)
 
     if Constants.total_list[0] == 0:
-        return {'ошибка': 'Деление на 0 запрещено.'}
+        return {'ошибка': 'Деление на  0 запрещено.'}
     else:
         result_data['region_distribution'] = {
             region: (count / result_data[Constants.total_list[0]]) * 100
@@ -111,13 +74,10 @@ def process_data(
     result_data['online_days'] = [
         time.total_seconds() / (60 * 60 * 24) for time in result_data['online_times']
     ]
-    be_true = (
-        result_data[Constants.total_list[0]] != 0
-        and result_data[Constants.total_list_two[0]] != 0
-        and result_data['total'] != 0
-    )
 
-    if be_true:
+    if result_data[Constants.total_list[0]] != 0 and \
+       result_data[Constants.total_list_two[0]] != 0 and \
+       result_data['total'] != 0:
         average_age = calculate_statistics(result_data, Constants.total_key[0])
         online_times = calculate_online_times_statistics(
             result_data,
@@ -126,7 +86,7 @@ def process_data(
         )
 
         if average_age is None or online_times is None:
-            return {'Ошибка': 'Деление на  0 запрещено.'}
+            return {'Ошибка': 'Деление на   0 запрещено.'}
 
         result_data['stats'] = {
             'region_distribution': result_data['region_distribution'],
@@ -134,7 +94,7 @@ def process_data(
             'online_times': online_times,
         }
     else:
-        return {'Ошибка': 'Деление на  0 запрещено.'}
+        return {'Ошибка': 'Деление на   0 запрещено.'}
 
     with open(output_path, 'w') as output_file:
         json.dump(result_data['stats'], output_file)
