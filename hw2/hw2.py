@@ -1,4 +1,5 @@
 """Файл с ДЗ 2."""
+
 import json
 from datetime import datetime
 
@@ -50,8 +51,10 @@ def calculate_online_times_statistics(result_data, online_days_key, total_key):
     """
     try:
         return {
-            '<2 days': sum(day < 2 for day in result_data[online_days_key]) / result_data[total_key],
-            '<1 week': sum(day < 7 for day in result_data[online_days_key]) / result_data[total_key],
+            '<2 days': sum(day < 2 for day in result_data[online_days_key])
+            / result_data[total_key],
+            '<1 week': sum(day < 7 for day in result_data[online_days_key])
+            / result_data[total_key],
             '<1 month': sum(
                 day < Constants.month for day in result_data[online_days_key]
             )
@@ -117,7 +120,9 @@ def process_data(
     if be_true:
         average_age = calculate_statistics(result_data, Constants.total_key[0])
         online_times = calculate_online_times_statistics(
-            result_data, Constants.online_days[0], Constants.total_key[0],
+            result_data,
+            Constants.online_days[0],
+            Constants.total_key[0],
         )
 
         if average_age is None or online_times is None:
