@@ -1,6 +1,3 @@
-""
-
-
 class Car:
     """Car instance."""
     def __init__(self, model: str, year_of_vehicle: int, price: int) -> None:
