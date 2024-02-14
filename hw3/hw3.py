@@ -1,12 +1,16 @@
+"""Module that provides classes for hw3."""
+
+
 class Car:
     """Car instance."""
-    def __init__(self, model: str, year_of_vehicle: int, price: int) -> None:
-        """Car initialisation.
+
+    def __init__(self, model: str, year_of_vehicle: int, price: int | float) -> None:
+        """Car initialization.
 
         Args:
-            model: str - car model.
-            year_of_the_vehicle: int - cars year of the vehicle.
-            price: int - the price of the car.
+            model (str): car model
+            year_of_vehicle (int): cars year of the vehicle.
+            price (int | float): the price of the car
         """
         self.model = model
         self.year_of_vehicle = year_of_vehicle
@@ -44,8 +48,16 @@ class Car:
         """Setter of year of the vehicle property of the instance.
 
         Args:
-            new_year_of_vehicle: int - new year of the vehicle.
+            new_year_of_vehicle (int): new year of the vehicle
+
+        Raises:
+            TypeError: if new value have wrong type
+            ValueError: if new value less than zero
         """
+        if not isinstance(new_year_of_vehicle, int):
+            raise TypeError('Given wrong type for new_year_of_vehicle')
+        if new_year_of_vehicle < 0:
+            raise ValueError('Less zero!')
         self._year_of_vehicle = new_year_of_vehicle
 
     @property
@@ -58,12 +70,20 @@ class Car:
         return self._price
 
     @price.setter
-    def price(self, new_price: int) -> int:
+    def price(self, new_price: int | float) -> None:
         """Setter of price property of the instance.
 
         Args:
-            new_price: int - new price of the car.
+            new_price (int): new price of the car.
+
+        Raises:
+            TypeError: if new value have wrong type
+            ValueError: if new value less than zero
         """
+        if not isinstance(new_price, (int | float)):
+            raise TypeError('Given wrong type for new_price')
+        if new_price < 0:
+            raise ValueError('Less zero!')
         self._price = new_price
 
     def __str__(self):
@@ -72,21 +92,28 @@ class Car:
         Returns:
             str: model + year of vehicle.
         """
-        return self._model + " " + str(self._year_of_vehicle)
+        return f'{self._model} {str(self._year_of_vehicle)}'
 
 
 class PassengerCar(Car):
     """Passenger car instance."""
-    def __init__(self, model: str, year_of_vehicle: int, price: int, passengers: int) -> None:
-        """Passenger car initialisation.
+
+    def __init__(
+        self,
+        model: str,
+        year_of_vehicle: int,
+        price: int | float,
+        passengers: int,
+    ) -> None:
+        """Passenger car initialization.
 
         Args:
-            model: str - car model.
-            year_of_the_vehicle: int - cars year of the vehicle.
-            price: int - the price of the car.
-            passengers: int - number of passengers.
+            model (str): car model
+            year_of_vehicle (int): cars year of the vehicle
+            price (int | float): the price of the car
+            passengers (int): number of passengers
         """
-        Car.__init__(self, model, year_of_vehicle, price)
+        super().__init__(self, model, year_of_vehicle, price)
         self.passengers = passengers
 
     @property
@@ -110,15 +137,21 @@ class PassengerCar(Car):
 
 class Truck(Car):
     """Truck car instance."""
-    def __init__(self, model: str, year_of_vehicle: int,
-                 price: int, lifting_capacity: int) -> None:
-        """Truck initialisation.
+
+    def __init__(
+        self,
+        model: str,
+        year_of_vehicle: int,
+        price: int,
+        lifting_capacity: int | float,
+    ) -> None:
+        """Truck initialization.
 
         Args:
-            model: str - car model.
-            year_of_the_vehicle: int - cars year of the vehicle.
-            price: int - the price of the car.
-            lifting_capacity: int - load capacity of the machine
+            model (str): car model
+            year_of_vehicle (int): cars year of the vehicle
+            price (int): the price of the car
+            lifting_capacity (int | float): number of passangers
         """
         Car.__init__(self, model, year_of_vehicle, price)
         self.lifting_capacity = lifting_capacity
@@ -137,49 +170,63 @@ class Truck(Car):
         """Setter of lifting capacity property of the instance.
 
         Args:
-            new_lifting_capacity: int - new lifting capacity.
+            new_lifting_capacity (int): new lifting capacity
+
+        Raises:
+            TypeError: if new value have wrong type
+            ValueError: if new value less than zero
         """
+        if not isinstance(new_lifting_capacity, (int | float)):
+            raise TypeError('Given wrong type for new_lifting_capacity')
+        if new_lifting_capacity < 0:
+            raise ValueError('Less zero!')
         self._lifting_capacity = new_lifting_capacity
 
 
 class CarPark:
     """Car park instance."""
-    def __init__(self, cars: list((Car, PassengerCar, Truck)) = None) -> None:
+
+    def __init__(self, cars: list[Car] = None) -> None:
         """Car park initialisation.
 
         Args:
             cars: list[Car or PasengerCar or Truck]: list of cars.
         """
-        if cars:
-            self._cars = [*cars]
-        else:
-            self._cars = []
+        self._cars = cars
 
-    def add(self, car: (Car, PassengerCar, Truck)) -> None:
-        """add car to list of cars.
+    def add(self, car: Car) -> None:
+        """Add car to list of cars.
 
         Args:
             car: (Car, PassengerCar, Truck) - a new car.
+
+        Raises:
+            TypeError: if given wrong type
         """
         if isinstance(car, (Car, PassengerCar, Truck)):
             self._cars.append(car)
         else:
-            raise TypeError(f'{car}: {type(car).__name__} should be {(Car, PassengerCar, Truck)}')
+            raise TypeError(
+                f'{car}: {type(car).__name__} should be {(Car, PassengerCar, Truck)}')
 
-    def remove(self, car: (Car, PassengerCar, Truck)) -> None:
-        """remove car from list of cars.
+    def remove(self, car: Car) -> None:
+        """Remove car from list of cars.
 
         Args:
             car: (Car, PassengerCar, Truck) - the car to be deleted.
+
+        Raises:
+            TypeError: if given wrong type
         """
-        if isinstance(car, (Car, PassengerCar, Truck)):
+        if not isinstance(car, (Car, PassengerCar, Truck)):
+            raise TypeError(
+                f'{car}: {type(car).__name__} should be {(Car, PassengerCar, Truck)}')
+        if car in self.cars:
             self._cars.remove(car)
-        else:
-            raise TypeError(f'{car}: {type(car).__name__} should be {(Car, PassengerCar, Truck)}')
 
     @property
-    def cars(self) -> list((Car, PassengerCar, Truck)):
-        """Return list of cars
+    def cars(self) -> list[Car]:
+        """Return list of cars.
 
         Returns:
             list((Car, PassengerCar, Truck)): list of all cars
@@ -187,10 +234,19 @@ class CarPark:
         return self._cars
 
     @cars.setter
-    def cars(self, cars: list((Car, PassengerCar, Truck))) -> None:
-        """Return list of cars
+    def cars(self, cars: list[Car]) -> None:
+        """Setter for cars.
 
-        Returns:
-            list((Car, PassengerCar, Truck)): list of all cars
+        Args:
+            cars (list[Car]): list of cars
+
+        Raises:
+            TypeError: if was given not list
+            TypeError: if was given not car
         """
-        return self._cars
+        if not isinstance(cars, list):
+            raise TypeError('Given wrong type for cars')
+        for car in cars:
+            if not isinstance(car, (Car, PassengerCar, Truck)):
+                raise TypeError('Given wrong type for car in new cars')
+        self._cars = cars
