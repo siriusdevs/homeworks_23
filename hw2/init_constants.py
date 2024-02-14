@@ -6,6 +6,7 @@ class Constants:
 
     regions_list = ['regions']
     total_list = ['total']
+    total_key = ['total']
     online_days = ['online_days']
     total_list_two = ['total']
     month = 30

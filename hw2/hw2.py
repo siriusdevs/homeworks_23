@@ -30,11 +30,10 @@ def calculate_statistics(result_data, key):
     Returns:
          Union[int: средний возраст, dict: ошибка о делении на 0]
     """
-    total = result_data[key]
     try:
-        return sum(result_data['ages']) / total
+        return sum(result_data['ages']) / result_data[key]
     except ZeroDivisionError:
-        return {'error': 'Деление на 0 запрещено.'}
+        return {'ошибка': 'Деление на 0 запрещено.'}
 
 
 def calculate_online_times_statistics(result_data, online_days_key, total_key):
@@ -49,22 +48,21 @@ def calculate_online_times_statistics(result_data, online_days_key, total_key):
     Returns:
         dict: Словарь с данными после анализа/Ошибка о делении на 0.
     """
-    total = result_data[total_key]
     try:
         return {
-            '<2 days': sum(day < 2 for day in result_data[online_days_key]) / total,
-            '<1 week': sum(day < 7 for day in result_data[online_days_key]) / total,
+            '<2 days': sum(day < 2 for day in result_data[online_days_key]) / result_data[total_key],
+            '<1 week': sum(day < 7 for day in result_data[online_days_key]) / result_data[total_key],
             '<1 month': sum(
                 day < Constants.month for day in result_data[online_days_key]
             )
-            / total,
+            / result_data[total_key],
             '>6 months': sum(
                 day > Constants.half_year for day in result_data[online_days_key]
             )
-            / total,
+            / result_data[total_key],
         }
     except ZeroDivisionError:
-        return {'error': 'Деление на 0 запрещено.'}
+        return {'ошибка': 'Деление на 0 запрещено.'}
 
 
 def process_data(
@@ -97,7 +95,7 @@ def process_data(
         result_data['last_login_dates'].append(last_login)
 
     if Constants.total_list[0] == 0:
-        return {'error': 'Деление на 0 запрещено.'}
+        return {'ошибка': 'Деление на 0 запрещено.'}
     else:
         result_data['region_distribution'] = {
             region: (count / result_data[Constants.total_list[0]]) * 100
@@ -119,12 +117,11 @@ def process_data(
     if be_true:
         average_age = calculate_statistics(result_data, Constants.total_key[0])
         online_times = calculate_online_times_statistics(
-            result_data, Constants.online_days[0], Constants.total_key[0]
+            result_data, Constants.online_days[0], Constants.total_key[0],
         )
 
         if average_age is None or online_times is None:
-            return {'error': 'Деление на  0 запрещено.'}
-
+            return {'Ошибка': 'Деление на  0 запрещено.'}
 
         result_data['stats'] = {
             'region_distribution': result_data['region_distribution'],
@@ -132,7 +129,7 @@ def process_data(
             'online_times': online_times,
         }
     else:
-        return {'error': 'Деление на  0 запрещено.'}
+        return {'Ошибка': 'Деление на  0 запрещено.'}
 
     with open(output_path, 'w') as output_file:
         json.dump(result_data['stats'], output_file)
