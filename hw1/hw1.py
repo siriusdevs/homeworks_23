@@ -1,5 +1,8 @@
-def salary_statistics(company_dict: dict, min_salary: int =None) -> dict:
-    """salary statictics function.
+"""Solution for hw1."""
+
+
+def salary_statistics(company_dict: dict, min_salary: int = None) -> dict:
+    """Salary statictics function.
 
     Args:
         company_dict: dict - a dictionary with company departments and workers.
@@ -10,25 +13,24 @@ def salary_statistics(company_dict: dict, min_salary: int =None) -> dict:
     """
     # создаём список со всеми зп
     all_salaries = []
-    for key in company_dict:
-        workers = company_dict[key]
-
+    for workers in company_dict.values():
         all_salaries.extend(workers.values())
 
     if min_salary is not None:
         # если есть аргумент min_salary отсеиваем всё, что меньше его
-        all_salaries = list(filter(lambda x: x >= min_salary, all_salaries))
+        all_salaries = list(
+            filter(lambda sal: sal >= min_salary, all_salaries))
 
     # топ 3 зп
-    top_salaries = sorted(all_salaries, reverse=True)[0:3]
+    top_salaries = sorted(all_salaries, reverse=True)[:3]
 
-    for i in range(3):
-        top_salaries[i] = round(top_salaries[i], 2)
+    for ind, _ in enumerate(top_salaries):
+        top_salaries[ind] = round(top_salaries[ind], 2)
 
     # отношение топа зарплат ко всем
     ratio = 0
-    
-    if len(all_salaries) > 0:
+
+    if all_salaries:
         ratio = round(sum(top_salaries) / sum(all_salaries) * 100, 2)
 
     return {'top': top_salaries, 'ratio': ratio}
