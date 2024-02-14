@@ -34,4 +34,3 @@ company = {
 ))
 def test(company, min_salary, excected_value):
     assert salary_statistics(company, min_salary) == excected_value
-    
