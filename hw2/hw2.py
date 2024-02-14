@@ -140,10 +140,7 @@ def process_data(output_path: str = 'data_result.json'):
             Constants.total_key[0],
         )
 
-        if (
-            calculate_statistics(result_data, Constants.total_key[0]) is None
-            or online_times is None
-        ):
+        if calculate_statistics(result_data, Constants.total_key[0]) is None:
             return {'Ошибка': 'Деление на 0 запрещено.'}
 
         result_data['stats'] = {
