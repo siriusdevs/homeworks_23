@@ -13,7 +13,7 @@ jobs:
     - name: Установка зависимостей
       run: |
         python -m pip install --upgrade pip
-        pip install flake8==3.9.0 wemake-python-styleguide==0.15.3 bandit==1.7.2
+        pip install flake8==6.1.0 wemake-python-styleguide==0.15.3 bandit==4.1.1
     - name: Flake8
       run: flake8 hw1
   tests_1:
@@ -28,7 +28,7 @@ jobs:
     - name: Установка зависимостей
       run: |
         python -m pip install --upgrade pip
-        pip install pytest==6.2.5
+        pip install pytest==7.4.2
         pip install numpy
     - name: Pytest
       run: pytest hw1
@@ -44,7 +44,7 @@ jobs:
     - name: Установка зависимостей
       run: |
         python -m pip install --upgrade pip
-        pip install flake8==3.9.2 flake8_isort==4.2.0 wemake-python-styleguide==0.15.3 bandit==1.7.2
+        pip install flake8==6.1.0 flake8_isort==4.2.0 wemake-python-styleguide==0.15.3 bandit==4.1.1
     - name: Flake8
       run: flake8 hw2
   tests_2:
@@ -59,7 +59,7 @@ jobs:
     - name: Установка зависимостей
       run: |
         python -m pip install --upgrade pip
-        pip install pytest==6.2.5
+        pip install pytest==7.4.2
     - name: Pytest
       run: cd hw2 && pytest .
   linter_3:
@@ -74,7 +74,7 @@ jobs:
     - name: Установка зависимостей
       run: |
         python -m pip install --upgrade pip
-        pip install flake8==3.9.0 wemake-python-styleguide==0.15.3 bandit==1.7.2
+        pip install flake8==6.1.0 wemake-python-styleguide==0.15.3 bandit==4.1.1
     - name: Flake8
       run: flake8 hw3
   tests_3:
