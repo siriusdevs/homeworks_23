@@ -6,7 +6,7 @@ def salary_statistics(company_dict: dict, min_salary: int = None) -> dict:
 
     Args:
         company_dict: dict - a dictionary with company departments and workers.
-        min_salary: float optional - the minimum threshold for salaries. Defaults to None.
+        min_salary: float optional the minimum threshold. Defaults to None.
 
     Returns:
         dict: - output data.
@@ -19,7 +19,8 @@ def salary_statistics(company_dict: dict, min_salary: int = None) -> dict:
     if min_salary is not None:
         # если есть аргумент min_salary отсеиваем всё, что меньше его
         all_salaries = list(
-            filter(lambda sal: sal >= min_salary, all_salaries))
+            filter(lambda sal: sal >= min_salary, all_salaries),
+        )
 
     # топ 3 зп
     top_salaries = sorted(all_salaries, reverse=True)[:3]
