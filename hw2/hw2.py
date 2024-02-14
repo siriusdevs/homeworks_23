@@ -134,19 +134,19 @@ def process_data(output_path: str = 'data_result.json'):
         result_data['total'] != 0
 
     if condition:
-        average_age = calculate_statistics(result_data, Constants.total_key[0])
         online_times = calculate_online_times_statistics(
             result_data,
             Constants.online_days[0],
             Constants.total_key[0],
         )
 
-        if average_age is None or online_times is None:
+        if calculate_statistics(result_data, Constants.total_key[0]) \
+                is None or online_times is None:
             return {'Ошибка': 'Деление на 0 запрещено.'}
 
         result_data['stats'] = {
             'region_distribution': result_data['region_distribution'],
-            'average_age': average_age,
+            'average_age': calculate_statistics(result_data, Constants.total_key[0]),
             'online_times': online_times,
         }
     else:
