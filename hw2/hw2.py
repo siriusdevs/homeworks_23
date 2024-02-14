@@ -69,8 +69,7 @@ def calculate_online_times_statistics(result_data, online_days_key, total_key):
 
 def gather_regional_data(result_data, user_info):
     """
-    Соберите региональные данные из информации о пользователе и
-    соответствующим образом обновите данные результатов.
+    Анализ собранных данных.
 
     Args:
         result_data (dict): Словарь для хранения региональных данных.
@@ -83,8 +82,7 @@ def gather_regional_data(result_data, user_info):
 
 def gather_age_and_last_login_dates(result_data, user_info):
     """
-    Соберите возраст и даты последнего входа в систему из
-    информации о пользователе и обновите данные результатов соответствующим образом.
+    Анализ и обновление существующих данных.
 
     Args:
         result_data (dict): Словарь для хранения возраста и дат последнего входа в систему.
@@ -131,9 +129,9 @@ def process_data(output_path: str = 'data_result.json'):
         time.total_seconds() / (60 * 60 * 24) for time in result_data['online_times']
     ]
 
-    if (result_data[Constants.total_list[0]] != 0 and
-            result_data[Constants.total_list_two[0]] != 0 and
-            result_data['total'] != 0):
+    if result_data[Constants.total_list[0]] != 0 and \
+            result_data[Constants.total_list_two[0]] != 0 and \
+            result_data['total'] != 0:
 
         average_age = calculate_statistics(result_data, Constants.total_key[0])
         online_times = calculate_online_times_statistics(
