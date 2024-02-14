@@ -5,11 +5,30 @@ from init_constants import Constants
 
 
 def load_json_data(input_path: str = 'data_hw2.json'):
+    """
+    Функция подгрузки json информации.
+
+    Args:
+        input_path (str): путь к файлу json.
+
+    Returns:
+        dict: загруженный json.
+    """
     with open(input_path, 'r') as input_file:
         return json.load(input_file)
 
 
 def calculate_statistics(result_data, key):
+    """
+    Функция подсчета среднего возраста.
+
+    Args:
+        result_data: dict, содержащий в себе данные.
+        key: dict, ключ поиска по словарю.
+
+    Returns:
+        Union[int: средний возраст, dict: ошибка о делении на 0]
+    """    
     try:
         return sum(result_data['ages']) / result_data[key]
     except ZeroDivisionError:
@@ -17,6 +36,17 @@ def calculate_statistics(result_data, key):
 
 
 def calculate_online_times_statistics(result_data, online_days_key, total_key):
+    """
+    Вычисляет статистику онлайн-времени пользователей.
+
+    Args:
+        result_data: dict, словарь с данными.
+        online_days_key: str, ключ для словаря result_data.
+        total_key: str, ключ для словаря result_data.
+
+    Returns:
+        dict: Словарь с данными после анализа/Ошибка о делении на 0.
+    """
     try:
         return {
             '<2 days': sum(day < 2 for day in result_data[online_days_key])
@@ -37,18 +67,41 @@ def calculate_online_times_statistics(result_data, online_days_key, total_key):
 
 
 def gather_regional_data(result_data, user_info):
+    """
+    Соберите региональные данные из информации о пользователе и соответствующим образом обновите данные результатов.
+
+    Args::
+        result_data (dict): Словарь для хранения региональных данных.
+        user_info (dict): Информация о пользователе, включая регион.
+    """
     if user_info['region'] not in result_data[Constants.regions_list[0]]:
         result_data[Constants.regions_list[0]][user_info['region']] = 0
     result_data[Constants.regions_list[0]][user_info['region']] += 1
 
 
 def gather_age_and_last_login_dates(result_data, user_info):
+    """
+    Соберите возраст и даты последнего входа в систему из информации о пользователе и обновите данные результатов соответствующим образом.
+
+    Args:
+        result_data (dict): Словарь для хранения возраста и дат последнего входа в систему.
+        user_info (dict): Информация о пользователе, включая возраст и последний вход в систему.
+    """
     result_data['ages'].append(user_info['age'])
     last_login = datetime.strptime(user_info['last_login'], '%Y-%m-%d')
     result_data['last_login_dates'].append(last_login)
 
 
 def process_data(output_path: str = 'data_result.json'):
+    """
+    Функция реализующая анализ существующего json и соберет из него новую статистику.
+
+    Args:
+        output_path (str): путь для записи итогового .json файла.
+
+    Returns:
+        str: dict, предупреждение о делении на 0.
+    """
     result_data = {
         'regions': {},
         'ages': [],
@@ -76,8 +129,8 @@ def process_data(output_path: str = 'data_result.json'):
     ]
 
     if result_data[Constants.total_list[0]] != 0 and \
-       result_data[Constants.total_list_two[0]] != 0 and \
-       result_data['total'] != 0:
+        result_data[Constants.total_list_two[0]] != 0 and \
+        result_data['total'] != 0:
         average_age = calculate_statistics(result_data, Constants.total_key[0])
         online_times = calculate_online_times_statistics(
             result_data,
