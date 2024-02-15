@@ -33,12 +33,12 @@ company = {
         'ratio': 91.92,
     }),
 ))
-def test(company, min_salary, excected_value):
+def test(comp, min_salary, excected_value):
     """Provide tests.
 
     Args:
-        company (_type_):  name
+        comp (_type_):  name
         min_salary (_type_): minimal salary
         excected_value (_type_): value
     """
-    assert salary_statistics(company, min_salary) == excected_value
+    assert salary_statistics(comp, min_salary) == excected_value
