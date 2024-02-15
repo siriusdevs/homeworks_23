@@ -23,7 +23,7 @@ company = {
 }
 
 
-@pytest.mark.parametrize('company, min_salary, excected_value', (
+@pytest.mark.parametrize('comp, min_salary, excected_value', (
     (company, None, {
         'top': [1234, 244, 232],
         'ratio': 75.87,
