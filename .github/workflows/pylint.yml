@@ -1,35 +1,94 @@
 name: Проверка
 on: [push]
 jobs:
-  linter:
-    name: Линтер
+  linter_1:
+    name: Линтер hw1
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Установка Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.10.6
+        python-version: 3.11.0
     - name: Установка зависимостей
       run: |
         python -m pip install --upgrade pip
-        pip install flake8==3.9.0 wemake-python-styleguide==0.15.3 bandit==1.7.2
+        pip install flake8==6.1.0 wemake-python-styleguide==0.18.0 bandit==1.7.6
     - name: Flake8
-      run: flake8 .
-  tests:
-    name: Тесты
+      run: flake8 hw1
+  tests_1:
+    name: Тесты hw1
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Установка Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.10.6
+        python-version: 3.11.0
     - name: Установка зависимостей
       run: |
         python -m pip install --upgrade pip
-        pip install pytest==6.2.5
+        pip install pytest==7.4.2
         pip install numpy
     - name: Pytest
-      run: pytest
-
+      run: pytest hw1
+  linter_2:
+    name: Линтер hw2
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Установка Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11.0
+    - name: Установка зависимостей
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8==6.1.0 flake8_isort==6.1.1 wemake-python-styleguide==0.18.0 bandit==1.7.6
+    - name: Flake8
+      run: flake8 hw2
+  tests_2:
+    name: Тесты hw2
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Установка Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11.0
+    - name: Установка зависимостей
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest==7.4.2
+    - name: Pytest
+      run: cd hw2 && pytest .
+  linter_3:
+    name: Линтер hw3
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Установка Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11.0
+    - name: Установка зависимостей
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8==6.1.0 wemake-python-styleguide==0.18.0 bandit==1.7.6
+    - name: Flake8
+      run: flake8 hw3
+  tests_3:
+    name: Тесты hw3
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Установка Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11.0
+    - name: Установка зависимостей
+      run:
+        python -m pip install --upgrade pip
+        pip install pytest==6.2.5
+    - name: Pytest
+      run: cd hw3 && pytest .
