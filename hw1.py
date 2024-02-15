@@ -1,11 +1,28 @@
-"""Main file with task for hw1."""
+"""Модуль с функциями для вычисления статистики по зарплатам."""
 
-import statistics
 from typing import Dict, Optional
 
 
+def calculate_median(numbers):
+    """
+    Рассчитывает медианное значение списка чисел.
+
+    Args:
+        numbers (list): Список числовых данных.
+
+    Returns:
+        float: Медианное значение данных.
+    """
+    sorted_numbers = sorted(numbers)
+    len_numbers = len(sorted_numbers)
+    if len_numbers % 2 == 0:
+        return (sorted_numbers[len_numbers // 2 - 1] + sorted_numbers[len_numbers // 2]) / 2
+    return sorted_numbers[len_numbers // 2]
+
+
 def salary_stats(
-    departments: Dict[str, Dict[str, float]], limit: Optional[float] = None,
+    departments: Dict[str, Dict[str, float]],
+    limit: Optional[float] = None,
 ) -> Dict[str, float]:
     """
     Функция считающая среднюю, максимальную и значение медианы у зарплат.
@@ -23,10 +40,11 @@ def salary_stats(
             if limit is None or salary >= limit:
                 salaries.append(salary)
     if salaries:
+        total_salary = sum(salaries)
         return {
-            'average': round(sum(salaries) / len(salaries), 2),
+            'average': round(total_salary / len(salaries), 2),
             'maximum': max(salaries),
-            'median': round(statistics.median(salaries), 2),
+            'median': round(calculate_median(salaries), 2),
         }
     return {
         'average': None,
