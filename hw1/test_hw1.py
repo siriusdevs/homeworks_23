@@ -2,7 +2,7 @@
 
 import pytest
 
-from hw1 import salary_count
+from hw1.hw1 import salary_count
 
 TEST_COMPANY_DATA = (
     (
