@@ -37,4 +37,5 @@ jobs:
         pip install pytest==6.2.5
         pip install numpy
     - name: Pytest
-      run: pytest ${{ matrix.homework }}
+      run: chmod -w hw2/writing.json' |
+        pytest ${{ matrix.homework }}
