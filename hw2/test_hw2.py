@@ -27,8 +27,8 @@ ERROR_CHECKING = (
     ),
     (
         './hw2/data_hw2.json',
-        './hw2/not_writing.json',
-        'file ./hw2/not_writing.json Cant write data to file!',
+        './hw2/writing.json',
+        'The prograp was completed without errors.',
     ),
     (
         './hw2/data_hw2.json',
