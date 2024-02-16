@@ -1,0 +1,16 @@
+{
+    "user": {
+        "region": "Moscow",
+        "registered": "2014-12-24",
+        "last_login": "2020-10-01",
+        "email": "user@yahoo.com",
+        "age": 39
+    },
+    "user2": {
+        "region": "Bratsk",
+        "registered": "2016-10-30",
+        "last_login": "2021-11-21",
+        "email": "user2@yahoo.com",
+        "age": 35
+    }
+}

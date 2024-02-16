@@ -1,0 +1,10 @@
+{
+    "email_host_percentages": {
+        "yandex.ru": 50.0,
+        "gmail.com": 50.0
+    },
+    "registration_year_percentages": {
+        "2012": 50.0,
+        "2022": 50.0
+    }
+}
