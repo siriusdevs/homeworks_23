@@ -2,7 +2,7 @@
 import json
 from datetime import date
 
-DMITRY_TORSHIN = 18
+TEENAGER = 18
 MIDDLE = 25
 NOT_OLD = 45
 OLD = 60
@@ -18,7 +18,7 @@ def get_the_age(age: int) -> str:
     Returns:
         str: Age group.
     """
-    if age < DMITRY_TORSHIN:
+    if age < TEENAGER:
         return '0-18'
     elif age < MIDDLE:
         return '18-25'
