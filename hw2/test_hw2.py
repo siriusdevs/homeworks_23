@@ -16,23 +16,23 @@ ERROR_CHECKING = (
         'file vydumanniy_file.json does not exist!',
     ),
     (
-        './hw2/test_error',
-        'test_output.json',
-        'file ./hw2/test_error is not in JSON format!',
-    ),
-    (
         './hw2/test_error.json',
         'test_output.json',
         'file ./hw2/test_error.json is not in JSON format!',
     ),
     (
-        './hw2/data_hw2.json',
+        './hw2/test1.json',
         './hw2/writing.json',
-        'The prograp was completed without errors.',
+        'not permission to write to file ./hw2/writing.json',
     ),
     (
         './hw2/data_hw2.json',
         './hw2/test_output.json',
+        'The prograp was completed without errors.',
+    ),
+    (
+        './hw2/data_hw2.json',
+        './hw2/test.json',
         'The prograp was completed without errors.',
     ),
 )
