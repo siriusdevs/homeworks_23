@@ -6,6 +6,9 @@ import pytest
 
 from hw2 import process_data
 
+correct_output_file = './hw2/test_output.json'
+
+
 ERROR_CHECKING = (
     (
         'vydumanniy_file.json',
@@ -15,7 +18,7 @@ ERROR_CHECKING = (
     (
         './hw2/test_error',
         'test_output.json',
-        'file ./hw2/test_error.json is not in JSON format!',
+        'file ./hw2/test_error is not in JSON format!',
     ),
     (
         './hw2/test_error.json',
@@ -50,8 +53,8 @@ def test_with_error_code(input_file: str, output_file: str, expected: int):
 
 def test_data():
     """Tests data processing functionality."""
-    process_data('./hw2/data_hw2.json', './hw2/test_output.json')
-    with open('./hw2/test_output.json', 'r') as output_file:
+    process_data('./hw2/data_hw2.json', correct_output_file)
+    with open(correct_output_file, 'r') as output_file:
         output_dict = json.load(output_file)
         assert output_dict == {
             'age_stats': {
@@ -63,4 +66,4 @@ def test_data():
                 'above half year': 1,
             },
         }
-    os.remove('./hw2/test_output.json')
+    os.remove(correct_output_file)
