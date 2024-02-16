@@ -20,7 +20,7 @@ ERROR_CHECKING = (
     (
         './hw2/test_error.json',
         'test_output.json',
-        'file ./hw2/test_error.json invalid test data format!',
+        'file ./hw2/test_error.json is not in JSON format!',
     ),
     (
         './hw2/data_hw2.json',
@@ -29,8 +29,8 @@ ERROR_CHECKING = (
     ),
     (
         './hw2/data_hw2.json',
-        './hw2/test_success.json',
-        'file The prograp was completed without errors.',
+        './hw2/test_output.json',
+        'The prograp was completed without errors.',
     ),
 )
 
