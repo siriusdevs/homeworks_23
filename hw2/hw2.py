@@ -57,9 +57,9 @@ def calculate_online_times_statistics(result_data, online_days_key, total_key):
 
     results_dict = {key: 0 for key in conditions}
 
-    for day in result_data[online_days_key]:
+    for day_k in result_data[online_days_key]:
         for condition_key, condition_func in conditions.items():
-            if condition_func(day):
+            if condition_func(day_k):
                 results_dict[condition_key] += 1
 
     for result_key in results_dict:
