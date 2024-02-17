@@ -176,12 +176,25 @@ class RestaurantDetails:
 
     @property
     def name(self) -> str:
-        """Возвращает название ресторана."""
+        """
+        Возвращает название ресторана.
+
+        Returns:
+            _name (str): значение имени
+        """
         return self._name
 
     @name.setter
     def name(self, name_value: str):
-        """Устанавливает название ресторана."""
+        """
+        Устанавливает название ресторана.
+
+        Args:
+            name_value (str): значение имени
+
+        Raises:
+            TypeError: если значение не является str
+        """
         if not isinstance(name_value, str):
             raise TypeError('Имя {0} должно быть str, а не {1}'.format(
                 name_value,
@@ -191,23 +204,49 @@ class RestaurantDetails:
 
     @property
     def inventory(self) -> List[Product]:
-        """Возвращает инвентарь ресторана."""
+        """
+        Возвращает инвентарь ресторана.
+
+        Returns:
+            _inventory (List): список продуктов, из которых приготовлено блюдо
+        """
         return self._inventory
 
     @property
     def menu(self) -> List[Dish]:
-        """Возвращает список блюд, предлагаемых рестораном."""
+        """
+        Возвращает список блюд, предлагаемых рестораном.
+
+        Returns:
+            _menu (List): список блюд, предлагаемых рестораном
+        """
         return self._menu
 
     def add_dish_to_menu(self, dish: Dish):
-        """Добавляет блюдо в меню."""
+        """
+        Добавляет блюдо в меню.
+        
+        Args:
+            dish (Dish): объект блюда.
+
+        Raises:
+            ValueError: обработка случаев отсутствия параметра.
+        """
         if dish:
             self._menu.append(dish)
         else:
             raise ValueError('Блюдо должно существовать, чтобы его добавить.')
 
     def remove_dish_from_menu(self, dish: Dish):
-        """Удаляет блюдо из меню."""
+        """
+        Удаляет блюдо из меню.
+        
+        Args:
+            dish (Dish): объект блюда.
+
+        Raises:
+            ValueError: обработка случая None блюда.
+        """
         if dish:
             self._menu.remove(dish)
         else:
@@ -227,15 +266,30 @@ class MenuManager:
         self._restaurant_details = restaurant_details
 
     def add_dish(self, dish: Dish):
-        """Добавляет блюдо в ресторан."""
+        """
+        Добавляет блюдо в ресторан.
+
+        Args:
+            dish (Dish): объект блюда.
+        """
         self._restaurant_details.add_dish_to_menu(dish)
 
     def remove_dish(self, dish: Dish):
-        """Удаляет блюдо из ресторана."""
+        """
+        Удаляет блюдо из ресторана.
+
+        Args:
+            dish (Dish): объект блюда.
+        """
         self._restaurant_details.remove_dish_from_menu(dish)
 
     def order_dish(self, dish: Dish) -> str:
-        """Заказывает блюдо, и обновляет инвентарь соответственно."""
+        """
+        Заказывает блюдо, и обновляет инвентарь соответственно.
+
+        Args:
+            dish (Dish): объект блюда.
+        """
         dish_products = dish.products
         for product in dish_products:
             if product not in self._restaurant_details.inventory:

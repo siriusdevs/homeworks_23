@@ -7,6 +7,7 @@ BANANA_PRICE = 2.0
 ORANGE_PRICE = 1.5
 PIZZA = 'Pizza'
 PASTA = 'Pasta'
+TEST_RESTAURANT_NAME = 'Test Restaurant'
 
 
 class TestRestaurantClasses(unittest.TestCase):
@@ -70,11 +71,11 @@ class TestRestaurantDetails(unittest.TestCase):
 
     def setUp(self):
         """Метод инициализации перед тестированием."""
-        self.restaurant_details = RestaurantDetails('Test Restaurant', [PIZZA, PASTA])
+        self.restaurant_details = RestaurantDetails(TEST_RESTAURANT_NAME, [PIZZA, PASTA])
 
     def test_name(self):
         """Проверка имени."""
-        self.assertEqual(self.restaurant_details.name, 'Test Restaurant')
+        self.assertEqual(self.restaurant_details.name, TEST_RESTAURANT_NAME)
 
     def test_inventory(self):
         """Проверка продуктов для блюда."""
@@ -91,7 +92,7 @@ class TestMenuManager(unittest.TestCase):
 
     def setUp(self):
         """Метод инициализации перед тестами."""
-        self.restaurant_details = RestaurantDetails('Test Restaurant', [PIZZA, PASTA])
+        self.restaurant_details = RestaurantDetails(TEST_RESTAURANT_NAME, [PIZZA, PASTA])
         self.menu_manager = MenuManager(self.restaurant_details)
 
         self.dish = Dish('Яблочный салат.')
