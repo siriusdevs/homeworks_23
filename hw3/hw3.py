@@ -161,38 +161,27 @@ class Dish:
 class RestaurantDetails:
     """Класс, представляющий ресторан."""
 
-    def __init__(self, name: str, inventory: List[Product]):
+    def __init__(self, name: str, inventory: List[Product], menu: List[Dish] = None):
         """
         Инициализирует новый экземпляр класса RestaurantDetails.
 
         Args:
             name (str): название ресторана
             inventory (List): список продуктов, из которых приготовлено блюдо
+            menu (List): список блюд, предлагаемых рестораном
         """
         self._name = name
         self._inventory = inventory
+        self._menu = menu if menu is not None else []
 
     @property
     def name(self) -> str:
-        """
-        Возвращает название ресторана.
-
-        Returns:
-            _name (str): название ресторана
-        """
+        """Возвращает название ресторана."""
         return self._name
 
     @name.setter
     def name(self, name_value: str):
-        """
-        Устанавливает название ресторана.
-
-        Args:
-            name_value (str): значение названия ресторана
-
-        Raises:
-            TypeError: если значение не является str
-        """
+        """Устанавливает название ресторана."""
         if not isinstance(name_value, str):
             raise TypeError('Имя {0} должно быть str, а не {1}'.format(
                 name_value,
@@ -202,82 +191,55 @@ class RestaurantDetails:
 
     @property
     def inventory(self) -> List[Product]:
-        """
-        Возвращает инвентарь ресторана.
-
-        Returns:
-            List (list): список продуктов для блюда.
-        """
+        """Возвращает инвентарь ресторана."""
         return self._inventory
+
+    @property
+    def menu(self) -> List[Dish]:
+        """Возвращает список блюд, предлагаемых рестораном."""
+        return self._menu
+
+    def add_dish_to_menu(self, dish: Dish):
+        """Добавляет блюдо в меню."""
+        if dish:
+            self._menu.append(dish)
+        else:
+            raise ValueError('Блюдо должно существовать, чтобы его добавить.')
+
+    def remove_dish_from_menu(self, dish: Dish):
+        """Удаляет блюдо из меню."""
+        if dish:
+            self._menu.remove(dish)
+        else:
+            raise ValueError('Блюдо должно существовать, чтобы его удалить.')
 
 
 class MenuManager:
     """Класс, управляющий меню ресторана."""
 
-    def __init__(self, dishes: List[Dish]):
+    def __init__(self, restaurant_details: RestaurantDetails):
         """
         Инициализирует новый экземпляр класса MenuManager.
 
         Args:
-            dishes (List): список блюд
+            restaurant_details (RestaurantDetails): объект с информацией о ресторане
         """
-        self._dishes = dishes
-
-    @property
-    def dishes(self) -> List[Dish]:
-        """
-        Возвращает список блюд, предлагаемых рестораном.
-
-        Returns:
-            List: список блюд
-        """
-        return self._dishes
+        self._restaurant_details = restaurant_details
 
     def add_dish(self, dish: Dish):
-        """
-        Добавляет блюдо в меню.
-
-        Args:
-            dish (Dish): объект продукта
-
-        Raises:
-            ValueError: обработка случая, если блюдо не существует.
-        """
-        if dish:
-            self._dishes.append(dish)
-        else:
-            raise ValueError('Блюдо должно существовать, чтобы его добавить.')
+        """Добавляет блюдо в ресторан."""
+        self._restaurant_details.add_dish_to_menu(dish)
 
     def remove_dish(self, dish: Dish):
-        """
-        Удаляет блюдо из меню.
+        """Удаляет блюдо из ресторана."""
+        self._restaurant_details.remove_dish_from_menu(dish)
 
-        Args:
-            dish: объект продукта
-
-        Raises:
-            ValueError: обработка случая, если блюдо не существует.
-        """
-        if dish:
-            self._dishes.remove(dish)
-        else:
-            raise ValueError('Блюдо должно существовать, чтобы его удалить.')
-
-    def order_dish(self, dish: Dish, restaurant_details: RestaurantDetails) -> str:
-        """
-        Заказывает блюдо, и обновляет инвентарь соответственно.
-
-        Args:
-            dish: объект продукта
-            restaurant_details: объект с информацией о ресторане
-
-        Returns:
-            str: уведомление о статусе заказа
-        """
+    def order_dish(self, dish: Dish) -> str:
+        """Заказывает блюдо, и обновляет инвентарь соответственно."""
         dish_products = dish.products
         for product in dish_products:
-            if product not in restaurant_details.inventory:
+            if product not in self._restaurant_details.inventory:
                 return 'Не хватает товаров на складе'
         for dish_product in dish_products:
-            restaurant_details.inventory.remove(dish_product)
+            self._restaurant_details.inventory.remove(dish_product)
         return 'Блюдо заказано успешно'

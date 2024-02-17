@@ -91,25 +91,27 @@ class TestMenuManager(unittest.TestCase):
 
     def setUp(self):
         """Метод инициализации перед тестами."""
-        self.menu_manager = MenuManager([PIZZA, PASTA])
+        self.restaurant_details = RestaurantDetails('Test Restaurant', [PIZZA, PASTA])
+        self.menu_manager = MenuManager(self.restaurant_details)
 
         self.dish = Dish('Яблочный салат.')
-        self.apple = Product('Яблоко', 1.0)
+        self.apple = Product('Яблоко',  1.0)
         self.dish.add_product(self.apple)
 
-    def test_dishes(self):
+    def test_menu(self):
         """Тестирование блюд."""
-        self.assertEqual(self.menu_manager.dishes, [PIZZA, PASTA])
+        self.assertEqual(self.restaurant_details.menu, [])
 
     def test_add_dish(self):
         """Тест добавления блюда."""
-        self.menu_manager.add_dish('Salad')
-        self.assertEqual(self.menu_manager.dishes, [PIZZA, PASTA, 'Salad'])
+        self.menu_manager.add_dish(self.dish)
+        self.assertIn(self.dish, self.restaurant_details.menu)
 
     def test_remove_dish(self):
         """Тест удаления блюда."""
-        self.menu_manager.remove_dish(PIZZA)
-        self.assertEqual(self.menu_manager.dishes, [PASTA])
+        self.restaurant_details.add_dish_to_menu(self.dish)
+        self.menu_manager.remove_dish(self.dish)
+        self.assertNotIn(self.dish, self.restaurant_details.menu)
 
     def test_non_exist_remove_dish(self):
         """Тест на удаление None блюда."""
