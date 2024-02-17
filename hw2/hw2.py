@@ -48,21 +48,25 @@ def calculate_online_times_statistics(result_data, online_days_key, total_key):
     Returns:
         dict: Словарь с данными после анализа/Ошибка о делении на 0.
     """
+    conditions = {
+        '<2 days': lambda day: day < 2,
+        '<1 week': lambda day: day < 7,
+        '<1 month': lambda day: day < Constants.month,
+        '>6 months': lambda day: day > Constants.half_year,
+    }
+
+    results = {key:  0 for key in conditions}
+
+    for day in result_data[online_days_key]:
+        for key, condition in conditions.items():
+            if condition(day):
+                results[key] += 1
+
+    for key in results:
+        results[key] /= result_data[total_key]
+
     try:
-        return {
-            '<2 days': sum(day < 2 for day in result_data[online_days_key])
-            / result_data[total_key],
-            '<1 week': sum(day < 7 for day in result_data[online_days_key])
-            / result_data[total_key],
-            '<1 month': sum(
-                day < Constants.month for day in result_data[online_days_key]
-            )
-            / result_data[total_key],
-            '>6 months': sum(
-                day > Constants.half_year for day in result_data[online_days_key]
-            )
-            / result_data[total_key],
-        }
+        return results
     except ZeroDivisionError:
         return {'ошибка': 'Деление на  0 запрещено.'}
 
