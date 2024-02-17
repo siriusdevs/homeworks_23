@@ -33,12 +33,6 @@ def calculate_salary(
         rounded_salaries = [round(salary, 2) for salary in top_salaries]
 
         return percentage, rounded_salaries
-    elif sum(all_salaries) < 0:
-        percentage = round((sum(top_salaries) / sum_salary) * 100, 2)
-
-        rounded_salaries = [round(salary, 2) for salary in top_salaries]
-
-        return percentage, rounded_salaries
     elif sum(all_salaries) == 0:
         return 0, [0, 0, 0]
     return ()
