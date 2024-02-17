@@ -32,4 +32,3 @@ jobs:
         pip install numpy
     - name: Pytest
       run: pytest
-
