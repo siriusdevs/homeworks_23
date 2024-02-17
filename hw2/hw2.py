@@ -55,20 +55,20 @@ def calculate_online_times_statistics(result_data, online_days_key, total_key):
         '>6 months': lambda day: day > Constants.half_year,
     }
 
-    results = {key:  0 for key in conditions}
+    results_dict = {key: 0 for key in conditions}
 
     for day in result_data[online_days_key]:
-        for key, condition in conditions.items():
-            if condition(day):
-                results[key] += 1
+        for condition_key, condition_func in conditions.items():
+            if condition_func(day):
+                results_dict[condition_key] += 1
 
-    for key in results:
-        results[key] /= result_data[total_key]
+    for result_key in results_dict:
+        results_dict[result_key] /= result_data[total_key]
 
     try:
-        return results
+        return results_dict
     except ZeroDivisionError:
-        return {'ошибка': 'Деление на  0 запрещено.'}
+        return {'ошибка': 'Деление на 0 запрещено.'}
 
 
 def gather_regional_data(result_data, user_info):
