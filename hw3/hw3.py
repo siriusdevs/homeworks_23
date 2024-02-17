@@ -225,7 +225,7 @@ class RestaurantDetails:
     def add_dish_to_menu(self, dish: Dish):
         """
         Добавляет блюдо в меню.
-        
+
         Args:
             dish (Dish): объект блюда.
 
@@ -240,7 +240,7 @@ class RestaurantDetails:
     def remove_dish_from_menu(self, dish: Dish):
         """
         Удаляет блюдо из меню.
-        
+
         Args:
             dish (Dish): объект блюда.
 
@@ -289,6 +289,9 @@ class MenuManager:
 
         Args:
             dish (Dish): объект блюда.
+
+        Returns:
+            str: сообщение об успешном заказе блюда
         """
         dish_products = dish.products
         for product in dish_products:
