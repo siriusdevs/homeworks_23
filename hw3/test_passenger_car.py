@@ -1,12 +1,12 @@
-"""
-Tests for PassengerCar class.
-"""
+"""Tests for PassengerCar class."""
 import pytest
+
 from hw3 import PassengerCar
 
 TOYOTA_MODEL = 'Toyota'
 MODEL_YEAR = 2024
 CAR_COST = 35000.0
+
 
 def test_init():
     """Test initialization of PassengerCar object."""
@@ -27,7 +27,7 @@ def test_empty_passenger_seats():
     """Test empty passenger seats."""
     with pytest.raises(TypeError):
         PassengerCar(TOYOTA_MODEL, MODEL_YEAR, CAR_COST, None)
-        
+
 
 def test_extra_argument():
     """Test extra argument passed to PassengerCar."""
