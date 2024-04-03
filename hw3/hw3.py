@@ -27,3 +27,16 @@ class Car:
     @cost.setter
     def cost(self, value):
         self._cost = value
+
+class PassengerCar(Car):
+    def __init__(self, model, year, cost, passenger_seats):
+        super().__init__(model, year, cost)
+        self._passenger_seats = passenger_seats
+
+    @property
+    def passenger_seats(self):
+        return self._passenger_seats
+
+    @passenger_seats.setter
+    def passenger_seats(self, value):
+        self._passenger_seats = value
