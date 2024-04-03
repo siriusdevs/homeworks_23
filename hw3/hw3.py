@@ -54,3 +54,16 @@ class Truck(Car):
     @carrying_capacity.setter
     def carrying_capacity(self, value):
         self._carrying_capacity = value
+
+class CarPark:
+    def __init__(self):
+        self._cars = []
+
+    def add_car(self, car):
+        self._cars.append(car)
+
+    def remove_car(self, car):
+        self._cars.remove(car)
+
+    def get_all_cars(self):
+        return self._cars
