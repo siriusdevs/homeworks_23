@@ -1,4 +1,4 @@
-"""A module for fleet management"""
+"""A module for fleet management."""
 class Car:
     """Class representing a car."""
 
@@ -32,7 +32,7 @@ class Car:
             TypeError: If new_model is not a string.
         """
         if not isinstance(new_model, str):
-            raise TypeError("Model must be a string")
+            raise TypeError('Model must be a string')
         self._model = new_model
 
     @property
@@ -55,7 +55,7 @@ class Car:
             TypeError: If new_model is not an integer.
         """
         if not isinstance(new_model, int):
-            raise TypeError("Year must be an integer")
+            raise TypeError('Year must be an integer')
         self._year = new_model
 
     @property
@@ -78,7 +78,7 @@ class Car:
             TypeError: If new_model is not a float.
         """
         if not isinstance(new_model, float):
-            raise TypeError("Cost must be a float")
+            raise TypeError('Cost must be a float')
         self._cost = new_model
 
 
@@ -117,7 +117,7 @@ class PassengerCar(Car):
             TypeError: If new_model is not an integer.
         """
         if not isinstance(new_model, int):
-            raise TypeError("Passenger seats must be an integer")
+            raise TypeError('Passenger seats must be an integer')
         self._passenger_seats = new_model
 
 
@@ -156,7 +156,7 @@ class Truck(Car):
             TypeError: If new_model is not a float.
         """
         if not isinstance(new_model, float):
-            raise TypeError("Carrying capacity must be a float")
+            raise TypeError('Carrying capacity must be a float')
         self._carrying_capacity = new_model
 
 
