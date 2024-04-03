@@ -6,6 +6,7 @@ from hw3 import Car
 TOYOTA_MODEL = 'Toyota'
 MODEL_YEAR = 2024
 CAR_COST = 35000.0
+TOYOTA_YEAR = 123
 
 
 def test_init():
@@ -19,7 +20,7 @@ def test_init():
 def test_invalid_model_type():
     """Test invalid model type."""
     with pytest.raises(TypeError):
-        Car(123, MODEL_YEAR, CAR_COST)
+        Car(TOYOTA_YEAR, MODEL_YEAR, CAR_COST)
 
 
 def test_invalid_year_type():
