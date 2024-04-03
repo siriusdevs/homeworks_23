@@ -11,6 +11,10 @@ class Car: # noqa: WPS214 (too many methods, but it is according to the task)
             model (str): The model of the car.
             year (int): The year the car was manufactured.
             cost (float): The cost of the car.
+
+        Raises:
+            TypeError: If model is not a string, year is not an integer, or cost is not a float.
+            ValueError: If model is an empty string.
         """
         if not isinstance(model, str) or not model:
             raise ValueError('Model must be a non-empty string')
