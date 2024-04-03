@@ -95,7 +95,10 @@ class Car:  # noqa: WPS214 (too many methods, but it is according to the task)
         self._cost = new_cost
 
     def __str__(self) -> str:
-        """Magic method str"""
+        """Magic method str.
+        Returns:
+            str.
+        """
         return f'{self.model}, {self.year}, {self.cost}'
 
 
