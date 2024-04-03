@@ -37,9 +37,9 @@ class Car:  # noqa: WPS214 (too many methods, but it is according to the task)
     @model.setter
     def model(self, new_model: str) -> None:
         """Set the model of the car.
-
+        
         Raises:
-            ValeuError: Model must be a non-empty string.
+            ValueError: If new_model is not a non-empty string.
 
         Args:
             new_model (str): The new model of the car.
