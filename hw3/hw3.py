@@ -22,7 +22,7 @@ class Car: # noqa: WPS214 (too many methods, but it is according to the task)
             raise TypeError('Year must be an integer')
         if not isinstance(cost, float):
             raise TypeError('Cost must be a float')
-            
+
         self._model, self._year, self._cost = model, year, cost
 
     @property
