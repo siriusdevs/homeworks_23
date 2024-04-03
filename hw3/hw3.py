@@ -1,6 +1,3 @@
-"""A module for fleet management."""
-
-
 class Car:
     """Class representing a car."""
 
@@ -12,6 +9,15 @@ class Car:
             year (int): The year the car was manufactured.
             cost (float): The cost of the car.
         """
+        if not isinstance(model, str):
+            raise TypeError('Model must be a string')
+        if not model:
+            raise ValueError('Model cannot be empty')
+        if not isinstance(year, int):
+            raise TypeError('Year must be an integer')
+        if not isinstance(cost, float):
+            raise TypeError('Cost must be a float')
+            
         self._model, self._year, self._cost = model, year, cost
 
     @property
@@ -32,9 +38,12 @@ class Car:
 
         Raises:
             TypeError: If new_model is not a string.
+            ValueError: If new_model is an empty string.
         """
         if not isinstance(new_model, str):
             raise TypeError('Model must be a string')
+        if not new_model:
+            raise ValueError('Model cannot be empty')
         self._model = new_model
 
     @property
@@ -47,18 +56,18 @@ class Car:
         return self._year
 
     @year.setter
-    def year(self, new_model: int) -> None:
+    def year(self, new_year: int) -> None:
         """Set the year of manufacture of the car.
 
         Args:
-            new_model (int): The new year of manufacture of the car.
+            new_year (int): The new year of manufacture of the car.
 
         Raises:
-            TypeError: If new_model is not an integer.
+            TypeError: If new_year is not an integer.
         """
-        if not isinstance(new_model, int):
+        if not isinstance(new_year, int):
             raise TypeError('Year must be an integer')
-        self._year = new_model
+        self._year = new_year
 
     @property
     def cost(self) -> float:
@@ -70,18 +79,21 @@ class Car:
         return self._cost
 
     @cost.setter
-    def cost(self, new_model: float) -> None:
+    def cost(self, new_cost: float) -> None:
         """Set the cost of the car.
 
         Args:
-            new_model (float): The new cost of the car.
+            new_cost (float): The new cost of the car.
 
         Raises:
-            TypeError: If new_model is not a float.
+            TypeError: If new_cost is not a float.
         """
-        if not isinstance(new_model, float):
+        if not isinstance(new_cost, float):
             raise TypeError('Cost must be a float')
-        self._cost = new_model
+        self._cost = new_cost
+
+    def __str__(self) -> str:
+        return f'{self.model}, {self.year}, {self.cost}'
 
 
 class PassengerCar(Car):
@@ -97,6 +109,8 @@ class PassengerCar(Car):
             passenger_seats (int): The number of passenger seats in the car.
         """
         super().__init__(model, year, cost)
+        if not isinstance(passenger_seats, int):
+            raise TypeError('Passenger seats must be an integer')
         self._passenger_seats = passenger_seats
 
     @property
@@ -109,18 +123,18 @@ class PassengerCar(Car):
         return self._passenger_seats
 
     @passenger_seats.setter
-    def passenger_seats(self, new_model: int) -> None:
+    def passenger_seats(self, new_passenger_seats: int) -> None:
         """Set the number of passenger seats in the car.
 
         Args:
-            new_model (int): The new number of passenger seats in the car.
+            new_passenger_seats (int): The new number of passenger seats in the car.
 
         Raises:
-            TypeError: If new_model is not an integer.
+            TypeError: If new_passenger_seats is not an integer.
         """
-        if not isinstance(new_model, int):
+        if not isinstance(new_passenger_seats, int):
             raise TypeError('Passenger seats must be an integer')
-        self._passenger_seats = new_model
+        self._passenger_seats = new_passenger_seats
 
 
 class Truck(Car):
@@ -136,6 +150,8 @@ class Truck(Car):
             carrying_capacity (float): The carrying capacity of the truck.
         """
         super().__init__(model, year, cost)
+        if not isinstance(carrying_capacity, float):
+            raise TypeError('Carrying capacity must be a float')
         self._carrying_capacity = carrying_capacity
 
     @property
@@ -148,18 +164,18 @@ class Truck(Car):
         return self._carrying_capacity
 
     @carrying_capacity.setter
-    def carrying_capacity(self, new_model: float) -> None:
+    def carrying_capacity(self, new_carrying_capacity: float) -> None:
         """Set the carrying capacity of the truck.
 
         Args:
-            new_model (float): The new carrying capacity of the truck.
+            new_carrying_capacity (float): The new carrying capacity of the truck.
 
         Raises:
-            TypeError: If new_model is not a float.
+            TypeError: If new_carrying_capacity is not a float.
         """
-        if not isinstance(new_model, float):
+        if not isinstance(new_carrying_capacity, float):
             raise TypeError('Carrying capacity must be a float')
-        self._carrying_capacity = new_model
+        self._carrying_capacity = new_carrying_capacity
 
 
 class CarPark:
