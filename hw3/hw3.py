@@ -12,10 +12,8 @@ class Car:
             year (int): The year the car was manufactured.
             cost (float): The cost of the car.
         """
-        if not isinstance(model, str):
-            raise TypeError('Model must be a string')
-        if not model:
-            raise ValueError('Model cannot be empty')
+        if not isinstance(model, str) or not model:
+            raise ValueError('Model must be a non-empty string')
         if not isinstance(year, int):
             raise TypeError('Year must be an integer')
         if not isinstance(cost, float):
@@ -43,10 +41,8 @@ class Car:
             TypeError: If new_model is not a string.
             ValueError: If new_model is an empty string.
         """
-        if not isinstance(new_model, str):
-            raise TypeError('Model must be a string')
-        if not new_model:
-            raise ValueError('Model cannot be empty')
+        if not isinstance(new_model, str) or not new_model:
+            raise ValueError('Model must be a non-empty string')
         self._model = new_model
 
     @property
