@@ -1,7 +1,7 @@
 """class architecture for fleet management."""
 
 
-class Car: # noqa: WPS214 (too many methods, but it is according to the task)
+class Car:  # noqa: WPS214 (too many methods, but it is according to the task)
     """Class representing a car."""
 
     def __init__(self, model: str, year: int, cost: float) -> None:
@@ -43,7 +43,6 @@ class Car: # noqa: WPS214 (too many methods, but it is according to the task)
 
         Raises:
             TypeError: If new_model is not a string.
-            ValueError: If new_model is an empty string.
         """
         if not isinstance(new_model, str) or not new_model:
             raise ValueError('Model must be a non-empty string')
@@ -96,6 +95,7 @@ class Car: # noqa: WPS214 (too many methods, but it is according to the task)
         self._cost = new_cost
 
     def __str__(self) -> str:
+        """Magic method str"""
         return f'{self.model}, {self.year}, {self.cost}'
 
 
