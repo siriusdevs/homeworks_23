@@ -16,15 +16,18 @@ def test_init():
     assert passenger_car.cost == CAR_COST
     assert passenger_car.passenger_seats == 5
 
+
 def test_invalid_passenger_seats_type():
     """Test invalid passenger seats type."""
     with pytest.raises(TypeError):
         PassengerCar(TOYOTA_MODEL, MODEL_YEAR, CAR_COST, '5')
 
+
 def test_empty_passenger_seats():
     """Test empty passenger seats."""
     with pytest.raises(TypeError):
         PassengerCar(TOYOTA_MODEL, MODEL_YEAR, CAR_COST, None)
+        
 
 def test_extra_argument():
     """Test extra argument passed to PassengerCar."""
