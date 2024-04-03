@@ -1,3 +1,4 @@
+# pylint: disable=W0611
 import pytest
 from hw3 import Truck
 
