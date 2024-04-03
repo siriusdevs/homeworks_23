@@ -38,11 +38,11 @@ class Car:  # noqa: WPS214 (too many methods, but it is according to the task)
     def model(self, new_model: str) -> None:
         """Set the model of the car.
 
-        Args:
-            new_model (str): The new model of the car.
-
         Raises:
             ValeuError: Model must be a non-empty string.
+
+        Args:
+            new_model (str): The new model of the car.
         """
         if not isinstance(new_model, str) or not new_model:
             raise ValueError('Model must be a non-empty string')
