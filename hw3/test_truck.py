@@ -1,3 +1,5 @@
+"""Tests for TruckCar class."""
+
 import pytest
 from hw3 import Truck
 
