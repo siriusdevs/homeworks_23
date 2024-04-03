@@ -10,6 +10,8 @@ class Car:
 
     @model.setter
     def model(self, value: str) -> None:
+        if not isinstance(value, str):
+            raise TypeError("Model must be a string")
         self._model = value
 
     @property
@@ -18,6 +20,8 @@ class Car:
 
     @year.setter
     def year(self, value: int) -> None:
+        if not isinstance(value, int):
+            raise TypeError("Year must be an integer")
         self._year = value
 
     @property
@@ -26,6 +30,8 @@ class Car:
 
     @cost.setter
     def cost(self, value: float) -> None:
+        if not isinstance(value, float):
+            raise TypeError("Cost must be a float")
         self._cost = value
 
 
@@ -40,6 +46,8 @@ class PassengerCar(Car):
 
     @passenger_seats.setter
     def passenger_seats(self, value: int) -> None:
+        if not isinstance(value, int):
+            raise TypeError("Passenger seats must be an integer")
         self._passenger_seats = value
 
 
@@ -54,6 +62,8 @@ class Truck(Car):
 
     @carrying_capacity.setter
     def carrying_capacity(self, value: float) -> None:
+        if not isinstance(value, float):
+            raise TypeError("Carrying capacity must be a float")
         self._carrying_capacity = value
 
 
@@ -69,3 +79,4 @@ class CarPark:
 
     def get_all_cars(self) -> list[Car]:
         return self._cars
+
