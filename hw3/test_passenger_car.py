@@ -1,7 +1,5 @@
-
-"""Tests for PassengerCar class."""
-
 import pytest
+
 from hw3 import PassengerCar
 
 
@@ -9,6 +7,8 @@ TOYOTA_MODEL = 'Toyota'
 MODEL_YEAR = 2024
 CAR_COST = 35000.0
 
+
+"""Tests for PassengerCar class."""
 
 def test_init():
     """Test initialization of PassengerCar object."""
