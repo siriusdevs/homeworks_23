@@ -42,7 +42,7 @@ class Car:  # noqa: WPS214 (too many methods, but it is according to the task)
             new_model (str): The new model of the car.
 
         Raises:
-            TypeError: If new_model is not a string.
+            ValeuError: Model must be a non-empty string.
         """
         if not isinstance(new_model, str) or not new_model:
             raise ValueError('Model must be a non-empty string')
