@@ -96,7 +96,7 @@ class Car:  # noqa: WPS214 (too many methods, but it is according to the task)
 
     def __str__(self) -> str:
         """Magic method str.
- 
+
         Returns:
             str.
         """
@@ -152,6 +152,9 @@ class Truck(Car):
 
     def __init__(self, model: str, year: int, cost: float, carrying_capacity: float) -> None:
         """Initialize Truck object with model, year, cost, and carrying capacity.
+
+        Raises:
+            TypeError: If Carrying capacity must be a float.
 
         Args:
             model (str): The model of the truck.
