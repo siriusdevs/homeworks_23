@@ -7,6 +7,7 @@ DEFAULT_YEAR = 2022
 DEFAULT_COST = 30000.0
 DEFAULT_CAPACITY = 1000.0
 
+
 def test_init():
     """Test initialization of Truck object."""
     truck = Truck(TOYOTA_MODEL, DEFAULT_YEAR, DEFAULT_COST, DEFAULT_CAPACITY)

@@ -1,5 +1,7 @@
+"""Tests for PassengerCar class."""
 import pytest
 from hw3 import PassengerCar
+
 
 TOYOTA_MODEL = 'Toyota'
 
