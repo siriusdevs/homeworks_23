@@ -1,7 +1,8 @@
 import pytest
+
 from hw3 import PassengerCar
 
-"""Tests for PassengerCar class."""
+# Tests for PassengerCar class
 
 TOYOTA_MODEL = 'Toyota'
 MODEL_YEAR = 2024
