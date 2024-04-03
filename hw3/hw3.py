@@ -1,7 +1,7 @@
 """class architecture for fleet management."""
 
 
-class Car:
+class Car: # noqa: WPS214 (too many methods, but it is according to the task)
     """Class representing a car."""
 
     def __init__(self, model: str, year: int, cost: float) -> None:
