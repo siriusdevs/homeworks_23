@@ -2,22 +2,20 @@ class Car:
     """Class representing a car."""
 
     def __init__(self, model: str, year: int, cost: float) -> None:
-        """Initialize Car object with model, year, and cost.
+        """Initialize a car instance.
 
         Args:
             model (str): The model of the car.
             year (int): The year the car was manufactured.
             cost (float): The cost of the car.
         """
-        self._model, self._year, self._cost = model, year, cost
+        self._model = model
+        self._year = year
+        self._cost = cost
 
     @property
     def model(self) -> str:
-        """Get the model of the car.
-
-        Returns:
-            str: The model of the car.
-        """
+        """Get the model of the car."""
         return self._model
 
     @model.setter
@@ -26,9 +24,6 @@ class Car:
 
         Args:
             value (str): The new model of the car.
-
-        Raises:
-            TypeError: If value is not a string.
         """
         if not isinstance(value, str):
             raise TypeError("Model must be a string")
@@ -36,11 +31,7 @@ class Car:
 
     @property
     def year(self) -> int:
-        """Get the year of manufacture of the car.
-
-        Returns:
-            int: The year of manufacture of the car.
-        """
+        """Get the year of manufacture of the car."""
         return self._year
 
     @year.setter
@@ -49,9 +40,6 @@ class Car:
 
         Args:
             value (int): The new year of manufacture of the car.
-
-        Raises:
-            TypeError: If value is not an integer.
         """
         if not isinstance(value, int):
             raise TypeError("Year must be an integer")
@@ -59,11 +47,7 @@ class Car:
 
     @property
     def cost(self) -> float:
-        """Get the cost of the car.
-
-        Returns:
-            float: The cost of the car.
-        """
+        """Get the cost of the car."""
         return self._cost
 
     @cost.setter
@@ -72,9 +56,6 @@ class Car:
 
         Args:
             value (float): The new cost of the car.
-
-        Raises:
-            TypeError: If value is not a float.
         """
         if not isinstance(value, float):
             raise TypeError("Cost must be a float")
@@ -82,10 +63,10 @@ class Car:
 
 
 class PassengerCar(Car):
-    """Class representing a passenger car, inherited from Car."""
+    """Class representing a passenger car."""
 
     def __init__(self, model: str, year: int, cost: float, passenger_seats: int) -> None:
-        """Initialize PassengerCar object with model, year, cost, and passenger seats.
+        """Initialize a passenger car instance.
 
         Args:
             model (str): The model of the car.
@@ -98,11 +79,7 @@ class PassengerCar(Car):
 
     @property
     def passenger_seats(self) -> int:
-        """Get the number of passenger seats in the car.
-
-        Returns:
-            int: The number of passenger seats in the car.
-        """
+        """Get the number of passenger seats in the car."""
         return self._passenger_seats
 
     @passenger_seats.setter
@@ -111,9 +88,6 @@ class PassengerCar(Car):
 
         Args:
             value (int): The new number of passenger seats in the car.
-
-        Raises:
-            TypeError: If value is not an integer.
         """
         if not isinstance(value, int):
             raise TypeError("Passenger seats must be an integer")
@@ -121,10 +95,10 @@ class PassengerCar(Car):
 
 
 class Truck(Car):
-    """Class representing a truck, inherited from Car."""
+    """Class representing a truck."""
 
     def __init__(self, model: str, year: int, cost: float, carrying_capacity: float) -> None:
-        """Initialize Truck object with model, year, cost, and carrying capacity.
+        """Initialize a truck instance.
 
         Args:
             model (str): The model of the truck.
@@ -137,11 +111,7 @@ class Truck(Car):
 
     @property
     def carrying_capacity(self) -> float:
-        """Get the carrying capacity of the truck.
-
-        Returns:
-            float: The carrying capacity of the truck.
-        """
+        """Get the carrying capacity of the truck."""
         return self._carrying_capacity
 
     @carrying_capacity.setter
@@ -150,9 +120,6 @@ class Truck(Car):
 
         Args:
             value (float): The new carrying capacity of the truck.
-
-        Raises:
-            TypeError: If value is not a float.
         """
         if not isinstance(value, float):
             raise TypeError("Carrying capacity must be a float")
@@ -163,7 +130,7 @@ class CarPark:
     """Class representing a car park."""
 
     def __init__(self) -> None:
-        """Initialize an empty CarPark object."""
+        """Initialize a car park."""
         self._cars = []
 
     def add_car(self, car: Car) -> None:
