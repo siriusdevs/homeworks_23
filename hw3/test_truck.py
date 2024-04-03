@@ -1,8 +1,7 @@
 """Tests for TruckCar class."""
-
 import pytest
-from hw3 import Truck
 
+from hw3 import Truck
 
 TOYOTA_MODEL = 'Toyota'
 DEFAULT_YEAR = 2022

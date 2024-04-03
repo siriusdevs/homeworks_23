@@ -1,8 +1,7 @@
 """Tests for Car class."""
-
 import pytest
-from hw3 import Car
 
+from hw3 import Car
 
 TOYOTA_MODEL = 'Toyota'
 MODEL_YEAR = 2024
