@@ -110,6 +110,9 @@ class PassengerCar(Car):
             year (int): The year the car was manufactured.
             cost (float): The cost of the car.
             passenger_seats (int): The number of passenger seats in the car.
+
+        Raises:
+            TypeError: If passenger_seats is not a int.
         """
         super().__init__(model, year, cost)
         if not isinstance(passenger_seats, int):
