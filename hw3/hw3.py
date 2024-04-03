@@ -1,5 +1,6 @@
 """class architecture for fleet management."""
 
+
 class Car:
     """Class representing a car."""
 
