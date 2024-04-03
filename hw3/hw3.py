@@ -40,3 +40,17 @@ class PassengerCar(Car):
     @passenger_seats.setter
     def passenger_seats(self, value):
         self._passenger_seats = value
+
+    
+class Truck(Car):
+    def __init__(self, model, year, cost, carrying_capacity):
+        super().__init__(model, year, cost)
+        self._carrying_capacity = carrying_capacity
+
+    @property
+    def carrying_capacity(self):
+        return self._carrying_capacity
+
+    @carrying_capacity.setter
+    def carrying_capacity(self, value):
+        self._carrying_capacity = value
