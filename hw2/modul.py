@@ -1,6 +1,9 @@
 import json
+
 from collections import Counter
+
 from datetime import datetime, timedelta
+
 
 def calculate_age_category(age):
     if age <= 18:
@@ -13,6 +16,7 @@ def calculate_age_category(age):
         return '46-60'
     else:
         return '60+'
+
 
 def calculate_online_intervals(login_dates):
     intervals = {
@@ -38,6 +42,7 @@ def calculate_online_intervals(login_dates):
             intervals['>6 months'] += 1
     total_logins = len(login_dates)
     return {key: (value / total_logins) * 100 for key, value in intervals.items()}
+
 
 def process_data(input_file, output_file):
     with open(input_file, 'r') as f:
