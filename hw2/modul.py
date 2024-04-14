@@ -6,11 +6,6 @@ from datetime import datetime, timedelta
 
 
 def calculate_age_category(age):
-    eighteen = 18
-    twenty_five = 25
-    forty_five = 45
-    sixty = 60
-
     """
     Calculate the age category based on the given age.
 
@@ -20,6 +15,11 @@ def calculate_age_category(age):
     Returns:
         str: The age category.
     """
+
+    eighteen = 18
+    twenty_five = 25
+    forty_five = 45
+    sixty = 60
     if age <= eighteen:
         return '0-18'
     elif age <= twenty_five:
