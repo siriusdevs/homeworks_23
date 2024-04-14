@@ -1,11 +1,17 @@
 import json
-
 from collections import Counter
-
 from datetime import datetime, timedelta
 
-
 def calculate_age_category(age):
+    """
+    Calculate the age category based on the given age.
+
+    Args:
+        age (int): The age of the user.
+
+    Returns:
+        str: The age category.
+    """
     if age <= 18:
         return '0-18'
     elif age <= 25:
@@ -17,8 +23,16 @@ def calculate_age_category(age):
     else:
         return '60+'
 
-
 def calculate_online_intervals(login_dates):
+    """
+    Calculate the distribution of online intervals based on login dates.
+
+    Args:
+        login_dates (list): List of login dates in '%Y-%m-%d' format.
+
+    Returns:
+        dict: Distribution of online intervals.
+    """
     intervals = {
         '<2 days': 0,
         '<1 week': 0,
@@ -43,8 +57,14 @@ def calculate_online_intervals(login_dates):
     total_logins = len(login_dates)
     return {key: (value / total_logins) * 100 for key, value in intervals.items()}
 
-
 def process_data(input_file, output_file):
+    """
+    Process user data and save the results to a JSON file.
+
+    Args:
+        input_file (str): Path to the input JSON file.
+        output_file (str): Path to save the output JSON file.
+    """
     with open(input_file, 'r') as f:
         data = json.load(f)
 
@@ -67,16 +87,3 @@ def process_data(input_file, output_file):
 
     with open(output_file, 'w') as f:
         json.dump(result, f, indent=4)
-
-# Пример использования:
-# process_data('hw2/tests_folder/test1.json', 'hw2/expected_folder/expected1.json')
-# process_data('hw2/tests_folder/test2.json', 'hw2/expected_folder/expected2.json')
-# process_data('hw2/tests_folder/test3.json', 'hw2/expected_folder/expected3.json')
-# process_data('hw2/tests_folder/test4.json', 'hw2/expected_folder/expected4.json')
-# process_data('hw2/tests_folder/test5.json', 'hw2/expected_folder/expected5.json')
-# process_data('hw2/tests_folder/test6.json', 'hw2/expected_folder/expected6.json')
-# process_data('hw2/tests_folder/test7.json', 'hw2/expected_folder/expected7.json')
-# process_data('hw2/tests_folder/test8.json', 'hw2/expected_folder/expected8.json')
-# process_data('hw2/tests_folder/test9.json', 'hw2/expected_folder/expected9.json')
-# process_data('hw2/tests_folder/test10.json', 'hw2/expected_folder/expected10.json')
-# process_data('hw2/tests_folder/test11.json', 'hw2/expected_folder/expected11.json')
