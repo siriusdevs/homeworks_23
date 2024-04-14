@@ -22,13 +22,13 @@ def calculate_age_category(age):
     sixty = 60
     if age <= eighteen:
         return '0-18'
-    elif age <= twenty_five:
+    if age <= twenty_five:
         return '19-25'
-    elif age <= forty_five:
+    if age <= forty_five:
         return '26-45'
-    elif age <= sixty:
+    if age <= sixty:
         return '46-60'
-    else:
+    if age > sixty:
         return '60+'
 
 def calculate_online_intervals(login_dates):
@@ -46,7 +46,7 @@ def calculate_online_intervals(login_dates):
         '<1 week': 0,
         '<1 month': 0,
         '<6 months': 0,
-        '>6 months': 0
+        '>6 months': 0,
     }
     today = datetime.now()
     for date_str in login_dates:
@@ -80,13 +80,15 @@ def process_data(input_file, output_file):
     age_counter = Counter(calculate_age_category(age) for age in ages)
 
     login_dates = [user.get('last_login', '') for user in data.values()
-                   if isinstance(user.get('last_login'), str)]
+                   if isinstance(user.get('last_login'), str)
+                   ]
     online_intervals = calculate_online_intervals(login_dates)
 
     total_users = len(data)
 
     age_percentage = {category: (count / total_users) * 100 for category,
-                      count in age_counter.items()}
+                      count in age_counter.items()
+                      }
 
     result = {
         'age_distribution': age_percentage,
