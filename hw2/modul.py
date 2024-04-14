@@ -1,8 +1,16 @@
+"""Module for processing user data and generating statistics."""
 import json
 from collections import Counter
+
 from datetime import datetime, timedelta
 
+
 def calculate_age_category(age):
+    eighteen = 18
+    twenty_five = 25
+    forty_five = 45
+    sixty = 60
+
     """
     Calculate the age category based on the given age.
 
@@ -12,13 +20,13 @@ def calculate_age_category(age):
     Returns:
         str: The age category.
     """
-    if age <= 18:
+    if age <= eighteen:
         return '0-18'
-    elif age <= 25:
+    elif age <= twenty_five:
         return '19-25'
-    elif age <= 45:
+    elif age <= forty_five:
         return '26-45'
-    elif age <= 60:
+    elif age <= sixty:
         return '46-60'
     else:
         return '60+'
