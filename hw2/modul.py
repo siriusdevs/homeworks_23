@@ -62,4 +62,14 @@ def process_data(input_file, output_file):
         json.dump(result, f, indent=4)
 
 # Пример использования:
-process_data('hw2/tests_folder/test2.json', 'hw2/expected_folder/2.json')
+# process_data('hw2/tests_folder/test1.json', 'hw2/expected_folder/expected1.json')
+# process_data('hw2/tests_folder/test2.json', 'hw2/expected_folder/expected2.json')
+# process_data('hw2/tests_folder/test3.json', 'hw2/expected_folder/expected3.json')
+# process_data('hw2/tests_folder/test4.json', 'hw2/expected_folder/expected4.json')
+# process_data('hw2/tests_folder/test5.json', 'hw2/expected_folder/expected5.json')
+# process_data('hw2/tests_folder/test6.json', 'hw2/expected_folder/expected6.json')
+# process_data('hw2/tests_folder/test7.json', 'hw2/expected_folder/expected7.json')
+# process_data('hw2/tests_folder/test8.json', 'hw2/expected_folder/expected8.json')
+# process_data('hw2/tests_folder/test9.json', 'hw2/expected_folder/expected9.json')
+# process_data('hw2/tests_folder/test10.json', 'hw2/expected_folder/expected10.json')
+# process_data('hw2/tests_folder/test11.json', 'hw2/expected_folder/expected11.json')
