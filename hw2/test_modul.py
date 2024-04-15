@@ -11,6 +11,7 @@ OUTPUT_PATH = 'hw2/tests_folder/output.json'
 # Переменные для строковых констант
 ERROR_MESSAGE = 'The processed data does not match expected results'
 FILE_DESC = 'Path to the file with test data.'
+WITH_OPEN = 'r'
 
 # Наборы данных для параметризации тестов
 
@@ -55,11 +56,11 @@ def test_different_arguments(input_file, expected_file):
     modul.process_data(input_file, OUTPUT_PATH)
 
     # Считываем ожидаемые результаты
-    with open(expected_file, 'r') as file_json:
+    with open(expected_file, WITH_OPEN) as file_json:
         expected_data = json.load(file_json)
 
     # Считываем полученные результаты
-    with open(OUTPUT_PATH, 'r') as file_output:
+    with open(OUTPUT_PATH, WITH_OPEN) as file_output:
         output_data = json.load(file_output)
 
     # Проверяем, что результаты соответствуют ожиданиям
@@ -78,11 +79,11 @@ def test_without_different_arguments(input_file, expected_file):
     modul.process_data(input_file, OUTPUT_PATH)
 
     # Считываем ожидаемые результаты
-    with open(expected_file, 'r') as file_json:
+    with open(expected_file, WITH_OPEN) as file_json:
         expected_data = json.load(file_json)
 
     # Считываем полученные результаты
-    with open(OUTPUT_PATH, 'r') as file_output:
+    with open(OUTPUT_PATH, WITH_OPEN) as file_output:
         output_data = json.load(file_output)
 
     # Проверяем, что результаты соответствуют ожиданиям
@@ -107,11 +108,11 @@ def test_with_wrong_type_variables(input_file, expected_file):
         return 'An error occurred:', er
 
     # Считываем ожидаемые результаты
-    with open(expected_file, 'r') as file_json_expected:
+    with open(expected_file, WITH_OPEN) as file_json_expected:
         expected_data = json.load(file_json_expected)
 
     # Считываем полученные результаты
-    with open(OUTPUT_PATH, 'r') as file_output:
+    with open(OUTPUT_PATH, WITH_OPEN) as file_output:
         output_data = json.load(file_output)
 
     # Проверяем, что результаты соответствуют ожиданиям
@@ -136,11 +137,11 @@ def test_with_errors(input_file, expected_file):
         return 'An error occurred:', er
 
     # Считываем ожидаемые результаты
-    with open(expected_file, 'r') as file_json_expected:
+    with open(expected_file, WITH_OPEN) as file_json_expected:
         expected_data = json.load(file_json_expected)
 
     # Считываем полученные результаты
-    with open(OUTPUT_PATH, 'r') as file_output:
+    with open(OUTPUT_PATH, WITH_OPEN) as file_output:
         output_data = json.load(file_output)
 
     # Проверяем, что результаты соответствуют ожиданиям
