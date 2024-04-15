@@ -2,8 +2,8 @@
 
 import json
 
-import pytest
 import modul
+import pytest
 
 # Путь к файлу, в который функция сохраняет результаты
 OUTPUT_PATH = 'hw2/tests_folder/output.json'
@@ -58,8 +58,8 @@ def test_different_arguments(input_file, expected_file):
         expected_data = json.load(file_json)
 
     # Считываем полученные результаты
-    with open(OUTPUT_PATH, 'r') as file_json:
-        output_data = json.load(file_json)
+    with open(OUTPUT_PATH, 'r') as file_output:
+        output_data = json.load(file_output)
 
     # Проверяем, что результаты соответствуют ожиданиям
     assert output_data == expected_data, 'The processed data does not match expected results'
@@ -83,8 +83,8 @@ def test_without_different_arguments(input_file, expected_file):
         expected_data = json.load(file_json)
 
     # Считываем полученные результаты
-    with open(OUTPUT_PATH, 'r') as file_json:
-        output_data = json.load(file_json)
+    with open(OUTPUT_PATH, 'r') as file_output:
+        output_data = json.load(file_output)
 
     # Проверяем, что результаты соответствуют ожиданиям
     assert output_data == expected_data, 'The processed data does not match expected results'
@@ -109,12 +109,12 @@ def test_with_wrong_type_variables(input_file, expected_file):
         return
 
     # Считываем ожидаемые результаты
-    with open(expected_file, 'r') as file_json:
-        expected_data = json.load(file_json)
+    with open(expected_file, 'r') as file_json_expected:
+        expected_data = json.load(file_json_expected)
 
     # Считываем полученные результаты
-    with open(OUTPUT_PATH, 'r') as file_json:
-        output_data = json.load(file_json)
+    with open(OUTPUT_PATH, 'r') as file_output:
+        output_data = json.load(file_output)
 
     # Проверяем, что результаты соответствуют ожиданиям
     assert output_data == expected_data, 'The processed data does not match expected results'
@@ -138,12 +138,12 @@ def test_with_errors(input_file, expected_file):
         return
 
     # Считываем ожидаемые результаты
-    with open(expected_file, 'r') as file_json:
-        expected_data = json.load(file_json)
+    with open(expected_file, 'r') as file_json_expected:
+        expected_data = json.load(file_json_expected)
 
     # Считываем полученные результаты
-    with open(OUTPUT_PATH, 'r') as file_json:
-        output_data = json.load(file_json)
+    with open(OUTPUT_PATH, 'r') as file_output:
+        output_data = json.load(file_output)
 
     # Проверяем, что результаты соответствуют ожиданиям
     assert output_data == expected_data, 'The processed data does not match expected results'
