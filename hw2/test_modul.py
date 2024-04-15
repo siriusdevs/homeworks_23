@@ -1,6 +1,7 @@
-"""Testing module 'hw2.py'."""
+"""Testing module 'modul.py'."""
 
 import json
+
 import pytest
 import modul
 
