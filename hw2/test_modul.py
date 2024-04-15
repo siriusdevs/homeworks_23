@@ -10,8 +10,7 @@ OUTPUT_PATH = 'hw2/tests_folder/output.json'
 
 # Переменные для строковых констант
 ERROR_MESSAGE = 'The processed data does not match expected results'
-INPUT_FILE_DESC = 'Путь к входному файлу с тестовыми данными.'
-EXPECTED_FILE_DESC = 'Путь к файлу с ожидаемыми результатами.'
+FILE_DESC = 'Path to the file with test data.'
 
 # Наборы данных для параметризации тестов
 
@@ -49,8 +48,8 @@ def test_different_arguments(input_file, expected_file):
     """We are testing the process_data function on various datasets.
 
     Args:
-        input_file (str): {INPUT_FILE_DESC}
-        expected_file (str): {EXPECTED_FILE_DESC}
+        input_file (str): {FILE_DESC}
+        expected_file (str): {FILE_DESC}
     """
     # Запускаем функцию обработки данных
     modul.process_data(input_file, OUTPUT_PATH)
@@ -72,8 +71,8 @@ def test_without_different_arguments(input_file, expected_file):
     """We are testing the process_data function on datasets with missing arguments.
 
     Args:
-        input_file (str): {INPUT_FILE_DESC}
-        expected_file (str): {EXPECTED_FILE_DESC}
+        input_file (str): {FILE_DESC}
+        expected_file (str): {FILE_DESC}
     """
     # Запускаем функцию обработки данных
     modul.process_data(input_file, OUTPUT_PATH)
@@ -95,8 +94,8 @@ def test_with_wrong_type_variables(input_file, expected_file):
     """We are testing the process_data function on datasets with incorrect variable types.
 
     Args:
-        input_file (str): {INPUT_FILE_DESC}
-        expected_file (str): {EXPECTED_FILE_DESC}
+        input_file (str): {FILE_DESC}
+        expected_file (str): {FILE_DESC}
 
     Returns:
         tuple: Tuple with error message and error object
@@ -124,8 +123,8 @@ def test_with_errors(input_file, expected_file):
     """We are testing the process_data function on datasets with errors.
 
     Args:
-        input_file (str): {INPUT_FILE_DESC}
-        expected_file (str): {EXPECTED_FILE_DESC}
+        input_file (str): {FILE_DESC}
+        expected_file (str): {FILE_DESC}
 
     Returns:
         tuple: Tuple with error message and error object
