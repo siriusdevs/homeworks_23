@@ -8,6 +8,11 @@ import pytest
 # Путь к файлу, в который функция сохраняет результаты
 OUTPUT_PATH = 'hw2/tests_folder/output.json'
 
+# Переменные для строковых констант
+ERROR_MESSAGE = 'The processed data does not match expected results'
+INPUT_FILE_DESC = 'Путь к входному файлу с тестовыми данными.'
+EXPECTED_FILE_DESC = 'Путь к файлу с ожидаемыми результатами.'
+
 # Наборы данных для параметризации тестов
 
 # test_different_arguments
@@ -44,8 +49,8 @@ def test_different_arguments(input_file, expected_file):
     """We are testing the process_data function on various datasets.
 
     Args:
-        input_file (str): Путь к входному файлу с тестовыми данными.
-        expected_file (str): Путь к файлу с ожидаемыми результатами.
+        input_file (str): {INPUT_FILE_DESC}
+        expected_file (str): {EXPECTED_FILE_DESC}
     """
     # Запускаем функцию обработки данных
     modul.process_data(input_file, OUTPUT_PATH)
@@ -59,7 +64,7 @@ def test_different_arguments(input_file, expected_file):
         output_data = json.load(file_output)
 
     # Проверяем, что результаты соответствуют ожиданиям
-    assert output_data == expected_data, 'The processed data does not match expected results'
+    assert output_data == expected_data, ERROR_MESSAGE
 
 
 @pytest.mark.parametrize('input_file, expected_file', without_different_arguments_tests)
@@ -67,8 +72,8 @@ def test_without_different_arguments(input_file, expected_file):
     """We are testing the process_data function on datasets with missing arguments.
 
     Args:
-        input_file (str): Путь к входному файлу с тестовыми данными.
-        expected_file (str): Путь к файлу с ожидаемыми результатами.
+        input_file (str): {INPUT_FILE_DESC}
+        expected_file (str): {EXPECTED_FILE_DESC}
     """
     # Запускаем функцию обработки данных
     modul.process_data(input_file, OUTPUT_PATH)
@@ -82,7 +87,7 @@ def test_without_different_arguments(input_file, expected_file):
         output_data = json.load(file_output)
 
     # Проверяем, что результаты соответствуют ожиданиям
-    assert output_data == expected_data, 'The processed data does not match expected results'
+    assert output_data == expected_data, ERROR_MESSAGE
 
 
 @pytest.mark.parametrize('input_file, expected_file', with_wrong_type_variables_tests)
@@ -90,11 +95,11 @@ def test_with_wrong_type_variables(input_file, expected_file):
     """We are testing the process_data function on datasets with incorrect variable types.
 
     Args:
-        input_file (str): Путь к входному файлу с тестовыми данными.
-        expected_file (str): Путь к файлу с ожидаемыми результатами.
+        input_file (str): {INPUT_FILE_DESC}
+        expected_file (str): {EXPECTED_FILE_DESC}
 
     Returns:
-        An error occurred: er
+        tuple: Tuple with error message and error object
     """
     # Запускаем функцию обработки данных
     try:
@@ -111,7 +116,7 @@ def test_with_wrong_type_variables(input_file, expected_file):
         output_data = json.load(file_output)
 
     # Проверяем, что результаты соответствуют ожиданиям
-    assert output_data == expected_data, 'The processed data does not match expected results'
+    assert output_data == expected_data, ERROR_MESSAGE
 
 
 @pytest.mark.parametrize('input_file, expected_file', with_errors_tests)
@@ -119,11 +124,11 @@ def test_with_errors(input_file, expected_file):
     """We are testing the process_data function on datasets with errors.
 
     Args:
-        input_file (str): Путь к входному файлу с тестовыми данными.
-        expected_file (str): Путь к файлу с ожидаемыми результатами.
+        input_file (str): {INPUT_FILE_DESC}
+        expected_file (str): {EXPECTED_FILE_DESC}
 
     Returns:
-        An error occurred: er
+        tuple: Tuple with error message and error object
     """
     # Запускаем функцию обработки данных
     try:
@@ -140,4 +145,4 @@ def test_with_errors(input_file, expected_file):
         output_data = json.load(file_output)
 
     # Проверяем, что результаты соответствуют ожиданиям
-    assert output_data == expected_data, 'The processed data does not match expected results'
+    assert output_data == expected_data, ERROR_MESSAGE
