@@ -139,11 +139,11 @@ def extract_data_statistics(data_j):
         tuple: Tuple containing age distribution dictionary and online intervals dictionary.
     """
     ages = [
-    user.get('age', 0)
-    for user in data_j.values()
-    if isinstance(user.get('age'), int)
+        user.get('age', 0)
+        for user in data_j.values()
+        if isinstance(user.get('age'), int)
     ]
-    
+
     age_counter = Counter(calculate_age_category(age) for age in ages)
 
     login_dates = [
