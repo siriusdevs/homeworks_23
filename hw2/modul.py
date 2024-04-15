@@ -73,23 +73,23 @@ def process_data(input_file, output_file):
         input_file (str): Path to the input JSON file.
         output_file (str): Path to save the output JSON file.
     """
-    with open(input_file, 'r') as f:
-        data = json.load(f)
+    with open(input_file, 'r') as file_json:
+        data_j = json.load(file_json)
 
-    ages = [user.get('age', 0) for user in data.values() if isinstance(user.get('age'), int)]
+    ages = [user.get('age', 0) for user in data_j.values() if isinstance(user.get('age'), int)]
     age_counter = Counter(calculate_age_category(age) for age in ages)
 
-    login_dates = [user.get('last_login', '') for user in data.values() if isinstance(user.get('last_login'), str)]
+    login_dates = [user.get('last_login', '') for user in data_j.values() if isinstance(user.get('last_login'), str)]
     online_intervals = calculate_online_intervals(login_dates)
 
     total_users = len(data)
 
     age_percentage = {category: (count / total_users) * 100 for category, count in age_counter.items()}
 
-    result = {
+    result_payload = {
         'age_distribution': age_percentage,
         'online_intervals': online_intervals,
     }
 
-    with open(output_file, 'w') as f:
-        json.dump(result, f, indent=4)
+    with open(output_file, 'w') as f_output:
+        json.dump(result_payload, f_output, indent=4)
