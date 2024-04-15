@@ -59,7 +59,7 @@ def test_different_arguments(input_file, expected_file):
         output_data = json.load(file_output)
 
     # Проверяем, что результаты соответствуют ожиданиям
-    assert output_data == expected_data, 'The processed data_j does not match expected results'
+    assert output_data == expected_data, 'The processed data does not match expected results'
 
 
 @pytest.mark.parametrize('input_file, expected_file', without_different_arguments_tests)
@@ -82,7 +82,7 @@ def test_without_different_arguments(input_file, expected_file):
         output_data = json.load(file_output)
 
     # Проверяем, что результаты соответствуют ожиданиям
-    assert output_data == expected_data, 'The processed data_j does not match expected results'
+    assert output_data == expected_data, 'The processed data does not match expected results'
 
 
 @pytest.mark.parametrize('input_file, expected_file', with_wrong_type_variables_tests)
@@ -111,7 +111,7 @@ def test_with_wrong_type_variables(input_file, expected_file):
         output_data = json.load(file_output)
 
     # Проверяем, что результаты соответствуют ожиданиям
-    assert output_data == expected_data, 'The processed data_j does not match expected results'
+    assert output_data == expected_data, 'The processed data does not match expected results'
 
 
 @pytest.mark.parametrize('input_file, expected_file', with_errors_tests)
@@ -121,7 +121,7 @@ def test_with_errors(input_file, expected_file):
     Args:
         input_file (str): Путь к входному файлу с тестовыми данными.
         expected_file (str): Путь к файлу с ожидаемыми результатами.
-    
+
     Returns:
         An error occurred: er
     """
@@ -140,4 +140,4 @@ def test_with_errors(input_file, expected_file):
         output_data = json.load(file_output)
 
     # Проверяем, что результаты соответствуют ожиданиям
-    assert output_data == expected_data, 'The processed data_j does not match expected results'
+    assert output_data == expected_data, 'The processed data does not match expected results'
