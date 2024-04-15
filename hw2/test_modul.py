@@ -49,7 +49,6 @@ def test_different_arguments(input_file, expected_file):
         input_file (str): Путь к входному файлу с тестовыми данными.
         expected_file (str): Путь к файлу с ожидаемыми результатами.
     """
-    
     # Запускаем функцию обработки данных
     modul.process_data(input_file, OUTPUT_PATH)
 
