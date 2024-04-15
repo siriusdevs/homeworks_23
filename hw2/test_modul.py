@@ -13,19 +13,19 @@ OUTPUT_PATH = 'hw2/tests_folder/output.json'
 # TEST_DIFFERENT_ARGUMENTS
 TEST_DIFFERENT_ARGUMENTS = [
     ('hw2/tests_folder/test1.json', 'hw2/expected_folder/expected1.json'),
-    ('hw2/tests_folder/test2.json', 'hw2/expected_folder/expected2.json')
+    ('hw2/tests_folder/test2.json', 'hw2/expected_folder/expected2.json'),
 ]
 
 # TEST_WITHOUT_DIFFERENT_ARGUMENTS
 TEST_WITHOUT_DIFFERENT_ARGUMENTS = [
     ('hw2/tests_folder/test3.json', 'hw2/expected_folder/expected3.json'),
     ('hw2/tests_folder/test4.json', 'hw2/expected_folder/expected4.json'),
-    ('hw2/tests_folder/test5.json', 'hw2/expected_folder/expected5.json')
+    ('hw2/tests_folder/test5.json', 'hw2/expected_folder/expected5.json'),
 ]
 
 # TEST_WITH_WRONG_TYPE_VARIABLES
 TEST_WITH_WRONG_TYPE_VARIABLES = [
-    ('hw2/tests_folder/test6.json', 'hw2/expected_folder/expected6.json')
+    ('hw2/tests_folder/test6.json', 'hw2/expected_folder/expected6.json'),
 ]
 
 # TEST_WITH_ERRORS
@@ -33,7 +33,7 @@ TEST_WITH_ERRORS = [
     ('hw2/tests_folder/test7.json', 'hw2/expected_folder/expected7.json'),
     ('hw2/tests_folder/test9.txt', 'hw2/expected_folder/expected9.json'),
     ('hw2/tests_folder/test10.txt', 'hw2/expected_folder/expected10.json'),
-    ('hw2/tests_folder/test11.json', 'hw2/expected_folder/expected11.json')
+    ('hw2/tests_folder/test11.json', 'hw2/expected_folder/expected11.json'),
 ]
 
 # Тесты для различных наборов данных
@@ -85,7 +85,7 @@ def test_without_different_arguments(input_file, expected_file):
         output_data = json.load(file)
 
     # Проверяем, что результаты соответствуют ожиданиям
-    assert output_data == expected_data, "The processed data does not match expected results"
+    assert output_data == expected_data, 'The processed data does not match expected results'
 
 
 @pytest.mark.parametrize('input_file, expected_file', TEST_WITH_WRONG_TYPE_VARIABLES)
@@ -102,7 +102,7 @@ def test_with_wrong_type_variables(input_file, expected_file):
     try:
         modul.process_data(input_file, OUTPUT_PATH)
     except Exception as e:
-        print("An error occurred:", e)
+        print('An error occurred:', e)
         return
 
     # Считываем ожидаемые результаты
@@ -114,7 +114,7 @@ def test_with_wrong_type_variables(input_file, expected_file):
         output_data = json.load(file)
 
     # Проверяем, что результаты соответствуют ожиданиям
-    assert output_data == expected_data, "The processed data does not match expected results"
+    assert output_data == expected_data, 'The processed data does not match expected results'
 
 
 @pytest.mark.parametrize('input_file, expected_file', TEST_WITH_ERRORS)
@@ -131,7 +131,7 @@ def test_with_errors(input_file, expected_file):
     try:
         modul.process_data(input_file, OUTPUT_PATH)
     except Exception as e:
-        print("An error occurred:", e)
+        print('An error occurred:', e)
         return
 
     # Считываем ожидаемые результаты
@@ -143,4 +143,4 @@ def test_with_errors(input_file, expected_file):
         output_data = json.load(file)
 
     # Проверяем, что результаты соответствуют ожиданиям
-    assert output_data == expected_data, "The processed data does not match expected results"
+    assert output_data == expected_data, 'The processed data does not match expected results'
