@@ -66,8 +66,7 @@ def calculate_online_intervals(login_dates):
 
 
 def process_data(input_file, output_file):
-    """
-    Process user data and save the results to a JSON file.
+    """Process user data and save the results to a JSON file.
 
     Args:
         input_file (str): Path to the input JSON file.
@@ -76,6 +75,25 @@ def process_data(input_file, output_file):
     with open(input_file, 'r') as file_json:
         data_j = json.load(file_json)
 
+    age_percentage, online_intervals = extract_data_statistics(data_j)
+
+    result_payload = {
+        'age_distribution': age_percentage,
+        'online_intervals': online_intervals,
+    }
+
+    with open(output_file, 'w') as f_output:
+        json.dump(result_payload, f_output, indent=4)
+
+def extract_data_statistics(data_j):
+    """Extract age distribution and online intervals statistics from user data.
+
+    Args:
+        data_j (dict): User data in JSON format.
+
+    Returns:
+        tuple: Tuple containing age distribution dictionary and online intervals dictionary.
+    """
     ages = [user.get('age', 0) for user in data_j.values() if isinstance(user.get('age'), int)]
     age_counter = Counter(calculate_age_category(age) for age in ages)
 
@@ -94,10 +112,4 @@ def process_data(input_file, output_file):
         for category, count in age_counter.items()
     }
 
-    result_payload = {
-        'age_distribution': age_percentage,
-        'online_intervals': online_intervals,
-    }
-
-    with open(output_file, 'w') as f_output:
-        json.dump(result_payload, f_output, indent=4)
+    return age_percentage, online_intervals
