@@ -40,7 +40,6 @@ def calculate_online_intervals(login_dates):
     Returns:
         dict: Distribution of online intervals.
     """
-    
     intervals = {
         '<2 days': 0,
         '<1 week': 0,
@@ -63,7 +62,7 @@ def calculate_online_intervals(login_dates):
         else:
             intervals['>6 months'] += 1
     total_logins = len(login_dates)
-    return {key: (value / total_logins) * 100 for key, value in intervals.items()}
+    return {key: (value_d / total_logins) * 100 for key, value_d in intervals.items()}
 
 
 def process_data(input_file, output_file):
