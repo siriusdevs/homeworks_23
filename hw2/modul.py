@@ -5,8 +5,7 @@ from datetime import datetime, timedelta
 
 
 def calculate_age_category(age):
-    """
-    Calculate the age category based on the given age.
+    """Calculate the age category based on the given age.
 
     Args:
         age (int): The age of the user.
