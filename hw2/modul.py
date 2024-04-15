@@ -85,6 +85,7 @@ def process_data(input_file, output_file):
     with open(output_file, 'w') as f_output:
         json.dump(result_payload, f_output, indent=4)
 
+
 def extract_data_statistics(data_j):
     """Extract age distribution and online intervals statistics from user data.
 
