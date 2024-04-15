@@ -40,6 +40,7 @@ def calculate_online_intervals(login_dates):
     Returns:
         dict: Distribution of online intervals.
     """
+    
     intervals = {
         '<2 days': 0,
         '<1 week': 0,

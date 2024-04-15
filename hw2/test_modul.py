@@ -54,12 +54,12 @@ def test_different_arguments(input_file, expected_file):
     modul.process_data(input_file, OUTPUT_PATH)
 
     # Считываем ожидаемые результаты
-    with open(expected_file, 'r') as file:
-        expected_data = json.load(file)
+    with open(expected_file, 'r') as file_json:
+        expected_data = json.load(file_json)
 
     # Считываем полученные результаты
-    with open(OUTPUT_PATH, 'r') as file:
-        output_data = json.load(file)
+    with open(OUTPUT_PATH, 'r') as file_json:
+        output_data = json.load(file_json)
 
     # Проверяем, что результаты соответствуют ожиданиям
     assert output_data == expected_data, 'The processed data does not match expected results'
@@ -79,12 +79,12 @@ def test_without_different_arguments(input_file, expected_file):
     modul.process_data(input_file, OUTPUT_PATH)
 
     # Считываем ожидаемые результаты
-    with open(expected_file, 'r') as file:
-        expected_data = json.load(file)
+    with open(expected_file, 'r') as file_json:
+        expected_data = json.load(file_json)
 
     # Считываем полученные результаты
-    with open(OUTPUT_PATH, 'r') as file:
-        output_data = json.load(file)
+    with open(OUTPUT_PATH, 'r') as file_json:
+        output_data = json.load(file_json)
 
     # Проверяем, что результаты соответствуют ожиданиям
     assert output_data == expected_data, 'The processed data does not match expected results'
@@ -109,12 +109,12 @@ def test_with_wrong_type_variables(input_file, expected_file):
         return
 
     # Считываем ожидаемые результаты
-    with open(expected_file, 'r') as file:
-        expected_data = json.load(file)
+    with open(expected_file, 'r') as file_json:
+        expected_data = json.load(file_json)
 
     # Считываем полученные результаты
-    with open(OUTPUT_PATH, 'r') as file:
-        output_data = json.load(file)
+    with open(OUTPUT_PATH, 'r') as file_json:
+        output_data = json.load(file_json)
 
     # Проверяем, что результаты соответствуют ожиданиям
     assert output_data == expected_data, 'The processed data does not match expected results'
@@ -138,12 +138,12 @@ def test_with_errors(input_file, expected_file):
         return
 
     # Считываем ожидаемые результаты
-    with open(expected_file, 'r') as file:
-        expected_data = json.load(file)
+    with open(expected_file, 'r') as file_json:
+        expected_data = json.load(file_json)
 
     # Считываем полученные результаты
-    with open(OUTPUT_PATH, 'r') as file:
-        output_data = json.load(file)
+    with open(OUTPUT_PATH, 'r') as file_json:
+        output_data = json.load(file_json)
 
     # Проверяем, что результаты соответствуют ожиданиям
     assert output_data == expected_data, 'The processed data does not match expected results'
