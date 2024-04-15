@@ -92,6 +92,9 @@ def test_with_wrong_type_variables(input_file, expected_file):
     Args:
         input_file (str): Путь к входному файлу с тестовыми данными.
         expected_file (str): Путь к файлу с ожидаемыми результатами.
+
+    Returns:
+        An error occurred: er
     """
     # Запускаем функцию обработки данных
     try:
@@ -118,6 +121,9 @@ def test_with_errors(input_file, expected_file):
     Args:
         input_file (str): Путь к входному файлу с тестовыми данными.
         expected_file (str): Путь к файлу с ожидаемыми результатами.
+    
+    Returns:
+        An error occurred: er
     """
     # Запускаем функцию обработки данных
     try:
