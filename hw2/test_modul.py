@@ -11,25 +11,25 @@ OUTPUT_PATH = 'hw2/tests_folder/output.json'
 # Наборы данных для параметризации тестов
 
 # test_different_arguments
-test_different_arguments = [
+different_arguments_tests = [
     ('hw2/tests_folder/test1.json', 'hw2/expected_folder/expected1.json'),
     ('hw2/tests_folder/test2.json', 'hw2/expected_folder/expected2.json'),
 ]
 
 # test_without_different_arguments
-test_without_different_arguments = [
+without_different_arguments_tests = [
     ('hw2/tests_folder/test3.json', 'hw2/expected_folder/expected3.json'),
     ('hw2/tests_folder/test4.json', 'hw2/expected_folder/expected4.json'),
     ('hw2/tests_folder/test5.json', 'hw2/expected_folder/expected5.json'),
 ]
 
 # test_with_wrong_type_variables
-test_with_wrong_type_variables = [
+with_wrong_type_variables_tests = [
     ('hw2/tests_folder/test6.json', 'hw2/expected_folder/expected6.json'),
 ]
 
 # test_with_errors
-test_with_errors = [
+with_errors_tests = [
     ('hw2/tests_folder/test7.json', 'hw2/expected_folder/expected7.json'),
     ('hw2/tests_folder/test9.txt', 'hw2/expected_folder/expected9.json'),
     ('hw2/tests_folder/test10.txt', 'hw2/expected_folder/expected10.json'),
@@ -39,7 +39,7 @@ test_with_errors = [
 # Тесты для различных наборов данных
 
 
-@pytest.mark.parametrize('input_file, expected_file', test_different_arguments)
+@pytest.mark.parametrize('input_file, expected_file', different_arguments_tests)
 def test_different_arguments(input_file, expected_file):
 
     """
@@ -65,7 +65,7 @@ def test_different_arguments(input_file, expected_file):
     assert output_data == expected_data, 'The processed data does not match expected results'
 
 
-@pytest.mark.parametrize('input_file, expected_file', test_without_different_arguments)
+@pytest.mark.parametrize('input_file, expected_file', without_different_arguments_tests)
 def test_without_different_arguments(input_file, expected_file):
     """
     Тестируем функцию process_data на наборах данных с недостающими аргументами.
@@ -90,7 +90,7 @@ def test_without_different_arguments(input_file, expected_file):
     assert output_data == expected_data, 'The processed data does not match expected results'
 
 
-@pytest.mark.parametrize('input_file, expected_file', test_with_wrong_type_variables)
+@pytest.mark.parametrize('input_file, expected_file', with_wrong_type_variables_tests)
 def test_with_wrong_type_variables(input_file, expected_file):
     
     """
@@ -120,7 +120,7 @@ def test_with_wrong_type_variables(input_file, expected_file):
     assert output_data == expected_data, 'The processed data does not match expected results'
 
 
-@pytest.mark.parametrize('input_file, expected_file', test_with_errors)
+@pytest.mark.parametrize('input_file, expected_file', with_errors_tests)
 def test_with_errors(input_file, expected_file):
     """
     Тестируем функцию process_data на наборах данных с ошибками.
