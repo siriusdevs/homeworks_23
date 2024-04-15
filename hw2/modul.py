@@ -94,7 +94,6 @@ def process_data(input_file, output_file):
         for category, count in age_counter.items()
     }
 
-
     result_payload = {
         'age_distribution': age_percentage,
         'online_intervals': online_intervals,
