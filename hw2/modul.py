@@ -31,8 +31,7 @@ def calculate_age_category(age):
 
 
 def calculate_online_intervals(login_dates):
-    """
-    Calculate the distribution of online intervals based on login dates.
+    """Calculate the distribution of online intervals based on login dates.
 
     Args:
         login_dates (list): List of login dates in '%Y-%m-%d' format.
@@ -40,28 +39,48 @@ def calculate_online_intervals(login_dates):
     Returns:
         dict: Distribution of online intervals.
     """
-    intervals = {
+    intervals = initialize_intervals()
+    today = datetime.now()
+    for date_str in login_dates:
+        delta = calculate_delta(today, date_str)
+        update_intervals(intervals, delta)
+    total_logins = len(login_dates)
+    return normalize_intervals(intervals, total_logins)
+
+
+def initialize_intervals():
+    """Initialize dictionary for online intervals."""
+    return {
         '<2 days': 0,
         '<1 week': 0,
         '<1 month': 0,
         '<6 months': 0,
         '>6 months': 0,
     }
-    today = datetime.now()
-    for date_str in login_dates:
-        login_date = datetime.strptime(date_str, '%Y-%m-%d')
-        delta = today - login_date
-        if delta < timedelta(days=2):
-            intervals['<2 days'] += 1
-        elif delta < timedelta(weeks=1):
-            intervals['<1 week'] += 1
-        elif delta < timedelta(weeks=4):
-            intervals['<1 month'] += 1
-        elif delta < timedelta(weeks=24):
-            intervals['<6 months'] += 1
-        else:
-            intervals['>6 months'] += 1
-    total_logins = len(login_dates)
+
+
+def calculate_delta(today, date_str):
+    """Calculate time difference between today and login date."""
+    login_date = datetime.strptime(date_str, '%Y-%m-%d')
+    return today - login_date
+
+
+def update_intervals(intervals, delta):
+    """Update intervals dictionary based on time difference."""
+    if delta < timedelta(days=2):
+        intervals['<2 days'] += 1
+    elif delta < timedelta(weeks=1):
+        intervals['<1 week'] += 1
+    elif delta < timedelta(weeks=4):
+        intervals['<1 month'] += 1
+    elif delta < timedelta(weeks=24):
+        intervals['<6 months'] += 1
+    else:
+        intervals['>6 months'] += 1
+
+
+def normalize_intervals(intervals, total_logins):
+    """Normalize interval counts by total number of logins."""
     return {key: (value_d / total_logins) * 100 for key, value_d in intervals.items()}
 
 
