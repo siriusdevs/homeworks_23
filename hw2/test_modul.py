@@ -11,7 +11,7 @@ OUTPUT_PATH = 'hw2/tests_folder/output.json'
 # Наборы данных для параметризации тестов
 
 # TEST_DIFFERENT_ARGUMENTS
-TEST_DIFFERENT_ARGUMENTS = [
+test_different_arguments = [
     ('hw2/tests_folder/test1.json', 'hw2/expected_folder/expected1.json'),
     ('hw2/tests_folder/test2.json', 'hw2/expected_folder/expected2.json'),
 ]
