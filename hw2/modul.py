@@ -15,12 +15,11 @@ def calculate_age_category(age):
         str: The age category.
     """
     age_ranges = {
-        18: '0-18', 25: '19-25', 45: '26-45', 60: '46-60'
+        (0, 18): '0-18', (19, 25): '19-25', (26, 45): '26-45', (46, 60): '46-60', (61, float('inf')): '60+'
     }
-    for limit, category in age_ranges.items():
-        if age <= limit:
+    for range_, category in age_ranges.items():
+        if range_[0] <= age <= range_[1]:
             return category
-    return '60+'
 
 
 def calculate_online_intervals(login_dates):
