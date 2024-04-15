@@ -1,7 +1,6 @@
 """Module for processing user data and generating statistics."""
 import json
 from collections import Counter
-
 from datetime import datetime, timedelta
 
 
@@ -15,7 +14,6 @@ def calculate_age_category(age):
     Returns:
         str: The age category.
     """
-
     eighteen = 18
     twenty_five = 25
     forty_five = 45
@@ -30,6 +28,7 @@ def calculate_age_category(age):
         return '46-60'
     if age > sixty:
         return '60+'
+
 
 def calculate_online_intervals(login_dates):
     """
@@ -64,6 +63,7 @@ def calculate_online_intervals(login_dates):
             intervals['>6 months'] += 1
     total_logins = len(login_dates)
     return {key: (value / total_logins) * 100 for key, value in intervals.items()}
+
 
 def process_data(input_file, output_file):
     """
