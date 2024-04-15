@@ -14,20 +14,13 @@ def calculate_age_category(age):
     Returns:
         str: The age category.
     """
-    eighteen = 18
-    twenty_five = 25
-    forty_five = 45
-    sixty = 60
-    if age <= eighteen:
-        return '0-18'
-    if age <= twenty_five:
-        return '19-25'
-    if age <= forty_five:
-        return '26-45'
-    if age <= sixty:
-        return '46-60'
-    if age > sixty:
-        return '60+'
+    age_ranges = {
+        18: '0-18', 25: '19-25', 45: '26-45', 60: '46-60'
+    }
+    for limit, category in age_ranges.items():
+        if age <= limit:
+            return category
+    return '60+'
 
 
 def calculate_online_intervals(login_dates):
@@ -40,13 +33,7 @@ def calculate_online_intervals(login_dates):
     Returns:
         dict: Distribution of online intervals.
     """
-    intervals = {
-        '<2 days': 0,
-        '<1 week': 0,
-        '<1 month': 0,
-        '<6 months': 0,
-        '>6 months': 0,
-    }
+    intervals = {'<2 days': 0, '<1 week': 0, '<1 month': 0, '<6 months': 0, '>6 months': 0}
     today = datetime.now()
     for date_str in login_dates:
         login_date = datetime.strptime(date_str, '%Y-%m-%d')
