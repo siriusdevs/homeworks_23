@@ -41,9 +41,7 @@ with_errors_tests = [
 
 @pytest.mark.parametrize('input_file, expected_file', different_arguments_tests)
 def test_different_arguments(input_file, expected_file):
-    """
-    Тестируем функцию process_data на различных наборах данных.
-    Проверяем, что выходные данные соответствуют ожидаемым результатам.
+    """We are testing the process_data function on various datasets.
 
     Args:
         input_file (str): Путь к входному файлу с тестовыми данными.
