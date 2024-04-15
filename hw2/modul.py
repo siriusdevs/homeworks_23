@@ -80,9 +80,9 @@ def process_data(input_file, output_file):
     age_counter = Counter(calculate_age_category(age) for age in ages)
 
     login_dates = [
-    user.get('last_login', '') 
-    for user in data_j.values() 
-    if isinstance(user.get('last_login'), str)
+        user.get('last_login', '')
+        for user in data_j.values()
+        if isinstance(user.get('last_login'), str)
     ]
 
     online_intervals = calculate_online_intervals(login_dates)
@@ -90,8 +90,8 @@ def process_data(input_file, output_file):
     total_users = len(data_j)
 
     age_percentage = {
-    category: (count / total_users) * 100 
-    for category, count in age_counter.items()
+        category: (count / total_users) * 100
+        for category, count in age_counter.items()
     }
 
 
