@@ -41,7 +41,6 @@ with_errors_tests = [
 
 @pytest.mark.parametrize('input_file, expected_file', different_arguments_tests)
 def test_different_arguments(input_file, expected_file):
-
     """
     Тестируем функцию process_data на различных наборах данных.
     Проверяем, что выходные данные соответствуют ожидаемым результатам.
@@ -50,7 +49,6 @@ def test_different_arguments(input_file, expected_file):
         input_file (str): Путь к входному файлу с тестовыми данными.
         expected_file (str): Путь к файлу с ожидаемыми результатами.
     """
-    
     # Запускаем функцию обработки данных
     modul.process_data(input_file, OUTPUT_PATH)
 
@@ -93,7 +91,6 @@ def test_without_different_arguments(input_file, expected_file):
 
 @pytest.mark.parametrize('input_file, expected_file', with_wrong_type_variables_tests)
 def test_with_wrong_type_variables(input_file, expected_file):
-    
     """
     Тестируем функцию process_data на наборах данных с неправильными типами переменных.
     Проверяем, что выходные данные соответствуют ожидаемым результатам.
@@ -105,8 +102,8 @@ def test_with_wrong_type_variables(input_file, expected_file):
     # Запускаем функцию обработки данных
     try:
         modul.process_data(input_file, OUTPUT_PATH)
-    except Exception as e:
-        print('An error occurred:', e)
+    except Exception as er:
+        print('An error occurred:', er)
         return
 
     # Считываем ожидаемые результаты
@@ -134,8 +131,8 @@ def test_with_errors(input_file, expected_file):
     # Запускаем функцию обработки данных
     try:
         modul.process_data(input_file, OUTPUT_PATH)
-    except Exception as e:
-        print('An error occurred:', e)
+    except Exception as er:
+        print('An error occurred:', er)
         return
 
     # Считываем ожидаемые результаты
