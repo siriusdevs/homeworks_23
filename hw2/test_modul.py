@@ -12,6 +12,7 @@ OUTPUT_PATH = 'hw2/tests_folder/output.json'
 ERROR_MESSAGE = 'The processed data does not match expected results'
 FILE_DESC = 'Path to the file with test data.'
 WITH_OPEN = 'r'
+IN_EX_FILE = 'input_file, expected_file'
 
 # Наборы данных для параметризации тестов
 
@@ -44,7 +45,7 @@ with_errors_tests = [
 # Тесты для различных наборов данных
 
 
-@pytest.mark.parametrize('input_file, expected_file', different_arguments_tests)
+@pytest.mark.parametrize(IN_EX_FILE, different_arguments_tests)
 def test_different_arguments(input_file, expected_file):
     """We are testing the process_data function on various datasets.
 
@@ -67,7 +68,7 @@ def test_different_arguments(input_file, expected_file):
     assert output_data == expected_data, ERROR_MESSAGE
 
 
-@pytest.mark.parametrize('input_file, expected_file', without_different_arguments_tests)
+@pytest.mark.parametrize(IN_EX_FILE, without_different_arguments_tests)
 def test_without_different_arguments(input_file, expected_file):
     """We are testing the process_data function on datasets with missing arguments.
 
@@ -90,7 +91,7 @@ def test_without_different_arguments(input_file, expected_file):
     assert output_data == expected_data, ERROR_MESSAGE
 
 
-@pytest.mark.parametrize('input_file, expected_file', with_wrong_type_variables_tests)
+@pytest.mark.parametrize(IN_EX_FILE, with_wrong_type_variables_tests)
 def test_with_wrong_type_variables(input_file, expected_file):
     """We are testing the process_data function on datasets with incorrect variable types.
 
@@ -119,7 +120,7 @@ def test_with_wrong_type_variables(input_file, expected_file):
     assert output_data == expected_data, ERROR_MESSAGE
 
 
-@pytest.mark.parametrize('input_file, expected_file', with_errors_tests)
+@pytest.mark.parametrize(IN_EX_FILE, with_errors_tests)
 def test_with_errors(input_file, expected_file):
     """We are testing the process_data function on datasets with errors.
 
