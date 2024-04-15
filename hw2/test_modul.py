@@ -38,8 +38,10 @@ test_with_errors = [
 
 # Тесты для различных наборов данных
 
+
 @pytest.mark.parametrize('input_file, expected_file', test_different_arguments)
 def test_different_arguments(input_file, expected_file):
+
     """
     Тестируем функцию process_data на различных наборах данных.
     Проверяем, что выходные данные соответствуют ожидаемым результатам.
@@ -60,7 +62,7 @@ def test_different_arguments(input_file, expected_file):
         output_data = json.load(file)
 
     # Проверяем, что результаты соответствуют ожиданиям
-    assert output_data == expected_data, "The processed data does not match expected results"
+    assert output_data == expected_data, 'The processed data does not match expected results'
 
 
 @pytest.mark.parametrize('input_file, expected_file', test_without_different_arguments)
@@ -90,6 +92,7 @@ def test_without_different_arguments(input_file, expected_file):
 
 @pytest.mark.parametrize('input_file, expected_file', test_with_wrong_type_variables)
 def test_with_wrong_type_variables(input_file, expected_file):
+    
     """
     Тестируем функцию process_data на наборах данных с неправильными типами переменных.
     Проверяем, что выходные данные соответствуют ожидаемым результатам.
