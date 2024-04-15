@@ -48,7 +48,11 @@ def calculate_online_intervals(login_dates):
 
 
 def initialize_intervals():
-    """Initialize dictionary for online intervals."""
+    """Initialize dictionary for online intervals.
+
+    Returns:
+        dict: Dictionary with online intervals initialized to zero.
+    """
     return {
         '<2 days': 0,
         '<1 week': 0,
@@ -59,13 +63,26 @@ def initialize_intervals():
 
 
 def calculate_delta(today, date_str):
-    """Calculate time difference between today and login date."""
+    """Calculate time difference between today and login date.
+
+    Args:
+        today (datetime): Current date and time.
+        date_str (str): Login date in '%Y-%m-%d' format.
+
+    Returns:
+        timedelta: Time difference between today and login date.
+    """
     login_date = datetime.strptime(date_str, '%Y-%m-%d')
     return today - login_date
 
 
 def update_intervals(intervals, delta):
-    """Update intervals dictionary based on time difference."""
+    """Update intervals dictionary based on time difference.
+
+    Args:
+        intervals (dict): Dictionary containing online intervals.
+        delta (timedelta): Time difference between today and login date.
+    """
     if delta < timedelta(days=2):
         intervals['<2 days'] += 1
     elif delta < timedelta(weeks=1):
@@ -79,7 +96,15 @@ def update_intervals(intervals, delta):
 
 
 def normalize_intervals(intervals, total_logins):
-    """Normalize interval counts by total number of logins."""
+    """Normalize interval counts by total number of logins.
+
+    Args:
+        intervals (dict): Dictionary containing online intervals.
+        total_logins (int): Total number of login dates.
+
+    Returns:
+        dict: Normalized distribution of online intervals.
+    """
     return {key: (value_d / total_logins) * 100 for key, value_d in intervals.items()}
 
 
