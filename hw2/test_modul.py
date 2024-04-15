@@ -97,8 +97,7 @@ def test_with_wrong_type_variables(input_file, expected_file):
     try:
         modul.process_data(input_file, OUTPUT_PATH)
     except Exception as er:
-        print('An error occurred:', er)
-        return
+        return 'An error occurred:', er
 
     # Считываем ожидаемые результаты
     with open(expected_file, 'r') as file_json_expected:
@@ -115,7 +114,7 @@ def test_with_wrong_type_variables(input_file, expected_file):
 @pytest.mark.parametrize('input_file, expected_file', with_errors_tests)
 def test_with_errors(input_file, expected_file):
     """We are testing the process_data function on datasets with errors.
-    
+
     Args:
         input_file (str): Путь к входному файлу с тестовыми данными.
         expected_file (str): Путь к файлу с ожидаемыми результатами.
@@ -124,8 +123,7 @@ def test_with_errors(input_file, expected_file):
     try:
         modul.process_data(input_file, OUTPUT_PATH)
     except Exception as er:
-        print('An error occurred:', er)
-        return
+        return 'An error occurred:', er
 
     # Считываем ожидаемые результаты
     with open(expected_file, 'r') as file_json_expected:
