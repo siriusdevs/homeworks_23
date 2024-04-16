@@ -16,12 +16,6 @@ class Car:  # noqa: WPS214 (too many methods, but it is according to the task)
             TypeError: If model is not a string, year is not an integer, or cost is not a float.
             ValueError: If model is an empty string.
         """
-        if not isinstance(model, str) or not model:
-            raise ValueError('Model must be a non-empty string')
-        if not isinstance(year, int):
-            raise TypeError('Year must be an integer')
-        if not isinstance(cost, float):
-            raise TypeError('Cost must be a float')
 
         self._model, self._year, self._cost = model, year, cost
 
@@ -119,8 +113,6 @@ class PassengerCar(Car):
             TypeError: If passenger_seats is not a int.
         """
         super().__init__(model, year, cost)
-        if not isinstance(passenger_seats, int):
-            raise TypeError('Passenger seats must be an integer')
         self._passenger_seats = passenger_seats
 
     @property
