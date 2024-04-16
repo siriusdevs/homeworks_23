@@ -2,11 +2,9 @@
 import json
 
 import pytest
-
 from main_hw2 import process_data
 
 test_data = {
-
     (
         './data_hw2.json',
         './task2/test_result/test_1.json',
@@ -32,7 +30,7 @@ test_data = {
 
 @pytest.mark.parametrize('data_file_for_stats, output_file, expected', test_data)
 def test_process_data(data_file_for_stats: str, output_file: str, expected: tuple):
-    """test function for main modul procces_data function.
+    """test function for main modul process function.
 
     Args:
         data_file_for_stats (str): _description_
