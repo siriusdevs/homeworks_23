@@ -174,3 +174,5 @@ def extract_data_statistics(data_j):
     }
 
     return age_percentage, online_intervals
+
+process_data("hw2/tests_folder/test8.json", "expected_folder/expected8.json")
