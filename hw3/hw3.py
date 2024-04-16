@@ -185,16 +185,26 @@ class CarPark:
 
         Args:
             car (Car): The car to be added to the car park.
+
+        Raises:
+            TypeError: If the provided object is not an instance of Car or its subclasses.
         """
-        self._cars.append(car)
+        if not isinstance(car, (Car, PassengerCar, Truck)):
+            raise TypeError('The provided object is not a Car or its subclass')
+        self.cars = self.cars + [car]
 
     def remove_car(self, car: Car) -> None:
         """Remove a car from the car park.
 
         Args:
             car (Car): The car to be removed from the car park.
+
+        Raises:
+            ValueError: If the provided car is not in the car park.
         """
-        self._cars.remove(car)
+        if car not in self._cars:
+            raise ValueError('Car not found in the car park')
+        self.cars = [c for c in self.cars if c != car]
 
     def get_all_cars(self) -> list[Car]:
         """Get a list of all cars in the car park.
@@ -203,3 +213,26 @@ class CarPark:
             list[Car]: A list of all cars in the car park.
         """
         return self._cars
+
+    @property
+    def cars(self) -> list:
+        """Get the list of cars in the car park.
+
+        Returns:
+            list: The list of cars in the car park.
+        """
+        return self._cars
+
+    @cars.setter
+    def cars(self, new_cars: list) -> None:
+        """Set the list of cars in the car park.
+
+        Args:
+            new_cars (list): The new list of cars in the car park.
+
+        Raises:
+            TypeError: If the provided object is not a list.
+        """
+        if not isinstance(new_cars, list):
+            raise TypeError('Cars must be a list')
+        self._cars = new_cars
