@@ -124,7 +124,7 @@ def process_data(input_file, output_file):
     except FileNotFoundError:
         raise FileNotFoundError(f"Input file '{input_file}' not found.")
     except json.decoder.JSONDecodeError:
-        raise ValueError(f"Input file '{input_file}' is empty or contains no valid JSON data.")
+        raise ValueError(f"Input file '{input_file}' no valid JSON data.")
 
     age_percentage, online_intervals = extract_data_statistics(data_j)
 

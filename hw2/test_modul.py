@@ -141,5 +141,5 @@ def test_with_empty_file(input_file, expected_file):
     """
     with pytest.raises(ValueError) as error_info:
         modul.process_data(input_file, OUTPUT_PATH)
-
-    assert str(error_info.value) == "Input file is empty or contains no valid JSON data."
+    
+    assert str(error_info.value) == "Input file 'hw2/tests_folder/test8.json' no valid JSON data."
