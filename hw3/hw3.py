@@ -11,12 +11,7 @@ class Car:  # noqa: WPS214 (too many methods, but it is according to the task)
             model (str): The model of the car.
             year (int): The year the car was manufactured.
             cost (float): The cost of the car.
-
-        Raises:
-            TypeError: If model is not a string, year is not an integer, or cost is not a float.
-            ValueError: If model is an empty string.
         """
-
         self.model, self.year, self.cost = model, year, cost
 
     @property
@@ -37,6 +32,10 @@ class Car:  # noqa: WPS214 (too many methods, but it is according to the task)
 
         Args:
             new_model (str): The new model of the car.
+
+        Returns:
+            TypeError: Model must be an string.
+            ValueError: Model must be a non-empty string.
         """
         if not isinstance(new_model, str):
             raise TypeError('Model must be an string')
@@ -110,9 +109,6 @@ class PassengerCar(Car):
             year (int): The year the car was manufactured.
             cost (float): The cost of the car.
             passenger_seats (int): The number of passenger seats in the car.
-
-        Raises:
-            TypeError: If passenger_seats is not a int.
         """
         super().__init__(model, year, cost)
         self.passenger_seats = passenger_seats
@@ -146,9 +142,6 @@ class Truck(Car):
 
     def __init__(self, model: str, year: int, cost: float, carrying_capacity: float) -> None:
         """Initialize Truck object with model, year, cost, and carrying capacity.
-
-        Raises:
-            TypeError: If Carrying capacity must be a float.
 
         Args:
             model (str): The model of the truck.

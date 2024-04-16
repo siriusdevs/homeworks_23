@@ -22,10 +22,12 @@ def test_invalid_model_type():
     with pytest.raises(TypeError):
         Car(TOYOTA_YEAR, MODEL_YEAR, CAR_COST)
 
+
 def test_invalid_model_value():
-    "Test invalid model value."
+    """Test invalid model value."""
     with pytest.raises(ValueError):
         Car('', MODEL_YEAR, CAR_COST)
+
 
 def test_invalid_year_type():
     """Test invalid year type."""
