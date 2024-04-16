@@ -4,7 +4,6 @@ import os
 
 
 def process_data(file_data_for_stats: str, output_file: str) -> str:
-
     """Procces_data function for writing the statistics.
 
     Args:
