@@ -13,7 +13,6 @@ def process_data(file_data_for_stats: str, output_file: str) -> str:
     Returns:
         str: file is written.
     """
-
     res_dict = {}
     stats = [{}, {}]
 
@@ -38,18 +37,15 @@ def process_data(file_data_for_stats: str, output_file: str) -> str:
 
 
 def make_dir(output_file):
-
     """Initialize the path.
 
     Args:
         output_file (str): file for stats
     """
-
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
 
 
 def open_file(file_with_data: str) -> dict:
-
     """Open json file.
 
     Args:
@@ -58,7 +54,6 @@ def open_file(file_with_data: str) -> dict:
     Returns:
         dict: info from json file
     """
-
     try:
         with open(file_with_data, 'r') as name_file:
             return json.loads(name_file.read())
@@ -75,7 +70,6 @@ def generate_stats(
     count_users: int,
     text_key: str,
 ) -> dict:
-
     """Generate a dict with statistics.
 
     Args:
@@ -88,7 +82,6 @@ def generate_stats(
     Returns:
         dict: statistics
     """
-
     if dict_stats.get(user_data):
         dict_stats[user_data] += 1 / count_users * 100
 
