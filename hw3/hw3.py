@@ -29,13 +29,10 @@ class Car:  # noqa: WPS214 (too many methods, but it is according to the task)
 
         Raises:
             ValueError: If new_model is not a non-empty string.
-
+            TypeError: Model must be an string.
+            
         Args:
             new_model (str): The new model of the car.
-
-        Returns:
-            TypeError: Model must be an string.
-            ValueError: Model must be a non-empty string.
         """
         if not isinstance(new_model, str):
             raise TypeError('Model must be an string')
