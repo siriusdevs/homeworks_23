@@ -129,6 +129,7 @@ with_empty_file_test = [
     ('hw2/tests_folder/test8.json', 'hw2/expected_folder/expected8.json'),
 ]
 
+
 @pytest.mark.parametrize(IN_EX_FILE, with_empty_file_test)
 def test_with_empty_file(input_file, expected_file):
     """We are testing the process_data function on datasets with an empty file.
@@ -137,10 +138,8 @@ def test_with_empty_file(input_file, expected_file):
         input_file (str): {FILE_DESC}
         expected_file (str): {FILE_DESC}
 
-    Returns:
-        tuple: Tuple with error message and error object
     """
     with pytest.raises(ValueError) as error_info:
         modul.process_data(input_file, OUTPUT_PATH)
-    
-    assert str(error_info.value) == "Input file 'hw2/tests_folder/test8.json' is empty or contains no valid JSON data."
+
+    assert str(error_info.value) == "Input file is empty or contains no valid JSON data."

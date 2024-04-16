@@ -162,7 +162,7 @@ def extract_data_statistics(data_j):
         if isinstance(user.get('last_login'), str)
     ]
     if not login_dates:
-        raise ValueError("No user login date data found.")
+        raise ValueError('No user login date data found.')
 
     online_intervals = calculate_online_intervals(login_dates)
 
@@ -174,5 +174,3 @@ def extract_data_statistics(data_j):
     }
 
     return age_percentage, online_intervals
-
-process_data("hw2/tests_folder/test8.json", "expected_folder/expected8.json")
