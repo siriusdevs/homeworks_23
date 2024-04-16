@@ -38,7 +38,9 @@ class Car:  # noqa: WPS214 (too many methods, but it is according to the task)
         Args:
             new_model (str): The new model of the car.
         """
-        if not isinstance(new_model, str) or not new_model:
+        if not isinstance(new_model, str):
+            raise TypeError('Model must be an string')
+        if not new_model:
             raise ValueError('Model must be a non-empty string')
         self._model = new_model
 
