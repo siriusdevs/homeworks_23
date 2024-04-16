@@ -8,23 +8,15 @@ def salary_calculation_statistic(
     *arguments: tuple[str, list[float]],
     limit: Optional[float] = None,
 ) -> tuple[float, float, float]:
-
-    """salary_calculation_statistic function
+    """Salary statistic calculation function.
 
     Args:
-
-        arguments tuple[str, list[float]]:
-        position arguments whose takes
-        tuple of workers departments names & salaries (str, list[float])
-
-        limit (Optional[float], optional):
-        limit which above salaries won't be taken. Defaults to None type.
+        arguments (tuple[str, list[float]]): giving arguments.
+        limit (Optional[float], optional): limit. Defaults to None.
 
     Returns:
-        tuple[float, float, float]:
-        average, max, median salary atributes (tuple, tuple, tuple)
+        tuple[float, float, float]: tuple of salary.
     """
-
     salaries = []
 
     for _, employees in arguments:

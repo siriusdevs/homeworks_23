@@ -2,6 +2,7 @@
 import json
 
 import pytest
+
 from main_hw2 import process_data
 
 test_data = {
