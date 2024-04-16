@@ -37,7 +37,7 @@ def calculate_online_intervals(login_dates):
 
     Returns:
         dict: Distribution of online intervals.
-    
+
     Raises:
         ValueError: Input file is empty or contains no login dates.
     """
@@ -123,6 +123,7 @@ def process_data(input_file, output_file):
 
     Raises:
         FileNotFoundError: Input file '{input_file}' not found.
+        ValueError: Input file '{input_file}' no valid.
     """
     try:
         with open(input_file, 'r') as file_json:
@@ -130,7 +131,7 @@ def process_data(input_file, output_file):
     except FileNotFoundError:
         raise FileNotFoundError(f"Input file '{input_file}' not found.")
     except json.decoder.JSONDecodeError:
-        raise ValueError(f"Input file '{input_file}' no valid JSON data.")
+        raise ValueError(f"Input file '{input_file}' no valid.")
 
     age_percentage, online_intervals = extract_data_statistics(data_j)
 
