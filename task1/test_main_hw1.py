@@ -1,11 +1,10 @@
 """This is module for testing salary_calculation_statistic function from main module."""
 
-import pytest
-
 from typing import Optional
 
-from main_hw1 import salary_calculation_statistic
+import pytest
 
+from main_hw1 import salary_calculation_statistic
 
 compans = (
     (

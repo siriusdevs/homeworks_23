@@ -3,6 +3,7 @@
 This test module contains tests for the classes and functions defined in module main."""
 
 import pytest
+
 from main_hw3 import Course, Person, Student, Teacher, check_type
 
 AGE20 = 20

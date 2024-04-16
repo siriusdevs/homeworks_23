@@ -1,7 +1,6 @@
 """Main module."""
-
-import os
 import json
+import os
 
 
 def process_data(file_data_for_stats: str, output_file: str) -> str:

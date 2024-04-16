@@ -1,5 +1,4 @@
 """Module for testing the main file."""
-
 import json
 
 import pytest
