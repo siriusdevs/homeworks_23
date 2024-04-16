@@ -17,7 +17,7 @@ class Car:  # noqa: WPS214 (too many methods, but it is according to the task)
             ValueError: If model is an empty string.
         """
 
-        self._model, self._year, self._cost = model, year, cost
+        self.model, self.year, self.cost = model, year, cost
 
     @property
     def model(self) -> str:
@@ -38,7 +38,9 @@ class Car:  # noqa: WPS214 (too many methods, but it is according to the task)
         Args:
             new_model (str): The new model of the car.
         """
-        if not isinstance(new_model, str) or not new_model:
+        if not isinstance(new_model, str):
+            raise TypeError('Model must be an string')
+        if not new_model:
             raise ValueError('Model must be a non-empty string')
         self._model = new_model
 
@@ -113,7 +115,7 @@ class PassengerCar(Car):
             TypeError: If passenger_seats is not a int.
         """
         super().__init__(model, year, cost)
-        self._passenger_seats = passenger_seats
+        self.passenger_seats = passenger_seats
 
     @property
     def passenger_seats(self) -> int:
@@ -155,7 +157,7 @@ class Truck(Car):
             carrying_capacity (float): The carrying capacity of the truck.
         """
         super().__init__(model, year, cost)
-        self._carrying_capacity = carrying_capacity
+        self.carrying_capacity = carrying_capacity
 
     @property
     def carrying_capacity(self) -> float:
