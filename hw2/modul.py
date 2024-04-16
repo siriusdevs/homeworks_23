@@ -38,6 +38,9 @@ def calculate_online_intervals(login_dates):
     Returns:
         dict: Distribution of online intervals.
     """
+    if not login_dates:
+        raise ValueError("Input file is empty or contains no login dates.")
+
     intervals = initialize_intervals()
     today = datetime.now()
     for date_str in login_dates:
@@ -115,8 +118,13 @@ def process_data(input_file, output_file):
         input_file (str): Path to the input JSON file.
         output_file (str): Path to save the output JSON file.
     """
-    with open(input_file, 'r') as file_json:
-        data_j = json.load(file_json)
+    try:
+        with open(input_file, 'r') as file_json:
+            data_j = json.load(file_json)
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Input file '{input_file}' not found.")
+    except json.decoder.JSONDecodeError:
+        raise ValueError(f"Input file '{input_file}' is empty or contains no valid JSON data.")
 
     age_percentage, online_intervals = extract_data_statistics(data_j)
 
@@ -143,6 +151,8 @@ def extract_data_statistics(data_j):
         for user in data_j.values()
         if isinstance(user.get('age'), int)
     ]
+    if not ages:
+        raise ValueError("No user age data found.")
 
     age_counter = Counter(calculate_age_category(age) for age in ages)
 
@@ -151,6 +161,8 @@ def extract_data_statistics(data_j):
         for user in data_j.values()
         if isinstance(user.get('last_login'), str)
     ]
+    if not login_dates:
+        raise ValueError("No user login date data found.")
 
     online_intervals = calculate_online_intervals(login_dates)
 
