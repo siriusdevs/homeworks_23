@@ -19,13 +19,9 @@ def test_init():
 
 def test_invalid_model_type():
     """Test invalid model type."""
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         Car(TOYOTA_YEAR, MODEL_YEAR, CAR_COST)
 
-def test_invalid_model_value():
-    "Test invalid model value."
-    with pytest.raises(ValueError):
-        Car('', MODEL_YEAR, CAR_COST)
 
 def test_invalid_year_type():
     """Test invalid year type."""

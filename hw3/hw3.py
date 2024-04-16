@@ -38,9 +38,7 @@ class Car:  # noqa: WPS214 (too many methods, but it is according to the task)
         Args:
             new_model (str): The new model of the car.
         """
-        if not isinstance(new_model, str):
-            raise TypeError('Model must be an string')
-        if not new_model:
+        if not isinstance(new_model, str) or not new_model:
             raise ValueError('Model must be a non-empty string')
         self._model = new_model
 
@@ -213,3 +211,11 @@ class CarPark:
             list[Car]: A list of all cars in the car park.
         """
         return self._cars
+
+# car_park = CarPark() 
+# car_park.add_car('hello')
+
+car = Car('Toyota', 2020, 300000.0)
+pas_car = PassengerCar('Toyota', 2020, 300000.0, 5)
+truck = Truck('Toyota', 2020, 300000.0, 5.9)
+print(pas_car)
