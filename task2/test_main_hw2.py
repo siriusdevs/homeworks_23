@@ -33,10 +33,9 @@ def test_process_data(data_file_for_stats: str, output_file: str, expected: tupl
     """Test function for main process function.
 
     Args:
-        data_file_for_stats (str): _description_
-        output_file (str): _description_
-        expected (tuple): _description_
-        """
+        data_file_for_stats (str): file path of data file.
+        output_file (str): output file path.
+        expected (tuple): expected output file."""
     process_data(data_file_for_stats, output_file)
 
     with open(output_file, 'r') as data_file_res:
