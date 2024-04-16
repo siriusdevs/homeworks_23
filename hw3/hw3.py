@@ -204,7 +204,7 @@ class CarPark:
         """
         if car not in self._cars:
             raise ValueError('Car not found in the car park')
-        self.cars = [c for c in self.cars if c != car]
+        self.cars = [ca for ca in self.cars if ca != car]
 
     def get_all_cars(self) -> list[Car]:
         """Get a list of all cars in the car park.
