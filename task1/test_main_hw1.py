@@ -3,7 +3,6 @@
 from typing import Optional
 
 import pytest
-
 from main_hw1 import salary_calculation_statistic
 
 compans = (

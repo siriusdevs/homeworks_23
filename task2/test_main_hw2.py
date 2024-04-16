@@ -30,12 +30,13 @@ test_data = {
 
 @pytest.mark.parametrize('data_file_for_stats, output_file, expected', test_data)
 def test_process_data(data_file_for_stats: str, output_file: str, expected: tuple):
-    """test function for main modul process function.
+    """Test function for main process function.
 
     Args:
         data_file_for_stats (str): _description_
         output_file (str): _description_
-        expected (tuple): _description_"""
+        expected (tuple): _description_
+        """
     process_data(data_file_for_stats, output_file)
 
     with open(output_file, 'r') as data_file_res:
