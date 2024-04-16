@@ -155,8 +155,6 @@ class Truck(Car):
             carrying_capacity (float): The carrying capacity of the truck.
         """
         super().__init__(model, year, cost)
-        if not isinstance(carrying_capacity, float):
-            raise TypeError('Carrying capacity must be a float')
         self._carrying_capacity = carrying_capacity
 
     @property
