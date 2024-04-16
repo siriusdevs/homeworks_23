@@ -211,11 +211,3 @@ class CarPark:
             list[Car]: A list of all cars in the car park.
         """
         return self._cars
-
-# car_park = CarPark() 
-# car_park.add_car('hello')
-
-car = Car('Toyota', 2020, 300000.0)
-pas_car = PassengerCar('Toyota', 2020, 300000.0, 5)
-truck = Truck('Toyota', 2020, 300000.0, 5.9)
-print(pas_car)
