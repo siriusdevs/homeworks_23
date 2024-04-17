@@ -1,0 +1,10 @@
+{
+    "user1": {
+        "age": "twenty",
+        "last_login": "2023-04-10"
+    },
+    "user2": {
+        "age": 35,
+        "last_login": "2023-04-09"
+    }
+}

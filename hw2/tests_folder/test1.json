@@ -1,0 +1,16 @@
+{
+    "user1": {
+        "region": "Moscow",
+        "registered": "2015-06-01",
+        "last_login": "2024-04-10",
+        "email": "user1@example.com",
+        "age": 25
+    },
+    "user2": {
+        "region": "Kazan",
+        "registered": "2018-12-12",
+        "last_login": "2023-10-01",
+        "email": "user2@example.com",
+        "age": 34
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "age_distribution": {
+        "26-45": 100.0
+    },
+    "online_intervals": {
+        "<2 days": 0.0,
+        "<1 week": 0.0,
+        "<1 month": 0.0,
+        "<6 months": 0.0,
+        ">6 months": 100.0
+    }
+}
