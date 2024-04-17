@@ -1,6 +1,30 @@
 """Architecture course management."""
 
 
+class RemoveStudentError(Exception):
+    """Exception raised when trying to remove a student not enrolled in the students."""
+
+    def __init__(self) -> None:
+        """Initialize the RemoveStudentError with a default error message."""
+        super().__init__('The student is not in students')
+
+
+class RemoveCourseError(Exception):
+    """Exception raised when trying to remove a course not enrolled in the courses."""
+
+    def __init__(self) -> None:
+        """Initialize the RemoveCourseError with a default error message."""
+        super().__init__('The course is not in courses')
+
+
+class RemoveGroupError(Exception):
+    """Exception raised when trying to remove a group not enrolled in the groups."""
+
+    def __init__(self) -> None:
+        """Initialize the RemoveGroupError with a default error message."""
+        super().__init__('The group is not in groups')
+
+
 class Teacher:
     """Represents a teacher in a school.
 
@@ -172,7 +196,12 @@ class Course:
 
         Args:
             student (Student): The student to remove.
+
+        Raises:
+            RemoveStudentError: If the student is not in students.
         """
+        if student not in self.students:
+            raise RemoveStudentError()
         self.students.remove(student)
 
 
@@ -206,7 +235,12 @@ class Group:
 
         Args:
             student (Student): The student removed in group.
+
+        Raises:
+            RemoveStudentError: If the student is not in students.
         """
+        if student not in self.students:
+            raise RemoveStudentError()
         self.students.remove(student)
 
     def take_students(self):
@@ -244,7 +278,12 @@ class EducationalInstitution:
 
         Args:
             course (Course): The course to remove.
+
+        Raises:
+            RemoveCourseError: If the course is not in courses.
         """
+        if course not in self.courses:
+            raise RemoveCourseError()
         self.courses.remove(course)
 
     def take_courses(self):
@@ -268,7 +307,12 @@ class EducationalInstitution:
 
         Args:
             group (Group): The removed group.
+
+        Raises:
+            RemoveGroupError: If the group is not in groups.
         """
+        if group not in self.groups:
+            raise RemoveGroupError()
         self.groups.remove(group)
 
     def take_groups(self):
