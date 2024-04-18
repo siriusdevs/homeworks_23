@@ -3,17 +3,9 @@
 import json
 from datetime import datetime
 
-online_duration = {
-    'recently': 0,
-    '2_days_ago': 0,
-    '1_week_ago': 0,
-    '1_month_ago': 0,
-    '6_months_ago': 0,
-    }
-
+CALENDAR = (('lt_2_days', 2), ('lt_1_week', 7), ('lt_1_month', 30), ('lt_6_months', 180))
 LEN_MONTH = 30
 LEN_HALF_YEAR = 180
-hosts_count = {}
 
 
 class InvalidAddress(Exception):
@@ -56,54 +48,65 @@ def export_file(file_name: str, data_output: dict) -> None:
         json.dump(data_output, file_output, indent=4)
 
 
-def host_counter(email: str) -> None:
+def host_counter(email: str, hosts_count: dict) -> None:
     """Count the number of hosts.
 
     Args:
         email (str): The counted host.
+        hosts_count (dict): The counts of hosts.
 
     Raises:
         InvalidAddress: If the email is not valids.
+
+    Returns:
+        dict: The total number of hosts.
     """
     try:
         _, host = email.split('@')
     except Exception:
         raise InvalidAddress()
     hosts_count[host] = hosts_count.get(host, 0) + 1
+    return hosts_count
 
 
-def online_count(days_since_last_login: int) -> None:
+def online_count(days_since_last_login: int, online_duration: dict) -> None:
     """Count the number of online duration.
 
     Args:
         days_since_last_login (int): The last login.
+        online_duration (dict): The online duration.
+
+    Returns:
+        dict: The updated online duration.
     """
-    if days_since_last_login < 2:
-        online_duration['recently'] += 1
-    elif days_since_last_login < 7:
-        online_duration['2_days_ago'] += 1
-    elif days_since_last_login < LEN_MONTH:
-        online_duration['1_week_ago'] += 1
-    elif days_since_last_login < LEN_HALF_YEAR:
-        online_duration['1_month_ago'] += 1
-    else:
-        online_duration['6_months_ago'] += 1
+    days_since_last_login = (datetime.now().date() - days_since_last_login).days
+    for category, days in CALENDAR:
+        if days_since_last_login < days:
+            online_duration[category] += 1
+        elif category == 'lt_6_months' and days_since_last_login >= days:
+            online_duration['mt_6_months'] += 1
+    return online_duration
 
 
-def hosts_percents(total_clients: int) -> None:
+def hosts_percents(total_clients: int, hosts_count: dict) -> None:
     """Calculate the percentage of each host item based on the total number of clients.
 
     Parameters:
         total_clients (int): The total number of clients.
+        hosts_count (dict): The counts of hosts.
 
     Raises:
         EmptyFileError: If the total_clients is 0, which would lead to a division by zero error.
+
+    Returns:
+        dict: The total number of hosts.
     """
     try:
         for host_item in hosts_count.items():
             hosts_count[host_item[0]] = host_item[1] / total_clients * 100
     except ZeroDivisionError:
         raise EmptyFileError()
+    return hosts_count
 
 
 def process_data(input_file_path: str, output_file_path: str) -> None:
@@ -117,6 +120,16 @@ def process_data(input_file_path: str, output_file_path: str) -> None:
     Raises:
         EmptyFileError: If the file is empty.
     """
+    online_duration = {
+        'lt_2_days': 0,
+        'lt_1_week': 0,
+        'lt_1_month': 0,
+        'lt_6_months': 0,
+        'mt_6_months': 0,
+        }
+
+    hosts_count = {}
+
     data_json = load_file(input_file_path)
 
     total_clients = len(data_json)
@@ -124,13 +137,13 @@ def process_data(input_file_path: str, output_file_path: str) -> None:
     for client in data_json.values():
         email = client.get('email')
         if email:
-            host_counter(email)
+            hosts_count = host_counter(email, hosts_count)
 
         last_login = client.get('last_login')
         if last_login:
-            online_count((datetime.now().date() - datetime.fromisoformat(last_login).date()).days)
+            online_count(datetime.fromisoformat(last_login).date(), online_duration)
 
-    hosts_percents(total_clients)
+    hosts_count = hosts_percents(total_clients, hosts_count)
 
     try:
         for online_item in online_duration.items():
